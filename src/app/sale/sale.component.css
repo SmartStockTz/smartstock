@@ -1,0 +1,21 @@
+.match-parent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.match-parent-side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 300px;
+}
+
+.space{
+  margin-bottom: 16px;
+}
+
+

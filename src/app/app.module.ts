@@ -1,16 +1,63 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LoginComponent} from './login/login.component';
+import {LandingComponent} from './landing/landing.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {SaleComponent} from './sale/sale.component';
+import {StockComponent} from './stock/stock.component';
+import {PurchaseComponent} from './purchase/purchase.component';
+import {ExpensesComponent} from './expenses/expenses.component';
+import {SettingComponent} from './setting/setting.component';
+import {NavComponent} from './nav/nav.component';
+import {
+  MatButtonModule,
+  MatCardModule, MatDividerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    LandingComponent,
+    DashboardComponent,
+    SaleComponent,
+    StockComponent,
+    PurchaseComponent,
+    ExpensesComponent,
+    SettingComponent,
+    NavComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatDividerModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,0 +1,56 @@
+<mat-toolbar class="mytoolbar" color="primary">
+  <button mat-icon-button="" (click)="goHome()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>SmartStockManager</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button="">
+    <mat-icon [matMenuTriggerFor]="menu">
+      more_vert
+    </mat-icon>
+  </button>
+  <mat-menu #menu>
+    <button mat-menu-item>item</button>
+  </mat-menu>
+</mat-toolbar>
+<main style="margin-top: 54px" class="page login-page">
+  <section class="clean-block clean-form dark">
+    <div class="container">
+
+      <div class="block-heading">
+        <h2 class="text-info">Log In</h2>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <label for="email">Username</label>
+          <input class="form-control item" name="username" [(ngModel)]="username" type="text" id="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" name="password" [(ngModel)]="password" id="password"></div>
+        <!--<div class="form-group">-->
+        <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
+        <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
+        <!--</div>-->
+        <button mat-flat-button color="accent" class="btn-block" (click)="login()">Log In</button>
+      </form>
+
+    </div>
+  </section>
+</main>
+<div class="footer-basic">
+  <footer>
+    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+      class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+      class="icon ion-social-facebook"></i></a></div>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Home</a></li>
+      <li class="list-inline-item"><a href="#">Services</a></li>
+      <li class="list-inline-item"><a href="#">About</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+    </ul>
+    <p class="copyright">FahamuTech © 2018</p>
+  </footer>
+</div>
