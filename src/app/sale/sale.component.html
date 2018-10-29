@@ -1,8 +1,8 @@
 <mat-sidenav-container class="match-parent">
 
   <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
-    <div mat-card-image="">
-      <img src="/assets/img/1.jpg" width="300px">
+    <div>
+      <img src="/assets/img/1.jpg" width="100%">
     </div>
     <div style="margin: 16px; word-wrap: break-word">
       <div mat-line="">
@@ -56,6 +56,74 @@
         </button>
       </mat-menu>
     </mat-toolbar>
+
+    <div class="container" style="margin-top: 70px">
+
+      <div class="row">
+
+        <div class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 card">
+          <div class="input-container" style="margin-bottom: 16px">
+            <mat-form-field style="margin-top: 8px">
+              <label>
+                <input matInput="" type="text" name="product" placeholder="Product Name" matInput
+                       [formControl]="product" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.product}}
+                  </mat-option>
+                </mat-autocomplete>
+              </label>
+            </mat-form-field>
+            <mat-form-field>
+              <label>
+                <input matInput type="number" placeholder="Quantity" name="quantity">
+              </label>
+            </mat-form-field>
+            <mat-form-field>
+              <label>
+                <input matInput type="number" value="0" placeholder="Discount ( TZS )" name="discount">
+              </label>
+            </mat-form-field>
+            <mat-slide-toggle class="space">
+              Wholesale
+            </mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <mat-slide-toggle class="space">
+              NHIF
+            </mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <mat-slide-toggle class="space">
+              N\N
+            </mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <button mat-fab="" style="margin: 8px;">
+              <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+            <span mat-card-subtitle="">Price ( TZS )</span>
+            <span mat-card-title>10,000</span>
+            <mat-divider></mat-divider>
+            <span mat-card-subtitle="">Shelf</span>
+            <span mat-card-title>Counter A</span>
+            <mat-divider></mat-divider>
+            <span mat-card-subtitle="">Category</span>
+            <span mat-card-title>Medicine</span>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
+        <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8">
+
+        </div>
+      </div>
+
+    </div>
+    <!--<mat-grid-tile [colspan]="8">-->
+    <!--<mat-card>-->
+    <!--<mat-card-header>-->
+    <!--Status-->
+    <!--</mat-card-header>-->
+    <!--</mat-card>-->
+    <!--</mat-grid-tile>-->
   </mat-sidenav-content>
 
 </mat-sidenav-container>

@@ -17,15 +17,17 @@ import {ExpensesComponent} from './expenses/expenses.component';
 import {SettingComponent} from './setting/setting.component';
 import {NavComponent} from './nav/nav.component';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule, MatDividerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSidenavModule,
+  MatFormFieldModule, MatGridListModule,
+  MatIconModule, MatInputModule,
+  MatMenuModule, MatRadioModule,
+  MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,14 @@ import {FormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatSidenavModule,
     MatDividerModule,
+    MatGridListModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
