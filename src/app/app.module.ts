@@ -19,11 +19,18 @@ import {NavComponent} from './nav/nav.component';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatDividerModule,
-  MatFormFieldModule, MatGridListModule,
-  MatIconModule, MatInputModule,
-  MatMenuModule, MatRadioModule,
-  MatSidenavModule, MatSlideToggleModule,
+  MatCardModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatRadioModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatTableModule,
+  MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -61,6 +68,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatAutocompleteModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatTableModule,
+    MatTabsModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

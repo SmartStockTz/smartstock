@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Urls} from '../database/urls';
+import {Stock} from '../database/stock';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -15,37 +16,51 @@ import {map} from 'rxjs/operators';
 export class SaleComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   product = new FormControl();
+  iQuantity = new FormControl();
   filteredOptions: Observable<Stock[]>;
+  stocks: Stock[];
+  stock: Stock = {
+    product: '',
+    sell: 0,
+    shelf: 'Shelf',
+    category: 'Category',
+    profit: 0,
+    purchase: 0,
+    qStatus: '',
+    quantity: 0,
+    reorder: 0,
+    supplier: '',
+    times: 0,
+    unit: '',
+    wquantity: 0,
+    wsell: 0,
+  };
 
   constructor(private router: Router, private http: HttpClient) {
   }
 
   ngOnInit() {
-    // this.filteredOptions = this.product.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value))
-    //   );
-    // this.getProduct();
+    this.iQuantity.setValue(1);
     this.product.valueChanges.subscribe(value => {
-      console.log('value typed is ' + value.toString());
       this.getProduct(value.toString());
     }, error1 => {
       console.log(error1);
     });
   }
 
-  private getProduct(p: string): void {
-    this.http.get(Urls.SEARCH_PRODUCT + p).pipe(
-      map(value => {
-        let json: any;
-        json = JSON.stringify(value);
-        json = JSON.parse(json);
-        const st = json._embedded.stock;
-        console.log(st);
-        this.filteredOptions = st;
-      })
-    );
+  private getProduct(p: string) {
+    this.filteredOptions = this.http.get(Urls.SEARCH_PRODUCT + p)
+      .pipe<Stock[]>(
+        map(value => this.toJs(value))
+      );
+  }
+
+  toJs(sourc): Stock[] {
+    let json: any;
+    json = JSON.stringify(sourc);
+    json = JSON.parse(json);
+    this.stocks = json._embedded.stock;
+    return this.stocks;
   }
 
   openDrawer() {

@@ -36,6 +36,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
+
     <mat-toolbar class="mytoolbar" color="primary">
       <button mat-icon-button (click)="openDrawer()">
         <mat-icon>menu</mat-icon>
@@ -68,15 +69,16 @@
                 <input matInput="" type="text" name="product" placeholder="Product Name" matInput
                        [formControl]="product" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option.product}}
+                  <mat-option *ngFor="let st of filteredOptions | async" [value]="st.product"
+                              (onSelectionChange)="stock=st">
+                    {{st.product}}
                   </mat-option>
                 </mat-autocomplete>
               </label>
             </mat-form-field>
             <mat-form-field>
               <label>
-                <input matInput type="number" placeholder="Quantity" name="quantity">
+                <input matInput type="number" placeholder="Quantity" [formControl]="iQuantity" name="quantity">
               </label>
             </mat-form-field>
             <mat-form-field>
@@ -99,20 +101,33 @@
             <button mat-fab="" style="margin: 8px;">
               <mat-icon>add_shopping_cart</mat-icon>
             </button>
-            <span mat-card-subtitle="">Price ( TZS )</span>
-            <span mat-card-title>10,000</span>
+            <span mat-card-subtitle="">Total ( TZS )</span>
+            <span mat-card-title>{{stock.sell * iQuantity.value}}</span>
+            <span mat-card-subtitle="">Price/Unit ( TZS )</span>
+            <span mat-card-title>{{stock.sell}}</span>
             <mat-divider></mat-divider>
             <span mat-card-subtitle="">Shelf</span>
-            <span mat-card-title>Counter A</span>
+            <span mat-card-title>{{stock.shelf}}</span>
             <mat-divider></mat-divider>
             <span mat-card-subtitle="">Category</span>
-            <span mat-card-title>Medicine</span>
+            <span mat-card-title>{{stock.category}}</span>
             <mat-divider></mat-divider>
           </div>
         </div>
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8">
-
+          <mat-tab-group dynamicHeight>
+            <mat-tab label="Cart">
+              <div class=" mat-elevation-z4">
+                Small content
+              </div>
+            </mat-tab>
+            <mat-tab label="Sales">
+              <div class="mat-elevation-z4">
+                Large content
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
 

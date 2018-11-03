@@ -1,4 +1,4 @@
-interface Stock {
+export interface Stock {
   product: string;
   category: string;
   profit: number;
