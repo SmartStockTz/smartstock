@@ -26,6 +26,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatRadioModule,
   MatSidenavModule,
   MatSlideToggleModule,
@@ -73,6 +74,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

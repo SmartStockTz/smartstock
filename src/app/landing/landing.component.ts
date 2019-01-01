@@ -9,7 +9,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class LandingComponent implements OnInit {
   log: boolean;
-  message: string;
+  message = 'The revolution smart stock manage and sales point is here now. ' +
+    'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
 
   constructor(private router: Router, private auth: AngularFireAuth) {
   }
@@ -19,7 +20,8 @@ export class LandingComponent implements OnInit {
     this.auth.authState.subscribe(value => {
       if (value == null) {
         this.log = false;
-        this.message = 'The revolution is here';
+        this.message = 'The revolution smart stock manage and sales point is here now. ' +
+          'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
       } else {
         this.log = true;
         this.message = 'Welcome back ' + value.displayName + ' ';

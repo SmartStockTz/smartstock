@@ -1,56 +1,59 @@
-<mat-toolbar class="mytoolbar" color="primary">
-  <button mat-icon-button="" (click)="goHome()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <span>SmartStockManager</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-icon-button="">
-    <mat-icon [matMenuTriggerFor]="menu">
-      more_vert
-    </mat-icon>
-  </button>
-  <mat-menu #menu>
-    <button mat-menu-item>item</button>
-  </mat-menu>
-</mat-toolbar>
-<main style="margin-top: 54px" class="page login-page">
-  <section class="clean-block clean-form dark">
+<nav class="sticky-top">
+  <mat-toolbar color="primary">
+    <button mat-icon-button="" (click)="goHome()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>SSM</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button="">
+      <mat-icon [matMenuTriggerFor]="menu">
+        more_vert
+      </mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item>item</button>
+    </mat-menu>
+  </mat-toolbar>
+</nav>
+
+<main style="padding-top: 54px" class="page login-page">
+  <section >
     <div class="container">
 
-      <div class="block-heading">
-        <h2 class="text-info">Log In</h2>
-      </div>
+      <div class="col-sm-12 col-12 col-md-6 col-xl-4 col-lg-4 offset-xl-4 offset-lg-4 offset-md-3">
+        <mat-progress-bar class="full-width" mode="indeterminate"></mat-progress-bar>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Username" [formControl]="usernameControlInput" type="text" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Password" type="password" [formControl]="passwordControlInput" required>
+            </mat-form-field>
+            <!--<div class="form-group">-->
+            <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
+            <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
+            <!--</div>-->
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="btn-block" (click)="login()">Log In</button>
+          </mat-card-actions>
 
-      <form>
-        <div class="form-group">
-          <label for="email">Username</label>
-          <input class="form-control item" name="username" [(ngModel)]="username" type="text" id="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input class="form-control" type="password" name="password" [(ngModel)]="password" id="password"></div>
-        <!--<div class="form-group">-->
-        <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
-        <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
-        <!--</div>-->
-        <button mat-flat-button color="accent" class="btn-block" (click)="login()">Log In</button>
-      </form>
+        </mat-card>
+      </div>
 
     </div>
   </section>
 </main>
+
 <div class="footer-basic">
   <footer>
-    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
-      class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a>
+      <a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
       class="icon ion-social-facebook"></i></a></div>
-    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Home</a></li>
-      <li class="list-inline-item"><a href="#">Services</a></li>
-      <li class="list-inline-item"><a href="#">About</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-    </ul>
-    <p class="copyright">FahamuTech © 2018</p>
+    <p class="copyright">FahamuTech © 2019</p>
   </footer>
 </div>

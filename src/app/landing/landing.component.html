@@ -1,45 +1,50 @@
+<nav class="sticky-top">
+  <mat-toolbar color="primary">
+    <button mat-icon-button="">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span mat-card-title="">SSM</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button="" [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item (click)="login()" *ngIf="!log">
+        <mat-icon>arrow_forward</mat-icon>
+        Login
+      </button>
+      <button mat-menu-item (click)="register()">
+        <mat-icon>person_add</mat-icon>
+        Register
+      </button>
+      <button mat-menu-item (click)="profile()" *ngIf="log">
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()" *ngIf="log">
+        <mat-icon>arrow_back</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
 
-<mat-toolbar class="mytoolbar" color="primary">
-  <span mat-card-title="">SmartStockManager</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-icon-button="" [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu>
-    <button mat-menu-item (click)="login()" *ngIf="!log">
-      <mat-icon>arrow_forward</mat-icon>
-      Login
-    </button>
-    <!--<button mat-menu-item (click)="register()">-->
-    <!--<mat-icon>person_add</mat-icon>-->
-    <!--Register-->
-    <!--</button>-->
-    <button mat-menu-item (click)="profile()">
-      <mat-icon>person</mat-icon>
-      Profile
-    </button>
-    <button mat-menu-item (click)="logout()" *ngIf="log">
-      <mat-icon>arrow_back</mat-icon>
-      Logout
-    </button>
-  </mat-menu>
+  </mat-toolbar>
+</nav>
 
-</mat-toolbar>
-<div style="margin-top: 50px;">
-  <div class="header-dark">
-    <div class="container hero">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          <h1 class="text-center">{{message}}</h1>
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item"></iframe>
-          </div>
+<div id="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2" style="color: #fff; padding-top: 20%">
+        <h1>Smart Stock Manager</h1>
+        <p style="font-family: Roboto; font-size: 28px; color: #f5f5f5;" class="justify-content-center">{{message}}</p>
+        <div class="d-flex justify-content-center">
+          <button mat-raised-button="" color="primary" class="btn-primary align-self-center">Get Started</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="features-boxed" style="background-color: rgb(247,247,247);">
+
+<div class="features-boxed">
   <div class="container">
     <div class="intro">
       <h2 class="text-center">Features </h2>
@@ -48,151 +53,190 @@
     </div>
     <div class="row justify-content-center features">
       <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-map-marker icon"></i>
-          <h3 class="name">Works everywhere</h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+        <mat-card>
+          <mat-card-content>
+            <i class="fa fa-map-marker icon"></i>
+            <h3 class="name">Works everywhere</h3>
+            <p class="description">
+              Due to internet connectivity challenge our service available offline and online
+            </p>
+          </mat-card-content>
+          <!--<mat-card-actions>-->
+          <!--<button mat-button color="primary">Learn more</button>-->
+          <!--</mat-card-actions>-->
+        </mat-card>
       </div>
       <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-clock-o icon"></i>
-          <h3 class="name">Always available</h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+        <mat-card>
+          <mat-card-content>
+            <i class="fa fa-clock-o icon"></i>
+            <h3 class="name">Always available</h3>
+            <p class="description">
+              You will never experience down time or have to wait for something
+            </p>
+          </mat-card-content>
+        </mat-card>
       </div>
       <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-list-alt icon"></i>
-          <h3 class="name">Customizable </h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+        <mat-card>
+          <mat-card-content>
+            <i class="fa fa-list-alt icon"></i>
+            <h3 class="name">Customizable </h3>
+            <p class="description">
+              Say how you want it to work for you and it will work the way you want
+            </p>
+          </mat-card-content>
+        </mat-card>
       </div>
-      <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-leaf icon"></i>
-          <h3 class="name">Organic </h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
-      </div>
-      <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-plane icon"></i>
-          <h3 class="name">Fast </h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
-      </div>
-      <div class="col-sm-6 col-md-5 col-lg-4 item">
-        <div class="box"><i class="fa fa-phone icon"></i>
-          <h3 class="name">Mobile-first</h3>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
-      </div>
+      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
+        <!--<div class="box">-->
+          <!--<i class="fa fa-leaf icon"></i>-->
+          <!--<h3 class="name">Organic </h3>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--</div>-->
+      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
+        <!--<div class="box"><i class="fa fa-plane icon"></i>-->
+          <!--<h3 class="name">Fast </h3>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--</div>-->
+      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
+        <!--<div class="box"><i class="fa fa-phone icon"></i>-->
+          <!--<h3 class="name">Mobile-first</h3>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
+
 <section class="clean-block clean-pricing dark">
   <div class="container">
     <div class="block-heading">
       <h2 class="text-info">Pricing Table</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae
-        leo.</p>
+      <p>Our service offered in following price</p>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-5 col-lg-4">
-        <div class="clean-pricing-item">
-          <div class="heading">
-            <h3>BASIC</h3>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="features">
-            <h4><span class="feature">Full Support:&nbsp;</span><span>No</span></h4>
-            <h4><span class="feature">Duration:&nbsp;</span><span>30 Days</span></h4>
-            <h4><span class="feature">Storage:&nbsp;</span><span>10GB</span></h4>
-          </div>
-          <div class="price">
-            <h4>$25</h4>
-          </div>
-          <button class="btn btn-outline-primary btn-block" type="button">BUY NOW</button>
-        </div>
+        <mat-card class="clean-pricing-item">
+          <mat-card-content>
+            <div class="heading">
+              <h3>BASIC</h3>
+            </div>
+            <p>For small business or entrepreneur </p>
+            <div class="features">
+              <h4><span class="feature">Number Of Users:&nbsp;</span><span>1</span></h4>
+              <h4><span class="feature">Wholesale:&nbsp;</span><span>No</span></h4>
+              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
+              <h4><span class="feature">Duration:&nbsp;</span><span>30 Days</span></h4>
+              <h4><span class="feature">Storage:&nbsp;</span><span>Unlimited</span></h4>
+            </div>
+            <div class="price">
+              <h4>20,000 TZS</h4>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button  mat-button="" class=" btn-block" color="primary">BUY NOW</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
       <div class="col-md-5 col-lg-4">
-        <div class="clean-pricing-item">
-          <div class="ribbon"><span>Best Value</span></div>
-          <div class="heading">
-            <h3>PRO</h3>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="features">
-            <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
-            <h4><span class="feature">Duration:&nbsp;</span><span>60 Days</span></h4>
-            <h4><span class="feature">Storage:&nbsp;</span><span>50GB</span></h4>
-          </div>
-          <div class="price">
-            <h4>$50</h4>
-          </div>
-          <button class="btn btn-primary btn-block" type="button">BUY NOW</button>
-        </div>
+        <mat-card class="clean-pricing-item">
+          <mat-card-content>
+            <div class="ribbon"><span>Best Value</span></div>
+            <div class="heading">
+              <h3>PRO</h3>
+            </div>
+            <p>Medium business</p>
+            <div class="features">
+              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
+              <h4><span class="feature">Wholesale:&nbsp;</span><span>Yes</span></h4>
+              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
+              <h4><span class="feature">Duration:&nbsp;</span><span>30 Days</span></h4>
+              <h4><span class="feature">Storage:&nbsp;</span><span>Unlimited</span></h4>
+            </div>
+            <div class="price">
+              <h4>30,000 TZS</h4>
+            </div>
+          </mat-card-content>
+         <mat-card-actions>
+           <button mat-raised-button color="primary" class="btn btn-block" >BUY NOW</button>
+         </mat-card-actions>
+        </mat-card>
       </div>
       <div class="col-md-5 col-lg-4">
-        <div class="clean-pricing-item">
-          <div class="heading">
-            <h3>PREMIUM</h3>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="features">
-            <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
-            <h4><span class="feature">Duration:&nbsp;</span><span>120 Days</span></h4>
-            <h4><span class="feature">Storage:&nbsp;</span><span>150GB</span></h4>
-          </div>
-          <div class="price">
-            <h4>$150</h4>
-          </div>
-          <button class="btn btn-outline-primary btn-block" type="button">BUY NOW</button>
-        </div>
+        <mat-card class="clean-pricing-item">
+          <mat-card-content>
+            <div class="heading">
+              <h3>PREMIUM</h3>
+            </div>
+            <p>Enterprises of large business</p>
+            <div class="features">
+              <h4><span class="feature">Contact us for talking&nbsp;</span><span></span></h4>
+              <!--<h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>-->
+              <!--<h4><span class="feature">Duration:&nbsp;</span><span>120 Days</span></h4>-->
+              <!--<h4><span class="feature">Storage:&nbsp;</span><span>150GB</span></h4>-->
+            </div>
+            <div class="price">
+              <h4>Pay as you go</h4>
+            </div>
+          </mat-card-content>
+         <mat-card-actions>
+           <button class="btn btn-block" mat-button color="primary">BUY NOW</button>
+         </mat-card-actions>
+
+        </mat-card>
       </div>
     </div>
   </div>
 </section>
-<div class="team-boxed">
-  <div class="container">
-    <div class="intro">
-      <h2 class="text-center">Team </h2>
-      <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,
-        pellentesque ut laoreet vitae.</p>
-    </div>
-    <div class="row people">
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box"><img class="rounded-circle" src="assets/img/1.jpg">
-          <h3 class="name">Ben Johnson</h3>
-          <p class="title">Musician</p>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a
-            semper massa. </p>
-          <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i
-            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box"><img class="rounded-circle" src="assets/img/2.jpg">
-          <h3 class="name">Emily Clark</h3>
-          <p class="title">Artist</p>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a
-            semper massa. </p>
-          <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i
-            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box"><img class="rounded-circle" src="assets/img/3.jpg">
-          <h3 class="name">Carl Kent</h3>
-          <p class="title">Stylist</p>
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a
-            semper massa. </p>
-          <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i
-            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<!--<div class="team-boxed">-->
+  <!--<div class="container">-->
+    <!--<div class="intro">-->
+      <!--<h2 class="text-center">Team </h2>-->
+      <!--<p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,-->
+        <!--pellentesque ut laoreet vitae.</p>-->
+    <!--</div>-->
+    <!--<div class="row people">-->
+      <!--<div class="col-md-6 col-lg-4 item">-->
+        <!--<div class="box"><img class="rounded-circle" src="assets/img/1.jpg">-->
+          <!--<h3 class="name">Ben Johnson</h3>-->
+          <!--<p class="title">Musician</p>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+            <!--semper massa. </p>-->
+          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-lg-4 item">-->
+        <!--<div class="box"><img class="rounded-circle" src="assets/img/2.jpg">-->
+          <!--<h3 class="name">Emily Clark</h3>-->
+          <!--<p class="title">Artist</p>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+            <!--semper massa. </p>-->
+          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-lg-4 item">-->
+        <!--<div class="box"><img class="rounded-circle" src="assets/img/3.jpg">-->
+          <!--<h3 class="name">Carl Kent</h3>-->
+          <!--<p class="title">Stylist</p>-->
+          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+            <!--semper massa. </p>-->
+          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
 <div class="testimonials-clean">
   <div class="container">
     <div class="intro">
@@ -238,8 +282,7 @@
   <div class="container">
     <div class="intro">
       <h2 class="text-center">Location </h2>
-      <p class="text-center">Nunc luctus in metus eget fringilla.
-        Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+      <p class="text-center"></p>
     </div>
   </div>
   <iframe allowfullscreen="" frameborder="0" width="100%" height="450"
@@ -247,16 +290,11 @@
 </div>
 <div class="footer-basic">
   <footer>
-    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
-      class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
-      class="icon ion-social-facebook"></i></a></div>
-    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Home</a></li>
-      <li class="list-inline-item"><a href="#">Services</a></li>
-      <li class="list-inline-item"><a href="#">About</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-    </ul>
-    <p class="copyright">Company Name © 2017</p>
+    <div class="social">
+      <a href="#"><i class="icon ion-social-instagram"></i></a>
+      <a href="#"><i class="icon ion-social-twitter"></i></a>
+      <a href="#"><i class="icon ion-social-facebook"></i></a>
+    </div>
+    <p class="copyright">Company Name © 2019</p>
   </footer>
 </div>
