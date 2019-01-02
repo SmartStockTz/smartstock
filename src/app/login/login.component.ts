@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
+import {UserDatabaseService} from '../services/user-database.service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,21 @@ export class LoginComponent implements OnInit {
   usernameControlInput = new FormControl();
   passwordControlInput = new FormControl();
 
-  constructor(public routes: Router) {
+  constructor(public routes: Router, private userDatabase: UserDatabaseService) {
   }
 
   ngOnInit() {
+    this.userDatabase.login({
+      username: 'lina',
+      password: 'jeremiah',
+    }, {
+      success(data: any) {
+        console.log(data);
+      },
+      error(data: any) {
+        console.log(data);
+      }
+    });
   }
 
   goHome() {

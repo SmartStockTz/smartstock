@@ -4,8 +4,8 @@ import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Urls} from '../database/urls';
-import {Stock} from '../database/stock';
+import {UrlsConstants} from '../model/urlsConstants';
+import {Stock} from '../model/stock';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -49,7 +49,7 @@ export class SaleComponent implements OnInit {
   }
 
   private getProduct(p: string) {
-    this.filteredOptions = this.http.get(Urls.SEARCH_PRODUCT + p)
+    this.filteredOptions = this.http.get(UrlsConstants.SEARCH_PRODUCT + p)
       .pipe<Stock[]>(
         map(value => this.toJs(value))
       );
