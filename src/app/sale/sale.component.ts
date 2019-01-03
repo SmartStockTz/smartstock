@@ -29,7 +29,23 @@ export class SaleComponent implements OnInit {
   discountControlInput = new FormControl();
   filteredOptions: Observable<Stock[]>;
   stocks: Stock[];
-  stock: Stock;
+  stock: Stock = {
+    category: '',
+    id: '',
+    nhifPrice: 0,
+    product: '',
+    profit: 0,
+    purchase: 0,
+    quantity: 0,
+    reorder: 0,
+    retailPrice: 0,
+    retailWholesalePrice: 0,
+    shelf: '',
+    supplier: '',
+    unit: '',
+    wholesalePrice: 0,
+    wholesaleQuantity: 0,
+  };
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,

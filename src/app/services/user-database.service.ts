@@ -6,12 +6,24 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {NgForage} from 'ngforage';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserDatabaseService implements UserDataSource {
+  // parseHeadersGet = {
+  //   'X-Parse-Application-Id': 'ssm',
+  //   'X-Parse-REST-API-Key': '${REST_API_KEY}',
+  //   'X-Parse-Revocable-Session': '1'
+  // };
+  // parseHeaderPost = {
+  //   'X-Parse-Application-Id': 'ssm',
+  //   'X-Parse-REST-API-Key': '${REST_API_KEY}',
+  //   'Content-Type': 'application/json',
+  // };
 
-  constructor(private firestore: AngularFirestore, private fireAuth: AngularFireAuth, private indexD: NgForage) {
+  constructor(private firestore: AngularFirestore, private fireAuth: AngularFireAuth,
+              private indexD: NgForage) {
   }
 
   createUser(user: UserI, callback?: DatabaseCallback) {
