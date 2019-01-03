@@ -1,3 +1,31 @@
-<p>
-  dashboard works!
-</p>
+<div *ngIf="!isLogin">
+  <app-check-user-progress></app-check-user-progress>
+</div>
+<div *ngIf="isLogin">
+  <mat-sidenav-container class="my-drawer-container">
+    <mat-sidenav #sidenav mode="over" [opened]="false">
+      <app-nav></app-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <nav class="sticky-top">
+        <mat-toolbar color="primary">
+          <button mat-icon-button (click)="openDrawer()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>SSM DASHBOARD</span>
+          <span style="flex: 1 1 auto;"></span>
+          <button mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </mat-toolbar>
+      </nav>
+
+      <div class="container">
+
+      </div>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

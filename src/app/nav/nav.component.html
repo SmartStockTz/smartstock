@@ -1,3 +1,48 @@
-<p>
-  nav works!
-</p>
+<div class="my-side-nav">
+  <div class="dawer-head"></div>
+  <mat-accordion class="mat-elevation-z0">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Dashboard
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Sales
+      </mat-expansion-panel-header>
+      <mat-action-list>
+        <button mat-list-item (click)="goToSale()">Retails</button>
+        <button mat-list-item >WholeSale</button>
+        <button mat-list-item >NHIF</button>
+        <button mat-list-item >Night Sale</button>
+      </mat-action-list>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Purchase
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Stock
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Expenses
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        Settings
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>

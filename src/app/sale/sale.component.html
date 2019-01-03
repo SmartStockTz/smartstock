@@ -1,119 +1,128 @@
-<mat-sidenav-container class="match-parent">
+<app-check-user-progress *ngIf="!isLogin"></app-check-user-progress>
+<mat-sidenav-container *ngIf="isLogin" class="match-parent">
 
   <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
-    <div>
-      <img src="/assets/img/1.jpg" width="100%">
-    </div>
-    <div style="margin: 16px; word-wrap: break-word">
-      <div mat-line="">
-        <mat-icon>person_outline</mat-icon>
-        <span mat-card-subtitle="">Username</span>
-      </div>
-      <div>
-        <span mat-card-title="">Joshua Mshana</span>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="space"></div>
-      <div mat-line="">
-        <mat-icon>email</mat-icon>
-        <span mat-card-subtitle="">Email</span>
-      </div>
-      <div>
-        <span mat-card-title="">example@gmail.com</span>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="space"></div>
-      <div>
-        <span mat-card-subtitle="">Level</span>
-      </div>
-      <div>
-        <span mat-card-title="">Sales</span>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="space"></div>
-      <button mat-raised-button="" color="accent" (click)="showProfile()">Update Profile</button>
+    <app-nav *ngIf="isAdmin"></app-nav>
+    <div *ngIf="!isAdmin">
+      <div class="dawer-head"></div>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Dashboard
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Sale
+          </mat-expansion-panel-header>
+          <mat-action-list>
+            <button mat-list-item="">Retails</button>
+            <button mat-list-item>WholeSale</button>
+            <button mat-list-item>NHIF</button>
+            <button mat-list-item>Night Sale</button>
+          </mat-action-list>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Profile
+          </mat-expansion-panel-header>
+          <mat-action-list>
+            <button mat-list-item="">View</button>
+            <button mat-list-item="">Logout</button>
+          </mat-action-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
     </div>
   </mat-sidenav>
 
   <mat-sidenav-content>
 
-    <mat-toolbar class="mytoolbar" color="primary">
-      <button mat-icon-button (click)="openDrawer()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>SSM-Sales</span>
-      <span class="toolbar-spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu>
-        <button mat-menu-item (click)="home()">
-          <mat-icon>home</mat-icon>
-          Home
+    <nav class="sticky-top">
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="openDrawer()">
+          <mat-icon>menu</mat-icon>
         </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>arrow_back</mat-icon>
-          Logout
+        <span>SSM-Retail</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-      </mat-menu>
-    </mat-toolbar>
+        <mat-menu #menu>
+          <button mat-menu-item (click)="home()">
+            <mat-icon>home</mat-icon>
+            Home
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>arrow_back</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+    </nav>
 
-    <div class="container" style="margin-top: 70px">
-
+    <div class="container" style="margin-top: 24px">
       <div class="row">
+        <mat-card class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 col-12">
+          <mat-card-content>
+            <mat-form-field style="margin-top: 8px" class="my-input">
+              <input type="text" placeholder="Product Name" matInput [formControl]="productNameControlInput"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let st of filteredOptions | async" [value]="st.product"
+                            (onSelectionChange)="stock=st">
+                  {{st.product}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
 
-        <div class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 card">
-          <div class="input-container" style="margin-bottom: 16px">
-            <mat-form-field style="margin-top: 8px">
-              <label>
-                <input matInput="" type="text" name="product" placeholder="Product Name" matInput
-                       [formControl]="product" [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let st of filteredOptions | async" [value]="st.product"
-                              (onSelectionChange)="stock=st">
-                    {{st.product}}
-                  </mat-option>
-                </mat-autocomplete>
-              </label>
+            <mat-form-field class="my-input">
+              <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>
             </mat-form-field>
-            <mat-form-field>
-              <label>
-                <input matInput type="number" placeholder="Quantity" [formControl]="iQuantity" name="quantity">
-              </label>
+
+            <mat-form-field class="my-input">
+              <input matInput type="number" placeholder="Discount ( TZS )" [formControl]="discountControlInput">
             </mat-form-field>
-            <mat-form-field>
-              <label>
-                <input matInput type="number" value="0" placeholder="Discount ( TZS )" name="discount">
-              </label>
-            </mat-form-field>
-            <mat-slide-toggle class="space">
-              Wholesale
+
+            <!--<mat-radio-group class="my-input">-->
+              <!--<mat-radio-button [value]="true">Normal</mat-radio-button>-->
+              <!--<mat-radio-button>R.Wholesale</mat-radio-button>-->
+              <!--<mat-radio-button>NHIF</mat-radio-button>-->
+            <!--</mat-radio-group>-->
+            <mat-slide-toggle class="my-input space">
+              R.Wholesale
             </mat-slide-toggle>
             <mat-divider></mat-divider>
-            <mat-slide-toggle class="space">
+            <mat-slide-toggle class="my-input space">
               NHIF
             </mat-slide-toggle>
             <mat-divider></mat-divider>
-            <mat-slide-toggle class="space">
-              N\N
-            </mat-slide-toggle>
-            <mat-divider></mat-divider>
-            <button mat-fab="" style="margin: 8px;">
-              <mat-icon>add_shopping_cart</mat-icon>
+            <!--<mat-slide-toggle class="space my-input">-->
+              <!--N\N-->
+            <!--</mat-slide-toggle>-->
+            <!--<mat-divider></mat-divider>-->
+            <button mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+              Add To Cart
             </button>
-            <span mat-card-subtitle="">Total ( TZS )</span>
-            <span mat-card-title>{{stock.sell * iQuantity.value}}</span>
-            <span mat-card-subtitle="">Price/Unit ( TZS )</span>
-            <span mat-card-title>{{stock.sell}}</span>
-            <mat-divider></mat-divider>
-            <span mat-card-subtitle="">Shelf</span>
-            <span mat-card-title>{{stock.shelf}}</span>
-            <mat-divider></mat-divider>
-            <span mat-card-subtitle="">Category</span>
-            <span mat-card-title>{{stock.category}}</span>
-            <mat-divider></mat-divider>
-          </div>
-        </div>
+
+            <mat-form-field class="my-input">
+              <input matInput [formControl]="receiveControlInput" placeholder="Receive" type="number">
+            </mat-form-field>
+            <mat-card-subtitle >Change ( TZS )</mat-card-subtitle>
+            <mat-card-title >{{changePrice}}</mat-card-title>
+
+            <mat-card-subtitle >Total ( TZS )</mat-card-subtitle>
+            <mat-card-title >{{totalPrice}}</mat-card-title>
+
+            <mat-card-subtitle >Price/Unit ( TZS )</mat-card-subtitle>
+            <mat-card-title >{{priceUnit}}</mat-card-title>
+
+            <mat-card-subtitle >Shelf</mat-card-subtitle>
+            <mat-card-title>{{stock.shelf}}</mat-card-title>
+          </mat-card-content>
+        </mat-card>
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8">
           <mat-tab-group dynamicHeight>
@@ -132,13 +141,7 @@
       </div>
 
     </div>
-    <!--<mat-grid-tile [colspan]="8">-->
-    <!--<mat-card>-->
-    <!--<mat-card-header>-->
-    <!--Status-->
-    <!--</mat-card-header>-->
-    <!--</mat-card>-->
-    <!--</mat-grid-tile>-->
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>

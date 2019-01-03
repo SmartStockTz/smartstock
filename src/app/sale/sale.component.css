@@ -1,20 +1,23 @@
 .match-parent {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  height: 100vh;
 }
 
 .match-parent-side {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  height: 100vh;
   width: 300px;
 }
 
 .space{
+  margin-top: 16px;
   margin-bottom: 16px;
 }
 
@@ -43,6 +46,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.dawer-head{
+  height: 30vh;
+  background-image: url("/assets/img/calculate.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 

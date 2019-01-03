@@ -1,16 +1,17 @@
 export interface Stock {
+  id: string;
   product: string;
   category: string;
   profit: number;
   purchase: number;
-  qStatus: string;
   quantity: number;
   reorder: number;
-  sell: number;
+  retailPrice: number;
+  retailWholesalePrice: number;
   shelf: string;
   supplier: string;
-  times: number;
   unit: string;
-  wquantity: number;
-  wsell: number;
+  wholesaleQuantity: number;
+  wholesalePrice: number;
+  nhifPrice: number;
 }

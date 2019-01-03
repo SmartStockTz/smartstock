@@ -2,19 +2,21 @@ import {UserI} from '../../model/UserI';
 import {DatabaseCallback} from '../DatabaseCallback';
 
 export interface UserDataSource {
-  login(user: UserI, callback: DatabaseCallback);
+  login(user: UserI, callback?: Function);
 
-  register(user: UserI, callback: DatabaseCallback);
+  logout(callback?: Function);
 
-  resetPassword(user: UserI, callback: DatabaseCallback);
+  register(user: UserI, callback?: DatabaseCallback);
 
-  getAllUser(callback: DatabaseCallback);
+  resetPassword(user: UserI, callback?: DatabaseCallback);
 
-  getUser(user: UserI, callback);
+  getAllUser(callback?: DatabaseCallback);
 
-  deleteUser(user: UserI, callback: DatabaseCallback);
+  getUser(user: UserI, callback?: DatabaseCallback);
 
-  updateUser(user: UserI, callback: DatabaseCallback);
+  deleteUser(user: UserI, callback?: DatabaseCallback);
 
-  createUser(user: UserI, callback: DatabaseCallback);
+  updateUser(user: UserI, callback?: DatabaseCallback);
+
+  createUser(user: UserI, callback?: DatabaseCallback);
 }

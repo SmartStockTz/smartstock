@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
+import {UserDatabaseService} from '../services/user-database.service';
+import {MatSnackBar} from '@angular/material';
+import {NgForage} from 'ngforage';
 
 @Component({
   selector: 'app-landing',
@@ -12,31 +14,32 @@ export class LandingComponent implements OnInit {
   message = 'The revolution smart stock manage and sales point is here now. ' +
     'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
 
-  constructor(private router: Router, private auth: AngularFireAuth) {
+  constructor(private router: Router,
+              private snack: MatSnackBar,
+              private indexDb: NgForage,
+              private auth: UserDatabaseService) {
   }
 
   ngOnInit() {
-    this.log = this.auth.auth.currentUser != null;
-    this.auth.authState.subscribe(value => {
-      if (value == null) {
-        this.log = false;
-        this.message = 'The revolution smart stock manage and sales point is here now. ' +
-          'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
-      } else {
+    this.message = 'The revolution smart stock manage and sales point is here now. ' +
+      'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
+    this.indexDb.getItem('user').then(value => {
+      if (value !== null) {
         this.log = true;
-        this.message = 'Welcome back ' + value.displayName + ' ';
+      } else {
+        this.log = false;
       }
-    }, error1 => {
-      console.log('error in authenticate listener');
     });
   }
 
-  register() {
-    console.log('Register clicked');
-  }
-
   logout() {
-    console.log('logout clciked');
+    this.snack.open('Wait while we log you out');
+    this.auth.logout().then(value => {
+      this.snack.open('Successful logout', 'Ok', {duration: 3000});
+      this.log = false;
+    }).catch(reason => {
+      this.snack.open(reason, 'Ok');
+    });
   }
 
   login() {
@@ -46,12 +49,9 @@ export class LandingComponent implements OnInit {
       });
   }
 
-  profile() {
-    console.log('profile clicked');
-    if (!this.log) {
-      this.router.navigateByUrl('login').catch(reason => {
-        console.log(reason.toString());
-      });
-    }
+  goToShop() {
+    this.router.navigateByUrl('login').catch(reason => {
+      console.log(reason.toString());
+    });
   }
 }

@@ -13,20 +13,19 @@
         <mat-icon>arrow_forward</mat-icon>
         Login
       </button>
-      <button mat-menu-item (click)="register()">
-        <mat-icon>person_add</mat-icon>
-        Register
-      </button>
-      <button mat-menu-item (click)="profile()" *ngIf="log">
+      <!--<button mat-menu-item (click)="register()">-->
+      <!--<mat-icon>person_add</mat-icon>-->
+      <!--Register-->
+      <!--</button>-->
+      <button mat-menu-item (click)="goToShop()" *ngIf="log">
         <mat-icon>person</mat-icon>
-        Profile
+        Shop
       </button>
       <button mat-menu-item (click)="logout()" *ngIf="log">
         <mat-icon>arrow_back</mat-icon>
         Logout
       </button>
     </mat-menu>
-
   </mat-toolbar>
 </nav>
 
@@ -37,7 +36,9 @@
         <h1>Smart Stock Manager</h1>
         <p style="font-family: Roboto; font-size: 28px; color: #f5f5f5;" class="justify-content-center">{{message}}</p>
         <div class="d-flex justify-content-center">
-          <button mat-raised-button="" color="primary" class="btn-primary align-self-center">Get Started</button>
+          <button (click)="goToShop()" mat-raised-button="" color="primary" class="btn-primary align-self-center">
+            Get Started
+          </button>
         </div>
       </div>
     </div>
@@ -89,23 +90,23 @@
         </mat-card>
       </div>
       <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-        <!--<div class="box">-->
-          <!--<i class="fa fa-leaf icon"></i>-->
-          <!--<h3 class="name">Organic </h3>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--<div class="box">-->
+      <!--<i class="fa fa-leaf icon"></i>-->
+      <!--<h3 class="name">Organic </h3>-->
+      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
       <!--</div>-->
       <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-        <!--<div class="box"><i class="fa fa-plane icon"></i>-->
-          <!--<h3 class="name">Fast </h3>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--<div class="box"><i class="fa fa-plane icon"></i>-->
+      <!--<h3 class="name">Fast </h3>-->
+      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
       <!--</div>-->
       <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-        <!--<div class="box"><i class="fa fa-phone icon"></i>-->
-          <!--<h3 class="name">Mobile-first</h3>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
+      <!--<div class="box"><i class="fa fa-phone icon"></i>-->
+      <!--<h3 class="name">Mobile-first</h3>-->
+      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
       <!--</div>-->
     </div>
   </div>
@@ -137,7 +138,7 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button  mat-button="" class=" btn-block" color="primary">BUY NOW</button>
+            <button mat-button="" class=" btn-block" color="primary">BUY NOW</button>
           </mat-card-actions>
         </mat-card>
       </div>
@@ -160,9 +161,9 @@
               <h4>30,000 TZS</h4>
             </div>
           </mat-card-content>
-         <mat-card-actions>
-           <button mat-raised-button color="primary" class="btn btn-block" >BUY NOW</button>
-         </mat-card-actions>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="btn btn-block">BUY NOW</button>
+          </mat-card-actions>
         </mat-card>
       </div>
       <div class="col-md-5 col-lg-4">
@@ -182,9 +183,9 @@
               <h4>Pay as you go</h4>
             </div>
           </mat-card-content>
-         <mat-card-actions>
-           <button class="btn btn-block" mat-button color="primary">BUY NOW</button>
-         </mat-card-actions>
+          <mat-card-actions>
+            <button class="btn btn-block" mat-button color="primary">BUY NOW</button>
+          </mat-card-actions>
 
         </mat-card>
       </div>
@@ -193,48 +194,48 @@
 </section>
 
 <!--<div class="team-boxed">-->
-  <!--<div class="container">-->
-    <!--<div class="intro">-->
-      <!--<h2 class="text-center">Team </h2>-->
-      <!--<p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,-->
-        <!--pellentesque ut laoreet vitae.</p>-->
-    <!--</div>-->
-    <!--<div class="row people">-->
-      <!--<div class="col-md-6 col-lg-4 item">-->
-        <!--<div class="box"><img class="rounded-circle" src="assets/img/1.jpg">-->
-          <!--<h3 class="name">Ben Johnson</h3>-->
-          <!--<p class="title">Musician</p>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-            <!--semper massa. </p>-->
-          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col-md-6 col-lg-4 item">-->
-        <!--<div class="box"><img class="rounded-circle" src="assets/img/2.jpg">-->
-          <!--<h3 class="name">Emily Clark</h3>-->
-          <!--<p class="title">Artist</p>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-            <!--semper massa. </p>-->
-          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col-md-6 col-lg-4 item">-->
-        <!--<div class="box"><img class="rounded-circle" src="assets/img/3.jpg">-->
-          <!--<h3 class="name">Carl Kent</h3>-->
-          <!--<p class="title">Stylist</p>-->
-          <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-            <!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-            <!--semper massa. </p>-->
-          <!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-            <!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div class="container">-->
+<!--<div class="intro">-->
+<!--<h2 class="text-center">Team </h2>-->
+<!--<p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,-->
+<!--pellentesque ut laoreet vitae.</p>-->
+<!--</div>-->
+<!--<div class="row people">-->
+<!--<div class="col-md-6 col-lg-4 item">-->
+<!--<div class="box"><img class="rounded-circle" src="assets/img/1.jpg">-->
+<!--<h3 class="name">Ben Johnson</h3>-->
+<!--<p class="title">Musician</p>-->
+<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+<!--semper massa. </p>-->
+<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-6 col-lg-4 item">-->
+<!--<div class="box"><img class="rounded-circle" src="assets/img/2.jpg">-->
+<!--<h3 class="name">Emily Clark</h3>-->
+<!--<p class="title">Artist</p>-->
+<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+<!--semper massa. </p>-->
+<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-6 col-lg-4 item">-->
+<!--<div class="box"><img class="rounded-circle" src="assets/img/3.jpg">-->
+<!--<h3 class="name">Carl Kent</h3>-->
+<!--<p class="title">Stylist</p>-->
+<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
+<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
+<!--semper massa. </p>-->
+<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
+<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <div class="testimonials-clean">

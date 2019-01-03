@@ -1,5 +1,5 @@
 export class UrlsConstants {
-  static SEARCH_PRODUCT = 'http://lvh.me:8080/stock/search/findAllByProductContains?product=';
+  static SEARCH_PRODUCT = 'http://lvh.me:8080/stock/search/findAllByProductContains?productNameControlInput=';
   LOGIN_URL: string;
 
   constructor(private severUrl) {

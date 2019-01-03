@@ -21,21 +21,28 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatRadioModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {NgForageConfig, NgForageModule} from 'ngforage';
+import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
 
 @NgModule({
   declarations: [
@@ -48,12 +55,14 @@ import {HttpClientModule} from '@angular/common/http';
     PurchaseComponent,
     ExpensesComponent,
     SettingComponent,
-    NavComponent
+    NavComponent,
+    CheckUserProgressComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -74,10 +83,20 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatListModule,
+    NgForageModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  public constructor(ngfConfig: NgForageConfig) {
+    ngfConfig.configure({
+      name: 'ssm',
+    });
+  }
 }

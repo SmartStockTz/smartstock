@@ -5,6 +5,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .toolbar-spacer{
   flex: 1 1 auto;
 }
+.my-input{
+  width: 100%;
+}
 /*.mytoolbar {*/
   /*position: fixed;*/
   /*top: 0;*/

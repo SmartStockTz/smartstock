@@ -7,6 +7,9 @@ import {HttpClient} from '@angular/common/http';
 import {UrlsConstants} from '../model/urlsConstants';
 import {Stock} from '../model/stock';
 import {map} from 'rxjs/operators';
+import {NgForage} from 'ngforage';
+import {UserI} from '../model/UserI';
+import {UserDatabaseService} from '../services/user-database.service';
 
 @Component({
   selector: 'app-sale',
@@ -14,38 +17,41 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./sale.component.css']
 })
 export class SaleComponent implements OnInit {
+  isAdmin = false;
+  isLogin = false;
+  totalPrice = 0;
+  priceUnit = 0;
+  changePrice = 0;
   @ViewChild('sidenav') sidenav: MatSidenav;
-  product = new FormControl();
-  iQuantity = new FormControl();
+  productNameControlInput = new FormControl();
+  receiveControlInput = new FormControl();
+  quantityControlInput = new FormControl();
+  discountControlInput = new FormControl();
   filteredOptions: Observable<Stock[]>;
   stocks: Stock[];
-  stock: Stock = {
-    product: '',
-    sell: 0,
-    shelf: 'Shelf',
-    category: 'Category',
-    profit: 0,
-    purchase: 0,
-    qStatus: '',
-    quantity: 0,
-    reorder: 0,
-    supplier: '',
-    times: 0,
-    unit: '',
-    wquantity: 0,
-    wsell: 0,
-  };
+  stock: Stock;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router,
+              private userDatabase: UserDatabaseService,
+              private indexDb: NgForage,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.iQuantity.setValue(1);
-    this.product.valueChanges.subscribe(value => {
-      this.getProduct(value.toString());
-    }, error1 => {
-      console.log(error1);
+    this.indexDb.getItem<UserI>('user').then(value => {
+      if (value === null) {
+        this.isLogin = false;
+        this.router.navigateByUrl('login').catch(reason => console.log(reason));
+      } else {
+        this.isAdmin = value.role === 'admin';
+        this.isLogin = true;
+      }
+    }).catch(reason => {
+      console.log(reason);
     });
+
+    // control input initialize
+    this.initializeView();
   }
 
   private getProduct(p: string) {
@@ -64,7 +70,6 @@ export class SaleComponent implements OnInit {
   }
 
   openDrawer() {
-    console.log('side nav about to open');
     this.sidenav.open()
       .then(value => {
         console.log(value);
@@ -73,19 +78,29 @@ export class SaleComponent implements OnInit {
     });
   }
 
-  showProfile() {
-    console.log('to go to profile');
-  }
-
   home() {
-    this.router.navigateByUrl('/').catch(reason => {
+    this.router.navigateByUrl('').catch(reason => {
       console.log(reason.toString());
     });
   }
 
   logout() {
-    this.router.navigateByUrl('login').catch(reason => {
-      console.log(reason.toString());
+    this.userDatabase.logout().then(value => {
+      this.router.navigateByUrl('').catch(reason => console.log(reason));
+    }).catch(reason => {
+      console.log(reason);
+    });
+  }
+
+  addToCart() {
+
+  }
+
+  private initializeView() {
+    this.productNameControlInput.valueChanges.subscribe(value => {
+
+    }, error1 => {
+
     });
   }
 }
