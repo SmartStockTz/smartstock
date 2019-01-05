@@ -43,6 +43,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
+import { WholeSaleComponent } from './whole-sale/whole-sale.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {CheckUserProgressComponent} from './check-user-progress/check-user-progr
     ExpensesComponent,
     SettingComponent,
     NavComponent,
-    CheckUserProgressComponent
+    CheckUserProgressComponent,
+    WholeSaleComponent
   ],
   imports: [
     BrowserModule,

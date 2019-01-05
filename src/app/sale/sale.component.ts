@@ -2,13 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {Stock} from '../model/stock';
 import {NgForage} from 'ngforage';
 import {UserI} from '../model/UserI';
 import {UserDatabaseService} from '../services/user-database.service';
 import {Observable, of} from 'rxjs';
 import {CartI} from '../model/cart';
+import {SalesDatabaseService} from '../services/sales-database.service';
+import {CashSaleI} from '../model/CashSale';
 
 @Component({
   selector: 'app-sale',
@@ -16,17 +17,23 @@ import {CartI} from '../model/cart';
   styleUrls: ['./sale.component.css']
 })
 export class SaleComponent implements OnInit {
+  private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
+  showProgress = false;
   totalPrice = 0;
   priceUnit = 0;
   changePrice = 0;
   totalBill = 0;
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  totalSaleAmount = 0;
   productNameControlInput = new FormControl();
   receiveControlInput = new FormControl();
   quantityControlInput = new FormControl();
   discountControlInput = new FormControl();
+  searchSaleControl = new FormControl();
+  retailWholesaleRadioInput = new FormControl();
+  traRadioControl = new FormControl();
+  nhifRadioInput = new FormControl();
   filteredOptions: Observable<Stock[]>;
   stocks: Stock[];
   stock: Stock = {
@@ -50,18 +57,19 @@ export class SaleComponent implements OnInit {
     wholesalePrice: 0,
     wholesaleQuantity: 0,
   };
-  retailWholesaleRadioInput = new FormControl();
-  nhifRadioInput = new FormControl();
   cartDatasourceArray: CartI[];
   cartDatasource: MatTableDataSource<CartI>;
+  saleDatasourceArray: CashSaleI[];
+  salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
-  traRadioControl = new FormControl();
+  saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
-              private http: HttpClient) {
+              private saleDatabase: SalesDatabaseService) {
   }
 
   ngOnInit() {
@@ -72,13 +80,13 @@ export class SaleComponent implements OnInit {
       } else {
         this.isAdmin = value.role === 'admin';
         this.isLogin = true;
+        this.currentUser = value;
+        // control input initialize
+        this.initializeView();
       }
     }).catch(reason => {
       console.log(reason);
     });
-
-    // control input initialize
-    this.initializeView();
   }
 
   private getProduct(product: string) {
@@ -119,13 +127,16 @@ export class SaleComponent implements OnInit {
       this.snack.open('Please enter the product to sell', 'Ok', {duration: 3000});
     } else if (this.quantityControlInput.value === null) {
       this.snack.open('Please enter quantity of a product you sell', 'Ok', {duration: 3000});
+    } else if (this.totalPrice === 0) {
+      this.snack.open('Can\'t sell zero product', 'Ok');
     } else {
       const showTotalPrice = this.showTotalPrice();
       this.cartDatasourceArray.push({
         product: this.productNameControlInput.value,
         quantity: showTotalPrice.quantity,
         amount: showTotalPrice.amount,
-        discount: this.discountControlInput.value
+        discount: this.discountControlInput.value,
+        stock: this.stock,
       });
       this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
       this.updateTotalBill();
@@ -146,7 +157,47 @@ export class SaleComponent implements OnInit {
   }
 
   submitBill() {
-
+    this.showProgressBar();
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const stringDate = year + '-' + month + '-' + day;
+    let idTra: string;
+    if (this.traRadioControl.value === false) {
+      idTra = 'n';
+    } else {
+      idTra = 'n/n';
+    }
+    const saleM: CashSaleI[] = [];
+    this.cartDatasourceArray.forEach(value => {
+      saleM.push({
+        amount: value.amount,
+        discount: value.discount,
+        quantity: value.quantity,
+        product: value.product,
+        category: value.stock.category,
+        unit: value.stock.unit,
+        channel: 'retail',
+        date: stringDate,
+        id: '',
+        idTra: idTra,
+        user: this.currentUser.id
+      });
+    });
+    this.saleDatabase.addCashSale(saleM)
+      .then(value => {
+        console.log(value);
+        this.hideProgressBar();
+        this.cartDatasourceArray = [];
+        this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+        this.updateTotalBill();
+        this.snack.open('Done save the cart', 'Ok', {duration: 3000});
+      })
+      .catch(reason => {
+        console.log(reason);
+        this.snack.open(reason, 'Ok');
+      });
   }
 
   private clearInputs() {
@@ -162,19 +213,27 @@ export class SaleComponent implements OnInit {
     this.stock.shelf = '';
   }
 
+  private showProgressBar() {
+    this.showProgress = true;
+  }
+
+  private hideProgressBar() {
+    this.showProgress = false;
+  }
 
   private initializeView() {
     this.retailWholesaleRadioInput.setValue(false);
     this.nhifRadioInput.setValue(false);
+    this.traRadioControl.setValue(false);
     this.discountControlInput.setValue(0);
     this.receiveControlInput.setValue(0);
+    this.cartDatasourceArray = [];
+    this.saleDatasourceArray = [];
     this.productNameControlInput.valueChanges.subscribe(value => {
       this.getProduct(value);
     }, error1 => {
       console.log(error1);
     });
-    this.cartDatasourceArray = [];
-
     this.quantityControlInput.valueChanges.subscribe(value => {
       if (value === null) {
         this.snack.open('Quantity must be number', 'Ok', {duration: 3000});
@@ -185,7 +244,6 @@ export class SaleComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-
     this.discountControlInput.valueChanges.subscribe(value => {
       if (value === null) {
         this.snack.open('Discount must be a number', 'Ok', {duration: 3000});
@@ -196,7 +254,11 @@ export class SaleComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-
+    this.searchSaleControl.valueChanges.subscribe(value => {
+      this.salesDatasource.filter = value.toString().toLowerCase();
+    }, error1 => {
+      console.log(error1);
+    });
     this.receiveControlInput.valueChanges.subscribe(value => {
       if (value === null) {
         this.snack.open('Please enter number ', 'Ok', {duration: 3000});
@@ -206,11 +268,17 @@ export class SaleComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-
     this.retailWholesaleRadioInput.valueChanges.subscribe(value => {
       this.showTotalPrice();
     }, error1 => {
       console.log(error1);
+    });
+    // live database
+    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
+      this.saleDatasourceArray = [];
+      this.saleDatasourceArray = datasource;
+      this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
+      this.updateTotalSales();
     });
   }
 
@@ -238,4 +306,11 @@ export class SaleComponent implements OnInit {
     });
   }
 
+  private updateTotalSales() {
+    let s = 0;
+    this.saleDatasourceArray.forEach(value => {
+      s += value.amount;
+    });
+    this.totalSaleAmount = s;
+  }
 }

@@ -2,11 +2,13 @@ import {CashSaleI} from '../../model/CashSale';
 import {DatabaseCallback} from '../DatabaseCallback';
 
 export interface SalesDatasource {
-  addCashSale(sale: CashSaleI, callback?: DatabaseCallback);
+  addCashSale(sale: CashSaleI[], callback?: DatabaseCallback);
 
   getCashSale(id: string, callback?: DatabaseCallback);
 
   getAllCashSale(callback?: DatabaseCallback);
+
+  getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback);
 
   updateCashSale(sale: CashSaleI, callback?: DatabaseCallback);
 
