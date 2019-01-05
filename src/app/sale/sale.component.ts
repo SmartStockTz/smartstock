@@ -145,6 +145,10 @@ export class SaleComponent implements OnInit {
     this.showTotalPrice();
   }
 
+  submitBill() {
+
+  }
+
   private clearInputs() {
     this.productNameControlInput.setValue('');
     this.quantityControlInput.setValue(0);
@@ -233,4 +237,5 @@ export class SaleComponent implements OnInit {
       this.totalBill += value.amount;
     });
   }
+
 }
