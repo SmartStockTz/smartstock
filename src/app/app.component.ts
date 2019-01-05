@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {HttpClient} from '@angular/common/http';
+import {UpdateLocalDatabaseService} from './services/update-local-database.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,14 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private firestore: AngularFirestore, private httpClient: HttpClient) {
+  constructor(private firestore: AngularFirestore,
+              private updateLocal: UpdateLocalDatabaseService,
+              private httpClient: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    this.updateLocal.updateStock();
     // this.httpClient.get<{
     //   id: any,
     //   product: string;

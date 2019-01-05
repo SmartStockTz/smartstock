@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
 import {UserI} from '../model/UserI';
+import {Stock} from '../model/stock';
 
 @Component({
   selector: 'app-login',
