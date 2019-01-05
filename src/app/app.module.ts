@@ -20,6 +20,7 @@ import {
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -43,7 +44,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
-import { WholeSaleComponent } from './whole-sale/whole-sale.component';
+import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { WholeSaleComponent } from './whole-sale/whole-sale.component';
     SettingComponent,
     NavComponent,
     CheckUserProgressComponent,
-    WholeSaleComponent
+    WholeSaleComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,8 +93,12 @@ import { WholeSaleComponent } from './whole-sale/whole-sale.component';
     MatExpansionModule,
     MatListModule,
     NgForageModule.forRoot(),
+    MatDialogModule,
   ],
   providers: [],
+  entryComponents: [
+    DialogComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

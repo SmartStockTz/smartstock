@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {UserI} from '../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
@@ -11,6 +11,11 @@ import {UserDatabaseService} from '../services/user-database.service';
 import {NgForage} from 'ngforage';
 import {SalesDatabaseService} from '../services/sales-database.service';
 import {OrderI} from '../model/OderI';
+
+export interface DialogData {
+  customer?: string;
+  name?: string;
+}
 
 @Component({
   selector: 'app-whole-sale',
@@ -26,6 +31,7 @@ export class WholeSaleComponent implements OnInit {
   priceUnit = 0;
   changePrice = 0;
   totalBill = 0;
+  totalOrder = 0;
   totalSaleAmount = 0;
   productNameControlInput = new FormControl();
   receiveControlInput = new FormControl();
@@ -74,6 +80,7 @@ export class WholeSaleComponent implements OnInit {
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
+              private dialog: MatDialog,
               private saleDatabase: SalesDatabaseService) {
   }
 
@@ -202,6 +209,11 @@ export class WholeSaleComponent implements OnInit {
       });
   }
 
+  saveOrder() {
+    // console.log('save order clicked');
+    this.openDialog();
+  }
+
   private clearInputs() {
     this.productNameControlInput.setValue('');
     this.quantityControlInput.setValue(0);
@@ -270,6 +282,9 @@ export class WholeSaleComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    this.searchOrderControl.valueChanges.subscribe(value => {
+      this.salesOrderDatasourceArray.filter = value.toString().toLowerCase();
+    }, error1 => console.log(error1));
     // this.retailWholesaleRadioInput.valueChanges.subscribe(value => {
     //   this.showTotalPrice();
     // }, error1 => {
@@ -310,5 +325,39 @@ export class WholeSaleComponent implements OnInit {
       s += value.amount;
     });
     this.totalSaleAmount = s;
+  }
+
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === null) {
+        this.snack.open('Customer not inserted', 'Ok', {duration: 3000});
+      }
+      console.log(result);
+    });
+  }
+
+}
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: 'app-dialog.html',
+})
+export class DialogComponent {
+  customerControl = new FormControl();
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
+
+  done() {
+    if (this.customerControl.value !== null) {
+      this.dialogRef.close(this.customerControl.value);
+    }
   }
 }

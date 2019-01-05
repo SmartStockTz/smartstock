@@ -11,12 +11,12 @@
       <mat-expansion-panel-header>
         Sales
       </mat-expansion-panel-header>
-      <mat-action-list>
-        <button mat-list-item (click)="goToSale()">Retails</button>
-        <button mat-list-item (click)="goToWholeSale()">WholeSale</button>
-        <button mat-list-item >NHIF</button>
-        <button mat-list-item >Night Sale</button>
-      </mat-action-list>
+      <mat-nav-list>
+        <a mat-list-item (click)="goToSale()">Retails</a>
+        <a mat-list-item (click)="goToWholeSale()">WholeSale</a>
+        <a mat-list-item >NHIF</a>
+        <a mat-list-item >Night Sale</a>
+      </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
 

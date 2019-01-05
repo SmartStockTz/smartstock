@@ -3,6 +3,7 @@ import {SalesDatasource} from '../database/connector/SalesDatasource';
 import {CashSaleI} from '../model/CashSale';
 import {DatabaseCallback} from '../database/DatabaseCallback';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {OrderI} from '../model/OderI';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +107,40 @@ export class SalesDatabaseService implements SalesDatasource {
         console.log(error1);
         results([]);
       });
+  }
+
+  addOrder(order: OrderI, callback?: (value) => void) {
+  }
+
+  addOrders(orders: OrderI[], callback?: (value) => void) {
+  }
+
+  deleteOrder(order: OrderI, callback?: (value) => void) {
+  }
+
+  getAllOrders(callback: (orders: OrderI[]) => void) {
+    this.firestore.collection('orders').ref
+      .where('complete', '==', false)
+      .onSnapshot(value => {
+        const ords: OrderI[] = [];
+        value.forEach(value1 => {
+          ords.push({
+            date: value1.get('date'),
+            customer: value1.get('customer'),
+            amount: value1.get('amount'),
+            cart: value1.get('cart'),
+            complete: value1.get('complete'),
+            id: value1.get('id')
+          });
+        });
+        callback(ords);
+      });
+  }
+
+  getOrder(id: string, callback: (order: OrderI) => void) {
+  }
+
+  updateOrder(order: OrderI, callback?: (value) => void) {
+    // this.firestore.collection<OrderI>('orders').doc(order.id)
   }
 }
