@@ -100,10 +100,7 @@ export class SaleComponent implements OnInit {
   }
 
   openDrawer() {
-    this.sidenav.open()
-      .then(value => {
-        console.log(value);
-      }).catch(reason => {
+    this.sidenav.open().catch(reason => {
       console.log(reason.toString());
     });
   }
@@ -292,9 +289,10 @@ export class SaleComponent implements OnInit {
       this.totalPrice = (this.quantityControlInput.value * this.stock.retailPrice) - (<number>this.discountControlInput.value);
       return {amount: this.totalPrice, quantity: this.quantityControlInput.value};
     } else {
-      this.priceUnit = this.stock.retailWholesalePrice;
+      this.priceUnit = this.stock.wholesalePrice;
       const a: number = (Number(this.quantityControlInput.value) * Number(this.stock.wholesaleQuantity));
-      this.totalPrice = (a * <number>this.stock.retailWholesalePrice) - <number>this.discountControlInput.value;
+      const totalPrice1 = (a * (<number>this.stock.wholesalePrice / Number(this.stock.wholesaleQuantity)));
+      this.totalPrice = totalPrice1 - <number>this.discountControlInput.value;
       return {amount: this.totalPrice, quantity: a};
     }
   }

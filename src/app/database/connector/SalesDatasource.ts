@@ -13,4 +13,8 @@ export interface SalesDatasource {
   updateCashSale(sale: CashSaleI, callback?: DatabaseCallback);
 
   deleteCashSale(sale: CashSaleI, callback?: DatabaseCallback);
+
+  getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback);
+
+  addWholeCashSale(sale: CashSaleI[], callback?: DatabaseCallback);
 }

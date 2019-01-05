@@ -4,12 +4,14 @@ import {LandingComponent} from './landing/landing.component';
 import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SaleComponent} from './sale/sale.component';
+import {WholeSaleComponent} from './whole-sale/whole-sale.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
   {path: 'admin', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sale', component: SaleComponent},
+  {path: 'whole', component: WholeSaleComponent},
   {path: 'home', redirectTo: ''},
 ];
 

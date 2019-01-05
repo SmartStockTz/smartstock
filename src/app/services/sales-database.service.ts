@@ -30,6 +30,16 @@ export class SalesDatabaseService implements SalesDatasource {
     await writeBatch.commit();
   }
 
+  async addWholeCashSale(sale: CashSaleI[], callback?: DatabaseCallback) {
+    const writeBatch = this.firestore.firestore.batch();
+    sale.forEach(value => {
+      const newVar = this.firestore.collection<CashSaleI>('sales').ref.doc();
+      value.id = newVar.id;
+      writeBatch.set(newVar, value, {merge: true});
+    });
+    await writeBatch.commit();
+  }
+
   deleteCashSale(sale: CashSaleI, callback?: DatabaseCallback) {
   }
 
@@ -45,7 +55,36 @@ export class SalesDatabaseService implements SalesDatasource {
   getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback) {
     return this.firestore.collection('sales').ref
       .where('user', '==', id)
-      .where('date', '==', SalesDatabaseService.getCurrentDate()).onSnapshot(value => {
+      .where('date', '==', SalesDatabaseService.getCurrentDate())
+      .where('channel', '==', 'retail').onSnapshot(value => {
+        const arrayD: CashSaleI[] = [];
+        value.forEach(value2 => {
+          arrayD.push({
+            product: value2.get('product'),
+            amount: value2.get('amount'),
+            id: value2.get('id'),
+            user: value2.get('user'),
+            idTra: value2.get('idTra'),
+            date: value2.get('date'),
+            channel: value2.get('channel'),
+            unit: value2.get('unit'),
+            category: value2.get('category'),
+            quantity: value2.get('quantity'),
+            discount: value2.get('discount')
+          });
+        });
+        results(arrayD);
+      }, error1 => {
+        console.log(error1);
+        results([]);
+      });
+  }
+
+  getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback) {
+    return this.firestore.collection('sales').ref
+      .where('user', '==', id)
+      .where('date', '==', SalesDatabaseService.getCurrentDate())
+      .where('channel', '==', 'whole').onSnapshot(value => {
         const arrayD: CashSaleI[] = [];
         value.forEach(value2 => {
           arrayD.push({

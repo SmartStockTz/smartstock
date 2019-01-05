@@ -1,3 +1,269 @@
-<p>
-  whole-sale works!
-</p>
+<app-check-user-progress *ngIf="!isLogin"></app-check-user-progress>
+<mat-sidenav-container *ngIf="isLogin" class="match-parent">
+
+  <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
+    <app-nav *ngIf="isAdmin"></app-nav>
+    <div *ngIf="!isAdmin">
+      <div class="dawer-head"></div>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Dashboard
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Sale
+          </mat-expansion-panel-header>
+          <mat-action-list>
+            <button mat-list-item="">Retails</button>
+            <button mat-list-item>WholeSale</button>
+            <button mat-list-item>NHIF</button>
+            <button mat-list-item>Night Sale</button>
+          </mat-action-list>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            Profile
+          </mat-expansion-panel-header>
+          <mat-action-list>
+            <button mat-list-item="">View</button>
+            <button mat-list-item="">Logout</button>
+          </mat-action-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <nav class="sticky-top">
+      <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="openDrawer()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>SSM-WholeSale</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu>
+          <button mat-menu-item (click)="home()">
+            <mat-icon>home</mat-icon>
+            Home
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>arrow_back</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+    </nav>
+
+    <div class="container" style="margin-top: 24px">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field style="margin-top: 8px" class="my-input">
+            <input type="text" placeholder="Product Name" matInput [formControl]="productNameControlInput"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let st of filteredOptions | async"
+                          [value]="st.product + ' -->' + st.wholesalePrice + ' TZS/' + st.wholesaleQuantity+' '+st.unit"
+                          (onSelectionChange)="updateSelectedStock(st)">
+                {{st.product + ' -->' + st.wholesalePrice + ' TZS/' + st.wholesaleQuantity+' '+st.unit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <mat-card class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 col-12" style="margin-bottom: 16px">
+          <mat-card-content>
+
+            <mat-form-field class="my-input">
+              <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>
+            </mat-form-field>
+
+            <mat-form-field class="my-input">
+              <input matInput type="number" placeholder="Discount ( TZS )" [formControl]="discountControlInput">
+            </mat-form-field>
+
+            <!--<mat-radio-group class="my-input">-->
+            <!--<mat-radio-button [value]="true">Normal</mat-radio-button>-->
+            <!--<mat-radio-button>R.Wholesale</mat-radio-button>-->
+            <!--<mat-radio-button>NHIF</mat-radio-button>-->
+            <!--</mat-radio-group>-->
+            <mat-slide-toggle class="my-input space" [formControl]="retailWholesaleRadioInput" disabled>
+              Wholesale
+            </mat-slide-toggle>
+            <!--<mat-divider></mat-divider>-->
+            <!--<mat-slide-toggle class="my-input space" [formControl]="nhifRadioInput">-->
+            <!--NHIF-->
+            <!--</mat-slide-toggle>-->
+            <mat-divider></mat-divider>
+            <!--<mat-slide-toggle class="space my-input">-->
+            <!--N\N-->
+            <!--</mat-slide-toggle>-->
+            <!--<mat-divider></mat-divider>-->
+            <button mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+              Add To Cart
+            </button>
+
+            <mat-form-field class="my-input">
+              <input matInput [formControl]="receiveControlInput" placeholder="Receive" type="number">
+            </mat-form-field>
+            <mat-card-subtitle>Change ( TZS )</mat-card-subtitle>
+            <mat-card-title>{{changePrice}}</mat-card-title>
+
+            <mat-card-subtitle>Total ( TZS )</mat-card-subtitle>
+            <mat-card-title>{{totalPrice}}</mat-card-title>
+
+            <mat-card-subtitle>Price/Unit ( TZS )</mat-card-subtitle>
+            <mat-card-title>{{priceUnit}}</mat-card-title>
+
+            <mat-card-subtitle>Shelf</mat-card-subtitle>
+            <mat-card-title>{{stock.shelf}}</mat-card-title>
+          </mat-card-content>
+        </mat-card>
+
+        <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
+          <mat-tab-group dynamicHeight color="warn" backgroundColor="primary">
+
+            <mat-tab label="Cart">
+              <div>
+                <!--<mat-card-subtitle>Total Bill ( TZS )</mat-card-subtitle>-->
+                <!--<mat-card-title>{{totalBill}}</mat-card-title>-->
+                <!--<mat-divider></mat-divider>-->
+
+                <table mat-table [dataSource]="cartDatasource" class=" mat-elevation-z8">
+                  <ng-container matColumnDef="product">
+                    <th mat-header-cell *matHeaderCellDef>Product</th>
+                    <td mat-cell *matCellDef="let element">{{element.product}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                    <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount (TZ)</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalBill}}</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="discount">
+                    <th mat-header-cell *matHeaderCellDef>Discount</th>
+                    <td mat-cell *matCellDef="let element">{{element.discount}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button class="btn-block" mat-button color="primary" (click)="removeItemFromCart(element)">
+                        Remove
+                      </button>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>
+                      <div *ngIf="totalBill!==0">
+                        <div class="d-flex justify-content-center" *ngIf="!showProgress">
+                          <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
+                          <button mat-raised-button color="primary" style="margin: 8px" (click)="submitBill()">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="cartColums"></tr>
+                  <tr mat-row *matRowDef="let row; columns: cartColums;"></tr>
+                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="cartColums"></tr>
+                </table>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Sales">
+              <div>
+
+                <mat-form-field style="width: 100%; margin-top: 16px">
+                  <input matInput placeholder="Search" type="text" [formControl]="searchSaleControl"/>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="salesDatasource" class="mat-elevation-z8">
+                  <ng-container matColumnDef="Date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <!--<ng-container matColumnDef="product">-->
+                  <!--<th mat-header-cell *matHeaderCellDef>Product</th>-->
+                  <!--<td mat-cell *matCellDef="let element">{{element.product}}</td>-->
+                  <!--<td mat-footer-cell *matFooterCellDef><b>Total</b></td>-->
+                  <!--</ng-container>-->
+                  <ng-container matColumnDef="product">
+                    <th mat-header-cell *matHeaderCellDef>Product</th>
+                    <td mat-cell *matCellDef="let element">{{element.product}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                    <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalSaleAmount}}</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="discount">
+                    <th mat-header-cell *matHeaderCellDef>Discount</th>
+                    <td mat-cell *matCellDef="let element">{{element.discount}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="saleColums"></tr>
+                  <tr mat-row *matRowDef="let row; columns: saleColums;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="saleColums; sticky: true"></tr>
+
+                </table>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Orders">
+                <div>
+                  <mat-form-field style="width: 100%; margin-top: 16px">
+                    <input matInput placeholder="Search" type="text" [formControl]="searchOrderControl"/>
+                  </mat-form-field>
+
+                  <table mat-table [dataSource]="salesOrderDatasource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="Date">
+                      <th mat-header-cell *matHeaderCellDef>Date</th>
+                      <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef>Amount</th>
+                      <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                      <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                    </ng-container>
+                    <ng-container matColumnDef="customer">
+                      <th mat-header-cell *matHeaderCellDef>Customer</th>
+                      <td mat-cell *matCellDef="let element">{{element.customer}}</td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="orderColums"></tr>
+                    <tr mat-row *matRowDef="let row; columns: orderColums;"></tr>
+                    <tr mat-footer-row *matFooterRowDef="orderColums"></tr>
+                  </table>
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

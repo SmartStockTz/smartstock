@@ -8,6 +8,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .my-input{
   width: 100%;
 }
+
+.match-parent {
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  height: 100vh;
+}
+
+.match-parent-side {
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  height: 100vh;
+  width: 300px;
+}
 /*.mytoolbar {*/
   /*position: fixed;*/
   /*top: 0;*/
