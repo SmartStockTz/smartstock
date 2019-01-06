@@ -21,4 +21,8 @@ export class NavComponent implements OnInit {
   goToWholeSale() {
     this.router.navigateByUrl('whole').catch(reason => console.log(reason));
   }
+
+  goToStock() {
+    this.router.navigateByUrl('stock').catch(reason => console.log(reason));
+  }
 }

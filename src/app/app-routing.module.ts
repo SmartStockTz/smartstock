@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SaleComponent} from './sale/sale.component';
 import {WholeSaleComponent} from './whole-sale/whole-sale.component';
+import {StockComponent} from './stock/stock.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'sale', component: SaleComponent},
   {path: 'whole', component: WholeSaleComponent},
+  {path: 'stock', component: StockComponent},
   {path: 'home', redirectTo: ''},
 ];
 
