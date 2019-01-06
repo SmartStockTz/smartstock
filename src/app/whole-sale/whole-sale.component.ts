@@ -191,7 +191,8 @@ export class WholeSaleComponent implements OnInit {
         date: stringDate,
         id: '',
         idTra: idTra,
-        user: this.currentUser.id
+        user: this.currentUser.id,
+        stockId: value.stock.id
       });
     });
     this.saleDatabase.addWholeCashSale(saleM)
@@ -207,7 +208,6 @@ export class WholeSaleComponent implements OnInit {
   }
 
   saveOrder() {
-    // console.log('save order clicked');
     this.openDialog();
   }
 
@@ -287,7 +287,7 @@ export class WholeSaleComponent implements OnInit {
       console.log(error1);
     });
     this.searchOrderControl.valueChanges.subscribe(value => {
-      this.salesOrderDatasourceArray.filter = value.toString().toLowerCase();
+      this.salesOrderDatasource.filter = value.toString().toLowerCase();
     }, error1 => console.log(error1));
     // this.retailWholesaleRadioInput.valueChanges.subscribe(value => {
     //   this.showTotalPrice();
@@ -295,11 +295,21 @@ export class WholeSaleComponent implements OnInit {
     //   console.log(error1);
     // });
     // live database
+
     this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.id, datasource => {
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
       this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
       this.updateTotalSales();
+    });
+    this.saleDatabase.getAllOrders(orders => {
+      this.salesOrderDatasourceArray = orders;
+      this.salesOrderDatasource = new MatTableDataSource<OrderI>(this.salesOrderDatasourceArray);
+      let orderT = 0;
+      this.salesOrderDatasourceArray.forEach(value => {
+        orderT += value.amount;
+      });
+      this.totalOrder = orderT;
     });
   }
 

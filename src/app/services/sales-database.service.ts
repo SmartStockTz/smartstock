@@ -23,7 +23,6 @@ export class SalesDatabaseService implements SalesDatasource {
 
   async addCashSale(sale: CashSaleI[], callback?: DatabaseCallback) {
     const writeBatch = this.firestore.firestore.batch();
-    const updateBatch = this.firestore.firestore.batch();
     sale.forEach(value => {
       const newVar = this.firestore.collection<CashSaleI>('sales').ref.doc();
       value.id = newVar.id;
