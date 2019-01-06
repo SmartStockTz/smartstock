@@ -198,10 +198,7 @@ export class WholeSaleComponent implements OnInit {
       .then(value => {
         console.log(value);
         this.hideProgressBar();
-        this.cartDatasourceArray = [];
-        this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
-        this.updateTotalBill();
-        this.snack.open('Done save the cart', 'Ok', {duration: 3000});
+        this.clearCart();
       })
       .catch(reason => {
         console.log(reason);
@@ -225,6 +222,13 @@ export class WholeSaleComponent implements OnInit {
     this.totalPrice = 0;
     this.priceUnit = 0;
     this.stock.shelf = '';
+  }
+
+  private clearCart() {
+    this.cartDatasourceArray = [];
+    this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+    this.updateTotalBill();
+    this.snack.open('Done saving items', 'Ok', {duration: 3000});
   }
 
   private showProgressBar() {
@@ -335,9 +339,31 @@ export class WholeSaleComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === null) {
-        this.snack.open('Customer not inserted', 'Ok', {duration: 3000});
+        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
+      } else if (result === undefined) {
+        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
+      } else if (result === '') {
+        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
+      } else {
+        this.showProgressBar();
+        this.saleDatabase.addOrder({
+          date: SalesDatabaseService.getCurrentDate(),
+          customer: result,
+          amount: this.totalBill,
+          cart: this.cartDatasourceArray,
+          complete: false,
+          id: ''
+        }, value => {
+          if (value == null) {
+            this.snack.open('Order not saved, try again', 'Ok', {duration: 3000});
+            this.hideProgressBar();
+          } else {
+            this.clearCart();
+            this.hideProgressBar();
+            console.log(value);
+          }
+        });
       }
-      console.log(result);
     });
   }
 

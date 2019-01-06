@@ -179,7 +179,8 @@ export class SaleComponent implements OnInit {
         date: stringDate,
         id: '',
         idTra: idTra,
-        user: this.currentUser.id
+        user: this.currentUser.id,
+        stockId: value.stock.id// for reference only
       });
     });
     this.saleDatabase.addCashSale(saleM)

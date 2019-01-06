@@ -23,6 +23,7 @@ export class SalesDatabaseService implements SalesDatasource {
 
   async addCashSale(sale: CashSaleI[], callback?: DatabaseCallback) {
     const writeBatch = this.firestore.firestore.batch();
+    const updateBatch = this.firestore.firestore.batch();
     sale.forEach(value => {
       const newVar = this.firestore.collection<CashSaleI>('sales').ref.doc();
       value.id = newVar.id;
@@ -110,6 +111,14 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   addOrder(order: OrderI, callback?: (value) => void) {
+    const documentReference = this.firestore.collection('orders').ref.doc();
+    order.id = documentReference.id;
+    documentReference.set(order, {merge: true}).then(value => {
+      callback('Done insert data');
+    }).catch(reason => {
+      callback(null);
+      console.log(reason);
+    });
   }
 
   addOrders(orders: OrderI[], callback?: (value) => void) {
