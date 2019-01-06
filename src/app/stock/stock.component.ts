@@ -445,10 +445,10 @@ export class StockComponent implements OnInit {
     let month = (date.getMonth() + 1).toString(2);
     let day = (date.getDate()).toString(2);
     if (month.length === 1) {
-      month = '0' + month;
+      month = '0'.concat(month);
     }
     if (day.length === 1) {
-      day = '0' + day;
+      day = '0'.concat(day);
     }
     return year + '-' + month + '-' + day;
   }
