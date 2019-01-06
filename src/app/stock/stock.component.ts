@@ -20,16 +20,23 @@ import {StockDatabaseService} from '../services/stock-database.service';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
+
+  constructor(private router: Router,
+              private userDatabase: UserDatabaseService,
+              private indexDb: NgForage,
+              private snack: MatSnackBar,
+              private dialog: MatDialog,
+              private stockDatabase: StockDatabaseService,
+              private saleDatabase: SalesDatabaseService) {
+  }
+
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
   showProgress = false;
-  totalPrice = 0;
-  priceUnit = 0;
   totalPurchase = 0;
   showRetailProfit = 0;
   wholesaleProfit = 0;
-  totalQuantity = 0;
   productNameControlInput = new FormControl();
   receiveControlInput = new FormControl();
   quantityControlInput = new FormControl();
@@ -38,7 +45,6 @@ export class StockComponent implements OnInit {
   retailWholesaleRadioInput = new FormControl();
   traRadioControl = new FormControl();
   nhifRadioInput = new FormControl();
-  private stocks: Stock[];
   private stock: Stock;
   private stockDatasourceArray: Stock[];
   categories: Observable<CategoryI[]>;
@@ -65,13 +71,22 @@ export class StockComponent implements OnInit {
   shelfControlInput = new FormControl();
   expireDateControlInput = new FormControl();
 
-  constructor(private router: Router,
-              private userDatabase: UserDatabaseService,
-              private indexDb: NgForage,
-              private snack: MatSnackBar,
-              private dialog: MatDialog,
-              private stockDatabase: StockDatabaseService,
-              private saleDatabase: SalesDatabaseService) {
+  private static getSqlDate(date: any): string {
+    try {
+      const year = date.getFullYear();
+      let month = (date.getMonth() + 1).toString(10);
+      let day = (date.getDate()).toString(10);
+      if (month.length === 1) {
+        month = '0'.concat(month);
+      }
+      if (day.length === 1) {
+        day = '0'.concat(day);
+      }
+      return year + '-' + month + '-' + day;
+    } catch (e) {
+      console.log('date has an error : ' + e);
+      return date;
+    }
   }
 
   ngOnInit() {
@@ -168,7 +183,7 @@ export class StockComponent implements OnInit {
         supplier: this.supplierControlInput.value,
         q_status: '',
         times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
-        expire: this.getSqlDate(<Date>this.expireDateControlInput.value),
+        expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
         retail_stockcol: ''
       }, value => {
         if (value === null) {
@@ -186,63 +201,6 @@ export class StockComponent implements OnInit {
       });
     }
   }
-
-  // removeItemFromCart(element: CartI) {
-  //   const cartIS = this.stockDatasourceArray.filter(value => value !== element);
-  //   this.stockDatasourceArray = cartIS;
-  //   this.stockDatasource = new MatTableDataSource(this.stockDatasourceArray);
-  //   this.updateTotalBill();
-  // }
-  //
-  // updateSelectedStock(st: Stock) {
-  //   this.stock = st;
-  //   this.showTotalPrice();
-  // }
-
-  // submitBill() {
-  //   this.showProgressBar();
-  //   const date = new Date();
-  //   const year = date.getFullYear();
-  //   const month = date.getMonth() + 1;
-  //   const day = date.getDate();
-  //   const stringDate = year + '-' + month + '-' + day;
-  //   let idTra: string;
-  //   if (this.traRadioControl.value === false) {
-  //     idTra = 'n';
-  //   } else {
-  //     idTra = 'n/n';
-  //   }
-  //   const saleM: CashSaleI[] = [];
-  //   this.stockDatasourceArray.forEach(value => {
-  //     saleM.push({
-  //       amount: value.amount,
-  //       discount: value.discount,
-  //       quantity: value.quantity,
-  //       product: value.product,
-  //       category: value.stock.category,
-  //       unit: value.stock.unit,
-  //       channel: 'retail',
-  //       date: stringDate,
-  //       id: '',
-  //       idTra: idTra,
-  //       user: this.currentUser.id,
-  //       stockId: value.stock.id// for reference only
-  //     });
-  //   });
-  //   this.saleDatabase.addCashSale(saleM)
-  //     .then(value => {
-  //       console.log(value);
-  //       this.hideProgressBar();
-  //       this.stockDatasourceArray = [];
-  //       this.stockDatasource = new MatTableDataSource(this.stockDatasourceArray);
-  //       this.updateTotalBill();
-  //       this.snack.open('Done save the cart', 'Ok', {duration: 3000});
-  //     })
-  //     .catch(reason => {
-  //       console.log(reason);
-  //       this.snack.open(reason, 'Ok');
-  //     });
-  // }
 
   private clearInputs() {
     this.productNameControlInput.setValue('');
@@ -327,46 +285,18 @@ export class StockComponent implements OnInit {
     this.getStocksFromCache();
   }
 
-  getStocksFromCache() {
+  private getStocksFromCache() {
     this.stockDatabase.getAllStock(stocks1 => {
       this.stockDatasourceArray = stocks1;
       this.stockDatasource = new MatTableDataSource(stocks1);
       this.stockDatasource.paginator = this.paginator;
+      let sTotal = 0;
+      stocks1.forEach(value => {
+        sTotal += <number>value.purchase;
+      });
+      this.totalPurchase = sTotal;
     });
   }
-
-  // private showChanges() {
-  //   this.changePrice = this.receiveControlInput.value - this.totalPrice;
-  // }
-  //
-  // private showTotalPrice(): { quantity: number, amount: number } {
-  //   if (this.retailWholesaleRadioInput.value === false) {
-  //     this.priceUnit = this.stock.retailPrice;
-  //     this.totalPrice = (this.quantityControlInput.value * this.stock.retailPrice) - (<number>this.discountControlInput.value);
-  //     return {amount: this.totalPrice, quantity: this.quantityControlInput.value};
-  //   } else {
-  //     this.priceUnit = this.stock.wholesalePrice;
-  //     const a: number = (Number(this.quantityControlInput.value) * Number(this.stock.wholesaleQuantity));
-  //     const totalPrice1 = (a * (<number>this.stock.wholesalePrice / Number(this.stock.wholesaleQuantity)));
-  //     this.totalPrice = totalPrice1 - <number>this.discountControlInput.value;
-  //     return {amount: this.totalPrice, quantity: a};
-  //   }
-  // }
-  //
-  // private updateTotalBill() {
-  //   this.totalPurchase = 0;
-  //   this.stockDatasourceArray.forEach(value => {
-  //     this.totalPurchase += value.amount;
-  //   });
-  // }
-  //
-  // private updateTotalSales() {
-  //   let s = 0;
-  //   this.saleDatasourceArray.forEach(value => {
-  //     s += value.amount;
-  //   });
-  //   this.totalSaleAmount = s;
-  // }
 
   private getSuppliers(supplier: string) {
     this.indexDb.getItem<SupplierI[]>('suppliers').then(value => {
@@ -438,19 +368,6 @@ export class StockComponent implements OnInit {
         });
       }
     });
-  }
-
-  private getSqlDate(date: Date): string {
-    const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString(2);
-    let day = (date.getDate()).toString(2);
-    if (month.length === 1) {
-      month = '0'.concat(month);
-    }
-    if (day.length === 1) {
-      day = '0'.concat(day);
-    }
-    return year + '-' + month + '-' + day;
   }
 }
 
