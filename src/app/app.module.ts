@@ -11,7 +11,7 @@ import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SaleComponent} from './sale/sale.component';
-import {StockComponent} from './stock/stock.component';
+import {DialogDeleteComponent, StockComponent} from './stock/stock.component';
 import {PurchaseComponent} from './purchase/purchase.component';
 import {ExpensesComponent} from './expenses/expenses.component';
 import {SettingComponent} from './setting/setting.component';
@@ -20,6 +20,7 @@ import {
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -29,9 +30,12 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatSnackBarModule,
@@ -61,6 +65,7 @@ import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.compo
     CheckUserProgressComponent,
     WholeSaleComponent,
     DialogComponent,
+    DialogDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,10 +99,15 @@ import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.compo
     MatListModule,
     NgForageModule.forRoot(),
     MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
   ],
   providers: [],
   entryComponents: [
     DialogComponent,
+    DialogDeleteComponent,
   ],
   bootstrap: [AppComponent]
 })

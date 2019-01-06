@@ -16,8 +16,14 @@ export class SalesDatabaseService implements SalesDatasource {
   static getCurrentDate(): string {
     const date = new Date();
     const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
+    let month = (date.getMonth() + 1).toString(2);
+    let day = (date.getDate()).toString(2);
+    if (month.length === 1) {
+      month = '0' + month;
+    }
+    if (day.length === 1) {
+      day = '0' + day;
+    }
     return year + '-' + month + '-' + day;
   }
 
