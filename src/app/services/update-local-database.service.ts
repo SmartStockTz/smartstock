@@ -5,15 +5,18 @@ import {Stock} from '../model/stock';
 import {CategoryI} from '../model/CategoryI';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
+import {ReceiptI} from '../model/ReceiptI';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UpdateLocalDatabaseService implements OnInit {
-  stocks: Stock[];
-  categories: CategoryI[];
-  suppliers: SupplierI[];
-  units: UnitsI[];
+  private stocks: Stock[];
+  private categories: CategoryI[];
+  private suppliers: SupplierI[];
+  private units: UnitsI[];
+  private receipts: ReceiptI[];
+  private invoices: ReceiptI[];
 
   constructor(private firestore: AngularFirestore, private indexDb: NgForage) {
   }
@@ -45,7 +48,7 @@ export class UpdateLocalDatabaseService implements OnInit {
           this.categories.push(value1.payload.doc.data());
         });
         this.indexDb.setItem('categories', this.categories).then(value1 => {
-          console.log('Inserted categories in cache is : ' + value1.length);
+          console.log('Inserted receipts in cache is : ' + value1.length);
         }).catch(reason => {
           console.log(reason);
         });
@@ -85,6 +88,22 @@ export class UpdateLocalDatabaseService implements OnInit {
         }).catch(reason => {
           console.log(reason);
         });
+      }
+    }, error1 => {
+      console.log(error1);
+    });
+  }
+
+  updateReceipts() {
+    this.firestore.collection<ReceiptI>('purchaseRefs').snapshotChanges().subscribe(value => {
+      if (value.length > 0) {
+        this.receipts = [];
+        value.forEach(value1 => {
+          this.receipts.push(value1.payload.doc.data());
+        });
+        this.indexDb.setItem('purchaseRefs', this.receipts).then(value1 => {
+          console.log('inserted purchase reference data in the cache is  : ' + value1.length);
+        }, reason => console.log(reason));
       }
     }, error1 => {
       console.log(error1);

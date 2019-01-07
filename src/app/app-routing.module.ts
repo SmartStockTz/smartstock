@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {SaleComponent} from './sale/sale.component';
 import {WholeSaleComponent} from './whole-sale/whole-sale.component';
 import {StockComponent} from './stock/stock.component';
+import {PurchaseComponent} from './purchase/purchase.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'sale', component: SaleComponent},
   {path: 'whole', component: WholeSaleComponent},
   {path: 'stock', component: StockComponent},
+  {path: 'purchase', component: PurchaseComponent},
   {path: 'home', redirectTo: ''},
 ];
 

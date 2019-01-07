@@ -77,7 +77,8 @@ export class SalesDatabaseService implements SalesDatasource {
             unit: value2.get('unit'),
             category: value2.get('category'),
             quantity: value2.get('quantity'),
-            discount: value2.get('discount')
+            discount: value2.get('discount'),
+            stockId: value2.get('stockId')
           });
         });
         results(arrayD);
@@ -105,7 +106,8 @@ export class SalesDatabaseService implements SalesDatasource {
             unit: value2.get('unit'),
             category: value2.get('category'),
             quantity: value2.get('quantity'),
-            discount: value2.get('discount')
+            discount: value2.get('discount'),
+            stockId: value2.get('stockId')
           });
         });
         results(arrayD);

@@ -10,5 +10,5 @@ export interface CashSaleI {
   discount: number;
   user: string;
   channel: string;
-  stockId?: string
+  stockId: string;
 }

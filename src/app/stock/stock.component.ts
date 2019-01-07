@@ -71,7 +71,7 @@ export class StockComponent implements OnInit {
   shelfControlInput = new FormControl();
   expireDateControlInput = new FormControl();
 
-  private static getSqlDate(date: any): string {
+  static getSqlDate(date: any): string {
     try {
       const year = date.getFullYear();
       let month = (date.getMonth() + 1).toString(10);
