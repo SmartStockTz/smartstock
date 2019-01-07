@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentChangeType} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
 import {CategoryI} from '../model/CategoryI';
