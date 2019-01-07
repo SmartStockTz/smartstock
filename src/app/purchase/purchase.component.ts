@@ -11,9 +11,9 @@ import {Stock} from '../model/stock';
 import {Observable, of} from 'rxjs';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
-import {CashSaleI} from '../model/CashSale';
 import {DialogDeleteComponent, StockComponent} from '../stock/stock.component';
 import {ReceiptI} from '../model/ReceiptI';
+import {PurchaseI} from '../model/PurchaseI';
 
 @Component({
   selector: 'app-purchase',
@@ -32,45 +32,28 @@ export class PurchaseComponent implements OnInit {
   }
 
   private currentUser: UserI;
+  private stock: Stock;
+  private stockDatasourceArray: Stock[];
+  private purchaseDatasourceArray: PurchaseI[];
   isAdmin = false;
   isLogin = false;
   showProgress = false;
   totalPurchase = 0;
-  showRetailProfit = 0;
-  wholesaleProfit = 0;
   productNameControlInput = new FormControl();
-  receiveControlInput = new FormControl();
   quantityControlInput = new FormControl();
-  discountControlInput = new FormControl();
-  searchSaleControl = new FormControl();
-  retailWholesaleRadioInput = new FormControl();
-  traRadioControl = new FormControl();
-  nhifRadioInput = new FormControl();
-  private stock: Stock;
-  private stockDatasourceArray: Stock[];
   purchaseProducts: Observable<Stock[]>;
   receipts: Observable<ReceiptI[]>;
   suppliers: Observable<SupplierI[]>;
   units: Observable<UnitsI[]>;
-  stockDatasource: MatTableDataSource<Stock>;
-  private saleDatasourceArray: CashSaleI[];
-  salesDatasource: MatTableDataSource<CashSaleI>;
-  stockColums = ['product', 'category', 'supplier', 'quantity', 'wholesaleQuantity', 'purchase', 'retailPrice',
-    'retailWholesalePrice', 'nhifPrice', 'expire', 'action'];
+  purchaseDatasource: MatTableDataSource<PurchaseI>;
+  purchaseColums = ['date', 'due', 'reference', 'quantity', 'amount', 'expire', 'action'];
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchStockControl = new FormControl();
-  wholesaleQuantityControlInput = new FormControl();
   purchasePriceControlInput = new FormControl();
-  retailPriceControlInput = new FormControl();
-  retailWholesalePriceControlInput = new FormControl();
-  wholesalePriceControlInput = new FormControl();
-  reorderControlInput = new FormControl();
-  nhifPriceControlInput = new FormControl();
   receipNumberControlInput = new FormControl();
   supplierControlInput = new FormControl();
   unitsControlInput = new FormControl();
-  shelfControlInput = new FormControl();
   expireDateControlInput = new FormControl();
   invoiceNumberControlInput = new FormControl();
   purchaseDateControlInput = new FormControl();
@@ -132,76 +115,54 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  addNewStock() {
+  addNewPurchase() {
     if (this.productNameControlInput.value === null) {
       this.snack.open('Please enter a product name', 'Ok', {duration: 3000});
-    } else if (this.receipNumberControlInput.value === null) {
-      this.snack.open('Please enter category', 'Ok', {duration: 3000});
+    } else if (this.purchaseDateControlInput.value === null) {
+      this.snack.open('Please enter purchase date', 'Ok', {duration: 3000});
+    } else if (this.dueDateControlInput.value === null) {
+      this.snack.open('Please enter due date', 'Ok', {duration: 3000});
     } else if (this.supplierControlInput.value === null) {
       this.snack.open('Please enter supplier', 'Ok', {duration: 3000});
-    } else if (this.unitsControlInput.value === null) {
-      this.snack.open('Please enter unit', 'Ok', {duration: 3000});
-    } else if (<number>this.quantityControlInput.value === null) {
-      this.snack.open('Please enter quantity and must be positive number', 'Ok', {duration: 3000});
-    } else if (<number>this.wholesaleQuantityControlInput.value === null || <number>this.wholesaleQuantityControlInput.value < 0) {
-      this.snack.open('Please enter wholesale quantity and must be positive number', 'Ok', {duration: 3000});
+    } else if (<number>this.quantityControlInput.value === null || <number>this.quantityControlInput.value < 0) {
+      this.snack.open('Please enter quantity and must be positive', 'Ok', {duration: 3000});
     } else if (<number>this.purchasePriceControlInput.value === null || <number>this.purchasePriceControlInput.value < 0) {
-      this.snack.open('Please enter purchase price and must be positive number', 'Ok', {duration: 3000});
-    } else if (<number>this.retailPriceControlInput.value === null || <number>this.retailPriceControlInput.value < 0) {
-      this.snack.open('Please enter retail price and must be positive', 'Ok', {duration: 3000});
-    } else if (<number>this.retailWholesalePriceControlInput.value === null || <number>this.retailWholesalePriceControlInput.value < 0) {
-      this.snack.open('Please enter retail wholesale price and must be positive', 'Ok', {duration: 3000});
-    } else if (<number>this.wholesalePriceControlInput.value === null || <number>this.wholesalePriceControlInput.value < 0) {
-      this.snack.open('Please enter wholesale price and must be positive', 'Ok', {duration: 3000});
-    } else if (<number>this.nhifPriceControlInput.value === null || <number>this.nhifPriceControlInput.value < 0) {
-      this.snack.open('Please enter nhif price and must be positive', 'Ok', {duration: 3000});
-    } else if (<number>this.reorderControlInput.value === null || <number>this.reorderControlInput.value < 0) {
-      this.snack.open('Please enter reorder level and must be positive', 'Ok', {duration: 3000});
-    } else if (this.shelfControlInput.value === null) {
-      this.snack.open('Please enter shelf location', 'Ok', {duration: 3000});
+      this.snack.open('Please enter purchase price and must be positive', 'Ok', {duration: 3000});
     } else if (this.expireDateControlInput.value === null) {
       this.snack.open('Please enter expire date of the product', 'Ok', {duration: 3000});
     } else {
       this.showProgressBar();
-      let idV: string;
-      if (this.stock === null) {
-        idV = 'newS';
-      } else if (this.stock === undefined) {
-        idV = 'newS';
-      } else {
-        idV = this.stock.id;
-      }
-      this.stockDatabase.addStock({
-        product: this.productNameControlInput.value,
-        id: idV,
-        wholesalePrice: this.wholesalePriceControlInput.value,
-        unit: this.unitsControlInput.value,
-        wholesaleQuantity: this.wholesaleQuantityControlInput.value,
-        retailPrice: this.retailPriceControlInput.value,
-        category: this.receipNumberControlInput.value,
-        shelf: this.shelfControlInput.value,
-        retailWholesalePrice: this.retailWholesalePriceControlInput.value,
-        nhifPrice: this.nhifPriceControlInput.value,
-        profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
-        purchase: this.purchasePriceControlInput.value,
-        quantity: this.quantityControlInput.value,
-        reorder: this.reorderControlInput.value,
-        supplier: this.supplierControlInput.value,
-        q_status: '',
-        times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
-        expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
-        retail_stockcol: ''
-      }, value => {
-        if (value === null) {
-          this.snack.open('Stock is not added, try again or contact support', 'Ok');
-          this.hideProgressBar();
-        } else {
-          this.hideProgressBar();
-          this.clearInputs();
-          this.stock = null;
-          console.log(value);
-        }
-      });
+      // this.stockDatabase.addStock({
+      //   product: this.productNameControlInput.value,
+      //   id: idV,
+      //   wholesalePrice: this.wholesalePriceControlInput.value,
+      //   unit: this.unitsControlInput.value,
+      //   wholesaleQuantity: this.wholesaleQuantityControlInput.value,
+      //   retailPrice: this.retailPriceControlInput.value,
+      //   category: this.receipNumberControlInput.value,
+      //   shelf: this.shelfControlInput.value,
+      //   retailWholesalePrice: this.retailWholesalePriceControlInput.value,
+      //   nhifPrice: this.nhifPriceControlInput.value,
+      //   profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
+      //   purchase: this.purchasePriceControlInput.value,
+      //   quantity: this.quantityControlInput.value,
+      //   reorder: this.reorderControlInput.value,
+      //   supplier: this.supplierControlInput.value,
+      //   q_status: '',
+      //   times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
+      //   expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
+      //   retail_stockcol: ''
+      // }, value => {
+      //   if (value === null) {
+      //     this.snack.open('Stock is not added, try again or contact support', 'Ok');
+      //     this.hideProgressBar();
+      //   } else {
+      //     this.hideProgressBar();
+      //     this.clearInputs();
+      //     this.stock = null;
+      //     console.log(value);
+      //   }
+      // });
     }
   }
 
@@ -211,17 +172,17 @@ export class PurchaseComponent implements OnInit {
     this.supplierControlInput.setValue('');
     this.unitsControlInput.setValue('');
     this.quantityControlInput.setValue(null);
-    this.wholesaleQuantityControlInput.setValue(null);
-    this.purchasePriceControlInput.setValue(null);
-    this.retailPriceControlInput.setValue(null);
-    this.retailWholesalePriceControlInput.setValue(null);
-    this.wholesalePriceControlInput.setValue(null);
-    this.nhifPriceControlInput.setValue(null);
-    this.reorderControlInput.setValue(null);
-    this.shelfControlInput.setValue('');
-    this.expireDateControlInput.setValue(null);
-    this.showRetailProfit = 0;
-    this.wholesaleProfit = 0;
+    // this.wholesaleQuantityControlInput.setValue(null);
+    // this.purchasePriceControlInput.setValue(null);
+    // this.retailPriceControlInput.setValue(null);
+    // this.retailWholesalePriceControlInput.setValue(null);
+    // this.wholesalePriceControlInput.setValue(null);
+    // this.nhifPriceControlInput.setValue(null);
+    // this.reorderControlInput.setValue(null);
+    // this.shelfControlInput.setValue('');
+    // this.expireDateControlInput.setValue(null);
+    // this.showRetailProfit = 0;
+    // this.wholesaleProfit = 0;
     // this.quantityControlInput.setValue(0);
     // this.discountControlInput.setValue(0);
     // this.retailWholesaleRadioInput.setValue(false);
@@ -243,13 +204,13 @@ export class PurchaseComponent implements OnInit {
   private initializeView() {
     // initial value
     this.stock = null;
-    this.retailWholesaleRadioInput.setValue(false);
-    this.nhifRadioInput.setValue(false);
-    this.traRadioControl.setValue(false);
-    this.discountControlInput.setValue(0);
-    this.receiveControlInput.setValue(0);
-    this.stockDatasourceArray = [];
-    this.saleDatasourceArray = [];
+    // this.retailWholesaleRadioInput.setValue(false);
+    // this.nhifRadioInput.setValue(false);
+    // this.traRadioControl.setValue(false);
+    // this.discountControlInput.setValue(0);
+    // this.receiveControlInput.setValue(0);
+    // this.stockDatasourceArray = [];
+    // this.saleDatasourceArray = [];
     this.productNameControlInput.valueChanges.subscribe(value => {
       this.getProduct(value);
     }, error1 => console.log(error1));
@@ -272,26 +233,6 @@ export class PurchaseComponent implements OnInit {
       this.getUnits(value);
     }, error1 => {
       console.log(error1);
-    });
-    // this.searchSaleControl.valueChanges.subscribe(value => {
-    //   this.salesDatasource.filter = value.toString().toLowerCase();
-    // }, error1 => {
-    //   console.log(error1);
-    // });
-    this.searchStockControl.valueChanges.subscribe(value => {
-      this.stockDatabase.getAllStock(stocks1 => {
-        this.stockDatasourceArray = stocks1;
-        this.stockDatasource = new MatTableDataSource(stocks1);
-        this.stockDatasource.paginator = this.paginator;
-        this.stockDatasource.filter = value;
-      });
-    }, error1 => console.log(error1));
-
-    // live database
-    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
-      this.saleDatasourceArray = [];
-      this.saleDatasourceArray = datasource;
-      this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
     });
   }
 
@@ -366,14 +307,14 @@ export class PurchaseComponent implements OnInit {
     this.supplierControlInput.setValue(element.supplier);
     this.unitsControlInput.setValue(element.unit);
     this.quantityControlInput.setValue(element.quantity);
-    this.wholesaleQuantityControlInput.setValue(element.wholesaleQuantity);
-    this.purchasePriceControlInput.setValue(element.purchase);
-    this.retailPriceControlInput.setValue(element.retailPrice);
-    this.retailWholesalePriceControlInput.setValue(element.retailWholesalePrice);
-    this.wholesalePriceControlInput.setValue(element.wholesalePrice);
-    this.nhifPriceControlInput.setValue(element.nhifPrice);
-    this.reorderControlInput.setValue(element.reorder);
-    this.shelfControlInput.setValue(element.shelf);
+    // this.wholesaleQuantityControlInput.setValue(element.wholesaleQuantity);
+    // this.purchasePriceControlInput.setValue(element.purchase);
+    // this.retailPriceControlInput.setValue(element.retailPrice);
+    // this.retailWholesalePriceControlInput.setValue(element.retailWholesalePrice);
+    // this.wholesalePriceControlInput.setValue(element.wholesalePrice);
+    // this.nhifPriceControlInput.setValue(element.nhifPrice);
+    // this.reorderControlInput.setValue(element.reorder);
+    // this.shelfControlInput.setValue(element.shelf);
     this.expireDateControlInput.setValue(element.expire);
 
     this.snack.open('Now edit the document and save it', 'Ok', {duration: 3000});

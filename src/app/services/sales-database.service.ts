@@ -132,6 +132,12 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   deleteOrder(order: OrderI, callback?: (value) => void) {
+    this.firestore.collection('orders').doc(order.id).delete().then(value => {
+      callback('Done delete');
+    }).catch(reason => {
+      console.log(reason);
+      callback(null);
+    });
   }
 
   getAllOrders(callback: (orders: OrderI[]) => void) {

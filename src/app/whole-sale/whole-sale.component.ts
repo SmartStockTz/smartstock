@@ -11,6 +11,8 @@ import {UserDatabaseService} from '../services/user-database.service';
 import {NgForage} from 'ngforage';
 import {SalesDatabaseService} from '../services/sales-database.service';
 import {OrderI} from '../model/OderI';
+import {DialogDeleteComponent} from '../stock/stock.component';
+import {PrintServiceService} from '../services/print-service.service';
 
 export interface DialogData {
   customer?: string;
@@ -74,13 +76,14 @@ export class WholeSaleComponent implements OnInit {
   searchOrderControl = new FormControl();
   salesOrderDatasourceArray: OrderI[];
   salesOrderDatasource: MatTableDataSource<OrderI>;
-  orderColums = ['date', 'amount', 'customer'];
+  orderColums = ['date', 'amount', 'customer', 'action'];
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
               private dialog: MatDialog,
+              private printS: PrintServiceService,
               private saleDatabase: SalesDatabaseService) {
   }
 
@@ -377,6 +380,49 @@ export class WholeSaleComponent implements OnInit {
     });
   }
 
+  printOrder(element: OrderI) {
+    this.printS.printOrder(element, value => {
+      if (value === null) {
+        this.snack.open('Printing fail', 'Ok', {duration: 3000});
+      } else {
+        this.snack.open('Done printing', 'Ok', {duration: 3000});
+      }
+    });
+  }
+
+  deleteOrder(element: OrderI) {
+    const matDialogRef = this.dialog.open(DialogDeleteComponent, {
+      width: '350',
+      data: element,
+    });
+
+    matDialogRef.afterClosed().subscribe(value => {
+      if (value === 'no') {
+        this.snack.open('Delete canceled', 'Ok', {duration: 3000});
+      } else {
+        this.showProgressBar();
+        this.saleDatabase.deleteOrder(value, value1 => {
+          if (value1 === null) {
+            this.snack.open('Order delete fail', 'Ok', {duration: 3000});
+            this.hideProgressBar();
+          } else {
+            this.snack.open('Order delete is successful', 'Ok', {duration: 3000});
+            this.hideProgressBar();
+          }
+        });
+      }
+    });
+  }
+
+  printCart() {
+    this.printS.printCart(this.cartDatasourceArray, value => {
+      if (value === null) {
+        this.snack.open('Cart not printed', 'Ok', {duration: 3000});
+      } else {
+        this.snack.open('Cart printed', 'Ok', {duration: 30000});
+      }
+    });
+  }
 }
 
 @Component({

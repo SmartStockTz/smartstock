@@ -137,32 +137,8 @@
               <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>
             </mat-form-field>
             <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="Wholesale Quantity"
-                     [formControl]="wholesaleQuantityControlInput" required>
-            </mat-form-field>
-            <mat-form-field class="my-input">
               <input matInput type="number" placeholder="Purchase Price ( TZS )"
                      [formControl]="purchasePriceControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="Retail Price ( TZS )" [formControl]="retailPriceControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="R.Wholesale Price ( TZS )"
-                     [formControl]="retailWholesalePriceControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="Wholesale Price ( TZS )"
-                     [formControl]="wholesalePriceControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="Nhif Price ( TZS )" [formControl]="nhifPriceControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="number" placeholder="Reorder Level" [formControl]="reorderControlInput">
-            </mat-form-field>
-            <mat-form-field class="my-input">
-              <input matInput type="text" placeholder="Shelf" [formControl]="shelfControlInput">
             </mat-form-field>
 
             <mat-form-field class="my-input">
@@ -191,8 +167,8 @@
             <!--<mat-divider></mat-divider>-->
 
             <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
-                    (click)="addNewStock()">
-              Add Stock
+                    (click)="addNewPurchase()">
+              Purchase
             </button>
 
             <!--<mat-form-field class="my-input">-->
@@ -209,6 +185,67 @@
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
           <mat-tab-group color="warn" backgroundColor="primary">
+            <mat-tab label="Purchase Cart">
+              <div>
+                <table mat-table [dataSource]="stockDatasource" class=" mat-elevation-z8">
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="due">
+                    <th mat-header-cell *matHeaderCellDef>Due</th>
+                    <td mat-cell *matCellDef="let element">{{element.due}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="reference">
+                    <th mat-header-cell *matHeaderCellDef>Reference</th>
+                    <td mat-cell *matCellDef="let element">{{element.reference}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                    <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase| currency:'TZS':'code'}}</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="expire">
+                    <th mat-header-cell *matHeaderCellDef>Expire</th>
+                    <td mat-cell *matCellDef="let element">{{element.expire}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="row">
+                        <!--<div class="col-6">-->
+                          <!--<button mat-icon-button (click)="editStock(element)">-->
+                            <!--<mat-icon color="primary">edit</mat-icon>-->
+                          <!--</button>-->
+                        <!--</div>-->
+                        <div class="col-12">
+                          <button mat-icon-button (click)="deleteStock(element)">
+                            <mat-icon color="primary">delete</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="purchaseColums"></tr>
+                  <tr mat-row *matRowDef="let row; columns: purchaseColums;"></tr>
+                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="purchaseColums"></tr>
+
+                </table>
+              </div>
+
+            </mat-tab>
             <mat-tab label="All Stock">
               <mat-form-field class="my-input" style="margin-top: 8px">
                 <input matInput placeholder="Search" type="text" [formControl]="searchStockControl"/>
