@@ -8,6 +8,7 @@ import {PurchaseI} from './model/PurchaseI';
 import {StockDatabaseService} from './services/stock-database.service';
 import {SupplierI} from './model/SupplierI';
 import {CategoryI} from './model/CategoryI';
+import {UnitsI} from './model/UnitsI';
 
 @Component({
   selector: 'app-root',
@@ -24,16 +25,17 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.updateLocal.updateCategories();
-    // this.updateLocal.updateSuppliers();
-    // this.updateLocal.updateUnits();
+     this.updateLocal.updateCategories();
+     this.updateLocal.updateSuppliers();
+     this.updateLocal.updateUnits();
     // this.updateLocal.updateReceipts();
-    this.updateLocal.updateStock();
+     this.updateLocal.updateStock();
   }
 
   async insertCategory() {
     await this.httpClient.get<CategoryI[]>('/assets/datadumps/category.json').subscribe(value => {
       value.forEach((value1, index, array) => {
+        console.log(value1);
         this.stockDatabase.addCategory(value1, value2 => {
           if (value2 === null) {
             console.log(' error happened at ---> ' + index);
@@ -45,6 +47,23 @@ export class AppComponent implements OnInit {
       });
     }, error1 => {
       console.log('http error ' + error1);
+    });
+  }
+
+  async insertUnits() {
+    await this.httpClient.get<UnitsI[]>('/assets/datadumps/units.json').subscribe(value => {
+      value.forEach((value1, index, array) => {
+        this.stockDatabase.addUnit(value1, value2 => {
+          if (value2 === null) {
+            console.log(' error happened at ---> ' + index);
+          } else {
+            console.log('index number ---> ' + index);
+            console.log(value2);
+          }
+        });
+      });
+    }, error1 => {
+      console.log(error1);
     });
   }
 

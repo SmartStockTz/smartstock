@@ -6,6 +6,8 @@ import {SupplierI} from '../model/SupplierI';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
+import {UnitsI} from '../model/UnitsI';
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,11 +46,45 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
+  addUnit(unit: UnitsI, callback: (value: any) => void) {
+    this.httpClient.post(this.serverUrl + '/units', {
+      'name': unit.name,
+    }, {
+      headers: {
+        'X-Parse-Application-id': 'ssm',
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
+  }
+
+  getAllUnit(callback: (value: UnitsI[]) => void) {
+    this.httpClient.get<any>(this.serverUrl + '/units', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'limit': '1000'
+      }
+    }).subscribe(value => {
+      const unt: UnitsI[] = value.results;
+      callback(unt);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
+  }
+
   addStock(stock: Stock, callback?: (value: any) => void) {
-    if (stock.id === 'newS') {
+    console.log(stock);
+    if (stock.idOld !== 'newS') {
       this.updateStock(stock, callback);
     } else {
-      stock.id = this.firestore.createId();
+      stock.idOld = this.firestore.createId();
       this.httpClient.post(this.serverUrl + '/stocks', {
         'product': stock.product,
         'unit': stock.unit,
@@ -65,7 +101,7 @@ export class StockDatabaseService implements StockDataSource {
         'profit': stock.profit,
         'times': stock.times,
         'expire': stock.expire,
-        'idOld': stock.id,
+        'idOld': stock.idOld,
         'retail_stockcol': stock.retail_stockcol,
         'nhifPrice': stock.nhifPrice,
         'wholesalePrice': stock.wholesalePrice
@@ -133,36 +169,71 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getAllCategory(callback: (categories: CategoryI[]) => void) {
+    this.httpClient.get<any>(this.serverUrl + '/categories', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'limit': '1000'
+      }
+    }).subscribe(value => {
+      const categ: CategoryI[] = value.results;
+      callback(categ);
+    }, error1 => {
+      console.log(error1);
+      callback(error1);
+    });
   }
 
   getAllStock(callback: (stocks: Stock[]) => void) {
-
-    this.indexDb.getItem('stocks').then(value => {
-      callback(<Stock[]>value);
-    }).catch(reason => {
-      console.log(reason);
+    this.httpClient.get<any>(this.serverUrl + '/stocks', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'limit': '100000'
+      }
+    }).subscribe(value => {
+      const result: Stock[] = value.results;
+      // console.log(value.results);
+      callback(result);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
     });
-
-    // this.firestore.collection<Stock>('stocks').snapshotChanges().subscribe(value => {
-    //   if (value.length > 0) {
-    //     const st: Stock[] = [];
-    //     value.forEach(value1 => {
-    //       st.push(value1.payload.doc.data());
-    //     });
-    //     callback(st);
-    //   }
-    // }, error1 => {
-    //   console.log(error1);
-    // });
   }
 
   getAllSupplier(callback: (suppliers: SupplierI[]) => void) {
+    this.httpClient.get<any>(this.serverUrl + '/suppliers', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'limit': '10000'
+      }
+    }).subscribe(value => {
+      const supp: SupplierI[] = value.results;
+      callback(supp);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   getCategory(id: string, callback: (category: CategoryI) => void) {
   }
 
   getStock(id: string, callback: (stock: Stock) => void) {
+    this.httpClient.get<Stock>(this.serverUrl + '/stocks/' + id, {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   getSupplier(id: string, callback: (supplier: SupplierI) => void) {

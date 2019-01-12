@@ -1,17 +1,17 @@
 [
 	{
-		"category" : "medicine"
+		"name" : "medicine"
 	},
 	{
-		"category" : "general sundry"
+		"name" : "general sundry"
 	},
 	{
-		"category" : "Vifaa Tiba"
+		"name" : "Vifaa Tiba"
 	},
 	{
-		"category" : "Cosmetics"
+		"name" : "Cosmetics"
 	},
 	{
-		"category" : "Mifugo/kilimo"
+		"name" : "Mifugo/kilimo"
 	}
 ]

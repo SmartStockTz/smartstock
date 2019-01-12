@@ -159,17 +159,15 @@ export class StockComponent implements OnInit {
     } else {
       this.showProgressBar();
       let idV: string;
-      if (this.stock === null) {
-        idV = 'newS';
-      } else if (this.stock === undefined) {
+      if (!this.updateStock) {
         idV = 'newS';
       } else {
-        idV = this.stock.id;
+        idV = this.stock.idOld;
       }
       this.stockDatabase.addStock({
         product: this.productNameControlInput.value,
-        id: idV,
-        wholesalePrice: this.wholesalePriceControlInput.value,
+        idOld: idV,
+        wholesalePrice: <string>this.wholesalePriceControlInput.value,
         unit: this.unitsControlInput.value,
         wholesaleQuantity: this.wholesaleQuantityControlInput.value,
         retailPrice: this.retailPriceControlInput.value,
@@ -248,7 +246,7 @@ export class StockComponent implements OnInit {
     this.discountControlInput.setValue(0);
     this.receiveControlInput.setValue(0);
     this.stockDatasourceArray = [];
-    this.saleDatasourceArray = [];
+    // this.saleDatasourceArray = [];
     this.categoryControlInput.valueChanges.subscribe(value => {
       this.getCategory(value);
     }, error1 => {
@@ -264,26 +262,11 @@ export class StockComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-    this.searchSaleControl.valueChanges.subscribe(value => {
-      this.salesDatasource.filter = value.toString().toLowerCase();
-    }, error1 => {
-      console.log(error1);
-    });
     this.searchStockControl.valueChanges.subscribe(value => {
-      this.stockDatabase.getAllStock(stocks1 => {
-        this.stockDatasourceArray = stocks1;
-        this.stockDatasource = new MatTableDataSource(stocks1);
-        this.stockDatasource.paginator = this.paginator;
-        this.stockDatasource.filter = value;
-      });
+      this.stockDatasource.filter = value;
     }, error1 => console.log(error1));
 
-    // live database
-    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
-      this.saleDatasourceArray = [];
-      this.saleDatasourceArray = datasource;
-      this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
-    });
+
     this.getStocksFromCache();
   }
 
@@ -301,17 +284,6 @@ export class StockComponent implements OnInit {
       console.log(reason);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
     });
-
-    // this.stockDatabase.getAllStock(stocks1 => {
-    //   this.stockDatasourceArray = stocks1;
-    //   this.stockDatasource = new MatTableDataSource(stocks1);
-    //   this.stockDatasource.paginator = this.paginator;
-    //   let sTotal = 0;
-    //   stocks1.forEach(value => {
-    //     sTotal += <number>value.purchase;
-    //   });
-    //   this.totalPurchase = sTotal;
-    // });
   }
 
   private getSuppliers(supplier: string) {

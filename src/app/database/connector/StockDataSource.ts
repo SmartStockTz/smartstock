@@ -1,6 +1,7 @@
 import {Stock} from '../../model/stock';
 import {CategoryI} from '../../model/CategoryI';
 import {SupplierI} from '../../model/SupplierI';
+import {UnitsI} from '../../model/UnitsI';
 
 export interface StockDataSource {
   getStock(id: string, callback: (stock: Stock) => void);
@@ -50,5 +51,9 @@ export interface StockDataSource {
   deleteSupplier(supplier: SupplierI, callback?: (value: any) => void);
 
   deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void);
+
+  addUnit(unit: UnitsI, callback?: (value: any) => void);
+
+  getAllUnit(callback: (value: UnitsI[]) => void);
 
 }

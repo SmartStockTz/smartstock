@@ -21,7 +21,7 @@ const api = new ParseServer({
     masterKey: 'joshua5715',
     serverURL: 'http://localhost:3000/parse',
     liveQuery: {
-        classNames: ['stocks', 'sales', 'purchases']
+        classNames: ['stocks', 'sales', 'purchases', 'categories','units','suppliers']
     }
 });
 
