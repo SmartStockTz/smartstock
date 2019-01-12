@@ -34,6 +34,7 @@ export class StockComponent implements OnInit {
   isAdmin = false;
   isLogin = false;
   showProgress = false;
+  updateStock = false;
   totalPurchase = 0;
   showRetailProfit = 0;
   wholesaleProfit = 0;
@@ -107,9 +108,9 @@ export class StockComponent implements OnInit {
   }
 
   openDrawer() {
-    this.sidenav.open().catch(reason => {
-      console.log(reason.toString());
-    });
+    // this.sidenav.open().catch(reason => {
+    //   console.log(reason.toString());
+    // });
   }
 
   home() {
@@ -194,7 +195,7 @@ export class StockComponent implements OnInit {
           this.clearInputs();
           this.stock = null;
           console.log(value);
-
+          this.updateStock = false;
           // get stocks from cache
           this.getStocksFromCache();
         }
@@ -219,6 +220,7 @@ export class StockComponent implements OnInit {
     this.expireDateControlInput.setValue(null);
     this.showRetailProfit = 0;
     this.wholesaleProfit = 0;
+    this.updateStock = false;
     // this.quantityControlInput.setValue(0);
     // this.discountControlInput.setValue(0);
     // this.retailWholesaleRadioInput.setValue(false);
@@ -286,16 +288,30 @@ export class StockComponent implements OnInit {
   }
 
   private getStocksFromCache() {
-    this.stockDatabase.getAllStock(stocks1 => {
-      this.stockDatasourceArray = stocks1;
-      this.stockDatasource = new MatTableDataSource(stocks1);
+    this.indexDb.getItem<Stock[]>('stocks').then(value => {
+      this.stockDatasourceArray = value;
+      this.stockDatasource = new MatTableDataSource(value);
       this.stockDatasource.paginator = this.paginator;
       let sTotal = 0;
-      stocks1.forEach(value => {
-        sTotal += <number>value.purchase;
+      value.forEach(value1 => {
+        sTotal += <number>value1.purchase;
       });
       this.totalPurchase = sTotal;
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
     });
+
+    // this.stockDatabase.getAllStock(stocks1 => {
+    //   this.stockDatasourceArray = stocks1;
+    //   this.stockDatasource = new MatTableDataSource(stocks1);
+    //   this.stockDatasource.paginator = this.paginator;
+    //   let sTotal = 0;
+    //   stocks1.forEach(value => {
+    //     sTotal += <number>value.purchase;
+    //   });
+    //   this.totalPurchase = sTotal;
+    // });
   }
 
   private getSuppliers(supplier: string) {
@@ -304,7 +320,7 @@ export class StockComponent implements OnInit {
       this.suppliers = of(supplierF);
     }).catch(reason => {
       console.log(reason);
-      this.snack.open(reason, 'Ok');
+      this.snack.open('Failed to get suppliers', 'Ok', {duration: 3000});
     });
   }
 
@@ -314,7 +330,7 @@ export class StockComponent implements OnInit {
       this.units = of(unitsF);
     }).catch(reason => {
       console.log(reason);
-      this.snack.open(reason, 'Ok');
+      this.snack.open('Failed to get units', 'Ok', {duration: 3000});
     });
   }
 
@@ -324,7 +340,7 @@ export class StockComponent implements OnInit {
       this.categories = of(cateF);
     }).catch(reason => {
       console.log(reason);
-      this.snack.open(reason, 'Ok');
+      this.snack.open('Failed to get categories', 'Ok', {duration: 3000});
     });
   }
 
@@ -346,6 +362,7 @@ export class StockComponent implements OnInit {
 
     this.snack.open('Now edit the document and save it', 'Ok', {duration: 3000});
     this.stock = element;
+    this.updateStock = true;
   }
 
   deleteStock(element: Stock) {

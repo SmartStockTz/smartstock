@@ -156,10 +156,18 @@
             <!--</mat-slide-toggle>-->
             <!--<mat-divider></mat-divider>-->
 
-            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
-                    (click)="addNewStock()">
-              Add Stock
-            </button>
+            <div *ngIf="!showProgress">
+              <button *ngIf="!updateStock" mat-raised-button color="primary" class="space my-input rounded"
+                      (click)="addNewStock()">
+                Add Stock
+              </button>
+              <button *ngIf="updateStock" mat-raised-button color="primary" class="space my-input rounded"
+                      (click)="addNewStock()">
+                Update Stock
+              </button>
+              <button mat-raised-button color="warn" class="space rounded my-input" (click)="clearInputs()"
+                      *ngIf="updateStock">Cancel Update</button>
+            </div>
 
             <!--<mat-form-field class="my-input">-->
             <!--<input matInput [formControl]="receiveControlInput" placeholder="Receive" type="number">-->

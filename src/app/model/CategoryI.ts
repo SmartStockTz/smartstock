@@ -1,4 +1,4 @@
 export interface CategoryI {
-  id: string;
+  objectId?: string;
   name: string;
 }

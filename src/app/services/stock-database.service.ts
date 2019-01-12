@@ -5,13 +5,18 @@ import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockDatabaseService implements StockDataSource {
 
-  constructor(private firestore: AngularFirestore, private indexDb: NgForage) {
+  serverUrl = 'http://localhost:3000/parse/classes';
+
+  constructor(private firestore: AngularFirestore,
+              private httpClient: HttpClient,
+              private indexDb: NgForage) {
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
@@ -24,30 +29,79 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addCategory(category: CategoryI, callback?: (value: any) => void) {
+    this.httpClient.post(this.serverUrl + '/categories', {
+      'name': category.name
+    }, {
+      headers: {
+        'X-Parse-Application-id': 'ssm',
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   addStock(stock: Stock, callback?: (value: any) => void) {
     if (stock.id === 'newS') {
-      const documentReference = this.firestore.collection('stocks').ref.doc();
-      stock.id = documentReference.id;
-      documentReference.set(stock).then(value => {
-        callback('Done insert stock value is : ' + value);
-      }).catch(reason => {
-        console.log(reason);
-        callback(null);
-      });
+      this.updateStock(stock, callback);
     } else {
-      this.updateStock(stock, value => {
-        if (value === null) {
-          callback(null);
-        } else {
-          callback(value);
+      stock.id = this.firestore.createId();
+      this.httpClient.post(this.serverUrl + '/stocks', {
+        'product': stock.product,
+        'unit': stock.unit,
+        'category': stock.category,
+        'shelf': stock.shelf,
+        'quantity': stock.quantity,
+        'wholesaleQuantity': stock.wholesaleQuantity,
+        'q_status': stock.q_status,
+        'reorder': stock.reorder,
+        'supplier': stock.supplier,
+        'purchase': stock.purchase,
+        'retailPrice': stock.retailPrice,
+        'retailWholesalePrice': stock.retailWholesalePrice,
+        'profit': stock.profit,
+        'times': stock.times,
+        'expire': stock.expire,
+        'idOld': stock.id,
+        'retail_stockcol': stock.retail_stockcol,
+        'nhifPrice': stock.nhifPrice,
+        'wholesalePrice': stock.wholesalePrice
+      }, {
+        headers: {
+          'X-Parse-Application-id': 'ssm',
+          'Content-Type': 'application/json'
         }
+      }).subscribe(value => {
+        callback(value);
+      }, error1 => {
+        console.log(error1);
+        callback(null);
       });
     }
   }
 
   addSupplier(supplier: SupplierI, callback: (value: any) => void) {
+    supplier.id = this.firestore.createId();
+    this.httpClient.post(this.serverUrl + '/suppliers', {
+      'name': supplier.name,
+      'email': supplier.email,
+      'address': supplier.address,
+      'number': supplier.number,
+      'idOld': supplier.id
+    }, {
+      headers: {
+        'X-Parse-Application-id': 'ssm',
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   deleteAllCategory(categories: CategoryI[], callback: (value: any) => void) {
@@ -63,11 +117,15 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   deleteStock(stock: Stock, callback?: (value: any) => void) {
-    this.firestore.collection('stocks').doc(stock.id).delete().then(value => {
-      callback(' Done delete stock with value : ' + value);
-    }).catch(reason => {
+    this.httpClient.delete(this.serverUrl + '/stocks/' + stock.objectId, {
+      headers: {
+        'X-Parse-Application-id': 'ssm',
+      }
+    }).subscribe(value => {
+      console.log(value);
+    }, error1 => {
+      console.log(error1);
       callback(null);
-      console.log(reason);
     });
   }
 
@@ -123,10 +181,32 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   updateStock(stock: Stock, callback?: (value: any) => void) {
-    this.firestore.collection('stocks').doc(stock.id).update(stock).then(value => {
-      callback('done update with value : ' + value);
-    }).catch(reason => {
-      console.log(reason);
+    this.httpClient.put(this.serverUrl + '/stocks/' + stock.objectId,
+      {
+        'product': stock.product,
+        'unit': stock.unit,
+        'category': stock.category,
+        'shelf': stock.shelf,
+        'quantity': stock.quantity,
+        'wholesaleQuantity': stock.wholesaleQuantity,
+        'reorder': stock.reorder,
+        'supplier': stock.supplier,
+        'purchase': stock.purchase,
+        'retailPrice': stock.retailPrice,
+        'retailWholesalePrice': stock.retailWholesalePrice,
+        'expire': stock.expire,
+        'nhifPrice': stock.nhifPrice,
+        'wholesalePrice': stock.wholesalePrice
+      },
+      {
+        headers: {
+          'X-Parse-Application-id': 'ssm',
+          'Content-Type': 'application/json'
+        }
+      }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
       callback(null);
     });
   }

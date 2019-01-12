@@ -1,11 +1,15 @@
 import {Injectable, OnInit} from '@angular/core';
-import {AngularFirestore, DocumentChangeType} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
 import {CategoryI} from '../model/CategoryI';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
 import {ReceiptI} from '../model/ReceiptI';
+import * as Parse from 'node_modules/parse';
+
+Parse.initialize('ssm');
+Parse.serverURL = 'http://localhost:3000/parse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,26 +22,37 @@ export class UpdateLocalDatabaseService implements OnInit {
   private receipts: ReceiptI[];
   private invoices: ReceiptI[];
 
-  constructor(private firestore: AngularFirestore, private indexDb: NgForage) {
+  constructor(private firestore: AngularFirestore,
+              private indexDb: NgForage) {
   }
 
   updateStock() {
-    this.firestore.collection<Stock>('stocks').snapshotChanges().subscribe(value => {
-      if (value.length > 0) {
-        this.stocks = [];
-        value.forEach(value1 => {
-          this.stocks.push(value1.payload.doc.data());
-        });
-        console.log('start inserted data to indexdb');
-        this.indexDb.setItem('stocks', this.stocks).then(value1 => {
-          console.log('Inserted stocks in cache is : ', value1.length);
-        }).catch(reason => {
-          console.log(reason);
-        });
-      }
-    }, error1 => {
-      console.log(error1);
+    // this.firestore.collection<Stock>('stocks').snapshotChanges().subscribe(value => {
+    //   if (value.length > 0) {
+    //     this.stocks = [];
+    //     value.forEach(value1 => {
+    //       this.stocks.push(value1.payload.doc.data());
+    //     });
+    //     console.log('start inserted data to indexdb');
+    //     this.indexDb.setItem('stocks', this.stocks).then(value1 => {
+    //       console.log('Inserted stocks in cache is : ', value1.length);
+    //     }).catch(reason => {
+    //       console.log(reason);
+    //     });
+    //   }
+    // }, error1 => {
+    //   console.log(error1);
+    // });
+
+    const query = new Parse.Query('stocks');
+    const subscription = query.subscribe();
+    subscription.on('open', () => {
+      console.log('live server connected');
     });
+    subscription.on('create', (value) => {
+      console.log(value);
+    });
+
   }
 
   updateCategories() {

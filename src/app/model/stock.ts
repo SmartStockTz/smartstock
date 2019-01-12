@@ -1,5 +1,6 @@
 export interface Stock {
-  id: string;
+  id?: string;
+  objectId?: string;
   product: string;
   unit: string;
   category: string;
@@ -10,7 +11,7 @@ export interface Stock {
   reorder: number;
   purchase: number;
   retailPrice: number;
-  wholesalePrice: number;
+  wholesalePrice: any;
   profit: number;
   times: number;
   supplier: string;
