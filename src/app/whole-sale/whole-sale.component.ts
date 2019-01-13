@@ -47,7 +47,7 @@ export class WholeSaleComponent implements OnInit {
   stocks: Stock[];
   stock: Stock = {
     category: '',
-    id: '',
+    objectId: '',
     nhifPrice: 0,
     product: '',
     profit: 0,
@@ -195,7 +195,7 @@ export class WholeSaleComponent implements OnInit {
         id: '',
         idTra: idTra,
         user: this.currentUser.id,
-        stockId: value.stock.id
+        stockId: value.stock.objectId
       });
     });
     this.saleDatabase.addWholeCashSale(saleM)

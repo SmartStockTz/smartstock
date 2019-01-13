@@ -8,11 +8,11 @@ import {CashSaleI} from '../model/CashSale';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../services/user-database.service';
 import {NgForage} from 'ngforage';
-import {SalesDatabaseService} from '../services/sales-database.service';
 import {CategoryI} from '../model/CategoryI';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
 import {StockDatabaseService} from '../services/stock-database.service';
+import {UpdateLocalDatabaseService} from '../services/update-local-database.service';
 
 @Component({
   selector: 'app-stock',
@@ -26,8 +26,7 @@ export class StockComponent implements OnInit {
               private indexDb: NgForage,
               private snack: MatSnackBar,
               private dialog: MatDialog,
-              private stockDatabase: StockDatabaseService,
-              private saleDatabase: SalesDatabaseService) {
+              private stockDatabase: StockDatabaseService) {
   }
 
   private currentUser: UserI;
@@ -158,46 +157,75 @@ export class StockComponent implements OnInit {
       this.snack.open('Please enter expire date of the product', 'Ok', {duration: 3000});
     } else {
       this.showProgressBar();
-      let idV: string;
       if (!this.updateStock) {
-        idV = 'newS';
+        this.stockDatabase.addStock({
+          product: this.productNameControlInput.value,
+          idOld: '',
+          wholesalePrice: <string>this.wholesalePriceControlInput.value,
+          unit: this.unitsControlInput.value,
+          wholesaleQuantity: this.wholesaleQuantityControlInput.value,
+          retailPrice: this.retailPriceControlInput.value,
+          category: this.categoryControlInput.value,
+          shelf: this.shelfControlInput.value,
+          retailWholesalePrice: this.retailWholesalePriceControlInput.value,
+          nhifPrice: this.nhifPriceControlInput.value,
+          profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
+          purchase: this.purchasePriceControlInput.value,
+          quantity: this.quantityControlInput.value,
+          reorder: this.reorderControlInput.value,
+          supplier: this.supplierControlInput.value,
+          q_status: '',
+          times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
+          expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
+          retail_stockcol: ''
+        }, value => {
+          if (value === null) {
+            this.snack.open('Stock is not added, try again or contact support', 'Ok');
+            this.hideProgressBar();
+          } else {
+            this.hideProgressBar();
+            this.clearInputs();
+            this.stock = null;
+            this.updateStock = false;
+            // this.getStocksFromCache();
+            console.log(value);
+          }
+        });
       } else {
-        idV = this.stock.idOld;
+        this.stockDatabase.updateStock({
+          product: this.productNameControlInput.value,
+          idOld: this.stock.idOld,
+          objectId: this.stock.objectId,
+          wholesalePrice: <string>this.wholesalePriceControlInput.value,
+          unit: this.unitsControlInput.value,
+          wholesaleQuantity: this.wholesaleQuantityControlInput.value,
+          retailPrice: this.retailPriceControlInput.value,
+          category: this.categoryControlInput.value,
+          shelf: this.shelfControlInput.value,
+          retailWholesalePrice: this.retailWholesalePriceControlInput.value,
+          nhifPrice: this.nhifPriceControlInput.value,
+          profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
+          purchase: this.purchasePriceControlInput.value,
+          quantity: this.quantityControlInput.value,
+          reorder: this.reorderControlInput.value,
+          supplier: this.supplierControlInput.value,
+          q_status: '',
+          times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
+          expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
+          retail_stockcol: ''
+        }, value => {
+          if (value === null) {
+            this.snack.open('Stock is not updated, try again or contact support', 'Ok');
+            this.hideProgressBar();
+          } else {
+            this.hideProgressBar();
+            this.clearInputs();
+            this.stock = null;
+            this.updateStock = false;
+            // this.getStocksFromCache();
+          }
+        });
       }
-      this.stockDatabase.addStock({
-        product: this.productNameControlInput.value,
-        idOld: idV,
-        wholesalePrice: <string>this.wholesalePriceControlInput.value,
-        unit: this.unitsControlInput.value,
-        wholesaleQuantity: this.wholesaleQuantityControlInput.value,
-        retailPrice: this.retailPriceControlInput.value,
-        category: this.categoryControlInput.value,
-        shelf: this.shelfControlInput.value,
-        retailWholesalePrice: this.retailWholesalePriceControlInput.value,
-        nhifPrice: this.nhifPriceControlInput.value,
-        profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
-        purchase: this.purchasePriceControlInput.value,
-        quantity: this.quantityControlInput.value,
-        reorder: this.reorderControlInput.value,
-        supplier: this.supplierControlInput.value,
-        q_status: '',
-        times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
-        expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
-        retail_stockcol: ''
-      }, value => {
-        if (value === null) {
-          this.snack.open('Stock is not added, try again or contact support', 'Ok');
-          this.hideProgressBar();
-        } else {
-          this.hideProgressBar();
-          this.clearInputs();
-          this.stock = null;
-          console.log(value);
-          this.updateStock = false;
-          // get stocks from cache
-          this.getStocksFromCache();
-        }
-      });
     }
   }
 
@@ -263,7 +291,7 @@ export class StockComponent implements OnInit {
       console.log(error1);
     });
     this.searchStockControl.valueChanges.subscribe(value => {
-      this.stockDatasource.filter = value;
+      this.stockDatasource.filter = value.toString().toLowerCase();
     }, error1 => console.log(error1));
 
 
@@ -271,6 +299,7 @@ export class StockComponent implements OnInit {
   }
 
   private getStocksFromCache() {
+    this.searchStockControl.setValue('');
     this.indexDb.getItem<Stock[]>('stocks').then(value => {
       this.stockDatasourceArray = value;
       this.stockDatasource = new MatTableDataSource(value);
@@ -280,8 +309,8 @@ export class StockComponent implements OnInit {
         sTotal += <number>value1.purchase;
       });
       this.totalPurchase = sTotal;
-    }).catch(reason => {
-      console.log(reason);
+    }, error1 => {
+      console.log(error1);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
     });
   }
@@ -352,7 +381,7 @@ export class StockComponent implements OnInit {
             this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
             this.hideProgressBar();
             // update tables
-            this.getStocksFromCache();
+            // this.getStocksFromCache();
           }
         });
       }

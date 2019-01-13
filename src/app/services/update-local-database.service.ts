@@ -2,10 +2,6 @@ import {Injectable, OnInit} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
-import {CategoryI} from '../model/CategoryI';
-import {SupplierI} from '../model/SupplierI';
-import {UnitsI} from '../model/UnitsI';
-import {ReceiptI} from '../model/ReceiptI';
 import * as Parse from 'node_modules/parse';
 import {StockDatabaseService} from './stock-database.service';
 
@@ -16,12 +12,13 @@ Parse.serverURL = 'http://localhost:3000/parse';
   providedIn: 'root'
 })
 export class UpdateLocalDatabaseService implements OnInit {
-  private stocks: Stock[];
-  private categories: CategoryI[];
-  private suppliers: SupplierI[];
-  private units: UnitsI[];
-  private receipts: ReceiptI[];
-  private invoices: ReceiptI[];
+  // private stocks: Stock[];
+  // private categories: CategoryI[];
+  // private suppliers: SupplierI[];
+  // private units: UnitsI[];
+  // private receipts: ReceiptI[];
+  // private invoices: ReceiptI[];
+  // stockObservable: Observable<Stock[]>;
 
   constructor(private firestore: AngularFirestore,
               private stockDatabase: StockDatabaseService,
@@ -39,6 +36,7 @@ export class UpdateLocalDatabaseService implements OnInit {
         } else {
           this.indexDb.setItem<Stock[]>('stocks', stocks).then(value => {
             console.log('updated stocks is --> ' + value.length);
+            // this.stockObservable = of(value);
           }).catch(reason => {
             console.log(reason);
           });
@@ -51,11 +49,11 @@ export class UpdateLocalDatabaseService implements OnInit {
         if (value1 === null) {
           console.log('object id is not available');
         } else {
-          console.log(value1);
           this.indexDb.getItem<Stock[]>('stocks').then(value2 => {
             value2.push(value1);
             this.indexDb.setItem<Stock[]>('stocks', value2).then(value3 => {
-              console.log(value3.length);
+              console.log('stock updated ---> ' + value3.length);
+              // this.stockObservable = of(value3);
             }).catch(reason => console.log(reason));
           }).catch(reason => console.log(reason));
         }
@@ -63,8 +61,22 @@ export class UpdateLocalDatabaseService implements OnInit {
     });
 
     subscription.on('update', value => {
-      console.log('stock updated is ');
-      console.log(value);
+      console.log('stock updated is ---> ' + value.id);
+      this.stockDatabase.getStock(value.id, stock => {
+        if (stock === null) {
+          console.log('object stock id is not available');
+        } else {
+          this.indexDb.getItem<Stock[]>('stocks').then(value1 => {
+            value1.filter(((value2, index) => {
+              if (value2.objectId === stock.objectId) {
+                value1[index] = stock;
+                console.log(value1[index].objectId);
+              }
+            }));
+            // this.stockObservable = of(value1);
+          }).catch(reason => console.log(reason));
+        }
+      });
     });
 
   }

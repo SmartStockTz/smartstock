@@ -38,7 +38,7 @@ export class SaleComponent implements OnInit {
   stocks: Stock[];
   stock: Stock = {
     category: '',
-    id: '',
+    objectId: '',
     nhifPrice: 0,
     product: '',
     profit: 0,
@@ -180,7 +180,7 @@ export class SaleComponent implements OnInit {
         id: '',
         idTra: idTra,
         user: this.currentUser.id,
-        stockId: value.stock.id// for reference only
+        stockId: value.stock.objectId// for reference only
       });
     });
     this.saleDatabase.addCashSale(saleM)
