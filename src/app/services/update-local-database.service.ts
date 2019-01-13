@@ -25,7 +25,7 @@ export class UpdateLocalDatabaseService implements OnInit {
               private indexDb: NgForage) {
   }
 
-  updateStock() {
+  updateStock(callback: (stocks: Stock[]) => void) {
     const query = new Parse.Query('stocks');
     const subscription = query.subscribe();
     subscription.on('open', () => {
@@ -36,6 +36,7 @@ export class UpdateLocalDatabaseService implements OnInit {
         } else {
           this.indexDb.setItem<Stock[]>('stocks', stocks).then(value => {
             console.log('updated stocks is --> ' + value.length);
+            // callback(value);
             // this.stockObservable = of(value);
           }).catch(reason => {
             console.log(reason);
@@ -54,6 +55,7 @@ export class UpdateLocalDatabaseService implements OnInit {
             this.indexDb.setItem<Stock[]>('stocks', value2).then(value3 => {
               console.log('stock updated ---> ' + value3.length);
               // this.stockObservable = of(value3);
+              // callback(value3);
             }).catch(reason => console.log(reason));
           }).catch(reason => console.log(reason));
         }
@@ -70,13 +72,24 @@ export class UpdateLocalDatabaseService implements OnInit {
             value1.filter(((value2, index) => {
               if (value2.objectId === stock.objectId) {
                 value1[index] = stock;
-                console.log(value1[index].objectId);
+                console.log('stock update match local stock ---> ' + value1[index].objectId);
               }
             }));
+            this.indexDb.setItem('stocks', value1).catch(reason => console.log(reason));
             // this.stockObservable = of(value1);
+            // callback(value1);
           }).catch(reason => console.log(reason));
         }
       });
+    });
+
+    subscription.on('delete', value => {
+      this.indexDb.getItem<Stock[]>('stocks').then(value1 => {
+        const stocks = value1.filter(value2 => value2.objectId !== value.id);
+        this.indexDb.setItem<Stock[]>('stocks', stocks).then(value2 => {
+          console.log('stock updated after delete is ---> ' + value2.length);
+        }).catch(reason => console.log(reason));
+      }).catch(reason => console.log(reason));
     });
 
   }

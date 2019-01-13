@@ -142,8 +142,7 @@ export class SaleComponent implements OnInit {
   }
 
   removeItemFromCart(element: CartI) {
-    const cartIS = this.cartDatasourceArray.filter(value => value !== element);
-    this.cartDatasourceArray = cartIS;
+    this.cartDatasourceArray = this.cartDatasourceArray.filter(value => value !== element);
     this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
     this.updateTotalBill();
   }
@@ -183,19 +182,19 @@ export class SaleComponent implements OnInit {
         stockId: value.stock.objectId// for reference only
       });
     });
-    this.saleDatabase.addCashSale(saleM)
-      .then(value => {
-        console.log(value);
+    this.saleDatabase.addAllCashSale(saleM, value => {
+      if (value === null) {
+        this.saleDatabase.addCashSaleToCache(this.cartDatasourceArray, value1 => {
+        });
+        this.snack.open('Product no saved, try again', 'Ok');
+      } else {
         this.hideProgressBar();
         this.cartDatasourceArray = [];
         this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
         this.updateTotalBill();
         this.snack.open('Done save the cart', 'Ok', {duration: 3000});
-      })
-      .catch(reason => {
-        console.log(reason);
-        this.snack.open(reason, 'Ok');
-      });
+      }
+    });
   }
 
   private clearInputs() {
@@ -223,8 +222,8 @@ export class SaleComponent implements OnInit {
     this.retailWholesaleRadioInput.setValue(false);
     this.nhifRadioInput.setValue(false);
     this.traRadioControl.setValue(false);
-    this.discountControlInput.setValue(0);
-    this.receiveControlInput.setValue(0);
+    this.discountControlInput.setValue(null);
+    this.receiveControlInput.setValue(null);
     this.cartDatasourceArray = [];
     this.saleDatasourceArray = [];
     this.productNameControlInput.valueChanges.subscribe(value => {
@@ -271,6 +270,7 @@ export class SaleComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+
     // live database
     this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
       this.saleDatasourceArray = [];

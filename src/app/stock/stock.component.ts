@@ -12,7 +12,6 @@ import {CategoryI} from '../model/CategoryI';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
 import {StockDatabaseService} from '../services/stock-database.service';
-import {UpdateLocalDatabaseService} from '../services/update-local-database.service';
 
 @Component({
   selector: 'app-stock',
@@ -107,9 +106,9 @@ export class StockComponent implements OnInit {
   }
 
   openDrawer() {
-    // this.sidenav.open().catch(reason => {
-    //   console.log(reason.toString());
-    // });
+    this.sidenav.open().catch(reason => {
+      console.log(reason.toString());
+    });
   }
 
   home() {
@@ -160,7 +159,7 @@ export class StockComponent implements OnInit {
       if (!this.updateStock) {
         this.stockDatabase.addStock({
           product: this.productNameControlInput.value,
-          idOld: '',
+          idOld: 'newS',
           wholesalePrice: <string>this.wholesalePriceControlInput.value,
           unit: this.unitsControlInput.value,
           wholesaleQuantity: this.wholesaleQuantityControlInput.value,
@@ -187,8 +186,10 @@ export class StockComponent implements OnInit {
             this.clearInputs();
             this.stock = null;
             this.updateStock = false;
-            // this.getStocksFromCache();
-            console.log(value);
+            // update stock
+            this.getStocksFromCache(() => {
+
+            });
           }
         });
       } else {
@@ -222,7 +223,10 @@ export class StockComponent implements OnInit {
             this.clearInputs();
             this.stock = null;
             this.updateStock = false;
-            // this.getStocksFromCache();
+            // update stocks
+            this.getStocksFromCache(() => {
+
+            });
           }
         });
       }
@@ -275,6 +279,11 @@ export class StockComponent implements OnInit {
     this.receiveControlInput.setValue(0);
     this.stockDatasourceArray = [];
     // this.saleDatasourceArray = [];
+    // get all stocks
+    this.getStocksFromCache(() => {
+
+    });
+
     this.categoryControlInput.valueChanges.subscribe(value => {
       this.getCategory(value);
     }, error1 => {
@@ -290,25 +299,25 @@ export class StockComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
-    this.searchStockControl.valueChanges.subscribe(value => {
-      this.stockDatasource.filter = value.toString().toLowerCase();
+    this.searchStockControl.valueChanges.subscribe(search => {
+      this.getStocksFromCache(() => {
+        this.stockDatasource.filter = search.toString().toLowerCase();
+      });
     }, error1 => console.log(error1));
-
-
-    this.getStocksFromCache();
   }
 
-  private getStocksFromCache() {
-    this.searchStockControl.setValue('');
+  private getStocksFromCache(callback: () => void) {
+    // this.searchStockControl.setValue('');
     this.indexDb.getItem<Stock[]>('stocks').then(value => {
       this.stockDatasourceArray = value;
-      this.stockDatasource = new MatTableDataSource(value);
+      this.stockDatasource = new MatTableDataSource(this.stockDatasourceArray);
       this.stockDatasource.paginator = this.paginator;
       let sTotal = 0;
       value.forEach(value1 => {
         sTotal += <number>value1.purchase;
       });
       this.totalPurchase = sTotal;
+      callback();
     }, error1 => {
       console.log(error1);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
@@ -381,7 +390,9 @@ export class StockComponent implements OnInit {
             this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
             this.hideProgressBar();
             // update tables
-            // this.getStocksFromCache();
+            this.getStocksFromCache(() => {
+
+            });
           }
         });
       }

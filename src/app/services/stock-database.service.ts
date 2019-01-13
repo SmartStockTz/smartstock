@@ -80,7 +80,6 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addStock(stock: Stock, callback?: (value: any) => void) {
-    console.log(stock);
     if (stock.idOld !== 'newS') {
       this.updateStock(stock, callback);
     } else {
@@ -104,7 +103,7 @@ export class StockDatabaseService implements StockDataSource {
         'idOld': stock.idOld,
         'retail_stockcol': stock.retail_stockcol,
         'nhifPrice': stock.nhifPrice,
-        'wholesalePrice': stock.wholesalePrice
+        'wholesalePrice': stock.wholesalePrice.toString()
       }, {
         headers: {
           'X-Parse-Application-id': 'ssm',
@@ -158,7 +157,7 @@ export class StockDatabaseService implements StockDataSource {
         'X-Parse-Application-id': 'ssm',
       }
     }).subscribe(value => {
-      console.log(value);
+      callback(value);
     }, error1 => {
       console.log(error1);
       callback(null);

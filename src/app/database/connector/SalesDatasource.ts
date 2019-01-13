@@ -1,33 +1,34 @@
 import {CashSaleI} from '../../model/CashSale';
-import {DatabaseCallback} from '../DatabaseCallback';
 import {OrderI} from '../../model/OderI';
 
 export interface SalesDatasource {
-  addCashSale(sale: CashSaleI[], callback?: DatabaseCallback);
+  addCashSale(sale: CashSaleI, callback: (value: any) => void);
 
-  getCashSale(id: string, callback?: DatabaseCallback);
+  addAllCashSale(sale: CashSaleI[], callback: (value: any) => void);
 
-  getAllCashSale(callback?: DatabaseCallback);
+  getCashSale(id: string, callback: (sale: CashSaleI) => void);
 
-  getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback);
+  getAllCashSale(callback: (sales: CashSaleI[]) => void);
 
-  updateCashSale(sale: CashSaleI, callback?: DatabaseCallback);
+  getAllCashSaleOfUser(id: string, results: (sales: CashSaleI[]) => void);
 
-  deleteCashSale(sale: CashSaleI, callback?: DatabaseCallback);
+  updateCashSale(sale: CashSaleI, callback: (value: any) => void);
 
-  getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void, callback?: DatabaseCallback);
+  deleteCashSale(sale: CashSaleI, callback: (value: any) => void);
 
-  addWholeCashSale(sale: CashSaleI[], callback?: DatabaseCallback);
+  getAllWholeCashSaleOfUser(id: string, results: (sales: CashSaleI[]) => void);
+
+  addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void);
 
   getOrder(id: string, callback: (order: OrderI) => void);
 
   getAllOrders(callback: (orders: OrderI[]) => void);
 
-  deleteOrder(order: OrderI, callback?: (value) => void);
+  deleteOrder(order: OrderI, callback: (value: any) => void);
 
-  updateOrder(order: OrderI, callback?: (value) => void);
+  updateOrder(order: OrderI, callback: (value: any) => void);
 
-  addOrder(order: OrderI, callback?: (value) => void);
+  addOrder(order: OrderI, callback: (value: any) => void);
 
-  addOrders(orders: OrderI[], callback?: (value) => void);
+  addOrders(orders: OrderI[], callback: (value: any) => void);
 }
