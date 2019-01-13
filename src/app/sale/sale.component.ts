@@ -178,7 +178,7 @@ export class SaleComponent implements OnInit {
         unit: value.stock.unit,
         channel: 'retail',
         date: stringDate,
-        id: '',
+        idOld: '',
         idTra: idTra,
         user: this.currentUser.id,
         stockId: value.stock.objectId// for reference only

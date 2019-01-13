@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
       // const writeBatch = this.firestore.firestore.batch();
       value.forEach(value1 => {
         const documentReference = this.firestore.collection('sales').ref.doc();
-        value1.id = documentReference.id;
+        value1.idOld = documentReference.id;
         documentReference.set(value1).then(value2 => {
           console.log('Done insert ' + value1.product);
         }).catch(reason => {

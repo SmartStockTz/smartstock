@@ -34,7 +34,7 @@ export class PrintServiceService implements OnInit {
       this.httpC.get(this.url, {
         params: {
           data: data,
-          id: order.id
+          id: order.objectId
         }
       }).subscribe(value => {
         callback(value);

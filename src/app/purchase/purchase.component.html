@@ -93,7 +93,8 @@
             <mat-datepicker #pickerDue></mat-datepicker>
           </mat-form-field>
           <mat-card-content>
-            <mat-form-field class="my-input">
+
+            <mat-form-field class="my-input" *ngIf="!showCreditPurchase">
               <input type="text" placeholder="Receipt#" matInput [formControl]="receipNumberControlInput"
                      [matAutocomplete]="autoReceipts">
               <mat-autocomplete #autoReceipts="matAutocomplete">
@@ -102,7 +103,8 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field class="my-input">
+
+            <mat-form-field class="my-input" *ngIf="showCreditPurchase">
               <input type="text" placeholder="Invoice#" matInput [formControl]="invoiceNumberControlInput"
                      [matAutocomplete]="autoReceipts">
               <mat-autocomplete #autoReceipts="matAutocomplete">
@@ -111,6 +113,7 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
             <mat-form-field class="my-input">
               <input type="text" placeholder="Supplier" matInput [formControl]="supplierControlInput"
                      [matAutocomplete]="autoSupplier">
@@ -120,6 +123,7 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
             <mat-slide-toggle style="margin-top: 16px; bottom: 16px" [formControl]="creditPurchaseButton">Credit
               Purchase?
             </mat-slide-toggle>

@@ -1,7 +1,7 @@
 #header{
   height: 100vh;
   margin-top: 0;
-  background-image: url('https://images.unsplash.com/photo-1533727843255-76b0e1a2382e');
+  background-image: url('/assets/img/ssmbg.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
 }

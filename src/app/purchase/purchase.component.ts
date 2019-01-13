@@ -11,7 +11,7 @@ import {Stock} from '../model/stock';
 import {Observable, of} from 'rxjs';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
-import {DialogDeleteComponent, StockComponent} from '../stock/stock.component';
+import {DialogDeleteComponent} from '../stock/stock.component';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 
@@ -38,6 +38,7 @@ export class PurchaseComponent implements OnInit {
   isAdmin = false;
   isLogin = false;
   showProgress = false;
+  showCreditPurchase = false;
   totalPurchase = 0;
   productNameControlInput = new FormControl();
   quantityControlInput = new FormControl();
@@ -204,13 +205,10 @@ export class PurchaseComponent implements OnInit {
   private initializeView() {
     // initial value
     this.stock = null;
-    // this.retailWholesaleRadioInput.setValue(false);
-    // this.nhifRadioInput.setValue(false);
-    // this.traRadioControl.setValue(false);
-    // this.discountControlInput.setValue(0);
-    // this.receiveControlInput.setValue(0);
-    // this.stockDatasourceArray = [];
-    // this.saleDatasourceArray = [];
+    this.creditPurchaseButton.setValue(false);
+    this.creditPurchaseButton.valueChanges.subscribe(value => {
+      this.showCreditPurchase = <boolean>value;
+    });
     this.productNameControlInput.valueChanges.subscribe(value => {
       this.getProduct(value);
     }, error1 => console.log(error1));
