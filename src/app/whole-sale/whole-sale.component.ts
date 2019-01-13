@@ -157,8 +157,7 @@ export class WholeSaleComponent implements OnInit {
   }
 
   removeItemFromCart(element: CartI) {
-    const cartIS = this.cartDatasourceArray.filter(value => value !== element);
-    this.cartDatasourceArray = cartIS;
+    this.cartDatasourceArray = this.cartDatasourceArray.filter(value => value !== element);
     this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
     this.updateTotalBill();
   }
@@ -170,11 +169,12 @@ export class WholeSaleComponent implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const stringDate = year + '-' + month + '-' + day;
+    // const date = new Date();
+    // const year = date.getFullYear();
+    // const month = date.getMonth() + 1;
+    // const day = date.getDate();
+    // const stringDate = year + '-' + month + '-' + day;
+    const stringDate = SalesDatabaseService.getCurrentDate();
     let idTra: string;
     if (this.traRadioControl.value === false) {
       idTra = 'n';
@@ -192,22 +192,26 @@ export class WholeSaleComponent implements OnInit {
         unit: value.stock.unit,
         channel: 'whole',
         date: stringDate,
-        id: '',
+        idOld: '',
         idTra: idTra,
         user: this.currentUser.id,
         stockId: value.stock.objectId
       });
     });
-    this.saleDatabase.addWholeCashSale(saleM)
-      .then(value => {
-        console.log(value);
+    this.saleDatabase.addWholeCashSale(saleM, value => {
+      if (value == null) {
+        this.snack.open('Sales can\'t be completed, please try again', 'Ok');
+        this.hideProgressBar();
+      } else if (value === 'BE') {
+        this.snack.open('You cant sell more than 50 items at once reduce product from cart then submit',
+          'Ok', {duration: 4000});
+        this.hideProgressBar();
+      } else {
+        this.snack.open('Sales saved', 'Ok', {duration: 3000});
         this.hideProgressBar();
         this.clearCart();
-      })
-      .catch(reason => {
-        console.log(reason);
-        this.snack.open(reason, 'Ok');
-      });
+      }
+    });
   }
 
   saveOrder() {
@@ -216,7 +220,7 @@ export class WholeSaleComponent implements OnInit {
 
   private clearInputs() {
     this.productNameControlInput.setValue('');
-    this.quantityControlInput.setValue(0);
+    this.quantityControlInput.setValue(null);
     this.discountControlInput.setValue(0);
     this.retailWholesaleRadioInput.setValue(false);
     this.nhifRadioInput.setValue(false);
@@ -292,13 +296,8 @@ export class WholeSaleComponent implements OnInit {
     this.searchOrderControl.valueChanges.subscribe(value => {
       this.salesOrderDatasource.filter = value.toString().toLowerCase();
     }, error1 => console.log(error1));
-    // this.retailWholesaleRadioInput.valueChanges.subscribe(value => {
-    //   this.showTotalPrice();
-    // }, error1 => {
-    //   console.log(error1);
-    // });
-    // live database
 
+    // live database
     this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.id, datasource => {
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
@@ -365,7 +364,7 @@ export class WholeSaleComponent implements OnInit {
           amount: this.totalBill,
           cart: this.cartDatasourceArray,
           complete: false,
-          id: ''
+          idOld: ''
         }, value => {
           if (value == null) {
             this.snack.open('Order not saved, try again', 'Ok', {duration: 3000});
@@ -373,7 +372,6 @@ export class WholeSaleComponent implements OnInit {
           } else {
             this.clearCart();
             this.hideProgressBar();
-            console.log(value);
           }
         });
       }

@@ -16,13 +16,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const api = new ParseServer({
-    databaseURI: 'mongodb://localhost:27017/ssm',
-    appId: 'ssm',
-    masterKey: 'joshua5715',
-    serverURL: 'http://localhost:3000/parse',
-    liveQuery: {
-        classNames: ['stocks', 'sales', 'purchases', 'categories','units','suppliers']
-    }
+  databaseURI: 'mongodb://localhost:27017/ssm',
+  appId: 'ssm',
+  // cloud: '/home/fahamu/WebstormProjects/smartstockclient/cloud/main.js',
+  masterKey: 'joshua5715',
+  serverURL: 'http://localhost:3000/parse',
+  liveQuery: {
+    classNames: ['stocks', 'sales', 'purchases', 'categories', 'units', 'suppliers']
+  }
 });
 
 app.use('/', indexRouter);

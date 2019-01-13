@@ -1,5 +1,6 @@
 export interface CashSaleI {
-  id: string;
+  idOld: string;
+  objectId?: string;
   idTra: string;
   date: string;
   product: string;

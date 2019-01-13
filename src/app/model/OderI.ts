@@ -1,7 +1,8 @@
 import {CartI} from './cart';
 
 export interface OrderI {
-  id: string;
+  idOld: string;
+  objectId?: string;
   amount: number;
   customer: string;
   date: string;

@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import * as Parse from 'node_modules/parse';
+import {BatchI} from '../model/batchI';
 
 Parse.initialize('ssm');
 Parse.serverURL = 'http://localhost:3000/parse';
@@ -17,6 +18,8 @@ Parse.serverURL = 'http://localhost:3000/parse';
 export class SalesDatabaseService implements SalesDatasource {
   private serverUrl = 'http://localhost:3000/parse/classes';
   private query = new Parse.Query('sales');
+  private orderQuery = new Parse.Query('orders');
+  private ordersSubscription = this.orderQuery.subscribe();
   private subscription = this.query.subscribe();
 
   constructor(private firestore: AngularFirestore,
@@ -39,31 +42,58 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   addAllCashSale(sales: CashSaleI[], callback: (value: any) => void) {
-    if (sales.length < 50) {
-      sales.forEach(sale => {
-        this.httpClient.post<CashSaleI>(this.serverUrl + '/sales', sale, {
-          headers: {
-            'X-Parse-Application-Id': 'ssm',
-            'Content-Type': 'application/json'
-          }
-        }).subscribe(value => {
-          callback(value);
-        }, error1 => {
-          console.log(error1);
-          callback(null);
-        });
+    const batchs: BatchI[] = [];
+    sales.forEach(value => {
+      batchs.push({
+        method: 'POST',
+        body: value,
+        path: '/parse/classes/sales'
       });
-    }
+    });
+    this.httpClient.post<BatchI[]>('http://localhost:3000/parse/batch', {
+        'requests': batchs
+      },
+      {
+        headers: {
+          'X-Parse-Application-Id': 'ssm'
+        }
+      }
+    ).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
-  async addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void) {
-    // const writeBatch = this.firestore.firestore.batch();
-    // sale.forEach(value => {
-    //   const newVar = this.firestore.collection<CashSaleI>('sales').ref.doc();
-    //   value.id = newVar.id;
-    //   writeBatch.set(newVar, value, {merge: true});
-    // });
-    // await writeBatch.commit();
+  addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void) {
+    if (sale.length <= 50) {
+      const batchs: BatchI[] = [];
+      sale.forEach(value => {
+        batchs.push({
+          method: 'POST',
+          body: value,
+          path: '/parse/classes/sales'
+        });
+      });
+      this.httpClient.post<BatchI[]>('http://localhost:3000/parse/batch', {
+          'requests': batchs
+        },
+        {
+          headers: {
+            'X-Parse-Application-Id': 'ssm'
+          }
+        }
+      ).subscribe(value => {
+        callback(value);
+      }, error1 => {
+        console.log(error1);
+        callback(null);
+      });
+    } else {
+      console.log('sales cant fit in batch');
+      callback('BE');
+    }
   }
 
   deleteCashSale(sale: CashSaleI, callback: (value: any) => void) {
@@ -79,87 +109,83 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-
     this.subscription.on('open', () => {
       console.log('sales socket created');
-      this.httpClient.get(this.serverUrl + '/sales', {
-        headers: {
-          'X-Parse-Application-Id': 'ssm'
-        },
-        params: {
-          'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"retail" }',
-          'limit': '10000000'
-        }
-      }).subscribe(value => {
-        console.log(value);
-      }, error1 => console.log(error1));
+      this.getSales(id, results);
     });
+    this.subscription.on('create', value => {
+      this.getSales(id, results);
+    });
+    this.subscription.on('update', value => {
+      this.getSales(id, results);
+    });
+    this.subscription.on('delete', value => {
+      this.getSales(id, results);
+    });
+  }
 
-    // return this.firestore.collection('sales').ref
-    //   .where('user', '==', id)
-    //   .where('date', '==', SalesDatabaseService.getCurrentDate())
-    //   .where('channel', '==', 'retail').onSnapshot(value => {
-    //     const arrayD: CashSaleI[] = [];
-    //     value.forEach(value2 => {
-    //       arrayD.push({
-    //         product: value2.get('product'),
-    //         amount: value2.get('amount'),
-    //         id: value2.get('id'),
-    //         user: value2.get('user'),
-    //         idTra: value2.get('idTra'),
-    //         date: value2.get('date'),
-    //         channel: value2.get('channel'),
-    //         unit: value2.get('unit'),
-    //         category: value2.get('category'),
-    //         quantity: value2.get('quantity'),
-    //         discount: value2.get('discount'),
-    //         stockId: value2.get('stockId')
-    //       });
-    //     });
-    //     results(arrayD);
-    //   }, error1 => {
-    //     console.log(error1);
-    //     results([]);
-    //   });
+  private getSales(id: string, res: any) {
+    this.httpClient.get<any>(this.serverUrl + '/sales', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"retail" }',
+        'limit': '10000000'
+      }
+    }).subscribe(value => {
+      res(value.results);
+    }, error1 => {
+      console.log(error1);
+      res([]);
+    });
+  }
+
+  private getWholeSale(id: string, res: any) {
+    this.httpClient.get<any>(this.serverUrl + '/sales', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"whole" }',
+        'limit': '10000000'
+      }
+    }).subscribe(value => {
+      res(value.results);
+    }, error1 => {
+      console.log(error1);
+      res([]);
+    });
   }
 
   getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-    return this.firestore.collection('sales').ref;
-    // .where('user', '==', id)
-    // .where('date', '==', SalesDatabaseService.getCurrentDate())
-    // .where('channel', '==', 'whole').onSnapshot(value => {
-    //   const arrayD: CashSaleI[] = [];
-    //   value.forEach(value2 => {
-    //     arrayD.push({
-    //       product: value2.get('product'),
-    //       amount: value2.get('amount'),
-    //       id: value2.get('id'),
-    //       user: value2.get('user'),
-    //       idTra: value2.get('idTra'),
-    //       date: value2.get('date'),
-    //       channel: value2.get('channel'),
-    //       unit: value2.get('unit'),
-    //       category: value2.get('category'),
-    //       quantity: value2.get('quantity'),
-    //       discount: value2.get('discount'),
-    //       stockId: value2.get('stockId')
-    //     });
-    //   });
-    //   results(arrayD);
-    // }, error1 => {
-    //   console.log(error1);
-    //   results([]);
-    // });
+    this.subscription.on('open', () => {
+      console.log('sales socket created');
+      this.getWholeSale(id, results);
+    });
+    this.subscription.on('create', value => {
+      this.getWholeSale(id, results);
+    });
+    this.subscription.on('update', value => {
+      this.getWholeSale(id, results);
+    });
+    this.subscription.on('delete', value => {
+      this.getWholeSale(id, results);
+    });
   }
 
   addOrder(order: OrderI, callback?: (value) => void) {
-    const documentReference = this.firestore.collection('orders').ref.doc();
-    order.id = documentReference.id;
-    documentReference.set(order, {merge: true}).then(value => {
-      callback('Done insert data');
-    }).catch(reason => {
+    order.idOld = this.firestore.createId();
+    this.httpClient.post<OrderI>(this.serverUrl + '/orders', order, {
+      headers: {
+        'X-Parse-Application-Id': 'ssm',
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
       callback(null);
-      console.log(reason);
     });
   }
 
@@ -167,31 +193,49 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   deleteOrder(order: OrderI, callback?: (value) => void) {
-    this.firestore.collection('orders').doc(order.id).delete().then(value => {
-      callback('Done delete');
-    }).catch(reason => {
-      console.log(reason);
+    this.httpClient.delete(this.serverUrl + '/orders/' + order.objectId, {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
       callback(null);
     });
   }
 
   getAllOrders(callback: (orders: OrderI[]) => void) {
-    this.firestore.collection('orders').ref
-      .where('complete', '==', false)
-      .onSnapshot(value => {
-        const ords: OrderI[] = [];
-        value.forEach(value1 => {
-          ords.push({
-            date: value1.get('date'),
-            customer: value1.get('customer'),
-            amount: value1.get('amount'),
-            cart: value1.get('cart'),
-            complete: value1.get('complete'),
-            id: value1.get('id')
-          });
-        });
-        callback(ords);
-      });
+    this.ordersSubscription.on('open', () => {
+      console.log('order socket connected');
+      this.getOrders(callback);
+    });
+    this.ordersSubscription.on('create', value => {
+      console.log('new order saved');
+      this.getOrders(callback);
+    });
+    this.ordersSubscription.on('update', value => {
+      this.getOrders(callback);
+    });
+    this.ordersSubscription.on('delete', value => {
+      this.getOrders(callback);
+    });
+  }
+
+  private getOrders(res: any) {
+    this.httpClient.get<any>(this.serverUrl + '/orders', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      },
+      params: {
+        'limit': '100000'
+      }
+    }).subscribe(value => {
+      res(value.results);
+    }, error1 => {
+      console.log(error1);
+      res(null);
+    });
   }
 
   getOrder(id: string, callback: (order: OrderI) => void) {

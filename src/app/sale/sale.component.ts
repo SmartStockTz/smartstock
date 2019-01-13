@@ -154,11 +154,12 @@ export class SaleComponent implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const stringDate = year + '-' + month + '-' + day;
+    // const date = new Date();
+    // const year = date.getFullYear();
+    // const month = date.getMonth() + 1;
+    // const day = date.getDate();
+    // const stringDate = year + '-' + month + '-' + day;
+    const stringDate = SalesDatabaseService.getCurrentDate();
     let idTra: string;
     if (this.traRadioControl.value === false) {
       idTra = 'n';
@@ -166,6 +167,7 @@ export class SaleComponent implements OnInit {
       idTra = 'n/n';
     }
     const saleM: CashSaleI[] = [];
+    // console.log(stringDate);
     this.cartDatasourceArray.forEach(value => {
       saleM.push({
         amount: value.amount,
@@ -186,7 +188,8 @@ export class SaleComponent implements OnInit {
       if (value === null) {
         this.saleDatabase.addCashSaleToCache(this.cartDatasourceArray, value1 => {
         });
-        this.snack.open('Product no saved, try again', 'Ok');
+        this.snack.open('Product not saved, try again', 'Ok');
+        this.hideProgressBar();
       } else {
         this.hideProgressBar();
         this.cartDatasourceArray = [];
@@ -199,7 +202,7 @@ export class SaleComponent implements OnInit {
 
   private clearInputs() {
     this.productNameControlInput.setValue('');
-    this.quantityControlInput.setValue(0);
+    this.quantityControlInput.setValue(null);
     this.discountControlInput.setValue(0);
     this.retailWholesaleRadioInput.setValue(false);
     this.nhifRadioInput.setValue(false);
@@ -222,8 +225,8 @@ export class SaleComponent implements OnInit {
     this.retailWholesaleRadioInput.setValue(false);
     this.nhifRadioInput.setValue(false);
     this.traRadioControl.setValue(false);
-    this.discountControlInput.setValue(null);
-    this.receiveControlInput.setValue(null);
+    this.discountControlInput.setValue(0);
+    this.receiveControlInput.setValue(0);
     this.cartDatasourceArray = [];
     this.saleDatasourceArray = [];
     this.productNameControlInput.valueChanges.subscribe(value => {
@@ -273,6 +276,7 @@ export class SaleComponent implements OnInit {
 
     // live database
     this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
+      // console.log(datasource);
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
       this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
