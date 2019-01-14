@@ -14,7 +14,7 @@ import {UnitsI} from '../model/UnitsI';
 })
 export class StockDatabaseService implements StockDataSource {
 
-  serverUrl = 'http://localhost:3000/parse/classes';
+  serverUrl = 'http://lb.fahamutech.com/parse/classes';
 
   constructor(private firestore: AngularFirestore,
               private httpClient: HttpClient,

@@ -1,7 +1,6 @@
 package com.fahamutech.ssmjpos.rest;
 
 import com.fahamutech.ssmjpos.service.MyPrinterService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +14,6 @@ public class PrintServiceRest {
         this.myPrinterService = myPrinterService;
     }
 
-    @CrossOrigin
     @RequestMapping("/print")
     public String print(HttpServletRequest request) {
         String data = request.getParameter("data");

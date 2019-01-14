@@ -7,7 +7,7 @@ import {StockDatabaseService} from './stock-database.service';
 import {HttpClient} from '@angular/common/http';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://localhost:3000/parse';
+Parse.serverURL = 'http://lb.fahamutech.com/parse';
 
 @Injectable({
   providedIn: 'root'
@@ -160,7 +160,7 @@ export class UpdateLocalDatabaseService implements OnInit {
   }
 
   private getAllRefs() {
-    this.httpClient.get<any>('http://localhost:3000/parse/purchaseRefs', {
+    this.httpClient.get<any>('http://lb.fahamutech.com/parse/purchaseRefs', {
       headers: {
         'X-Parse-Application-Id': 'ssm'
       }

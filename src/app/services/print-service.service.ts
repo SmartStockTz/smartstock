@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {OrderI} from '../model/OderI';
 import {CartI} from '../model/cart';
 import {HttpClient} from '@angular/common/http';
@@ -7,7 +7,7 @@ import {SsmSettingsServiceService} from './ssm-settings-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PrintServiceService implements OnInit {
+export class PrintServiceService {
   url: string;
 
   constructor(private ssmSettings: SsmSettingsServiceService, private httpC: HttpClient) {
@@ -32,6 +32,9 @@ export class PrintServiceService implements OnInit {
         this.url = value1.ip;
       }
       this.httpC.get(this.url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
         params: {
           data: data,
           id: order.objectId
@@ -64,6 +67,9 @@ export class PrintServiceService implements OnInit {
         this.url = value1.ip;
       }
       this.httpC.get(this.url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
         params: {
           data: data,
           id: 'test id'
@@ -85,6 +91,4 @@ export class PrintServiceService implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
 }

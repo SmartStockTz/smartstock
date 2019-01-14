@@ -8,15 +8,15 @@ import * as Parse from 'node_modules/parse';
 import {NgForage} from 'ngforage';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://localhost:3000/parse';
+Parse.serverURL = 'http://lb.fahamutech.com/parse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchaseDatabaseService implements PurchaseDataSource {
 
-  serverUrl = 'http://localhost:3000/parse/classes';
-  serverUrlBatch = 'http://localhost:3000/parse/batch';
+  serverUrl = 'http://lb.fahamutech.com/parse/classes';
+  serverUrlBatch = 'http://lb.fahamutech.com/parse/batch';
 
   constructor(private httpClient: HttpClient, private indexDb: NgForage) {
   }

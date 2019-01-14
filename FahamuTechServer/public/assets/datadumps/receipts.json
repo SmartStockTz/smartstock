@@ -1,0 +1,3259 @@
+[
+  {
+    "date": "2017-10-09",
+    "reference": "3450",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-09"
+  },
+  {
+    "date": "2017-10-09",
+    "reference": "3419",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-09"
+  },
+  {
+    "date": "2017-10-10",
+    "reference": "3475",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-10"
+  },
+  {
+    "date": "2017-10-11",
+    "reference": "3500",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-11"
+  },
+  {
+    "date": "2017-10-12",
+    "reference": "3508",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-12"
+  },
+  {
+    "date": "2017-10-14",
+    "reference": "3538",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-14"
+  },
+  {
+    "date": "2017-10-18",
+    "reference": "3577",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-18"
+  },
+  {
+    "date": "2017-10-20",
+    "reference": "3627",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-20"
+  },
+  {
+    "date": "2017-10-24",
+    "reference": "3671",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-24"
+  },
+  {
+    "date": "2017-10-25",
+    "reference": "3695",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-25"
+  },
+  {
+    "date": "2017-10-25",
+    "reference": "964",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-25"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "123553",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "123552",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "3701",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-27",
+    "reference": "3711",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-27"
+  },
+  {
+    "date": "2017-10-28",
+    "reference": "abpl/cs002876",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-10-28"
+  },
+  {
+    "date": "2017-11-01",
+    "reference": "3746",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-01"
+  },
+  {
+    "date": "2017-11-01",
+    "reference": "3796",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-01"
+  },
+  {
+    "date": "2017-11-03",
+    "reference": "tall cash on credit",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-03"
+  },
+  {
+    "date": "2017-11-05",
+    "reference": "3831",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-05"
+  },
+  {
+    "date": "2017-11-06",
+    "reference": "01ap004549/2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-06"
+  },
+  {
+    "date": "2017-11-06",
+    "reference": "3833",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-06"
+  },
+  {
+    "date": "2017-11-06",
+    "reference": "jose-mkononi",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-06"
+  },
+  {
+    "date": "2017-11-07",
+    "reference": "3865",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-07"
+  },
+  {
+    "date": "2017-11-07",
+    "reference": "0711",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-07"
+  },
+  {
+    "date": "2017-11-09",
+    "reference": "tall09/11",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-09"
+  },
+  {
+    "date": "2017-11-11",
+    "reference": "1111",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-11"
+  },
+  {
+    "date": "2017-11-13",
+    "reference": "19671",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-13"
+  },
+  {
+    "date": "2017-11-14",
+    "reference": "3959",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-14"
+  },
+  {
+    "date": "2017-11-14",
+    "reference": "3961",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-14"
+  },
+  {
+    "date": "2017-11-14",
+    "reference": "3961",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-14"
+  },
+  {
+    "date": "2017-11-16",
+    "reference": "abpl/cr001220",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-16"
+  },
+  {
+    "date": "2017-11-16",
+    "reference": "02852/2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-16"
+  },
+  {
+    "date": "2017-11-17",
+    "reference": "1707",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-17"
+  },
+  {
+    "date": "2017-11-18",
+    "reference": "4050",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-18"
+  },
+  {
+    "date": "2017-11-19",
+    "reference": "19/11/2010",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-19"
+  },
+  {
+    "date": "2017-11-22",
+    "reference": "4093",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-22"
+  },
+  {
+    "date": "2017-11-23",
+    "reference": "2599",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-23"
+  },
+  {
+    "date": "2017-11-23",
+    "reference": "01ap004849/2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-23"
+  },
+  {
+    "date": "2017-11-25",
+    "reference": "96077",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-25"
+  },
+  {
+    "date": "2017-11-26",
+    "reference": "4151",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-26"
+  },
+  {
+    "date": "2017-11-27",
+    "reference": "4168",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-27"
+  },
+  {
+    "date": "2017-11-29",
+    "reference": "4196",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-29"
+  },
+  {
+    "date": "2017-11-30",
+    "reference": "4227",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-30"
+  },
+  {
+    "date": "2017-11-30",
+    "reference": "01ap004969/2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-11-30"
+  },
+  {
+    "date": "2017-12-02",
+    "reference": "4251",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-02"
+  },
+  {
+    "date": "2017-12-04",
+    "reference": "1771",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-04"
+  },
+  {
+    "date": "2017-12-05",
+    "reference": "123996",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-05"
+  },
+  {
+    "date": "2017-12-05",
+    "reference": "123994",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-05"
+  },
+  {
+    "date": "2017-12-05",
+    "reference": "4300",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-05"
+  },
+  {
+    "date": "2017-12-06",
+    "reference": "404",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-06"
+  },
+  {
+    "date": "2017-12-06",
+    "reference": "4176",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-06"
+  },
+  {
+    "date": "2017-12-07",
+    "reference": "4324",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-07"
+  },
+  {
+    "date": "2017-12-08",
+    "reference": "emerginor",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-08"
+  },
+  {
+    "date": "2017-12-09",
+    "reference": "4352",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-09"
+  },
+  {
+    "date": "2017-12-14",
+    "reference": "kika",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-14"
+  },
+  {
+    "date": "2017-12-15",
+    "reference": "x17-2863",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-15"
+  },
+  {
+    "date": "2017-12-15",
+    "reference": "03191/2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-15"
+  },
+  {
+    "date": "2017-12-15",
+    "reference": "beula",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-15"
+  },
+  {
+    "date": "2017-12-16",
+    "reference": "4459",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-16"
+  },
+  {
+    "date": "2017-12-19",
+    "reference": "abpl/cr001332",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-19"
+  },
+  {
+    "date": "2017-12-19",
+    "reference": "4499",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-19"
+  },
+  {
+    "date": "2017-12-29",
+    "reference": "4603",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2017-12-29"
+  },
+  {
+    "date": "2018-01-04",
+    "reference": "52",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-04"
+  },
+  {
+    "date": "2018-01-04",
+    "reference": "4567",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-04"
+  },
+  {
+    "date": "2018-01-05",
+    "reference": "05ap000046/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-05"
+  },
+  {
+    "date": "2018-01-08",
+    "reference": "75",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-08"
+  },
+  {
+    "date": "2018-01-08",
+    "reference": "4567",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-08"
+  },
+  {
+    "date": "2018-01-08",
+    "reference": "18",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-08"
+  },
+  {
+    "date": "2018-01-09",
+    "reference": "95",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-09"
+  },
+  {
+    "date": "2018-01-10",
+    "reference": "95",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-10"
+  },
+  {
+    "date": "2018-01-11",
+    "reference": "1707",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-11"
+  },
+  {
+    "date": "2018-01-11",
+    "reference": "145",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-11"
+  },
+  {
+    "date": "2018-01-19",
+    "reference": "240",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-19"
+  },
+  {
+    "date": "2018-01-22",
+    "reference": "271",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-22"
+  },
+  {
+    "date": "2018-01-22",
+    "reference": "271",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-22"
+  },
+  {
+    "date": "2018-01-22",
+    "reference": "HC",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-22"
+  },
+  {
+    "date": "2018-01-22",
+    "reference": "1455",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-22"
+  },
+  {
+    "date": "2018-01-22",
+    "reference": "1544",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-22"
+  },
+  {
+    "date": "2018-01-24",
+    "reference": "00306/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-24"
+  },
+  {
+    "date": "2018-01-26",
+    "reference": "06AP000764/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-26"
+  },
+  {
+    "date": "2018-01-29",
+    "reference": "abpl/cr1/0000095",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-29"
+  },
+  {
+    "date": "2018-01-31",
+    "reference": "409",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-01-31"
+  },
+  {
+    "date": "2018-02-03",
+    "reference": "1857",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-03"
+  },
+  {
+    "date": "2018-02-04",
+    "reference": "458",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-04"
+  },
+  {
+    "date": "2018-02-06",
+    "reference": "96792",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-06"
+  },
+  {
+    "date": "2018-02-06",
+    "reference": "124548",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-06"
+  },
+  {
+    "date": "2018-02-06",
+    "reference": "124549",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-06"
+  },
+  {
+    "date": "2018-02-07",
+    "reference": "6944",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-07"
+  },
+  {
+    "date": "2018-02-10",
+    "reference": "525",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-10"
+  },
+  {
+    "date": "2018-02-12",
+    "reference": "7660",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-12"
+  },
+  {
+    "date": "2018-02-12",
+    "reference": "554",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-12"
+  },
+  {
+    "date": "2018-02-14",
+    "reference": "595",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-14"
+  },
+  {
+    "date": "2018-02-15",
+    "reference": "06AP001383/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-15"
+  },
+  {
+    "date": "2018-02-16",
+    "reference": "02AP001828/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-16"
+  },
+  {
+    "date": "2018-02-20",
+    "reference": "693",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-20"
+  },
+  {
+    "date": "2018-02-22",
+    "reference": "2078",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-22"
+  },
+  {
+    "date": "2018-02-22",
+    "reference": "726",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-22"
+  },
+  {
+    "date": "2018-02-27",
+    "reference": "773",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-02-27"
+  },
+  {
+    "date": "2018-03-01",
+    "reference": "00777/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-01"
+  },
+  {
+    "date": "2018-03-06",
+    "reference": "843",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-06"
+  },
+  {
+    "date": "2018-03-06",
+    "reference": "01AP000918/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-06"
+  },
+  {
+    "date": "2018-03-07",
+    "reference": "862",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-07"
+  },
+  {
+    "date": "2018-03-07",
+    "reference": "00845/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-07"
+  },
+  {
+    "date": "2018-03-14",
+    "reference": "ABPL/CR1/000295",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-14"
+  },
+  {
+    "date": "2018-03-15",
+    "reference": "1038",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-15"
+  },
+  {
+    "date": "2018-03-15",
+    "reference": "2253",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-15"
+  },
+  {
+    "date": "2018-03-20",
+    "reference": "1100",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-20"
+  },
+  {
+    "date": "2018-03-24",
+    "reference": "X18-695",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-24"
+  },
+  {
+    "date": "2018-03-28",
+    "reference": "1227",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-03-28"
+  },
+  {
+    "date": "2018-04-05",
+    "reference": "1347",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-05"
+  },
+  {
+    "date": "2018-04-09",
+    "reference": "1390",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-09"
+  },
+  {
+    "date": "2018-04-09",
+    "reference": "01290/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-09"
+  },
+  {
+    "date": "2018-04-10",
+    "reference": "1422",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-10"
+  },
+  {
+    "date": "2018-04-13",
+    "reference": "2017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-13"
+  },
+  {
+    "date": "2018-04-13",
+    "reference": "125275",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-13"
+  },
+  {
+    "date": "2018-04-13",
+    "reference": "125274",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-13"
+  },
+  {
+    "date": "2018-04-18",
+    "reference": "1540",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-18"
+  },
+  {
+    "date": "2018-04-19",
+    "reference": "abpl/cr1/000413",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-19"
+  },
+  {
+    "date": "2018-04-20",
+    "reference": "1576",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-20"
+  },
+  {
+    "date": "2018-04-22",
+    "reference": "1612",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-22"
+  },
+  {
+    "date": "2018-04-25",
+    "reference": "CALWHSIN000000203",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-25"
+  },
+  {
+    "date": "2018-04-26",
+    "reference": "1683",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-26"
+  },
+  {
+    "date": "2018-04-27",
+    "reference": "22146",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-27"
+  },
+  {
+    "date": "2018-04-27",
+    "reference": "22146",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-27"
+  },
+  {
+    "date": "2018-04-27",
+    "reference": "22146",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-27"
+  },
+  {
+    "date": "2018-04-27",
+    "reference": "22146",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-27"
+  },
+  {
+    "date": "2018-04-29",
+    "reference": "1716",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-04-29"
+  },
+  {
+    "date": "2018-05-02",
+    "reference": "1780",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-02"
+  },
+  {
+    "date": "2018-05-07",
+    "reference": "1852",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-07"
+  },
+  {
+    "date": "2018-05-13",
+    "reference": "1929",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-13"
+  },
+  {
+    "date": "2018-05-18",
+    "reference": "37966",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-18"
+  },
+  {
+    "date": "2018-05-20",
+    "reference": "01727/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-20"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "abpl/cs1/002861",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "abpl/cr1/000500",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "abpl/cs1/002860",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "abpl/cr1/000497",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "2070",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-22",
+    "reference": "2100",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-22"
+  },
+  {
+    "date": "2018-05-22",
+    "reference": "2100",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-22"
+  },
+  {
+    "date": "2018-05-23",
+    "reference": "02ap005285/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-23"
+  },
+  {
+    "date": "2018-05-25",
+    "reference": "2152",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-25"
+  },
+  {
+    "date": "2018-05-26",
+    "reference": "calwhsin000000398",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-26"
+  },
+  {
+    "date": "2018-05-30",
+    "reference": "2220",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-30"
+  },
+  {
+    "date": "2018-05-30",
+    "reference": "27191",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-30"
+  },
+  {
+    "date": "2018-05-30",
+    "reference": "3068",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-30"
+  },
+  {
+    "date": "2018-05-31",
+    "reference": "x18 1407",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-31"
+  },
+  {
+    "date": "2018-05-31",
+    "reference": "2009",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-05-31"
+  },
+  {
+    "date": "2018-06-04",
+    "reference": "2294",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-06-04"
+  },
+  {
+    "date": "2018-06-08",
+    "reference": "2366",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-06-08"
+  },
+  {
+    "date": "2018-06-11",
+    "reference": "0150",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-06-11"
+  },
+  {
+    "date": "2018-06-19",
+    "reference": "33635",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-06-19"
+  },
+  {
+    "date": "2018-06-23",
+    "reference": "38561",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-06-23"
+  },
+  {
+    "date": "2018-07-04",
+    "reference": "02232/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-04"
+  },
+  {
+    "date": "2018-07-08",
+    "reference": "02232/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-08"
+  },
+  {
+    "date": "2018-07-09",
+    "reference": "38774",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-09"
+  },
+  {
+    "date": "2018-07-09",
+    "reference": "2450",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-09"
+  },
+  {
+    "date": "2018-07-11",
+    "reference": "inv1601",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-11"
+  },
+  {
+    "date": "2018-07-11",
+    "reference": "0716137175",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-11"
+  },
+  {
+    "date": "2018-07-11",
+    "reference": "2857",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-11"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "38190",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "11276",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "2877",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-21",
+    "reference": "kpl/inv/18/209",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-21"
+  },
+  {
+    "date": "2018-07-26",
+    "reference": "2596",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-26"
+  },
+  {
+    "date": "2018-07-30",
+    "reference": "3118",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-07-30"
+  },
+  {
+    "date": "2018-08-01",
+    "reference": "126059",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-01"
+  },
+  {
+    "date": "2018-08-03",
+    "reference": "117-233-065",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-03"
+  },
+  {
+    "date": "2018-08-07",
+    "reference": "3234",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-07"
+  },
+  {
+    "date": "2018-08-08",
+    "reference": "3212",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-08"
+  },
+  {
+    "date": "2018-08-09",
+    "reference": "98829",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-09"
+  },
+  {
+    "date": "2018-08-10",
+    "reference": "ABPL/CR1/000730",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-10"
+  },
+  {
+    "date": "2018-08-10",
+    "reference": "6373",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-10"
+  },
+  {
+    "date": "2018-08-14",
+    "reference": "3344",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-14"
+  },
+  {
+    "date": "2018-08-15",
+    "reference": "1846",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-15"
+  },
+  {
+    "date": "2018-08-17",
+    "reference": "CRH0000180",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-17"
+  },
+  {
+    "date": "2018-08-18",
+    "reference": "ch271/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-18"
+  },
+  {
+    "date": "2018-08-20",
+    "reference": "117-233-065",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-20"
+  },
+  {
+    "date": "2018-08-28",
+    "reference": "3545",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-28"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "3571",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "x18-2343",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "2783",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-31",
+    "reference": "5397",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-31"
+  },
+  {
+    "date": "2018-08-31",
+    "reference": "2484",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-08-31"
+  },
+  {
+    "date": "2018-09-08",
+    "reference": "mummy2",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-08"
+  },
+  {
+    "date": "2018-09-09",
+    "reference": "3747",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-09"
+  },
+  {
+    "date": "2018-09-10",
+    "reference": "beula",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-10"
+  },
+  {
+    "date": "2018-09-12",
+    "reference": "4017",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-12"
+  },
+  {
+    "date": "2018-09-14",
+    "reference": "3398",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-14"
+  },
+  {
+    "date": "2018-09-14",
+    "reference": "2165/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-14"
+  },
+  {
+    "date": "2018-09-18",
+    "reference": "abpl/cs1/005305",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-18"
+  },
+  {
+    "date": "2018-09-18",
+    "reference": "abpl/cr1/000830",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-18"
+  },
+  {
+    "date": "2018-09-18",
+    "reference": "5684",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-18"
+  },
+  {
+    "date": "2018-09-28",
+    "reference": "crh0000599",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-28"
+  },
+  {
+    "date": "2018-09-28",
+    "reference": "2235",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-09-28"
+  },
+  {
+    "date": "2018-10-04",
+    "reference": "4182",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-04"
+  },
+  {
+    "date": "2018-10-06",
+    "reference": "4220",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-06"
+  },
+  {
+    "date": "2018-10-08",
+    "reference": "10175",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-08"
+  },
+  {
+    "date": "2018-10-08",
+    "reference": "10188",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-08"
+  },
+  {
+    "date": "2018-10-16",
+    "reference": "4373",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-16"
+  },
+  {
+    "date": "2018-10-17",
+    "reference": "rc26106",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-17"
+  },
+  {
+    "date": "2018-10-19",
+    "reference": "4433",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-19"
+  },
+  {
+    "date": "2018-10-19",
+    "reference": "4373",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-19"
+  },
+  {
+    "date": "2018-10-23",
+    "reference": "4471",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-23"
+  },
+  {
+    "date": "2018-10-24",
+    "reference": "4485",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-24"
+  },
+  {
+    "date": "2018-10-29",
+    "reference": "1459",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-29"
+  },
+  {
+    "date": "2018-10-31",
+    "reference": "02ap010493/2018",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-31"
+  },
+  {
+    "date": "2018-10-31",
+    "reference": "375",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-31"
+  },
+  {
+    "date": "2018-10-31",
+    "reference": "40106",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-31"
+  },
+  {
+    "date": "2018-10-31",
+    "reference": "40028",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-10-31"
+  },
+  {
+    "date": "2018-11-02",
+    "reference": "4671",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-02"
+  },
+  {
+    "date": "2018-11-07",
+    "reference": "4706",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-07"
+  },
+  {
+    "date": "2018-11-07",
+    "reference": "1624",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-07"
+  },
+  {
+    "date": "2018-11-09",
+    "reference": "farmer center 4",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-09"
+  },
+  {
+    "date": "2018-11-12",
+    "reference": "4793",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-12"
+  },
+  {
+    "date": "2018-11-14",
+    "reference": "4844",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-14"
+  },
+  {
+    "date": "2018-11-16",
+    "reference": "4863",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-16"
+  },
+  {
+    "date": "2018-11-20",
+    "reference": "4909",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-20"
+  },
+  {
+    "date": "2018-11-20",
+    "reference": "4922",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-20"
+  },
+  {
+    "date": "2018-11-21",
+    "reference": "4337",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-21"
+  },
+  {
+    "date": "2018-11-22",
+    "reference": "4953",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-22"
+  },
+  {
+    "date": "2018-11-23",
+    "reference": "4953",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-23"
+  },
+  {
+    "date": "2018-11-23",
+    "reference": "001038",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-23"
+  },
+  {
+    "date": "2018-11-26",
+    "reference": "1114",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-26"
+  },
+  {
+    "date": "2018-11-27",
+    "reference": "5044",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-11-27"
+  },
+  {
+    "date": "2018-12-01",
+    "reference": "5120",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-01"
+  },
+  {
+    "date": "2018-12-06",
+    "reference": "100522",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-06"
+  },
+  {
+    "date": "2018-12-06",
+    "reference": "5172",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-06"
+  },
+  {
+    "date": "2018-12-06",
+    "reference": "BEULA 22",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-06"
+  },
+  {
+    "date": "2018-12-08",
+    "reference": "5249",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-08"
+  },
+  {
+    "date": "2018-12-09",
+    "reference": "13248",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-09"
+  },
+  {
+    "date": "2018-12-11",
+    "reference": "41216",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-11"
+  },
+  {
+    "date": "2018-12-12",
+    "reference": "5309",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-12"
+  },
+  {
+    "date": "2018-12-17",
+    "reference": "5368",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-17"
+  },
+  {
+    "date": "2018-12-18",
+    "reference": "5393",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-18"
+  },
+  {
+    "date": "2018-12-21",
+    "reference": "5064",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-21"
+  },
+  {
+    "date": "2018-12-23",
+    "reference": "5465",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-23"
+  },
+  {
+    "date": "2018-12-26",
+    "reference": "5504",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-26"
+  },
+  {
+    "date": "2018-12-26",
+    "reference": "5503",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-26"
+  },
+  {
+    "date": "2018-12-27",
+    "reference": "5521",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-27"
+  },
+  {
+    "date": "2018-12-28",
+    "reference": "100867",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-28"
+  },
+  {
+    "date": "2018-12-29",
+    "reference": "5552",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-29"
+  },
+  {
+    "date": "2018-12-29",
+    "reference": "5554",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-29"
+  },
+  {
+    "date": "2018-12-29",
+    "reference": "5553",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-29"
+  },
+  {
+    "date": "2018-12-30",
+    "reference": "5560",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-30"
+  },
+  {
+    "date": "2018-12-31",
+    "reference": "wizarani",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2018-12-31"
+  },
+  {
+    "date": "2019-01-05",
+    "reference": "5639",
+    "id": "1",
+    "type": "invoice",
+    "paid": "true",
+    "due": "2019-01-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "01",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "0512/01244400512",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "01kika",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "11245",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "02shoo",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "01alex",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "C/S PH23692",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "01aza",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "0515",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "ABPL/CS002590",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-05",
+    "reference": "test",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-05"
+  },
+  {
+    "date": "2017-10-06",
+    "reference": "12hasnein ",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-06"
+  },
+  {
+    "date": "2017-10-06",
+    "reference": "10biju confectionery",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-06"
+  },
+  {
+    "date": "2017-10-09",
+    "reference": "joshua1234",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-09"
+  },
+  {
+    "date": "2017-10-09",
+    "reference": "0863/024097",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-09"
+  },
+  {
+    "date": "2017-10-10",
+    "reference": "49769",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-10"
+  },
+  {
+    "date": "2017-10-10",
+    "reference": "49769",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-10"
+  },
+  {
+    "date": "2017-10-12",
+    "reference": "abpl/cs002695",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-12"
+  },
+  {
+    "date": "2017-10-12",
+    "reference": "43834",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-12"
+  },
+  {
+    "date": "2017-10-12",
+    "reference": "12kika",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-12"
+  },
+  {
+    "date": "2017-10-14",
+    "reference": "14sleepy",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-14"
+  },
+  {
+    "date": "2017-10-15",
+    "reference": "0714414241dili",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-15"
+  },
+  {
+    "date": "2017-10-15",
+    "reference": "dili-0714429300",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-15"
+  },
+  {
+    "date": "2017-10-16",
+    "reference": "jd",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-16"
+  },
+  {
+    "date": "2017-10-16",
+    "reference": "3560",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-16"
+  },
+  {
+    "date": "2017-10-17",
+    "reference": "omega",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-17"
+  },
+  {
+    "date": "2017-10-19",
+    "reference": "maji",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-19"
+  },
+  {
+    "date": "2017-10-20",
+    "reference": "colgate",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-20"
+  },
+  {
+    "date": "2017-10-22",
+    "reference": "core cash",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-22"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "afya",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "k & c",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-26",
+    "reference": "bahari-kkoo",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-26"
+  },
+  {
+    "date": "2017-10-27",
+    "reference": "0007/000521",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-27"
+  },
+  {
+    "date": "2017-10-27",
+    "reference": "stan",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-27"
+  },
+  {
+    "date": "2017-10-28",
+    "reference": "the people",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-28"
+  },
+  {
+    "date": "2017-10-30",
+    "reference": "kitumbini",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-10-30"
+  },
+  {
+    "date": "2017-11-01",
+    "reference": "3746",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-01"
+  },
+  {
+    "date": "2017-11-01",
+    "reference": "B13549",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-01"
+  },
+  {
+    "date": "2017-11-02",
+    "reference": "abcon",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-02"
+  },
+  {
+    "date": "2017-11-02",
+    "reference": "samiro cash",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-02"
+  },
+  {
+    "date": "2017-11-03",
+    "reference": "tall cash credt",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-03"
+  },
+  {
+    "date": "2017-11-03",
+    "reference": "MPARE",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-03"
+  },
+  {
+    "date": "2017-11-05",
+    "reference": "3831",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-05"
+  },
+  {
+    "date": "2017-11-05",
+    "reference": "3831",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-05"
+  },
+  {
+    "date": "2017-11-06",
+    "reference": "farmbase",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-06"
+  },
+  {
+    "date": "2017-11-06",
+    "reference": "jose-mkononi",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-06"
+  },
+  {
+    "date": "2017-11-07",
+    "reference": "0711",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-07"
+  },
+  {
+    "date": "2017-11-08",
+    "reference": "340181",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-08"
+  },
+  {
+    "date": "2017-11-08",
+    "reference": "55093",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-08"
+  },
+  {
+    "date": "2017-11-10",
+    "reference": "0711",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-10"
+  },
+  {
+    "date": "2017-11-10",
+    "reference": "kitumbini perfume",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-10"
+  },
+  {
+    "date": "2017-11-11",
+    "reference": "1111",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-11"
+  },
+  {
+    "date": "2017-11-11",
+    "reference": "tall11110",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-11"
+  },
+  {
+    "date": "2017-11-14",
+    "reference": "41184",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-14"
+  },
+  {
+    "date": "2017-11-15",
+    "reference": "010118",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-15"
+  },
+  {
+    "date": "2017-11-15",
+    "reference": "56461",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-15"
+  },
+  {
+    "date": "2017-11-16",
+    "reference": "1167",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-16"
+  },
+  {
+    "date": "2017-11-16",
+    "reference": "34047",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-16"
+  },
+  {
+    "date": "2017-11-16",
+    "reference": "340947",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-16"
+  },
+  {
+    "date": "2017-11-23",
+    "reference": "57716",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-23"
+  },
+  {
+    "date": "2017-11-27",
+    "reference": "salama",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-11-27"
+  },
+  {
+    "date": "2017-12-05",
+    "reference": "multivet",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2017-12-05"
+  },
+  {
+    "date": "2018-01-11",
+    "reference": "1707",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-01-11"
+  },
+  {
+    "date": "2018-01-11",
+    "reference": "18118077",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-01-11"
+  },
+  {
+    "date": "2018-01-17",
+    "reference": "1701",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-01-17"
+  },
+  {
+    "date": "2018-01-18",
+    "reference": "1801",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-01-18"
+  },
+  {
+    "date": "2018-01-31",
+    "reference": "3001",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-01-31"
+  },
+  {
+    "date": "2018-02-05",
+    "reference": "1075",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-02-05"
+  },
+  {
+    "date": "2018-02-05",
+    "reference": "0621/015049",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-02-05"
+  },
+  {
+    "date": "2018-02-20",
+    "reference": "22018",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-02-20"
+  },
+  {
+    "date": "2018-03-29",
+    "reference": "2222",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-03-29"
+  },
+  {
+    "date": "2018-04-11",
+    "reference": "ABPL/CS1/001780",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-04-11"
+  },
+  {
+    "date": "2018-05-21",
+    "reference": "002861",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-05-21"
+  },
+  {
+    "date": "2018-05-22",
+    "reference": "2100",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-05-22"
+  },
+  {
+    "date": "2018-05-30",
+    "reference": "MacNaughton",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-05-30"
+  },
+  {
+    "date": "2018-05-30",
+    "reference": "3068",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-05-30"
+  },
+  {
+    "date": "2018-05-31",
+    "reference": "x18 1407",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-05-31"
+  },
+  {
+    "date": "2018-06-01",
+    "reference": "42673",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-01"
+  },
+  {
+    "date": "2018-06-01",
+    "reference": "1898",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-01"
+  },
+  {
+    "date": "2018-06-04",
+    "reference": "2294",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-04"
+  },
+  {
+    "date": "2018-06-05",
+    "reference": "352761",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-05"
+  },
+  {
+    "date": "2018-06-08",
+    "reference": "abl/cs1/003526",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-08"
+  },
+  {
+    "date": "2018-06-11",
+    "reference": "0150",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-11"
+  },
+  {
+    "date": "2018-06-12",
+    "reference": "10844",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-12"
+  },
+  {
+    "date": "2018-06-12",
+    "reference": "355301",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-12"
+  },
+  {
+    "date": "2018-06-18",
+    "reference": "CALWHSIN000000513",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-18"
+  },
+  {
+    "date": "2018-06-25",
+    "reference": "355530",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-06-25"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "38190",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "22384",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "1807195",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "2529",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "38422",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "38190",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-12",
+    "reference": "355026",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-12"
+  },
+  {
+    "date": "2018-07-16",
+    "reference": "39706",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-16"
+  },
+  {
+    "date": "2018-07-19",
+    "reference": "40473",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-19"
+  },
+  {
+    "date": "2018-07-20",
+    "reference": "355256",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-20"
+  },
+  {
+    "date": "2018-07-24",
+    "reference": "41354",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-24"
+  },
+  {
+    "date": "2018-07-25",
+    "reference": "41826",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-25"
+  },
+  {
+    "date": "2018-07-26",
+    "reference": "353334",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-26"
+  },
+  {
+    "date": "2018-07-26",
+    "reference": "vaseline",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-26"
+  },
+  {
+    "date": "2018-07-27",
+    "reference": "42051",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-27"
+  },
+  {
+    "date": "2018-07-27",
+    "reference": "23151",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-27"
+  },
+  {
+    "date": "2018-07-27",
+    "reference": "cathy",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-07-27"
+  },
+  {
+    "date": "2018-08-01",
+    "reference": "43324",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-01"
+  },
+  {
+    "date": "2018-08-02",
+    "reference": "43490",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-02"
+  },
+  {
+    "date": "2018-08-06",
+    "reference": "145562",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-06"
+  },
+  {
+    "date": "2018-08-07",
+    "reference": "44676",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-07"
+  },
+  {
+    "date": "2018-08-07",
+    "reference": "kitumbini",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-07"
+  },
+  {
+    "date": "2018-08-08",
+    "reference": "44903",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-08"
+  },
+  {
+    "date": "2018-08-16",
+    "reference": "46733",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-16"
+  },
+  {
+    "date": "2018-08-16",
+    "reference": "1166047",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-16"
+  },
+  {
+    "date": "2018-08-16",
+    "reference": "mkl0072/18",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-16"
+  },
+  {
+    "date": "2018-08-16",
+    "reference": "371568",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-16"
+  },
+  {
+    "date": "2018-08-16",
+    "reference": "145635",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-16"
+  },
+  {
+    "date": "2018-08-17",
+    "reference": "46988",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-17"
+  },
+  {
+    "date": "2018-08-20",
+    "reference": "145660",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-20"
+  },
+  {
+    "date": "2018-08-21",
+    "reference": "0086",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-21"
+  },
+  {
+    "date": "2018-08-21",
+    "reference": "354243",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-21"
+  },
+  {
+    "date": "2018-08-21",
+    "reference": "csh0646",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-21"
+  },
+  {
+    "date": "2018-08-24",
+    "reference": "multvet",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-24"
+  },
+  {
+    "date": "2018-08-27",
+    "reference": "1050935",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-27"
+  },
+  {
+    "date": "2018-08-28",
+    "reference": "csh0868",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-28"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "49416",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "49417",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "49417",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "CSH0929",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "97787",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-30",
+    "reference": "49596",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-30"
+  },
+  {
+    "date": "2018-08-31",
+    "reference": "cash",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-08-31"
+  },
+  {
+    "date": "2018-09-11",
+    "reference": "52285",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-11"
+  },
+  {
+    "date": "2018-09-12",
+    "reference": "52314",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-12"
+  },
+  {
+    "date": "2018-09-12",
+    "reference": "52310",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-12"
+  },
+  {
+    "date": "2018-09-12",
+    "reference": "farmbase",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-12"
+  },
+  {
+    "date": "2018-09-12",
+    "reference": "farmbase 2",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-12"
+  },
+  {
+    "date": "2018-09-13",
+    "reference": "multvet",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-13"
+  },
+  {
+    "date": "2018-09-15",
+    "reference": "heko cash",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-15"
+  },
+  {
+    "date": "2018-09-18",
+    "reference": "5684",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-09-18"
+  },
+  {
+    "date": "2018-10-02",
+    "reference": "56578",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-02"
+  },
+  {
+    "date": "2018-10-10",
+    "reference": "mifugo",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-10"
+  },
+  {
+    "date": "2018-10-10",
+    "reference": "58639",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-10"
+  },
+  {
+    "date": "2018-10-17",
+    "reference": "farmbase",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-17"
+  },
+  {
+    "date": "2018-10-17",
+    "reference": "rc26106",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-17"
+  },
+  {
+    "date": "2018-10-19",
+    "reference": "356400",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-19"
+  },
+  {
+    "date": "2018-10-22",
+    "reference": "farmbase 2",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-22"
+  },
+  {
+    "date": "2018-10-22",
+    "reference": "farmabase 2",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-22"
+  },
+  {
+    "date": "2018-10-23",
+    "reference": "multvet 1",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-23"
+  },
+  {
+    "date": "2018-10-24",
+    "reference": "mchome",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-24"
+  },
+  {
+    "date": "2018-10-25",
+    "reference": "mifugo 2",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-25"
+  },
+  {
+    "date": "2018-10-27",
+    "reference": "heko 1",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-10-27"
+  },
+  {
+    "date": "2018-11-02",
+    "reference": "mifugo 3",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-02"
+  },
+  {
+    "date": "2018-11-05",
+    "reference": "19",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-05"
+  },
+  {
+    "date": "2018-11-09",
+    "reference": "farmer centres",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-09"
+  },
+  {
+    "date": "2018-11-12",
+    "reference": "47318",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-12"
+  },
+  {
+    "date": "2018-11-14",
+    "reference": "CSU0003975",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-14"
+  },
+  {
+    "date": "2018-11-16",
+    "reference": "METRO",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-16"
+  },
+  {
+    "date": "2018-11-16",
+    "reference": "102293",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-16"
+  },
+  {
+    "date": "2018-11-16",
+    "reference": "67155",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-16"
+  },
+  {
+    "date": "2018-11-23",
+    "reference": "68586",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-11-23"
+  },
+  {
+    "date": "2018-12-24",
+    "reference": "multvet24/12/2018",
+    "id": "1",
+    "type": "receipt",
+    "paid": "true",
+    "due": "2018-12-24"
+  }
+]
+
