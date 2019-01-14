@@ -4,6 +4,7 @@ import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
 import * as Parse from 'node_modules/parse';
 import {StockDatabaseService} from './stock-database.service';
+import {HttpClient} from '@angular/common/http';
 
 Parse.initialize('ssm');
 Parse.serverURL = 'http://localhost:3000/parse';
@@ -12,16 +13,10 @@ Parse.serverURL = 'http://localhost:3000/parse';
   providedIn: 'root'
 })
 export class UpdateLocalDatabaseService implements OnInit {
-  // private stocks: Stock[];
-  // private categories: CategoryI[];
-  // private suppliers: SupplierI[];
-  // private units: UnitsI[];
-  // private receipts: ReceiptI[];
-  // private invoices: ReceiptI[];
-  // stockObservable: Observable<Stock[]>;
 
   constructor(private firestore: AngularFirestore,
               private stockDatabase: StockDatabaseService,
+              private httpClient: HttpClient,
               private indexDb: NgForage) {
   }
 
@@ -145,28 +140,41 @@ export class UpdateLocalDatabaseService implements OnInit {
     });
   }
 
+  // on progress
+  updateReceipts() {
+    const query = new Parse.Query('purchaseRefs');
+    const subscription = query.subscribe();
+    subscription.on('open', () => {
+      console.log('Live server connect on purchaseRefs');
+      this.getAllRefs();
+    });
+    subscription.on('create', value => {
+      this.getAllRefs();
+    });
+    subscription.on('update', value => {
+      this.getAllRefs();
+    });
+    subscription.on('delete', value => {
+      this.getAllRefs();
+    });
+  }
+
+  private getAllRefs() {
+    this.httpClient.get<any>('http://localhost:3000/parse/purchaseRefs', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm'
+      }
+    }).subscribe(value => {
+      this.indexDb.setItem('purchaseRefs', value.results).then(value1 => {
+        console.log('inserted reference ---> ' + value1);
+      }).catch(reason => {
+        console.log(reason);
+      });
+    }, error1 => {
+      console.log(error1);
+    });
+  }
+
   ngOnInit(): void {
   }
 }
-
-// updateReceipts();
-// {
-//   this.firestore.collection<ReceiptI>('purchaseRefs').snapshotChanges().subscribe(value => {
-//     if (value.length > 0) {
-//       this.receipts = [];
-//       value.forEach(value1 => {
-//         this.receipts.push(value1.payload.doc.data());
-//       });
-//       this.indexDb.setItem('purchaseRefs', this.receipts).then(value1 => {
-//         console.log('inserted purchase reference data in the cache is  : ' + value1.length);
-//       }, reason => console.log(reason));
-//     }
-//   }, error1 => {
-//     console.log(error1);
-//   });
-// }
-//
-// ngOnInit();
-// :
-// void {};
-// }

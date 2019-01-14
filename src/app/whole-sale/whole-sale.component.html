@@ -103,7 +103,10 @@
             <!--N\N-->
             <!--</mat-slide-toggle>-->
             <!--<mat-divider></mat-divider>-->
-            <button mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+              <mat-icon>
+                add_shopping_cart
+              </mat-icon>
               Add To Cart
             </button>
 

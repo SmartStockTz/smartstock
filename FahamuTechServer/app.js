@@ -18,11 +18,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 const api = new ParseServer({
   databaseURI: 'mongodb://localhost:27017/ssm',
   appId: 'ssm',
-  // cloud: '/home/fahamu/WebstormProjects/smartstockclient/cloud/main.js',
+  cloud: __dirname + '/cloud/main.js',
   masterKey: 'joshua5715',
   serverURL: 'http://localhost:3000/parse',
   liveQuery: {
-    classNames: ['stocks', 'sales', 'orders', 'purchases', 'categories', 'units', 'suppliers']
+    classNames: ['stocks', 'sales', 'orders','purchaseRefs', 'purchases', 'categories', 'units', 'suppliers']
   }
 });
 

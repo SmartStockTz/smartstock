@@ -1,6 +1,7 @@
 export interface PurchaseI {
   idOld: string;
   objectId?: string;
+  stockId: string;
   date: string;
   due: string;
   reference: string;
@@ -10,4 +11,5 @@ export interface PurchaseI {
   amount: number;
   paid: boolean;
   channel: string;
+  expire: string;
 }

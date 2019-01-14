@@ -10,6 +10,7 @@ import {Observable, of} from 'rxjs';
 import {CartI} from '../model/cart';
 import {SalesDatabaseService} from '../services/sales-database.service';
 import {CashSaleI} from '../model/CashSale';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-sale',
@@ -69,6 +70,7 @@ export class SaleComponent implements OnInit {
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
+              private firestore: AngularFirestore,
               private saleDatabase: SalesDatabaseService) {
   }
 
@@ -178,7 +180,7 @@ export class SaleComponent implements OnInit {
         unit: value.stock.unit,
         channel: 'retail',
         date: stringDate,
-        idOld: '',
+        idOld: this.firestore.createId(),
         idTra: idTra,
         user: this.currentUser.id,
         stockId: value.stock.objectId// for reference only
@@ -195,7 +197,7 @@ export class SaleComponent implements OnInit {
         this.cartDatasourceArray = [];
         this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
         this.updateTotalBill();
-        this.snack.open('Done save the cart', 'Ok', {duration: 3000});
+        this.snack.open('Done save sales', 'Ok', {duration: 3000});
       }
     });
   }

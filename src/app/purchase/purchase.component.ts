@@ -4,17 +4,17 @@ import {UserDatabaseService} from '../services/user-database.service';
 import {NgForage} from 'ngforage';
 import {MatDialog, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {StockDatabaseService} from '../services/stock-database.service';
-import {SalesDatabaseService} from '../services/sales-database.service';
 import {UserI} from '../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Stock} from '../model/stock';
 import {Observable, of} from 'rxjs';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
-import {DialogDeleteComponent} from '../stock/stock.component';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {PurchaseDatabaseService} from '../services/purchase-database.service';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {SsmToolsService} from '../services/ssm-tools.service';
 
 @Component({
   selector: 'app-purchase',
@@ -28,14 +28,15 @@ export class PurchaseComponent implements OnInit {
               private indexDb: NgForage,
               private snack: MatSnackBar,
               private dialog: MatDialog,
+              private firestore: AngularFirestore,
               private stockDatabase: StockDatabaseService,
-              private puchaseDatabase: PurchaseDatabaseService) {
+              private purchaseDatabase: PurchaseDatabaseService) {
   }
 
   private currentUser: UserI;
   private stock: Stock;
   private stockDatasourceArray: Stock[];
-  private purchaseDatasourceArray: PurchaseI[];
+  purchaseDatasourceArray: PurchaseI[];
   isAdmin = false;
   isLogin = false;
   showProgress = false;
@@ -47,8 +48,9 @@ export class PurchaseComponent implements OnInit {
   receipts: Observable<ReceiptI[]>;
   suppliers: Observable<SupplierI[]>;
   units: Observable<UnitsI[]>;
+  selecteStock: Stock;
   purchaseDatasource: MatTableDataSource<PurchaseI>;
-  purchaseColums = ['date', 'due', 'reference', 'quantity', 'amount', 'action'];
+  purchaseColums = ['product', 'date', 'due', 'reference', 'quantity', 'amount', 'action'];
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchPurchaseControl = new FormControl();
@@ -64,7 +66,7 @@ export class PurchaseComponent implements OnInit {
   showRetailProfit = 0;
   wholesaleProfit = 0;
   allPurchaseDatasourceArray: PurchaseI[];
-  allPurchaseDatasource: MatTableDataSource<PurchaseI[]>;
+  allPurchaseDatasource: MatTableDataSource<PurchaseI>;
 
   private static getSqlDate(date: any): string {
     try {
@@ -121,7 +123,7 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  addNewPurchase() {
+  addPurchaseToCart() {
     if (this.productNameControlInput.value === null || this.productNameControlInput.value === '') {
       this.snack.open('Please enter a product name', 'Ok', {duration: 3000});
     } else if (this.purchaseDateControlInput.value === null || this.purchaseDateControlInput.value === '') {
@@ -142,36 +144,83 @@ export class PurchaseComponent implements OnInit {
       this.snack.open('Please enter purchase price and must be positive', 'Ok', {duration: 3000});
     } else if (this.expireDateControlInput.value === null || this.expireDateControlInput.value === '') {
       this.snack.open('Please enter expire date of the product', 'Ok', {duration: 3000});
+    } else if (this.selecteStock === null || this.selecteStock === undefined) {
+      this.snack.open('Make sure you choose a product name from dropdown', 'Ok', {duration: 3000});
     } else {
-
+      let ch: string;
+      let ref: string;
+      let pd: boolean;
+      if (this.creditPurchaseButton.value) {
+        ch = 'credit';
+        ref = this.invoiceNumberControlInput.value;
+        pd = false;
+      } else {
+        ch = 'cash';
+        ref = this.receipNumberControlInput.value;
+        pd = true;
+      }
+      this.purchaseDatasourceArray.push({
+        product: this.productNameControlInput.value,
+        idOld: this.firestore.createId(),
+        quantity: this.quantityControlInput.value,
+        channel: ch,
+        date: SsmToolsService.getDateInString(this.purchaseDateControlInput.value),
+        due: SsmToolsService.getDateInString(this.dueDateControlInput.value),
+        purchase: this.purchasePriceControlInput.value,
+        reference: ref,
+        paid: pd,
+        stockId: this.selecteStock.objectId,
+        expire: SsmToolsService.getDateInString(this.expireDateControlInput.value),
+        amount: <number>this.quantityControlInput.value * <number>this.purchasePriceControlInput.value
+      });
+      this.purchaseDatasource = new MatTableDataSource<PurchaseI>(this.purchaseDatasourceArray);
+      //  this.purchaseDatabase.addAllPurchase()
+      this.updateTotalPrice();
+      this.clearInputs();
     }
   }
 
+  submitPurchase() {
+    if (this.purchaseDatasourceArray.length === 0) {
+      this.snack.open('Please add something in cart to submit', 'Ok', {duration: 3000});
+    } else {
+      this.showProgressBar();
+      this.purchaseDatabase.addAllPurchase(this.purchaseDatasourceArray, value => {
+        if (value === null) {
+          this.snack.open('Failed to save purchase, try again or check if you have internet connection',
+            'Ok', {duration: 3000});
+          this.hideProgressBar();
+        } else if (value === 'BE') {
+          this.snack.open('You cant send more than 50 items at once, reduce your cart', 'Ok', {duration: 3000});
+          this.hideProgressBar();
+        } else {
+          this.snack.open('Purchase saved successfully', 'Ok', {duration: 3000});
+          this.purchaseDatasourceArray = [];
+          this.purchaseDatasource = new MatTableDataSource<PurchaseI>(this.purchaseDatasourceArray);
+          this.hideProgressBar();
+        }
+      });
+    }
+  }
+
+  updateTotalPrice() {
+    this.totalPurchase = 0;
+    this.purchaseDatasourceArray.forEach(value => {
+      this.totalPurchase += <number>value.amount;
+    });
+  }
+
   private clearInputs() {
-    this.productNameControlInput.setValue('');
-    this.receipNumberControlInput.setValue('');
-    this.supplierControlInput.setValue('');
-    this.unitsControlInput.setValue('');
+    this.productNameControlInput.setValue(null);
+    // this.receipNumberControlInput.setValue(null);
+    // this.invoiceNumberControlInput.setValue(null);
+    // this.supplierControlInput.setValue(null);
+    this.creditPurchaseButton.setValue(false);
     this.quantityControlInput.setValue(null);
-    // this.wholesaleQuantityControlInput.setValue(null);
-    // this.purchasePriceControlInput.setValue(null);
-    // this.retailPriceControlInput.setValue(null);
-    // this.retailWholesalePriceControlInput.setValue(null);
-    // this.wholesalePriceControlInput.setValue(null);
-    // this.nhifPriceControlInput.setValue(null);
-    // this.reorderControlInput.setValue(null);
-    // this.shelfControlInput.setValue('');
-    // this.expireDateControlInput.setValue(null);
-    // this.showRetailProfit = 0;
-    // this.wholesaleProfit = 0;
-    // this.quantityControlInput.setValue(0);
-    // this.discountControlInput.setValue(0);
-    // this.retailWholesaleRadioInput.setValue(false);
-    // this.nhifRadioInput.setValue(false);
-    // this.receiveControlInput.setValue(0);
-    //
-    // this.totalPrice = 0;
-    // this.priceUnit = 0;
+    this.purchasePriceControlInput.setValue(null);
+    this.expireDateControlInput.setValue(null);
+    this.showCreditPurchase = this.creditPurchaseButton.value;
+    this.selecteStock = null;
   }
 
   private showProgressBar() {
@@ -185,12 +234,17 @@ export class PurchaseComponent implements OnInit {
   private initializeView() {
     // initial value
     this.stock = null;
+    this.purchaseDatasourceArray = [];
+    this.allPurchaseDatasource = new MatTableDataSource([]);
+    this.allPurchaseDatasource.paginator = this.paginator;
     this.creditPurchaseButton.setValue(false);
     this.creditPurchaseButton.valueChanges.subscribe(value => {
       this.showCreditPurchase = <boolean>value;
     });
     this.productNameControlInput.valueChanges.subscribe(value => {
-      this.getProduct(value);
+      if (value != null) {
+        this.getProduct(value);
+      }
     }, error1 => console.log(error1));
     this.receipNumberControlInput.valueChanges.subscribe(value => {
       this.getReceipts(value);
@@ -212,20 +266,15 @@ export class PurchaseComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    this.searchPurchaseControl.valueChanges.subscribe(value => {
+      this.getPurchasesFromCache().then(value1 => {
+        this.allPurchaseDatasource.filter = value.toString().toLowerCase();
+      }).catch(reason => console.log(reason));
+    });
+    // get all purchases new socket established
+    this.purchaseDatabase.getAllPurchase(null);
+    this.getPurchasesFromCache().catch(reason => console.log(reason));
   }
-
-  // private getStocksFromCache() {
-  //   this.stockDatabase.getAllStock(stocks1 => {
-  //     this.stockDatasourceArray = stocks1;
-  //     this.stockDatasource = new MatTableDataSource(stocks1);
-  //     this.stockDatasource.paginator = this.paginator;
-  //     let sTotal = 0;
-  //     stocks1.forEach(value => {
-  //       sTotal += <number>value.purchase;
-  //     });
-  //     this.totalPurchase = sTotal;
-  //   });
-  // }
 
   private getSuppliers(supplier: string) {
     this.indexDb.getItem<SupplierI[]>('suppliers').then(value => {
@@ -279,7 +328,16 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  editStock(element: Stock) {
+  private async getPurchasesFromCache() {
+    await this.indexDb.getItem<PurchaseI[]>('purchases').then(value => {
+      this.allPurchaseDatasourceArray = [];
+      this.allPurchaseDatasourceArray = value;
+      this.allPurchaseDatasource = new MatTableDataSource<PurchaseI>(this.allPurchaseDatasourceArray);
+      this.allPurchaseDatasource.paginator = this.paginator;
+    });
+  }
+
+  private editStock(element: Stock) {
     this.productNameControlInput.setValue(element.product);
     this.receipNumberControlInput.setValue(element.category);
     this.supplierControlInput.setValue(element.supplier);
@@ -299,28 +357,31 @@ export class PurchaseComponent implements OnInit {
     this.stock = element;
   }
 
-  deletePurchase(element: Stock) {
-    const matDialogRef = this.dialog.open(DialogDeleteComponent, {width: '350', data: element});
-    matDialogRef.afterClosed().subscribe(value => {
-      if (value === 'no') {
-        this.snack.open('Deletion is cancelled', 'Ok', {duration: 3000});
-      } else {
-        this.showProgressBar();
-        this.stockDatabase.deleteStock(element, value1 => {
-          if (value1 === null) {
-            this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
-            this.hideProgressBar();
-          } else {
-            this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
-            this.hideProgressBar();
-            // update tables
-          }
-        });
-      }
-    });
+  removePurchaseFromCart(element: PurchaseI) {
+    this.purchaseDatasourceArray = this.purchaseDatasourceArray.filter(value => value.idOld !== element.idOld);
+    this.purchaseDatasource = new MatTableDataSource(this.purchaseDatasourceArray);
+    this.updateTotalPrice();
+    // const matDialogRef = this.dialog.open(DialogDeleteComponent, {width: '350', data: element});
+    // matDialogRef.afterClosed().subscribe(value => {
+    //   if (value === 'no') {
+    //     this.snack.open('Deletion is cancelled', 'Ok', {duration: 3000});
+    //   } else {
+    //     this.showProgressBar();
+    //     this.stockDatabase.deleteStock(element, value1 => {
+    //       if (value1 === null) {
+    //         this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
+    //         this.hideProgressBar();
+    //       } else {
+    //         this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
+    //         this.hideProgressBar();
+    //         // update tables
+    //       }
+    //     });
+    //   }
+    // });
   }
 
-  updateSelectedStock(purchaseP: Stock) {
-
+  updateSelectedPurchase(stock: Stock) {
+    this.selecteStock = stock;
   }
 }

@@ -4,6 +4,11 @@ import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {HttpClient} from '@angular/common/http';
 import {BatchI} from '../model/batchI';
+import * as Parse from 'node_modules/parse';
+import {NgForage} from 'ngforage';
+
+Parse.initialize('ssm');
+Parse.serverURL = 'http://localhost:3000/parse';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +18,7 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   serverUrl = 'http://localhost:3000/parse/classes';
   serverUrlBatch = 'http://localhost:3000/parse/batch';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private indexDb: NgForage) {
   }
 
   addAllInvoices(invoices: ReceiptI[], callback: (value: any) => void) {
@@ -29,7 +34,9 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
       });
     });
     if (purchases.length <= 50) {
-      this.httpClient.post(this.serverUrlBatch, bat, {
+      this.httpClient.post(this.serverUrlBatch, {
+        'requests': bat
+      }, {
         headers: {
           'X-Parse-Application-Id': 'ssm',
           'Content-Type': 'application/json'
@@ -81,18 +88,38 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   getAllPurchase(callback: (purchases: PurchaseI[]) => void) {
+    const query = new Parse.Query('purchases');
+    const subscription = query.subscribe();
+    subscription.on('open', () => {
+      console.log('socket connected on purchases');
+      this.updateCachePurchase();
+    });
+    subscription.on('update', value => {
+      this.updateCachePurchase();
+    });
+    subscription.on('delete', value => {
+      this.updateCachePurchase();
+    });
+    subscription.on('create', value => {
+      this.updateCachePurchase();
+    });
+  }
+
+  private updateCachePurchase() {
     this.httpClient.get<any>(this.serverUrl + '/purchases', {
       headers: {
         'X-Parse-Application-Id': 'ssm'
       },
       params: {
-        'limit': '1000000000'
+        'limit': '1000000'
       }
     }).subscribe(value => {
-      callback(value.results);
+      this.indexDb.setItem<PurchaseI[]>('purchases', value.results).then(value1 => {
+        console.log('updated purchases is ---> ' + value1.length);
+      }).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
-      callback(null);
+      // callback(null);
     });
   }
 
