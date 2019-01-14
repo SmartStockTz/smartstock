@@ -103,7 +103,7 @@ export class StockDatabaseService implements StockDataSource {
         'idOld': stock.idOld,
         'retail_stockcol': stock.retail_stockcol,
         'nhifPrice': stock.nhifPrice,
-        'wholesalePrice': stock.wholesalePrice.toString()
+        'wholesalePrice': stock.wholesalePrice
       }, {
         headers: {
           'X-Parse-Application-id': 'ssm',
