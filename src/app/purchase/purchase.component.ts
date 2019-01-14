@@ -14,6 +14,7 @@ import {UnitsI} from '../model/UnitsI';
 import {DialogDeleteComponent} from '../stock/stock.component';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
+import {PurchaseDatabaseService} from '../services/purchase-database.service';
 
 @Component({
   selector: 'app-purchase',
@@ -28,7 +29,7 @@ export class PurchaseComponent implements OnInit {
               private snack: MatSnackBar,
               private dialog: MatDialog,
               private stockDatabase: StockDatabaseService,
-              private saleDatabase: SalesDatabaseService) {
+              private puchaseDatabase: PurchaseDatabaseService) {
   }
 
   private currentUser: UserI;
@@ -47,10 +48,10 @@ export class PurchaseComponent implements OnInit {
   suppliers: Observable<SupplierI[]>;
   units: Observable<UnitsI[]>;
   purchaseDatasource: MatTableDataSource<PurchaseI>;
-  purchaseColums = ['date', 'due', 'reference', 'quantity', 'amount', 'expire', 'action'];
+  purchaseColums = ['date', 'due', 'reference', 'quantity', 'amount', 'action'];
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  searchStockControl = new FormControl();
+  searchPurchaseControl = new FormControl();
   purchasePriceControlInput = new FormControl();
   receipNumberControlInput = new FormControl();
   supplierControlInput = new FormControl();
@@ -60,6 +61,10 @@ export class PurchaseComponent implements OnInit {
   purchaseDateControlInput = new FormControl();
   dueDateControlInput = new FormControl();
   creditPurchaseButton = new FormControl();
+  showRetailProfit = 0;
+  wholesaleProfit = 0;
+  allPurchaseDatasourceArray: PurchaseI[];
+  allPurchaseDatasource: MatTableDataSource<PurchaseI[]>;
 
   private static getSqlDate(date: any): string {
     try {
@@ -117,53 +122,28 @@ export class PurchaseComponent implements OnInit {
   }
 
   addNewPurchase() {
-    if (this.productNameControlInput.value === null) {
+    if (this.productNameControlInput.value === null || this.productNameControlInput.value === '') {
       this.snack.open('Please enter a product name', 'Ok', {duration: 3000});
-    } else if (this.purchaseDateControlInput.value === null) {
+    } else if (this.purchaseDateControlInput.value === null || this.purchaseDateControlInput.value === '') {
       this.snack.open('Please enter purchase date', 'Ok', {duration: 3000});
-    } else if (this.dueDateControlInput.value === null) {
+    } else if (this.dueDateControlInput.value === null || this.dueDateControlInput.value === '') {
       this.snack.open('Please enter due date', 'Ok', {duration: 3000});
-    } else if (this.supplierControlInput.value === null) {
+    } else if ((this.invoiceNumberControlInput.value === null || this.invoiceNumberControlInput.value === '')
+      && (this.receipNumberControlInput.value === null || this.receipNumberControlInput.value === '')) {
+      this.snack.open('Please enter reference number', 'Ok', {duration: 3000});
+    } else if (this.creditPurchaseButton.value &&
+      (this.invoiceNumberControlInput.value === null || this.invoiceNumberControlInput.value === '')) {
+      this.snack.open('Please enter invoice number', 'Ok', {duration: 3000});
+    } else if (this.supplierControlInput.value === null || this.supplierControlInput.value === '') {
       this.snack.open('Please enter supplier', 'Ok', {duration: 3000});
     } else if (<number>this.quantityControlInput.value === null || <number>this.quantityControlInput.value < 0) {
       this.snack.open('Please enter quantity and must be positive', 'Ok', {duration: 3000});
     } else if (<number>this.purchasePriceControlInput.value === null || <number>this.purchasePriceControlInput.value < 0) {
       this.snack.open('Please enter purchase price and must be positive', 'Ok', {duration: 3000});
-    } else if (this.expireDateControlInput.value === null) {
+    } else if (this.expireDateControlInput.value === null || this.expireDateControlInput.value === '') {
       this.snack.open('Please enter expire date of the product', 'Ok', {duration: 3000});
     } else {
-      this.showProgressBar();
-      // this.stockDatabase.addStock({
-      //   product: this.productNameControlInput.value,
-      //   id: idV,
-      //   wholesalePrice: this.wholesalePriceControlInput.value,
-      //   unit: this.unitsControlInput.value,
-      //   wholesaleQuantity: this.wholesaleQuantityControlInput.value,
-      //   retailPrice: this.retailPriceControlInput.value,
-      //   category: this.receipNumberControlInput.value,
-      //   shelf: this.shelfControlInput.value,
-      //   retailWholesalePrice: this.retailWholesalePriceControlInput.value,
-      //   nhifPrice: this.nhifPriceControlInput.value,
-      //   profit: (<number>this.retailPriceControlInput.value - <number>this.purchasePriceControlInput.value),
-      //   purchase: this.purchasePriceControlInput.value,
-      //   quantity: this.quantityControlInput.value,
-      //   reorder: this.reorderControlInput.value,
-      //   supplier: this.supplierControlInput.value,
-      //   q_status: '',
-      //   times: (<number>this.retailPriceControlInput.value / <number>this.purchasePriceControlInput.value),
-      //   expire: StockComponent.getSqlDate(<Date>this.expireDateControlInput.value),
-      //   retail_stockcol: ''
-      // }, value => {
-      //   if (value === null) {
-      //     this.snack.open('Stock is not added, try again or contact support', 'Ok');
-      //     this.hideProgressBar();
-      //   } else {
-      //     this.hideProgressBar();
-      //     this.clearInputs();
-      //     this.stock = null;
-      //     console.log(value);
-      //   }
-      // });
+
     }
   }
 
@@ -319,7 +299,7 @@ export class PurchaseComponent implements OnInit {
     this.stock = element;
   }
 
-  deleteStock(element: Stock) {
+  deletePurchase(element: Stock) {
     const matDialogRef = this.dialog.open(DialogDeleteComponent, {width: '350', data: element});
     matDialogRef.afterClosed().subscribe(value => {
       if (value === 'no') {

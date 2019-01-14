@@ -1,12 +1,13 @@
 export interface PurchaseI {
-  id: string;
+  idOld: string;
+  objectId?: string;
   date: string;
   due: string;
-  receipt: string;
+  reference: string;
   product: string;
   quantity: number;
   purchase: number;
   amount: number;
-  paid: true;
+  paid: boolean;
   channel: string;
 }

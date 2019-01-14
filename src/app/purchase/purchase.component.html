@@ -128,15 +128,6 @@
               Purchase?
             </mat-slide-toggle>
 
-            <!--<mat-form-field class="my-input">-->
-            <!--<input type="text" placeholder="Unit" matInput [formControl]="unitsControlInput"-->
-            <!--[matAutocomplete]="autoUnits">-->
-            <!--<mat-autocomplete #autoUnits="matAutocomplete">-->
-            <!--<mat-option *ngFor="let unit of units | async" [value]="unit.name">-->
-            <!--{{unit.name}}-->
-            <!--</mat-option>-->
-            <!--</mat-autocomplete>-->
-            <!--</mat-form-field>-->
             <mat-form-field class="my-input">
               <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>
             </mat-form-field>
@@ -151,33 +142,14 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-
-            <!--<mat-radio-group class="my-input">-->
-            <!--<mat-radio-button [value]="true">Normal</mat-radio-button>-->
-            <!--<mat-radio-button>R.Wholesale</mat-radio-button>-->
-            <!--<mat-radio-button>NHIF</mat-radio-button>-->
-            <!--</mat-radio-group>-->
-            <!--<mat-slide-toggle class="my-input space" [formControl]="retailWholesaleRadioInput">-->
-            <!--R.Wholesale-->
-            <!--</mat-slide-toggle>-->
-            <!--<mat-divider></mat-divider>-->
-            <!--<mat-slide-toggle class="my-input space" [formControl]="nhifRadioInput">-->
-            <!--NHIF-->
-            <!--</mat-slide-toggle>-->
-            <!--<mat-divider></mat-divider>-->
-            <!--<mat-slide-toggle class="space my-input">-->
-            <!--N\N-->
-            <!--</mat-slide-toggle>-->
-            <!--<mat-divider></mat-divider>-->
-
             <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
                     (click)="addNewPurchase()">
-              Purchase
+              <mat-icon>
+                add_shopping_cart
+              </mat-icon>
+              Add To Cart
             </button>
 
-            <!--<mat-form-field class="my-input">-->
-            <!--<input matInput [formControl]="receiveControlInput" placeholder="Receive" type="number">-->
-            <!--</mat-form-field>-->
             <mat-card-subtitle>Retail Profit ( TZS )</mat-card-subtitle>
             <mat-card-title>{{showRetailProfit}}</mat-card-title>
 
@@ -189,9 +161,10 @@
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
           <mat-tab-group color="warn" backgroundColor="primary">
-            <mat-tab label="Purchase Cart">
+
+            <mat-tab label="Cart">
               <div>
-                <table mat-table [dataSource]="stockDatasource" class=" mat-elevation-z8">
+                <table mat-table [dataSource]="purchaseDatasource" class=" mat-elevation-z8">
                   <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef>Date</th>
                     <td mat-cell *matCellDef="let element">{{element.date}}</td>
@@ -217,23 +190,23 @@
                     <td mat-cell *matCellDef="let element">{{element.amount}}</td>
                     <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase| currency:'TZS':'code'}}</b></td>
                   </ng-container>
-                  <ng-container matColumnDef="expire">
-                    <th mat-header-cell *matHeaderCellDef>Expire</th>
-                    <td mat-cell *matCellDef="let element">{{element.expire}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
+                  <!--<ng-container matColumnDef="expire">-->
+                  <!--<th mat-header-cell *matHeaderCellDef>Expire</th>-->
+                  <!--<td mat-cell *matCellDef="let element">{{element.expire}}</td>-->
+                  <!--<td mat-footer-cell *matFooterCellDef></td>-->
+                  <!--</ng-container>-->
 
                   <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef>Action</th>
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
                         <!--<div class="col-6">-->
-                          <!--<button mat-icon-button (click)="editStock(element)">-->
-                            <!--<mat-icon color="primary">edit</mat-icon>-->
-                          <!--</button>-->
+                        <!--<button mat-icon-button (click)="editStock(element)">-->
+                        <!--<mat-icon color="primary">edit</mat-icon>-->
+                        <!--</button>-->
                         <!--</div>-->
                         <div class="col-12">
-                          <button mat-icon-button (click)="deleteStock(element)">
+                          <button mat-icon-button (click)="deletePurchase(element)">
                             <mat-icon color="primary">delete</mat-icon>
                           </button>
                         </div>
@@ -248,27 +221,27 @@
 
                 </table>
               </div>
-
             </mat-tab>
-            <mat-tab label="All Stock">
+
+            <mat-tab label="All Purchases">
               <mat-form-field class="my-input" style="margin-top: 8px">
-                <input matInput placeholder="Search" type="text" [formControl]="searchStockControl"/>
+                <input matInput placeholder="Search" type="text" [formControl]="searchPurchaseControl"/>
               </mat-form-field>
               <div>
-                <table mat-table [dataSource]="stockDatasource" class=" mat-elevation-z8">
-                  <ng-container matColumnDef="product">
-                    <th mat-header-cell *matHeaderCellDef>Product</th>
-                    <td mat-cell *matCellDef="let element">{{element.product}}</td>
+                <table mat-table [dataSource]="allPurchaseDatasource" class=" mat-elevation-z8">
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
                     <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
                   </ng-container>
-                  <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef>Category</th>
-                    <td mat-cell *matCellDef="let element">{{element.category}}</td>
+                  <ng-container matColumnDef="due">
+                    <th mat-header-cell *matHeaderCellDef>Due</th>
+                    <td mat-cell *matCellDef="let element">{{element.due}}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
-                  <ng-container matColumnDef="supplier">
-                    <th mat-header-cell *matHeaderCellDef>Supplier</th>
-                    <td mat-cell *matCellDef="let element">{{element.supplier}}</td>
+                  <ng-container matColumnDef="reference">
+                    <th mat-header-cell *matHeaderCellDef>Reference</th>
+                    <td mat-cell *matCellDef="let element">{{element.reference}}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
                   <ng-container matColumnDef="quantity">
@@ -276,53 +249,28 @@
                     <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
-                  <ng-container matColumnDef="wholesaleQuantity">
-                    <th mat-header-cell *matHeaderCellDef>W.Quantity</th>
-                    <td mat-cell *matCellDef="let element">{{element.wholesaleQuantity}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase| currency:'TZS':'code'}}</b></td>
                   </ng-container>
-                  <ng-container matColumnDef="purchase">
-                    <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
-                    <td mat-cell *matCellDef="let element">{{element.purchase}}</td>
-                    <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase | currency:'TZS':'code'}}</b></td>
-                  </ng-container>
-                  <ng-container matColumnDef="retailPrice">
-                    <th mat-header-cell *matHeaderCellDef>R.Price (TZS)</th>
-                    <td mat-cell *matCellDef="let element">{{element.retailPrice}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-                  <ng-container matColumnDef="retailWholesalePrice">
-                    <th mat-header-cell *matHeaderCellDef>R.W.Price (TZS)</th>
-                    <td mat-cell *matCellDef="let element">{{element.retailWholesalePrice}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-                  <ng-container matColumnDef="wholesalePrice">
-                    <th mat-header-cell *matHeaderCellDef>W.Price (TZS)</th>
-                    <td mat-cell *matCellDef="let element">{{element.wholesalePrice}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-                  <ng-container matColumnDef="nhifPrice">
-                    <th mat-header-cell *matHeaderCellDef>NHIF Price (TZS)</th>
-                    <td mat-cell *matCellDef="let element">{{element.nhifPrice}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-                  <ng-container matColumnDef="expire">
-                    <th mat-header-cell *matHeaderCellDef>Expire</th>
-                    <td mat-cell *matCellDef="let element">{{element.expire}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
+                  <!--<ng-container matColumnDef="expire">-->
+                  <!--<th mat-header-cell *matHeaderCellDef>Expire</th>-->
+                  <!--<td mat-cell *matCellDef="let element">{{element.expire}}</td>-->
+                  <!--<td mat-footer-cell *matFooterCellDef></td>-->
+                  <!--</ng-container>-->
 
                   <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef>Action</th>
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
-                        <div class="col-6">
-                          <button mat-icon-button (click)="editStock(element)">
-                            <mat-icon color="primary">edit</mat-icon>
-                          </button>
-                        </div>
-                        <div class="col-6">
-                          <button mat-icon-button (click)="deleteStock(element)">
+                        <!--<div class="col-6">-->
+                        <!--<button mat-icon-button (click)="editStock(element)">-->
+                        <!--<mat-icon color="primary">edit</mat-icon>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <div class="col-12">
+                          <button mat-icon-button (click)="deletePurchase(element)">
                             <mat-icon color="primary">delete</mat-icon>
                           </button>
                         </div>
@@ -331,16 +279,14 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
 
-                  <tr mat-header-row *matHeaderRowDef="stockColums"></tr>
-                  <tr mat-row *matRowDef="let row; columns: stockColums;"></tr>
-                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="stockColums"></tr>
-
+                  <tr mat-header-row *matHeaderRowDef="purchaseColums"></tr>
+                  <tr mat-row *matRowDef="let row; columns: purchaseColums;"></tr>
+                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="purchaseColums"></tr>
                 </table>
-
-                <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
-
+                <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
               </div>
             </mat-tab>
+
           </mat-tab-group>
         </div>
 
