@@ -14,7 +14,7 @@ import {UnitsI} from '../model/UnitsI';
 })
 export class StockDatabaseService implements StockDataSource {
 
-  serverUrl = 'http://lb.fahamutech.com/parse/classes';
+  serverUrl = 'http://lb.fahamutech.com:81/parse/classes';
 
   constructor(private firestore: AngularFirestore,
               private httpClient: HttpClient,
@@ -80,7 +80,7 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addStock(stock: Stock, callback?: (value: any) => void) {
-    if (stock.idOld !== 'newS') {
+    if (false) {
       this.updateStock(stock, callback);
     } else {
       stock.idOld = this.firestore.createId();

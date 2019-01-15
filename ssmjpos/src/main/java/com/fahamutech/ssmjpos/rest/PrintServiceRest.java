@@ -29,11 +29,11 @@ public class PrintServiceRest {
         String footer =
                 "\n" +
                         "***********************************\n" +
-                        "System Design by : Joshua\n" +
-                        "Website : ssm.fahamutech.com\n" +
-                        "Email : mama27j@gmail.com\n" +
-                        "Number : +255764943055\n\n" +
-                        "***************************************\n\n\n\n\n\n\n";
+                        "Kusoma oda piga \n" +
+                        "1. 0684972687\n" +
+                        "2. 0714702887\n" +
+                        "3. 0768316283\n\n" +
+                        "***************************************\n\n\n\n\n\n";
         String concat = header.concat(footer);
         myPrinterService.printString("TM-T20II", concat);
         // cut that paper!

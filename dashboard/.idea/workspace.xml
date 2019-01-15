@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d97bfd63-5a47-4f27-8c0d-c3d9ddb20854" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Features-Boxed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Footer-Basic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Header-Dark.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Map-Clean.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Team-Boxed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/Testimonials.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/css/smoothproducts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/cash_purchase.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/cash_sale.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/category.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/credit_purchase.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/invoice.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/receipts.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/retail_stock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/retail_stockold.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/suppliers.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/datadumps/units.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/Simple-Line-Icons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/Simple-Line-Icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/Simple-Line-Icons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/Simple-Line-Icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/Simple-Line-Icons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/ionicons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/ionicons.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/ionicons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/ionicons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/ionicons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/fonts/simple-line-icons.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/avatars/avatar1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/avatars/avatar2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/avatars/avatar3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/calculate.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/calculate.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/cart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/databaseIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/developerLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/googleSign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/googleSign.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/googleSignUp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/lbLogo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/manicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/mountain_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/scenery/image1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/scenery/image3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/scenery/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/scenery/image5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/scenery/image6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/ssmbg.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/ssmlogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/img/tech/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/js/smoothproducts.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/assets/js/theme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/polyfills.d6c80b389a3c780d347c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/runtime.ec2944dd8b20ec099bf3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FahamuTechServer/public/styles.7ed6dd5b0079dc82c835.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/database/parse-server/ParseBackend.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/database/parse-server/ParseBackend.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/purchase-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/purchase-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/sales-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/sales-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/stock-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/update-local-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/update-local-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/datadumps/invoice.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/datadumps/receipts.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/datadumps/retail_stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../src/assets/datadumps/retail_stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/avatars/avatar1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/avatars/avatar2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/avatars/avatar3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/cart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/databaseIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/googleSign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/googleSignUp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/manicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/mountain_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/scenery/image1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/scenery/image3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/scenery/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/scenery/image5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/ssmbg.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/../src/assets/img/ssmbg.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/img/tech/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ssmjpos/src/main/java/com/fahamutech/ssmjpos/rest/PrintServiceRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ssmjpos/src/main/java/com/fahamutech/ssmjpos/rest/PrintServiceRest.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="31" column="6" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+              <folding>
+                <element signature="e#562#691#0" />
+                <element signature="e#715#871#0" />
+                <element signature="e#725#788#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/www">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>var</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>const</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/bin/www" />
+        <option value="$PROJECT_DIR$/app.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="464" />
+    <option name="y" value="114" />
+    <option name="width" value="1436" />
+    <option name="height" value="778" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="dashboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dashboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.15.0" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d97bfd63-5a47-4f27-8c0d-c3d9ddb20854" name="Default Changelist" comment="" />
+      <created>1547538526024</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1547538526024</updated>
+      <workItem from="1547538534790" duration="21000" />
+      <workItem from="1547538588012" duration="450000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="471000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="47" y="25" width="1873" height="1055" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1387689" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="31" column="6" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+          <folding>
+            <element signature="e#562#691#0" />
+            <element signature="e#715#871#0" />
+            <element signature="e#725#788#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

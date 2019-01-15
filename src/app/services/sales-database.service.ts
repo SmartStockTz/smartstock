@@ -10,13 +10,14 @@ import * as Parse from 'node_modules/parse';
 import {BatchI} from '../model/batchI';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://lb.fahamutech.com/parse';
+Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalesDatabaseService implements SalesDatasource {
-  private serverUrl = 'http://lb.fahamutech.com/parse/classes';
+  private serverUrl = 'http://lb.fahamutech.com:81/parse/classes';
+  private serverUrlBatch = 'http://lb.fahamutech.com:81/parse/batch';
   private query = new Parse.Query('sales');
   private orderQuery = new Parse.Query('orders');
   private ordersSubscription = this.orderQuery.subscribe();
@@ -50,7 +51,7 @@ export class SalesDatabaseService implements SalesDatasource {
         path: '/parse/classes/sales'
       });
     });
-    this.httpClient.post<BatchI[]>('http://lb.fahamutech.com/parse/batch', {
+    this.httpClient.post<BatchI[]>(this.serverUrlBatch, {
         'requests': batchs
       },
       {
@@ -76,7 +77,7 @@ export class SalesDatabaseService implements SalesDatasource {
           path: '/parse/classes/sales'
         });
       });
-      this.httpClient.post<BatchI[]>('http://lb.fahamutech.com/parse/batch', {
+      this.httpClient.post<BatchI[]>(this.serverUrlBatch, {
           'requests': batchs
         },
         {
