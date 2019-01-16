@@ -4,9 +4,12 @@ import {UserI} from '../model/UserI';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {NgForage} from 'ngforage';
-import {ParseBackend} from '../database/ParseBackend';
+import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
+import * as Parse from 'node_modules/parse';
 
+Parse.initialize('ssm');
+Parse.serverURL = serverUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,15 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
               private fireAuth: AngularFireAuth,
               private indexD: NgForage) {
     super();
+  }
+
+  static currentUser(callback: (value: any) => void) {
+    Parse.User.currentAsync().then(value => {
+      callback(value);
+    }).catch(e => {
+      console.log(e);
+      callback(null);
+    });
   }
 
   createUser(user: UserI, callback?: (value: any) => void) {
@@ -57,7 +69,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
-  login(user: UserI, callback?: (value: UserI) => void) {
+  login(user: { username: string, password: string }, callback?: (value: UserI) => void) {
     this.httpClient.get<UserI>(this.serverUrl + '/login', {
       params: {
         'username': user.username + '@ssm.com',

@@ -5,8 +5,6 @@ import {UserDatabaseService} from '../services/user-database.service';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
-import {UserI} from '../model/UserI';
-import {Stock} from '../model/stock';
 
 @Component({
   selector: 'app-login',
@@ -27,18 +25,26 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.indexDb.getItem<UserI>('user').then(value => {
+    UserDatabaseService.currentUser(value => {
       if (value === null) {
-        this.isLogin = false;
+        console.log('user is null');
       } else {
-        this.showMainUi(value.role);
+        console.log('user is ---> ' + value);
       }
     });
+
+    // this.indexDb.getItem<UserI>('user').then(value => {
+    //   if (value === null) {
+    //     this.isLogin = false;
+    //   } else {
+    //     this.showMainUi(value.role);
+    //   }
+    // });
   }
 
   goHome() {
     console.log('back is clicked');
-    this.routes.navigateByUrl('/').catch(reason => {
+    this.routes.navigateByUrl('').catch(reason => {
       console.log(reason.toString());
     });
   }
@@ -53,32 +59,22 @@ export class LoginComponent implements OnInit {
       this.userDatabase.login({
         username: this.usernameControlInput.value,
         password: this.passwordControlInput.value,
-      }).then(value => {
-        // get user role
-        this.indexDb.getItem<UserI>('user').then(value1 => {
-
-          if (value1 === null) {
-            this.showProgress = false;
-            this.snack.open('User role is not available', 'Ok');
-          } else {
-            if (value1.role === 'admin') {
-              this.stopProgressAndCleanForm();
-              this.showMainUi('admin');
-            } else {
-              this.stopProgressAndCleanForm();
-              this.showMainUi('cashier');
-            }
-          }
-        }).catch(reason => {
+      }, value => {
+        if (value === null) {
           this.showProgress = false;
-          this.snack.open(reason, 'Ok');
-        });
-      }).catch(reason => {
-        this.showProgress = false;
-        this.snack.open(reason, 'Ok');
+          this.snack.open('Username of password is wrong or check your' +
+            ' internet connection, enter the details correctly and try again', 'Ok');
+        } else {
+          if (value.role === 'admin') {
+            this.stopProgressAndCleanForm();
+            this.showMainUi('admin');
+          } else {
+            this.stopProgressAndCleanForm();
+            this.showMainUi('cashier');
+          }
+        }
       });
     }
-
   }
 
   private stopProgressAndCleanForm() {
@@ -97,18 +93,29 @@ export class LoginComponent implements OnInit {
 
   reset() {
     if (this.usernameControlInput.value === null) {
-      this.snack.open('Please enter your username to reset the password', 'Ok', {duration: 30000});
+      this.snack.open('Please enter your email to reset the password', 'Ok', {duration: 30000});
     } else {
       this.showProgress = true;
       this.userDatabase.resetPassword({
-        username: this.usernameControlInput.value,
-        password: ''
-      }).then(value => {
-        this.showProgress = false;
-        this.snack.open('Reset instruction is sent to your email, Log to your email and reset the password', 'Ok');
-      }).catch(reason => {
-        this.showProgress = false;
-        this.snack.open(reason, 'Ok');
+        username: '',
+        password: '',
+        role: '',
+        meta: {
+          email: this.usernameControlInput.value,
+          address: '',
+          fullname: '',
+          number: '',
+        }
+      }, value => {
+        if (value === null) {
+          this.showProgress = false;
+          this.snack.open('Error cant send reset instruction,' +
+            ' make sure you have internet if problem proceed contact support', 'Ok');
+        } else {
+          this.showProgress = false;
+          this.usernameControlInput.setValue('');
+          this.snack.open('Reset instruction is sent to your email, Log to your email and reset the password', 'Ok');
+        }
       });
     }
   }

@@ -1,7 +1,7 @@
 import {UserI} from '../../model/UserI';
 
 export interface UserDataSource {
-  login(user: UserI, callback?: (value: UserI) => void);
+  login(user: {username: string, password: string}, callback?: (value: UserI) => void);
 
   logout(user: UserI, callback?: (value: any) => void);
 

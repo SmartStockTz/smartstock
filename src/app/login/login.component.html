@@ -43,12 +43,16 @@
               <!--</div>-->
             </mat-card-content>
             <mat-card-actions>
-              <button mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress" (click)="login()">Log In</button>
+              <button mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress" (click)="login()">
+                Log In
+              </button>
             </mat-card-actions>
             <mat-card-actions>
-              <button mat-button color="primary" class="btn-block" *ngIf="!showProgress" (click)="reset()">Reset</button>
+              <button mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress">Open Account</button>
             </mat-card-actions>
-
+            <mat-card-actions>
+              <button mat-button color="warn" class="btn-block" *ngIf="!showProgress" (click)="reset()">Reset</button>
+            </mat-card-actions>
           </mat-card>
         </div>
 
