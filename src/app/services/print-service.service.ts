@@ -14,7 +14,7 @@ export class PrintServiceService {
   }
 
   printOrder(order: OrderI, callback: (value: any) => void) {
-    let data = '';
+    let data = '\t' + new Date().toString() + '\n';
     let tT = 0;
     order.cart.forEach((value, index) => {
       tT += <number>value.amount;
