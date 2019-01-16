@@ -114,10 +114,17 @@ export class SaleComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.logout().then(value => {
-      this.router.navigateByUrl('').catch(reason => console.log(reason));
+    this.indexDb.getItem<UserI>('user').then(user => {
+      this.userDatabase.logout(user, value => {
+        if (value === null) {
+          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+        } else {
+          this.router.navigateByUrl('').catch(reason => console.log(reason));
+        }
+      });
     }).catch(reason => {
       console.log(reason);
+      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
     });
   }
 
@@ -182,7 +189,7 @@ export class SaleComponent implements OnInit {
         date: stringDate,
         idOld: this.firestore.createId(),
         idTra: idTra,
-        user: this.currentUser.id,
+        user: this.currentUser.objectId,
         stockId: value.stock.objectId// for reference only
       });
     });
@@ -277,7 +284,7 @@ export class SaleComponent implements OnInit {
     });
 
     // live database
-    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.id, datasource => {
+    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.objectId, datasource => {
       // console.log(datasource);
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;

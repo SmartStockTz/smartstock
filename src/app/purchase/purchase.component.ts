@@ -116,10 +116,17 @@ export class PurchaseComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.logout().then(value => {
-      this.router.navigateByUrl('').catch(reason => console.log(reason));
+    this.indexDb.getItem<UserI>('user').then(user => {
+      this.userDatabase.logout(user, value => {
+        if (value === null) {
+          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+        } else {
+          this.router.navigateByUrl('').catch(reason => console.log(reason));
+        }
+      });
     }).catch(reason => {
       console.log(reason);
+      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
     });
   }
 

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserDatabaseService} from '../services/user-database.service';
 import {MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
+import {UserI} from '../model/UserI';
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +18,7 @@ export class LandingComponent implements OnInit {
   constructor(private router: Router,
               private snack: MatSnackBar,
               private indexDb: NgForage,
-              private auth: UserDatabaseService) {
+              private userDatabase: UserDatabaseService) {
   }
 
   ngOnInit() {
@@ -33,12 +34,17 @@ export class LandingComponent implements OnInit {
   }
 
   logout() {
-    this.snack.open('Wait while we log you out');
-    this.auth.logout().then(value => {
-      this.snack.open('Successful logout', 'Ok', {duration: 3000});
-      this.log = false;
+    this.indexDb.getItem<UserI>('user').then(user => {
+      this.userDatabase.logout(user, value => {
+        if (value === null) {
+          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+        } else {
+          this.router.navigateByUrl('').catch(reason => console.log(reason));
+        }
+      });
     }).catch(reason => {
-      this.snack.open(reason, 'Ok');
+      console.log(reason);
+      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
     });
   }
 

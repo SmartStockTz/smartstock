@@ -127,10 +127,17 @@ export class WholeSaleComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.logout().then(value => {
-      this.router.navigateByUrl('').catch(reason => console.log(reason));
+    this.indexDb.getItem<UserI>('user').then(user => {
+      this.userDatabase.logout(user, value => {
+        if (value === null) {
+          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+        } else {
+          this.router.navigateByUrl('').catch(reason => console.log(reason));
+        }
+      });
     }).catch(reason => {
       console.log(reason);
+      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
     });
   }
 
@@ -194,7 +201,7 @@ export class WholeSaleComponent implements OnInit {
         date: stringDate,
         idOld: '',
         idTra: idTra,
-        user: this.currentUser.id,
+        user: this.currentUser.objectId,
         stockId: value.stock.objectId
       });
     });
@@ -298,7 +305,7 @@ export class WholeSaleComponent implements OnInit {
     }, error1 => console.log(error1));
 
     // live database
-    this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.id, datasource => {
+    this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.objectId, datasource => {
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
       this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);

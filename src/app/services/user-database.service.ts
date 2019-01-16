@@ -36,7 +36,10 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     this.httpClient.post<UserI>(this.serverUrl + '/users', user, {
       headers: this.postHeaderUser
     }).subscribe(value => {
-      callback(value);
+      this.indexD.setItem<UserI>('user', value).then(value1 => {
+        console.log('saved user in cache is ---> ' + value1.objectId);
+        callback(value);
+      }).catch(reason => callback(null));
     }, error1 => {
       console.log(error1);
       callback(null);
