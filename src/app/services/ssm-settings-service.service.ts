@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SsmSettingsServiceService {
 
-  constructor(private indexDb: NgForage) {
+  constructor(private indexDb: NgForage, private httpClient: HttpClient) {
   }
 
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
@@ -25,5 +26,15 @@ export class SsmSettingsServiceService {
       console.log(reason);
       callback(null);
     });
+  }
+
+  setServerAddress(ip: string) {
+    this.indexDb.setItem('serverAddress', ip).then(value => {
+
+    }).catch(reason => console.log(reason));
+  }
+
+  getServerAddress(callback: (ip: string) => void) {
+
   }
 }

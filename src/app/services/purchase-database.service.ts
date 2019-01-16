@@ -6,19 +6,18 @@ import {HttpClient} from '@angular/common/http';
 import {BatchI} from '../model/batchI';
 import * as Parse from 'node_modules/parse';
 import {NgForage} from 'ngforage';
+import {ParseBackend, serverUrl} from '../database/ParseBackend';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
+Parse.serverURL = serverUrl;
 
 @Injectable({
   providedIn: 'root'
 })
-export class PurchaseDatabaseService implements PurchaseDataSource {
-
-  serverUrl = 'http://lb.fahamutech.com:81/parse/classes';
-  serverUrlBatch = 'http://lb.fahamutech.com:81/parse/batch';
+export class PurchaseDatabaseService extends ParseBackend implements PurchaseDataSource {
 
   constructor(private httpClient: HttpClient, private indexDb: NgForage) {
+    super();
   }
 
   addAllInvoices(invoices: ReceiptI[], callback: (value: any) => void) {
@@ -34,13 +33,10 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
       });
     });
     if (purchases.length <= 50) {
-      this.httpClient.post(this.serverUrlBatch, {
+      this.httpClient.post(this.serverUrl + '/batch', {
         'requests': bat
       }, {
-        headers: {
-          'X-Parse-Application-Id': 'ssm',
-          'Content-Type': 'application/json'
-        }
+        headers: this.postHeader
       }).subscribe(value => {
         callback(value);
       }, error1 => {
@@ -56,14 +52,12 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   addInvoice(invoice: ReceiptI, callback: (value: any) => void) {
+    this.addReceipt(invoice, callback);
   }
 
   addPurchase(purchase: PurchaseI, callback: (value: any) => void) {
-    this.httpClient.post<PurchaseI>(this.serverUrl + '/purchases', purchase, {
-      headers: {
-        'X-Parse-Application-Id': 'ssm',
-        'Content-Type': 'application/json'
-      }
+    this.httpClient.post<PurchaseI>(this.serverUrl + '/classes/purchases', purchase, {
+      headers: this.postHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -73,6 +67,14 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   addReceipt(invoice: ReceiptI, callback: (value: any) => void) {
+    this.httpClient.post<ReceiptI>(this.serverUrl + '/classes/purchaseRefs', invoice, {
+      headers: this.postHeader,
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   deleteInvoice(id: string, callback: (value: any) => void) {
@@ -87,6 +89,7 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   getAllInvoice(callback: (invoices: ReceiptI[]) => void) {
   }
 
+  // socket method
   getAllPurchase(callback: (purchases: PurchaseI[]) => void) {
     const query = new Parse.Query('purchases');
     const subscription = query.subscribe();
@@ -106,10 +109,8 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   private updateCachePurchase() {
-    this.httpClient.get<any>(this.serverUrl + '/purchases', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/purchases', {
+      headers: this.getHeader,
       params: {
         'limit': '1000000'
       }
@@ -119,26 +120,51 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
       }).catch(reason => console.log(reason));
     }, error1 => {
       console.log(error1);
-      // callback(null);
     });
   }
 
+  // must be updated and its socket method
   getAllReceipts(callback: (invoices: ReceiptI[]) => void) {
+    const query = new Parse.Query('purchaseRefs');
+    const subscription = query.subscribe();
+    subscription.on('open', () => {
+      console.log('purchase refs socket connected');
+      this.updateCachedPurchaseRefs();
+    });
+    subscription.on('update', value => {
+      this.updateCachedPurchaseRefs();
+    });
+    subscription.on('delete', value => {
+      this.updateCachedPurchaseRefs();
+    });
+    subscription.on('create', value => {
+      this.updateCachedPurchaseRefs();
+    });
+  }
+
+  private updateCachedPurchaseRefs() {
+    this.httpClient.get<any>(this.serverUrl + '/classes/purchaseRefs', {
+      headers: this.getHeader,
+      params: {
+        'limit': '1000'
+      }
+    }).subscribe(value => {
+      this.indexDb.setItem<ReceiptI[]>('purchaseRefs', value.results).then(value1 => {
+        console.log('updated purchaseRefs is ---> ' + value1.length);
+      }).catch(reason => console.log(reason));
+    }, error1 => {
+      console.log(error1);
+    });
   }
 
   getInvoice(id: string, callback: (invoice: ReceiptI) => void) {
   }
 
   getPurchase(id: string, callback: (purchase: PurchaseI) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/purchases', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm',
-      },
-      params: {
-        'limit': '100000000'
-      }
+    this.httpClient.get<any>(this.serverUrl + '/classes/purchases/' + id, {
+      headers: this.getHeader
     }).subscribe(value => {
-      callback(value.results);
+      callback(value);
     }, error1 => {
       console.log(error1);
       callback(null);

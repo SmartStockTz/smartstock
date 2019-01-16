@@ -29,4 +29,14 @@ export class NavComponent implements OnInit {
   goToPurchase() {
     this.router.navigateByUrl('purchase').catch(reason => console.log(reason));
   }
+
+  goToServerSetting() {
+    this.router.navigateByUrl('server', {
+      queryParams: {name: 'joshua'}
+    }).catch(reason => console.log(reason));
+  }
+
+  goToUsers() {
+    this.router.navigateByUrl('users').catch(reason => console.log(reason));
+  }
 }

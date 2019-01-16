@@ -1,14 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {HttpClient} from '@angular/common/http';
 import {UpdateLocalDatabaseService} from './services/update-local-database.service';
-import {Stock} from './model/stock';
-import {CashSaleI} from './model/CashSale';
-import {PurchaseI} from './model/PurchaseI';
-import {StockDatabaseService} from './services/stock-database.service';
-import {SupplierI} from './model/SupplierI';
-import {CategoryI} from './model/CategoryI';
-import {UnitsI} from './model/UnitsI';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +10,7 @@ import {UnitsI} from './model/UnitsI';
 export class AppComponent implements OnInit {
 
   constructor(private firestore: AngularFirestore,
-              private updateLocal: UpdateLocalDatabaseService,
-              private stockDatabase: StockDatabaseService,
-              private httpClient: HttpClient) {
+              private updateLocal: UpdateLocalDatabaseService) {
 
   }
 
@@ -28,7 +18,7 @@ export class AppComponent implements OnInit {
     this.updateLocal.updateCategories();
     this.updateLocal.updateSuppliers();
     this.updateLocal.updateUnits();
-    // this.updateLocal.updateReceipts();
+    this.updateLocal.updateReceipts();
     this.updateLocal.updateStock(stocks => {
       // this.stockC.getStocksFromCache(stocks);
     });
@@ -69,8 +59,23 @@ export class AppComponent implements OnInit {
   //   });
   // }
   //
+  // async insertPurchaseRef() {
+  //   await this.httpClient.get<ReceiptI[]>('/assets/datadumps/invoices.json').subscribe(value => {
+  //     value.forEach(((value1, index, array) => {
+  //       this.purchaseDatabase.addInvoice(value1, results => {
+  //         if (results == null) {
+  //           console.log('error happened at ----> ' + index);
+  //         } else {
+  //           console.log('index number ---> ' + index);
+  //           console.log(results);
+  //         }
+  //       });
+  //     }));
+  //   }, error1 => console.log(error1));
+  // }
+  //
   // async insertSuppliers() {
-  //   await this.httpClient.get<SupplierI[]>('/assets/datadumps/suppliers.json').subscribe(value => {
+  //   await this.httpClient.get<SupplierI[]>('/assets/datadumps/receipts.json').subscribe(value => {
   //     value.forEach((value1, index, array) => {
   //       this.stockDatabase.addSupplier(value1, value2 => {
   //         if (value2 === null) {

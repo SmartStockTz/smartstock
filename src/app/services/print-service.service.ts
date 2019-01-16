@@ -19,12 +19,12 @@ export class PrintServiceService {
     order.cart.forEach((value, index) => {
       tT += <number>value.amount;
       data = data.concat('-----------------------------------\n' +
-        (index + 1) + '.  ' + value.product + '\n' +
-        '       Quantity : ' + (value.quantity / value.stock.wholesalePrice) + '\n' +
-        '       Unit Price : ' + value.stock.wholesalePrice + '\n' +
-        '       Amount   : ' + value.amount + ' \n');
+        (index + 1) + '.  ' + value.product + '\t' +
+        'Quantity --> ' + (value.quantity / value.stock.wholesalePrice) + '\t' +
+        'Unit Price --> ' + value.stock.wholesalePrice + '\t' +
+        'Amount   --> ' + value.amount + ' \n');
     });
-    data = data.concat('\n---------------------------------------\n| Total Bill : ' + tT + '\n---------------------------------------');
+    data = data.concat('\n**********\n| Total Bill : ' + tT + '\n**********');
     this.ssmSettings.getPrinterAddress(value1 => {
       if (value1 === null) {
         this.url = 'http://localhost:8080/print';
@@ -55,11 +55,11 @@ export class PrintServiceService {
       tT += <number>value.amount;
       data = data.concat('-----------------------------------\n' +
         (index + 1) + '.  ' + value.product + '\n' +
-        '       Quantity : ' + (value.quantity / value.stock.wholesaleQuantity) + ' \n' +
-        '       Unit Price : ' + value.stock.wholesalePrice + '\n' +
-        '       Total Amount   : ' + value.amount + ' \n');
+        'Quantity --> ' + (value.quantity / value.stock.wholesaleQuantity) + ' \t' +
+        'Unit Price --> ' + value.stock.wholesalePrice + '\t' +
+        'Total Amount  --> ' + value.amount + ' \t');
     });
-    data = data.concat('\n---------------------------------------\n| Total Bill : ' + tT + '\n---------------------------------------');
+    data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
     this.ssmSettings.getPrinterAddress(value1 => {
       if (value1 === null) {
         this.url = 'http://localhost:8080/print';
@@ -72,7 +72,7 @@ export class PrintServiceService {
         },
         params: {
           data: data,
-          id: 'test id'
+          id: '#'
         }
       }).subscribe(value => {
         callback(value);

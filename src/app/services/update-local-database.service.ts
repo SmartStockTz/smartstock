@@ -1,10 +1,11 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
 import * as Parse from 'node_modules/parse';
 import {StockDatabaseService} from './stock-database.service';
 import {HttpClient} from '@angular/common/http';
+import {ParseBackend} from '../database/ParseBackend';
 
 Parse.initialize('ssm');
 Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
@@ -12,12 +13,13 @@ Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
 @Injectable({
   providedIn: 'root'
 })
-export class UpdateLocalDatabaseService implements OnInit {
+export class UpdateLocalDatabaseService extends ParseBackend {
 
   constructor(private firestore: AngularFirestore,
               private stockDatabase: StockDatabaseService,
               private httpClient: HttpClient,
               private indexDb: NgForage) {
+    super();
   }
 
   updateStock(callback: (stocks: Stock[]) => void) {
@@ -160,10 +162,8 @@ export class UpdateLocalDatabaseService implements OnInit {
   }
 
   private getAllRefs() {
-    this.httpClient.get<any>('http://lb.fahamutech.com:81/parse/purchaseRefs', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      }
+    this.httpClient.get<any>(this.serverUrl + '/classes/purchaseRefs', {
+      headers: this.getHeader,
     }).subscribe(value => {
       this.indexDb.setItem('purchaseRefs', value.results).then(value1 => {
         console.log('inserted reference ---> ' + value1);
@@ -175,6 +175,4 @@ export class UpdateLocalDatabaseService implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
 }

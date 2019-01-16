@@ -4,21 +4,19 @@ import {CategoryI} from '../model/CategoryI';
 import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
+import {ParseBackend} from '../database/ParseBackend';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class StockDatabaseService implements StockDataSource {
-
-  serverUrl = 'http://lb.fahamutech.com:81/parse/classes';
+export class StockDatabaseService extends ParseBackend implements StockDataSource {
 
   constructor(private firestore: AngularFirestore,
-              private httpClient: HttpClient,
-              private indexDb: NgForage) {
+              private httpClient: HttpClient) {
+    super();
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
@@ -31,13 +29,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addCategory(category: CategoryI, callback?: (value: any) => void) {
-    this.httpClient.post(this.serverUrl + '/categories', {
-      'name': category.name
-    }, {
-      headers: {
-        'X-Parse-Application-id': 'ssm',
-        'Content-Type': 'application/json'
-      }
+    this.httpClient.post(this.serverUrl + '/classes/categories', category, {
+      headers: this.postHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -47,13 +40,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addUnit(unit: UnitsI, callback: (value: any) => void) {
-    this.httpClient.post(this.serverUrl + '/units', {
-      'name': unit.name,
-    }, {
-      headers: {
-        'X-Parse-Application-id': 'ssm',
-        'Content-Type': 'application/json'
-      }
+    this.httpClient.post(this.serverUrl + '/classes/units', unit, {
+      headers: this.postHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -63,10 +51,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getAllUnit(callback: (value: UnitsI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/units', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/units', {
+      headers: this.getHeader,
       params: {
         'limit': '1000'
       }
@@ -80,57 +66,21 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addStock(stock: Stock, callback?: (value: any) => void) {
-    if (false) {
-      this.updateStock(stock, callback);
-    } else {
-      stock.idOld = this.firestore.createId();
-      this.httpClient.post(this.serverUrl + '/stocks', {
-        'product': stock.product,
-        'unit': stock.unit,
-        'category': stock.category,
-        'shelf': stock.shelf,
-        'quantity': stock.quantity,
-        'wholesaleQuantity': stock.wholesaleQuantity,
-        'q_status': stock.q_status,
-        'reorder': stock.reorder,
-        'supplier': stock.supplier,
-        'purchase': stock.purchase,
-        'retailPrice': stock.retailPrice,
-        'retailWholesalePrice': stock.retailWholesalePrice,
-        'profit': stock.profit,
-        'times': stock.times,
-        'expire': stock.expire,
-        'idOld': stock.idOld,
-        'retail_stockcol': stock.retail_stockcol,
-        'nhifPrice': stock.nhifPrice,
-        'wholesalePrice': stock.wholesalePrice
-      }, {
-        headers: {
-          'X-Parse-Application-id': 'ssm',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe(value => {
-        callback(value);
-      }, error1 => {
-        console.log(error1);
-        callback(null);
-      });
-    }
+    stock.idOld = this.firestore.createId();
+    this.httpClient.post(this.serverUrl + '/classes/stocks', stock, {
+      headers: this.postHeader
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
+      console.log(error1);
+      callback(null);
+    });
   }
 
   addSupplier(supplier: SupplierI, callback: (value: any) => void) {
-    supplier.id = this.firestore.createId();
-    this.httpClient.post(this.serverUrl + '/suppliers', {
-      'name': supplier.name,
-      'email': supplier.email,
-      'address': supplier.address,
-      'number': supplier.number,
-      'idOld': supplier.id
-    }, {
-      headers: {
-        'X-Parse-Application-id': 'ssm',
-        'Content-Type': 'application/json'
-      }
+    supplier.idOld = this.firestore.createId();
+    this.httpClient.post(this.serverUrl + '/classes/suppliers', supplier, {
+      headers: this.postHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -152,10 +102,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   deleteStock(stock: Stock, callback?: (value: any) => void) {
-    this.httpClient.delete(this.serverUrl + '/stocks/' + stock.objectId, {
-      headers: {
-        'X-Parse-Application-id': 'ssm',
-      }
+    this.httpClient.delete(this.serverUrl + '/classes/stocks/' + stock.objectId, {
+      headers: this.getHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -168,10 +116,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getAllCategory(callback: (categories: CategoryI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/categories', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/categories', {
+      headers: this.getHeader,
       params: {
         'limit': '1000'
       }
@@ -185,10 +131,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getAllStock(callback: (stocks: Stock[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/stocks', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/stocks', {
+      headers: this.getHeader,
       params: {
         'limit': '100000'
       }
@@ -203,10 +147,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getAllSupplier(callback: (suppliers: SupplierI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/suppliers', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/suppliers', {
+      headers: this.getHeader,
       params: {
         'limit': '10000'
       }
@@ -223,10 +165,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   getStock(id: string, callback: (stock: Stock) => void) {
-    this.httpClient.get<Stock>(this.serverUrl + '/stocks/' + id, {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      }
+    this.httpClient.get<Stock>(this.serverUrl + '/classes/stocks/' + id, {
+      headers: this.getHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -251,28 +191,10 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   updateStock(stock: Stock, callback?: (value: any) => void) {
-    this.httpClient.put(this.serverUrl + '/stocks/' + stock.objectId,
+    this.httpClient.put(this.serverUrl + '/classes/stocks/' + stock.objectId,
+      stock,
       {
-        'product': stock.product,
-        'unit': stock.unit,
-        'category': stock.category,
-        'shelf': stock.shelf,
-        'quantity': stock.quantity,
-        'wholesaleQuantity': stock.wholesaleQuantity,
-        'reorder': stock.reorder,
-        'supplier': stock.supplier,
-        'purchase': stock.purchase,
-        'retailPrice': stock.retailPrice,
-        'retailWholesalePrice': stock.retailWholesalePrice,
-        'expire': stock.expire,
-        'nhifPrice': stock.nhifPrice,
-        'wholesalePrice': stock.wholesalePrice
-      },
-      {
-        headers: {
-          'X-Parse-Application-id': 'ssm',
-          'Content-Type': 'application/json'
-        }
+        headers: this.postHeader
       }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -284,3 +206,42 @@ export class StockDatabaseService implements StockDataSource {
   updateSupplier(id: string, callback?: (value: any) => void) {
   }
 }
+
+// {
+//   'product': stock.product,
+//   'unit': stock.unit,
+//   'category': stock.category,
+//   'shelf': stock.shelf,
+//   'quantity': stock.quantity,
+//   'wholesaleQuantity': stock.wholesaleQuantity,
+//   'reorder': stock.reorder,
+//   'supplier': stock.supplier,
+//   'purchase': stock.purchase,
+//   'retailPrice': stock.retailPrice,
+//   'retailWholesalePrice': stock.retailWholesalePrice,
+//   'expire': stock.expire,
+//   'nhifPrice': stock.nhifPrice,
+//   'wholesalePrice': stock.wholesalePrice
+// }
+
+// {
+//   'product': stock.product,
+//   'unit': stock.unit,
+//   'category': stock.category,
+//   'shelf': stock.shelf,
+//   'quantity': stock.quantity,
+//   'wholesaleQuantity': stock.wholesaleQuantity,
+//   'q_status': stock.q_status,
+//   'reorder': stock.reorder,
+//   'supplier': stock.supplier,
+//   'purchase': stock.purchase,
+//   'retailPrice': stock.retailPrice,
+//   'retailWholesalePrice': stock.retailWholesalePrice,
+//   'profit': stock.profit,
+//   'times': stock.times,
+//   'expire': stock.expire,
+//   'idOld': stock.idOld,
+//   'retail_stockcol': stock.retail_stockcol,
+//   'nhifPrice': stock.nhifPrice,
+//   'wholesalePrice': stock.wholesalePrice
+// }

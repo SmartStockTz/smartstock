@@ -8,16 +8,15 @@ import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import * as Parse from 'node_modules/parse';
 import {BatchI} from '../model/batchI';
+import {ParseBackend, serverUrl} from '../database/ParseBackend';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
+Parse.serverURL = serverUrl;
 
 @Injectable({
   providedIn: 'root'
 })
-export class SalesDatabaseService implements SalesDatasource {
-  private serverUrl = 'http://lb.fahamutech.com:81/parse/classes';
-  private serverUrlBatch = 'http://lb.fahamutech.com:81/parse/batch';
+export class SalesDatabaseService extends ParseBackend implements SalesDatasource {
   private query = new Parse.Query('sales');
   private orderQuery = new Parse.Query('orders');
   private ordersSubscription = this.orderQuery.subscribe();
@@ -26,6 +25,7 @@ export class SalesDatabaseService implements SalesDatasource {
   constructor(private firestore: AngularFirestore,
               private indexDb: NgForage,
               private httpClient: HttpClient) {
+    super();
   }
 
   static getCurrentDate(): string {
@@ -51,13 +51,11 @@ export class SalesDatabaseService implements SalesDatasource {
         path: '/parse/classes/sales'
       });
     });
-    this.httpClient.post<BatchI[]>(this.serverUrlBatch, {
+    this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
         'requests': batchs
       },
       {
-        headers: {
-          'X-Parse-Application-Id': 'ssm'
-        }
+        headers: this.getHeader
       }
     ).subscribe(value => {
       callback(value);
@@ -77,13 +75,11 @@ export class SalesDatabaseService implements SalesDatasource {
           path: '/parse/classes/sales'
         });
       });
-      this.httpClient.post<BatchI[]>(this.serverUrlBatch, {
+      this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
           'requests': batchs
         },
         {
-          headers: {
-            'X-Parse-Application-Id': 'ssm'
-          }
+          headers:this.getHeader
         }
       ).subscribe(value => {
         callback(value);
@@ -126,10 +122,8 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   private getSales(id: string, res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/sales', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
+      headers: this.getHeader,
       params: {
         'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"retail" }',
         'limit': '10000000'
@@ -143,10 +137,8 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   private getWholeSale(id: string, res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/sales', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
+      headers: this.getHeader,
       params: {
         'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"whole" }',
         'limit': '10000000'
@@ -177,11 +169,8 @@ export class SalesDatabaseService implements SalesDatasource {
 
   addOrder(order: OrderI, callback?: (value) => void) {
     order.idOld = this.firestore.createId();
-    this.httpClient.post<OrderI>(this.serverUrl + '/orders', order, {
-      headers: {
-        'X-Parse-Application-Id': 'ssm',
-        'Content-Type': 'application/json'
-      }
+    this.httpClient.post<OrderI>(this.serverUrl + '/classes/orders', order, {
+      headers: this.postHeader
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -194,7 +183,7 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   deleteOrder(order: OrderI, callback?: (value) => void) {
-    this.httpClient.delete(this.serverUrl + '/orders/' + order.objectId, {
+    this.httpClient.delete(this.serverUrl + '/classes/orders/' + order.objectId, {
       headers: {
         'X-Parse-Application-Id': 'ssm'
       }
@@ -224,10 +213,8 @@ export class SalesDatabaseService implements SalesDatasource {
   }
 
   private getOrders(res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/orders', {
-      headers: {
-        'X-Parse-Application-Id': 'ssm'
-      },
+    this.httpClient.get<any>(this.serverUrl + '/classes/orders', {
+      headers: this.getHeader,
       params: {
         'limit': '100000'
       }

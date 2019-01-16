@@ -48,6 +48,10 @@
       <mat-expansion-panel-header>
         Settings
       </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item (click)="goToServerSetting()">General</a>
+        <a mat-list-item (click)="goToUsers()">Manage Users</a>
+      </mat-nav-list>
     </mat-expansion-panel>
 
   </mat-accordion>

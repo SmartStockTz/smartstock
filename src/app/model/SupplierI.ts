@@ -1,5 +1,5 @@
 export interface SupplierI {
-  id?: string;
+  idOld?: string;
   objectId?: string;
   name: string;
   number: string;
