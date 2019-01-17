@@ -6,6 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const httpsServer = require('https');
+const httpServer = require('http');
 const fs = require('fs');
 
 const indexRouter = require('./routes/index');
@@ -24,7 +25,7 @@ const api = new ParseServer({
     appId: 'ssm',
     cloud: __dirname + '/cloud/main.js',
     masterKey: 'joshua5715',
-    serverURL: 'http://lb.fahamutech.com/parse',
+    serverURL: 'https://lb.fahamutech.com/parse',
     liveQuery: {
         classNames: ['stocks', 'sales', 'orders', 'purchaseRefs', 'purchases', 'categories', 'units', 'suppliers'],
     }
@@ -39,5 +40,6 @@ const options = {
     key: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/cert.pem')
 };
-httpsServer.createServer(options).listen(80);
+httpServer.createServer(app).listen(8080);
+httpsServer.createServer(options, app).listen(8443);
 ParseServer.createLiveQueryServer(httpsServer);
