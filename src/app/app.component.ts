@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+
   // async insertCategory() {
   //   await this.httpClient.get<CategoryI[]>('/assets/datadumps/category.json').subscribe(value => {
   //     value.forEach((value1, index, array) => {
