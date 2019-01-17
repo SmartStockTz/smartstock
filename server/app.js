@@ -43,3 +43,4 @@ const options = {
 httpServer.createServer(app).listen(8080);
 httpsServer.createServer(options, app).listen(8443);
 ParseServer.createLiveQueryServer(httpsServer);
+ParseServer.createLiveQueryServer(httpServer);
