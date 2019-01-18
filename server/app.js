@@ -37,8 +37,8 @@ app.use('/parse', api);
 
 // Initialize a LiveQuery server instance, app is the express app of your Parse Server
 const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/ssm.fahamutech.com/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/ssm.fahamutech.com/cert.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/cert.pem')
 };
 // const server = http.createServer(app).listen(1337, value => {
 //   console.log('server connected at ---> : ' + 1337);
