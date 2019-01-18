@@ -3,66 +3,11 @@
 
   <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
     <app-nav *ngIf="isAdmin"></app-nav>
-    <div *ngIf="!isAdmin">
-      <div class="dawer-head"></div>
-      <mat-accordion>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Dashboard
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Sale
-          </mat-expansion-panel-header>
-          <mat-action-list>
-            <button mat-list-item="">Retails</button>
-            <button mat-list-item>WholeSale</button>
-            <button mat-list-item>NHIF</button>
-            <button mat-list-item>Night Sale</button>
-          </mat-action-list>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Profile
-          </mat-expansion-panel-header>
-          <mat-action-list>
-            <button mat-list-item="">View</button>
-            <button mat-list-item="">Logout</button>
-          </mat-action-list>
-        </mat-expansion-panel>
-
-      </mat-accordion>
-    </div>
+    <app-nav-user *ngIf="!isAdmin"></app-nav-user>
   </mat-sidenav>
 
   <mat-sidenav-content>
-
-    <nav class="sticky-top">
-      <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
-      <mat-toolbar color="primary">
-        <button mat-icon-button (click)="openDrawer()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>SSM-Stock</span>
-        <span class="toolbar-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu>
-          <button mat-menu-item (click)="home()">
-            <mat-icon>home</mat-icon>
-            Home
-          </button>
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>arrow_back</mat-icon>
-            Logout
-          </button>
-        </mat-menu>
-      </mat-toolbar>
-    </nav>
+    <app-nav-bar [heading]="'SSM-Stock'" [sidenav]="sidenav" [showProgress]="showProgress"></app-nav-bar>
 
     <div class="container-fluid">
       <div class="row" style="margin: 16px">
@@ -280,7 +225,6 @@
       </div>
 
     </div>
-
   </mat-sidenav-content>
 
 </mat-sidenav-container>

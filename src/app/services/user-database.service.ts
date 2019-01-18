@@ -27,7 +27,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     Parse.User.currentAsync().then(value => {
       callback(value);
     }).catch(e => {
-      console.log(e);
+      console.log('Error get current users is ---> ' + e);
       callback(null);
     });
   }

@@ -5,10 +5,11 @@ import {Stock} from '../model/stock';
 import * as Parse from 'node_modules/parse';
 import {StockDatabaseService} from './stock-database.service';
 import {HttpClient} from '@angular/common/http';
-import {ParseBackend} from '../database/ParseBackend';
+import {ParseBackend, serverUrl} from '../database/ParseBackend';
+import {ReceiptI} from '../model/ReceiptI';
 
 Parse.initialize('ssm');
-Parse.serverURL = 'http://lb.fahamutech.com:81/parse';
+Parse.serverURL = serverUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -165,8 +166,8 @@ export class UpdateLocalDatabaseService extends ParseBackend {
     this.httpClient.get<any>(this.serverUrl + '/classes/purchaseRefs', {
       headers: this.getHeader,
     }).subscribe(value => {
-      this.indexDb.setItem('purchaseRefs', value.results).then(value1 => {
-        console.log('inserted reference ---> ' + value1);
+      this.indexDb.setItem<ReceiptI[]>('purchaseRefs', value.results).then(value1 => {
+        console.log('inserted reference ---> ' + value1.length);
       }).catch(reason => {
         console.log(reason);
       });

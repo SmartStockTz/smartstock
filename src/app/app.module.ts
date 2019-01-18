@@ -49,6 +49,8 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
 import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavUserComponent } from './nav-user/nav-user.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.compo
     WholeSaleComponent,
     DialogComponent,
     DialogDeleteComponent,
+    NavBarComponent,
+    NavUserComponent,
   ],
   imports: [
     BrowserModule,

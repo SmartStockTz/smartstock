@@ -1,0 +1,23 @@
+<nav class="sticky-top">
+  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="openDrawer()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{heading}}</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item (click)="home()">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>arrow_back</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</nav>

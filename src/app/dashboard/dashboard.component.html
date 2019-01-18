@@ -3,24 +3,14 @@
 </div>
 <div *ngIf="isLogin">
   <mat-sidenav-container class="my-drawer-container">
-    <mat-sidenav #sidenav mode="over" [opened]="false">
-      <app-nav></app-nav>
+
+    <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
+      <app-nav *ngIf="true"></app-nav>
+      <app-nav-user *ngIf="false"></app-nav-user>
     </mat-sidenav>
 
     <mat-sidenav-content>
-
-      <nav class="sticky-top">
-        <mat-toolbar color="primary">
-          <button mat-icon-button (click)="openDrawer()">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <span>SSM DASHBOARD</span>
-          <span style="flex: 1 1 auto;"></span>
-          <button mat-icon-button>
-            <mat-icon>more_vert</mat-icon>
-          </button>
-        </mat-toolbar>
-      </nav>
+      <app-nav-bar [heading]="'SSM DASHBOARD'" [sidenav]="sidenav" [showProgress]="false"></app-nav-bar>
 
       <div class="container">
 

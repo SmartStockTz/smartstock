@@ -3,67 +3,11 @@
 
   <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
     <app-nav *ngIf="isAdmin"></app-nav>
-    <div *ngIf="!isAdmin">
-      <div class="dawer-head"></div>
-      <mat-accordion>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Dashboard
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Sale
-          </mat-expansion-panel-header>
-          <mat-action-list>
-            <button mat-list-item="">Retails</button>
-            <button mat-list-item>WholeSale</button>
-            <button mat-list-item>NHIF</button>
-            <button mat-list-item>Night Sale</button>
-          </mat-action-list>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            Profile
-          </mat-expansion-panel-header>
-          <mat-action-list>
-            <button mat-list-item="">View</button>
-            <button mat-list-item="">Logout</button>
-          </mat-action-list>
-        </mat-expansion-panel>
-
-      </mat-accordion>
-    </div>
+    <app-nav-user *ngIf="!isAdmin"></app-nav-user>
   </mat-sidenav>
 
   <mat-sidenav-content>
-
-    <nav class="sticky-top">
-      <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
-      <mat-toolbar color="primary">
-        <button mat-icon-button (click)="openDrawer()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>SSM-Retail</span>
-        <span class="toolbar-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu>
-          <button mat-menu-item (click)="home()">
-            <mat-icon>home</mat-icon>
-            Home
-          </button>
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>arrow_back</mat-icon>
-            Logout
-          </button>
-        </mat-menu>
-      </mat-toolbar>
-    </nav>
-
+    <app-nav-bar [heading]="'SSM-Sale'" [sidenav]="sidenav" [showProgress]="showProgress"></app-nav-bar>
     <div class="container" style="margin-top: 24px">
       <div class="row">
         <div class="col-12">
@@ -73,7 +17,7 @@
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let st of filteredOptions | async" [value]="st.product"
                           (onSelectionChange)="updateSelectedStock(st)">
-                {{st.product + ' --> ' + st.retailPrice+' TZS'}}
+                {{st.product + ' --> ' + st.retailPrice + ' TZS'}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -106,7 +50,8 @@
             <!--N\N-->
             <!--</mat-slide-toggle>-->
             <!--<mat-divider></mat-divider>-->
-            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
+                    (click)="addToCart()">
               Add To Cart
             </button>
 
@@ -128,7 +73,7 @@
         </mat-card>
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
-          <mat-tab-group  color="warn" backgroundColor="primary">
+          <mat-tab-group color="warn" backgroundColor="primary">
 
             <mat-tab label="Cart">
               <div>
@@ -234,7 +179,6 @@
       </div>
 
     </div>
-
   </mat-sidenav-content>
 
 </mat-sidenav-container>
