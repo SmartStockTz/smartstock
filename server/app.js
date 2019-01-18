@@ -25,7 +25,7 @@ const api = new ParseServer({
   appId: 'ssm',
   cloud: __dirname + '/cloud/main.js',
   masterKey: 'joshua5715',
-  serverURL: 'https://ssm.fahamutech.com:8443/parse',
+  serverURL: 'https://lb.fahamutech.com:8443/parse',
   liveQuery: {
     classNames: ['stocks', 'sales', 'orders', 'purchaseRefs', 'purchases', 'categories', 'units', 'suppliers'],
   }

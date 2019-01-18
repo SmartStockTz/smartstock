@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatSidenav, MatSnackBar} from '@angular/material';
-import {UserI} from '../model/UserI';
 import {Router} from '@angular/router';
 import {NgForage} from 'ngforage';
 import {UserDatabaseService} from '../services/user-database.service';
@@ -39,17 +38,18 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.indexDb.getItem<UserI>('user').then(user => {
-      this.userDatabase.logout(user, value => {
-        if (value === null) {
-          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
-        } else {
-          this.router.navigateByUrl('').catch(reason => console.log(reason));
-        }
-      });
-    }).catch(reason => {
-      console.log(reason);
-      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+    this.userDatabase.currentUser(user => {
+      if (user === null) {
+        this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+      } else {
+        this.userDatabase.logout(user, value => {
+          if (value === null) {
+            this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+          } else {
+            this.router.navigateByUrl('').catch(reason => console.log(reason));
+          }
+        });
+      }
     });
   }
 

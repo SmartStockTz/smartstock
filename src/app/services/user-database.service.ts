@@ -23,11 +23,11 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     super();
   }
 
-  static currentUser(callback: (value: any) => void) {
-    Parse.User.currentAsync().then(value => {
+  currentUser(callback: (value: UserI) => void) {
+    this.indexD.getItem<UserI>('user').then(value => {
       callback(value);
-    }).catch(e => {
-      console.log('Error get current users is ---> ' + e);
+    }).catch(reason => {
+      console.log(reason);
       callback(null);
     });
   }
@@ -36,10 +36,13 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     this.httpClient.post<UserI>(this.serverUrl + '/users', user, {
       headers: this.postHeaderUser
     }).subscribe(value => {
-      this.indexD.setItem<UserI>('user', value).then(value1 => {
-        console.log('saved user in cache is ---> ' + value1.objectId);
+      this.indexD.setItem<UserI>('user_created', value).then(value1 => {
+        console.log('saved user_created in cache is ---> ' + value1.objectId);
         callback(value);
-      }).catch(reason => callback(null));
+      }).catch(reason => {
+        console.log(reason);
+        callback(null);
+      });
     }, error1 => {
       console.log(error1);
       callback(null);
@@ -83,7 +86,10 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       this.indexD.setItem<UserI>('user', value).then(value1 => {
         console.log('saved user in cache is ---> ' + value1.objectId);
         callback(value);
-      }).catch(reason => callback(null));
+      }).catch(reason => {
+        console.log(reason);
+        callback(null);
+      });
     }, error1 => {
       console.log(error1);
       callback(null);
@@ -94,9 +100,17 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     this.httpClient.post(this.serverUrl + '/logout', {}, {
       headers: {
         'X-Parse-Application-Id': 'ssm',
-        'X-Parse-Session-Token': 'r:' + user.sessionToken
+        'X-Parse-Session-Token': user.sessionToken
       }
-    }).subscribe(value => callback(value), error1 => {
+    }).subscribe(value => {
+      this.indexD.removeItem('user').then(value1 => {
+        console.log('user removed from cache is ---> successful');
+        callback('Ok');
+      }).catch(reason => {
+        console.log(reason);
+        callback(null);
+      });
+    }, error1 => {
       console.log(error1);
       callback(null);
     });
@@ -123,7 +137,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     this.httpClient.put(this.serverUrl + '/users/' + user.objectId, user, {
       headers: {
         'X-Parse-Application-Id': 'ssm',
-        'X-Parse-Session-Token': 'r:' + user.sessionToken,
+        'X-Parse-Session-Token': user.sessionToken,
         'Content-Type': 'application/json'
       }
     }).subscribe(value => callback(value), error1 => {

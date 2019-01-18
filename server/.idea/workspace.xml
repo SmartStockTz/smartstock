@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3bfe61f-9eaa-4abe-a185-3eec538fb97c" name="Default Changelist" comment="">
+    <list default="true" id="a3bfe61f-9eaa-4abe-a185-3eec538fb97c" name="Default Changelist" comment="add https and refresh server">
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/escodegen" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/esgenerate" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/esparse" afterDir="false" />
@@ -8118,29 +8118,6 @@
       <change afterPath="$PROJECT_DIR$/node_modules/yallist/iterator.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/yallist/package.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/yallist/yallist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-bar/nav-bar.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-bar/nav-bar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-bar/nav-bar.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-bar/nav-bar.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-user/nav-user.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-user/nav-user.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-user/nav-user.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/app/nav-user/nav-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/database/ParseBackend.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/database/ParseBackend.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/landing/landing.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/landing/landing.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/purchase/purchase.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/purchase/purchase.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/sale/sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/sale/sale.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/sale/sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/services/update-local-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/update-local-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/user-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/stock/stock.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/whole-sale/whole-sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/whole-sale/whole-sale.component.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -8156,8 +8133,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            <state relative-caret-position="702">
+              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -8194,20 +8171,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -8251,6 +8215,7 @@
       <workItem from="1547676401991" duration="146000" />
       <workItem from="1547700511587" duration="5477000" />
       <workItem from="1547810996171" duration="1518000" />
+      <workItem from="1547839000930" duration="406000" />
     </task>
     <task id="LOCAL-00001" summary="change server structure">
       <created>1547676530568</created>
@@ -8280,14 +8245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1547711414790</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add https and refresh server">
+      <created>1547839187036</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1547839187036</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19558000" />
+    <option name="totallyTimeSpent" value="19964000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1109" y="25" width="811" height="1055" extended-state="4" />
+    <frame x="983" y="25" width="937" height="1055" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.23322147" />
@@ -8318,7 +8290,8 @@
     <MESSAGE value="change server structure" />
     <MESSAGE value="use https server" />
     <MESSAGE value="add https" />
-    <option name="LAST_COMMIT_MESSAGE" value="add https" />
+    <MESSAGE value="add https and refresh server" />
+    <option name="LAST_COMMIT_MESSAGE" value="add https and refresh server" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/routes/index.js">
@@ -8362,8 +8335,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        <state relative-caret-position="702">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
         </state>
       </provider>
     </entry>

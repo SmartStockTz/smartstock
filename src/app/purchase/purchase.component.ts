@@ -87,7 +87,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.indexDb.getItem<UserI>('user').then(value => {
+    this.userDatabase.currentUser(value => {
       if (value === null) {
         this.isLogin = false;
         this.router.navigateByUrl('login').catch(reason => console.log(reason));
@@ -98,35 +98,6 @@ export class PurchaseComponent implements OnInit {
         // control input initialize
         this.initializeView();
       }
-    }).catch(reason => {
-      console.log(reason);
-    });
-  }
-
-  openDrawer() {
-    this.sidenav.open().catch(reason => {
-      console.log(reason.toString());
-    });
-  }
-
-  home() {
-    this.router.navigateByUrl('').catch(reason => {
-      console.log(reason.toString());
-    });
-  }
-
-  logout() {
-    this.indexDb.getItem<UserI>('user').then(user => {
-      this.userDatabase.logout(user, value => {
-        if (value === null) {
-          this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
-        } else {
-          this.router.navigateByUrl('').catch(reason => console.log(reason));
-        }
-      });
-    }).catch(reason => {
-      console.log(reason);
-      this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
     });
   }
 

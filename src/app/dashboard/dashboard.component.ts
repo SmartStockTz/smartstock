@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSidenav, MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
-import {UserI} from '../model/UserI';
 import {UserDatabaseService} from '../services/user-database.service';
 
 @Component({
@@ -20,29 +19,26 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    UserDatabaseService.currentUser(value => {
-      console.log(value);
+    this.userDatabase.currentUser(value => {
+      if (value === null) {
+        this.routes.navigateByUrl('login').catch(reason => console);
+      } else {
+        if (value.role !== 'admin') {
+          this.routes.navigateByUrl('sale').catch(reason => console.log(reason));
+          this.snack.open('Your not an admin, we redirect you to sale');
+        } else {
+          this.isLogin = true;
+        }
+      }
     });
-    // this.indexDb.getItem<UserI>('user').then(value => {
-    //   if (value === null) {
-    //     this.routes.navigateByUrl('login').catch(reason => console);
-    //   } else {
-    //     if (value.role !== 'admin') {
-    //       this.routes.navigateByUrl('sale').catch(reason => console.log(reason));
-    //       this.snack.open('Your not an admin, we redirect you to sale');
-    //     } else {
-    //       this.isLogin = true;
-    //     }
-    //   }
-    // });
   }
 
-  openDrawer() {
-    this.sidenav.open()
-      .then(value => {
-        console.log(value);
-      }).catch(reason => {
-      console.log(reason.toString());
-    });
-  }
+  // openDrawer() {
+  //   this.sidenav.open()
+  //     .then(value => {
+  //       console.log(value);
+  //     }).catch(reason => {
+  //     console.log(reason.toString());
+  //   });
+  // }
 }

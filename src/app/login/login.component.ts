@@ -25,23 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    UserDatabaseService.currentUser(value => {
+    this.userDatabase.currentUser(value => {
       if (value === null) {
         console.log('user is null');
         this.isLogin = false;
       } else {
         this.isLogin = true;
-        console.log('user is ---> ' + value);
+        this.showMainUi(value.role);
       }
     });
 
-    // this.indexDb.getItem<UserI>('user').then(value => {
-    //   if (value === null) {
-    //     this.isLogin = false;
-    //   } else {
-    //     this.showMainUi(value.role);
-    //   }
-    // });
   }
 
   goHome() {
