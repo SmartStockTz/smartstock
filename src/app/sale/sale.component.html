@@ -52,6 +52,7 @@
             <!--<mat-divider></mat-divider>-->
             <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
                     (click)="addToCart()">
+              <mat-icon>add_shopping_cart</mat-icon>
               Add To Cart
             </button>
 
@@ -71,11 +72,10 @@
             <mat-card-title>{{stock.shelf}}</mat-card-title>
           </mat-card-content>
         </mat-card>
-
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
-          <mat-tab-group color="warn" backgroundColor="primary">
+          <mat-tab-group [(selectedIndex)]="activeTab" >
 
-            <mat-tab label="Cart">
+            <mat-tab label="Cart" >
               <div>
                 <!--<mat-card-subtitle>Total Bill ( TZS )</mat-card-subtitle>-->
                 <!--<mat-card-title>{{totalPurchase}}</mat-card-title>-->
@@ -124,6 +124,8 @@
                   <tr mat-row *matRowDef="let row; columns: cartColums;"></tr>
                   <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="cartColums"></tr>
                 </table>
+                <mat-paginator #cartPaginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+
               </div>
             </mat-tab>
 
@@ -171,13 +173,13 @@
                   <tr mat-footer-row *matFooterRowDef="saleColums; sticky: true"></tr>
 
                 </table>
+                <mat-paginator #salePaginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
               </div>
             </mat-tab>
 
           </mat-tab-group>
         </div>
       </div>
-
     </div>
   </mat-sidenav-content>
 

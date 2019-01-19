@@ -15,6 +15,8 @@ export class PrintServiceService {
 
   printOrder(order: OrderI, callback: (value: any) => void) {
     let data = '\t' + new Date().toString() + '\n';
+    data = data.concat('**************************\n');
+    data = data.concat('To ---> ' + order.customer + '\n*************************\n');
     let tT = 0;
     order.cart.forEach((value, index) => {
       tT += <number>value.amount;
@@ -48,8 +50,10 @@ export class PrintServiceService {
     });
   }
 
-  printCart(carts: CartI[], callback: (value: any) => void) {
-    let data = '';
+  printCart(carts: CartI[], customer: string, callback: (value: any) => void) {
+    let data = '\t' + new Date().toString() + '\n';
+    data = data.concat('**************************\n');
+    data = data.concat('To ---> ' + customer + '\n*************************\n');
     let tT = 0;
     carts.forEach((value, index) => {
       tT += <number>value.amount;

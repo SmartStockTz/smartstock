@@ -1,10 +1,32 @@
 <div class="container">
-  <div class="row">
+  <!--<div class="row" *ngIf="data.type===0">-->
+    <!--<div class="col-12">-->
+      <!--<mat-form-field style="width: 100%">-->
+        <!--<input matInput placeholder="Customer Name" [formControl]="customerControl" required>-->
+      <!--</mat-form-field>-->
+      <!--<button class="btn-block" mat-button (click)="done()">Done</button>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="row" *ngIf="data.type===1">
     <div class="col-12">
-      <mat-form-field style="width: 100%">
-        <input matInput placeholder="Customer Name" [formControl]="customerControl" required>
-      </mat-form-field>
-      <button class="btn-block" mat-button (click)="done()">Done</button>
+      <mat-card-title>Printer is not working do you want to sell without printing?</mat-card-title>
+      <mat-divider></mat-divider>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" style="margin: 4px" (click)="done(1)">Sell</button>
+        <button mat-raised-button color="warn" style="margin: 4px" (click)="done(0)">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="data.type===2">
+    <div class="col-12">
+      <mat-card-title>Printer is not working do you want to sell order without printing?</mat-card-title>
+      <mat-divider></mat-divider>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" style="margin: 4px" (click)="done(2)">Sell</button>
+        <button mat-raised-button color="warn" style="margin: 4px" (click)="done(0)">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

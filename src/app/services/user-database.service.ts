@@ -96,7 +96,10 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
+
   logout(user: UserI, callback?: (value: any) => void) {
+    // console.log(this.serverUrl + '/logout');
+    console.log(user.sessionToken);
     this.httpClient.post(this.serverUrl + '/logout', {}, {
       headers: {
         'X-Parse-Application-Id': 'ssm',
@@ -141,6 +144,20 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         'Content-Type': 'application/json'
       }
     }).subscribe(value => callback(value), error1 => {
+      console.log(error1);
+      callback(null);
+    });
+  }
+
+  refreshToken(user: UserI, callback: (value: any) => void) {
+    this.httpClient.get(serverUrl + '/sessions/me', {
+      headers: {
+        'X-Parse-Application-Id': 'ssm',
+        'X-Parse-Session-Token': user.sessionToken
+      }
+    }).subscribe(value => {
+      callback(value);
+    }, error1 => {
       console.log(error1);
       callback(null);
     });

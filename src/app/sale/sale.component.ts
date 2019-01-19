@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatSnackBar, MatTableDataSource} from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Stock} from '../model/stock';
@@ -64,6 +64,9 @@ export class SaleComponent implements OnInit {
   salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
   saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
+  activeTab = 0;
+  @ViewChild('cartPaginator') paginator: MatPaginator;
+  @ViewChild('salePaginator') salePaginator: MatPaginator;
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
@@ -107,7 +110,13 @@ export class SaleComponent implements OnInit {
       this.snack.open('Please enter quantity of a product you sell', 'Ok', {duration: 3000});
     } else if (this.totalPrice === 0) {
       this.snack.open('Can\'t sell zero product', 'Ok');
+    } else if (this.cartDatasourceArray.length === 50) {
+      this.snack.open('Cart can accommodate only 50 products at once save them or sale them first then add another products',
+        'Ok', {duration: 3000});
     } else {
+      if (this.activeTab !== 0) {
+        this.activeTab = 0;
+      }
       const showTotalPrice = this.showTotalPrice();
       this.cartDatasourceArray.push({
         product: this.productNameControlInput.value,
@@ -117,6 +126,7 @@ export class SaleComponent implements OnInit {
         stock: this.stock,
       });
       this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+      this.cartDatasource.paginator = this.paginator;
       this.updateTotalBill();
       this.clearInputs();
     }
@@ -125,6 +135,7 @@ export class SaleComponent implements OnInit {
   removeItemFromCart(element: CartI) {
     this.cartDatasourceArray = this.cartDatasourceArray.filter(value => value !== element);
     this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+    this.cartDatasource.paginator = this.paginator;
     this.updateTotalBill();
   }
 
@@ -175,6 +186,7 @@ export class SaleComponent implements OnInit {
         this.hideProgressBar();
         this.cartDatasourceArray = [];
         this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+        this.cartDatasource.paginator = this.paginator;
         this.updateTotalBill();
         this.snack.open('Done save sales', 'Ok', {duration: 3000});
       }
@@ -217,7 +229,7 @@ export class SaleComponent implements OnInit {
     });
     this.quantityControlInput.valueChanges.subscribe(value => {
       if (value === null) {
-        this.snack.open('Quantity must be number', 'Ok', {duration: 3000});
+        // this.snack.open('Quantity must be number', 'Ok', {duration: 3000});
         this.showTotalPrice();
       } else {
         this.showTotalPrice();
@@ -257,10 +269,10 @@ export class SaleComponent implements OnInit {
 
     // live database
     this.saleDatabase.getAllCashSaleOfUser(this.currentUser.objectId, datasource => {
-      // console.log(datasource);
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
       this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
+      this.salesDatasource.paginator = this.salePaginator;
       this.updateTotalSales();
     });
   }
