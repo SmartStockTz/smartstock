@@ -39,7 +39,7 @@ const api = new ParseServer({
     appId: 'ssm',
     cloud: __dirname + '/cloud/main.js',
     masterKey: 'joshua5715',
-    serverURL: 'http://localhost:8000/parse',
+    serverURL: 'http://ssm.fahamutech.com/parse',
     liveQuery: {
         classNames: ['stocks', 'sales', 'orders', 'purchaseRefs', 'purchases', 'categories', 'units', 'suppliers'],
     }
@@ -56,5 +56,5 @@ app.use('/console', dash);
 //     cert: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/cert.pem')
 // };
 
-let server1 = http.createServer(app).listen(8000);
+let server1 = http.createServer(app).listen(80);
 ParseServer.createLiveQueryServer(server1);
