@@ -6,11 +6,8 @@ const ParseDashboard = require('parse-dashboard');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const https = require('http');
-const fs = require('fs');
-
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
+const http = require('http');
+// const fs = require('fs');
 
 const app = express();
 
@@ -20,11 +17,11 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const dashOptions = {allowInsecureHTTP: false};
+const dashOptions = {allowInsecureHTTP: true};
 const dashConfig = {
     "apps": [
         {
-            "serverURL": "https://ssm.fahamutech.com/parse",
+            "serverURL": "https://localhost:1337/parse",
             "appId": "ssm",
             "masterKey": "joshua5715"
         }
@@ -42,7 +39,7 @@ const api = new ParseServer({
     appId: 'ssm',
     cloud: __dirname + '/cloud/main.js',
     masterKey: 'joshua5715',
-    serverURL: 'http://ssm.fahamutech.com/parse',
+    serverURL: 'http://localhost:8000/parse',
     liveQuery: {
         classNames: ['stocks', 'sales', 'orders', 'purchaseRefs', 'purchases', 'categories', 'units', 'suppliers'],
     }
@@ -59,5 +56,5 @@ app.use('/console', dash);
 //     cert: fs.readFileSync('/etc/letsencrypt/live/lb.fahamutech.com/cert.pem')
 // };
 
-let server1 = https.createServer(app).listen(80);
-const parseLiveQueryServer = ParseServer.createLiveQueryServer(server1);
+let server1 = http.createServer(app).listen(8000);
+ParseServer.createLiveQueryServer(server1);

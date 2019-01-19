@@ -25,6 +25,9 @@
         </div>
         <mat-card class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 col-12" style="margin-bottom: 16px">
           <mat-card-content>
+            <mat-form-field style="width: 100%">
+              <input matInput placeholder="Customer Name" [formControl]="customerControl" required>
+            </mat-form-field>
             <mat-form-field class="my-input">
               <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>
             </mat-form-field>
@@ -73,7 +76,7 @@
         </mat-card>
 
         <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">
-          <mat-tab-group dynamicHeight color="warn" backgroundColor="primary">
+          <mat-tab-group [(selectedIndex)]="activeTab" dynamicHeight>
 
             <mat-tab label="Cart">
               <div>
@@ -116,14 +119,14 @@
                               </mat-icon>
                             </button>
                             <button mat-button="" color="primary" style="margin: 8px" (click)="saveOrder()">
-                              Save
+                              <mat-icon>save</mat-icon>Save
                             </button>
                           </div>
-                          <div>
-                            <button mat-button color="primary" style="margin: 8px" (click)="submitBill()">
-                              Sale
-                            </button>
-                          </div>
+                          <!--<div>-->
+                            <!--<button mat-button color="primary" style="margin: 8px" (click)="submitBill()">-->
+                              <!--Sale-->
+                            <!--</button>-->
+                          <!--</div>-->
                         </div>
                       </div>
                     </td>
@@ -132,6 +135,7 @@
                   <tr mat-row *matRowDef="let row; columns: cartColums;"></tr>
                   <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="cartColums"></tr>
                 </table>
+                <mat-paginator #cartPaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
               </div>
             </mat-tab>
 
@@ -179,6 +183,7 @@
                   <tr mat-footer-row *matFooterRowDef="saleColums; sticky: true"></tr>
 
                 </table>
+                <mat-paginator #salePaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
               </div>
             </mat-tab>
 
@@ -208,14 +213,19 @@
                       <th mat-header-cell *matHeaderCellDef>Action</th>
                       <td mat-cell *matCellDef="let element">
                         <div class="d-flex">
-                          <div class="align-self-center" style="margin: 8px">
-                            <button mat-icon-button (click)="printOrder(element)">
-                              <mat-icon color="primary">print</mat-icon>
+                          <!--<div class="align-self-center" style="margin: 8px">-->
+                            <!--<button mat-icon-button (click)="printOrder(element)">-->
+                              <!--<mat-icon color="primary">print</mat-icon>-->
+                            <!--</button>-->
+                          <!--</div>-->
+                          <div class="align-self-center" style="margin: 8px;">
+                            <button mat-icon-button (click)="deleteOrder(element)">
+                              <mat-icon color="warn">delete</mat-icon>
                             </button>
                           </div>
                           <div class="align-self-center" style="margin: 8px;">
-                            <button mat-icon-button (click)="deleteOrder(element)">
-                              <mat-icon color="primary">delete</mat-icon>
+                            <button mat-icon-button (click)="editOrder(element)">
+                              <mat-icon color="primary">remove_red_eye</mat-icon>
                             </button>
                           </div>
                         </div>
@@ -227,6 +237,7 @@
                     <tr mat-row *matRowDef="let row; columns: orderColums;"></tr>
                     <tr mat-footer-row *matFooterRowDef="orderColums"></tr>
                   </table>
+                  <mat-paginator #ordersPaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
                 </div>
             </mat-tab>
           </mat-tab-group>

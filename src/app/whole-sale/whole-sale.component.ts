@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {UserI} from '../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
@@ -17,6 +17,7 @@ import {PrintServiceService} from '../services/print-service.service';
 export interface DialogData {
   customer?: string;
   name?: string;
+  type: number;
 }
 
 @Component({
@@ -77,6 +78,11 @@ export class WholeSaleComponent implements OnInit {
   salesOrderDatasourceArray: OrderI[];
   salesOrderDatasource: MatTableDataSource<OrderI>;
   orderColums = ['date', 'amount', 'customer', 'action'];
+  activeTab = 0;
+  @ViewChild('cartPaginator') paginator: MatPaginator;
+  @ViewChild('salePaginator') salePaginator: MatPaginator;
+  @ViewChild('ordersPaginator') ordersPaginator: MatPaginator;
+  customerControl = new FormControl();
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
@@ -119,7 +125,15 @@ export class WholeSaleComponent implements OnInit {
       this.snack.open('Please enter quantity of a product you sell', 'Ok', {duration: 3000});
     } else if (this.totalPrice === 0) {
       this.snack.open('Can\'t sell zero product', 'Ok');
+    } else if (this.customerControl.value === null || this.customerControl.value === '') {
+      this.snack.open('Please enter customer name', 'Ok', {duration: 3000});
+    } else if (this.cartDatasourceArray.length === 50) {
+      this.snack.open('Cart can accommodate only 50 products at once save them or sale them first then add another products',
+        'Ok', {duration: 3000});
     } else {
+      if (this.activeTab !== 0) {
+        this.activeTab = 0;
+      }
       const showTotalPrice = this.showTotalPrice();
       this.cartDatasourceArray.push({
         product: this.stock.product,
@@ -129,6 +143,7 @@ export class WholeSaleComponent implements OnInit {
         stock: this.stock,
       });
       this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+      this.cartDatasource.paginator = this.paginator;
       this.updateTotalBill();
       this.clearInputs();
     }
@@ -137,6 +152,7 @@ export class WholeSaleComponent implements OnInit {
   removeItemFromCart(element: CartI) {
     this.cartDatasourceArray = this.cartDatasourceArray.filter(value => value !== element);
     this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+    this.cartDatasource.paginator = this.paginator;
     this.updateTotalBill();
   }
 
@@ -147,11 +163,6 @@ export class WholeSaleComponent implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    // const date = new Date();
-    // const year = date.getFullYear();
-    // const month = date.getMonth() + 1;
-    // const day = date.getDate();
-    // const stringDate = year + '-' + month + '-' + day;
     const stringDate = SalesDatabaseService.getCurrentDate();
     let idTra: string;
     if (this.traRadioControl.value === false) {
@@ -193,7 +204,28 @@ export class WholeSaleComponent implements OnInit {
   }
 
   saveOrder() {
-    this.openDialog();
+    // this.openDialog(0);
+    if (this.customerControl.value === null || this.customerControl.value === '') {
+      this.snack.open('Please enter customer name to save order');
+    } else {
+      this.showProgressBar();
+      this.saleDatabase.addOrder({
+        date: SalesDatabaseService.getCurrentDate(),
+        customer: this.customerControl.value,
+        amount: this.totalBill,
+        cart: this.cartDatasourceArray,
+        complete: false,
+        idOld: ''
+      }, value => {
+        if (value == null) {
+          this.snack.open('Order not saved, try again', 'Ok', {duration: 3000});
+          this.hideProgressBar();
+        } else {
+          this.clearCart();
+          this.hideProgressBar();
+        }
+      });
+    }
   }
 
   private clearInputs() {
@@ -212,8 +244,10 @@ export class WholeSaleComponent implements OnInit {
   private clearCart() {
     this.cartDatasourceArray = [];
     this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+    this.cartDatasource.paginator = this.paginator;
     this.updateTotalBill();
-    this.snack.open('Done saving items', 'Ok', {duration: 3000});
+    this.snack.open('Done saving cart items items', 'Ok', {duration: 3000});
+    this.customerControl.setValue('');
   }
 
   private showProgressBar() {
@@ -239,7 +273,7 @@ export class WholeSaleComponent implements OnInit {
     });
     this.quantityControlInput.valueChanges.subscribe(value => {
       if (value === null) {
-        this.snack.open('Quantity must be number', 'Ok', {duration: 3000});
+        // this.snack.open('Quantity must be number', 'Ok', {duration: 3000});
         this.showTotalPrice();
       } else {
         this.showTotalPrice();
@@ -280,11 +314,13 @@ export class WholeSaleComponent implements OnInit {
       this.saleDatasourceArray = [];
       this.saleDatasourceArray = datasource;
       this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
+      this.salesDatasource.paginator = this.salePaginator;
       this.updateTotalSales();
     });
     this.saleDatabase.getAllOrders(orders => {
       this.salesOrderDatasourceArray = orders;
       this.salesOrderDatasource = new MatTableDataSource<OrderI>(this.salesOrderDatasourceArray);
+      this.salesOrderDatasource.paginator = this.ordersPaginator;
       let orderT = 0;
       this.salesOrderDatasourceArray.forEach(value => {
         orderT += value.amount;
@@ -321,37 +357,23 @@ export class WholeSaleComponent implements OnInit {
     this.totalSaleAmount = s;
   }
 
-  private openDialog(): void {
+  private openDialog(type: number): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '300px',
-      data: {}
+      data: {
+        type: type,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === null) {
-        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
-      } else if (result === undefined) {
-        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
-      } else if (result === '') {
-        this.snack.open('Customer not entered', 'Ok', {duration: 3000});
+      if (result === 0) {
+        this.snack.open('Products not printed nor saved', 'Ok', {duration: 3000});
+      } else if (result === 1) {
+        this.submitBill();
+      } else if (result === 2) {
+        console.log('sell order');
       } else {
-        this.showProgressBar();
-        this.saleDatabase.addOrder({
-          date: SalesDatabaseService.getCurrentDate(),
-          customer: result,
-          amount: this.totalBill,
-          cart: this.cartDatasourceArray,
-          complete: false,
-          idOld: ''
-        }, value => {
-          if (value == null) {
-            this.snack.open('Order not saved, try again', 'Ok', {duration: 3000});
-            this.hideProgressBar();
-          } else {
-            this.clearCart();
-            this.hideProgressBar();
-          }
-        });
+        this.snack.open('You don\'t choose anything', 'Ok', {duration: 3000});
       }
     });
   }
@@ -359,9 +381,12 @@ export class WholeSaleComponent implements OnInit {
   printOrder(element: OrderI) {
     this.printS.printOrder(element, value => {
       if (value === null) {
-        this.snack.open('Printing fail', 'Ok', {duration: 3000});
+        this.snack.open('Not printed, either printer is not connected or printer software is not running, try again',
+          'Ok', {duration: 3000});
+        this.openDialog(2);
       } else {
-        this.snack.open('Done printing', 'Ok', {duration: 3000});
+        this.snack.open('Order printed and saved', 'Ok', {duration: 3000});
+
       }
     });
   }
@@ -391,11 +416,38 @@ export class WholeSaleComponent implements OnInit {
   }
 
   printCart() {
-    this.printS.printCart(this.cartDatasourceArray, value => {
+    this.printS.printCart(this.cartDatasourceArray, this.customerControl.value, value => {
       if (value === null) {
-        this.snack.open('Cart not printed', 'Ok', {duration: 3000});
+        this.snack.open('Not printed, either printer is not connected or printer software is not running, try again',
+          'Ok', {duration: 3000});
+        this.openDialog(1);
       } else {
-        this.snack.open('Cart printed', 'Ok', {duration: 30000});
+        this.snack.open('Cart printed and saved', 'Ok', {duration: 30000});
+        this.submitBill();
+      }
+    });
+  }
+
+  editOrder(element: OrderI) {
+    // this.cartDatasourceArray = element.cart;
+    //
+    // this.updateTotalBill();
+    this.showProgressBar();
+    this.saleDatabase.deleteOrder(element, value => {
+      if (value === null) {
+        this.snack.open('Failed to get order details check your internet connection',
+          'Ok', {duration: 3000});
+        this.hideProgressBar();
+      } else {
+        this.activeTab = 0;
+        // const showTotalPrice = this.showTotalPrice();
+        this.cartDatasourceArray = element.cart;
+        this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+        this.cartDatasource.paginator = this.paginator;
+        this.updateTotalBill();
+        this.clearInputs();
+        this.customerControl.setValue(element.customer);
+        this.hideProgressBar();
       }
     });
   }
@@ -413,9 +465,7 @@ export class DialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 
-  done() {
-    if (this.customerControl.value !== null) {
-      this.dialogRef.close(this.customerControl.value);
-    }
+  done(ans: number) {
+    this.dialogRef.close(ans);
   }
 }

@@ -40,7 +40,8 @@ export class NavBarComponent implements OnInit {
   logout() {
     this.userDatabase.currentUser(user => {
       if (user === null) {
-        this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
+        this.snack.open('Can\'t log you out, there is no current user', 'Ok', {duration: 3000});
+        this.router.navigateByUrl('login').catch(reason => console.log(reason));
       } else {
         this.userDatabase.logout(user, value => {
           if (value === null) {
