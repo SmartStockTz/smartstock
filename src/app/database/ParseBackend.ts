@@ -21,6 +21,4 @@ export class ParseBackend {
   }
 
 }
-
 export const serverUrl = 'http://ssm.fahamutech.com/parse';
-
