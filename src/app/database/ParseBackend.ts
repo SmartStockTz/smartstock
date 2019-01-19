@@ -1,5 +1,5 @@
 export class ParseBackend {
-  serverUrl = 'http://ssm.fahamutech.com/parse';
+  serverUrl = 'https://ssm.fahamutech.com:8443/parse';
   getHeader = {
     'X-Parse-Application-Id': 'ssm',
   };
@@ -21,4 +21,6 @@ export class ParseBackend {
   }
 
 }
-export const serverUrl = 'http://ssm.fahamutech.com/parse';
+
+export const serverUrl = 'https://ssm.fahamutech.com:8443/parse';
+
