@@ -17,16 +17,17 @@ Parse.serverURL = serverUrl;
   providedIn: 'root'
 })
 export class SalesDatabaseService extends ParseBackend implements SalesDatasource {
-  private query = new Parse.Query('sales');
-  private orderQuery = new Parse.Query('orders');
-  private ordersSubscription = this.orderQuery.subscribe();
-  private subscription = this.query.subscribe();
 
   constructor(private firestore: AngularFirestore,
               private indexDb: NgForage,
               private httpClient: HttpClient) {
     super();
   }
+
+  private query = new Parse.Query('sales');
+  private orderQuery = new Parse.Query('orders');
+  private ordersSubscription = this.orderQuery.subscribe();
+  private subscription = this.query.subscribe();
 
   static getCurrentDate(): string {
     const date = new Date();
@@ -51,46 +52,43 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
         path: '/parse/classes/sales'
       });
     });
-    this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
-        'requests': batchs
-      },
-      {
-        headers: this.getHeader
-      }
-    ).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
+
+    this.indexDb.clone({name: 'ssmsales'}).setItem<BatchI[]>(this.firestore.createId(), batchs).then(_ => {
+      callback('Ok');
+    }).catch(reason => {
+      console.log(reason);
       callback(null);
     });
+
   }
 
   addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void) {
-    if (sale.length <= 50) {
-      const batchs: BatchI[] = [];
-      sale.forEach(value => {
-        batchs.push({
-          method: 'POST',
-          body: value,
-          path: '/parse/classes/sales'
-        });
-      });
-      this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
-          'requests': batchs
-        },
-        {
-          headers:this.getHeader
-        }
-      ).subscribe(value => {
-        callback(value);
-      }, error1 => {
-        console.log(error1);
-        callback(null);
-      });
-    } else {
-      console.log('sales cant fit in batch');
-      callback('BE');
-    }
+    this.addAllCashSale(sale, callback);
+    // if (sale.length <= 50) {
+    //   const batchs: BatchI[] = [];
+    //   sale.forEach(value => {
+    //     batchs.push({
+    //       method: 'POST',
+    //       body: value,
+    //       path: '/parse/classes/sales'
+    //     });
+    //   });
+    //   this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
+    //       'requests': batchs
+    //     },
+    //     {
+    //       headers: this.getHeader
+    //     }
+    //   ).subscribe(value => {
+    //     callback(value);
+    //   }, error1 => {
+    //     console.log(error1);
+    //     callback(null);
+    //   });
+    // } else {
+    //   console.log('sales cant fit in batch');
+    //   callback('BE');
+    // }
   }
 
   deleteCashSale(sale: CashSaleI, callback: (value: any) => void) {
@@ -237,12 +235,13 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   addCashSaleToCache(sales: CartI[], callback: (value: any) => void) {
-    this.indexDb.setItem<CartI[]>('cart', sales).then(value => {
-      console.log('saved sales are ---> ' + value.length);
-      callback('Ok');
-    }).catch(reason => {
-      console.log(reason);
-      callback(null);
-    });
+    // this.indexDb.setItem<CartI[]>('cart', sales).then(value => {
+    //   console.log('saved sales are ---> ' + value.length);
+    //   callback('Ok');
+    // }).catch(reason => {
+    //   console.log(reason);
+    //   callback(null);
+    // });
+    callback('Ok');
   }
 }

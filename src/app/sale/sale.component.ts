@@ -146,17 +146,18 @@ export class SaleComponent implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    // const date = new Date();
-    // const year = date.getFullYear();
-    // const month = date.getMonth() + 1;
-    // const day = date.getDate();
-    // const stringDate = year + '-' + month + '-' + day;
     const stringDate = SalesDatabaseService.getCurrentDate();
     let idTra: string;
+    let channel: string;
     if (this.traRadioControl.value === false) {
       idTra = 'n';
     } else {
       idTra = 'n/n';
+    }
+    if (this.nhifRadioInput.value === true) {
+      channel = 'nhif';
+    } else {
+      channel = 'retail';
     }
     const saleM: CashSaleI[] = [];
     // console.log(stringDate);
@@ -168,7 +169,7 @@ export class SaleComponent implements OnInit {
         product: value.product,
         category: value.stock.category,
         unit: value.stock.unit,
-        channel: 'retail',
+        channel: channel,
         date: stringDate,
         idOld: this.firestore.createId(),
         idTra: idTra,
@@ -203,7 +204,27 @@ export class SaleComponent implements OnInit {
     this.changePrice = 0;
     this.totalPrice = 0;
     this.priceUnit = 0;
-    this.stock.shelf = '';
+    this.stock = {
+      category: '',
+      objectId: '',
+      nhifPrice: 0,
+      product: '',
+      profit: 0,
+      purchase: 0,
+      quantity: 0,
+      reorder: 0,
+      retailPrice: 0,
+      retailWholesalePrice: 0,
+      shelf: '',
+      supplier: '',
+      q_status: '',
+      times: 0,
+      expire: '',
+      retail_stockcol: '',
+      unit: '',
+      wholesalePrice: 0,
+      wholesaleQuantity: 0,
+    };
   }
 
   private showProgressBar() {
@@ -262,10 +283,23 @@ export class SaleComponent implements OnInit {
       console.log(error1);
     });
     this.retailWholesaleRadioInput.valueChanges.subscribe(value => {
+      if (value === true) {
+        if (this.nhifRadioInput.value === true) {
+          this.nhifRadioInput.setValue(false);
+        }
+      }
       this.showTotalPrice();
     }, error1 => {
       console.log(error1);
     });
+    this.nhifRadioInput.valueChanges.subscribe(value => {
+      if (value === true) {
+        if (this.retailWholesaleRadioInput.value === true) {
+          this.retailWholesaleRadioInput.setValue(false);
+        }
+      }
+      this.showTotalPrice();
+    }, error1 => console.log(error1));
 
     // live database
     this.saleDatabase.getAllCashSaleOfUser(this.currentUser.objectId, datasource => {
@@ -282,16 +316,20 @@ export class SaleComponent implements OnInit {
   }
 
   private showTotalPrice(): { quantity: number, amount: number } {
-    if (this.retailWholesaleRadioInput.value === false) {
+    if (this.nhifRadioInput.value === true) {
+      this.priceUnit = this.stock.nhifPrice;
+      this.totalPrice = (this.quantityControlInput.value * this.stock.nhifPrice) - (<number>this.discountControlInput.value);
+      return {amount: this.totalPrice, quantity: this.quantityControlInput.value};
+    } else if (this.retailWholesaleRadioInput.value === true) {
+      this.priceUnit = this.stock.wholesalePrice;
+      const a: number = (Number(this.quantityControlInput.value) * Number(this.stock.wholesaleQuantity));
+      const totalPrice1 = (a * (<number>this.stock.retailWholesalePrice / Number(this.stock.wholesaleQuantity)));
+      this.totalPrice = totalPrice1 - <number>this.discountControlInput.value;
+      return {amount: this.totalPrice, quantity: a};
+    } else {
       this.priceUnit = this.stock.retailPrice;
       this.totalPrice = (this.quantityControlInput.value * this.stock.retailPrice) - (<number>this.discountControlInput.value);
       return {amount: this.totalPrice, quantity: this.quantityControlInput.value};
-    } else {
-      this.priceUnit = this.stock.wholesalePrice;
-      const a: number = (Number(this.quantityControlInput.value) * Number(this.stock.wholesaleQuantity));
-      const totalPrice1 = (a * (<number>this.stock.wholesalePrice / Number(this.stock.wholesaleQuantity)));
-      this.totalPrice = totalPrice1 - <number>this.discountControlInput.value;
-      return {amount: this.totalPrice, quantity: a};
     }
   }
 

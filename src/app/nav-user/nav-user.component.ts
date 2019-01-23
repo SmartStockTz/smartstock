@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav-user',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
+  goToSales() {
+    this.router.navigateByUrl('sale').catch(reason => console.log(reason));
+  }
+
+  goToWholesale() {
+    this.router.navigateByUrl('whole').catch(reason => console.log(reason));
+  }
 }

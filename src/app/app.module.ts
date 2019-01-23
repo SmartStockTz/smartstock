@@ -51,6 +51,7 @@ import {CheckUserProgressComponent} from './check-user-progress/check-user-progr
 import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NavUserComponent } from './nav-user/nav-user.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { NavUserComponent } from './nav-user/nav-user.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   entryComponents: [

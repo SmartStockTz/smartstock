@@ -3,8 +3,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {UpdateLocalDatabaseService} from './services/update-local-database.service';
 import {UserDatabaseService} from './services/user-database.service';
 import {NgForage} from 'ngforage';
-import {UserI} from './model/UserI';
 import {Router} from '@angular/router';
+import {SalesProxyService} from './services/sales-proxy.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private router: Router,
+              private salesProxy: SalesProxyService,
               private updateLocal: UpdateLocalDatabaseService) {
 
   }
@@ -26,25 +27,9 @@ export class AppComponent implements OnInit {
     this.updateLocal.updateSuppliers();
     this.updateLocal.updateUnits();
     this.updateLocal.updateReceipts();
-    this.updateLocal.updateStock(stocks => {
-      // this.stockC.getStocksFromCache(stocks);
-    });
-    this.indexDb.getItem<UserI>('user').then(value => {
-      this.userDatabase.refreshToken(value, value1 => {
-        if (value1 === null) {
-          this.indexDb.removeItem('user').then(value2 => {
-            this.router.navigateByUrl('login').catch(reason => console.log(reason));
-          }).catch(reason => console.log(reason));
-        } else {
-          value.sessionToken = value1.sessionToken;
-          this.indexDb.setItem('user', value).then(value2 => {
-            console.log('update user session');
-          }).catch(reason => console.log(reason));
-        }
-      });
-    }).catch(reason => console.log(reason));
+    this.updateLocal.updateStock();
+    this.salesProxy.saleProxy();
   }
-
 
   // async insertCategory() {
   //   await this.httpClient.get<CategoryI[]>('/assets/datadumps/category.json').subscribe(value => {

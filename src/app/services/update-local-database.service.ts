@@ -23,7 +23,7 @@ export class UpdateLocalDatabaseService extends ParseBackend {
     super();
   }
 
-  updateStock(callback: (stocks: Stock[]) => void) {
+  updateStock(callback?: (stocks: Stock[]) => void) {
     const query = new Parse.Query('stocks');
     const subscription = query.subscribe();
     subscription.on('open', () => {

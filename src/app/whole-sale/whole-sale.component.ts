@@ -383,10 +383,9 @@ export class WholeSaleComponent implements OnInit {
       if (value === null) {
         this.snack.open('Not printed, either printer is not connected or printer software is not running, try again',
           'Ok', {duration: 3000});
-        this.openDialog(2);
+        // this.openDialog(2);
       } else {
-        this.snack.open('Order printed and saved', 'Ok', {duration: 3000});
-
+        this.snack.open('Order printed', 'Ok', {duration: 3000});
       }
     });
   }

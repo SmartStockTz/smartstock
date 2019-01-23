@@ -41,10 +41,10 @@ export class PrintServiceService {
           data: data,
           id: order.objectId
         }
-      }).subscribe(value => {
-        callback(value);
-      }, error1 => {
-        console.log(error1);
+      }).subscribe(_ => {
+        callback('Ok');
+      }, _ => {
+        console.log('printer fails ');
         callback(null);
       });
     });
@@ -78,21 +78,13 @@ export class PrintServiceService {
           data: data,
           id: '#'
         }
-      }).subscribe(value => {
-        callback(value);
-      }, error1 => {
-        console.log(error1);
+      }).subscribe(_ => {
+        callback('Ok');
+      }, _ => {
+        console.log('printer fails to print');
         callback(null);
       });
     });
-  }
-
-  saveOrderToFile(order: OrderI, callback: (value: any) => void) {
-
-  }
-
-  saveCartToFile(cart: CartI[], callback: (value: any) => void) {
-
   }
 
 }
