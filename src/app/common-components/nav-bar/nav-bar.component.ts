@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatSidenav, MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
 import {NgForage} from 'ngforage';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserDatabaseService} from '../../services/user-database.service';
 
 @Component({
   selector: 'app-nav-bar',

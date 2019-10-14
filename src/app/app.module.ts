@@ -10,12 +10,10 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {SaleComponent} from './sale/sale.component';
-import {DialogDeleteComponent, StockComponent} from './stock/stock.component';
+import {DialogDeleteComponent} from './stock-module/stock/stock.component';
 import {PurchaseComponent} from './purchase/purchase.component';
 import {ExpensesComponent} from './expenses/expenses.component';
 import {SettingComponent} from './setting/setting.component';
-import {NavComponent} from './nav/nav.component';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -47,11 +45,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
-import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
-import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavUserComponent } from './nav-user/nav-user.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {CommonComponentsModule} from './common-components/common-components.module';
 
 @NgModule({
   declarations: [
@@ -59,18 +55,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     LoginComponent,
     LandingComponent,
     DashboardComponent,
-    SaleComponent,
-    StockComponent,
     PurchaseComponent,
     ExpensesComponent,
     SettingComponent,
-    NavComponent,
-    CheckUserProgressComponent,
-    WholeSaleComponent,
     DialogComponent,
     DialogDeleteComponent,
-    NavBarComponent,
-    NavUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +97,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    CommonComponentsModule,
   ],
   providers: [],
   entryComponents: [

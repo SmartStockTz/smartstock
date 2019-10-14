@@ -15,19 +15,19 @@ export class NavComponent implements OnInit {
   }
 
   goToSale() {
-    this.router.navigateByUrl('sale').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
   }
 
   goToWholeSale() {
-    this.router.navigateByUrl('whole').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/sale/whole').catch(reason => console.log(reason));
   }
 
   goToStock() {
-    this.router.navigateByUrl('stock').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/stock').catch(reason => console.log(reason));
   }
 
   goToPurchase() {
-    this.router.navigateByUrl('purchase').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/purchase').catch(reason => console.log(reason));
   }
 
   goToServerSetting() {
@@ -37,6 +37,6 @@ export class NavComponent implements OnInit {
   }
 
   goToUsers() {
-    this.router.navigateByUrl('users').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/users').catch(reason => console.log(reason));
   }
 }

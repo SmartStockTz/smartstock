@@ -15,10 +15,10 @@ export class NavUserComponent implements OnInit {
   }
 
   goToSales() {
-    this.router.navigateByUrl('sale').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
   }
 
   goToWholesale() {
-    this.router.navigateByUrl('whole').catch(reason => console.log(reason));
+    this.router.navigateByUrl('/sale/whole').catch(reason => console.log(reason));
   }
 }

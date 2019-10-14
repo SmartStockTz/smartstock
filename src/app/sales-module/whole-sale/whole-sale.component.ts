@@ -1,18 +1,18 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
-import {UserI} from '../model/UserI';
+import {UserI} from '../../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {Stock} from '../model/stock';
-import {CartI} from '../model/cart';
-import {CashSaleI} from '../model/CashSale';
+import {Stock} from '../../model/stock';
+import {CartI} from '../../model/cart';
+import {CashSaleI} from '../../model/CashSale';
 import {Router} from '@angular/router';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserDatabaseService} from '../../services/user-database.service';
 import {NgForage} from 'ngforage';
-import {SalesDatabaseService} from '../services/sales-database.service';
-import {OrderI} from '../model/OderI';
-import {DialogDeleteComponent} from '../stock/stock.component';
-import {PrintServiceService} from '../services/print-service.service';
+import {SalesDatabaseService} from '../../services/sales-database.service';
+import {OrderI} from '../../model/OderI';
+import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
+import {PrintServiceService} from '../../services/print-service.service';
 
 export interface DialogData {
   customer?: string;

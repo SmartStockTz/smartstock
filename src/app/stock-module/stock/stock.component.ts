@@ -1,17 +1,17 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {UserI} from '../model/UserI';
+import {UserI} from '../../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {Stock} from '../model/stock';
+import {Stock} from '../../model/stock';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
-import {CashSaleI} from '../model/CashSale';
+import {CashSaleI} from '../../model/CashSale';
 import {Router} from '@angular/router';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserDatabaseService} from '../../services/user-database.service';
 import {NgForage} from 'ngforage';
-import {CategoryI} from '../model/CategoryI';
-import {SupplierI} from '../model/SupplierI';
-import {UnitsI} from '../model/UnitsI';
-import {StockDatabaseService} from '../services/stock-database.service';
+import {CategoryI} from '../../model/CategoryI';
+import {SupplierI} from '../../model/SupplierI';
+import {UnitsI} from '../../model/UnitsI';
+import {StockDatabaseService} from '../../services/stock-database.service';
 
 @Component({
   selector: 'app-stock',

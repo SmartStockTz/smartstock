@@ -2,14 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {Stock} from '../model/stock';
+import {Stock} from '../../model/stock';
 import {NgForage} from 'ngforage';
-import {UserI} from '../model/UserI';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserI} from '../../model/UserI';
+import {UserDatabaseService} from '../../services/user-database.service';
 import {Observable, of} from 'rxjs';
-import {CartI} from '../model/cart';
-import {SalesDatabaseService} from '../services/sales-database.service';
-import {CashSaleI} from '../model/CashSale';
+import {CartI} from '../../model/cart';
+import {SalesDatabaseService} from '../../services/sales-database.service';
+import {CashSaleI} from '../../model/CashSale';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
