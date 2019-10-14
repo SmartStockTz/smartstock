@@ -1,9 +1,9 @@
 {
-  "name": "SSM",
-  "version": "v1.19.01",
+  "name": "ssm",
+  "version": "0.1.1-alpha",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
