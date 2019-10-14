@@ -21,7 +21,7 @@ const dashOptions = {allowInsecureHTTP: true};
 const dashConfig = {
     "apps": [
         {
-            "serverURL": "https://localhost:1337/parse",
+            "serverURL": "http://localhost:1337/parse",
             "appId": "ssm",
             "masterKey": "joshua5715"
         }

@@ -11,6 +11,7 @@ import {CartI} from '../../model/cart';
 import {SalesDatabaseService} from '../../services/sales-database.service';
 import {CashSaleI} from '../../model/CashSale';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {PrintServiceService} from '../../services/print-service.service';
 
 @Component({
   selector: 'app-sale',
@@ -72,6 +73,7 @@ export class SaleComponent implements OnInit {
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
+              private printS: PrintServiceService,
               private firestore: AngularFirestore,
               private saleDatabase: SalesDatabaseService) {
   }
@@ -185,11 +187,25 @@ export class SaleComponent implements OnInit {
         this.hideProgressBar();
       } else {
         this.hideProgressBar();
+        this.printCart();
         this.cartDatasourceArray = [];
         this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
         this.cartDatasource.paginator = this.paginator;
         this.updateTotalBill();
-        this.snack.open('Done save sales', 'Ok', {duration: 3000});
+        // this.snack.open('Done save sales', 'Ok', {duration: 3000});
+      }
+    });
+  }
+
+  printCart() {
+    this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username, value => {
+      if (value === null) {
+        this.snack.open('Cart saved but not printed, either printer is not connected or printer software is not running',
+          'Ok', {duration: 3000});
+        // this.openDialog(1);
+      } else {
+        this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
+        // this.submitBill();
       }
     });
   }

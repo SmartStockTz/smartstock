@@ -50,6 +50,47 @@ export class PrintServiceService {
     });
   }
 
+  printCartRetail(carts: CartI[], customer: string, callback: (value: any) => void) {
+    let data = '\t' + new Date().toString() + '\n';
+    data = data.concat('**************************\n');
+    data = data.concat('Seller ---> ' + customer + '\n**********************\n');
+    let tT = 0;
+    carts.forEach((value, index) => {
+      tT += <number>value.amount;
+      data = data.concat('-----------------------------------\n' +
+        (index + 1) + '.  ' + value.product + '\n' +
+        'Quantity --> ' + (value.quantity ) + ' \t' +
+        'Price --> ' + value.stock.retailPrice + '\t' +
+        'Amount  --> ' + value.amount + ' \t\n');
+    });
+    data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
+    this.ssmSettings.getPrinterAddress(value1 => {
+      // if (value1 === null) {
+      this.url = 'http://localhost:8080/print';
+      // } else {
+      //   this.url = value1.ip;
+      // }
+      this.httpC.get(this.url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
+        params: {
+          data: data,
+          id: Date.now().toString()
+        }
+      }).subscribe(_ => {
+        callback('Ok');
+      }, _ => {
+        console.log(_);
+        if (_.status === 200) {
+          callback('Ok');
+        } else {
+          callback(null);
+        }
+      });
+    });
+  }
+
   printCart(carts: CartI[], customer: string, callback: (value: any) => void) {
     let data = '\t' + new Date().toString() + '\n';
     data = data.concat('**************************\n');
@@ -65,24 +106,28 @@ export class PrintServiceService {
     });
     data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
     this.ssmSettings.getPrinterAddress(value1 => {
-      if (value1 === null) {
-        this.url = 'http://localhost:8080/print';
-      } else {
-        this.url = value1.ip;
-      }
+      // if (value1 === null) {
+      this.url = 'http://localhost:8080/print';
+      // } else {
+      //   this.url = value1.ip;
+      // }
       this.httpC.get(this.url, {
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
         params: {
           data: data,
-          id: '#'
+          id: Date.now().toString()
         }
       }).subscribe(_ => {
         callback('Ok');
       }, _ => {
-        console.log('printer fails to print');
-        callback(null);
+        console.log(_);
+        if (_.status === 200) {
+          callback('Ok');
+        } else {
+          callback(null);
+        }
       });
     });
   }

@@ -196,7 +196,8 @@ export class WholeSaleComponent implements OnInit {
           'Ok', {duration: 4000});
         this.hideProgressBar();
       } else {
-        this.snack.open('Sales saved', 'Ok', {duration: 3000});
+        this.printCart();
+        // this.snack.open('Sales saved', 'Ok', {duration: 3000});
         this.hideProgressBar();
         this.clearCart();
       }
@@ -417,12 +418,12 @@ export class WholeSaleComponent implements OnInit {
   printCart() {
     this.printS.printCart(this.cartDatasourceArray, this.customerControl.value, value => {
       if (value === null) {
-        this.snack.open('Not printed, either printer is not connected or printer software is not running, try again',
+        this.snack.open('Cart saved but not printed, either printer is not connected or printer software is not running',
           'Ok', {duration: 3000});
-        this.openDialog(1);
+        // this.openDialog(1);
       } else {
-        this.snack.open('Cart printed and saved', 'Ok', {duration: 30000});
-        this.submitBill();
+        this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
+        // this.submitBill();
       }
     });
   }

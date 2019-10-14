@@ -18,7 +18,7 @@
               <mat-option *ngFor="let st of filteredOptions | async"
                           [value]="st.product + ' -->' + st.wholesalePrice + ' TZS/' + st.wholesaleQuantity+' '+st.unit"
                           (onSelectionChange)="updateSelectedStock(st)">
-                {{st.product + ' -->' + st.wholesalePrice + ' TZS/' + st.wholesaleQuantity+' '+st.unit}}
+                {{st.product + ' -->' + st.wholesalePrice + ' TZS/' + st.wholesaleQuantity + ' ' + st.unit}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -51,7 +51,8 @@
             <!--N\N-->
             <!--</mat-slide-toggle>-->
             <!--<mat-divider></mat-divider>-->
-            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded" (click)="addToCart()">
+            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"
+                    (click)="addToCart()">
               <mat-icon>
                 add_shopping_cart
               </mat-icon>
@@ -113,19 +114,20 @@
                         <div class="d-flex" *ngIf="!showProgress">
                           <div>
                             <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
-                            <button mat-icon-button (click)="printCart()">
+                            <button mat-icon-button (click)="submitBill()">
                               <mat-icon color="primary">
                                 print
                               </mat-icon>
                             </button>
                             <button mat-button="" color="primary" style="margin: 8px" (click)="saveOrder()">
-                              <mat-icon>save</mat-icon>Save
+                              <mat-icon>save</mat-icon>
+                              Save
                             </button>
                           </div>
                           <!--<div>-->
-                            <!--<button mat-button color="primary" style="margin: 8px" (click)="submitBill()">-->
-                              <!--Sale-->
-                            <!--</button>-->
+                          <!--<button mat-button color="primary" style="margin: 8px" (click)="submitBill()">-->
+                          <!--Sale-->
+                          <!--</button>-->
                           <!--</div>-->
                         </div>
                       </div>
@@ -188,57 +190,57 @@
             </mat-tab>
 
             <mat-tab label="Orders">
-                <div>
-                  <mat-form-field style="width: 100%; margin-top: 16px">
-                    <input matInput placeholder="Search" type="text" [formControl]="searchOrderControl"/>
-                  </mat-form-field>
+              <div>
+                <mat-form-field style="width: 100%; margin-top: 16px">
+                  <input matInput placeholder="Search" type="text" [formControl]="searchOrderControl"/>
+                </mat-form-field>
 
-                  <table mat-table [dataSource]="salesOrderDatasource" class="mat-elevation-z8">
-                    <ng-container matColumnDef="date">
-                      <th mat-header-cell *matHeaderCellDef>Date</th>
-                      <td mat-cell *matCellDef="let element">{{element.date}}</td>
-                      <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
-                    </ng-container>
-                    <ng-container matColumnDef="amount">
-                      <th mat-header-cell *matHeaderCellDef>Amount</th>
-                      <td mat-cell *matCellDef="let element">{{element.amount}}</td>
-                      <td mat-footer-cell *matFooterCellDef><b>{{totalOrder}}</b></td>
-                    </ng-container>
-                    <ng-container matColumnDef="customer">
-                      <th mat-header-cell *matHeaderCellDef>Customer</th>
-                      <td mat-cell *matCellDef="let element">{{element.customer}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
-                    <ng-container matColumnDef="action">
-                      <th mat-header-cell *matHeaderCellDef>Action</th>
-                      <td mat-cell *matCellDef="let element">
-                        <div class="d-flex">
-                          <div class="align-self-center" style="margin: 8px">
-                            <button mat-icon-button (click)="printOrder(element)">
-                              <mat-icon color="primary">print</mat-icon>
-                            </button>
-                          </div>
-                          <div class="align-self-center" style="margin: 8px;">
-                            <button mat-icon-button (click)="deleteOrder(element)">
-                              <mat-icon color="warn">delete</mat-icon>
-                            </button>
-                          </div>
-                          <div class="align-self-center" style="margin: 8px;">
-                            <button mat-icon-button (click)="editOrder(element)">
-                              <mat-icon color="primary">edit</mat-icon>
-                            </button>
-                          </div>
+                <table mat-table [dataSource]="salesOrderDatasource" class="mat-elevation-z8">
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalOrder}}</b></td>
+                  </ng-container>
+                  <ng-container matColumnDef="customer">
+                    <th mat-header-cell *matHeaderCellDef>Customer</th>
+                    <td mat-cell *matCellDef="let element">{{element.customer}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex">
+                        <div class="align-self-center" style="margin: 8px">
+                          <button mat-icon-button (click)="printOrder(element)">
+                            <mat-icon color="primary">print</mat-icon>
+                          </button>
                         </div>
-                      </td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                        <div class="align-self-center" style="margin: 8px;">
+                          <button mat-icon-button (click)="deleteOrder(element)">
+                            <mat-icon color="warn">delete</mat-icon>
+                          </button>
+                        </div>
+                        <div class="align-self-center" style="margin: 8px;">
+                          <button mat-icon-button (click)="editOrder(element)">
+                            <mat-icon color="primary">edit</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                  </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="orderColums"></tr>
-                    <tr mat-row *matRowDef="let row; columns: orderColums;"></tr>
-                    <tr mat-footer-row *matFooterRowDef="orderColums"></tr>
-                  </table>
-                  <mat-paginator #ordersPaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
-                </div>
+                  <tr mat-header-row *matHeaderRowDef="orderColums"></tr>
+                  <tr mat-row *matRowDef="let row; columns: orderColums;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="orderColums"></tr>
+                </table>
+                <mat-paginator #ordersPaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
+              </div>
             </mat-tab>
           </mat-tab-group>
         </div>
