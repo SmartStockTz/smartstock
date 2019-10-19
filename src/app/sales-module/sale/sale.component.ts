@@ -179,6 +179,7 @@ export class SaleComponent implements OnInit {
         stockId: value.stock.objectId// for reference only
       });
     });
+
     this.saleDatabase.addAllCashSale(saleM, value => {
       if (value === null) {
         this.saleDatabase.addCashSaleToCache(this.cartDatasourceArray, value1 => {
@@ -187,7 +188,7 @@ export class SaleComponent implements OnInit {
         this.hideProgressBar();
       } else {
         this.hideProgressBar();
-        this.printCart();
+        // this.printCart();
         this.cartDatasourceArray = [];
         this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
         this.cartDatasource.paginator = this.paginator;
@@ -200,10 +201,11 @@ export class SaleComponent implements OnInit {
   printCart() {
     this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username, value => {
       if (value === null) {
-        this.snack.open('Cart saved but not printed, either printer is not connected or printer software is not running',
+        this.snack.open('Printer is not connected or printer software is not running',
           'Ok', {duration: 3000});
         // this.openDialog(1);
       } else {
+        this.submitBill();
         this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
         // this.submitBill();
       }

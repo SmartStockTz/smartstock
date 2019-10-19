@@ -33,13 +33,16 @@ export class PrintServiceService {
       } else {
         this.url = value1.ip;
       }
-      this.httpC.get(this.url, {
+      this.httpC.post(this.url, {
+        data: data,
+        id: order.objectId
+      }, {
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
         params: {
-          data: data,
-          id: order.objectId
+          // data: data,
+          // id: order.objectId
         }
       }).subscribe(_ => {
         callback('Ok');
@@ -59,7 +62,7 @@ export class PrintServiceService {
       tT += <number>value.amount;
       data = data.concat('-----------------------------------\n' +
         (index + 1) + '.  ' + value.product + '\n' +
-        'Quantity --> ' + (value.quantity ) + ' \t' +
+        'Quantity --> ' + (value.quantity) + ' \t' +
         'Price --> ' + value.stock.retailPrice + '\t' +
         'Amount  --> ' + value.amount + ' \t\n');
     });
@@ -70,13 +73,17 @@ export class PrintServiceService {
       // } else {
       //   this.url = value1.ip;
       // }
-      this.httpC.get(this.url, {
+      this.httpC.post(this.url, {
+        data: data,
+        id: Date.now().toString(),
+      }, {
         headers: {
+          'content-type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         },
         params: {
-          data: data,
-          id: Date.now().toString()
+          // data: data,
+          // id: Date.now().toString()
         }
       }).subscribe(_ => {
         callback('Ok');
@@ -111,13 +118,16 @@ export class PrintServiceService {
       // } else {
       //   this.url = value1.ip;
       // }
-      this.httpC.get(this.url, {
+      this.httpC.post(this.url, {
+        data: data,
+        id: Date.now().toString()
+      }, {
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
         params: {
-          data: data,
-          id: Date.now().toString()
+          // data: data,
+          // id: Date.now().toString()
         }
       }).subscribe(_ => {
         callback('Ok');
