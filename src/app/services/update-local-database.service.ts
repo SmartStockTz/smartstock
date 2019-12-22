@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {ReceiptI} from '../model/ReceiptI';
 
-Parse.initialize('ssm');
+Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
 
 @Injectable({

@@ -8,7 +8,7 @@ import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import * as Parse from 'node_modules/parse';
 
-Parse.initialize('ssm');
+Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
 
 @Injectable({
@@ -102,7 +102,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     console.log(user.sessionToken);
     this.httpClient.post(this.serverUrl + '/logout', {}, {
       headers: {
-        'X-Parse-Application-Id': 'ssm',
+        'X-Parse-Application-Id': 'lbpharmacy',
         'X-Parse-Session-Token': user.sessionToken
       }
     }).subscribe(value => {
@@ -139,7 +139,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   updateUser(user: UserI, callback?: (value: any) => void) {
     this.httpClient.put(this.serverUrl + '/users/' + user.objectId, user, {
       headers: {
-        'X-Parse-Application-Id': 'ssm',
+        'X-Parse-Application-Id': 'lbpharmacy',
         'X-Parse-Session-Token': user.sessionToken,
         'Content-Type': 'application/json'
       }
@@ -152,7 +152,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   refreshToken(user: UserI, callback: (value: any) => void) {
     this.httpClient.get(serverUrl + '/sessions/me', {
       headers: {
-        'X-Parse-Application-Id': 'ssm',
+        'X-Parse-Application-Id': 'lbpharmacy',
         'X-Parse-Session-Token': user.sessionToken
       }
     }).subscribe(value => {
