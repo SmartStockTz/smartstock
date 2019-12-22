@@ -8,7 +8,7 @@ import * as Parse from 'node_modules/parse';
 import {NgForage} from 'ngforage';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 
-Parse.initialize('ssm');
+Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
 
 @Injectable({

@@ -1,14 +1,15 @@
 export class ParseBackend {
-  serverUrl = 'http://ssm.fahamutech.com/parse';
+  serverUrl = 'https://lbpharmacy-daas.bfast.fahamutech.com';
+  functionsUrl = 'https://lbpharmacy-faas.bfast.fahamutech.com';
   getHeader = {
-    'X-Parse-Application-Id': 'ssm',
+    'X-Parse-Application-Id': 'lbpharmacy',
   };
   getHeaderUser = {
-    'X-Parse-Application-Id': 'ssm',
+    'X-Parse-Application-Id': 'lbpharmacy',
     'X-Parse-Revocable-Session': '1',
   };
   postHeader = {
-    'X-Parse-Application-Id': 'ssm',
+    'X-Parse-Application-Id': 'lbpharmacy',
     'Content-Type': 'application/json'
   };
   postHeaderUser = {
@@ -22,5 +23,6 @@ export class ParseBackend {
 
 }
 
-export const serverUrl = 'http://ssm.fahamutech.com/parse';
+export const serverUrl = 'https://lbpharmacy-daas.bfast.fahamutech.com';
+export const functionsUrl = 'https://lbpharmacy-faas.bfast.fahamutech.com';
 

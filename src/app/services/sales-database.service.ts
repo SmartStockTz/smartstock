@@ -10,7 +10,7 @@ import * as Parse from 'node_modules/parse';
 import {BatchI} from '../model/batchI';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 
-Parse.initialize('ssm');
+Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
 
 @Injectable({
@@ -183,7 +183,7 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   deleteOrder(order: OrderI, callback?: (value) => void) {
     this.httpClient.delete(this.serverUrl + '/classes/orders/' + order.objectId, {
       headers: {
-        'X-Parse-Application-Id': 'ssm'
+        'X-Parse-Application-Id': 'lbpharmacy'
       }
     }).subscribe(value => {
       callback(value);

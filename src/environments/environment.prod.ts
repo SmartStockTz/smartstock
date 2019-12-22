@@ -7,5 +7,6 @@ export const environment = {
     projectId: 'smart-stock-manager',
     storageBucket: 'smart-stock-manager.appspot.com',
     messagingSenderId: '23694341104',
-  }
+  },
+  printerUrl: 'https://localhost:8080'
 };

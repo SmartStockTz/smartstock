@@ -3,6 +3,7 @@ import {OrderI} from '../model/OderI';
 import {CartI} from '../model/cart';
 import {HttpClient} from '@angular/common/http';
 import {SsmSettingsServiceService} from './ssm-settings-service.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class PrintServiceService {
     data = data.concat('\n**********\n| Total Bill : ' + tT + '\n**********');
     this.ssmSettings.getPrinterAddress(value1 => {
       if (value1 === null) {
-        this.url = 'http://localhost:8080/print';
+        this.url = `${environment.printerUrl}/print`;
       } else {
         this.url = value1.ip;
       }
@@ -69,7 +70,7 @@ export class PrintServiceService {
     data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
     this.ssmSettings.getPrinterAddress(value1 => {
       // if (value1 === null) {
-      this.url = 'http://localhost:8080/print';
+      this.url = `${environment.printerUrl}/print`;
       // } else {
       //   this.url = value1.ip;
       // }
@@ -114,7 +115,7 @@ export class PrintServiceService {
     data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
     this.ssmSettings.getPrinterAddress(value1 => {
       // if (value1 === null) {
-      this.url = 'http://localhost:8080/print';
+      this.url = `${environment.printerUrl}/print`;
       // } else {
       //   this.url = value1.ip;
       // }
