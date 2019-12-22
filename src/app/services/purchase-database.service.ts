@@ -28,7 +28,7 @@ export class PurchaseDatabaseService extends ParseBackend implements PurchaseDat
     purchases.forEach(value => {
       bat.push({
         method: 'POST',
-        path: '/parse/classes/purchases',
+        path: '/classes/purchases',
         body: value
       });
     });

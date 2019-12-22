@@ -46,8 +46,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
-import {ServiceWorkerModule} from '@angular/service-worker';
 import {CommonComponentsModule} from './common-components/common-components.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -97,8 +97,8 @@ import {CommonComponentsModule} from './common-components/common-components.modu
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     CommonComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   entryComponents: [

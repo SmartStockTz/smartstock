@@ -49,7 +49,7 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
       batchs.push({
         method: 'POST',
         body: value,
-        path: '/parse/classes/sales'
+        path: '/classes/sales'
       });
     });
 
@@ -70,7 +70,7 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
     //     batchs.push({
     //       method: 'POST',
     //       body: value,
-    //       path: '/parse/classes/sales'
+    //       path: '/classes/sales'
     //     });
     //   });
     //   this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {

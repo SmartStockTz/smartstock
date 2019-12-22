@@ -43,6 +43,6 @@ export class SalesProxyService extends ParseBackend {
       }).catch(reason => {
         console.log(reason);
       });
-    }, 30000);
+    }, 1000);
   }
 }

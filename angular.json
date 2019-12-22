@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "smartstockclient": {
+    "lbpharmacy": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/smartstockclient",
+            "outputPath": "dist/lbpharmacy",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,6 +21,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.json",
               "src/manifest.json",
               "src/manifest.json"
             ],
@@ -54,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "smartstockclient:build"
+            "browserTarget": "lbpharmacy:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "smartstockclient:build:production"
+              "browserTarget": "lbpharmacy:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "smartstockclient:build"
+            "browserTarget": "lbpharmacy:build"
           }
         },
         "test": {
@@ -83,6 +84,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.json",
               "src/manifest.json",
               "src/manifest.json"
             ]
@@ -102,7 +104,7 @@
         }
       }
     },
-    "smartstockclient-e2e": {
+    "lbpharmacy-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -110,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "smartstockclient:serve"
+            "devServerTarget": "lbpharmacy:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "smartstockclient:serve:production"
+              "devServerTarget": "lbpharmacy:serve:production"
             }
           }
         },
@@ -130,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "smartstockclient"
+  "defaultProject": "lbpharmacy"
 }
