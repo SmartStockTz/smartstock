@@ -52,9 +52,13 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
         path: '/classes/sales'
       });
     });
-
     this.indexDb.clone({name: 'ssmsales'}).setItem<BatchI[]>(this.firestore.createId(), batchs).then(_ => {
       callback('Ok');
+      // const worker = new Worker('/assets/js/sw-sales-proxy.js');
+      // worker.onmessage = ({data}) => {
+      //   console.log(`page got message:`, data);
+      // };
+      // worker.postMessage(sales);
     }).catch(reason => {
       console.log(reason);
       callback(null);
