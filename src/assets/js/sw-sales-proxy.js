@@ -1,4 +1,5 @@
 importScripts('/assets/js/localforage.min.js');
+importScripts('/assets/js/axios.min.js');
 addEventListener('message', ({data}) => {
   localforage.config({
     name: 'ssmsales',
@@ -13,9 +14,12 @@ addEventListener('message', ({data}) => {
       } else if (keys.length > 0) {
         keys.forEach(key => {
           localforage.getItem(key).then(value => {
-            fetch('https://lbpharmacy-daas.bfast.fahamutech.com/batch', {
-              method: 'POST',
-              body: {
+            axios({
+              baseURL: 'https://lbpharmacy-daas.bfast.fahamutech.com',
+              url: '/batch',
+              method: 'post',
+              // mode: "cors",
+              data: {
                 'requests': value
               },
               headers: {
@@ -23,7 +27,7 @@ addEventListener('message', ({data}) => {
                 'Content-Type': 'application/json'
               }
             }).then(_ => {
-              console.log(_);
+              // console.log(_);
               localforage.removeItem(key).catch(reason => console.log(reason));
             }).catch(reason => {
               console.log(reason);
@@ -34,6 +38,6 @@ addEventListener('message', ({data}) => {
     }).catch(reason => {
       console.log(reason);
     });
-  }, 1000);
+  }, 2000);
   postMessage("your request received");
 });

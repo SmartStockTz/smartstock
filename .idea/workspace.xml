@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="r">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/js/localforage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/js/axios.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-proxy.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sales-proxy.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-proxy.worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,14 +251,8 @@
       <workItem from="1577001174064" duration="1791000" />
       <workItem from="1577009802445" duration="7563000" />
       <workItem from="1577026599920" duration="9853000" />
-      <workItem from="1577442026510" duration="11941000" />
-    </task>
-    <task id="LOCAL-00017" summary="refresh">
-      <created>1569662133647</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1569662133647</updated>
+      <workItem from="1577442026510" duration="12082000" />
+      <workItem from="1577460114400" duration="2205000" />
     </task>
     <task id="LOCAL-00018" summary="update invoice and receipt in purchase module">
       <created>1569705860865</created>
@@ -602,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577016617858</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="unreview web worker for background thread">
+      <created>1577456355820</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1577456355821</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -633,7 +628,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update edit product in stock module" />
     <MESSAGE value="fix add date when edit product" />
     <MESSAGE value="update server url" />
     <MESSAGE value="update invoice to record to stock and payments" />
@@ -658,7 +652,8 @@
     <MESSAGE value="migrate to bfast servers" />
     <MESSAGE value="refresh" />
     <MESSAGE value="update sales-proxy.service.ts routine for 1sec wait" />
-    <option name="LAST_COMMIT_MESSAGE" value="update sales-proxy.service.ts routine for 1sec wait" />
+    <MESSAGE value="unreview web worker for background thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="unreview web worker for background thread" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -666,26 +661,26 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577441980359">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577456355459">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577441980359" />
-    <state width="1600" height="256" key="GridCell.Tab.0.bottom" timestamp="1577455122832">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577456355459" />
+    <state width="1600" height="244" key="GridCell.Tab.0.bottom" timestamp="1577462541517">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="256" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1577455122832" />
-    <state width="1600" height="256" key="GridCell.Tab.0.center" timestamp="1577455122830">
+    <state width="1600" height="244" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1577462541517" />
+    <state width="1600" height="244" key="GridCell.Tab.0.center" timestamp="1577462541507">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="256" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1577455122830" />
-    <state width="1600" height="256" key="GridCell.Tab.0.left" timestamp="1577455122829">
+    <state width="1600" height="244" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1577462541507" />
+    <state width="1600" height="244" key="GridCell.Tab.0.left" timestamp="1577462541501">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="256" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1577455122829" />
-    <state width="1600" height="256" key="GridCell.Tab.0.right" timestamp="1577455122831">
+    <state width="1600" height="244" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1577462541501" />
+    <state width="1600" height="244" key="GridCell.Tab.0.right" timestamp="1577462541514">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="256" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1577455122831" />
+    <state width="1600" height="244" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1577462541514" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -698,10 +693,10 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="95" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577017324973">
+    <state x="398" y="90" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577456358783">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="398" y="95" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577017324973" />
+    <state x="398" y="90" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577456358783" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

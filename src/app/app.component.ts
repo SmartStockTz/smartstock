@@ -23,11 +23,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.updateLocal.updateCategories();
-    // this.updateLocal.updateSuppliers();
-    // this.updateLocal.updateUnits();
-    // this.updateLocal.updateReceipts();
-    // this.updateLocal.updateStock();
+    this.updateLocal.updateCategories();
+    this.updateLocal.updateSuppliers();
+    this.updateLocal.updateUnits();
+    this.updateLocal.updateReceipts();
+    this.updateLocal.updateStock();
     this.salesProxy.saleProxy();
   }
 
