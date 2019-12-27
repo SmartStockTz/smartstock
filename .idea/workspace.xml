@@ -2,10 +2,839 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/js/axios.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Electron Framework" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libswiftshader_libEGL.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/MainMenu.nib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ar.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/bn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/chrome_200_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/crashpad_handler" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/cs.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/es.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fa.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/he.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/hu.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ja.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/kn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/mr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/nb.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/resources.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ro.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sk.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sl.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sw.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/te.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/th.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/vi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/zh_CN.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/zh_TW.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/Current" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Modules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLModel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/Mantle.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSArray+MTLManipulationAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSValueTransformer+MTLInversionAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSValueTransformer+MTLPredefinedTransformerAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Modules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/ReactiveCocoa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/EXTScope.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSControl+RACCommandSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSData+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSDictionary+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSEnumerator+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSFileHandle+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACDeallocating.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACLifting.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSSet+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSString+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACBehaviorSubject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACCommand.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACReplaySubject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSerialDisposable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACUnit.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/ReactiveCocoa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/NSBundle+SQRLVersionExtensions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/NSProcessInfo+SQRLVersionExtensions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/SQRLDownloadedUpdate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/SQRLUpdate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Modules/module.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ssm Helper (Renderer).app/Contents/MacOS/ssm Helper (Renderer)" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ssm Helper.app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Frameworks/ssm Helper.app/Contents/MacOS/ssm Helper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/.firebaserc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/e2e/protractor.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/check-user-progress/check-user-progress.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/check-user-progress/check-user-progress.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/common-components.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-bar/nav-bar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-bar/nav-bar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-user/nav-user.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-user/nav-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/dashboard/dashboard.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/database/DatabaseCallback.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/database/connector/DataBaseConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/database/connector/PurchaseDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/expenses/expenses.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/landing/landing.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/landing/landing.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/model/CategoryI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/model/SupplierI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/model/stock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/sales-module/sale/sale.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/sales-module/sales-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/sales-module/whole-sale/whole-sale.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/sales-module/whole-sale/whole-sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/print-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/purchase-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/sales-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/sales-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/sales-proxy.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/ssm-settings-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/ssm-tools.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/stock-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/stock-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/update-local-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/services/user-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/setting/setting.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock-module.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/css/Features-Boxed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/css/Testimonials.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/ionicons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/fonts/ionicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/icons/icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/img/calculate.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/img/developerLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/img/lbLogo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/img/ssmlogo.icon" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/img/ssmlogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/js/localforage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/app/src/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-darwin-x64/ssm.app/Contents/Resources/electron.icns" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/LICENSES.chromium.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/icudtl.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/am.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/bg.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/bn.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/da.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/de.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/en-GB.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/en-US.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/et.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/fa.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/fil.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/ko.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/nl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/pt-PT.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/ro.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/sl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/tr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/locales/zh-TW.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/e2e/src/app.po.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/ngsw-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/app-routing.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/common-components.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/nav-bar/nav-bar.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/nav-user/nav-user.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/nav-user/nav-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/nav/nav.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/common-components/nav/nav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/dashboard/dashboard.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/dashboard/dashboard.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/database/connector/StockDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/database/connector/UserDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/landing/landing.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/landing/landing.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/CashSale.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/ReceiptI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/SupplierI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/UserI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/model/stock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/purchase/purchase.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/purchase/purchase.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/sale/sale.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/sale/sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/sales-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/purchase-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/sales-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/sales-proxy.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/ssm-settings-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/ssm-tools.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/stock-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/services/update-local-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/setting/setting.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/setting/setting.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/stock-module/stock/stock.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/css/Features-Boxed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/css/Header-Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/Simple-Line-Icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/ionicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/fonts/simple-line-icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/icons/icon-72x72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/img/lbLogo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/browserslist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/src/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-arm64/resources/app/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/chrome-sandbox" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/icudtl.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/libEGL.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/am.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/da.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/de.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/en-GB.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/en-US.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/es.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/et.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/hi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/hr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/ko.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/mr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/nl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/pt-BR.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/sl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/sv.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/te.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/uk.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/locales/vi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/natives_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/.firebaserc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/ngsw-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/app-routing.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/common-components/nav-bar/nav-bar.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/common-components/nav-user/nav-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/common-components/nav-user/nav-user.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/common-components/nav/nav.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/common-components/nav/nav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/dashboard/dashboard.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/database/DatabaseCallback.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/database/connector/PurchaseDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/expenses/expenses.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/landing/landing.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/landing/landing.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/login/login.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/model/SupplierI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/model/UserI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/model/batchI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/model/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/model/stock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/purchase/purchase.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/sales-module/sales-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/sales-module/whole-sale/app-dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/services/sales-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/services/ssm-tools.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/services/stock-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/services/user-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/setting/setting.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/setting/setting.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/stock-module/stock-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/app/stock-module/stock/stock.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/css/Footer-Basic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/css/Header-Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/css/Team-Boxed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/css/Testimonials.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/fonts/Simple-Line-Icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/fonts/ionicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/icons/icon-128x128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/icons/icon-152x152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/icons/icon-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/icons/icon-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/icons/icon-72x72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/img/scenery/image6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/img/ssmbg.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/assets/js/smoothproducts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/browserslist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/resources/app/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/snapshot_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-armv7l/ssm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/chrome-sandbox" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/chrome_200_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ar.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/da.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/el.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/en-US.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/es.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/fr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/hi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/hr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/hu.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/id.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ja.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ko.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ml.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/mr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/pt-BR.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ru.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/ta.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/te.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/uk.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/locales/zh-TW.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/e2e/src/app.po.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/ngsw-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/common-components/nav-bar/nav-bar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/common-components/nav-user/nav-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/common-components/nav-user/nav-user.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/common-components/nav/nav.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/dashboard/dashboard.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/dashboard/dashboard.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/database/DatabaseCallback.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/database/connector/DataBaseConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/landing/landing.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/model/CashSale.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/model/ReceiptI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/model/SupplierI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/model/UnitsI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/model/stock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/purchase/purchase.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/sales-module/sale/sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/sales-module/sales-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/sales-module/sales-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/services/purchase-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/services/ssm-settings-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/services/ssm-settings-service.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/setting/setting.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/setting/setting.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/stock-module/stock-module.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/stock-module/stock/app-dialog-delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/stock-module/stock/stock.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/css/Map-Clean.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/fonts/Simple-Line-Icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/fonts/ionicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/fonts/ionicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/fonts/simple-line-icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/icons/icon-384x384.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/icons/icon-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/assets/icons/icon-96x96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/environments/environment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/resources/app/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/snapshot_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/ssm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/swiftshader/libGLESv2.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-ia32/v8_context_snapshot.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/cs.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/el.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/et.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/fi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/hu.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/lt.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/ml.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/ms.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/nb.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/nl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/pl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/pt-BR.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/ro.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/ru.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/sw.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/ta.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/th.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/tr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/vi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/locales/zh-TW.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/natives_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/.firebaserc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/e2e/tsconfig.e2e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/ngsw-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/server/cloud/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/common-components.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/nav-user/nav-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/nav-user/nav-user.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/nav/nav.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/common-components/nav/nav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/dashboard/dashboard.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/database/connector/UserDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/landing/landing.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/model/OderI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/model/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/purchase/purchase.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/sales-module/sale/sale.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/sales-module/sales-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/sales-module/whole-sale/app-dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/purchase-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/purchase-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/sales-proxy.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/ssm-settings-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/ssm-tools.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/services/update-local-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/setting/setting.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/setting/setting.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/setting/setting.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/stock-module/stock-module.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/css/Footer-Basic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/css/Testimonials.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/fonts/Simple-Line-Icons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/fonts/ionicons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/icons/icon-128x128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/img/calculate.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/img/googleSign.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/img/ssmbg.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/img/ssmlogo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/img/ssmlogo.icon" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/assets/js/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/environments/environment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/src/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/app/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/resources/electron.asar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/snapshot_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-linux-x64/v8_context_snapshot.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/LICENSES.chromium.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Electron Framework" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libEGL.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libswiftshader_libGLESv2.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/MainMenu.nib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ar.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/bn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/chrome_100_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/cs.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/el.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/es.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fil.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/he.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ja.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/kn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/nb.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/pt_BR.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ro.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sw.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/te.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/th.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/vi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/ssm Helper (Plugin).app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/ssm Helper (Plugin).app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Frameworks/ssm Helper.app/Contents/MacOS/ssm Helper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/server/cloud/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-bar/nav-bar.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-bar/nav-bar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav-user/nav-user.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/common-components/nav/nav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/dashboard/dashboard.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/database/DatabaseCallback.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/database/connector/SalesDatasource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/landing/landing.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/login/login.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/model/CashSale.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/model/UnitsI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/sales-module/sales-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/sales-module/sales-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/sales-module/whole-sale/whole-sale.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/services/purchase-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/services/sales-proxy.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/services/ssm-settings-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/services/user-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/setting/setting.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock-module.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/css/Header-Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/css/Testimonials.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/fonts/Simple-Line-Icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/fonts/Simple-Line-Icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/img/calculate.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/img/ssmlogo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/img/ssmlogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/assets/js/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/browserslist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/app/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-mas-x64/ssm.app/Contents/Resources/electron.asar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/chrome_100_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/chrome_200_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/icudtl.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ar.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/cs.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/en-GB.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/es-419.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/fi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/fil.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/he.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/it.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ja.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/kn.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/lt.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/lv.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ml.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ms.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/nb.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/pl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/pt-BR.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ro.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/sk.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/sr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/sw.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/ta.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/locales/th.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/firebase.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/app-routing.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/common-components.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/nav-bar/nav-bar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/nav-user/nav-user.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/nav/nav.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/nav/nav.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/common-components/nav/nav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/dashboard/dashboard.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/database/connector/SalesDatasource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/database/connector/StockDataSource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/landing/landing.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/landing/landing.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/login/login.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/login/login.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/model/CategoryI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/model/ReceiptI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/model/UserI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/purchase/purchase.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/services/user-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/css/Header-Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/Simple-Line-Icons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/icons/icon-128x128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/icons/icon-384x384.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/icons/icon-72x72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/icons/icon-96x96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/img/developerLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/img/scenery/image6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/img/ssmlogo.icon" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/img/ssmlogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/js/axios.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/js/localforage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/resources/app/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/snapshot_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-arm64/ssm.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/LICENSES.chromium.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/d3dcompiler_47.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/libGLESv2.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/da.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/fi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/fil.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/he.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/hu.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/id.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/it.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/lt.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/lv.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/ml.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/ms.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/nb.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/pl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/pt-BR.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/sk.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/sr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/sw.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/ta.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/locales/th.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/natives_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/e2e/protractor.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/ngsw-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/common-components/nav/nav.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/database/ParseBackend.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/expenses/expenses.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/expenses/expenses.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/expenses/expenses.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/landing/landing.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/landing/landing.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/login/login.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/model/PurchaseI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/model/ReceiptI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/model/batchI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/model/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/purchase/purchase.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/sales-module/whole-sale/whole-sale.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/sales-module/whole-sale/whole-sale.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/purchase-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/sales-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/sales-proxy.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/ssm-settings-service.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/services/user-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/setting/setting.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/css/Header-Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/Simple-Line-Icons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/Simple-Line-Icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/ionicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/ionicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/fonts/simple-line-icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/icons/icon-384x384.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/icons/icon-96x96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/img/calculate.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/img/calculate.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/img/scenery/image6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/img/ssmlogo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/browserslist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/polyfills.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/app/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/resources/electron.asar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/snapshot_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/v8_context_snapshot.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-ia32/version" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/LICENSES.chromium.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/d3dcompiler_47.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/libGLESv2.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/ar.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/da.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/es-419.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/fi.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/fil.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/hu.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/id.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/it.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/lt.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/lv.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/ml.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/ms.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/nb.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/pl.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/pt-PT.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/sk.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/sr.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/locales/sw.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/firebase.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/server/cloud/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/app-routing.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/check-user-progress/check-user-progress.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/common-components.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/nav-bar/nav-bar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/nav-user/nav-user.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/common-components/nav/nav.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/dashboard/dashboard.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/database/DatabaseCallback.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/database/connector/DataBaseConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/expenses/expenses.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/expenses/expenses.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/landing/landing.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/login/login.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/login/login.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/model/UserI.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/purchase/purchase.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/purchase/purchase.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/sales-module/sale/sale.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/sales-module/sales-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/services/sales-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/services/ssm-settings-service.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/services/update-local-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/services/update-local-database.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/services/user-database.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/setting/setting.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/stock-module/stock-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/stock-module/stock-module.module.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/stock-module/stock/stock.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/css/Team-Boxed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/css/Testimonials.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/Simple-Line-Icons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/Simple-Line-Icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/ionicons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/ionicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/fonts/simple-line-icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/icons/icon-128x128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/icons/icon-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/img/developerLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/img/lbLogo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/js/axios.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/assets/js/localforage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/src/tsconfig.spec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/resources/app/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/swiftshader/libEGL.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/v8_context_snapshot.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssm-win32-x64/version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +1081,7 @@
       <workItem from="1577009802445" duration="7563000" />
       <workItem from="1577026599920" duration="9853000" />
       <workItem from="1577442026510" duration="12082000" />
-      <workItem from="1577460114400" duration="2205000" />
-    </task>
-    <task id="LOCAL-00018" summary="update invoice and receipt in purchase module">
-      <created>1569705860865</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1569705860866</updated>
+      <workItem from="1577460114400" duration="15058000" />
     </task>
     <task id="LOCAL-00019" summary="update invoice and receipt in purchase module">
       <created>1569706058693</created>
@@ -597,7 +1419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577456355821</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="initial draft of sales with a web worker for local saved routine">
+      <created>1577462572385</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1577462572386</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +1457,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix add date when edit product" />
     <MESSAGE value="update server url" />
     <MESSAGE value="update invoice to record to stock and payments" />
     <MESSAGE value="finish receipt and invoice management" />
@@ -653,7 +1481,8 @@
     <MESSAGE value="refresh" />
     <MESSAGE value="update sales-proxy.service.ts routine for 1sec wait" />
     <MESSAGE value="unreview web worker for background thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="unreview web worker for background thread" />
+    <MESSAGE value="initial draft of sales with a web worker for local saved routine" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial draft of sales with a web worker for local saved routine" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -661,26 +1490,26 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577456355459">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577462572120">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577456355459" />
-    <state width="1600" height="244" key="GridCell.Tab.0.bottom" timestamp="1577462541517">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577462572120" />
+    <state width="1600" height="244" key="GridCell.Tab.0.bottom" timestamp="1577479425310">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="244" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1577462541517" />
-    <state width="1600" height="244" key="GridCell.Tab.0.center" timestamp="1577462541507">
+    <state width="1600" height="244" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1577479425310" />
+    <state width="1600" height="244" key="GridCell.Tab.0.center" timestamp="1577479425308">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="244" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1577462541507" />
-    <state width="1600" height="244" key="GridCell.Tab.0.left" timestamp="1577462541501">
+    <state width="1600" height="244" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1577479425308" />
+    <state width="1600" height="244" key="GridCell.Tab.0.left" timestamp="1577479425307">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="244" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1577462541501" />
-    <state width="1600" height="244" key="GridCell.Tab.0.right" timestamp="1577462541514">
+    <state width="1600" height="244" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1577479425307" />
+    <state width="1600" height="244" key="GridCell.Tab.0.right" timestamp="1577479425309">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="244" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1577462541514" />
+    <state width="1600" height="244" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1577479425309" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -693,10 +1522,10 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="90" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577456358783">
+    <state x="398" y="85" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577462574732">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="398" y="90" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577456358783" />
+    <state x="398" y="85" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577462574732" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

@@ -1,13 +1,25 @@
 {
   "name": "lbpharmacy",
   "version": "0.3.1",
+  "main": "main.js",
+  "build": {
+    "appId": "com.fa",
+  "mac": {
+    "category": "productivity"
+  }
+  },
   "scripts": {
     "ng": "ng",
+    "esnap": "electron-installer-snap --help",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build:web": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:package": "ng build --prod --base-href ./ && electron-packager ./ ssm --all --out=dist",
+    "start:electron": "ng build --prod --base-href ./ && electron .",
+    "build:electron": "ng build --prod --base-href ./",
+    "build:snap": "electron-installer-snap --src=dist/ssm-linux-x64"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +56,9 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
+    "electron": "^6.1.7",
+    "electron-installer-snap": "^4.1.0",
+    "electron-packager": "^14.1.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
