@@ -4,7 +4,6 @@ import {UserDatabaseService} from './services/user-database.service';
 import {NgForage} from 'ngforage';
 import {Router} from '@angular/router';
 import {SalesProxyService} from './services/sales-proxy.service';
-import {randomString} from './database/ParseBackend';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +21,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.updateLocal.updateCategories();
-    // this.updateLocal.updateSuppliers();
-    // this.updateLocal.updateUnits();
-    // this.updateLocal.updateReceipts();
-    // this.updateLocal.updateStock();
+    this.updateLocal.updateCategories();
+    this.updateLocal.updateSuppliers();
+    this.updateLocal.updateUnits();
+    this.updateLocal.updateReceipts();
+    this.updateLocal.updateStock();
     this.salesProxy.saleProxy();
-    console.log(randomString(8));
   }
 
   // async insertCategory() {

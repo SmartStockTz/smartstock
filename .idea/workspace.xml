@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/database/ParseBackend.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/ParseBackend.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase/purchase.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/update-local-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/update-local-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,14 +251,7 @@
       <workItem from="1577026599920" duration="9853000" />
       <workItem from="1577442026510" duration="12082000" />
       <workItem from="1577460114400" duration="15058000" />
-      <workItem from="1577514566773" duration="1414000" />
-    </task>
-    <task id="LOCAL-00019" summary="update invoice and receipt in purchase module">
-      <created>1569706058693</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1569706058693</updated>
+      <workItem from="1577514566773" duration="1543000" />
     </task>
     <task id="LOCAL-00020" summary="update invoice and receipt in purchase module">
       <created>1569706132721</created>
@@ -606,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577462572386</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="remove firebase">
+      <created>1577516096188</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1577516096204</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,7 +627,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update server url" />
     <MESSAGE value="update invoice to record to stock and payments" />
     <MESSAGE value="finish receipt and invoice management" />
     <MESSAGE value="update version number" />
@@ -662,7 +651,8 @@
     <MESSAGE value="update sales-proxy.service.ts routine for 1sec wait" />
     <MESSAGE value="unreview web worker for background thread" />
     <MESSAGE value="initial draft of sales with a web worker for local saved routine" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial draft of sales with a web worker for local saved routine" />
+    <MESSAGE value="remove firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove firebase" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -670,10 +660,10 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577462572120">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1577516095356">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577462572120" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1577516095356" />
     <state width="1600" height="244" key="GridCell.Tab.0.bottom" timestamp="1577479425310">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -702,10 +692,10 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="85" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577462574732">
+    <state x="398" y="80" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1577516100731">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="398" y="85" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577462574732" />
+    <state x="398" y="80" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1577516100731" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
