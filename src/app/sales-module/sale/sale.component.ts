@@ -10,8 +10,8 @@ import {Observable, of} from 'rxjs';
 import {CartI} from '../../model/cart';
 import {SalesDatabaseService} from '../../services/sales-database.service';
 import {CashSaleI} from '../../model/CashSale';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {PrintServiceService} from '../../services/print-service.service';
+import {randomString} from '../../database/ParseBackend';
 
 @Component({
   selector: 'app-sale',
@@ -74,7 +74,6 @@ export class SaleComponent implements OnInit {
               private indexDb: NgForage,
               private snack: MatSnackBar,
               private printS: PrintServiceService,
-              private firestore: AngularFirestore,
               private saleDatabase: SalesDatabaseService) {
   }
 
@@ -173,7 +172,7 @@ export class SaleComponent implements OnInit {
         unit: value.stock.unit,
         channel: channel,
         date: stringDate,
-        idOld: this.firestore.createId(),
+        idOld: randomString(8),
         idTra: idTra,
         user: this.currentUser.objectId,
         stockId: value.stock.objectId// for reference only

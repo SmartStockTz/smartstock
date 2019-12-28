@@ -3,10 +3,9 @@ import {StockDataSource} from '../database/connector/StockDataSource';
 import {CategoryI} from '../model/CategoryI';
 import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {ParseBackend} from '../database/ParseBackend';
+import {ParseBackend, randomString} from '../database/ParseBackend';
 
 
 @Injectable({
@@ -14,8 +13,7 @@ import {ParseBackend} from '../database/ParseBackend';
 })
 export class StockDatabaseService extends ParseBackend implements StockDataSource {
 
-  constructor(private firestore: AngularFirestore,
-              private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     super();
   }
 
@@ -66,7 +64,7 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   addStock(stock: Stock, callback?: (value: any) => void) {
-    stock.idOld = this.firestore.createId();
+    stock.idOld = randomString(8);
     this.httpClient.post(this.serverUrl + '/classes/stocks', stock, {
       headers: this.postHeader
     }).subscribe(value => {
@@ -78,7 +76,7 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   addSupplier(supplier: SupplierI, callback: (value: any) => void) {
-    supplier.idOld = this.firestore.createId();
+    supplier.idOld = randomString(8);
     this.httpClient.post(this.serverUrl + '/classes/suppliers', supplier, {
       headers: this.postHeader
     }).subscribe(value => {

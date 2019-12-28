@@ -13,8 +13,8 @@ import {UnitsI} from '../model/UnitsI';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {PurchaseDatabaseService} from '../services/purchase-database.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {SsmToolsService} from '../services/ssm-tools.service';
+import {randomString} from '../database/ParseBackend';
 
 @Component({
   selector: 'app-purchase',
@@ -28,7 +28,6 @@ export class PurchaseComponent implements OnInit {
               private indexDb: NgForage,
               private snack: MatSnackBar,
               private dialog: MatDialog,
-              private firestore: AngularFirestore,
               private stockDatabase: StockDatabaseService,
               private purchaseDatabase: PurchaseDatabaseService) {
   }
@@ -139,7 +138,7 @@ export class PurchaseComponent implements OnInit {
       }
       this.purchaseDatasourceArray.push({
         product: this.productNameControlInput.value,
-        idOld: this.firestore.createId(),
+        idOld: randomString(8),
         quantity: this.quantityControlInput.value,
         channel: ch,
         date: SsmToolsService.getDateInString(this.purchaseDateControlInput.value),

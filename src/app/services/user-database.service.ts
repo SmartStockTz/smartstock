@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserDataSource} from '../database/connector/UserDataSource';
 import {UserI} from '../model/UserI';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {NgForage} from 'ngforage';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
@@ -16,9 +14,7 @@ Parse.serverURL = serverUrl;
 })
 export class UserDatabaseService extends ParseBackend implements UserDataSource {
 
-  constructor(private firestore: AngularFirestore,
-              private httpClient: HttpClient,
-              private fireAuth: AngularFireAuth,
+  constructor(private httpClient: HttpClient,
               private indexD: NgForage) {
     super();
   }

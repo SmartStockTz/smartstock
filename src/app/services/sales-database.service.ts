@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {SalesDatasource} from '../database/connector/SalesDatasource';
 import {CashSaleI} from '../model/CashSale';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {OrderI} from '../model/OderI';
 import {HttpClient} from '@angular/common/http';
 import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import * as Parse from 'node_modules/parse';
 import {BatchI} from '../model/batchI';
-import {ParseBackend, serverUrl} from '../database/ParseBackend';
+import {ParseBackend, randomString, serverUrl} from '../database/ParseBackend';
 
 Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
@@ -18,8 +17,7 @@ Parse.serverURL = serverUrl;
 })
 export class SalesDatabaseService extends ParseBackend implements SalesDatasource {
 
-  constructor(private firestore: AngularFirestore,
-              private indexDb: NgForage,
+  constructor(private indexDb: NgForage,
               private httpClient: HttpClient) {
     super();
   }
@@ -52,7 +50,7 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
         path: '/classes/sales'
       });
     });
-    this.indexDb.clone({name: 'ssmsales'}).setItem<BatchI[]>(this.firestore.createId(), batchs).then(_ => {
+    this.indexDb.clone({name: 'ssmsales'}).setItem<BatchI[]>(randomString(8), batchs).then(_ => {
       callback('Ok');
       // const worker = new Worker('/assets/js/sw-sales-proxy.js');
       // worker.onmessage = ({data}) => {
@@ -170,7 +168,7 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   addOrder(order: OrderI, callback?: (value) => void) {
-    order.idOld = this.firestore.createId();
+    order.idOld = randomString(8);
     this.httpClient.post<OrderI>(this.serverUrl + '/classes/orders', order, {
       headers: this.postHeader
     }).subscribe(value => {

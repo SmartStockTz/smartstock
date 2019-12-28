@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {NgForage} from 'ngforage';
 import {Stock} from '../model/stock';
 import * as Parse from 'node_modules/parse';
@@ -16,8 +15,7 @@ Parse.serverURL = serverUrl;
 })
 export class UpdateLocalDatabaseService extends ParseBackend {
 
-  constructor(private firestore: AngularFirestore,
-              private stockDatabase: StockDatabaseService,
+  constructor(private stockDatabase: StockDatabaseService,
               private httpClient: HttpClient,
               private indexDb: NgForage) {
     super();

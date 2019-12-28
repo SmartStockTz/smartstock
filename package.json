@@ -1,12 +1,14 @@
 {
   "name": "lbpharmacy",
+  "description": "manage your sales, purchase and stock",
+  "author": "Fahamu Tech",
   "version": "0.3.1",
   "main": "main.js",
   "build": {
-    "appId": "com.fa",
-  "mac": {
-    "category": "productivity"
-  }
+    "appId": "com.fahamutech.ssm",
+    "mac": {
+      "category": "productivity"
+    }
   },
   "scripts": {
     "ng": "ng",
@@ -19,7 +21,8 @@
     "build:package": "ng build --prod --base-href ./ && electron-packager ./ ssm --all --out=dist",
     "start:electron": "ng build --prod --base-href ./ && electron .",
     "build:electron": "ng build --prod --base-href ./",
-    "build:snap": "electron-installer-snap --src=dist/ssm-linux-x64"
+    "snap": "electron-builder --linux snap",
+    "build:snap": "electron-builder --linux snap"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +31,6 @@
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
     "@angular/core": "^6.1.0",
-    "@angular/fire": "^5.1.0",
     "@angular/forms": "^6.1.0",
     "@angular/http": "^6.1.0",
     "@angular/material": "^7.0.2",
@@ -38,7 +40,6 @@
     "@angular/router": "^6.1.0",
     "@angular/service-worker": "^6.1.0",
     "core-js": "^2.5.4",
-    "firebase": "^5.5.6",
     "hammerjs": "^2.0.8",
     "localforage": "^1.7.3",
     "ng-connection-service": "^1.0.4",
@@ -56,9 +57,11 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
-    "electron": "^6.1.7",
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
     "electron-installer-snap": "^4.1.0",
     "electron-packager": "^14.1.1",
+    "grpc": "^1.17.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",

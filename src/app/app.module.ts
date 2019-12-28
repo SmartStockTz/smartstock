@@ -6,9 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './login/login.component';
 import {LandingComponent} from './landing/landing.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {AngularFireAuthModule} from '@angular/fire/auth';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {DialogDeleteComponent} from './stock-module/stock/stock.component';
 import {PurchaseComponent} from './purchase/purchase.component';
@@ -43,7 +41,6 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
@@ -64,9 +61,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFireAuthModule,
     AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
