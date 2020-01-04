@@ -69,6 +69,8 @@ export class SaleComponent implements OnInit {
   @ViewChild('cartPaginator') paginator: MatPaginator;
   @ViewChild('salePaginator') salePaginator: MatPaginator;
 
+  printProgress = false;
+
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
@@ -198,6 +200,7 @@ export class SaleComponent implements OnInit {
   }
 
   printCart() {
+    this.printProgress = true;
     this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username, value => {
       if (value === null) {
         this.snack.open('Printer is not connected or printer software is not running',
@@ -208,6 +211,7 @@ export class SaleComponent implements OnInit {
         this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
         // this.submitBill();
       }
+      this.printProgress = false;
     });
   }
 
@@ -318,14 +322,14 @@ export class SaleComponent implements OnInit {
       this.showTotalPrice();
     }, error1 => console.log(error1));
 
-    // live database
-    this.saleDatabase.getAllCashSaleOfUser(this.currentUser.objectId, datasource => {
-      this.saleDatasourceArray = [];
-      this.saleDatasourceArray = datasource;
-      this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
-      this.salesDatasource.paginator = this.salePaginator;
-      this.updateTotalSales();
-    });
+    // // live database
+    // this.saleDatabase.getAllCashSaleOfUser(this.currentUser.objectId, datasource => {
+    //   this.saleDatasourceArray = [];
+    //   this.saleDatasourceArray = datasource;
+    //   this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
+    //   this.salesDatasource.paginator = this.salePaginator;
+    //   this.updateTotalSales();
+    // });
   }
 
   private showChanges() {

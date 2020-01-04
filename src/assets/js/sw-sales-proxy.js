@@ -1,33 +1,34 @@
-importScripts('/assets/js/localforage.min.js');
-importScripts('/assets/js/axios.min.js');
-addEventListener('message', ({data}) => {
+importScripts('localforage.min.js');
+importScripts('axios.min.js');
+addEventListener('message', (message) => {
+  console.log(message.data);
+  const appId = JSON.parse(message.data).appId;
+  const projectUrlId = JSON.parse(message.data).projectUrlId;
+  console.log(appId);
+  console.log(projectUrlId);
+
   localforage.config({
     name: 'ssmsales',
     storeName: 'ng_forage'
   });
-  const intervalSales = setInterval(() => {
+  setInterval(() => {
     localforage.keys().then(keys => {
-      if (keys === null) {
-
-      } else if (keys.length === 0) {
-
-      } else if (keys.length > 0) {
+      if (keys.length > 0) {
         keys.forEach(key => {
-          localforage.getItem(key).then(value => {
+          localforage.getItem(key).then(sales => {
             axios({
-              baseURL: 'https://lbpharmacy-daas.bfast.fahamutech.com',
+              baseURL: `https://${projectUrlId}.bfast.fahamutech.com`,
               url: '/batch',
               method: 'post',
               // mode: "cors",
               data: {
-                'requests': value
+                'requests': sales
               },
               headers: {
-                'X-Parse-Application-Id': 'lbpharmacy',
+                'X-Parse-Application-Id': appId,
                 'Content-Type': 'application/json'
               }
             }).then(_ => {
-              // console.log(_);
               localforage.removeItem(key).catch(reason => console.log(reason));
             }).catch(reason => {
               console.log(reason);
@@ -38,6 +39,6 @@ addEventListener('message', ({data}) => {
     }).catch(reason => {
       console.log(reason);
     });
-  }, 2000);
-  postMessage("your request received");
+  }, 5000);
+  postMessage("sales routine started");
 });

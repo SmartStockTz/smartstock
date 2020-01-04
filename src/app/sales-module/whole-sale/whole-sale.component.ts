@@ -69,7 +69,7 @@ export class WholeSaleComponent implements OnInit {
   };
   cartDatasourceArray: CartI[];
   cartDatasource: MatTableDataSource<CartI>;
-  saleDatasourceArray: CashSaleI[];
+  // saleDatasourceArray: CashSaleI[];
   salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
   saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
@@ -83,6 +83,8 @@ export class WholeSaleComponent implements OnInit {
   @ViewChild('salePaginator') salePaginator: MatPaginator;
   @ViewChild('ordersPaginator') ordersPaginator: MatPaginator;
   customerControl = new FormControl();
+
+  printProgress = false;
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
@@ -266,7 +268,7 @@ export class WholeSaleComponent implements OnInit {
     this.discountControlInput.setValue(0);
     this.receiveControlInput.setValue(0);
     this.cartDatasourceArray = [];
-    this.saleDatasourceArray = [];
+    // this.saleDatasourceArray = [];
     this.productNameControlInput.valueChanges.subscribe(value => {
       this.getProduct(value);
     }, error1 => {
@@ -311,23 +313,23 @@ export class WholeSaleComponent implements OnInit {
     }, error1 => console.log(error1));
 
     // live database
-    this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.objectId, datasource => {
-      this.saleDatasourceArray = [];
-      this.saleDatasourceArray = datasource;
-      this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
-      this.salesDatasource.paginator = this.salePaginator;
-      this.updateTotalSales();
-    });
-    this.saleDatabase.getAllOrders(orders => {
-      this.salesOrderDatasourceArray = orders;
-      this.salesOrderDatasource = new MatTableDataSource<OrderI>(this.salesOrderDatasourceArray);
-      this.salesOrderDatasource.paginator = this.ordersPaginator;
-      let orderT = 0;
-      this.salesOrderDatasourceArray.forEach(value => {
-        orderT += value.amount;
-      });
-      this.totalOrder = orderT;
-    });
+    // this.saleDatabase.getAllWholeCashSaleOfUser(this.currentUser.objectId, datasource => {
+    //   this.saleDatasourceArray = [];
+    //   this.saleDatasourceArray = datasource;
+    //   this.salesDatasource = new MatTableDataSource(this.saleDatasourceArray);
+    //   this.salesDatasource.paginator = this.salePaginator;
+    //   this.updateTotalSales();
+    // });
+    // this.saleDatabase.getAllOrders(orders => {
+    //   this.salesOrderDatasourceArray = orders;
+    //   this.salesOrderDatasource = new MatTableDataSource<OrderI>(this.salesOrderDatasourceArray);
+    //   this.salesOrderDatasource.paginator = this.ordersPaginator;
+    //   let orderT = 0;
+    //   this.salesOrderDatasourceArray.forEach(value => {
+    //     orderT += value.amount;
+    //   });
+    //   this.totalOrder = orderT;
+    // });
   }
 
   private showChanges() {
@@ -352,9 +354,9 @@ export class WholeSaleComponent implements OnInit {
 
   private updateTotalSales() {
     let s = 0;
-    this.saleDatasourceArray.forEach(value => {
-      s += value.amount;
-    });
+    // this.saleDatasourceArray.forEach(value => {
+    //   s += value.amount;
+    // });
     this.totalSaleAmount = s;
   }
 
@@ -416,6 +418,7 @@ export class WholeSaleComponent implements OnInit {
   }
 
   printCart() {
+    this.printProgress = true;
     this.printS.printCart(this.cartDatasourceArray, this.customerControl.value, value => {
       if (value === null) {
         this.snack.open('Printer is not connected or printer software is not running',
@@ -426,6 +429,7 @@ export class WholeSaleComponent implements OnInit {
         this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
         // this.submitBill();
       }
+      this.printProgress = false;
     });
   }
 

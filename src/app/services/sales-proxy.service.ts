@@ -16,11 +16,11 @@ export class SalesProxyService extends ParseBackend {
 
   salesBackground() {
     if (typeof Worker !== 'undefined') {
-      const worker = new Worker('/assets/js/sw-sales-proxy.js');
+      const worker = new Worker('assets/js/sw-sales-proxy.js');
       worker.onmessage = ({data}) => {
         console.log(`page got message: ${data}`);
       };
-      worker.postMessage('start sales auto post');
+      worker.postMessage(JSON.stringify({appId: 'lbpharmacy', projectUrlId: 'lbpharmacy-ssm'}));
     } else {
       console.log('fallback to normal routine');
       // Web Workers are not supported in this environment.
