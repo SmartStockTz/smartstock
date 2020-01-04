@@ -1,9 +1,10 @@
 importScripts('localforage.min.js');
 importScripts('axios.min.js');
-addEventListener('message', (message) => {
-  console.log(message.data);
-  const appId = JSON.parse(message.data).appId;
-  const projectUrlId = JSON.parse(message.data).projectUrlId;
+var localStorage = {};
+addEventListener('message', ({data}) => {
+  console.log(data);
+  const appId = JSON.parse(data).appId;
+  const projectUrlId = JSON.parse(data).projectUrlId;
   console.log(appId);
   console.log(projectUrlId);
 
@@ -11,6 +12,7 @@ addEventListener('message', (message) => {
     name: 'ssmsales',
     storeName: 'ng_forage'
   });
+
   setInterval(() => {
     localforage.keys().then(keys => {
       if (keys.length > 0) {
@@ -40,5 +42,6 @@ addEventListener('message', (message) => {
       console.log(reason);
     });
   }, 5000);
+
   postMessage("sales routine started");
 });

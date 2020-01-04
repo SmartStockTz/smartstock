@@ -2,16 +2,16 @@ import {Injectable} from '@angular/core';
 import {OrderI} from '../model/OderI';
 import {CartI} from '../model/cart';
 import {HttpClient} from '@angular/common/http';
-import {SsmSettingsServiceService} from './ssm-settings-service.service';
+import {SettingsServiceService} from './Settings-service.service';
 import {environment} from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PrintServiceService {
   url: string;
 
-  constructor(private ssmSettings: SsmSettingsServiceService, private httpC: HttpClient) {
+  constructor(private ssmSettings: SettingsServiceService, private httpC: HttpClient) {
   }
 
   printOrder(order: OrderI, callback: (value: any) => void) {

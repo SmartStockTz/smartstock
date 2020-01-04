@@ -73,15 +73,15 @@ export class WholeSaleComponent implements OnInit {
   salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
   saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   searchOrderControl = new FormControl();
   salesOrderDatasourceArray: OrderI[];
   salesOrderDatasource: MatTableDataSource<OrderI>;
   orderColums = ['date', 'amount', 'customer', 'action'];
   activeTab = 0;
-  @ViewChild('cartPaginator') paginator: MatPaginator;
-  @ViewChild('salePaginator') salePaginator: MatPaginator;
-  @ViewChild('ordersPaginator') ordersPaginator: MatPaginator;
+  @ViewChild('cartPaginator', {static: true}) paginator: MatPaginator;
+  @ViewChild('salePaginator', {static: true}) salePaginator: MatPaginator;
+  @ViewChild('ordersPaginator', {static: true}) ordersPaginator: MatPaginator;
   customerControl = new FormControl();
 
   printProgress = false;

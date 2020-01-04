@@ -11,7 +11,7 @@ import {UserDatabaseService} from '../services/user-database.service';
 })
 export class DashboardComponent implements OnInit {
   isLogin = false;
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
   constructor(private routes: Router, private indexDb: NgForage,
               private userDatabase: UserDatabaseService,

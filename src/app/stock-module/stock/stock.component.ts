@@ -54,8 +54,8 @@ export class StockComponent implements OnInit {
   salesDatasource: MatTableDataSource<CashSaleI>;
   stockColums = ['product', 'category', 'supplier', 'quantity', 'wholesaleQuantity', 'purchase', 'retailPrice',
     'retailWholesalePrice', 'nhifPrice', 'expire', 'action'];
-  @ViewChild('sidenav') sidenav: MatSidenav;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   searchStockControl = new FormControl();
   wholesaleQuantityControlInput = new FormControl();
   purchasePriceControlInput = new FormControl();

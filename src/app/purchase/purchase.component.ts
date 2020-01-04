@@ -50,8 +50,8 @@ export class PurchaseComponent implements OnInit {
   selecteStock: Stock;
   purchaseDatasource: MatTableDataSource<PurchaseI>;
   purchaseColums = ['product', 'date', 'due', 'reference', 'quantity', 'amount', 'action'];
-  @ViewChild('sidenav') sidenav: MatSidenav;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   searchPurchaseControl = new FormControl();
   purchasePriceControlInput = new FormControl();
   receipNumberControlInput = new FormControl();

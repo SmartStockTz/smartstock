@@ -1,13 +1,24 @@
 import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SsmSettingsServiceService {
+export class SettingsServiceService {
 
-  constructor(private indexDb: NgForage, private httpClient: HttpClient) {
+  constructor(private indexDb: NgForage) {
+  }
+
+  getApplicationId(): string {
+    return 'lbpharmacy';
+  }
+
+  getServerURLId(): string {
+    return 'lbpharmacy-daas';
+  }
+
+  getProjectId(): string {
+    return 'lbpharmacy';
   }
 
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {

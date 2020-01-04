@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SalesProxyService } from './sales-proxy.service';
+import { ThreadsService } from './threads.service';
 
-describe('SalesProxyService', () => {
+describe('ThreadService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SalesProxyService = TestBed.get(SalesProxyService);
+    const service: ThreadsService = TestBed.get(ThreadsService);
     expect(service).toBeTruthy();
   });
 });

@@ -66,8 +66,8 @@ export class SaleComponent implements OnInit {
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
   saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
   activeTab = 0;
-  @ViewChild('cartPaginator') paginator: MatPaginator;
-  @ViewChild('salePaginator') salePaginator: MatPaginator;
+  @ViewChild('cartPaginator', {static: false}) paginator: MatPaginator;
+  @ViewChild('salePaginator', {static: false}) salePaginator: MatPaginator;
 
   printProgress = false;
 
