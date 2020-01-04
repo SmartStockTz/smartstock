@@ -48,7 +48,9 @@
               </button>
             </mat-card-actions>
             <mat-card-actions>
-              <button mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress">Open Account</button>
+              <button routerLink="/register" mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress">
+                Open Account
+              </button>
             </mat-card-actions>
             <mat-card-actions>
               <button mat-button color="warn" class="btn-block" *ngIf="!showProgress" (click)="reset()">Reset</button>

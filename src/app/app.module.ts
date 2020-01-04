@@ -7,10 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {LandingComponent} from './landing/landing.component';
 import {AppRoutingModule} from './app-routing.module';
 import {environment} from '../environments/environment';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {DialogDeleteComponent} from './stock-module/stock/stock.component';
-import {PurchaseComponent} from './purchase/purchase.component';
-import {ExpensesComponent} from './expenses/expenses.component';
 import {SettingComponent} from './setting/setting.component';
 import {
   MatAutocompleteModule,
@@ -44,19 +41,18 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgForageConfig, NgForageModule} from 'ngforage';
 import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingComponent,
-    DashboardComponent,
-    PurchaseComponent,
-    ExpensesComponent,
     SettingComponent,
     DialogComponent,
     DialogDeleteComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +88,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatNativeDateModule,
     MatPaginatorModule,
     CommonComponentsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
   ],
   providers: [],
   entryComponents: [

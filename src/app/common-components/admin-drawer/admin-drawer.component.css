@@ -1,10 +1,11 @@
 .my-side-nav {
   height: 100vh;
-  width: 300px;
+  /*min-width: 250px;*/
+  width: 100%
 }
 
-.dawer-head {
-  height: 30vh;
+.drawer-head {
+  height: 180px;
   background-image: url("../../../assets/img/calculate.jpg");
   background-repeat: no-repeat;
   background-position: center;

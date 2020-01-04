@@ -1,20 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserDatabaseService} from '../../services/user-database.service';
 import {NgForage} from 'ngforage';
 import {MatDialog, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
-import {StockDatabaseService} from '../services/stock-database.service';
-import {UserI} from '../model/UserI';
+import {StockDatabaseService} from '../../services/stock-database.service';
+import {UserI} from '../../model/UserI';
 import {FormControl} from '@angular/forms';
-import {Stock} from '../model/stock';
+import {Stock} from '../../model/stock';
 import {Observable, of} from 'rxjs';
-import {SupplierI} from '../model/SupplierI';
-import {UnitsI} from '../model/UnitsI';
-import {ReceiptI} from '../model/ReceiptI';
-import {PurchaseI} from '../model/PurchaseI';
-import {PurchaseDatabaseService} from '../services/purchase-database.service';
-import {SsmToolsService} from '../services/ssm-tools.service';
-import {randomString} from '../database/ParseBackend';
+import {SupplierI} from '../../model/SupplierI';
+import {UnitsI} from '../../model/UnitsI';
+import {ReceiptI} from '../../model/ReceiptI';
+import {PurchaseI} from '../../model/PurchaseI';
+import {PurchaseDatabaseService} from '../../services/purchase-database.service';
+import {SsmToolsService} from '../../services/ssm-tools.service';
+import {randomString} from '../../database/ParseBackend';
 
 @Component({
   selector: 'app-purchase',

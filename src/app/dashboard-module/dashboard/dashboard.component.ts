@@ -2,20 +2,22 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSidenav, MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserDatabaseService} from '../../services/user-database.service';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends DeviceInfo implements OnInit {
   isLogin = false;
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
   constructor(private routes: Router, private indexDb: NgForage,
               private userDatabase: UserDatabaseService,
               private snack: MatSnackBar) {
+    super();
   }
 
   ngOnInit() {

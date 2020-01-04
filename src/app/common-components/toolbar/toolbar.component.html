@@ -1,7 +1,7 @@
 <nav class="sticky-top">
   <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="openDrawer()">
+    <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span>{{heading}}</span>
@@ -10,7 +10,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu>
-      <button mat-menu-item (click)="home()">
+      <button mat-menu-item routerLink="">
         <mat-icon>home</mat-icon>
         Home
       </button>

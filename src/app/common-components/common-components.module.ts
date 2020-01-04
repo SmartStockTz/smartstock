@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
-import {NavComponent} from './nav/nav.component';
-import {NavUserComponent} from './nav-user/nav-user.component';
-import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {AdminDrawerComponent} from './admin-drawer/admin-drawer.component';
+import {NavUserComponent} from './user-drawer/nav-user.component';
+import {ToolbarComponent} from './toolbar/toolbar.component';
 import {
   MatButtonModule,
   MatCardModule,
@@ -14,6 +14,7 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule, MatToolbarModule
 } from '@angular/material';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -28,18 +29,19 @@ import {
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    RouterModule,
   ],
   exports: [
     CheckUserProgressComponent,
     NavUserComponent,
-    NavComponent,
-    NavBarComponent
+    AdminDrawerComponent,
+    ToolbarComponent
   ],
   declarations: [
     CheckUserProgressComponent,
-    NavComponent,
+    AdminDrawerComponent,
     NavUserComponent,
-    NavBarComponent
+    ToolbarComponent
   ]
 })
 export class CommonComponentsModule {

@@ -1,5 +1,5 @@
 <div class="my-side-nav">
-  <div class="dawer-head"></div>
+  <div class="drawer-head"></div>
   <mat-accordion class="mat-elevation-z0">
     <mat-expansion-panel class="mat-elevation-z0">
       <mat-expansion-panel-header>
@@ -12,8 +12,8 @@
         Sales
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item (click)="goToSale()">Retails</a>
-        <a mat-list-item (click)="goToWholeSale()">WholeSale</a>
+        <a mat-list-item routerLink="/sale">Retails</a>
+        <a mat-list-item routerLink="/sale/whole">WholeSale</a>
         <!--<a mat-list-item >NHIF</a>-->
         <!--<a mat-list-item >Night Sale</a>-->
       </mat-nav-list>
@@ -25,7 +25,7 @@
         Purchase
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item (click)="goToPurchase()">Buy</a>
+        <a mat-list-item routerLink="/purchase">Buy</a>
       </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
@@ -34,23 +34,23 @@
         Stock
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item (click)="goToStock()">Manage</a>
+        <a mat-list-item routerLink="/stock">Manage</a>
       </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
-    <mat-expansion-panel class="mat-elevation-z0">
-      <mat-expansion-panel-header>
-        Expenses
-      </mat-expansion-panel-header>
-    </mat-expansion-panel>
-    <mat-divider></mat-divider>
+    <!--    <mat-expansion-panel class="mat-elevation-z0">-->
+    <!--      <mat-expansion-panel-header>-->
+    <!--        Expenses-->
+    <!--      </mat-expansion-panel-header>-->
+    <!--    </mat-expansion-panel>-->
+    <!--    <mat-divider></mat-divider>-->
     <mat-expansion-panel class="mat-elevation-z0">
       <mat-expansion-panel-header>
         Settings
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item (click)="goToServerSetting()">General</a>
-        <a mat-list-item (click)="goToUsers()">Manage Users</a>
+        <a mat-list-item>General</a>
+        <a mat-list-item routerLink="/sales">Manage Users</a>
       </mat-nav-list>
     </mat-expansion-panel>
 

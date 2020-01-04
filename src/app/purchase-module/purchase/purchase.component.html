@@ -2,12 +2,12 @@
 <mat-sidenav-container *ngIf="isLogin" class="match-parent">
 
   <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
-    <app-nav *ngIf="isAdmin"></app-nav>
+    <app-admin-drawer *ngIf="isAdmin"></app-admin-drawer>
     <app-nav-user *ngIf="!isAdmin"></app-nav-user>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-nav-bar [heading]="'SSM-Purchase'" [sidenav]="sidenav" [showProgress]="showProgress"></app-nav-bar>
+    <app-toolbar [heading]="'SSM-Purchase'" [sidenav]="sidenav" [showProgress]="showProgress"></app-toolbar>
 
     <div class="container-fluid">
       <div class="row" style="margin: 16px">

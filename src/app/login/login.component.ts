@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
 
   private showMainUi(role: string) {
     if (role === 'admin') {
-      this.routes.navigateByUrl('admin').catch(reason => console.log(reason));
+      this.routes.navigateByUrl('dashboard').catch(reason => console.log(reason));
     } else {
       this.routes.navigateByUrl('sale').catch(reason => console.log(reason));
     }

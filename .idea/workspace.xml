@@ -2,30 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/services/threads.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/js/parse.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/custom-theme.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard-module.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase-module-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase-module.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase/purchase.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/print-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/print-service.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-proxy.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/threads.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-proxy.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/ssm-settings-service.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/Settings-service.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/ssm-settings-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/update-local-database.service.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/update-local-database.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/polyfills.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-bar/nav-bar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/DeviceInfo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-bar/nav-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-bar/nav-bar.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-bar/nav-bar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-user/nav-user.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/user-drawer/nav-user.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-user/nav-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/user-drawer/nav-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-user/nav-user.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/user-drawer/nav-user.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav-user/nav-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/user-drawer/nav-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav/nav.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav/nav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav/nav.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/nav/nav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/expenses/expenses.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/expenses/expenses.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/expenses/expenses.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/expenses/expenses.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase/purchase.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/custom-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/custom-theme.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +53,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -95,19 +113,19 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
-      <recent name="$PROJECT_DIR$/src/assets/js" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/app/settings-module" />
-      <recent name="$PROJECT_DIR$/src/app/sales-module" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
       <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/src/assets/js" />
       <recent name="$PROJECT_DIR$/src/app/purchase-module/invoice" />
       <recent name="$PROJECT_DIR$/src/app/purchase-module/receipt" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/dashboard-module" />
+      <recent name="$PROJECT_DIR$/src/app/purchase-module" />
+      <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
+      <recent name="$PROJECT_DIR$/src/assets/js" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -279,21 +297,7 @@
       <workItem from="1578126020354" duration="101000" />
       <workItem from="1578127294693" duration="3331000" />
       <workItem from="1578135540680" duration="9243000" />
-      <workItem from="1578147274820" duration="11853000" />
-    </task>
-    <task id="LOCAL-00023" summary="update edit invoice in purchase module">
-      <created>1569783921245</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1569783921245</updated>
-    </task>
-    <task id="LOCAL-00024" summary="update edit invoice in purchase module">
-      <created>1569786145536</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1569786145536</updated>
+      <workItem from="1578147274820" duration="15326000" />
     </task>
     <task id="LOCAL-00025" summary="update edit invoice in purchase module">
       <created>1569874129620</created>
@@ -624,19 +628,25 @@
       <option name="project" value="LOCAL" />
       <updated>1578130795415</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="update angular to 8 and change theme color to green">
+      <created>1578163915491</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1578163915492</updated>
+    </task>
+    <task id="LOCAL-00073" summary="update angular to 8 and change theme color to green">
+      <created>1578163948669</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1578163948669</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/node_modules/.staging/@angular/cdk-5a643386/schematics/ng-update/data/property-names.js" />
-        <option value="$PROJECT_DIR$/node_modules/.staging/@angular/cdk-5a643386/schematics/ng-update/data/property-names.d.ts" />
-        <option value="$PROJECT_DIR$/node_modules/.staging/@angular/cdk-5a643386/schematics/ng-update/data/property-names.js.map" />
-        <option value="$PROJECT_DIR$/node_modules/.staging/@angular/cdk-5a643386/schematics/ng-update/data/property-names.js.map" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -655,7 +665,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update version number" />
     <MESSAGE value="remove node_module" />
     <MESSAGE value="remove dashboard" />
     <MESSAGE value="ignore node_modules in server folder" />
@@ -680,7 +689,8 @@
     <MESSAGE value="remove firebase" />
     <MESSAGE value="bump version" />
     <MESSAGE value="update sales routine" />
-    <option name="LAST_COMMIT_MESSAGE" value="update sales routine" />
+    <MESSAGE value="update angular to 8 and change theme color to green" />
+    <option name="LAST_COMMIT_MESSAGE" value="update angular to 8 and change theme color to green" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -696,22 +706,42 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578163948522" />
-    <state width="1600" height="385" key="GridCell.Tab.0.bottom" timestamp="1578163233083">
+    <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="385" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578163233083" />
-    <state width="1600" height="385" key="GridCell.Tab.0.center" timestamp="1578163233075">
+    <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
+    <state width="1600" height="385" key="GridCell.Tab.0.bottom" timestamp="1578164074105">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="385" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578163233075" />
-    <state width="1600" height="385" key="GridCell.Tab.0.left" timestamp="1578163233065">
+    <state width="1600" height="417" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578165087790">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="385" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578163233065" />
-    <state width="1600" height="385" key="GridCell.Tab.0.right" timestamp="1578163233082">
+    <state width="1600" height="417" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578165087790" />
+    <state width="1600" height="385" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578164074105" />
+    <state width="1600" height="385" key="GridCell.Tab.0.center" timestamp="1578164074104">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state width="1600" height="385" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578163233082" />
+    <state width="1600" height="417" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578165087788">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state width="1600" height="417" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578165087788" />
+    <state width="1600" height="385" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578164074104" />
+    <state width="1600" height="385" key="GridCell.Tab.0.left" timestamp="1578164074103">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state width="1600" height="417" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578165087787">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state width="1600" height="417" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578165087787" />
+    <state width="1600" height="385" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578164074103" />
+    <state width="1600" height="385" key="GridCell.Tab.0.right" timestamp="1578164074104">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state width="1600" height="417" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578165087789">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state width="1600" height="417" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578165087789" />
+    <state width="1600" height="385" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578164074104" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -739,6 +769,10 @@
     <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578140808475">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
+    <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode" timestamp="1578165060088">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578165060088" />
     <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578140808475" />
     <state x="528" y="259" width="540" height="332" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1577031276379">
       <screen x="52" y="27" width="1548" height="873" />

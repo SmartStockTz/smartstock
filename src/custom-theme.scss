@@ -12,7 +12,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$smartstock-primary: mat-palette($mat-green, 500); // mat-palette($mat-indigo);
+$smartstock-primary: mat-palette($mat-green, 900); // mat-palette($mat-indigo);
 //$smartstock-primary-light: #fbfffc;
 //$smartstock-primary-dark: #97b498;
 //$smartstock-secondary: #2e7d32;
@@ -20,7 +20,7 @@ $smartstock-primary: mat-palette($mat-green, 500); // mat-palette($mat-indigo);
 //$smartstock-secondary-dark: #005005;
 //$smartstock-primary-text: #000000;
 //$smartstock-secondary-text: #ffffff;
-$smartstock-accent: mat-palette($mat-green, 900); // mat-palette($mat-pink, A200, A100, A400);
+$smartstock-accent: mat-palette($mat-green, 500); // mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $smartstock-warn: mat-palette($mat-red);

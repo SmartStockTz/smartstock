@@ -96,23 +96,23 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   logout(user: UserI, callback?: (value: any) => void) {
     // console.log(this.serverUrl + '/logout');
     console.log(user.sessionToken);
-    this.httpClient.post(this.serverUrl + '/logout', {}, {
-      headers: {
-        'X-Parse-Application-Id': 'lbpharmacy',
-        'X-Parse-Session-Token': user.sessionToken
-      }
-    }).subscribe(value => {
-      this.indexD.removeItem('user').then(value1 => {
-        console.log('user removed from cache is ---> successful');
-        callback('Ok');
-      }).catch(reason => {
-        console.log(reason);
-        callback(null);
-      });
-    }, error1 => {
-      console.log(error1);
+    // this.httpClient.post(this.serverUrl + '/logout', {}, {
+    //   headers: {
+    //     'X-Parse-Application-Id': 'lbpharmacy',
+    //     'X-Parse-Session-Token': user.sessionToken
+    //   }
+    // }).subscribe(value => {
+    this.indexD.removeItem('user').then(value1 => {
+      // console.log('user removed from cache is ---> successful');
+      callback('Ok');
+    }).catch(reason => {
+      console.log(reason);
       callback(null);
     });
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   register(user: UserI, callback?: (value: any) => void) {
