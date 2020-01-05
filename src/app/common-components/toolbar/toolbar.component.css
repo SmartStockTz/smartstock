@@ -1,0 +1,18 @@
+.toolbar-input{
+  width: 80%;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  background: rgba(30, 127, 52, 0.76);
+  color: white;
+  padding: 8px;
+  outline: none;
+}
+
+.toolbar-input::placeholder{
+  color: #f5f5f5;
+}
+
+.toolbar-input:focus{
+  outline: none;
+}

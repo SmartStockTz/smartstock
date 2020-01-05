@@ -1,7 +1,4 @@
-<div *ngIf="!isLogin">
-  <app-check-user-progress></app-check-user-progress>
-</div>
-<div *ngIf="isLogin">
+<div>
   <mat-sidenav-container class="my-drawer-container">
 
     <mat-sidenav
@@ -9,7 +6,7 @@
       class="match-parent-side"
       #sidenav [mode]="enoughWidth()?'side':'over'"
       [opened]="enoughWidth()">
-      <app-admin-drawer *ngIf="true"></app-admin-drawer>
+      <app-admin-drawer></app-admin-drawer>
     </mat-sidenav>
 
     <mat-sidenav-content>

@@ -6,15 +6,16 @@ import {AdminDrawerComponent} from './admin-drawer/admin-drawer.component';
 import {NavUserComponent} from './user-drawer/nav-user.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatDividerModule,
-  MatExpansionModule, MatIconModule,
-  MatListModule, MatMenuModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule, MatToolbarModule
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatExpansionModule, MatFormFieldModule, MatIconModule,
+    MatListModule, MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule, MatToolbarModule
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -30,6 +31,8 @@ import {RouterModule} from '@angular/router';
     MatMenuModule,
     MatButtonModule,
     RouterModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CheckUserProgressComponent,

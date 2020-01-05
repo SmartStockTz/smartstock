@@ -1,4 +1,4 @@
-.space{
+.space {
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -24,13 +24,13 @@
   margin-left: 8px;
 }
 
-.input-container{
+.input-container {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.dawer-head{
+.dawer-head {
   height: 30vh;
   background-image: url("/assets/img/calculate.jpg");
   background-repeat: no-repeat;
@@ -38,8 +38,13 @@
   background-size: cover;
 }
 
-table{
+table {
   width: 100%;
+}
+
+.table-data-row:hover {
+  background: rgba(0, 128, 0, 0.09);
+  cursor: pointer;
 }
 
 

@@ -10,7 +10,8 @@ export class SettingsServiceService {
     'X-Parse-Application-Id': 'smartstock_lb'
   };
   ssmFunctionsHeader = {
-    'b-fast-application-id': 'smartstock_lb'
+    'bfast-application-id': 'smartstock_lb',
+    'content-type': 'application/json'
   };
   ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
 

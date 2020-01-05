@@ -8,7 +8,7 @@ import {LandingComponent} from './landing/landing.component';
 import {AppRoutingModule} from './app-routing.module';
 import {environment} from '../environments/environment';
 import {DialogDeleteComponent} from './stock-module/stock/stock.component';
-import {SettingComponent} from './setting/setting.component';
+import {SettingComponent} from './settings-module/setting/setting.component';
 import {
     MatAutocompleteModule,
     MatButtonModule,
@@ -34,7 +34,7 @@ import {
     MatSnackBarModule, MatStepperModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -49,7 +49,6 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     LoginComponent,
     LandingComponent,
-    SettingComponent,
     DialogComponent,
     DialogDeleteComponent,
     RegisterComponent,
@@ -90,6 +89,7 @@ import { RegisterComponent } from './register/register.component';
         CommonComponentsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MatStepperModule,
+        MatTooltipModule,
     ],
   providers: [],
   entryComponents: [

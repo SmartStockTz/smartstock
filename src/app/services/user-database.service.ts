@@ -96,7 +96,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   logout(user: UserI, callback?: (value: any) => void) {
     // console.log(this.serverUrl + '/logout');
-    console.log(user.sessionToken);
+    // console.log(user.sessionToken);
     // this.httpClient.post(this.serverUrl + '/logout', {}, {
     //   headers: {
     //     'X-Parse-Application-Id': 'lbpharmacy',
@@ -118,6 +118,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   register(user: UserI): Promise<UserI> {
     return new Promise<UserI>((resolve, reject) => {
+      console.log(user);
       this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/users/create', user, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {
@@ -133,16 +134,17 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   resetPassword(user: UserI, callback?: (value: any) => void) {
-    this.httpClient.post(this.serverUrl + '/requestPasswordReset', {
-      'email': user.meta.email
-    }, {
-      headers: this.postHeader
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    callback('');
+    // this.httpClient.post(this.serverUrl + '/requestPasswordReset', {
+    //   'email': user.meta.email
+    // }, {
+    //   headers: this.postHeader
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   updateUser(user: UserI, callback?: (value: any) => void) {

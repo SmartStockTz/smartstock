@@ -1,4 +1,7 @@
 export interface UserI {
+  applicationId?: string;
+  projectUrlId?: string;
+  projectId?: string;
   username: string;
   password?: string;
   firstname: string;

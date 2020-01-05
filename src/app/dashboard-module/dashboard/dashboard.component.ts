@@ -1,8 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {MatSidenav, MatSnackBar} from '@angular/material';
-import {NgForage} from 'ngforage';
-import {UserDatabaseService} from '../../services/user-database.service';
+import {MatSidenav} from '@angular/material';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
@@ -11,28 +8,13 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent extends DeviceInfo implements OnInit {
-  isLogin = false;
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
-  constructor(private routes: Router, private indexDb: NgForage,
-              private userDatabase: UserDatabaseService,
-              private snack: MatSnackBar) {
+  constructor() {
     super();
   }
 
   ngOnInit() {
-    this.userDatabase.currentUser(value => {
-      if (value === null) {
-        this.routes.navigateByUrl('login').catch(reason => console);
-      } else {
-        if (value.role !== 'admin') {
-          this.routes.navigateByUrl('sale').catch(reason => console.log(reason));
-          this.snack.open('Your not an admin, we redirect you to sale');
-        } else {
-          this.isLogin = true;
-        }
-      }
-    });
   }
 
   // openDrawer() {

@@ -98,8 +98,23 @@
 
           </div>
           <div>
-            <button mat-button class="stepper-btn" matStepperPrevious>Back</button>
-            <button mat-button (click)="openAccount()" class="stepper-btn">Create Account</button>
+            <button mat-button
+                    [disabled]="registerProgress"
+                    class="stepper-btn"
+                    matStepperPrevious>Back
+            </button>
+            <button *ngIf="!registerProgress"
+                    mat-button (click)="openAccount()"
+                    class="stepper-btn">
+              Create Account
+            </button>
+            <mat-progress-spinner style="display: inline-block"
+                                  *ngIf="registerProgress"
+                                  [matTooltip]="'create account in progress'"
+                                  [diameter]="30"
+                                  mode="indeterminate"
+                                  color="primary">
+            </mat-progress-spinner>
           </div>
         </form>
       </mat-step>

@@ -60,14 +60,15 @@ export class RegisterComponent implements OnInit {
       }
       // @ts-ignore
       const user: UserI = {};
+
       Object.keys(this.personalFormGroup.value).forEach(key => {
-        user[key] = this.personalFormGroup[key];
+        user[key] = this.personalFormGroup.value[key];
       });
       Object.keys(this.businessFormGroup.value).forEach(key => {
-        user[key] = this.businessFormGroup[key];
+        user[key] = this.businessFormGroup.value[key];
       });
       Object.keys(this.loginFormGroup.value).forEach(key => {
-        user[key] = this.loginFormGroup[key];
+        user[key] = this.loginFormGroup.value[key];
       });
       // @ts-ignore
       delete user.confPassword;

@@ -23,10 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initializeForm();
     // this.userDatabase.currentUser(value => {
-    //   if (value === null) {
-    //     console.log('user is null');
-    //     this.isLogin = false;
-    //   } else {
+    //   if (value) {
     //     this.isLogin = true;
     //     this.showMainUi(value.role);
     //   }
