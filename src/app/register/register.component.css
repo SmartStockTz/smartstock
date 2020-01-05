@@ -1,0 +1,98 @@
+.main-container {
+  /*
+  height: Calc(100% - 271px);
+  */
+  height: 600px;
+  /*padding: 40px 50px;*/
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+mat-toolbar {
+  background-color: white;
+}
+
+mat-toolbar a {
+  color: #027206;
+  text-decoration: none;
+}
+
+
+.stepper-inputs {
+  display: flex;
+  flex-direction: column;
+  /*width: 400px;*/
+}
+
+/*.inputs::placeholder, .inputs:focus {*/
+/*  color: #027206;*/
+/*  border-radius: 6px;*/
+/*  border-color: #027206;*/
+/*  outline: #027206;*/
+/*}*/
+/*.inputs {*/
+/*  border: 2px solid #027206;*/
+/*  background: rgba(0, 170, 7, 0.1);*/
+/*  color: #027206;*/
+/*  padding: 10px 20px;*/
+/*  border-radius: 6px;*/
+/*  margin: 10px 0;*/
+/*}*/
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: green !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #027206;
+  margin: 0 auto 0 auto;
+  padding-left: 100px;
+
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #55FF5C;
+  color: #ffffff;
+}
+
+::ng-deep .mat-step-header .mat-step-label {
+  font-size: 20px;
+  color: #000000;
+  font-weight: 500;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #027206;
+  color: #ffffff;
+}
+
+.stepper-btn {
+  background-color: #027206;
+  color: white;
+  border-radius: 6px;
+  margin: 10px 20px 0 0;
+  padding: 0 30px;
+}
+
+.landing-footer {
+  height: fit-content;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+}
+
+form{
+  padding-top: 8px;
+}

@@ -5,6 +5,7 @@ import {NgForage} from 'ngforage';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import * as Parse from 'node_modules/parse';
+import {SettingsServiceService} from './Settings-service.service';
 
 Parse.initialize('lbpharmacy');
 Parse.serverURL = serverUrl;
@@ -14,8 +15,9 @@ Parse.serverURL = serverUrl;
 })
 export class UserDatabaseService extends ParseBackend implements UserDataSource {
 
-  constructor(private httpClient: HttpClient,
-              private indexD: NgForage) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly settings: SettingsServiceService,
+              private readonly indexD: NgForage) {
     super();
   }
 
@@ -71,24 +73,23 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
-  login(user: { username: string, password: string }, callback?: (value: UserI) => void) {
-    this.httpClient.get<UserI>(this.serverUrl + '/login', {
-      params: {
-        'username': user.username + '@ssm.com',
-        'password': user.password
-      },
-      headers: this.getHeaderUser
-    }).subscribe(value => {
-      this.indexD.setItem<UserI>('user', value).then(value1 => {
-        console.log('saved user in cache is ---> ' + value1.objectId);
-        callback(value);
-      }).catch(reason => {
-        console.log(reason);
-        callback(null);
+  async login(user: { username: string, password: string }): Promise<UserI> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<UserI>(this.settings.ssmServerURL + '/login', {
+        params: {
+          'username': user.username,
+          'password': user.password
+        },
+        headers: this.settings.ssmHeader
+      }).subscribe(value => {
+        this.indexD.setItem<UserI>('user', value).then(value1 => {
+          resolve(value);
+        }).catch(reason => {
+          reject(reason);
+        });
+      }, error1 => {
+        reject(error1);
       });
-    }, error1 => {
-      console.log(error1);
-      callback(null);
     });
   }
 
@@ -115,8 +116,20 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     // });
   }
 
-  register(user: UserI, callback?: (value: any) => void) {
-    this.createUser(user, callback);
+  register(user: UserI): Promise<UserI> {
+    return new Promise<UserI>((resolve, reject) => {
+      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/users/create', user, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        this.indexD.setItem<UserI>('user', value).then(_ => {
+          resolve(value);
+        }).catch(reason => {
+          reject(reason);
+        });
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   resetPassword(user: UserI, callback?: (value: any) => void) {

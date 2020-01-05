@@ -1,61 +1,82 @@
-<div *ngIf="isLogin">
-  <app-check-user-progress></app-check-user-progress>
-</div>
-<div *ngIf="!isLogin">
-  <nav class="sticky-top">
-    <mat-toolbar color="primary">
-      <button mat-icon-button="" (click)="goHome()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <span>SSM</span>
-      <span class="toolbar-spacer"></span>
-      <button mat-icon-button="">
-        <mat-icon [matMenuTriggerFor]="menu">
-          more_vert
-        </mat-icon>
-      </button>
-      <mat-menu #menu>
-        <button mat-menu-item>item</button>
-      </mat-menu>
-    </mat-toolbar>
-  </nav>
+<div>
+  <!--  <nav class="sticky-top">-->
+  <!--    <mat-toolbar color="primary">-->
+  <!--&lt;!&ndash;      <button mat-icon-button="" (click)="goHome()">&ndash;&gt;-->
+  <!--&lt;!&ndash;        <mat-icon>arrow_back</mat-icon>&ndash;&gt;-->
+  <!--&lt;!&ndash;      </button>&ndash;&gt;-->
+  <!--      <span>SSM</span>-->
+  <!--      <span class="toolbar-spacer"></span>-->
+  <!--&lt;!&ndash;      <button mat-icon-button="">&ndash;&gt;-->
+  <!--&lt;!&ndash;        <mat-icon [matMenuTriggerFor]="menu">&ndash;&gt;-->
+  <!--&lt;!&ndash;          more_vert&ndash;&gt;-->
+  <!--&lt;!&ndash;        </mat-icon>&ndash;&gt;-->
+  <!--&lt;!&ndash;      </button>&ndash;&gt;-->
+  <!--&lt;!&ndash;      <mat-menu #menu>&ndash;&gt;-->
+  <!--&lt;!&ndash;        <button mat-menu-item>item</button>&ndash;&gt;-->
+  <!--&lt;!&ndash;      </mat-menu>&ndash;&gt;-->
+  <!--    </mat-toolbar>-->
+  <!--  </nav>-->
 
   <main style="padding-top: 54px" class="page login-page">
     <section>
       <div class="container">
 
         <div class="col-sm-12 col-12 col-md-6 col-xl-4 col-lg-4 offset-xl-4 offset-lg-4 offset-md-3">
-          <mat-progress-bar *ngIf="showProgress" class="full-width rounded-top" mode="indeterminate"></mat-progress-bar>
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title>Login</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Username" [formControl]="usernameControlInput" type="text" required>
-              </mat-form-field>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Password" type="password" [formControl]="passwordControlInput" required>
-              </mat-form-field>
-              <!--<div class="form-group">-->
-              <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
-              <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
-              <!--</div>-->
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress" (click)="login()">
-                Log In
-              </button>
-            </mat-card-actions>
-            <mat-card-actions>
-              <button routerLink="/register" mat-raised-button color="primary" class="btn-block" *ngIf="!showProgress">
-                Open Account
-              </button>
-            </mat-card-actions>
-            <mat-card-actions>
-              <button mat-button color="warn" class="btn-block" *ngIf="!showProgress" (click)="reset()">Reset</button>
-            </mat-card-actions>
-          </mat-card>
+          <mat-progress-bar *ngIf="showProgress"
+                            class="full-width rounded-top"
+                            mode="indeterminate"></mat-progress-bar>
+
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Login</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input matInput formControlName="username" type="text" required>
+                  <mat-error>Username required</mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" formControlName="password" required>
+                  <mat-error>Password required</mat-error>
+                </mat-form-field>
+                <!--<div class="form-group">-->
+                <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
+                <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
+                <!--</div>-->
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button
+                        color="primary"
+                        class="btn-block"
+                        *ngIf="!showProgress">
+                  Log In
+                </button>
+              </mat-card-actions>
+              <mat-card-actions>
+                <button routerLink="/register"
+                        (click)="$event.preventDefault()"
+                        mat-raised-button
+                        color="primary"
+                        class="btn-block"
+                        *ngIf="!showProgress">
+                  Open Account
+                </button>
+              </mat-card-actions>
+              <mat-card-actions>
+                <button mat-button
+                        color="warn"
+                        class="btn-block"
+                        *ngIf="!showProgress"
+                        (click)="reset($event)">
+                  Reset
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </form>
+
         </div>
 
       </div>
@@ -64,9 +85,17 @@
 
   <div class="footer-basic">
     <footer>
-      <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a>
-        <a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
-          class="icon ion-social-facebook"></i></a></div>
+      <div class="social">
+        <a target="_blank" href="https://www.instagram.com/smartstockmanager/">
+          <i class="icon ion-social-instagram"></i>
+        </a>
+        <a target="_blank" href="https://twitter.com/smartstockmanag">
+          <i class="icon ion-social-twitter"></i>
+        </a>
+        <a target="_blank" href="https://fb.me/smartstockmanager">
+          <i class="icon ion-social-facebook"></i>
+        </a>
+      </div>
       <p class="copyright">FahamuTech © 2019</p>
     </footer>
   </div>

@@ -1,15 +1,16 @@
 export interface UserI {
   username: string;
   password?: string;
+  firstname: string;
+  lastname: string;
+  mobile: string;
+  email: string;
   role: string;
-  idOld?: string;
+  businessName: string;
+  country: string;
+  region: string;
+  street: string;
   objectId?: string;
-  meta?: {
-    fullname: string;
-    number: string;
-    address: string;
-    email: string
-  };
   createdAt?: string;
   updatedAt?: string;
   sessionToken?: string;

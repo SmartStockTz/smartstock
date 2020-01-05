@@ -1,0 +1,129 @@
+<div class="main-container container">
+  <mat-toolbar class="row ">
+    <a href="" class="h4">Open SmartStock Account</a>
+    <span style="flex: 1 1 auto"></span>
+    <a routerLink="/login" class="h4">x</a>
+  </mat-toolbar>
+
+  <div class="register-form">
+    <mat-vertical-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="personalFormGroup">
+        <form [formGroup]="personalFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <div class="stepper-inputs">
+            <mat-form-field appearance="fill">
+              <mat-label>FirstName</mat-label>
+              <input matInput class="inputs" type="text" formControlName="firstname" required>
+              <mat-error>FirstName required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>LastName</mat-label>
+              <input matInput class="inputs" type="text" formControlName="lastname" required>
+              <mat-error>LastName required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput class="inputs" type="email" formControlName="email" required>
+              <mat-error>Email required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Mobile number</mat-label>
+              <input matInput class="inputs" type="number" formControlName="mobile" required>
+              <mat-error>Mobile number required</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div>
+            <button mat-button class="stepper-btn" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="businessFormGroup">
+        <form [formGroup]="businessFormGroup">
+          <ng-template matStepLabel>Fill out your address</ng-template>
+          <div class="stepper-inputs">
+            <mat-form-field appearance="fill">
+              <mat-label>Business Name</mat-label>
+              <input matInput class="inputs" type="text" formControlName="businessName"
+                     required>
+              <mat-error>Business name required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Country</mat-label>
+              <input matInput class="inputs" type="text" formControlName="country" required>
+              <mat-error>Country required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Region</mat-label>
+              <input matInput class="inputs" type="text" formControlName="region" required>
+              <mat-error>Region required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Street / Business location</mat-label>
+              <textarea matInput class="inputs" formControlName="street"
+                        required></textarea>
+              <mat-error>Street required</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div>
+            <button mat-button class="stepper-btn" matStepperPrevious>Back</button>
+            <button mat-button class="stepper-btn" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="loginFormGroup">
+        <form [formGroup]="loginFormGroup">
+          <ng-template matStepLabel>Login Information</ng-template>
+          <div class="stepper-inputs">
+            <mat-form-field appearance="fill">
+              <mat-label>Username</mat-label>
+              <input matInput class="inputs" type="text"
+                     formControlName="username" required>
+              <mat-error>Username required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput class="inputs" type="password"
+                     formControlName="password" placeholder="Password" required>
+              <mat-error>Password required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput class="inputs" type="password"
+                     formControlName="confPassword" placeholder="Confirm Password" required>
+              <mat-error>Confirm password required</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div>
+            <button mat-button class="stepper-btn" matStepperPrevious>Back</button>
+            <button mat-button (click)="openAccount()" class="stepper-btn">Create Account</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>
+
+<!--<div class="footer-basic">-->
+<!--  <footer>-->
+<!--    <div class="social">-->
+<!--      <a href="#">-->
+<!--        <i class="icon ion-social-instagram"></i>-->
+<!--      </a>-->
+<!--      <a href="#">-->
+<!--        <i class="icon ion-social-twitter"></i>-->
+<!--      </a>-->
+<!--      <a href="#">-->
+<!--        <i class="icon ion-social-facebook"></i>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--    <p class="copyright">FahamuTech © 2019</p>-->
+<!--  </footer>-->
+<!--</div>-->
+
+<!--<div class="landing-footer">-->
+<!--  <app-footer ></app-footer>-->
+<!--</div>-->

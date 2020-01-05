@@ -1,11 +1,11 @@
 import {UserI} from '../../model/UserI';
 
 export interface UserDataSource {
-  login(user: { username: string, password: string }, callback?: (value: UserI) => void);
+  login(user: { username: string, password: string }): Promise<UserI>;
 
   logout(user: UserI, callback?: (value: any) => void);
 
-  register(user: UserI, callback?: (value: any) => void);
+  register(user: UserI): Promise<UserI>;
 
   resetPassword(user: UserI, callback?: (value: any) => void);
 

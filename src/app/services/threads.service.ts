@@ -17,8 +17,8 @@ export class ThreadsService {
       };
       worker.postMessage(
         JSON.stringify({
-          appId: this.settings.getApplicationId(),
-          projectUrlId: this.settings.getServerURLId()
+          appId: this.settings.getCustomerApplicationId(),
+          projectUrlId: this.settings.getCustomerServerURLId()
         })
       );
       return 'Ok';
@@ -35,9 +35,9 @@ export class ThreadsService {
       };
       worker.postMessage(
         JSON.stringify({
-          appId: this.settings.getApplicationId(),
-          projectUrlId: this.settings.getServerURLId(),
-          projectId: this.settings.getProjectId(),
+          appId: this.settings.getCustomerApplicationId(),
+          projectUrlId: this.settings.getCustomerServerURLId(),
+          projectId: this.settings.getCustomerProjectId(),
         })
       );
       return 'Ok';

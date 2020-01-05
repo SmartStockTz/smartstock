@@ -5,20 +5,28 @@ import {NgForage} from 'ngforage';
   providedIn: 'root'
 })
 export class SettingsServiceService {
+  ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
+  ssmHeader = {
+    'X-Parse-Application-Id': 'smartstock_lb'
+  };
+  ssmFunctionsHeader = {
+    'b-fast-application-id': 'smartstock_lb'
+  };
+  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
 
   constructor(private indexDb: NgForage) {
   }
 
-  getApplicationId(): string {
-    return 'lbpharmacy';
+  getCustomerApplicationId(): string {
+    return 'lbpharmacy'; // replace with fetch from index db
   }
 
-  getServerURLId(): string {
-    return 'lbpharmacy-daas';
+  getCustomerServerURLId(): string {
+    return 'lbpharmacy-daas'; // replace with fetch from index db
   }
 
-  getProjectId(): string {
-    return 'lbpharmacy';
+  getCustomerProjectId(): string {
+    return 'lbpharmacy'; // replace with fetch from index db
   }
 
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
