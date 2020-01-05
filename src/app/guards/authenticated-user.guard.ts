@@ -16,17 +16,13 @@ export class AuthenticatedUserGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser(value => {
-        console.log(value);
         if (value && value.role === 'admin') {
-          console.log('user is admin');
           this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
           reject(false);
         } else if (value && value.role !== 'admin') {
-          console.log('user is not admin');
           this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
           reject(false);
         } else {
-          console.log('remain where i am');
           resolve(true);
         }
       });

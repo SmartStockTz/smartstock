@@ -12,7 +12,7 @@ export interface StockDataSource {
 
   deleteAllStock(stocks: Stock[], callback?: (value: any) => void);
 
-  addStock(stock: Stock, callback?: (value: any) => void);
+  addStock(stock: Stock): Promise<Stock>;
 
   addAllStock(stocks: Stock[], callback: (value: any) => void);
 
@@ -22,7 +22,7 @@ export interface StockDataSource {
 
   getCategory(id: string, callback: (category: CategoryI) => void);
 
-  getAllCategory(callback: (categories: CategoryI[]) => void);
+  getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]>;
 
   addCategory(category: CategoryI, callback?: (value: any) => void);
 
@@ -42,7 +42,7 @@ export interface StockDataSource {
 
   getSupplier(id: string, callback: (supplier: SupplierI) => void);
 
-  getAllSupplier(callback: (suppliers: SupplierI[]) => void);
+  getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]>;
 
   updateSupplier(id: string, callback?: (value: any) => void);
 
@@ -54,6 +54,6 @@ export interface StockDataSource {
 
   addUnit(unit: UnitsI, callback?: (value: any) => void);
 
-  getAllUnit(callback: (value: UnitsI[]) => void);
+  getAllUnit(pagination: {size?: number, skip?: number}): Promise<UnitsI[]>;
 
 }

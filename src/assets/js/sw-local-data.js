@@ -43,9 +43,9 @@ addEventListener('message', ({data}) => {
  */
 async function fetchStocks(appId, url, localforage, firstFetch) {
   try {
-   // if (firstFetch) {
-      await localforage.removeItem('lastUpdate');
-   // }
+    // if (firstFetch) {
+    //   await localforage.removeItem('lastUpdate');
+    // }
     const lastUpdateStamp = await localforage.getItem('lastUpdate');
     let fetchUrl;
     if (lastUpdateStamp) {

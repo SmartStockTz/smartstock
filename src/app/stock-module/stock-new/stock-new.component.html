@@ -3,7 +3,7 @@
                [fixedInViewport]="true"
                #sidenav
                [mode]="enoughWidth()?'side':'over'"
-               [opened]="enoughWidth()">
+               [opened]="false">
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
@@ -19,9 +19,9 @@
 
           <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
 
-            <h2>
+            <h4>
               Product Information
-            </h2>
+            </h4>
             <mat-card class="card-wrapper mat-elevation-z0">
               <mat-card-content class="card-content">
                 <mat-form-field appearance="fill" class="my-input">
@@ -60,15 +60,15 @@
                                         *ngIf="suppliersFetching" matSuffix color="accent"
                                         mode="indeterminate"
                                         [diameter]="20"></mat-progress-spinner>
-                  <mat-error>Category required</mat-error>
+                  <mat-error>Supplier required</mat-error>
                 </mat-form-field>
 
               </mat-card-content>
             </mat-card>
 
-            <h2>
+            <h4>
               Inventory Information
-            </h2>
+            </h4>
             <mat-card class="card-wrapper mat-elevation-z0">
 
               <mat-checkbox
@@ -147,7 +147,7 @@
                   <mat-label>Expire Date</mat-label>
                   <input matInput [matDatepicker]="picker" formControlName="expire">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-datepicker [touchUi]="true" #picker></mat-datepicker>
                 </mat-form-field>
 
               </mat-card-content>
@@ -171,8 +171,8 @@
             <!--            </mat-card>-->
 
             <div>
-              <button class="btn-block ft-button" color="accent" mat-raised-button
-                      [disabled]="!productForm.valid || mainProgress">
+              <button class="btn-block ft-button" color="primary" mat-raised-button
+                      [disabled]="mainProgress">
                 Create Product
                 <mat-progress-spinner style="display: inline-block" *ngIf="mainProgress" diameter="30"
                                       mode="indeterminate"></mat-progress-spinner>

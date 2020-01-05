@@ -26,6 +26,23 @@ export class SettingsServiceService {
     return 'lbpharmacy-daas'; // replace with fetch from index db
   }
 
+  getCustomerHeader(): any {
+    return {
+      'X-Parse-Application-Id': this.getCustomerApplicationId()
+    };
+  }
+
+  getCustomerPostHeader(): any {
+    return {
+      'X-Parse-Application-Id': this.getCustomerApplicationId(),
+      'content-type': 'application/json'
+    };
+  }
+
+  getCustomerServerURL(): string {
+    return `https://${this.getCustomerServerURLId()}.bfast.fahamutech.com`;
+  }
+
   getCustomerProjectId(): string {
     return 'lbpharmacy'; // replace with fetch from index db
   }

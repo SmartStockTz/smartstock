@@ -5,16 +5,17 @@ import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {ParseBackend, randomString} from '../database/ParseBackend';
+import {randomString} from '../database/ParseBackend';
+import {SettingsServiceService} from './Settings-service.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class StockDatabaseService extends ParseBackend implements StockDataSource {
+export class StockDatabaseService implements StockDataSource {
 
-  constructor(private httpClient: HttpClient) {
-    super();
+  constructor(private readonly httpClient: HttpClient,
+              private readonly settings: SettingsServiceService) {
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
@@ -27,8 +28,8 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   addCategory(category: CategoryI, callback?: (value: any) => void) {
-    this.httpClient.post(this.serverUrl + '/classes/categories', category, {
-      headers: this.postHeader
+    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/categories', category, {
+      headers: this.settings.getCustomerPostHeader()
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -38,8 +39,8 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   addUnit(unit: UnitsI, callback: (value: any) => void) {
-    this.httpClient.post(this.serverUrl + '/classes/units', unit, {
-      headers: this.postHeader
+    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/units', unit, {
+      headers: this.settings.getCustomerPostHeader()
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -48,37 +49,39 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
     });
   }
 
-  getAllUnit(callback: (value: UnitsI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/units', {
-      headers: this.getHeader,
-      params: {
-        'limit': '1000'
-      }
-    }).subscribe(value => {
-      const unt: UnitsI[] = value.results;
-      callback(unt);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
+    return new Promise<UnitsI[]>((resolve, reject) => {
+      this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/units', {
+        headers: this.settings.getCustomerHeader(),
+        params: {
+          'limit': '1000'
+        }
+      }).subscribe(value => {
+        const unt: UnitsI[] = value.results;
+        resolve(unt);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
-  addStock(stock: Stock, callback?: (value: any) => void) {
-    stock.idOld = randomString(8);
-    this.httpClient.post(this.serverUrl + '/classes/stocks', stock, {
-      headers: this.postHeader
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  addStock(stock: Stock): Promise<Stock> {
+    return new Promise<Stock>((resolve, reject) => {
+      stock.idOld = randomString(8);
+      this.httpClient.post<Stock>(this.settings.getCustomerServerURL() + '/classes/stocks', stock, {
+        headers: this.settings.getCustomerPostHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
   addSupplier(supplier: SupplierI, callback: (value: any) => void) {
     supplier.idOld = randomString(8);
-    this.httpClient.post(this.serverUrl + '/classes/suppliers', supplier, {
-      headers: this.postHeader
+    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
+      headers: this.settings.getCustomerPostHeader()
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -100,8 +103,8 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   deleteStock(stock: Stock, callback?: (value: any) => void) {
-    this.httpClient.delete(this.serverUrl + '/classes/stocks/' + stock.objectId, {
-      headers: this.getHeader
+    this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/stocks/' + stock.objectId, {
+      headers: this.settings.getCustomerHeader()
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -113,24 +116,25 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   deleteSupplier(supplier: SupplierI, callback?: (value: any) => void) {
   }
 
-  getAllCategory(callback: (categories: CategoryI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/categories', {
-      headers: this.getHeader,
-      params: {
-        'limit': '1000'
-      }
-    }).subscribe(value => {
-      const categ: CategoryI[] = value.results;
-      callback(categ);
-    }, error1 => {
-      console.log(error1);
-      callback(error1);
+  getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
+    return new Promise<CategoryI[]>((resolve, reject) => {
+      this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/categories', {
+        headers: this.settings.getCustomerHeader(),
+        params: {
+          'limit': pagination.size ? pagination.size.toString() : '1000'
+        }
+      }).subscribe(value => {
+        const categ: CategoryI[] = value.results;
+        resolve(categ);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
   getAllStock(callback: (stocks: Stock[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/stocks', {
-      headers: this.getHeader,
+    this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/stocks', {
+      headers: this.settings.getCustomerHeader(),
       params: {
         'limit': '100000'
       }
@@ -144,18 +148,19 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
     });
   }
 
-  getAllSupplier(callback: (suppliers: SupplierI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/suppliers', {
-      headers: this.getHeader,
-      params: {
-        'limit': '10000'
-      }
-    }).subscribe(value => {
-      const supp: SupplierI[] = value.results;
-      callback(supp);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
+    return new Promise<SupplierI[]>((resolve, reject) => {
+      this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/suppliers', {
+        headers: this.settings.getCustomerHeader(),
+        params: {
+          'limit': '1000'
+        }
+      }).subscribe(value => {
+        const supp: SupplierI[] = value.results;
+        resolve(supp);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
@@ -163,8 +168,8 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   getStock(id: string, callback: (stock: Stock) => void) {
-    this.httpClient.get<Stock>(this.serverUrl + '/classes/stocks/' + id, {
-      headers: this.getHeader
+    this.httpClient.get<Stock>(this.settings.getCustomerServerURL() + '/classes/stocks/' + id, {
+      headers: this.settings.getCustomerHeader()
     }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -189,10 +194,10 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 
   updateStock(stock: Stock, callback?: (value: any) => void) {
-    this.httpClient.put(this.serverUrl + '/classes/stocks/' + stock.objectId,
+    this.httpClient.put(this.settings.getCustomerServerURL() + '/classes/stocks/' + stock.objectId,
       stock,
       {
-        headers: this.postHeader
+        headers: this.settings.getCustomerPostHeader()
       }).subscribe(value => {
       callback(value);
     }, error1 => {
@@ -205,41 +210,3 @@ export class StockDatabaseService extends ParseBackend implements StockDataSourc
   }
 }
 
-// {
-//   'product': stock.product,
-//   'unit': stock.unit,
-//   'category': stock.category,
-//   'shelf': stock.shelf,
-//   'quantity': stock.quantity,
-//   'wholesaleQuantity': stock.wholesaleQuantity,
-//   'reorder': stock.reorder,
-//   'supplier': stock.supplier,
-//   'purchase': stock.purchase,
-//   'retailPrice': stock.retailPrice,
-//   'retailWholesalePrice': stock.retailWholesalePrice,
-//   'expire': stock.expire,
-//   'nhifPrice': stock.nhifPrice,
-//   'wholesalePrice': stock.wholesalePrice
-// }
-
-// {
-//   'product': stock.product,
-//   'unit': stock.unit,
-//   'category': stock.category,
-//   'shelf': stock.shelf,
-//   'quantity': stock.quantity,
-//   'wholesaleQuantity': stock.wholesaleQuantity,
-//   'q_status': stock.q_status,
-//   'reorder': stock.reorder,
-//   'supplier': stock.supplier,
-//   'purchase': stock.purchase,
-//   'retailPrice': stock.retailPrice,
-//   'retailWholesalePrice': stock.retailWholesalePrice,
-//   'profit': stock.profit,
-//   'times': stock.times,
-//   'expire': stock.expire,
-//   'idOld': stock.idOld,
-//   'retail_stockcol': stock.retail_stockcol,
-//   'nhifPrice': stock.nhifPrice,
-//   'wholesalePrice': stock.wholesalePrice
-// }
