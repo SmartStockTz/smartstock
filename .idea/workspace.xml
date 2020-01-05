@@ -2,53 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/guards/admin-role.guard.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/admin-role.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/authentication.guard.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/authentication.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/settings-module/settings-module-routing.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/settings-module/settings-module.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock-details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/UserI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/UserI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/setting/setting.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/setting/setting.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/setting/setting.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/setting/setting.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,14 +262,7 @@
       <workItem from="1578127294693" duration="3331000" />
       <workItem from="1578135540680" duration="9243000" />
       <workItem from="1578147274820" duration="15715000" />
-      <workItem from="1578199943475" duration="26752000" />
-    </task>
-    <task id="LOCAL-00027" summary="update edit product in stock module">
-      <created>1570010371248</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1570010371248</updated>
+      <workItem from="1578199943475" duration="31948000" />
     </task>
     <task id="LOCAL-00028" summary="refresh">
       <created>1570011313561</created>
@@ -648,7 +600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578208053813</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="update stock">
+      <created>1578231197863</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1578231197863</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +630,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ignore node_modules in server folder" />
     <MESSAGE value="restore v2" />
     <MESSAGE value="refresh v3 development branch" />
     <MESSAGE value="move stock and sales to specific module" />
@@ -696,7 +654,8 @@
     <MESSAGE value="update angular to 8 and change theme color to green" />
     <MESSAGE value="update rxjs package and start to change ui and separate a task to stand on its own from a big module" />
     <MESSAGE value="change login to promise and update register to add account to smartstock" />
-    <option name="LAST_COMMIT_MESSAGE" value="change login to promise and update register to add account to smartstock" />
+    <MESSAGE value="update stock" />
+    <option name="LAST_COMMIT_MESSAGE" value="update stock" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -708,50 +667,50 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578163948522">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578231197431">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578208053120">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208053120" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578163948522" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578231197431" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
-    <state width="1600" height="417" key="GridCell.Tab.0.bottom" timestamp="1578167718358">
+    <state width="1600" height="292" key="GridCell.Tab.0.bottom" timestamp="1578235159590">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578219498677">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219498677" />
-    <state width="1600" height="417" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578167718358" />
-    <state width="1600" height="417" key="GridCell.Tab.0.center" timestamp="1578167718357">
+    <state width="1600" height="292" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578235159590" />
+    <state width="1600" height="292" key="GridCell.Tab.0.center" timestamp="1578235159589">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578219498677">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219498677" />
-    <state width="1600" height="417" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578167718357" />
-    <state width="1600" height="417" key="GridCell.Tab.0.left" timestamp="1578167718357">
+    <state width="1600" height="292" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578235159589" />
+    <state width="1600" height="292" key="GridCell.Tab.0.left" timestamp="1578235159588">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578219498676">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219498676" />
-    <state width="1600" height="417" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578167718357" />
-    <state width="1600" height="417" key="GridCell.Tab.0.right" timestamp="1578167718358">
+    <state width="1600" height="292" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578235159588" />
+    <state width="1600" height="292" key="GridCell.Tab.0.right" timestamp="1578235159590">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578219498677">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="318" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219498677" />
-    <state width="1600" height="417" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578167718358" />
+    <state width="1600" height="292" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578235159590" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -764,14 +723,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="55" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578163950885">
+    <state x="398" y="50" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578231199919">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578208056726">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208056726" />
-    <state x="398" y="55" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578163950885" />
+    <state x="398" y="50" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578231199919" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

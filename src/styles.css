@@ -38,3 +38,7 @@ body {
 button {
   outline: none !important;
 }
+
+.ft-button{
+  height: 54px;
+}
