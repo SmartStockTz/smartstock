@@ -1,1 +1,190 @@
-<p>stock-edit works!</p>
+<mat-sidenav-container class="match-parent">
+  <mat-sidenav class="match-parent-side"
+               [fixedInViewport]="true"
+               #sidenav
+               [mode]="enoughWidth()?'side':'over'"
+               [opened]="false">
+    <app-admin-drawer></app-admin-drawer>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-toolbar [heading]="'Update Product'"
+                 [sidenav]="sidenav"
+                 [showProgress]="false">
+    </app-toolbar>
+
+    <div class="container stock-new-wrapper">
+      <form [formGroup]="updateForm" (ngSubmit)="updateProduct()">
+        <div class="row d-flex justify-content-center align-items-center">
+
+          <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
+
+            <h4>
+              Product Information
+            </h4>
+            <mat-card class="card-wrapper mat-elevation-z0">
+              <mat-card-content class="card-content">
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Product Name</mat-label>
+                  <input matInput type="text" required formControlName="product">
+                  <mat-error>Product name required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput type="text" formControlName="description"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="my-input">
+                  <mat-label>Category</mat-label>
+                  <mat-select [multiple]="false" formControlName="category">
+                    <mat-option *ngFor="let category of categories | async" [value]="category.name">
+                      {{category.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-progress-spinner matTooltip="Fetching units"
+                                        *ngIf="categoriesFetching" matSuffix color="accent"
+                                        mode="indeterminate"
+                                        [diameter]="20"></mat-progress-spinner>
+                  <mat-error>Category required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="my-input">
+                  <mat-label>Supplier</mat-label>
+                  <mat-select [multiple]="false" formControlName="supplier">
+                    <mat-option *ngFor="let supplier of suppliers | async" [value]="supplier.name">
+                      {{supplier.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-progress-spinner matTooltip="Fetching suppliers"
+                                        *ngIf="suppliersFetching" matSuffix color="accent"
+                                        mode="indeterminate"
+                                        [diameter]="20"></mat-progress-spinner>
+                  <mat-error>Supplier required</mat-error>
+                </mat-form-field>
+
+              </mat-card-content>
+            </mat-card>
+
+            <h4>
+              Inventory Information
+            </h4>
+            <mat-card class="card-wrapper mat-elevation-z0">
+
+              <mat-checkbox
+                labelPosition="after"
+                formControlName="active"
+                matTooltip="If selected a product can be bought by a customer
+                                and be sold by a seller, otherwise it can be purchased only">
+                For Sale
+              </mat-checkbox>
+
+              <mat-card-content class="card-content">
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Purchase Price / Unit</mat-label>
+                  <span matSuffix>TZS</span>
+                  <input min="0" matInput type="number" required formControlName="purchase">
+                  <mat-error>Purchase price required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Retail Price / Unit</mat-label>
+                  <span matSuffix>TZS</span>
+                  <input min="0" matInput type="number" required formControlName="retailPrice">
+                  <mat-error>Retail price required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Wholesale Price / Unit</mat-label>
+                  <span matSuffix>TZS</span>
+                  <input min="0" matInput type="number" required formControlName="wholesalePrice">
+                  <mat-error>Wholesale price required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input"
+                                matTooltip="Quantity for this product to be sold as a whole or in bulk">
+                  <mat-label>Wholesale Quantity</mat-label>
+                  <input min="0" matInput
+                         type="number"
+                         required formControlName="wholesaleQuantity">
+                  <mat-error>Wholesale Quantity required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input" matTooltip="Total initial unit quantity available">
+                  <mat-label>Quantity</mat-label>
+                  <input min="0" matInput type="number" required
+                         formControlName="quantity">
+                  <mat-error>Quantity required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="my-input">
+                  <mat-label>Reorder Level</mat-label>
+                  <input min="0" matInput type="number" required formControlName="reorder">
+                  <mat-error>Reorder field required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="my-input">
+                  <mat-label>Unit</mat-label>
+                  <mat-select formControlName="unit">
+                    <mat-option *ngFor="let unit of units | async" [value]="unit.name">
+                      {{unit.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-progress-spinner matTooltip="Fetching units"
+                                        *ngIf="unitsFetching" matSuffix color="accent"
+                                        mode="indeterminate"
+                                        [diameter]="20"></mat-progress-spinner>
+                  <mat-error>Unit required</mat-error>
+                </mat-form-field>
+
+                <mat-checkbox matTooltip="Select if a product can expire" labelPosition="after"
+                              class="my-input"
+                              formControlName="canExpire">
+                  Can Expire?
+                </mat-checkbox>
+
+                <mat-form-field appearance="outline" class="my-input">
+                  <mat-label>Expire Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="expire">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker [touchUi]="true" #picker></mat-datepicker>
+                </mat-form-field>
+
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+
+          <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 16px">
+            <!--            <mat-card class="card-wrapper mat-elevation-z1">-->
+
+            <!--              <mat-card-content class="card-content">-->
+            <!--                <mat-checkbox-->
+            <!--                  labelPosition="after"-->
+            <!--                  formControlName="active"-->
+            <!--                  matTooltip="If selected a product can be bought by a customer and be sold by a seller ">-->
+            <!--                  Active?-->
+            <!--                </mat-checkbox>-->
+
+            <!--              </mat-card-content>-->
+
+            <!--            </mat-card>-->
+
+            <div>
+              <button class="btn-block ft-button" color="primary" mat-raised-button
+                      [disabled]="mainProgress">
+                Update Product
+                <mat-progress-spinner style="display: inline-block" *ngIf="mainProgress" diameter="30"
+                                      mode="indeterminate"></mat-progress-spinner>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+

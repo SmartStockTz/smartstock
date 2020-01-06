@@ -1,7 +1,12 @@
 export interface Stock {
   idOld?: string;
+  createdAt?: any;
+  updatedAt?: any;
   objectId?: string;
   product: string;
+  active?: boolean | true;
+  canExpire?: boolean | true;
+  description?: string;
   unit: string;
   category: string;
   shelf: string;

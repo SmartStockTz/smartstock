@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Stock} from '../../model/stock';
 import {
   MAT_BOTTOM_SHEET_DATA,
@@ -14,8 +13,7 @@ import {
   MatSnackBar,
   MatTableDataSource
 } from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserDatabaseService} from '../../services/user-database.service';
+import {Router} from '@angular/router';
 import {NgForage} from 'ngforage';
 import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
@@ -28,27 +26,22 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
 })
 export class StockComponent extends DeviceInfo implements OnInit {
 
-  constructor(private router: Router,
-              private readonly activatedRoute: ActivatedRoute,
-              private userDatabase: UserDatabaseService,
-              private indexDb: NgForage,
+  constructor(private readonly router: Router,
+              private readonly indexDb: NgForage,
               public readonly bottomSheet: MatBottomSheet,
-              private snack: MatSnackBar,
-              private dialog: MatDialog,
-              private stockDatabase: StockDatabaseService) {
+              private readonly snack: MatSnackBar,
+              private readonly dialog: MatDialog,
+              private readonly stockDatabase: StockDatabaseService) {
     super();
   }
 
   showProgress = false;
-  totalPurchase = 0;
-  private stock: Stock;
-  private stockDatasourceArray: Stock[];
+  totalPurchase: Observable<number> = of(0);
   units: Observable<UnitsI[]>;
   stockDatasource: MatTableDataSource<Stock>;
   stockColumns = ['product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'expire', 'action'];
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  searchStockControl = new FormControl();
 
   static getSqlDate(date: any): string {
     try {
@@ -69,8 +62,10 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   ngOnInit() {
-    // const data = this.activatedRoute.snapshot.data;
-    // console.log(data);
+    window.addEventListener('ssm_stocks_updated', (e) => {
+      console.log(e);
+      console.log('stock is updated from worker thread check it out');
+    });
     this.initializeView();
   }
 
@@ -83,61 +78,23 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   private initializeView() {
-    this.getStocksFromCache(() => {
-    });
+    this.getStocksFromCache();
   }
 
-  private getStocksFromCache(callback: () => void) {
-    // this.searchStockControl.setValue('');
-    this.indexDb.getItem<Stock[]>('stocks').then(value => {
-      this.stockDatasourceArray = value;
-      this.stockDatasource = new MatTableDataSource(this.stockDatasourceArray);
+  private getStocksFromCache(callback?: () => void) {
+    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+      this.stockDatasource = new MatTableDataSource(stocks);
       this.stockDatasource.paginator = this.paginator;
-      let sTotal = 0;
-      value.forEach(value1 => {
-        sTotal += <number>value1.purchase;
-      });
-      this.totalPurchase = sTotal;
-      callback();
+      this._getTotalPurchaseOfStock(stocks);
     }, error1 => {
       console.log(error1);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
     });
   }
 
-  // private getSuppliers(supplier: string) {
-  //   this.indexDb.getItem<SupplierI[]>('suppliers').then(value => {
-  //     const supplierF: SupplierI[] = value.filter(value1 => (value1.name.toLowerCase().includes(supplier.toLowerCase())));
-  //     this.suppliers = of(supplierF);
-  //   }).catch(reason => {
-  //     console.log(reason);
-  //     this.snack.open('Failed to get suppliers', 'Ok', {duration: 3000});
-  //   });
-  // }
-  //
-  // private getUnits(unit: string) {
-  //   this.indexDb.getItem<UnitsI[]>('units').then(value => {
-  //     const unitsF: UnitsI[] = value.filter(value1 => (value1.name.toLowerCase().includes(unit.toLowerCase())));
-  //     this.units = of(unitsF);
-  //   }).catch(reason => {
-  //     console.log(reason);
-  //     this.snack.open('Failed to get units', 'Ok', {duration: 3000});
-  //   });
-  // }
-
-  // private getCategory(category: string) {
-  //   this.indexDb.getItem<CategoryI[]>('categories').then(value => {
-  //     const cateF: CategoryI[] = value.filter(value1 => (value1.name.toLowerCase().includes(category.toLowerCase())));
-  //     this.categories = of(cateF);
-  //   }).catch(reason => {
-  //     console.log(reason);
-  //     this.snack.open('Failed to get categories', 'Ok', {duration: 3000});
-  //   });
-  // }
-
   editStock(element: Stock) {
-    // this.snack.open('Now edit the document and save it', 'Ok', {duration: 3000});
-    // this.stock = element;
+    this.router.navigateByUrl('/stock/edit/' + element.objectId + '?stock=' + encodeURI(JSON.stringify(element)))
+      .catch(reason => console.log(reason));
   }
 
   deleteStock(element: Stock) {
@@ -154,10 +111,8 @@ export class StockComponent extends DeviceInfo implements OnInit {
           } else {
             this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
             this.hideProgressBar();
-            // update tables
-            this.getStocksFromCache(() => {
-
-            });
+            // update table
+            this._removeProductFromTable(element);
           }
         });
       }
@@ -172,9 +127,29 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   handleSearch(query: string) {
-    this.getStocksFromCache(() => {
-      this.stockDatasource.filter = query.toString().toLowerCase();
+    this.stockDatasource.filter = query.toString().toLowerCase();
+    // this.getStocksFromCache(() => {
+    // });
+  }
+
+  private _removeProductFromTable(element: Stock) {
+    this.stockDatasource.data = this.stockDatasource.data.filter(value => value.objectId !== element.objectId);
+    this._getTotalPurchaseOfStock(this.stockDatasource.data);
+    // update stocks
+    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+      const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
+      this.indexDb.setItem('stocks', updatedStock).catch(reason => console.warn('Fails to update stock due to deleted item'));
+    }).catch(reason => {
+      console.warn('fails to update stocks to to deleted item');
     });
+  }
+
+  private _getTotalPurchaseOfStock(stocks: Stock[]) {
+    // @ts-ignore
+    const sum = stocks.reduce(function (a, b) {
+      return {purchase: a.purchase + b.purchase}; // returns object with property x
+    });
+    this.totalPurchase = of(sum.purchase);
   }
 }
 

@@ -113,15 +113,11 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
 
     this.mainProgress = true;
     this.stockDatabase.addStock(this.productForm.value).then(_ => {
-      console.log(_);
       this.mainProgress = false;
       this.snack.open('Product added', 'Ok', {
-        duration: 3000
+        duration: 4000
       });
       this.productForm.reset();
-      this.productForm.markAsPristine();
-      this.productForm.markAsDirty();
-      this.productForm.updateValueAndValidity();
     }).catch(reason => {
       console.warn(reason);
       this.mainProgress = false;

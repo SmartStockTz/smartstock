@@ -5,8 +5,6 @@ addEventListener('message', ({data}) => {
   console.log(data);
   const appId = JSON.parse(data).appId;
   const projectUrlId = JSON.parse(data).projectUrlId;
-  console.log(appId);
-  console.log(projectUrlId);
 
   localforage.config({
     name: 'ssmsales',

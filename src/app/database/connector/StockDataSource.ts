@@ -16,7 +16,7 @@ export interface StockDataSource {
 
   addAllStock(stocks: Stock[], callback: (value: any) => void);
 
-  updateStock(stock: Stock, callback?: (value: any) => void);
+  updateStock(stock: Stock): Promise<Stock>;
 
   updateAllStock(stocks: Stock[], callback?: (value: any) => void);
 

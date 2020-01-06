@@ -43,7 +43,9 @@
                     <ng-container matColumnDef="purchase">
                       <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
                       <td mat-cell *matCellDef="let element">{{element.purchase | number}}</td>
-                      <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase | currency:'TZS':'code'}}</b></td>
+                      <td mat-footer-cell *matFooterCellDef>
+                        <b>{{totalPurchase | async | currency:'TZS '}}</b>
+                      </td>
                     </ng-container>
 
                     <ng-container matColumnDef="retailPrice">

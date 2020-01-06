@@ -21,16 +21,16 @@ addEventListener('message', ({data}) => {
       fetchStocks(appId, fetchStockURL, localforage, firstFetch).then(done => {
         firstFetch = false;
         onFetch = false;
-        postMessage("stock comparison thread started");
+        // postMessage("stock comparison thread started");
       }).catch(reason => {
         onFetch = false;
-        postMessage(false);
+        // postMessage(false);
       });
     } else {
       console.log('on fetch');
-      console.log(onFetch);
+      // console.log(onFetch);
     }
-  }, 180000);
+  }, 3000);
 });
 
 /**
@@ -42,10 +42,11 @@ addEventListener('message', ({data}) => {
  * @returns {Promise<void>}
  */
 async function fetchStocks(appId, url, localforage, firstFetch) {
+  console.log(firstFetch);
   try {
-    // if (firstFetch) {
-    //   await localforage.removeItem('lastUpdate');
-    // }
+    //if (firstFetch) {
+    // await localforage.removeItem('lastUpdate');
+    //}
     const lastUpdateStamp = await localforage.getItem('lastUpdate');
     let fetchUrl;
     if (lastUpdateStamp) {
@@ -58,29 +59,35 @@ async function fetchStocks(appId, url, localforage, firstFetch) {
         'bfast-application-id': 'smartstock_lb',
       }
     });
-    await localforage.setItem('lastUpdate', response.data['lastUpdateTime']);
     /*
     will be implemented
      */
-    if (response.data.results && Array.isArray(response.data.results) && response.data.results.length > 0) {
-      // const oldItems = await localforage.getItem('stocks');
-      // if (oldItems && Array.isArray(oldItems) && oldItems.length > 0) {
-      //   response.data.results.forEach(newStock => {
-      //     oldItems.forEach((oldStock, index, array) => {
-      //       if (oldStock.objectId === newStock.objectId) {
-      //         oldItems[index] = newStock;
-      //       } else {
-      //         oldItems.push(newStock);
-      //       }
-      //     })
-      //   });
-      // } else {
-      await localforage.setItem('stocks', response.data.results);
-      // }
+    const newProducts = response.data.results;
+    if (newProducts && Array.isArray(newProducts) && newProducts.length > 0) {
+      if (response.data['lastUpdateTime']) {
+        await localforage.setItem('lastUpdate', response.data['lastUpdateTime']);
+      }
+      const oldProducts = await localforage.getItem('stocks');
+      if (oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
+        newProducts.forEach((newProduct) => {
+          const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
+          if (indexOld >= 0) {
+            oldProducts[indexOld] = newProduct;
+          } else {
+            oldProducts.push(newProduct);
+          }
+        });
+        await localforage.setItem('stocks', oldProducts);
+        window.dispatchEvent(new Event('ssm_stocks_updated'));
+        return Promise.resolve();
+      } else {
+        await localforage.setItem('stocks', newProducts);
+        window.dispatchEvent(new Event('ssm_stocks_updated'));
+        return Promise.resolve();
+      }
     }
-    return Promise.resolve();
   } catch (e) {
     console.log(e.response.data);
-    throw {message: 'Fails to get stocks', reason: e.response.data.toString()};
+    throw {message: 'Fails to update stocks', reason: e.response.data.toString()};
   }
 }
