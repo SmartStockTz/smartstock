@@ -24,15 +24,15 @@ export interface StockDataSource {
 
   getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]>;
 
-  addCategory(category: CategoryI, callback?: (value: any) => void);
+  addCategory(category: CategoryI): Promise<any>;
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void);
 
-  updateCategory(category: CategoryI, callback?: (value: any) => void);
+  updateCategory(category: CategoryI): Promise<any>;
 
   updateAllCategory(categories: CategoryI[], callback?: (value: any) => void);
 
-  deleteCategory(category: CategoryI, callback?: (value: any) => void);
+  deleteCategory(category: CategoryI): Promise<any>;
 
   deleteAllCategory(categories: CategoryI[], callback: (value: any) => void);
 
@@ -54,6 +54,6 @@ export interface StockDataSource {
 
   addUnit(unit: UnitsI, callback?: (value: any) => void);
 
-  getAllUnit(pagination: {size?: number, skip?: number}): Promise<UnitsI[]>;
+  getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]>;
 
 }

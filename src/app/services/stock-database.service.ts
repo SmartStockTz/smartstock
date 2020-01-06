@@ -27,14 +27,15 @@ export class StockDatabaseService implements StockDataSource {
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {
   }
 
-  addCategory(category: CategoryI, callback?: (value: any) => void) {
-    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/categories', category, {
-      headers: this.settings.getCustomerPostHeader()
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  addCategory(category: CategoryI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/categories', category, {
+        headers: this.settings.getCustomerPostHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
@@ -99,7 +100,16 @@ export class StockDatabaseService implements StockDataSource {
   deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void) {
   }
 
-  deleteCategory(category: CategoryI, callback?: (value: any) => void) {
+  deleteCategory(category: CategoryI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/categories/' + category.objectId, {
+        headers: this.settings.getCustomerHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   deleteStock(stock: Stock, callback?: (value: any) => void) {
@@ -190,14 +200,25 @@ export class StockDatabaseService implements StockDataSource {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
-  updateCategory(category: CategoryI, callback?: (value: any) => void) {
+  updateCategory(category: CategoryI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const categoryId = category.objectId;
+      delete category.objectId;
+      this.httpClient.put<CategoryI>(this.settings.getCustomerServerURL() + '/classes/categories/' + categoryId, category,
+        {
+          headers: this.settings.getCustomerPostHeader()
+        }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   updateStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>((resolve, reject) => {
       const stockId = stock.objectId;
       delete stock.objectId;
-      console.log(this.settings.getCustomerServerURL() + '/classes/stocks/' + stockId);
       this.httpClient.put<Stock>(this.settings.getCustomerServerURL() + '/classes/stocks/' + stockId,
         stock,
         {

@@ -26,6 +26,11 @@
               <!--              </mat-form-field>-->
               <div>
                 <mat-card class="mat-elevation-z0">
+                  <mat-card-title>
+                    <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
+                      Add Product
+                    </button>
+                  </mat-card-title>
                   <table mat-table [dataSource]="stockDatasource">
 
                     <ng-container matColumnDef="product">

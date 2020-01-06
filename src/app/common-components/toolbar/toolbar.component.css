@@ -3,14 +3,14 @@
   border-radius: 4px;
   border: none;
   box-shadow: none;
-  background: rgba(30, 127, 52, 0.76);
-  color: white;
+  background: rgba(191, 191, 191, 0.76);
+  color: #000000;
   padding: 8px;
   outline: none;
 }
 
 .toolbar-input::placeholder{
-  color: #f5f5f5;
+  color: #535353;
 }
 
 .toolbar-input:focus{

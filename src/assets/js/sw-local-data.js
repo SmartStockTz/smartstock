@@ -27,7 +27,7 @@ addEventListener('message', ({data}) => {
         // postMessage(false);
       });
     } else {
-      console.log('on fetch');
+      // console.log('on fetch');
       // console.log(onFetch);
     }
   }, 3000);
@@ -42,7 +42,7 @@ addEventListener('message', ({data}) => {
  * @returns {Promise<void>}
  */
 async function fetchStocks(appId, url, localforage, firstFetch) {
-  console.log(firstFetch);
+  // console.log(firstFetch);
   try {
     //if (firstFetch) {
     // await localforage.removeItem('lastUpdate');

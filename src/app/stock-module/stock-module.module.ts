@@ -8,14 +8,20 @@ import {
   MatAutocompleteModule,
   MatBottomSheetModule,
   MatButtonModule,
-  MatCardModule, MatCheckboxModule,
-  MatDatepickerModule, MatDividerModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule,
-  MatRippleModule, MatSelectModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
   MatSidenavModule,
   MatTableModule,
   MatTabsModule,
@@ -24,7 +30,7 @@ import {
 import {ReactiveFormsModule} from '@angular/forms';
 import {StockNewComponent} from './stock-new/stock-new.component';
 import {StockEditComponent} from './stock-edit/stock-edit.component';
-import {CategoriesComponent} from './categories/categories.component';
+import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './categories/categories.component';
 import {SuppliersComponent} from './suppliers/suppliers.component';
 import {UnitsComponent} from './units/units.component';
 
@@ -54,6 +60,7 @@ import {UnitsComponent} from './units/units.component';
     MatSelectModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatExpansionModule,
   ],
   declarations: [
     StockComponent,
@@ -62,10 +69,14 @@ import {UnitsComponent} from './units/units.component';
     CategoriesComponent,
     SuppliersComponent,
     UnitsComponent,
-    StockDetailsComponent
+    StockDetailsComponent,
+    DialogCategoryDeleteComponent,
+    DialogCategoryNewComponent
   ],
   entryComponents: [
-    StockDetailsComponent
+    StockDetailsComponent,
+    DialogCategoryDeleteComponent,
+    DialogCategoryNewComponent
   ]
 })
 export class StockModuleModule {

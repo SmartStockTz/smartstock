@@ -86,9 +86,15 @@ export class StockComponent extends DeviceInfo implements OnInit {
       this.stockDatasource = new MatTableDataSource(stocks);
       this.stockDatasource.paginator = this.paginator;
       this._getTotalPurchaseOfStock(stocks);
+      if (callback) {
+        callback();
+      }
     }, error1 => {
       console.log(error1);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
+      if (callback) {
+        callback();
+      }
     });
   }
 
@@ -127,9 +133,9 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   handleSearch(query: string) {
-    this.stockDatasource.filter = query.toString().toLowerCase();
-    // this.getStocksFromCache(() => {
-    // });
+    this.getStocksFromCache(() => {
+      this.stockDatasource.filter = query.toString().toLowerCase();
+    });
   }
 
   private _removeProductFromTable(element: Stock) {

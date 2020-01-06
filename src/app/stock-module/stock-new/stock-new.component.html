@@ -8,7 +8,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [heading]="'Stock'"
+    <app-toolbar [heading]="'New Product'"
                  [sidenav]="sidenav"
                  [showProgress]="false">
     </app-toolbar>
@@ -19,6 +19,11 @@
 
           <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
 
+            <mat-card-title>
+              <button routerLink="/stock" color="warn" class="ft-button" mat-flat-button>
+                Cancel
+              </button>
+            </mat-card-title>
             <h4>
               Product Information
             </h4>

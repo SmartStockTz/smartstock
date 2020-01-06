@@ -46,4 +46,8 @@ export class ThreadsService {
       throw {message: 'Web Workers are not supported in this environment.'};
     }
   }
+
+  // async startCategoryUpdateProxy(){
+  //
+  // }
 }
