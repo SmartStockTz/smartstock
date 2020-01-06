@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {CategoryI} from '../../model/CategoryI';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {StockDatabaseService} from '../../services/stock-database.service';
 
 @Component({
@@ -87,21 +87,27 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  updateCategory(category: any) {
-    // this.snack.open('Update in progress..', 'Ok');
-    // this.stockDatabase.updateCategory(category).then(data => {
-    //   // console.log(data);
-    //   this.categoriesArray = this.categoriesArray.filter(value => value.objectId !== category.objectId);
-    //   this.categoriesArray.unshift(JSON.parse(JSON.stringify(data)));
-    //   this.categoriesDatasource = new MatTableDataSource<any>(this.categoriesArray);
-    //   this.snack.open('Category updated', 'Ok', {
-    //     duration: 3000
-    //   });
-    // }).catch(reason => {
-    //   this.snack.open(reason && reason.message ? reason.message : 'Fail to update category', 'Ok', {
-    //     duration: 3000
-    //   });
-    // });
+  updateCategory(category: { objectId: string, value: string, field: string }) {
+    this.snack.open('Update in progress..', 'Ok');
+    this.stockDatabase.updateCategory(category).then(data => {
+      const editedObjectIndex = this.categoriesArray.findIndex(value => value.objectId === data.objectId);
+      this.categoriesArray = this.categoriesArray.filter(value => value.objectId !== category.objectId);
+      if (editedObjectIndex !== -1) {
+        const updatedObject = this.categoriesArray[editedObjectIndex];
+        updatedObject[category.field] = category.value;
+        this.categoriesArray.unshift(updatedObject);
+        this.categoriesDatasource = new MatTableDataSource<any>(this.categoriesArray);
+      } else {
+        console.warn('fails to update category table');
+      }
+      this.snack.open('Category updated', 'Ok', {
+        duration: 3000
+      });
+    }).catch(reason => {
+      this.snack.open(reason && reason.message ? reason.message : 'Fail to update category', 'Ok', {
+        duration: 3000
+      });
+    });
   }
 
   updateCategoryDescription(category, matMenu: MatMenuTrigger) {
@@ -110,6 +116,18 @@ export class CategoriesComponent implements OnInit {
       category.field = 'description';
       this.updateCategory(category);
     }
+  }
+
+  openAddCategoryDialog() {
+    this.dialog.open(DialogCategoryNewComponent, {
+      closeOnNavigation: true,
+      hasBackdrop: true
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.categoriesArray.push(value);
+        this.categoriesDatasource.data = this.categoriesArray;
+      }
+    });
   }
 }
 
@@ -151,7 +169,7 @@ export class DialogCategoryDeleteComponent {
   templateUrl: 'app-new-category.html',
 
 })
-export class DialogCategoryNewComponent {
+export class DialogCategoryNewComponent implements OnInit {
   deleteProgress = false;
   errorCategoryMessage: string;
   newCategoryForm: FormGroup;
@@ -164,23 +182,46 @@ export class DialogCategoryNewComponent {
     public dialogRef: MatDialogRef<DialogCategoryDeleteComponent>) {
   }
 
+  ngOnInit(): void {
+    this.initiateForm();
+  }
+
+  initiateForm() {
+    this.newCategoryForm = this.formBuilder.group({
+      name: ['', [Validators.nullValidator, Validators.required]],
+      description: ['']
+    });
+  }
+
   createCategory() {
-    this.createCategoryProgress = true;
     if (!this.newCategoryForm.valid) {
       this.snack.open('Please fll all details', 'Ok', {
         duration: 3000
       });
       return;
     }
-    this.stockDatabase.addCategory(this.newCategoryForm.value).then(value => {
-      this.createCategoryProgress = true;
 
+    this.createCategoryProgress = true;
+    this.stockDatabase.addCategory(this.newCategoryForm.value).then(value => {
+      this.createCategoryProgress = false;
+      value.name = this.newCategoryForm.value.name;
+      value.description = this.newCategoryForm.value.description;
+      this.dialogRef.close(value);
+      this.snack.open('Category created', 'Ok', {
+        duration: 3000
+      });
     }).catch(reason => {
-      this.createCategoryProgress = true;
+      console.log(reason);
+      this.createCategoryProgress = false;
+      //  this.dialogRef.close(null);
+      this.snack.open('Category not created, try again', 'Ok', {
+        duration: 3000
+      });
     });
   }
 
-  cancel() {
+  cancel($event: Event) {
+    $event.preventDefault();
     this.dialogRef.close(null);
   }
 }

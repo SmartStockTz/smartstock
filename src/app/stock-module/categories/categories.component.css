@@ -2,7 +2,7 @@ td {
   padding: 8px;
 }
 
-td:hover {
+.editable:hover {
   outline: #0b2e13 solid 1px;
   cursor: pointer;
 }

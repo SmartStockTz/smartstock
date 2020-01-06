@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/app-dialog-delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/categories/app-new-category.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/CategoryI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/CategoryI.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/threads.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/threads.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/app-new-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/app-new-category.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-edit/stock-edit.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-new/stock-new.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,14 +268,7 @@
       <workItem from="1578252143695" duration="7396000" />
       <workItem from="1578286981240" duration="4288000" />
       <workItem from="1578297497091" duration="12635000" />
-      <workItem from="1578316413206" duration="6415000" />
-    </task>
-    <task id="LOCAL-00031" summary="update server url">
-      <created>1570868722976</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1570868722977</updated>
+      <workItem from="1578316413206" duration="11742000" />
     </task>
     <task id="LOCAL-00032" summary="update server url">
       <created>1570869667490</created>
@@ -623,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578309408966</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="update create category UI/UX">
+      <created>1578328985037</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1578328985037</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +636,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add printer to retail and print automatic when sale" />
     <MESSAGE value="fix lazy loading" />
     <MESSAGE value="update create customer view" />
     <MESSAGE value="update printer" />
@@ -671,7 +660,8 @@
     <MESSAGE value="update create new stock" />
     <MESSAGE value="it save new product" />
     <MESSAGE value="update local fetch of stocks and update stock and delete of a product in a stock" />
-    <option name="LAST_COMMIT_MESSAGE" value="update local fetch of stocks and update stock and delete of a product in a stock" />
+    <MESSAGE value="update create category UI/UX" />
+    <option name="LAST_COMMIT_MESSAGE" value="update create category UI/UX" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -683,14 +673,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578309408328">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578328984016">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578208053120">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208053120" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578309408328" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578328984016" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -739,14 +729,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="35" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578309438367">
+    <state x="398" y="30" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578328989314">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578208056726">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208056726" />
-    <state x="398" y="35" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578309438367" />
+    <state x="398" y="30" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578328989314" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

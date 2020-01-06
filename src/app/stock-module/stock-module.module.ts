@@ -10,7 +10,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -61,6 +61,7 @@ import {UnitsComponent} from './units/units.component';
     MatCheckboxModule,
     MatRadioModule,
     MatExpansionModule,
+    MatDialogModule,
   ],
   declarations: [
     StockComponent,

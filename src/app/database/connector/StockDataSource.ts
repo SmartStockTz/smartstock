@@ -28,7 +28,7 @@ export interface StockDataSource {
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void);
 
-  updateCategory(category: CategoryI): Promise<any>;
+  updateCategory(category: any): Promise<any>;
 
   updateAllCategory(categories: CategoryI[], callback?: (value: any) => void);
 

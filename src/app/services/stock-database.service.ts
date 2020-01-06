@@ -200,14 +200,17 @@ export class StockDatabaseService implements StockDataSource {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
-  updateCategory(category: CategoryI): Promise<any> {
+  updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const categoryId = category.objectId;
+      const data = {};
+      data[category.field] = category.value;
       delete category.objectId;
-      this.httpClient.put<CategoryI>(this.settings.getCustomerServerURL() + '/classes/categories/' + categoryId, category,
+      this.httpClient.put<CategoryI>(this.settings.getCustomerServerURL() + '/classes/categories/' + categoryId, data,
         {
           headers: this.settings.getCustomerPostHeader()
         }).subscribe(value => {
+        value.objectId = categoryId;
         resolve(value);
       }, error1 => {
         reject(error1);
