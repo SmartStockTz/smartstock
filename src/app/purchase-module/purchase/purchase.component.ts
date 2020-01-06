@@ -15,13 +15,14 @@ import {PurchaseI} from '../../model/PurchaseI';
 import {PurchaseDatabaseService} from '../../services/purchase-database.service';
 import {SsmToolsService} from '../../services/ssm-tools.service';
 import {randomString} from '../../database/ParseBackend';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
   styleUrls: ['./purchase.component.css']
 })
-export class PurchaseComponent implements OnInit {
+export class PurchaseComponent extends DeviceInfo implements OnInit {
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
@@ -30,6 +31,7 @@ export class PurchaseComponent implements OnInit {
               private dialog: MatDialog,
               private stockDatabase: StockDatabaseService,
               private purchaseDatabase: PurchaseDatabaseService) {
+    super();
   }
 
   private currentUser: UserI;
@@ -360,5 +362,9 @@ export class PurchaseComponent implements OnInit {
 
   updateSelectedPurchase(stock: Stock) {
     this.selecteStock = stock;
+  }
+
+  handleSearch(query: string) {
+    console.log(query);
   }
 }

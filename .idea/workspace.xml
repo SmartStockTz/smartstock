@@ -2,22 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/app-dialog-delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/app-new-unit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all/purchases-all.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all/purchases-all.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all/purchases-all.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all/purchases-all.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-invoice/purchases-invoice.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-invoice/purchases-invoice.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-invoice/purchases-invoice.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-invoice/purchases-invoice.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-receipts/purchases-receipts.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-receipts/purchases-receipts.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-receipts/purchases-receipts.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-receipts/purchases-receipts.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/UnitsI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/UnitsI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase-module/purchase-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase-module.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,14 +276,7 @@
       <workItem from="1578252143695" duration="7396000" />
       <workItem from="1578286981240" duration="4288000" />
       <workItem from="1578297497091" duration="12635000" />
-      <workItem from="1578316413206" duration="14910000" />
-    </task>
-    <task id="LOCAL-00033" summary="update invoice to record to stock and payments">
-      <created>1570876258169</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1570876258169</updated>
+      <workItem from="1578316413206" duration="16380000" />
     </task>
     <task id="LOCAL-00034" summary="update invoice to record to stock and payments">
       <created>1570877093152</created>
@@ -621,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578334161639</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="start to work on category unit">
+      <created>1578343407561</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1578343407561</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +644,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update create customer view" />
     <MESSAGE value="update printer" />
     <MESSAGE value="add new design in sales" />
     <MESSAGE value="add get products functionality in retail sale UI" />
@@ -669,7 +668,8 @@
     <MESSAGE value="update local fetch of stocks and update stock and delete of a product in a stock" />
     <MESSAGE value="update create category UI/UX" />
     <MESSAGE value="update category logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="update category logic" />
+    <MESSAGE value="start to work on category unit" />
+    <option name="LAST_COMMIT_MESSAGE" value="start to work on category unit" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -681,14 +681,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578334159931">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578343407440">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578208053120">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208053120" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578334159931" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578343407440" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -737,14 +737,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="25" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578334165982">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578343420797">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578208056726">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208056726" />
-    <state x="398" y="25" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578334165982" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578343420797" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -753,14 +753,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="547" y="66" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog/52.27.1548.873@52.27.1548.873" timestamp="1577441989164" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578221152562">
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578344215356">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode" timestamp="1578219395440">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219395440" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578221152562" />
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578344215356" />
     <state x="528" y="259" width="540" height="332" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1577031276379">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
