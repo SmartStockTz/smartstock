@@ -46,13 +46,15 @@ export interface StockDataSource {
 
   updateSupplier(id: string, callback?: (value: any) => void);
 
+  updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any>;
+
   updateAllSupplier(callback?: (value: any) => void);
 
   deleteSupplier(supplier: SupplierI, callback?: (value: any) => void);
 
   deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void);
 
-  addUnit(unit: UnitsI, callback?: (value: any) => void);
+  addUnit(unit: UnitsI): Promise<any>;
 
   getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]>;
 

@@ -10,7 +10,8 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatDatepickerModule, MatDialogModule,
+  MatDatepickerModule,
+  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -32,7 +33,7 @@ import {StockNewComponent} from './stock-new/stock-new.component';
 import {StockEditComponent} from './stock-edit/stock-edit.component';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './categories/categories.component';
 import {SuppliersComponent} from './suppliers/suppliers.component';
-import {UnitsComponent} from './units/units.component';
+import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
 
 @NgModule({
   imports: [
@@ -72,12 +73,16 @@ import {UnitsComponent} from './units/units.component';
     UnitsComponent,
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
-    DialogCategoryNewComponent
+    DialogCategoryNewComponent,
+    DialogUnitDeleteComponent,
+    DialogUnitNewComponent
   ],
   entryComponents: [
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
-    DialogCategoryNewComponent
+    DialogCategoryNewComponent,
+    DialogUnitDeleteComponent,
+    DialogUnitNewComponent
   ]
 })
 export class StockModuleModule {

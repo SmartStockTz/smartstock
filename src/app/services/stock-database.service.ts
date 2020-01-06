@@ -39,14 +39,15 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
-  addUnit(unit: UnitsI, callback: (value: any) => void) {
-    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/units', unit, {
-      headers: this.settings.getCustomerPostHeader()
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  addUnit(unit: UnitsI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/units', unit, {
+        headers: this.settings.getCustomerPostHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
@@ -236,5 +237,36 @@ export class StockDatabaseService implements StockDataSource {
 
   updateSupplier(id: string, callback?: (value: any) => void) {
   }
+
+  updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const unitId = unit.objectId;
+      const data = {};
+      data[unit.field] = unit.value;
+      delete unit.objectId;
+      this.httpClient.put<CategoryI>(this.settings.getCustomerServerURL() + '/classes/units/' + unitId, data,
+        {
+          headers: this.settings.getCustomerPostHeader()
+        }).subscribe(value => {
+        value.objectId = unitId;
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
+  }
+
+  deleteUnit(unit: UnitsI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/categories/' + unit.objectId, {
+        headers: this.settings.getCustomerHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
+  }
+
 }
 

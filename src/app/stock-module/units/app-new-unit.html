@@ -1,0 +1,28 @@
+<div style="min-width: 300px">
+  <div mat-dialog-title>Create Unity</div>
+  <div mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="newUnitForm" (ngSubmit)="createUnit()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" required>
+        <mat-error>Name required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" [rows]="3"></textarea>
+      </mat-form-field>
+
+      <button color="primary" [disabled]="createUnitProgress" mat-flat-button class="ft-button">
+        Save
+        <mat-progress-spinner style="display: inline-block" *ngIf="createUnitProgress" [diameter]="20"
+                              mode="indeterminate"></mat-progress-spinner>
+      </button>
+      <span style="margin-bottom: 8px"></span>
+      <button color="warn" mat-flat-button (click)="cancel($event)">
+        Close
+      </button>
+    </form>
+  </div>
+</div>

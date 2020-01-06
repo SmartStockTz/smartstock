@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/app-dialog-delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/app-new-unit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/StockDataSource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/UnitsI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/UnitsI.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/app-new-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/app-new-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,14 +276,7 @@
       <workItem from="1578252143695" duration="7396000" />
       <workItem from="1578286981240" duration="4288000" />
       <workItem from="1578297497091" duration="12635000" />
-      <workItem from="1578316413206" duration="11742000" />
-    </task>
-    <task id="LOCAL-00032" summary="update server url">
-      <created>1570869667490</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1570869667490</updated>
+      <workItem from="1578316413206" duration="14910000" />
     </task>
     <task id="LOCAL-00033" summary="update invoice to record to stock and payments">
       <created>1570876258169</created>
@@ -613,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578328985037</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="update category logic">
+      <created>1578334161639</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1578334161639</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +644,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix lazy loading" />
     <MESSAGE value="update create customer view" />
     <MESSAGE value="update printer" />
     <MESSAGE value="add new design in sales" />
@@ -661,7 +668,8 @@
     <MESSAGE value="it save new product" />
     <MESSAGE value="update local fetch of stocks and update stock and delete of a product in a stock" />
     <MESSAGE value="update create category UI/UX" />
-    <option name="LAST_COMMIT_MESSAGE" value="update create category UI/UX" />
+    <MESSAGE value="update category logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="update category logic" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -673,14 +681,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578328984016">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578334159931">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578208053120">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208053120" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578328984016" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578334159931" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -729,14 +737,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="30" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578328989314">
+    <state x="398" y="25" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578334165982">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578208056726">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="142" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578208056726" />
-    <state x="398" y="30" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578328989314" />
+    <state x="398" y="25" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578334165982" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
