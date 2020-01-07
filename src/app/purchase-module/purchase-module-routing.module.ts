@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PurchaseComponent} from './purchase/purchase.component';
-import {PurchaseCreateComponent} from './purchase/purchase-create/purchase-create.component';
+import {PurchaseCreateComponent} from './purchase-create/purchase-create.component';
 
 const routes: Routes = [
   {path: '', component: PurchaseComponent},

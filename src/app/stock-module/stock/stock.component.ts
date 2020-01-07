@@ -25,6 +25,7 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent extends DeviceInfo implements OnInit {
+  private stockFetchProgress = false;
 
   constructor(private readonly router: Router,
               private readonly indexDb: NgForage,
@@ -81,19 +82,22 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.getStocksFromCache();
   }
 
-  private getStocksFromCache(callback?: () => void) {
+  private getStocksFromCache(callback?: (error) => void) {
+    this.stockFetchProgress = true;
     this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
       this.stockDatasource = new MatTableDataSource(stocks);
       this.stockDatasource.paginator = this.paginator;
       this._getTotalPurchaseOfStock(stocks);
+      this.stockFetchProgress = false;
       if (callback) {
-        callback();
+        callback(null);
       }
-    }, error1 => {
+    }).catch(error1 => {
+      this.stockFetchProgress = false;
       console.log(error1);
       this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
       if (callback) {
-        callback();
+        callback(error1);
       }
     });
   }
@@ -133,9 +137,14 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   handleSearch(query: string) {
-    this.getStocksFromCache(() => {
+    if (query) {
       this.stockDatasource.filter = query.toString().toLowerCase();
-    });
+    } else {
+      this.stockDatasource.filter = '';
+    }
+    // this.getStocksFromCache(() => {
+    //   this.stockDatasource.filter = query.toString().toLowerCase();
+    // });
   }
 
   private _removeProductFromTable(element: Stock) {
@@ -156,6 +165,11 @@ export class StockComponent extends DeviceInfo implements OnInit {
       return {purchase: a.purchase + b.purchase}; // returns object with property x
     });
     this.totalPurchase = of(sum.purchase);
+  }
+
+  reload() {
+    this.getStocksFromCache(() => {
+    });
   }
 }
 

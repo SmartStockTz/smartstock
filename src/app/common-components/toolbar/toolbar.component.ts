@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {NgForage} from 'ngforage';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {FormControl, Validators} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,7 +26,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchInputControl.valueChanges.subscribe(query => {
+    this.searchInputControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(query => {
       this.searchCallback.emit(this.searchInputControl.value);
     });
   }

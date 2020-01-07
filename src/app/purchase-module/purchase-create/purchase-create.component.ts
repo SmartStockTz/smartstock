@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
-import {StockDatabaseService} from '../../../services/stock-database.service';
-import {DeviceInfo} from '../../../common-components/DeviceInfo';
+import {StockDatabaseService} from '../../services/stock-database.service';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {NgForage} from 'ngforage';
-import {Stock} from '../../../model/stock';
+import {Stock} from '../../model/stock';
 import {Router} from '@angular/router';
 
 @Component({

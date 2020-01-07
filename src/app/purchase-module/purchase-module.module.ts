@@ -25,9 +25,9 @@ import {
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PurchasesInvoiceComponent} from './purchase/purchases-invoice/purchases-invoice.component';
-import {PurchasesReceiptsComponent} from './purchase/purchases-receipts/purchases-receipts.component';
-import {PurchaseCreateComponent} from './purchase/purchase-create/purchase-create.component';
+import {PurchasesInvoiceComponent} from './purchases-invoice/purchases-invoice.component';
+import {PurchasesReceiptsComponent} from './purchases-receipts/purchases-receipts.component';
+import {PurchaseCreateComponent} from './purchase-create/purchase-create.component';
 
 
 @NgModule({

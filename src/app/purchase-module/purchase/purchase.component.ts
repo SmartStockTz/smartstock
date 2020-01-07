@@ -31,6 +31,8 @@ export class PurchaseComponent extends DeviceInfo implements OnInit {
   handleSearch(query: string) {
     if (query) {
       this.purchasesDatasource.filter = query.toLowerCase();
+    } else {
+      this.purchasesDatasource.filter = '';
     }
   }
 

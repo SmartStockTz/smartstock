@@ -10,6 +10,7 @@
   <mat-sidenav-content>
     <app-toolbar [heading]="'Stock'"
                  [showSearch]="true"
+                 [searchPlaceholder]="'Type to search'"
                  (searchCallback)="handleSearch($event)"
                  [sidenav]="sidenav"
                  [showProgress]="showProgress">
@@ -26,10 +27,17 @@
               <!--              </mat-form-field>-->
               <div>
                 <mat-card class="mat-elevation-z0">
-                  <mat-card-title>
+                  <mat-card-title class="d-flex flex-row">
                     <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
                       Add Product
                     </button>
+                    <span class="toolbar-spacer"></span>
+                    <button [matMenuTriggerFor]="stockMenu" color="primary" mat-icon-button>
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #stockMenu>
+                      <button (click)="reload()" matTooltip="refresh products in table" mat-menu-item>Reload</button>
+                    </mat-menu>
                   </mat-card-title>
                   <table mat-table [dataSource]="stockDatasource">
 
