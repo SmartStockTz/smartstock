@@ -1,15 +1,17 @@
+import {Stock} from './stock';
+import {SupplierI} from './SupplierI';
+
 export interface PurchaseI {
-  idOld: string;
   objectId?: string;
-  stockId: string;
-  date: string;
-  due: string;
-  reference: string;
-  product: string;
-  quantity: number;
-  purchase: number;
+  createdAt?: any;
+  updatedAt?: any;
+  date: any;
+  due: any;
+  refNumber: string;
   amount: number;
   paid: boolean;
-  channel: string;
-  expire: string;
+  draft?: boolean;
+  supplier: SupplierI;
+  type: 'invoice' | 'receipt';
+  items: Stock[];
 }

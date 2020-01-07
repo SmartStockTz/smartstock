@@ -88,18 +88,18 @@ export class PurchaseComponent extends DeviceInfo implements OnInit {
   }
 
   ngOnInit() {
-    this.userDatabase.currentUser(value => {
-      if (value === null) {
-        this.isLogin = false;
-        this.router.navigateByUrl('login').catch(reason => console.log(reason));
-      } else {
-        this.isAdmin = value.role === 'admin';
-        this.isLogin = true;
-        this.currentUser = value;
+    // this.userDatabase.currentUser(value => {
+    //   if (value === null) {
+    //     this.isLogin = false;
+    //     this.router.navigateByUrl('login').catch(reason => console.log(reason));
+    //   } else {
+    //     this.isAdmin = value.role === 'admin';
+    //     this.isLogin = true;
+    //     this.currentUser = value;
         // control input initialize
-        this.initializeView();
-      }
-    });
+       // this.initializeView();
+    //   }
+    // });
   }
 
   addPurchaseToCart() {
@@ -210,50 +210,50 @@ export class PurchaseComponent extends DeviceInfo implements OnInit {
     this.showProgress = false;
   }
 
-  private initializeView() {
-    // initial value
-    this.stock = null;
-    this.purchaseDatasourceArray = [];
-    this.allPurchaseDatasource = new MatTableDataSource([]);
-    this.allPurchaseDatasource.paginator = this.paginator;
-    this.creditPurchaseButton.setValue(false);
-    this.creditPurchaseButton.valueChanges.subscribe(value => {
-      this.showCreditPurchase = <boolean>value;
-    });
-    this.productNameControlInput.valueChanges.subscribe(value => {
-      if (value != null) {
-        this.getProduct(value);
-      }
-    }, error1 => console.log(error1));
-    this.receipNumberControlInput.valueChanges.subscribe(value => {
-      this.getReceipts(value);
-    }, error1 => {
-      console.log(error1);
-    });
-    this.invoiceNumberControlInput.valueChanges.subscribe(value => {
-      this.getInvoice(value);
-    }, error1 => {
-      console.log(error1);
-    });
-    this.supplierControlInput.valueChanges.subscribe(value => {
-      this.getSuppliers(value);
-    }, error1 => {
-      console.log(error1);
-    });
-    this.unitsControlInput.valueChanges.subscribe(value => {
-      this.getUnits(value);
-    }, error1 => {
-      console.log(error1);
-    });
-    this.searchPurchaseControl.valueChanges.subscribe(value => {
-      this.getPurchasesFromCache().then(value1 => {
-        this.allPurchaseDatasource.filter = value.toString().toLowerCase();
-      }).catch(reason => console.log(reason));
-    });
-    // get all purchases new socket established
-    this.purchaseDatabase.getAllPurchase(null);
-    this.getPurchasesFromCache().catch(reason => console.log(reason));
-  }
+  // private initializeView() {
+  //   // initial value
+  //   this.stock = null;
+  //   this.purchaseDatasourceArray = [];
+  //   this.allPurchaseDatasource = new MatTableDataSource([]);
+  //   this.allPurchaseDatasource.paginator = this.paginator;
+  //   this.creditPurchaseButton.setValue(false);
+  //   this.creditPurchaseButton.valueChanges.subscribe(value => {
+  //     this.showCreditPurchase = <boolean>value;
+  //   });
+  //   this.productNameControlInput.valueChanges.subscribe(value => {
+  //     if (value != null) {
+  //       this.getProduct(value);
+  //     }
+  //   }, error1 => console.log(error1));
+  //   this.receipNumberControlInput.valueChanges.subscribe(value => {
+  //     this.getReceipts(value);
+  //   }, error1 => {
+  //     console.log(error1);
+  //   });
+  //   this.invoiceNumberControlInput.valueChanges.subscribe(value => {
+  //     this.getInvoice(value);
+  //   }, error1 => {
+  //     console.log(error1);
+  //   });
+  //   this.supplierControlInput.valueChanges.subscribe(value => {
+  //     this.getSuppliers(value);
+  //   }, error1 => {
+  //     console.log(error1);
+  //   });
+  //   this.unitsControlInput.valueChanges.subscribe(value => {
+  //     this.getUnits(value);
+  //   }, error1 => {
+  //     console.log(error1);
+  //   });
+  //   this.searchPurchaseControl.valueChanges.subscribe(value => {
+  //     this.getPurchasesFromCache().then(value1 => {
+  //       this.allPurchaseDatasource.filter = value.toString().toLowerCase();
+  //     }).catch(reason => console.log(reason));
+  //   });
+  //   // get all purchases new socket established
+  //   this.purchaseDatabase.getAllPurchase(null);
+  //   this.getPurchasesFromCache().catch(reason => console.log(reason));
+  // }
 
   private getSuppliers(supplier: string) {
     this.indexDb.getItem<SupplierI[]>('suppliers').then(value => {

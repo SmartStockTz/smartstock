@@ -7,9 +7,9 @@ import {
   MatAutocompleteModule, MatButtonModule,
   MatCardModule,
   MatDatepickerModule,
-  MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule,
+  MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSidenavModule,
-  MatSlideToggleModule, MatTableModule, MatTabsModule
+  MatSlideToggleModule, MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -41,7 +41,10 @@ import { PurchasesReceiptsComponent } from './purchase/purchases-receipts/purcha
     MatTableModule,
     MatButtonModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ]
 })
 export class PurchaseModuleModule {

@@ -8,7 +8,7 @@ export interface PurchaseDataSource {
 
   getPurchase(id: string, callback: (purchase: PurchaseI) => void);
 
-  getAllPurchase(callback: (purchases: PurchaseI[]) => void);
+  getAllPurchase(pagination: { size?: number, skip?: number }): Promise<PurchaseI[]>;
 
   updatePurchase(id: string, callback: (value: any) => void);
 
