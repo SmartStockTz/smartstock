@@ -13,5 +13,10 @@ export interface PurchaseI {
   draft?: boolean;
   supplier: SupplierI;
   type: 'invoice' | 'receipt';
-  items: Stock[];
+  items: {
+    product: Stock,
+    amount: number,
+    purchase: number,
+    quantity: number
+  }[];
 }

@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
 import {randomString} from '../database/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
+import {PurchaseI} from '../model/PurchaseI';
 
 
 @Injectable({
@@ -268,5 +269,10 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
+  addPurchase(purchaseI: PurchaseI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      resolve('Ok');
+    });
+  }
 }
 

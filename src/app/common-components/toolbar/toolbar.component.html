@@ -8,7 +8,7 @@
     <span class="toolbar-spacer d-flex justify-content-center align-items-center">
       <input [formControl]="searchInputControl"
              *ngIf="showSearch"
-             class="toolbar-input" type="text" placeholder="Type to search">
+             class="toolbar-input" type="text" placeholder="{{searchPlaceholder}}">
 <!--      <button (click)="searchItem()" *ngIf="showSearch && searchInputControl.valid" matSuffix>-->
 <!--        <mat-icon>search</mat-icon>-->
 <!--      </button>-->

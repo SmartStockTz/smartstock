@@ -2,28 +2,41 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {PurchaseModuleRoutingModule} from './purchase-module-routing.module';
-import {PurchaseComponent} from './purchase/purchase.component';
+import {PurchaseComponent, PurchaseDetailsComponent} from './purchase/purchase.component';
 import {
-  MatAutocompleteModule, MatButtonModule,
+  MatAutocompleteModule,
+  MatBottomSheetModule,
+  MatButtonModule,
   MatCardModule,
   MatDatepickerModule,
-  MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule,
-  MatSlideToggleModule, MatTableModule, MatTabsModule, MatTooltipModule
+  MatSlideToggleModule,
+  MatTableModule,
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import { PurchasesAllComponent } from './purchase/purchases-all/purchases-all.component';
-import { PurchasesInvoiceComponent } from './purchase/purchases-invoice/purchases-invoice.component';
-import { PurchasesReceiptsComponent } from './purchase/purchases-receipts/purchases-receipts.component';
+import {PurchasesInvoiceComponent} from './purchase/purchases-invoice/purchases-invoice.component';
+import {PurchasesReceiptsComponent} from './purchase/purchases-receipts/purchases-receipts.component';
+import {PurchaseCreateComponent} from './purchase/purchase-create/purchase-create.component';
 
 
 @NgModule({
   declarations: [
     PurchaseComponent,
-    PurchasesAllComponent,
     PurchasesInvoiceComponent,
     PurchasesReceiptsComponent,
+    PurchaseDetailsComponent,
+    PurchaseCreateComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +57,14 @@ import { PurchasesReceiptsComponent } from './purchase/purchases-receipts/purcha
     MatPaginatorModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDividerModule,
+    MatBottomSheetModule,
+    MatExpansionModule,
+    MatSelectModule,
+  ],
+  entryComponents: [
+    PurchaseDetailsComponent
   ]
 })
 export class PurchaseModuleModule {

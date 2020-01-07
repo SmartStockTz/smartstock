@@ -17,6 +17,7 @@ export class ToolbarComponent implements OnInit {
   @Input() showSearch = false;
   @Output() searchCallback = new EventEmitter<string>();
   searchInputControl = new FormControl('', [Validators.nullValidator, Validators.required]);
+  @Input()searchPlaceholder: string | 'Type to search';
 
   constructor(private router: Router, private indexDb: NgForage,
               private snack: MatSnackBar,

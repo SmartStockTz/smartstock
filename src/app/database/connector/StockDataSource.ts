@@ -2,6 +2,7 @@ import {Stock} from '../../model/stock';
 import {CategoryI} from '../../model/CategoryI';
 import {SupplierI} from '../../model/SupplierI';
 import {UnitsI} from '../../model/UnitsI';
+import {PurchaseI} from '../../model/PurchaseI';
 
 export interface StockDataSource {
   getStock(id: string, callback: (stock: Stock) => void);
@@ -47,6 +48,8 @@ export interface StockDataSource {
   updateSupplier(id: string, callback?: (value: any) => void);
 
   updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any>;
+
+  addPurchase(purchaseI: PurchaseI): Promise<any>;
 
   updateAllSupplier(callback?: (value: any) => void);
 
