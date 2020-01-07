@@ -271,7 +271,13 @@ export class StockDatabaseService implements StockDataSource {
 
   addPurchase(purchaseI: PurchaseI): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      resolve('Ok');
+      this.httpClient.post(this.settings.ssmFunctionsURL + '/purchases/' + this.settings.getCustomerProjectId(), purchaseI, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(purchase => {
+        resolve(purchase);
+      }, error => {
+        reject(error);
+      });
     });
   }
 }

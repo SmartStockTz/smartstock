@@ -136,15 +136,16 @@ export class StockComponent extends DeviceInfo implements OnInit {
     });
   }
 
+  // affect performance
   handleSearch(query: string) {
-    if (query) {
-      this.stockDatasource.filter = query.toString().toLowerCase();
-    } else {
-      this.stockDatasource.filter = '';
-    }
-    // this.getStocksFromCache(() => {
-    //   this.stockDatasource.filter = query.toString().toLowerCase();
-    // });
+    this.getStocksFromCache(() => {
+      // this.stockDatasource.filter = query.toString().toLowerCase();
+      if (query) {
+        this.stockDatasource.filter = query.toString().toLowerCase();
+      } else {
+        this.stockDatasource.filter = '';
+      }
+    });
   }
 
   private _removeProductFromTable(element: Stock) {
