@@ -2,6 +2,8 @@ import {PurchaseI} from '../../model/PurchaseI';
 import {ReceiptI} from '../../model/ReceiptI';
 
 export interface PurchaseDataSource {
+  recordPayment(objectId: string): Promise<any>;
+
   addPurchase(purchase: PurchaseI, callback: (value: any) => void);
 
   addAllPurchase(purchases: PurchaseI[], callback: (value: any) => void);

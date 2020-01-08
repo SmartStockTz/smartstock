@@ -65,6 +65,7 @@
                       </button>
                       <mat-menu #opts>
                         <button (click)="showPurchaseDetails(purchase)" mat-menu-item>View</button>
+                        <button (click)="recordPayment(purchase)" mat-menu-item *ngIf="!purchase.paid">Record Payment</button>
                       </mat-menu>
                     </div>
                   </td>

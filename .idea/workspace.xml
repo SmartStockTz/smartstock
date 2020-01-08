@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cloud/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/database/connector/PurchaseDataSource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/PurchaseDataSource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/purchase-module/purchase/purchase.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/purchase-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/purchase-database.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,14 +271,10 @@
       <workItem from="1578373470518" duration="16380000" />
       <workItem from="1578397870396" duration="2000" />
       <workItem from="1578400459249" duration="233000" />
-      <workItem from="1578404210080" duration="3752000" />
-    </task>
-    <task id="LOCAL-00038" summary="update version number">
-      <created>1571040328496</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1571040328496</updated>
+      <workItem from="1578404210080" duration="3790000" />
+      <workItem from="1578416327665" duration="709000" />
+      <workItem from="1578420964276" duration="634000" />
+      <workItem from="1578458871518" duration="3809000" />
     </task>
     <task id="LOCAL-00039" summary="remove node_module">
       <created>1571041009051</created>
@@ -613,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578393261552</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="start working on purchase on receipt">
+      <created>1578413879291</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1578413879291</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +642,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="start improve product search to accept case insensitive" />
     <MESSAGE value="mat toolbar to stick when scroll cart view" />
     <MESSAGE value="update cart" />
     <MESSAGE value="migrate to bfast servers" />
@@ -661,7 +666,8 @@
     <MESSAGE value="start working on all purchases display" />
     <MESSAGE value="finish first draft of purchase" />
     <MESSAGE value="update debounce when search products in stock and purchases" />
-    <option name="LAST_COMMIT_MESSAGE" value="update debounce when search products in stock and purchases" />
+    <MESSAGE value="start working on purchase on receipt" />
+    <option name="LAST_COMMIT_MESSAGE" value="start working on purchase on receipt" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -677,50 +683,50 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578370478967">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578413879034">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578370478967" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578413879034" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
-    <state width="1600" height="339" key="GridCell.Tab.0.bottom" timestamp="1578404887818">
+    <state width="1600" height="270" key="GridCell.Tab.0.bottom" timestamp="1578459524145">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578391519216">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519216" />
-    <state width="1600" height="339" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578404887818" />
-    <state width="1600" height="339" key="GridCell.Tab.0.center" timestamp="1578404887816">
+    <state width="1600" height="270" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578459524145" />
+    <state width="1600" height="270" key="GridCell.Tab.0.center" timestamp="1578459524143">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578391519213">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519213" />
-    <state width="1600" height="339" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578404887816" />
-    <state width="1600" height="339" key="GridCell.Tab.0.left" timestamp="1578404887812">
+    <state width="1600" height="270" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578459524143" />
+    <state width="1600" height="270" key="GridCell.Tab.0.left" timestamp="1578459524142">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578391519212">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519212" />
-    <state width="1600" height="339" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578404887812" />
-    <state width="1600" height="339" key="GridCell.Tab.0.right" timestamp="1578404887817">
+    <state width="1600" height="270" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578459524142" />
+    <state width="1600" height="270" key="GridCell.Tab.0.right" timestamp="1578459524144">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578391519215">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519214" />
-    <state width="1600" height="339" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578404887817" />
+    <state width="1600" height="270" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578459524144" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -733,14 +739,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578370483300">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578413881854">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578370483300" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578413881854" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

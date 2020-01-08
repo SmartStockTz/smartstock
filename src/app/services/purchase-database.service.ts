@@ -4,22 +4,29 @@ import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {HttpClient} from '@angular/common/http';
 import {BatchI} from '../model/batchI';
-import * as Parse from 'node_modules/parse';
 import {NgForage} from 'ngforage';
-import {serverUrl} from '../database/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 
-Parse.initialize('lbpharmacy');
-Parse.serverURL = serverUrl;
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PurchaseDatabaseService implements PurchaseDataSource {
 
   constructor(private readonly httpClient: HttpClient,
               private readonly settings: SettingsServiceService,
               private readonly indexDb: NgForage) {
+  }
+
+  recordPayment(objectId: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.put(this.settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
+        paid: true
+      }, {
+        headers: this.settings.getCustomerPostHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   addAllInvoices(invoices: ReceiptI[], callback: (value: any) => void) {
@@ -114,21 +121,22 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
 
   // must be updated and its socket method
   getAllReceipts(callback: (invoices: ReceiptI[]) => void) {
-    const query = new Parse.Query('purchaseRefs');
-    const subscription = query.subscribe();
-    subscription.on('open', () => {
-      console.log('purchase refs socket connected');
-      this.updateCachedPurchaseRefs();
-    });
-    subscription.on('update', value => {
-      this.updateCachedPurchaseRefs();
-    });
-    subscription.on('delete', value => {
-      this.updateCachedPurchaseRefs();
-    });
-    subscription.on('create', value => {
-      this.updateCachedPurchaseRefs();
-    });
+    // const query = new Parse.Query('purchaseRefs');
+    // const subscription = query.subscribe();
+    // subscription.on('open', () => {
+    //   console.log('purchase refs socket connected');
+    //   this.updateCachedPurchaseRefs();
+    // });
+    // subscription.on('update', value => {
+    //   this.updateCachedPurchaseRefs();
+    // });
+    // subscription.on('delete', value => {
+    //   this.updateCachedPurchaseRefs();
+    // });
+    // subscription.on('create', value => {
+    //   this.updateCachedPurchaseRefs();
+    // });
+    callback(null);
   }
 
   private updateCachedPurchaseRefs() {

@@ -8,7 +8,10 @@ import {StockDetailsComponent} from '../../stock-module/stock/stock.component';
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
-  styleUrls: ['./purchase.component.css']
+  styleUrls: ['./purchase.component.css'],
+  providers: [
+    PurchaseDatabaseService
+  ]
 })
 export class PurchaseComponent extends DeviceInfo implements OnInit {
   purchasesDatasource: MatTableDataSource<PurchaseI>;
@@ -82,6 +85,26 @@ export class PurchaseComponent extends DeviceInfo implements OnInit {
     this.bottomSheet.open(PurchaseDetailsComponent, {
       data: purchase,
       closeOnNavigation: true,
+    });
+  }
+
+  recordPayment(purchase: PurchaseI) {
+    this.snack.open('Start update payment record..');
+    this.purchaseDatabase.recordPayment(purchase.objectId).then(value => {
+      this.snack.open('Payments recorded', 'Ok', {
+        duration: 3000
+      });
+      const oldIndex = this.purchasesDatasource.data.indexOf(purchase);
+      if (oldIndex !== -1) {
+        const oldPurchase: PurchaseI = this.purchasesDatasource.data[oldIndex];
+        oldPurchase.paid = true;
+        this.purchasesDatasource.data[oldIndex] = oldPurchase;
+      }
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Fails to record payments', 'Ok', {
+        duration: 3000
+      });
     });
   }
 }
