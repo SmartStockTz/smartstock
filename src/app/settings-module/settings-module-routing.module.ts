@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SettingComponent} from './setting/setting.component';
+import {AccountComponent} from './account/account.component';
 
 
 const routes: Routes = [
-  {path: '', component: SettingComponent}
+  {path: 'general', component: SettingComponent},
+  {path: 'account', component: AccountComponent}
 ];
 
 @NgModule({
