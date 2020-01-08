@@ -96,18 +96,18 @@ export class WholeSaleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userDatabase.currentUser(value => {
-      if (value === null) {
-        this.isLogin = false;
-        this.router.navigateByUrl('login').catch(reason => console.log(reason));
-      } else {
-        this.isAdmin = value.role === 'admin';
-        this.isLogin = true;
-        this.currentUser = value;
-        // control input initialize
-        this.initializeView();
-      }
-    });
+    // this.userDatabase.currentUser(value => {
+    //   if (value === null) {
+    //     this.isLogin = false;
+    //     this.router.navigateByUrl('login').catch(reason => console.log(reason));
+    //   } else {
+    //     this.isAdmin = value.role === 'admin';
+    //     this.isLogin = true;
+    //     this.currentUser = value;
+    //     // control input initialize
+    this.initializeView();
+    // }
+    // });
   }
 
   private getProduct(product: string) {
@@ -353,7 +353,7 @@ export class WholeSaleComponent implements OnInit {
   }
 
   private updateTotalSales() {
-    let s = 0;
+    const s = 0;
     // this.saleDatasourceArray.forEach(value => {
     //   s += value.amount;
     // });

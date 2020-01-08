@@ -28,18 +28,16 @@ export class AdminRoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
-      this.userDatabase.currentUser(user => {
-        if (!user && !user.role && !user.applicationId && !user.projectUrlId && !user.projectId) {
-          this.router.navigateByUrl('/login').catch(reason => console.log(reason));
-          reject(false);
-        }
-        if (user && user.role === 'admin') {
-          next.data = user;
+      this.userDatabase.currentUser().then(user => {
+        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role === 'admin') {
           resolve(true);
         } else {
           this.router.navigateByUrl('/login').catch(reason => console.log(reason));
           reject(false);
         }
+      }).catch(_ => {
+        this.router.navigateByUrl('/login').catch(reason => console.log(reason));
+        reject(false);
       });
     });
   }

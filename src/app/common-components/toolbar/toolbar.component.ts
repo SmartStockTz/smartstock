@@ -18,10 +18,9 @@ export class ToolbarComponent implements OnInit {
   @Input() showSearch = false;
   @Output() searchCallback = new EventEmitter<string>();
   searchInputControl = new FormControl('', [Validators.nullValidator, Validators.required]);
-  @Input()searchPlaceholder: string | 'Type to search';
+  @Input() searchPlaceholder: string | 'Type to search';
 
   constructor(private router: Router, private indexDb: NgForage,
-              private snack: MatSnackBar,
               private userDatabase: UserDatabaseService) {
   }
 
@@ -35,10 +34,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.currentUser(user => {
-      this.userDatabase.logout(user, value => {
-        this.router.navigateByUrl('').catch(reason => console.log(reason));
-      });
+    this.userDatabase.logout(null, value => {
+      this.router.navigateByUrl('').catch(reason => console.log(reason));
     });
   }
 

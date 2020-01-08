@@ -21,13 +21,13 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     super();
   }
 
-  currentUser(callback: (value: UserI) => void) {
-    this.indexD.getItem<UserI>('user').then(value => {
-      callback(value);
-    }).catch(reason => {
+  async currentUser(): Promise<UserI> {
+    try {
+      return await this.indexD.getItem<UserI>('user');
+    } catch (reason) {
       console.log(reason);
-      callback(null);
-    });
+      throw {message: 'Fails to get current user'};
+    }
   }
 
   createUser(user: UserI, callback?: (value: any) => void) {
