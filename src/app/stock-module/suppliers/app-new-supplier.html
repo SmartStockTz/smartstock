@@ -10,19 +10,35 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" [rows]="3"></textarea>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error>Email required</mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile</mat-label>
+        <input matInput formControlName="number">
+        <mat-error>Mobile required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <textarea matInput formControlName="address" rows="2"></textarea>
+        <mat-error>Address required</mat-error>
+      </mat-form-field>
+
 
       <button color="primary" [disabled]="createSupplierProgress" mat-flat-button class="ft-button">
         Save
         <mat-progress-spinner style="display: inline-block" *ngIf="createSupplierProgress" [diameter]="20"
-                              mode="indeterminate"></mat-progress-spinner>
+                              mode="indeterminate">
+        </mat-progress-spinner>
       </button>
+
       <span style="margin-bottom: 8px"></span>
-      <button color="warn" mat-flat-button (click)="cancel($event)">
-        Close
-      </button>
+      <!--      <button color="warn" mat-flat-button (click)="cancel($event)">-->
+      <!--        Close-->
+      <!--      </button>-->
     </form>
   </div>
 </div>

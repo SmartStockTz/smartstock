@@ -4,18 +4,19 @@
       Add Supplier
     </button>
     <span class="toolbar-spacer"></span>
-    <button [matMenuTriggerFor]="menuCategories" mat-icon-button>
+    <button [matMenuTriggerFor]="menuSuppliers" mat-icon-button>
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menuCategories>
-      <button (click)="getCategories()" mat-menu-item>Reload Categories</button>
+    <mat-menu #menuSuppliers>
+      <button (click)="getSuppliers()" mat-menu-item>Reload Suppliers</button>
     </mat-menu>
   </mat-card-title>
   <mat-card-content>
     <table style="margin-top: 16px" class="my-input"
-           *ngIf="!fetchCategoriesFlag && suppliersArray && suppliersArray.length > 0"
+           *ngIf="!fetchSuppliersFlag && suppliersArray && suppliersArray.length > 0"
            mat-table
            [dataSource]="suppliersDatasource">
+
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td class="editable" [matMenuTriggerFor]="nameMenu"
@@ -49,7 +50,7 @@
             <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
               <div (click)="$event.stopPropagation()" style="padding: 16px">
                 <mat-form-field class="my-input" appearance="outline">
-                  <mat-label>Description</mat-label>
+                  <mat-label>Mobile</mat-label>
                   <textarea [value]="data" [formControl]="mobileFormControl" matInput></textarea>
                 </mat-form-field>
                 <button
@@ -73,7 +74,7 @@
             <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
               <div (click)="$event.stopPropagation()" style="padding: 16px">
                 <mat-form-field class="my-input" appearance="outline">
-                  <mat-label>Description</mat-label>
+                  <mat-label>Email</mat-label>
                   <textarea [value]="data" [formControl]="emailFormControl" matInput></textarea>
                 </mat-form-field>
                 <button
@@ -133,10 +134,15 @@
 
       <tr mat-header-row *matHeaderRowDef="suppliersTableColums"></tr>
       <tr mat-row class="table-data-row" *matRowDef="let row; columns: suppliersTableColums;"></tr>
+
     </table>
-    <div *ngIf="fetchCategoriesFlag">
-      <mat-progress-spinner matTooltip="fetch suppliers" [diameter]="30" mode="indeterminate"
-                            color="primary"></mat-progress-spinner>
+
+    <div *ngIf="fetchSuppliersFlag">
+      <mat-progress-spinner matTooltip="fetch suppliers"
+                            [diameter]="30" mode="indeterminate"
+                            color="primary">
+      </mat-progress-spinner>
     </div>
+
   </mat-card-content>
 </mat-card>

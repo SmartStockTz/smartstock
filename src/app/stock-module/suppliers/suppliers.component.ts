@@ -14,7 +14,7 @@ export class SuppliersComponent implements OnInit {
   suppliersDatasource: MatTableDataSource<SupplierI>;
   suppliersTableColums = ['name', 'email', 'mobile', 'address', 'actions'];
   suppliersArray: SupplierI[];
-  fetchCategoriesFlag = false;
+  fetchSuppliersFlag = false;
   nameFormControl = new FormControl();
   descriptionFormControl = new FormControl();
   addressFormControl = new FormControl();
@@ -28,38 +28,38 @@ export class SuppliersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCategories();
+    this.getSuppliers();
   }
 
   searchSupplier(query: string) {
     // if ($event && $event.query) {
-    //   this.fetchCategoriesFlag = true;
+    //   this.fetchSuppliersFlag = true;
     //   this.stockDatabase.searchSupplier($event.query, {size: 20}).then(data => {
     //     this.suppliersArray = JSON.parse(JSON.stringify(data));
     //     // this.skip +=this.productsArray.length;
     //     this.suppliersDatasource = new MatTableDataSource(this.suppliersArray);
-    //     this.fetchCategoriesFlag = false;
+    //     this.fetchSuppliersFlag = false;
     //     // this.size = 0;
     //   }).catch(reason => {
     //     this.snack.open(reason, 'Ok', {
     //       duration: 3000
     //     });
-    //     this.fetchCategoriesFlag = false;
+    //     this.fetchSuppliersFlag = false;
     //   });
     // } else {
-    //   this.getCategories();
+    //   this.getSuppliers();
     // }
   }
 
-  getCategories() {
-    this.fetchCategoriesFlag = true;
+  getSuppliers() {
+    this.fetchSuppliersFlag = true;
     this.stockDatabase.getAllSupplier({size: 100}).then(data => {
       this.suppliersArray = JSON.parse(JSON.stringify(data));
       this.suppliersDatasource = new MatTableDataSource<SupplierI>(this.suppliersArray);
-      this.fetchCategoriesFlag = false;
+      this.fetchSuppliersFlag = false;
     }).catch(reason => {
       console.log(reason);
-      this.fetchCategoriesFlag = false;
+      this.fetchSuppliersFlag = false;
     });
   }
 
@@ -132,7 +132,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  updateSupplierEmail(param: {value: any; objectId: any}, descriptionMenuTrigger: MatMenuTrigger) {
+  updateSupplierEmail(param: { value: any; objectId: any }, descriptionMenuTrigger: MatMenuTrigger) {
 
   }
 
@@ -201,7 +201,9 @@ export class DialogSupplierNewComponent implements OnInit {
   initiateForm() {
     this.newSupplierForm = this.formBuilder.group({
       name: ['', [Validators.nullValidator, Validators.required]],
-      description: ['']
+      email: ['', [Validators.nullValidator, Validators.required]],
+      number: ['', [Validators.nullValidator, Validators.required]],
+      address: ['', [Validators.nullValidator, Validators.required]]
     });
   }
 
