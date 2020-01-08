@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/app-dialog-delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/app-new-supplier.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/categories/categories.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/units/units.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/units/units.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/units/units.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock-module.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/suppliers/suppliers.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +64,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/purchase-module/purchase" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/stock-module/suppliers" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -79,19 +77,19 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase" />
-      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all" />
-      <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
-      <recent name="$PROJECT_DIR$/dist" />
-      <recent name="$PROJECT_DIR$/src/assets/js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/purchase-module" />
       <recent name="$PROJECT_DIR$/src/app/settings-module" />
       <recent name="$PROJECT_DIR$/src/app/dashboard-module" />
       <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
       <recent name="$PROJECT_DIR$/src/assets/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/stock-module/suppliers" />
+      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase" />
+      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all" />
+      <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
+      <recent name="$PROJECT_DIR$/dist" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -276,14 +274,7 @@
       <workItem from="1578404210080" duration="3790000" />
       <workItem from="1578416327665" duration="709000" />
       <workItem from="1578420964276" duration="634000" />
-      <workItem from="1578458871518" duration="6925000" />
-    </task>
-    <task id="LOCAL-00040" summary="remove dashboard">
-      <created>1571041077263</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1571041077263</updated>
+      <workItem from="1578458871518" duration="10856000" />
     </task>
     <task id="LOCAL-00041" summary="refresh">
       <created>1571043623743</created>
@@ -621,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578471649508</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="update categories and units UI and fix some bugs">
+      <created>1578474519985</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1578474519985</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +642,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update cart" />
     <MESSAGE value="migrate to bfast servers" />
     <MESSAGE value="refresh" />
     <MESSAGE value="update sales-proxy.service.ts routine for 1sec wait" />
@@ -669,7 +666,8 @@
     <MESSAGE value="update debounce when search products in stock and purchases" />
     <MESSAGE value="start working on purchase on receipt" />
     <MESSAGE value="finish first draft of purchase ui/ux and logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish first draft of purchase ui/ux and logic" />
+    <MESSAGE value="update categories and units UI and fix some bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="update categories and units UI and fix some bugs" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -685,14 +683,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578471649247">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578474518786">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578471649247" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578474518786" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -741,14 +739,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578471654248">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578476858055">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578471654248" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578476858055" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

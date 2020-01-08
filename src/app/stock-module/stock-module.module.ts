@@ -32,7 +32,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {StockNewComponent} from './stock-new/stock-new.component';
 import {StockEditComponent} from './stock-edit/stock-edit.component';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './categories/categories.component';
-import {SuppliersComponent} from './suppliers/suppliers.component';
+import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './suppliers/suppliers.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
 
 @NgModule({
@@ -75,14 +75,18 @@ import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from 
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent
+    DialogUnitNewComponent,
+    DialogSupplierNewComponent,
+    DialogSupplierDeleteComponent
   ],
   entryComponents: [
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent
+    DialogUnitNewComponent,
+    DialogSupplierNewComponent,
+    DialogSupplierDeleteComponent
   ]
 })
 export class StockModuleModule {
