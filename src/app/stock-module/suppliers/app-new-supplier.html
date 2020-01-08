@@ -27,10 +27,11 @@
         <mat-error>Address required</mat-error>
       </mat-form-field>
 
-
       <button color="primary" [disabled]="createSupplierProgress" mat-flat-button class="ft-button">
         Save
-        <mat-progress-spinner style="display: inline-block" *ngIf="createSupplierProgress" [diameter]="20"
+        <mat-progress-spinner style="display: inline-block"
+                              *ngIf="createSupplierProgress"
+                              [diameter]="20"
                               mode="indeterminate">
         </mat-progress-spinner>
       </button>

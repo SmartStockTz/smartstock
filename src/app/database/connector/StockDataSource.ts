@@ -45,7 +45,7 @@ export interface StockDataSource {
 
   getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]>;
 
-  updateSupplier(id: string, callback?: (value: any) => void);
+  updateSupplier(data: {objectId: string, field: string, value: string}): Promise<any>;
 
   updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any>;
 
@@ -53,7 +53,7 @@ export interface StockDataSource {
 
   updateAllSupplier(callback?: (value: any) => void);
 
-  deleteSupplier(supplier: SupplierI, callback?: (value: any) => void);
+  deleteSupplier(objectId: string): Promise<any>;
 
   deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void);
 

@@ -91,33 +91,25 @@ export class SuppliersComponent implements OnInit {
   }
 
   updateSupplier(supplier: { objectId: string, value: string, field: string }) {
-    // this.snack.open('Update in progress..', 'Ok');
-    // this.stockDatabase.updateSupplier(supplier).then(data => {
-    //   const editedObjectIndex = this.suppliersArray.findIndex(value => value.objectId === data.objectId);
-    //   this.suppliersArray = this.suppliersArray.filter(value => value.objectId !== supplier.objectId);
-    //   if (editedObjectIndex !== -1) {
-    //     const updatedObject = this.suppliersArray[editedObjectIndex];
-    //     updatedObject[supplier.field] = supplier.value;
-    //     this.suppliersDatasource.data[editedObjectIndex] = updatedObject;
-    //   } else {
-    //     console.warn('fails to update supplier table');
-    //   }
-    //   this.snack.open('Supplier updated', 'Ok', {
-    //     duration: 3000
-    //   });
-    // }).catch(reason => {
-    //   this.snack.open(reason && reason.message ? reason.message : 'Fail to update supplier', 'Ok', {
-    //     duration: 3000
-    //   });
-    // });
-  }
-
-  updateSupplierDescription(supplier, matMenu: MatMenuTrigger) {
-    matMenu.toggleMenu();
-    if (supplier && supplier.value) {
-      supplier.field = 'description';
-      this.updateSupplier(supplier);
-    }
+    this.snack.open('Update in progress..', 'Ok');
+    this.stockDatabase.updateSupplier(supplier).then(data => {
+      const editedObjectIndex = this.suppliersArray.findIndex(value => value.objectId === data.objectId);
+      this.suppliersArray = this.suppliersArray.filter(value => value.objectId !== supplier.objectId);
+      if (editedObjectIndex !== -1) {
+        const updatedObject = this.suppliersArray[editedObjectIndex];
+        updatedObject[supplier.field] = supplier.value;
+        this.suppliersDatasource.data[editedObjectIndex] = updatedObject;
+      } else {
+        console.warn('fails to update supplier table');
+      }
+      this.snack.open('Supplier updated', 'Ok', {
+        duration: 3000
+      });
+    }).catch(reason => {
+      this.snack.open('Fail to update supplier', 'Ok', {
+        duration: 3000
+      });
+    });
   }
 
   openAddSupplierDialog() {
@@ -132,16 +124,28 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  updateSupplierEmail(param: { value: any; objectId: any }, descriptionMenuTrigger: MatMenuTrigger) {
-
+  updateSupplierEmail(supplier: any, matMenu: MatMenuTrigger) {
+    matMenu.toggleMenu();
+    if (supplier && supplier.value) {
+      supplier.field = 'email';
+      this.updateSupplier(supplier);
+    }
   }
 
-  updateSupplierAddress(param: { value: any; objectId: any }, addressMenuTrigger: MatMenuTrigger) {
-
+  updateSupplierAddress(supplier: any, matMenu: MatMenuTrigger) {
+    matMenu.toggleMenu();
+    if (supplier && supplier.value) {
+      supplier.field = 'address';
+      this.updateSupplier(supplier);
+    }
   }
 
-  updateSupplierMobile(param: { value: any; objectId: any }, mobileMenuTrigger: MatMenuTrigger) {
-
+  updateSupplierMobile(supplier: any, matMenu: MatMenuTrigger) {
+    matMenu.toggleMenu();
+    if (supplier && supplier.value) {
+      supplier.field = 'number';
+      this.updateSupplier(supplier);
+    }
   }
 }
 
@@ -160,16 +164,16 @@ export class DialogSupplierDeleteComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  deleteSupplier(supplier: any) {
-    // this.errorSupplierMessage = undefined;
-    // this.deleteProgress = true;
-    // this.stockDatabase.deleteSupplier(supplier).then(value => {
-    //   this.dialogRef.close(supplier);
-    //   this.deleteProgress = false;
-    // }).catch(reason => {
-    //   this.errorSupplierMessage = reason && reason.message ? reason.message : reason.toString();
-    //   this.deleteProgress = false;
-    // });
+  deleteSupplier(supplier: SupplierI) {
+    this.errorSupplierMessage = undefined;
+    this.deleteProgress = true;
+    this.stockDatabase.deleteSupplier(supplier.objectId).then(value => {
+      this.dialogRef.close(supplier);
+      this.deleteProgress = false;
+    }).catch(reason => {
+      this.errorSupplierMessage = 'Fails to delete supplier, try again';
+      this.deleteProgress = false;
+    });
   }
 
   cancel() {
@@ -214,24 +218,25 @@ export class DialogSupplierNewComponent implements OnInit {
       });
       return;
     }
-
     this.createSupplierProgress = true;
-    // this.stockDatabase.addSupplier(this.newSupplierForm.value).then(value => {
-    //   this.createSupplierProgress = false;
-    //   value.name = this.newSupplierForm.value.name;
-    //   value.description = this.newSupplierForm.value.description;
-    //   this.dialogRef.close(value);
-    //   this.snack.open('Supplier created', 'Ok', {
-    //     duration: 3000
-    //   });
-    // }).catch(reason => {
-    //   console.log(reason);
-    //   this.createSupplierProgress = false;
-    //   //  this.dialogRef.close(null);
-    //   this.snack.open('Supplier not created, try again', 'Ok', {
-    //     duration: 3000
-    //   });
-    // });
+    this.stockDatabase.addSupplier(this.newSupplierForm.value).then(value => {
+      this.createSupplierProgress = false;
+      value.name = this.newSupplierForm.value.name;
+      value.email = this.newSupplierForm.value.email;
+      value.mobile = this.newSupplierForm.value.mobile;
+      value.address = this.newSupplierForm.value.address;
+      this.dialogRef.close(value);
+      this.snack.open('Supplier created', 'Ok', {
+        duration: 3000
+      });
+    }).catch(reason => {
+      console.log(reason);
+      this.createSupplierProgress = false;
+      //  this.dialogRef.close(null);
+      this.snack.open('Supplier not created, try again', 'Ok', {
+        duration: 3000
+      });
+    });
   }
 
   cancel($event: Event) {

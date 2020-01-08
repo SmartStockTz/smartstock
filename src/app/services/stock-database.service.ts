@@ -81,15 +81,17 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
-  addSupplier(supplier: SupplierI, callback: (value: any) => void) {
-    supplier.idOld = randomString(8);
-    this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
-      headers: this.settings.getCustomerPostHeader()
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  addSupplier(supplier: SupplierI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      // supplier.idOld = randomString(8);
+      this.httpClient.post(this.settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
+        headers: this.settings.getCustomerPostHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        console.log(error1);
+        reject(null);
+      });
     });
   }
 
@@ -125,7 +127,16 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
-  deleteSupplier(supplier: SupplierI, callback?: (value: any) => void) {
+  deleteSupplier(objectId: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/suppliers/' + objectId, {
+        headers: this.settings.getCustomerHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
@@ -236,7 +247,22 @@ export class StockDatabaseService implements StockDataSource {
     });
   }
 
-  updateSupplier(id: string, callback?: (value: any) => void) {
+  updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const supplierId = value.objectId;
+      const data = {};
+      data[value.field] = value.value;
+      delete value.objectId;
+      this.httpClient.put<CategoryI>(this.settings.getCustomerServerURL() + '/classes/suppliers/' + supplierId, data,
+        {
+          headers: this.settings.getCustomerPostHeader()
+        }).subscribe(value1 => {
+        value1.objectId = supplierId;
+        resolve(value1);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {

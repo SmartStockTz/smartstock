@@ -49,3 +49,8 @@ button {
   background: rgba(0, 128, 0, 0.09);
   cursor: pointer;
 }
+
+.editable:hover {
+  outline: #0b2e13 solid 1px;
+  cursor: pointer;
+}
