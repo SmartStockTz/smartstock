@@ -44,3 +44,8 @@ button {
   color: white;
   font-size: 24px;
 }
+
+.table-data-row:hover {
+  background: rgba(0, 128, 0, 0.09);
+  cursor: pointer;
+}

@@ -47,7 +47,7 @@ export class UnitsComponent implements OnInit {
     }).afterClosed().subscribe(_ => {
       if (_) {
         this.unitsArray = this.unitsArray.filter(value => value.objectId !== element.objectId);
-        this.unitsDatasource = new MatTableDataSource<UnitsI>(this.unitsArray);
+        this.unitsDatasource.data = this.unitsArray;
         this.snack.open('Unit deleted', 'Ok', {
           duration: 2000
         });
@@ -68,15 +68,15 @@ export class UnitsComponent implements OnInit {
   }
 
   updateUnit(unit: { objectId: string, value: string, field: string }) {
-    this.snack.open('Update in progress..', 'Ok');
+    this.snack.open('Update units in progress..', 'Ok');
     this.stockDatabase.updateUnit(unit).then(data => {
       const editedObjectIndex = this.unitsArray.findIndex(value => value.objectId === data.objectId);
       this.unitsArray = this.unitsArray.filter(value => value.objectId !== unit.objectId);
       if (editedObjectIndex !== -1) {
         const updatedObject = this.unitsArray[editedObjectIndex];
         updatedObject[unit.field] = unit.value;
-        this.unitsArray.unshift(updatedObject);
-        this.unitsDatasource = new MatTableDataSource<any>(this.unitsArray);
+        this.unitsArray[editedObjectIndex] = updatedObject;
+        this.unitsDatasource.data = this.unitsArray;
       } else {
         console.warn('fails to update unit table');
       }
@@ -84,7 +84,8 @@ export class UnitsComponent implements OnInit {
         duration: 3000
       });
     }).catch(reason => {
-      this.snack.open(reason && reason.message ? reason.message : 'Fail to update unit', 'Ok', {
+      console.log(reason);
+      this.snack.open('Fail to update unit', 'Ok', {
         duration: 3000
       });
     });
@@ -133,7 +134,8 @@ export class DialogUnitDeleteComponent {
       this.dialogRef.close(unit);
       this.deleteProgress = false;
     }).catch(reason => {
-      this.errorUnitMessage = reason && reason.message ? reason.message : reason.toString();
+      console.log(reason);
+      this.errorUnitMessage = 'Fails to delete, try again';
       this.deleteProgress = false;
     });
   }
@@ -150,8 +152,6 @@ export class DialogUnitDeleteComponent {
 
 })
 export class DialogUnitNewComponent implements OnInit {
-  deleteProgress = false;
-  errorUnitMessage: string;
   newUnitForm: FormGroup;
   createUnitProgress = false;
 
@@ -193,7 +193,6 @@ export class DialogUnitNewComponent implements OnInit {
     }).catch(reason => {
       console.log(reason);
       this.createUnitProgress = false;
-      //  this.dialogRef.close(null);
       this.snack.open('Unit not created, try again', 'Ok', {
         duration: 3000
       });

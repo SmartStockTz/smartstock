@@ -259,7 +259,7 @@ export class StockDatabaseService implements StockDataSource {
 
   deleteUnit(unit: UnitsI): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/categories/' + unit.objectId, {
+      this.httpClient.delete(this.settings.getCustomerServerURL() + '/classes/units/' + unit.objectId, {
         headers: this.settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);

@@ -34,9 +34,4 @@ table {
   width: 100%;
 }
 
-.table-data-row:hover {
-  background: rgba(0, 128, 0, 0.09);
-  cursor: pointer;
-}
-
 

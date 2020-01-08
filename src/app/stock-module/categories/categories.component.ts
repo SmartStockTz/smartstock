@@ -95,8 +95,7 @@ export class CategoriesComponent implements OnInit {
       if (editedObjectIndex !== -1) {
         const updatedObject = this.categoriesArray[editedObjectIndex];
         updatedObject[category.field] = category.value;
-        this.categoriesArray.unshift(updatedObject);
-        this.categoriesDatasource = new MatTableDataSource<any>(this.categoriesArray);
+        this.categoriesDatasource.data[editedObjectIndex] = updatedObject;
       } else {
         console.warn('fails to update category table');
       }
@@ -170,8 +169,6 @@ export class DialogCategoryDeleteComponent {
 
 })
 export class DialogCategoryNewComponent implements OnInit {
-  deleteProgress = false;
-  errorCategoryMessage: string;
   newCategoryForm: FormGroup;
   createCategoryProgress = false;
 

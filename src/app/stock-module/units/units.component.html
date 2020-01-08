@@ -1,6 +1,13 @@
 <mat-card class="mat-elevation-z0">
-  <mat-card-title>
+  <mat-card-title class="d-flex flex-row">
     <button (click)="openAddUnitDialog()" color="primary" class="ft-button" mat-flat-button>Add Unit</button>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button color="primary" [matMenuTriggerFor]="unitsMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #unitsMenu>
+      <button (click)="getUnits()" mat-menu-item>Reload Units</button>
+    </mat-menu>
   </mat-card-title>
   <mat-card-content>
     <table style="margin-top: 16px" class="my-input"
@@ -75,9 +82,9 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="unitsTableColums"></tr>
-      <tr mat-row *matRowDef="let row; columns: unitsTableColums;"></tr>
+      <tr mat-row class="table-data-row" *matRowDef="let row; columns: unitsTableColums;"></tr>
     </table>
-    <div *ngIf="fetchUnitsFlag && !unitsArray ">
+    <div *ngIf="fetchUnitsFlag">
       <mat-progress-spinner matTooltip="fetch units" [diameter]="30" mode="indeterminate"
                             color="primary"></mat-progress-spinner>
     </div>
