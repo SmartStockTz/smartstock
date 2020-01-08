@@ -14,7 +14,7 @@
     </app-toolbar>
 
     <div class="container d-flex flex-column justify-content-center align-items-center stock-new-wrapper">
-      <form [formGroup]="settingsForm" style="margin-top: 16px" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <form [formGroup]="settingsForm" style="margin-top: 16px" class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
         <h4>Printer</h4>
         <mat-card class="mat-elevation-z0">
           <mat-card-content>
@@ -52,6 +52,13 @@
 
           </mat-card-content>
         </mat-card>
+        <button [disabled]="getSettingsProgress" style="margin-top: 16px; margin-bottom: 16px" color="primary"
+                mat-flat-button
+                (click)="saveSettings()"
+                class="btn-block ft-button">Update Settings
+          <mat-progress-spinner *ngIf="getSettingsProgress" [diameter]="30" color="primary"
+                                mode="indeterminate"></mat-progress-spinner>
+        </button>
       </form>
     </div>
   </mat-sidenav-content>

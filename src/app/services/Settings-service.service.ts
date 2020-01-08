@@ -1,10 +1,15 @@
 import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsServiceService {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly indexDb: NgForage) {
+  }
+
   ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock_lb'
@@ -14,9 +19,6 @@ export class SettingsServiceService {
     'content-type': 'application/json'
   };
   ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
-
-  constructor(private indexDb: NgForage) {
-  }
 
   getCustomerApplicationId(): string {
     return 'lbpharmacy'; // replace with fetch from index db
@@ -73,5 +75,27 @@ export class SettingsServiceService {
 
   getServerAddress(callback: (ip: string) => void) {
 
+  }
+
+  saveSettings(settings: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.post(this.getCustomerServerURL() + '/classes/settings', settings, {
+        headers: this.getCustomerPostHeader()
+      }).subscribe(value => {
+        this.indexDb.setItem('settings', value).then(value1 => {
+          resolve(value);
+        }).catch(reason => {
+          reject(reason);
+        });
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  getSettings(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+
+    });
   }
 }

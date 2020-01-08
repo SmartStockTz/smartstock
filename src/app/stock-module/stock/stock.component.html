@@ -37,7 +37,11 @@
                     </button>
                     <mat-menu #stockMenu>
                       <button (click)="reload()" matTooltip="refresh products in table" mat-menu-item>Reload</button>
+                      <button (click)="exportStock()" matTooltip="refresh products in table" mat-menu-item>
+                        Export to excel
+                      </button>
                     </mat-menu>
+
                   </mat-card-title>
                   <table mat-table [dataSource]="stockDatasource">
 

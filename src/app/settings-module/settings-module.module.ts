@@ -5,9 +5,10 @@ import {SettingsModuleRoutingModule} from './settings-module-routing.module';
 import {SettingComponent} from './setting/setting.component';
 import {AccountComponent} from './account/account.component';
 import {
+  MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatProgressSpinnerModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatTooltipModule
@@ -30,7 +31,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatSlideToggleModule,
     MatTooltipModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SettingsModuleModule {

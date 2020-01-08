@@ -9,7 +9,6 @@ import {randomString} from '../database/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +16,18 @@ export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly httpClient: HttpClient,
               private readonly settings: SettingsServiceService) {
+  }
+
+  exportToExcel(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.get(this.settings.ssmFunctionsURL + '/stocks/export', {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {

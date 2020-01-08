@@ -1,9 +1,7 @@
-<app-check-user-progress *ngIf="!isLogin"></app-check-user-progress>
-<mat-sidenav-container *ngIf="isLogin" class="match-parent">
+<mat-sidenav-container class="match-parent">
 
-  <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
-    <app-admin-drawer *ngIf="isAdmin"></app-admin-drawer>
-    <app-nav-user *ngIf="!isAdmin"></app-nav-user>
+  <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="false">
+    <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -114,28 +112,6 @@
                         </button>
                       </td>
                       <td mat-footer-cell *matFooterCellDef>
-                        <div *ngIf="totalBill!==0">
-                          <div class="d-flex" *ngIf="!showProgress">
-                            <div>
-                              <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
-                              <button [disabled]="printProgress" mat-icon-button (click)="printCart()">
-                                <mat-icon color="primary">
-                                  print
-                                </mat-icon>
-                              </button>
-                              <button [disabled]="printProgress" mat-button="" color="primary" style="margin: 8px"
-                                      (click)="saveOrder()">
-                                <mat-icon>save</mat-icon>
-                                Save
-                              </button>
-                            </div>
-                            <!--<div>-->
-                            <!--<button mat-button color="primary" style="margin: 8px" (click)="submitBill()">-->
-                            <!--Sale-->
-                            <!--</button>-->
-                            <!--</div>-->
-                          </div>
-                        </div>
                       </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="cartColums"></tr>
@@ -144,6 +120,29 @@
                   </table>
                   <mat-paginator #cartPaginator [pageSizeOptions]="['10','50','100']"></mat-paginator>
                 </mat-card-content>
+                <mat-card-actions>
+                  <div *ngIf="totalBill!==0">
+                    <div *ngIf="!showProgress">
+                      <div>
+                        <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
+                        <button color="primary" class="ft-button btn-block" [disabled]="printProgress" mat-flat-button
+                                (click)="printCart()">
+                          Submit
+                        </button>
+                        <!--                              <button [disabled]="printProgress" mat-button="" color="primary" style="margin: 8px"-->
+                        <!--                                      (click)="saveOrder()">-->
+                        <!--                                <mat-icon>save</mat-icon>-->
+                        <!--                                Save-->
+                        <!--                              </button>-->
+                      </div>
+                      <!--<div>-->
+                      <!--<button mat-button color="primary" style="margin: 8px" (click)="submitBill()">-->
+                      <!--Sale-->
+                      <!--</button>-->
+                      <!--</div>-->
+                    </div>
+                  </div>
+                </mat-card-actions>
               </mat-card>
             </mat-tab>
 

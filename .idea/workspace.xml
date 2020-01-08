@@ -3,18 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/toolbar/toolbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/guards/admin-role.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/guards/admin-role.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/guards/authentication.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/guards/authentication.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/landing/landing.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/landing/landing.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/settings-module/settings-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/settings-module.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,14 +286,7 @@
       <workItem from="1578458871518" duration="10960000" />
       <workItem from="1578484685307" duration="2667000" />
       <workItem from="1578495226629" duration="5134000" />
-      <workItem from="1578503163122" duration="3849000" />
-    </task>
-    <task id="LOCAL-00045" summary="refresh v3 development branch">
-      <created>1571045088272</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1571045088272</updated>
+      <workItem from="1578503163122" duration="8336000" />
     </task>
     <task id="LOCAL-00046" summary="move stock and sales to specific module">
       <created>1571052266399</created>
@@ -629,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578500314489</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="update guards and current user method">
+      <created>1578507136145</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1578507136146</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +654,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="unreview web worker for background thread" />
     <MESSAGE value="initial draft of sales with a web worker for local saved routine" />
     <MESSAGE value="remove firebase" />
     <MESSAGE value="bump version" />
@@ -677,7 +678,8 @@
     <MESSAGE value="start update supplier components in stock" />
     <MESSAGE value="finish initial draft of stock UI/UX" />
     <MESSAGE value="start working on settings-module.module.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="start working on settings-module.module.ts" />
+    <MESSAGE value="update guards and current user method" />
+    <option name="LAST_COMMIT_MESSAGE" value="update guards and current user method" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -693,14 +695,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578500314358">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578507135757">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578500314358" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578507135757" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -749,14 +751,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578500317836">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578507140535">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578500317836" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578507140535" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

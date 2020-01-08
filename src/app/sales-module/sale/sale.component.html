@@ -1,9 +1,7 @@
-<app-check-user-progress *ngIf="!isLogin"></app-check-user-progress>
-<mat-sidenav-container *ngIf="isLogin" class="match-parent">
+<mat-sidenav-container class="match-parent">
 
-  <mat-sidenav class="match-parent-side" #sidenav mode="over" [opened]="false">
-    <app-admin-drawer *ngIf="isAdmin"></app-admin-drawer>
-    <app-nav-user *ngIf="!isAdmin"></app-nav-user>
+  <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="false">
+    <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -100,17 +98,6 @@
                         </button>
                       </td>
                       <td mat-footer-cell *matFooterCellDef>
-                        <div *ngIf="totalBill!==0">
-                          <div class="d-flex justify-content-center" *ngIf="!showProgress">
-                            <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
-                            <button [disabled]="printProgress" mat-raised-button color="primary" style="margin: 8px"
-                                    (click)="printCart()">
-                              Submit
-                              <mat-progress-spinner *ngIf="printProgress" [diameter]="20" color="primary"
-                                                    style="display: inline-block"></mat-progress-spinner>
-                            </button>
-                          </div>
-                        </div>
                       </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="cartColums"></tr>
@@ -119,6 +106,20 @@
                   </table>
                   <mat-paginator #cartPaginator [pageSizeOptions]="[50, 75, 100]" showFirstLastButtons></mat-paginator>
                 </mat-card-content>
+                <mat-card-actions>
+                  <div *ngIf="totalBill!==0">
+                    <div *ngIf="!showProgress">
+                      <mat-slide-toggle style="margin: 8px" [formControl]="traRadioControl"></mat-slide-toggle>
+                      <button class="ft-button btn-block" [disabled]="printProgress" mat-flat-button color="primary"
+                              (click)="printCart()">
+                        Submit
+                        <mat-progress-spinner *ngIf="printProgress" [diameter]="20" color="primary"
+                                              style="display: inline-block">
+                        </mat-progress-spinner>
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-actions>
               </mat-card>
             </mat-tab>
 

@@ -12,13 +12,14 @@ import {SalesDatabaseService} from '../../services/sales-database.service';
 import {CashSaleI} from '../../model/CashSale';
 import {PrintServiceService} from '../../services/print-service.service';
 import {randomString} from '../../database/ParseBackend';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
   styleUrls: ['./sale.component.css']
 })
-export class SaleComponent implements OnInit {
+export class SaleComponent extends DeviceInfo implements OnInit {
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
@@ -77,6 +78,7 @@ export class SaleComponent implements OnInit {
               private snack: MatSnackBar,
               private printS: PrintServiceService,
               private saleDatabase: SalesDatabaseService) {
+    super();
   }
 
   ngOnInit() {

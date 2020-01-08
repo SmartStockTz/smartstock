@@ -172,6 +172,20 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.getStocksFromCache(() => {
     });
   }
+
+  exportStock() {
+    this.stockDatabase.exportToExcel().then(_ => {
+      this.snack.open('Your request received we will send your an email' +
+        ' contain link to download your stocks', 'Ok', {
+        duration: 6000
+      });
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Request fails try again later', 'Ok', {
+        duration: 3000
+      });
+    });
+  }
 }
 
 @Component({

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import {ThreadsService} from './services/threads.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private readonly thread: ThreadsService) {
+  constructor(private readonly thread: ThreadsService,
+              private readonly dialog: MatDialog) {
   }
 
   async ngOnInit() {
@@ -18,5 +20,14 @@ export class AppComponent implements OnInit {
     } catch (e) {
       console.warn(e);
     }
+  }
+
+  // private _checkNewVersion() {
+  //
+  // }
+}
+
+export class UpdateApplicationDialog {
+  constructor() {
   }
 }

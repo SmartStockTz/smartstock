@@ -13,6 +13,7 @@ import {SalesDatabaseService} from '../../services/sales-database.service';
 import {OrderI} from '../../model/OderI';
 import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
 import {PrintServiceService} from '../../services/print-service.service';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 export interface DialogData {
   customer?: string;
@@ -25,7 +26,7 @@ export interface DialogData {
   templateUrl: './whole-sale.component.html',
   styleUrls: ['./whole-sale.component.css']
 })
-export class WholeSaleComponent implements OnInit {
+export class WholeSaleComponent extends DeviceInfo implements OnInit {
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
@@ -93,21 +94,21 @@ export class WholeSaleComponent implements OnInit {
               private dialog: MatDialog,
               private printS: PrintServiceService,
               private saleDatabase: SalesDatabaseService) {
+    super();
   }
 
   ngOnInit() {
-    // this.userDatabase.currentUser(value => {
-    //   if (value === null) {
-    //     this.isLogin = false;
-    //     this.router.navigateByUrl('login').catch(reason => console.log(reason));
-    //   } else {
-    //     this.isAdmin = value.role === 'admin';
-    //     this.isLogin = true;
-    //     this.currentUser = value;
-    //     // control input initialize
-    this.initializeView();
-    // }
-    // });
+    this.userDatabase.currentUser().then(value => {
+        this.isAdmin = value.role === 'admin';
+        this.isLogin = true;
+        this.currentUser = value;
+        // control input initialize
+        this.initializeView();
+    }).catch(reason => {
+      console.log(reason);
+      this.isLogin = false;
+      this.router.navigateByUrl('login').catch(reason => console.log(reason));
+    });
   }
 
   private getProduct(product: string) {
@@ -353,7 +354,7 @@ export class WholeSaleComponent implements OnInit {
   }
 
   private updateTotalSales() {
-    const s = 0;
+    let s = 0;
     // this.saleDatasourceArray.forEach(value => {
     //   s += value.amount;
     // });
