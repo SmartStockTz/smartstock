@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
+import {UserI} from '../model/UserI';
 
 @Injectable({
   providedIn: 'root'
@@ -11,91 +12,128 @@ export class SettingsServiceService {
   }
 
   ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
+  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
+
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock_lb'
   };
+
   ssmFunctionsHeader = {
     'bfast-application-id': 'smartstock_lb',
     'content-type': 'application/json'
   };
-  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
 
-  getCustomerApplicationId(): string {
-    return 'lbpharmacy'; // replace with fetch from index db
+  async getCustomerApplicationId() {
+    try {
+      const user = await this.indexDb.getItem<UserI>('user');
+      if (!user) {
+        throw new Error('No user record');
+      }
+      return user.applicationId;
+    } catch (e) {
+      throw {message: 'Fails to get application id', reason: e.toString()};
+    }
   }
 
-  getCustomerServerURLId(): string {
-    return 'lbpharmacy-daas'; // replace with fetch from index db
+  async getCustomerServerURLId() {
+    try {
+      const user = await this.indexDb.getItem<UserI>('user');
+      if (!user) {
+        throw new Error('No user in local storage');
+      }
+      return user.projectUrlId;
+    } catch (reason) {
+      throw {message: 'Fails to get user', reason: reason.toString()};
+    }
   }
 
-  getCustomerHeader(): any {
-    return {
-      'X-Parse-Application-Id': this.getCustomerApplicationId()
-    };
+  async getCustomerHeader(): Promise<any> {
+    try {
+      return {
+        'X-Parse-Application-Id': await this.getCustomerApplicationId()
+      };
+    } catch (e) {
+      console.warn(e);
+      return {};
+    }
   }
 
-  getCustomerPostHeader(): any {
-    return {
-      'X-Parse-Application-Id': this.getCustomerApplicationId(),
-      'content-type': 'application/json'
-    };
+  async getCustomerPostHeader(): Promise<any> {
+    try {
+      return {
+        'X-Parse-Application-Id': await this.getCustomerApplicationId(),
+        'content-type': 'application/json'
+      };
+    } catch (e) {
+      throw {message: 'Fails to get customer post header', reason: e.toString()};
+    }
   }
 
-  getCustomerServerURL(): string {
-    return `https://${this.getCustomerServerURLId()}.bfast.fahamutech.com`;
+  async getCustomerServerURL(): Promise<string> {
+    try {
+      return `https://${await this.getCustomerServerURLId()}.bfast.fahamutech.com`;
+    } catch (e) {
+      throw {message: 'Fails to get server url', reason: e.toString()};
+    }
   }
 
-  getCustomerProjectId(): string {
-    return 'lbpharmacy'; // replace with fetch from index db
+  async getCustomerProjectId(): Promise<string> {
+    try {
+      const user = await this.indexDb.getItem<UserI>('user');
+      if (!user) {
+        throw new Error('No user in local storage');
+      }
+      return user.projectId;
+    } catch (e) {
+      throw {message: 'Fails to get project id', reason: e.toString()};
+    }
   }
 
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
     this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
-      callback(value);
+      callback(null);
     }).catch(reason => {
       console.log(reason);
       callback(null);
     });
-  }
-
-  public setPrinterAddress(addr: { ip: string, name: string }, callback: (value: any) => void) {
-    this.indexDb.setItem('printerAddress', addr).then(value => {
-      callback(value);
-    }).catch(reason => {
-      console.log(reason);
-      callback(null);
-    });
-  }
-
-  setServerAddress(ip: string) {
-    this.indexDb.setItem('serverAddress', ip).then(value => {
-
-    }).catch(reason => console.log(reason));
-  }
-
-  getServerAddress(callback: (ip: string) => void) {
-
   }
 
   saveSettings(settings: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.post(this.getCustomerServerURL() + '/classes/settings', settings, {
-        headers: this.getCustomerPostHeader()
-      }).subscribe(value => {
-        this.indexDb.setItem('settings', value).then(value1 => {
-          resolve(value);
-        }).catch(reason => {
-          reject(reason);
+      this.indexDb.getItem<UserI>('user').then(async user => {
+        this.httpClient.put(this.ssmServerURL + '/users/' + user.objectId, {
+          settings: settings
+        }, {
+          headers: await this.getCustomerPostHeader()
+        }).subscribe(_ => {
+          user.settings = settings;
+          this.indexDb.setItem('user', user).then(_1 => {
+            resolve('User settings updated');
+          }).catch(reason => {
+            reject(reason);
+          });
+        }, error => {
+          reject(error);
         });
-      }, error => {
-        reject(error);
+      }).catch(reason => {
+        reject(reason);
       });
     });
   }
 
-  getSettings(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-
-    });
+  async getSettings(): Promise<{ printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean }> {
+    try {
+      const user = await this.indexDb.getItem<UserI>('user');
+      if (!user) {
+        return {
+          'printerFooter': 'Thank you',
+          'printerHeader': '',
+          'saleWithoutPrinter': true
+        };
+      }
+      return user.settings;
+    } catch (e) {
+      throw {message: 'Fails to get settings', reason: e.toString()};
+    }
   }
 }

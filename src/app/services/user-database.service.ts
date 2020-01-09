@@ -118,7 +118,12 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   register(user: UserI): Promise<UserI> {
     return new Promise<UserI>((resolve, reject) => {
-      console.log(user);
+      // console.log(user);
+      user.settings = {
+        printerFooter: 'Thank you',
+        printerHeader: '',
+        saleWithoutPrinter: true,
+      };
       this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/users/create', user, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {

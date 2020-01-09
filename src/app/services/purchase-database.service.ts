@@ -3,24 +3,21 @@ import {PurchaseDataSource} from '../database/connector/PurchaseDataSource';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {HttpClient} from '@angular/common/http';
-import {BatchI} from '../model/batchI';
-import {NgForage} from 'ngforage';
 import {SettingsServiceService} from './Settings-service.service';
 
 @Injectable()
 export class PurchaseDatabaseService implements PurchaseDataSource {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly settings: SettingsServiceService,
-              private readonly indexDb: NgForage) {
+              private readonly settings: SettingsServiceService) {
   }
 
   recordPayment(objectId: string): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.httpClient.put(this.settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
+    return new Promise<any>(async (resolve, reject) => {
+      this.httpClient.put(await this.settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
         paid: true
       }, {
-        headers: this.settings.getCustomerPostHeader()
+        headers: await this.settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -33,57 +30,57 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   addAllPurchase(purchases: PurchaseI[], callback: (value: any) => void) {
-    const bat: BatchI[] = [];
-    purchases.forEach(value => {
-      bat.push({
-        method: 'POST',
-        path: '/classes/purchases',
-        body: value
-      });
-    });
-    if (purchases.length <= 50) {
-      this.httpClient.post(this.settings.getCustomerServerURL() + '/batch', {
-        'requests': bat
-      }, {
-        headers: this.settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        callback(value);
-      }, error1 => {
-        console.log(error1);
-        callback(null);
-      });
-    } else {
-      callback('BE');
-    }
+    // const bat: BatchI[] = [];
+    // purchases.forEach(value => {
+    //   bat.push({
+    //     method: 'POST',
+    //     path: '/classes/purchases',
+    //     body: value
+    //   });
+    // });
+    // if (purchases.length <= 50) {
+    //   this.httpClient.post(this.settings.getCustomerServerURL() + '/batch', {
+    //     'requests': bat
+    //   }, {
+    //     headers: this.settings.getCustomerPostHeader()
+    //   }).subscribe(value => {
+    //     callback(value);
+    //   }, error1 => {
+    //     console.log(error1);
+    //     callback(null);
+    //   });
+    // } else {
+    //   callback('BE');
+    // }
   }
 
   addAllReceipts(invoices: ReceiptI[], callback: (value: any) => void) {
   }
 
   addInvoice(invoice: ReceiptI, callback: (value: any) => void) {
-    this.addReceipt(invoice, callback);
+    // this.addReceipt(invoice, callback);
   }
 
   addPurchase(purchase: PurchaseI, callback: (value: any) => void) {
-    this.httpClient.post<PurchaseI>(this.settings.getCustomerServerURL() + '/classes/purchases', purchase, {
-      headers: this.settings.getCustomerPostHeader()
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this.httpClient.post<PurchaseI>(this.settings.getCustomerServerURL() + '/classes/purchases', purchase, {
+    //   headers: this.settings.getCustomerPostHeader()
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   addReceipt(invoice: ReceiptI, callback: (value: any) => void) {
-    this.httpClient.post<ReceiptI>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', invoice, {
-      headers: this.settings.getCustomerPostHeader(),
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this.httpClient.post<ReceiptI>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', invoice, {
+    //   headers: this.settings.getCustomerPostHeader(),
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   deleteInvoice(id: string, callback: (value: any) => void) {
@@ -100,9 +97,9 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
 
 
   getAllPurchase(page: { size?: number, skip?: number }): Promise<PurchaseI[]> {
-    return new Promise<PurchaseI[]>((resolve, reject) => {
-      this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchases', {
-        headers: this.settings.getCustomerHeader(),
+    return new Promise<PurchaseI[]>(async (resolve, reject) => {
+      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/purchases', {
+        headers: await this.settings.getCustomerHeader(),
         params: {
           'limit': page.size ? page.size.toString() : '100',
           'skip': page.skip ? page.skip.toString() : '0',
@@ -140,32 +137,32 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   private updateCachedPurchaseRefs() {
-    this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', {
-      headers: this.settings.getCustomerHeader(),
-      params: {
-        'limit': '1000'
-      }
-    }).subscribe(value => {
-      this.indexDb.setItem<ReceiptI[]>('purchaseRefs', value.results).then(value1 => {
-        console.log('updated purchaseRefs is ---> ' + value1.length);
-      }).catch(reason => console.log(reason));
-    }, error1 => {
-      console.log(error1);
-    });
+    // this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', {
+    //   headers: this.settings.getCustomerHeader(),
+    //   params: {
+    //     'limit': '1000'
+    //   }
+    // }).subscribe(value => {
+    //   this.indexDb.setItem<ReceiptI[]>('purchaseRefs', value.results).then(value1 => {
+    //     console.log('updated purchaseRefs is ---> ' + value1.length);
+    //   }).catch(reason => console.log(reason));
+    // }, error1 => {
+    //   console.log(error1);
+    // });
   }
 
   getInvoice(id: string, callback: (invoice: ReceiptI) => void) {
   }
 
   getPurchase(id: string, callback: (purchase: PurchaseI) => void) {
-    this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchases/' + id, {
-      headers: this.settings.getCustomerHeader()
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchases/' + id, {
+    //   headers: this.settings.getCustomerHeader()
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   getReceipt(id: string, callback: (invoice: ReceiptI) => void) {

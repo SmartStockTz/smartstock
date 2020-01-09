@@ -26,21 +26,26 @@ export class SettingComponent extends DeviceInfo implements OnInit {
   }
 
   private _getSettings() {
-    // this.getSettingsProgress = true;
-    // this.settings.getSettings().then(value => {
-    //   this._initiateSettingsForm();
-    //   this.getSettingsProgress = false;
-    // }).catch(reason => {
-    //
-    //   this.getSettingsProgress = false;
-    // });
+    this.getSettingsProgress = true;
+    this.settings.getSettings().then(value => {
+      this._initiateSettingsForm(value);
+      this.getSettingsProgress = false;
+    }).catch(reason => {
+      console.log(reason);
+      this._initiateSettingsForm({
+        saleWithoutPrinter: true,
+        printerHeader: '',
+        printerFooter: ''
+      });
+      this.getSettingsProgress = false;
+    });
   }
 
   private _initiateSettingsForm(settings: any) {
     this.settingsForm = this.formBuilder.group({
-      'saleWithoutPrinter': [true],
-      'printerHeader': [''],
-      'printerFooter': [''],
+      'saleWithoutPrinter': [settings.saleWithoutPrinter],
+      'printerHeader': [settings.printerHeader],
+      'printerFooter': [settings.printerFooter],
     });
   }
 

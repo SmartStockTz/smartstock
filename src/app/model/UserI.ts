@@ -17,4 +17,9 @@ export interface UserI {
   createdAt?: string;
   updatedAt?: string;
   sessionToken?: string;
+  settings: {
+    saleWithoutPrinter: boolean,
+    printerFooter: string,
+    printerHeader: string
+  };
 }

@@ -2,7 +2,6 @@ importScripts('localforage.min.js');
 importScripts('axios.min.js');
 var localStorage = {};
 addEventListener('message', ({data}) => {
-  console.log(data);
   const appId = JSON.parse(data).appId;
   const projectUrlId = JSON.parse(data).projectUrlId;
 
@@ -31,13 +30,13 @@ addEventListener('message', ({data}) => {
             }).then(_ => {
               localforage.removeItem(key).catch(reason => console.log(reason));
             }).catch(reason => {
-              console.log(reason);
+              // console.log(reason);
             });
-          }).catch(reason => console.log(reason));
+          }).catch();
         });
       }
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
     });
   }, 5000);
 
