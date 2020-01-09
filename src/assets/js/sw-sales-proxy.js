@@ -1,44 +1,66 @@
 importScripts('localforage.min.js');
 importScripts('axios.min.js');
-var localStorage = {};
-addEventListener('message', ({data}) => {
-  const appId = JSON.parse(data).appId;
-  const projectUrlId = JSON.parse(data).projectUrlId;
 
-  localforage.config({
-    name: 'ssmsales',
+/**
+ *
+ * @param name{string}
+ * @returns {LocalForage}
+ * @private
+ */
+function _getStorage(name) {
+  return localforage.createInstance({
+    name: name,
     storeName: 'ng_forage'
   });
+}
+
+
+addEventListener('message', ({data}) => {
+
+  let _salesStorage = _getStorage('ssmsales');
+  let _mainStorage = _getStorage('ssm');
 
   setInterval(() => {
-    localforage.keys().then(keys => {
-      if (keys.length > 0) {
-        keys.forEach(key => {
-          localforage.getItem(key).then(sales => {
-            axios({
-              baseURL: `https://${projectUrlId}.bfast.fahamutech.com`,
-              url: '/batch',
-              method: 'post',
-              // mode: "cors",
-              data: {
-                'requests': sales
-              },
-              headers: {
-                'X-Parse-Application-Id': appId,
-                'Content-Type': 'application/json'
-              }
-            }).then(_ => {
-              localforage.removeItem(key).catch(reason => console.log(reason));
-            }).catch(reason => {
-              // console.log(reason);
+
+    _mainStorage.getItem('user').then(user => {
+      if (!user) {
+        console.log('user is not available yet');
+        throw 'user is not available yet';
+      }
+      if (user && user.applicationId && user.projectId && user.projectUrlId) {
+        _salesStorage.keys().then(keys => {
+          if (keys.length > 0) {
+            keys.forEach(key => {
+              _salesStorage.getItem(key).then(sales => {
+                axios({
+                  baseURL: `https://${user.projectUrlId}.bfast.fahamutech.com`,
+                  url: '/batch',
+                  method: 'post',
+                  // mode: "cors",
+                  data: {
+                    'requests': sales
+                  },
+                  headers: {
+                    'X-Parse-Application-Id': user.applicationId,
+                    'Content-Type': 'application/json'
+                  }
+                }).then(_ => {
+                  _salesStorage.removeItem(key).catch(reason => console.log(reason));
+                });
+              });
             });
-          }).catch();
+          }
         });
+      } else {
+        console.log('project required parameters not available yet');
       }
     }).catch(reason => {
-      // console.log(reason);
+      console.warn(reason);
+      console.log('error when fetch user');
     });
+
   }, 5000);
 
   postMessage("sales routine started");
+
 });

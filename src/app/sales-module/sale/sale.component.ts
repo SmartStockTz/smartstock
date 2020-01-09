@@ -203,16 +203,16 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   printCart() {
     this.printProgress = true;
-    this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username, value => {
-      if (value === null) {
-        this.snack.open('Printer is not connected or printer software is not running',
-          'Ok', {duration: 3000});
-        // this.openDialog(1);
-      } else {
-        this.submitBill();
-        this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
-        // this.submitBill();
-      }
+    this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username).then(value => {
+      this.submitBill();
+      this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
+      // this.submitBill();
+      this.printProgress = false;
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Printer is not connected or printer software is not running',
+        'Ok', {duration: 3000});
+      // this.openDialog(1);
       this.printProgress = false;
     });
   }

@@ -1,6 +1,20 @@
 importScripts('localforage.min.js');
 importScripts('axios.min.js');
 
+/**
+ *
+ * @param name{string}
+ * @returns {LocalForage}
+ * @private
+ */
+function _getStorage(name) {
+  return localforage.createInstance({
+    name: name,
+    storeName: 'ng_forage'
+  });
+}
+
+
 addEventListener('message', ({data}) => {
   const appId = JSON.parse(data).appId;
   const projectId = JSON.parse(data).projectId;
@@ -10,15 +24,12 @@ addEventListener('message', ({data}) => {
   let firstFetch = true;
   let onFetch = false;
 
-  localforage.config({
-    name: 'ssm',
-    storeName: 'ng_forage'
-  });
+  let _stockStorage = _getStorage('ssm');
 
   setInterval(() => {
     if (!onFetch) {
       onFetch = true;
-      fetchStocks(appId, fetchStockURL, localforage, firstFetch).then(done => {
+      fetchStocks(appId, fetchStockURL, _stockStorage, firstFetch).then(done => {
         firstFetch = false;
         onFetch = false;
         // postMessage("stock comparison thread started");
@@ -30,24 +41,24 @@ addEventListener('message', ({data}) => {
       // console.log('on fetch');
       // console.log(onFetch);
     }
-  }, 3000);
+  }, 30000);
 });
 
 /**
  *
  * @param appId {string}
  * @param url {string}
- * @param localforage {LocalForage}
+ * @param _stockStorage {LocalForage}
  * @param firstFetch {boolean}
  * @returns {Promise<void>}
  */
-async function fetchStocks(appId, url, localforage, firstFetch) {
+async function fetchStocks(appId, url, _stockStorage, firstFetch) {
   // console.log(firstFetch);
   try {
     //if (firstFetch) {
     // await localforage.removeItem('lastUpdate');
     //}
-    const lastUpdateStamp = await localforage.getItem('lastUpdate');
+    const lastUpdateStamp = await _stockStorage.getItem('lastUpdate');
     let fetchUrl;
     if (lastUpdateStamp) {
       fetchUrl = url + '/?lastUpdateTime=' + lastUpdateStamp;
@@ -65,9 +76,9 @@ async function fetchStocks(appId, url, localforage, firstFetch) {
     const newProducts = response.data.results;
     if (newProducts && Array.isArray(newProducts) && newProducts.length > 0) {
       if (response.data['lastUpdateTime']) {
-        await localforage.setItem('lastUpdate', response.data['lastUpdateTime']);
+        await _stockStorage.setItem('lastUpdate', response.data['lastUpdateTime']);
       }
-      const oldProducts = await localforage.getItem('stocks');
+      const oldProducts = await _stockStorage.getItem('stocks');
       if (oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
         newProducts.forEach((newProduct) => {
           const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
@@ -77,11 +88,11 @@ async function fetchStocks(appId, url, localforage, firstFetch) {
             oldProducts.push(newProduct);
           }
         });
-        await localforage.setItem('stocks', oldProducts);
+        await _stockStorage.setItem('stocks', oldProducts);
         window.dispatchEvent(new Event('ssm_stocks_updated'));
         return Promise.resolve();
       } else {
-        await localforage.setItem('stocks', newProducts);
+        await _stockStorage.setItem('stocks', newProducts);
         window.dispatchEvent(new Event('ssm_stocks_updated'));
         return Promise.resolve();
       }

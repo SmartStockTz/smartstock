@@ -114,16 +114,15 @@ export class StockComponent extends DeviceInfo implements OnInit {
         this.snack.open('Deletion is cancelled', 'Ok', {duration: 3000});
       } else {
         this.showProgressBar();
-        this.stockDatabase.deleteStock(element, value1 => {
-          if (value1 === null) {
-            this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
-            this.hideProgressBar();
-          } else {
-            this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
-            this.hideProgressBar();
-            // update table
-            this._removeProductFromTable(element);
-          }
+        this.stockDatabase.deleteStock(element).then(value1 => {
+          this.snack.open('Product successful deleted', 'Ok', {duration: 3000});
+          this.hideProgressBar();
+          // update table
+          this._removeProductFromTable(element);
+        }).catch(reason => {
+          console.log(reason);
+          this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
+          this.hideProgressBar();
         });
       }
     });

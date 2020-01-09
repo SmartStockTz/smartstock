@@ -23,6 +23,26 @@ export class SettingsServiceService {
     'content-type': 'application/json'
   };
 
+  async getSSMUserHeader() {
+    try {
+      const user = await this.indexDb.getItem<UserI>('user');
+      if (!user) {
+        console.log('no user records found');
+        throw new Error('no user records found');
+      }
+      if (user && user.sessionToken && user.applicationId) {
+        return {
+          'X-Parse-Application-Id': user.applicationId,
+          'X-Parse-Session-Token': user.sessionToken
+        };
+      } else {
+        throw new Error('token not found');
+      }
+    } catch (e) {
+      throw {message: 'Fails to get user, so to retrieve token'};
+    }
+  }
+
   async getCustomerApplicationId() {
     try {
       const user = await this.indexDb.getItem<UserI>('user');
@@ -104,7 +124,7 @@ export class SettingsServiceService {
         this.httpClient.put(this.ssmServerURL + '/users/' + user.objectId, {
           settings: settings
         }, {
-          headers: await this.getCustomerPostHeader()
+          headers: await this.getSSMUserHeader()
         }).subscribe(_ => {
           user.settings = settings;
           this.indexDb.setItem('user', user).then(_1 => {

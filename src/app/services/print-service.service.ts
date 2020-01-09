@@ -86,15 +86,11 @@ export class PrintServiceService {
           headers: {
             'content-type': 'application/json',
             'Access-Control-Allow-Origin': '*'
-          },
-          params: {
-            // data: data,
-            // id: Date.now().toString()
           }
         }).subscribe(_ => {
           resolve('Ok');
         }, _ => {
-          console.log(_);
+          // console.log(_);
           if (_.status === 200) {
             resolve('Ok');
           } else {

@@ -21,7 +21,6 @@ export class SettingComponent extends DeviceInfo implements OnInit {
   }
 
   ngOnInit() {
-    this._initiateSettingsForm(null);
     this._getSettings();
   }
 

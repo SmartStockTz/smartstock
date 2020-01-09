@@ -16,12 +16,12 @@ export class ThreadsService {
         worker.onmessage = ({data}) => {
           console.log(`page got message: ${data}`);
         };
-        const applicationId = await this.settings.getCustomerApplicationId();
-        const serverUrl = await this.settings.getCustomerServerURLId();
+        // const applicationId = await this.settings.getCustomerApplicationId();
+        // const serverUrl = await this.settings.getCustomerServerURLId();
         worker.postMessage(
           JSON.stringify({
-            appId: applicationId,
-            projectUrlId: serverUrl
+            // appId: applicationId,
+            // projectUrlId: serverUrl
           })
         );
         return 'Ok';
@@ -29,7 +29,8 @@ export class ThreadsService {
         throw new Error('Web Workers are not supported in this environment.');
       }
     } catch (e) {
-      throw {message: 'Fails to start sales proxy', reason: e.toString()};
+      console.log(e);
+      throw {message: 'Fails to start sales proxy'};
     }
   }
 
@@ -40,14 +41,14 @@ export class ThreadsService {
         worker.onmessage = ({data}) => {
           // console.log(`page got message: ${data}`);
         };
-        const projectUrlId = await this.settings.getCustomerServerURLId();
-        const projectId = await this.settings.getCustomerProjectId();
-        const applicationId = await this.settings.getCustomerApplicationId();
+        // const projectUrlId = await this.settings.getCustomerServerURLId();
+        // const projectId = await this.settings.getCustomerProjectId();
+        // const applicationId = await this.settings.getCustomerApplicationId();
         worker.postMessage(
           JSON.stringify({
-            appId: applicationId,
-            projectUrlId: projectUrlId,
-            projectId: projectId
+            // appId: applicationId,
+            // projectUrlId: projectUrlId,
+            // projectId: projectId
           })
         );
         return 'Ok';
@@ -56,7 +57,8 @@ export class ThreadsService {
         throw new Error('Web Workers are not supported in this environment.');
       }
     } catch (e) {
-      throw {message: 'Fails to start stocks proxy', reason: e.toString()};
+      console.log(e);
+      throw {message: 'Fails to start stocks proxy'};
     }
   }
 
