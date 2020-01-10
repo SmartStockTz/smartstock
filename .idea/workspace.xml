@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/img/data.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/admin-drawer/admin-drawer.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard-module.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard-module.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/threads.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/threads.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,14 +281,7 @@
       <workItem from="1578553060750" duration="8870000" />
       <workItem from="1578573119194" duration="9059000" />
       <workItem from="1578587606051" duration="302000" />
-      <workItem from="1578633114658" duration="6873000" />
-    </task>
-    <task id="LOCAL-00050" summary="update create customer view">
-      <created>1571515833527</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1571515833528</updated>
+      <workItem from="1578633114658" duration="13195000" />
     </task>
     <task id="LOCAL-00051" summary="update printer">
       <created>1571524533148</created>
@@ -627,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578637617063</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="start working on sales to reduce stock">
+      <created>1578640083661</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1578640083661</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +649,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update angular to 8 and change theme color to green" />
     <MESSAGE value="update rxjs package and start to change ui and separate a task to stand on its own from a big module" />
     <MESSAGE value="change login to promise and update register to add account to smartstock" />
     <MESSAGE value="update stock" />
@@ -675,7 +673,8 @@
     <MESSAGE value="start to migrate to multi user and configurations to depend on who log ini" />
     <MESSAGE value="start working on settings" />
     <MESSAGE value="Now printer message can be configured and to print if no printer exist is configured too" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now printer message can be configured and to print if no printer exist is configured too" />
+    <MESSAGE value="start working on sales to reduce stock" />
+    <option name="LAST_COMMIT_MESSAGE" value="start working on sales to reduce stock" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -691,14 +690,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578637616806">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578640083323">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578637616806" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578640083323" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -747,14 +746,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578637621188">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578640095507">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578637621188" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578640095507" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

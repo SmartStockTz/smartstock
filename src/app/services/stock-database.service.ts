@@ -309,8 +309,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   addPurchase(purchaseI: PurchaseI): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.httpClient.post(this.settings.ssmFunctionsURL + '/purchases/' + this.settings.getCustomerProjectId(), purchaseI, {
+    return new Promise<any>(async (resolve, reject) => {
+      this.httpClient.post(this.settings.ssmFunctionsURL + '/purchases/' + await this.settings.getCustomerProjectId(), purchaseI, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(purchase => {
         resolve(purchase);

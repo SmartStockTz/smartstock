@@ -39,7 +39,7 @@ export class ThreadsService {
       if (typeof Worker !== 'undefined') {
         const worker = new Worker('assets/js/sw-local-data.js');
         worker.onmessage = ({data}) => {
-          // console.log(`page got message: ${data}`);
+           console.log(`page got message: ${data}`);
         };
         // const projectUrlId = await this.settings.getCustomerServerURLId();
         // const projectId = await this.settings.getCustomerProjectId();

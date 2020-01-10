@@ -34,21 +34,19 @@ addEventListener('message', ({data}) => {
           if (keys.length > 0) {
             keys.forEach(key => {
               _salesStorage.getItem(key).then(sales => {
-                console.log(sales);
-                axios({
-                  baseURL: `https://${user.projectUrlId}.bfast.fahamutech.com`,
-                  url: '/batch',
-                  method: 'post',
-                  // mode: "cors",
-                  data: {
+                axios.post(`https://smartstock-faas.bfast.fahamutech.com/functions/sales/${user.projectId}`,
+                  {
                     'requests': sales
                   },
-                  headers: {
-                    'X-Parse-Application-Id': user.applicationId,
-                    'Content-Type': 'application/json'
-                  }
-                }).then(_ => {
+                  {
+                    headers: {
+                      'bfast-application-id': 'smartstock_lb',
+                      'Content-Type': 'application/json'
+                    }
+                  }).then(_ => {
                   _salesStorage.removeItem(key).catch(reason => console.log(reason));
+                }).catch(reason => {
+                  console.log(reason);
                 });
               });
             });
