@@ -61,9 +61,10 @@ addEventListener('message', ({data}) => {
 async function fetchStocks(appId, url, _stockStorage, firstFetch) {
   // console.log(firstFetch);
   try {
-    if (firstFetch) {
-      await _stockStorage.removeItem('lastUpdate');
-    }
+    // if (firstFetch) {
+    //   console.log('first time');
+    //   await _stockStorage.removeItem('lastUpdate');
+    // }
     const lastUpdateStamp = await _stockStorage.getItem('lastUpdate');
     let fetchUrl;
     if (lastUpdateStamp) {
@@ -87,7 +88,7 @@ async function fetchStocks(appId, url, _stockStorage, firstFetch) {
       const oldProducts = await _stockStorage.getItem('stocks');
       if (oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
         newProducts.forEach((newProduct) => {
-          console.log('get new entry');
+          // console.log('get new entry');
           const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
           if (indexOld >= 0) {
             oldProducts[indexOld] = newProduct;
