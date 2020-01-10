@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {DashboardModuleRoutingModule} from './dashboard-module-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
-import {MatSidenavModule} from '@angular/material';
+import {MatCardModule, MatSidenavModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import {MatSidenavModule} from '@angular/material';
     CommonModule,
     DashboardModuleRoutingModule,
     CommonComponentsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule
   ]
 })
 export class DashboardModuleModule {

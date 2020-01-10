@@ -23,15 +23,18 @@ addEventListener('message', ({data}) => {
   setInterval(() => {
 
     _mainStorage.getItem('user').then(user => {
+
       if (!user) {
         console.log('user is not available yet');
         throw 'user is not available yet';
       }
+
       if (user && user.applicationId && user.projectId && user.projectUrlId) {
         _salesStorage.keys().then(keys => {
           if (keys.length > 0) {
             keys.forEach(key => {
               _salesStorage.getItem(key).then(sales => {
+                console.log(sales);
                 axios({
                   baseURL: `https://${user.projectUrlId}.bfast.fahamutech.com`,
                   url: '/batch',
@@ -54,6 +57,7 @@ addEventListener('message', ({data}) => {
       } else {
         console.log('project required parameters not available yet');
       }
+
     }).catch(reason => {
       console.warn(reason);
       console.log('error when fetch user');
