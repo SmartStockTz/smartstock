@@ -13,6 +13,7 @@ import {CashSaleI} from '../../model/CashSale';
 import {PrintServiceService} from '../../services/print-service.service';
 import {randomString} from '../../database/ParseBackend';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {SettingsServiceService} from '../../services/Settings-service.service';
 
 @Component({
   selector: 'app-sale',
@@ -76,6 +77,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
               private snack: MatSnackBar,
+              private readonly settings: SettingsServiceService,
               private printS: PrintServiceService,
               private saleDatabase: SalesDatabaseService) {
     super();
@@ -201,20 +203,34 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  printCart() {
-    this.printProgress = true;
-    this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username).then(value => {
-      this.submitBill();
-      this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
-      // this.submitBill();
-      this.printProgress = false;
-    }).catch(reason => {
-      console.log(reason);
-      this.snack.open('Printer is not connected or printer software is not running',
-        'Ok', {duration: 3000});
-      // this.openDialog(1);
-      this.printProgress = false;
-    });
+  async printCart() {
+    try {
+      this.printProgress = true;
+      const settings = await this.settings.getSettings();
+      if (settings && settings.saleWithoutPrinter) {
+        this.submitBill();
+        this.snack.open('Cart saved successful', 'Ok', {
+          duration: 3000
+        });
+        this.printProgress = false;
+      } else {
+        this.printS.printCartRetail(this.cartDatasourceArray, this.currentUser.username).then(_ => {
+          this.submitBill();
+          this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
+          this.printProgress = false;
+        }).catch(reason => {
+          console.log(reason);
+          this.snack.open('Printer is not connected or printer software is not running',
+            'Ok', {duration: 3000});
+          this.printProgress = false;
+        });
+      }
+    } catch (reason) {
+      console.error(reason);
+      this.snack.open('General failure when try to submit your sales, contact support', 'Ok', {
+        duration: 5000
+      });
+    }
   }
 
   private clearInputs() {

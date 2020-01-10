@@ -6,10 +6,10 @@ import {UserDatabaseService} from '../services/user-database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminRoleGuard implements CanActivate {
+export class StockManagerGuard implements CanActivate {
 
-  constructor(private readonly router: Router,
-              private readonly userDatabase: UserDatabaseService) {
+  constructor(private readonly userDatabase: UserDatabaseService,
+              private readonly router: Router) {
   }
 
   canActivate(
@@ -17,7 +17,7 @@ export class AdminRoleGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser().then(user => {
-        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role === 'admin') {
+        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role === 'manager') {
           resolve(true);
         } else {
           this.router.navigateByUrl('/login').catch(reason => console.log(reason));

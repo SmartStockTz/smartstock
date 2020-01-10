@@ -14,6 +14,7 @@ import {OrderI} from '../../model/OderI';
 import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
 import {PrintServiceService} from '../../services/print-service.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {SettingsServiceService} from '../../services/Settings-service.service';
 
 export interface DialogData {
   customer?: string;
@@ -90,6 +91,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
               private indexDb: NgForage,
+              private readonly settings: SettingsServiceService,
               private snack: MatSnackBar,
               private dialog: MatDialog,
               private printS: PrintServiceService,
@@ -99,15 +101,15 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   ngOnInit() {
     this.userDatabase.currentUser().then(value => {
-        this.isAdmin = value.role === 'admin';
-        this.isLogin = true;
-        this.currentUser = value;
-        // control input initialize
-        this.initializeView();
+      this.isAdmin = value.role === 'admin';
+      this.isLogin = true;
+      this.currentUser = value;
+      // control input initialize
+      this.initializeView();
     }).catch(reason => {
       console.log(reason);
       this.isLogin = false;
-      this.router.navigateByUrl('login').catch(reason => console.log(reason));
+      this.router.navigateByUrl('login').catch(reason1 => console.log(reason1));
     });
   }
 
@@ -354,7 +356,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   }
 
   private updateTotalSales() {
-    let s = 0;
+    const s = 0;
     // this.saleDatasourceArray.forEach(value => {
     //   s += value.amount;
     // });
@@ -418,20 +420,34 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  printCart() {
-    this.printProgress = true;
-    this.printS.printCart(this.cartDatasourceArray, this.customerControl.value, value => {
-      if (value === null) {
-        this.snack.open('Printer is not connected or printer software is not running',
-          'Ok', {duration: 3000});
-        // this.openDialog(1);
-      } else {
+  async printCart() {
+    try {
+      this.printProgress = true;
+      const settings = await this.settings.getSettings();
+      if (settings && settings.saleWithoutPrinter) {
         this.submitBill();
-        this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
-        // this.submitBill();
+        this.snack.open('Cart saved successful', 'Ok', {
+          duration: 3000
+        });
+        this.printProgress = false;
+      } else {
+        this.printS.printCartWholesale(this.cartDatasourceArray, this.customerControl.value).then(_ => {
+          this.submitBill();
+          this.snack.open('Cart printed and saved', 'Ok', {duration: 3000});
+          this.printProgress = false;
+        }).catch(reason => {
+          console.log(reason);
+          this.snack.open('Printer is not connected or printer software is not running',
+            'Ok', {duration: 3000});
+          this.printProgress = false;
+        });
       }
-      this.printProgress = false;
-    });
+    } catch (reason) {
+      console.error(reason);
+      this.snack.open('General failure when try to submit your sales, contact support', 'Ok', {
+        duration: 5000
+      });
+    }
   }
 
   editOrder(element: OrderI) {

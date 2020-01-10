@@ -32,8 +32,9 @@ export class SettingsServiceService {
       }
       if (user && user.sessionToken && user.applicationId) {
         return {
-          'X-Parse-Application-Id': user.applicationId,
-          'X-Parse-Session-Token': user.sessionToken
+          'X-Parse-Application-Id': 'smartstock_lb',
+          'X-Parse-Session-Token': user.sessionToken,
+          'Content-Type': 'application/json'
         };
       } else {
         throw new Error('token not found');

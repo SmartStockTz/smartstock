@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-manager.guard.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-manager.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/guards/admin-role.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/guards/admin-role.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/guards/authenticated-user.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/Settings-service.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/print-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/print-service.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/threads.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/threads.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/settings-module/setting/setting.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,14 +284,9 @@
       <workItem from="1578503163122" duration="9609000" />
       <workItem from="1578524365134" duration="698000" />
       <workItem from="1578553060750" duration="8870000" />
-      <workItem from="1578573119194" duration="8876000" />
-    </task>
-    <task id="LOCAL-00048" summary="fix lazy loading">
-      <created>1571077542132</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1571077542132</updated>
+      <workItem from="1578573119194" duration="9059000" />
+      <workItem from="1578587606051" duration="302000" />
+      <workItem from="1578633114658" duration="4285000" />
     </task>
     <task id="LOCAL-00049" summary="refresh">
       <created>1571423166577</created>
@@ -630,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578565270240</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="start working on settings">
+      <created>1578583359088</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1578583359088</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +654,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="bump version" />
     <MESSAGE value="update sales routine" />
     <MESSAGE value="update angular to 8 and change theme color to green" />
     <MESSAGE value="update rxjs package and start to change ui and separate a task to stand on its own from a big module" />
@@ -678,7 +678,8 @@
     <MESSAGE value="update guards and current user method" />
     <MESSAGE value="bump version to 0.4.0-beta0" />
     <MESSAGE value="start to migrate to multi user and configurations to depend on who log ini" />
-    <option name="LAST_COMMIT_MESSAGE" value="start to migrate to multi user and configurations to depend on who log ini" />
+    <MESSAGE value="start working on settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="start working on settings" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -694,50 +695,50 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578565269498">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578583358781">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578565269498" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578583358781" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
-    <state width="1600" height="167" key="GridCell.Tab.0.bottom" timestamp="1578574154031">
+    <state width="1600" height="167" key="GridCell.Tab.0.bottom" timestamp="1578634040660">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578391519216">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519216" />
-    <state width="1600" height="167" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578574154031" />
-    <state width="1600" height="167" key="GridCell.Tab.0.center" timestamp="1578574154028">
+    <state width="1600" height="167" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578634040660" />
+    <state width="1600" height="167" key="GridCell.Tab.0.center" timestamp="1578634040658">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578391519213">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519213" />
-    <state width="1600" height="167" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578574154028" />
-    <state width="1600" height="167" key="GridCell.Tab.0.left" timestamp="1578574154026">
+    <state width="1600" height="167" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578634040658" />
+    <state width="1600" height="167" key="GridCell.Tab.0.left" timestamp="1578634040656">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578391519212">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519212" />
-    <state width="1600" height="167" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578574154026" />
-    <state width="1600" height="167" key="GridCell.Tab.0.right" timestamp="1578574154029">
+    <state width="1600" height="167" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578634040656" />
+    <state width="1600" height="167" key="GridCell.Tab.0.right" timestamp="1578634040659">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578391519215">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519214" />
-    <state width="1600" height="167" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578574154029" />
+    <state width="1600" height="167" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578634040659" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -750,14 +751,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578565274737">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578583361471">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578565274737" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578583361471" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -766,14 +767,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="547" y="66" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog/52.27.1548.873@52.27.1548.873" timestamp="1577441989164" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578499924149">
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578633238907">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode" timestamp="1578219395440">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219395440" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578499924149" />
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578633238907" />
     <state x="528" y="259" width="540" height="332" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1577031276379">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

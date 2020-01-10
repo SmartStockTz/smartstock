@@ -58,9 +58,12 @@ export class PrintServiceService {
 
   async printCartRetail(carts: CartI[], customer: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
+
       const cSettings = await this.ssmSettings.getSettings();
-      let data = new Date().toString() + '\n';
+      let data = '';
       data = data.concat(cSettings.printerHeader + '\n');
+      data = data.concat('-----------------------------------\n');
+      data = data.concat(new Date().toDateString() + '\n');
       let tT = 0;
       carts.forEach((value, index) => {
         tT += <number>value.amount;
@@ -71,14 +74,11 @@ export class PrintServiceService {
           'Amount  --> ' + value.amount + ' \t\n');
       });
       data = data.concat('-----------------------------------\n');
-      data = data.concat('Total Bill : ' + tT + '\n');
+      data = data.concat('Total Bill : ' + tT + '\n-----------------------------------\n');
+      data = data.concat(cSettings.printerFooter);
 
       this.ssmSettings.getPrinterAddress(value1 => {
-        // if (value1 === null) {
         this.url = `${environment.printerUrl}/print`;
-        // } else {
-        //   this.url = value1.ip;
-        // }
         this.httpClient.post(this.url, {
           data: data,
           id: randomString(8),
@@ -99,53 +99,49 @@ export class PrintServiceService {
         });
       });
     });
-    // try {
-    // } catch (reason) {
-    //   console.log(reason);
-    //   throw {message: 'Fails to print your cart', reason: reason};
-    // }
   }
 
-  printCart(carts: CartI[], customer: string, callback: (value: any) => void) {
-    let data = '\t' + new Date().toString() + '\n';
-    data = data.concat('**************************\n');
-    data = data.concat('To ---> ' + customer + '\n*************************\n');
-    let tT = 0;
-    carts.forEach((value, index) => {
-      tT += <number>value.amount;
-      data = data.concat('-----------------------------------\n' +
-        (index + 1) + '.  ' + value.product + '\n' +
-        'Quantity --> ' + (value.quantity / value.stock.wholesaleQuantity) + ' \t' +
-        'Unit Price --> ' + value.stock.wholesalePrice + '\t' +
-        'Total Amount  --> ' + value.amount + ' \t');
-    });
-    data = data.concat('\n*************\n| Total Bill : ' + tT + '\n*************');
-    this.ssmSettings.getPrinterAddress(value1 => {
-      // if (value1 === null) {
-      this.url = `${environment.printerUrl}/print`;
-      // } else {
-      //   this.url = value1.ip;
-      // }
-      this.httpClient.post(this.url, {
-        data: data,
-        id: Date.now().toString()
-      }, {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        params: {
-          // data: data,
-          // id: Date.now().toString()
-        }
-      }).subscribe(_ => {
-        callback('Ok');
-      }, _ => {
-        console.log(_);
-        if (_.status === 200) {
-          callback('Ok');
-        } else {
-          callback(null);
-        }
+  printCartWholesale(carts: CartI[], customer: string): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      const cSettings = await this.ssmSettings.getSettings();
+      let data = '';
+      data = data.concat(cSettings.printerHeader + '\n');
+      data = data.concat('-----------------------------------\n');
+      data = data.concat(new Date().toDateString() + '\n');
+      data = data.concat('-----------------------------------\n');
+      data = data.concat('To ---> ' + customer);
+      let tT = 0;
+      carts.forEach((value, index) => {
+        tT += <number>value.amount;
+        data = data.concat('\n-----------------------------------\n' +
+          (index + 1) + '.  ' + value.product + '\n' +
+          'Quantity --> ' + (value.quantity / value.stock.wholesaleQuantity) + ' \t' +
+          'Unit Price --> ' + value.stock.wholesalePrice + '\t' +
+          'Total Amount  --> ' + value.amount + ' \t');
+      });
+      data = data.concat('\n-----------------------------------\n' +
+        'Total Bill : ' + tT + '\n-----------------------------------\n');
+      data = data.concat(cSettings.printerFooter);
+
+      this.ssmSettings.getPrinterAddress(value1 => {
+        this.url = `${environment.printerUrl}/print`;
+        this.httpClient.post(this.url, {
+          data: data,
+          id: Date.now().toString()
+        }, {
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          },
+        }).subscribe(_ => {
+          resolve('Ok');
+        }, _ => {
+          // console.log(_);
+          if (_.status === 200) {
+            resolve('Ok');
+          } else {
+            reject(null);
+          }
+        });
       });
     });
   }
