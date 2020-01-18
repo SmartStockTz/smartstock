@@ -1,51 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-exist.guard.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-exist.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/web_hi_res_512.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" afterPath="$PROJECT_DIR$/.firebaserc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/database/connector/SalesDatasource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/SalesDatasource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-128x128.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-128x128.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-144x144.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-152x152.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-192x192.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-384x384.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-384x384.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-512x512.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-512x512.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-72x72.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-72x72.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-96x96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/manifest.json" afterDir="false" />
-    </list>
+    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +32,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master-bfast" />
+        <entry key="$PROJECT_DIR$" value="bfast-live" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -325,14 +281,7 @@
       <workItem from="1578761706621" duration="644000" />
       <workItem from="1578832709402" duration="3543000" />
       <workItem from="1579194823128" duration="1849000" />
-      <workItem from="1579340558910" duration="15145000" />
-    </task>
-    <task id="LOCAL-00053" summary="add new design in sales">
-      <created>1572461112197</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1572461112198</updated>
+      <workItem from="1579340558910" duration="15407000" />
     </task>
     <task id="LOCAL-00054" summary="add get products functionality in retail sale UI">
       <created>1572508516619</created>
@@ -670,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578654428030</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="update name to smartstock">
+      <created>1579359782935</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1579359782936</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +649,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update stock" />
     <MESSAGE value="update create new stock" />
     <MESSAGE value="it save new product" />
     <MESSAGE value="update local fetch of stocks and update stock and delete of a product in a stock" />
@@ -718,7 +673,8 @@
     <MESSAGE value="start working on sales to reduce stock" />
     <MESSAGE value="sales now reduce stock" />
     <MESSAGE value="bump to 0.4.0-beta1" />
-    <option name="LAST_COMMIT_MESSAGE" value="bump to 0.4.0-beta1" />
+    <MESSAGE value="update name to smartstock" />
+    <option name="LAST_COMMIT_MESSAGE" value="update name to smartstock" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -738,14 +694,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578654427761">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1579359887521">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578654427761" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1579359887521" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -794,14 +750,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578654430352">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1579359902785">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578654430352" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1579359902785" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
