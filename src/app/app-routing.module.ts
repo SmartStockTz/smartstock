@@ -5,6 +5,7 @@ import {RegisterComponent} from './register/register.component';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
+import {StockExistGuard} from './guards/stock-exist.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, AdminRoleGuard],
+    canActivate: [AuthenticationGuard, AdminRoleGuard, StockExistGuard],
     loadChildren: () => import('./sales-module/sales-module.module').then(mod => mod.SalesModuleModule)
   },
   {

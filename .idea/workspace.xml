@@ -2,8 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/common-components/no-stock-dialog/no-stock-dialog.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-exist.guard.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/stock-exist.guard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/design/logo/web_hi_res_512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdC9sYnBoYXJtYWN5.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" afterPath="$PROJECT_DIR$/.firebaserc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common-components/common-components.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard-module/dashboard/dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/database/connector/SalesDatasource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/database/connector/SalesDatasource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/sale/sale.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sales-module/whole-sale/whole-sale.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sales-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/stock-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user-database.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-database.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock-module/stock/stock.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-128x128.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-128x128.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-144x144.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-152x152.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-192x192.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-384x384.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-384x384.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-512x512.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-512x512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-72x72.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-72x72.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icons/icon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icons/icon-96x96.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-local-data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/sw-sales-proxy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +101,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/icons" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -73,19 +114,19 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/assets/img" />
-      <recent name="$PROJECT_DIR$/src/app/stock-module/suppliers" />
-      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase" />
-      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase/purchases-all" />
-      <recent name="$PROJECT_DIR$/dist/lbpharmacy" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/design/logo" />
       <recent name="$PROJECT_DIR$/desktop" />
       <recent name="$PROJECT_DIR$/../" />
       <recent name="$PROJECT_DIR$/src/app/purchase-module" />
-      <recent name="$PROJECT_DIR$/src/app/settings-module" />
-      <recent name="$PROJECT_DIR$/src/app/dashboard-module" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/icons" />
+      <recent name="$PROJECT_DIR$/design" />
+      <recent name="$PROJECT_DIR$/src/assets/img" />
+      <recent name="$PROJECT_DIR$/src/app/stock-module/suppliers" />
+      <recent name="$PROJECT_DIR$/src/app/purchase-module/purchase" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -278,14 +319,13 @@
       <workItem from="1578553060750" duration="8870000" />
       <workItem from="1578573119194" duration="9059000" />
       <workItem from="1578587606051" duration="302000" />
-      <workItem from="1578633114658" duration="13980000" />
-    </task>
-    <task id="LOCAL-00052" summary="update printer">
-      <created>1571524653131</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1571524653131</updated>
+      <workItem from="1578633114658" duration="14057000" />
+      <workItem from="1578654511174" duration="517000" />
+      <workItem from="1578660608995" duration="1785000" />
+      <workItem from="1578761706621" duration="644000" />
+      <workItem from="1578832709402" duration="3543000" />
+      <workItem from="1579194823128" duration="1849000" />
+      <workItem from="1579340558910" duration="15145000" />
     </task>
     <task id="LOCAL-00053" summary="add new design in sales">
       <created>1572461112197</created>
@@ -623,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578653773953</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="bump to 0.4.0-beta1">
+      <created>1578654428030</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1578654428030</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +693,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="change login to promise and update register to add account to smartstock" />
     <MESSAGE value="update stock" />
     <MESSAGE value="update create new stock" />
     <MESSAGE value="it save new product" />
@@ -671,10 +717,15 @@
     <MESSAGE value="Now printer message can be configured and to print if no printer exist is configured too" />
     <MESSAGE value="start working on sales to reduce stock" />
     <MESSAGE value="sales now reduce stock" />
-    <option name="LAST_COMMIT_MESSAGE" value="sales now reduce stock" />
+    <MESSAGE value="bump to 0.4.0-beta1" />
+    <option name="LAST_COMMIT_MESSAGE" value="bump to 0.4.0-beta1" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="398" y="93" width="800" height="689" key="#Images" timestamp="1579356224640">
+      <screen x="52" y="27" width="1548" height="873" />
+    </state>
+    <state x="398" y="93" width="800" height="689" key="#Images/52.27.1548.873@52.27.1548.873" timestamp="1579356224640" />
     <state x="523" y="225" width="550" height="426" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577517534908">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -687,50 +738,50 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578654394298">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1578654427761">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578654394298" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1578654427761" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
-    <state width="1600" height="167" key="GridCell.Tab.0.bottom" timestamp="1578634040660">
+    <state width="1578" height="284" key="GridCell.Tab.0.bottom" timestamp="1579344519034">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578391519216">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519216" />
-    <state width="1600" height="167" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1578634040660" />
-    <state width="1600" height="167" key="GridCell.Tab.0.center" timestamp="1578634040658">
+    <state width="1578" height="284" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1579344519034" />
+    <state width="1578" height="284" key="GridCell.Tab.0.center" timestamp="1579344519032">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578391519213">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519213" />
-    <state width="1600" height="167" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1578634040658" />
-    <state width="1600" height="167" key="GridCell.Tab.0.left" timestamp="1578634040656">
+    <state width="1578" height="284" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1579344519032" />
+    <state width="1578" height="284" key="GridCell.Tab.0.left" timestamp="1579344519031">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578391519212">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519212" />
-    <state width="1600" height="167" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1578634040656" />
-    <state width="1600" height="167" key="GridCell.Tab.0.right" timestamp="1578634040659">
+    <state width="1578" height="284" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1579344519031" />
+    <state width="1578" height="284" key="GridCell.Tab.0.right" timestamp="1579344519033">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578391519215">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519214" />
-    <state width="1600" height="167" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1578634040659" />
+    <state width="1578" height="284" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1579344519033" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -743,30 +794,30 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578653777467">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1578654430352">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578653777467" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1578654430352" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/52.27.1548.873@52.27.1548.873" timestamp="1577027016377" />
-    <state x="547" y="66" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog" timestamp="1577441989164">
+    <state x="547" y="61" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579359753200">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
-    <state x="547" y="66" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog/52.27.1548.873@52.27.1548.873" timestamp="1577441989164" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1578633238907">
+    <state x="547" y="61" width="502" height="744" key="git4idea.branch.GitSmartOperationDialog/52.27.1548.873@52.27.1548.873" timestamp="1579359753200" />
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate" timestamp="1579343671902">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode" timestamp="1578219395440">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="671" y="342" width="350" height="298" key="org.angular.cli.generate.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578219395440" />
-    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1578633238907" />
+    <state x="671" y="341" width="348" height="298" key="org.angular.cli.generate/52.27.1548.873@52.27.1548.873" timestamp="1579343671902" />
     <state x="528" y="259" width="540" height="332" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1577031276379">
       <screen x="52" y="27" width="1548" height="873" />
     </state>

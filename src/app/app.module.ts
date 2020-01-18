@@ -39,11 +39,12 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {NgForageConfig, NgForageModule} from 'ngforage';
+import {NgForageConfig} from 'ngforage';
 import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
+import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import {RegisterComponent} from './register/register.component';
   entryComponents: [
     DialogComponent,
     DialogDeleteComponent,
+    NoStockDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

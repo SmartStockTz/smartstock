@@ -1,6 +1,8 @@
 importScripts('localforage.min.js');
 importScripts('axios.min.js');
 
+let firstFetch = true;
+
 /**
  *
  * @param name{string}
@@ -20,7 +22,6 @@ addEventListener('message', ({data}) => {
   // const projectId = JSON.parse(data).projectId;
   // const projectUrlId = JSON.parse(data).projectUrlId;
 
-  let firstFetch = true;
   let onFetch = false;
 
   let _stockStorage = _getStorage('ssm');
@@ -30,13 +31,14 @@ addEventListener('message', ({data}) => {
       onFetch = true;
       const user = await _stockStorage.getItem('user');
       if (user && user.applicationId && user.projectId && user.projectUrlId) {
-        const serverURL = `https://${user.projectUrlId}.bfast.fahamutech.com`;
+        // const serverURL = `https://${user.projectUrlId}.bfast.fahamutech.com`;
         const fetchStockURL = `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${user.projectId}`;
-        fetchStocks(user.applicationId, fetchStockURL, _stockStorage, firstFetch).then(done => {
+        fetchStocks(user.applicationId, fetchStockURL, _stockStorage).then(done => {
           firstFetch = false;
           onFetch = false;
           // postMessage("stock comparison thread started");
         }).catch(reason => {
+          console.log(reason);
           onFetch = false;
           // postMessage(false);
         });
@@ -55,14 +57,12 @@ addEventListener('message', ({data}) => {
  * @param appId {string}
  * @param url {string}
  * @param _stockStorage {LocalForage}
- * @param firstFetch {boolean}
  * @returns {Promise<void>}
  */
-async function fetchStocks(appId, url, _stockStorage, firstFetch) {
+async function fetchStocks(appId, url, _stockStorage) {
   // console.log(firstFetch);
   try {
     // if (firstFetch) {
-    //   console.log('first time');
     //   await _stockStorage.removeItem('lastUpdate');
     // }
     const lastUpdateStamp = await _stockStorage.getItem('lastUpdate');
@@ -86,7 +86,7 @@ async function fetchStocks(appId, url, _stockStorage, firstFetch) {
         await _stockStorage.setItem('lastUpdate', response.data['lastUpdateTime']);
       }
       const oldProducts = await _stockStorage.getItem('stocks');
-      if (oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
+      if (!firstFetch && oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
         newProducts.forEach((newProduct) => {
           // console.log('get new entry');
           const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
@@ -97,16 +97,16 @@ async function fetchStocks(appId, url, _stockStorage, firstFetch) {
           }
         });
         await _stockStorage.setItem('stocks', oldProducts);
-        window.dispatchEvent(new Event('ssm_stocks_updated'));
+        // window.dispatchEvent(new Event('ssm_stocks_updated'));
         return Promise.resolve();
       } else {
         await _stockStorage.setItem('stocks', newProducts);
-        window.dispatchEvent(new Event('ssm_stocks_updated'));
+        // window.dispatchEvent(new Event('ssm_stocks_updated'));
         return Promise.resolve();
       }
     }
   } catch (e) {
-    console.log(e.response.data);
-    throw {message: 'Fails to update stocks', reason: e.response.data.toString()};
+    console.log(e);
+    throw {message: 'Fails to update stocks', reason: e.toString()};
   }
 }

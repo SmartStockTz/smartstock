@@ -31,6 +31,17 @@
                     <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
                       Add Product
                     </button>
+                    <span style="width: 8px; height: 8px"></span>
+                    <button (click)="hotReloadStocks()" [disabled]="hotReloadProgress" matTooltip="Reload from server"
+                            color="primary"
+                            class="ft-button" mat-flat-button>
+                      <mat-icon *ngIf="!hotReloadProgress">refresh</mat-icon>
+                      <mat-progress-spinner *ngIf="hotReloadProgress" [diameter]="20"
+                                            matTooltip="Fetch products from server"
+                                            mode="indeterminate"
+                                            color="primary">
+                      </mat-progress-spinner>
+                    </button>
                     <span class="toolbar-spacer"></span>
                     <button [matMenuTriggerFor]="stockMenu" color="primary" mat-icon-button>
                       <mat-icon>more_vert</mat-icon>

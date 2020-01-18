@@ -185,21 +185,19 @@ export class SaleComponent extends DeviceInfo implements OnInit {
       });
     });
 
-    this.saleDatabase.addAllCashSale(saleM, value => {
-      if (value === null) {
-        this.saleDatabase.addCashSaleToCache(this.cartDatasourceArray, value1 => {
-        });
-        this.snack.open('Product not saved, try again', 'Ok');
-        this.hideProgressBar();
-      } else {
-        this.hideProgressBar();
-        // this.printCart();
-        this.cartDatasourceArray = [];
-        this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
-        this.cartDatasource.paginator = this.paginator;
-        this.updateTotalBill();
-        // this.snack.open('Done save sales', 'Ok', {duration: 3000});
-      }
+    this.saleDatabase.addAllCashSale(saleM).then(value => {
+      this.hideProgressBar();
+      // this.printCart();
+      this.cartDatasourceArray = [];
+      this.cartDatasource = new MatTableDataSource(this.cartDatasourceArray);
+      this.cartDatasource.paginator = this.paginator;
+      this.updateTotalBill();
+      // this.snack.open('Done save sales', 'Ok', {duration: 3000});
+    }).catch(reason => {
+      this.saleDatabase.addCashSaleToCache(this.cartDatasourceArray, value1 => {
+      });
+      this.snack.open('Product not saved, try again', 'Ok');
+      this.hideProgressBar();
     });
   }
 

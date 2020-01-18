@@ -6,16 +6,22 @@ import {AdminDrawerComponent} from './admin-drawer/admin-drawer.component';
 import {NavUserComponent} from './user-drawer/nav-user.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatExpansionModule, MatFormFieldModule, MatIconModule,
-    MatListModule, MatMenuModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule, MatToolbarModule
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.component';
 
 @NgModule({
   imports: [
@@ -33,6 +39,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     RouterModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
   exports: [
     CheckUserProgressComponent,
@@ -44,7 +51,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CheckUserProgressComponent,
     AdminDrawerComponent,
     NavUserComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    NoStockDialogComponent
   ]
 })
 export class CommonComponentsModule {

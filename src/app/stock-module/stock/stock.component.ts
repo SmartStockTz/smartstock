@@ -37,6 +37,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   showProgress = false;
+  hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
   units: Observable<UnitsI[]>;
   stockDatasource: MatTableDataSource<Stock>;
@@ -85,6 +86,15 @@ export class StockComponent extends DeviceInfo implements OnInit {
   private getStocksFromCache(callback?: (error) => void) {
     this.stockFetchProgress = true;
     this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+      if (!stocks && !Array.isArray(stocks)) {
+        // stocks = [];
+        this.hotReloadStocks();
+        throw new Error('Stock not available in localstorage');
+      }
+      if (stocks && Array.isArray(stocks) && stocks.length === 0) {
+        this.hotReloadStocks();
+        throw new Error('Stock not available in localstorage');
+      }
       this.stockDatasource = new MatTableDataSource(stocks);
       this.stockDatasource.paginator = this.paginator;
       this._getTotalPurchaseOfStock(stocks);
@@ -94,11 +104,36 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     }).catch(error1 => {
       this.stockFetchProgress = false;
-      console.log(error1);
-      this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
+      // console.log(error1);
+      this.snack.open('Failed to get stocks from local storage', 'Ok', {duration: 3000});
       if (callback) {
         callback(error1);
       }
+    });
+  }
+
+  hotReloadStocks() {
+    this.hotReloadProgress = true;
+    this.stockDatabase.getAllStock().then(async stocks => {
+      try {
+        this.hotReloadProgress = false;
+        await this.indexDb.setItem('stocks', stocks);
+        this.stockDatasource = new MatTableDataSource(stocks);
+        this.stockDatasource.paginator = this.paginator;
+        this._getTotalPurchaseOfStock(stocks);
+        this.stockFetchProgress = false;
+        this.snack.open('Successful retrieve stocks from server', 'Ok', {
+          duration: 3000
+        });
+      } catch (e) {
+        throw e;
+      }
+    }).catch(reason => {
+      this.hotReloadProgress = false;
+      console.log(reason);
+      this.snack.open('Fails to get stocks from server, try again', 'Ok', {
+        duration: 3000
+      });
     });
   }
 

@@ -4,7 +4,7 @@ import {OrderI} from '../../model/OderI';
 export interface SalesDatasource {
   addCashSale(sale: CashSaleI, callback: (value: any) => void);
 
-  addAllCashSale(sale: CashSaleI[], callback: (value: any) => void);
+  addAllCashSale(sale: CashSaleI[]): Promise<any>;
 
   getCashSale(id: string, callback: (sale: CashSaleI) => void);
 
@@ -18,7 +18,7 @@ export interface SalesDatasource {
 
   getAllWholeCashSaleOfUser(id: string, results: (sales: CashSaleI[]) => void);
 
-  addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void);
+  addWholeCashSale(sale: CashSaleI[]): Promise<any>;
 
   getOrder(id: string, callback: (order: OrderI) => void);
 

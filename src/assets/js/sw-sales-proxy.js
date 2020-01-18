@@ -17,7 +17,6 @@ function _getStorage(name) {
 
 addEventListener('message', ({data}) => {
 
-  let _salesStorage = _getStorage('ssmsales');
   let _mainStorage = _getStorage('ssm');
 
   setInterval(() => {
@@ -30,6 +29,7 @@ addEventListener('message', ({data}) => {
       }
 
       if (user && user.applicationId && user.projectId && user.projectUrlId) {
+        let _salesStorage = _getStorage(user.projectId + '_sales');
         _salesStorage.keys().then(keys => {
           if (keys.length > 0) {
             keys.forEach(key => {

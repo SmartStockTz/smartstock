@@ -192,20 +192,12 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
         stockId: value.stock.objectId
       });
     });
-    this.saleDatabase.addWholeCashSale(saleM, value => {
-      if (value == null) {
-        this.snack.open('Sales can\'t be completed, please try again', 'Ok');
-        this.hideProgressBar();
-      } else if (value === 'BE') {
-        this.snack.open('You cant sell more than 50 items at once reduce product from cart then submit',
-          'Ok', {duration: 4000});
-        this.hideProgressBar();
-      } else {
-        // this.printCart();
-        // this.snack.open('Sales saved', 'Ok', {duration: 3000});
-        this.hideProgressBar();
-        this.clearCart();
-      }
+    this.saleDatabase.addWholeCashSale(saleM).then(value => {
+      this.hideProgressBar();
+      this.clearCart();
+    }).catch(reason => {
+      this.snack.open('Sales can\'t be completed, please try again', 'Ok');
+      this.hideProgressBar();
     });
   }
 

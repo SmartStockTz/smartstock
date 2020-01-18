@@ -81,12 +81,18 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
           'password': user.password
         },
         headers: this.settings.ssmHeader
-      }).subscribe(value => {
-        this.indexD.setItem<UserI>('user', value).then(value1 => {
+      }).subscribe(async value => {
+        try {
+          const cProjectId = await this.indexD.getItem('cPID');
+          if (cProjectId && cProjectId !== value.projectId) {
+            await this.indexD.clear();
+          }
+          await this.indexD.setItem<UserI>('user', value);
+          await this.indexD.setItem('cPID', value.projectId);
           resolve(value);
-        }).catch(reason => {
-          reject(reason);
-        });
+        } catch (e) {
+          reject(e);
+        }
       }, error1 => {
         reject(error1);
       });

@@ -176,7 +176,6 @@ export class StockDatabaseService implements StockDataSource {
         }
       }).subscribe(value => {
         const result: Stock[] = value.results;
-        // console.log(value.results);
         resolve(result);
       }, error1 => {
         reject(error1);

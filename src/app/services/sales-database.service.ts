@@ -5,12 +5,9 @@ import {OrderI} from '../model/OderI';
 import {HttpClient} from '@angular/common/http';
 import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
-import * as Parse from 'node_modules/parse';
 import {BatchI} from '../model/batchI';
-import {ParseBackend, randomString, serverUrl} from '../database/ParseBackend';
-
-Parse.initialize('lbpharmacy');
-Parse.serverURL = serverUrl;
+import {ParseBackend, randomString} from '../database/ParseBackend';
+import {UserI} from '../model/UserI';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +18,6 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
               private httpClient: HttpClient) {
     super();
   }
-
-  private query = new Parse.Query('sales');
-  private orderQuery = new Parse.Query('orders');
-  private ordersSubscription = this.orderQuery.subscribe();
-  private subscription = this.query.subscribe();
 
   static getCurrentDate(): string {
     const date = new Date();
@@ -41,56 +33,34 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
     return year + '-' + month + '-' + day;
   }
 
-  addAllCashSale(sales: CashSaleI[], callback: (value: any) => void) {
-    const batchs: BatchI[] = [];
-    sales.forEach(value => {
-      batchs.push({
-        method: 'POST',
-        body: value,
-        path: '/classes/sales'
-      });
+  addAllCashSale(sales: CashSaleI[]): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const batchs: BatchI[] = [];
+        sales.forEach(value => {
+          batchs.push({
+            method: 'POST',
+            body: value,
+            path: '/classes/sales'
+          });
+        });
+        const user = await this.indexDb.getItem<UserI>('user');
+        this.indexDb
+          .clone({name: user.projectId + '_sales'})
+          .setItem<BatchI[]>(randomString(8), batchs).then(_ => {
+          resolve('Ok');
+        }).catch(reason => {
+          console.log(reason);
+          reject(null);
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
-    this.indexDb.clone({name: 'ssmsales'}).setItem<BatchI[]>(randomString(8), batchs).then(_ => {
-      callback('Ok');
-      // const worker = new Worker('/assets/js/sw-sales-proxy.js');
-      // worker.onmessage = ({data}) => {
-      //   console.log(`page got message:`, data);
-      // };
-      // worker.postMessage(sales);
-    }).catch(reason => {
-      console.log(reason);
-      callback(null);
-    });
-
   }
 
-  addWholeCashSale(sale: CashSaleI[], callback: (value: any) => void) {
-    this.addAllCashSale(sale, callback);
-    // if (sale.length <= 50) {
-    //   const batchs: BatchI[] = [];
-    //   sale.forEach(value => {
-    //     batchs.push({
-    //       method: 'POST',
-    //       body: value,
-    //       path: '/classes/sales'
-    //     });
-    //   });
-    //   this.httpClient.post<BatchI[]>(this.serverUrl + '/batch', {
-    //       'requests': batchs
-    //     },
-    //     {
-    //       headers: this.getHeader
-    //     }
-    //   ).subscribe(value => {
-    //     callback(value);
-    //   }, error1 => {
-    //     console.log(error1);
-    //     callback(null);
-    //   });
-    // } else {
-    //   console.log('sales cant fit in batch');
-    //   callback('BE');
-    // }
+  addWholeCashSale(sale: CashSaleI[]): Promise<any> {
+    return this.addAllCashSale(sale);
   }
 
   deleteCashSale(sale: CashSaleI, callback: (value: any) => void) {
@@ -106,19 +76,19 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-    this.subscription.on('open', () => {
-      console.log('sales socket created');
-      this.getSales(id, results);
-    });
-    this.subscription.on('create', value => {
-      this.getSales(id, results);
-    });
-    this.subscription.on('update', value => {
-      this.getSales(id, results);
-    });
-    this.subscription.on('delete', value => {
-      this.getSales(id, results);
-    });
+    // this.subscription.on('open', () => {
+    //   console.log('sales socket created');
+    //   this.getSales(id, results);
+    // });
+    // this.subscription.on('create', value => {
+    //   this.getSales(id, results);
+    // });
+    // this.subscription.on('update', value => {
+    //   this.getSales(id, results);
+    // });
+    // this.subscription.on('delete', value => {
+    //   this.getSales(id, results);
+    // });
   }
 
   private getSales(id: string, res: any) {
@@ -152,19 +122,19 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-    this.subscription.on('open', () => {
-      console.log('sales socket created');
-      this.getWholeSale(id, results);
-    });
-    this.subscription.on('create', value => {
-      this.getWholeSale(id, results);
-    });
-    this.subscription.on('update', value => {
-      this.getWholeSale(id, results);
-    });
-    this.subscription.on('delete', value => {
-      this.getWholeSale(id, results);
-    });
+    // this.subscription.on('open', () => {
+    //   console.log('sales socket created');
+    //   this.getWholeSale(id, results);
+    // });
+    // this.subscription.on('create', value => {
+    //   this.getWholeSale(id, results);
+    // });
+    // this.subscription.on('update', value => {
+    //   this.getWholeSale(id, results);
+    // });
+    // this.subscription.on('delete', value => {
+    //   this.getWholeSale(id, results);
+    // });
   }
 
   addOrder(order: OrderI, callback?: (value) => void) {
@@ -196,20 +166,20 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   getAllOrders(callback: (orders: OrderI[]) => void) {
-    this.ordersSubscription.on('open', () => {
-      console.log('order socket connected');
-      this.getOrders(callback);
-    });
-    this.ordersSubscription.on('create', value => {
-      console.log('new order saved');
-      this.getOrders(callback);
-    });
-    this.ordersSubscription.on('update', value => {
-      this.getOrders(callback);
-    });
-    this.ordersSubscription.on('delete', value => {
-      this.getOrders(callback);
-    });
+    // this.ordersSubscription.on('open', () => {
+    //   console.log('order socket connected');
+    //   this.getOrders(callback);
+    // });
+    // this.ordersSubscription.on('create', value => {
+    //   console.log('new order saved');
+    //   this.getOrders(callback);
+    // });
+    // this.ordersSubscription.on('update', value => {
+    //   this.getOrders(callback);
+    // });
+    // this.ordersSubscription.on('delete', value => {
+    //   this.getOrders(callback);
+    // });
   }
 
   private getOrders(res: any) {
