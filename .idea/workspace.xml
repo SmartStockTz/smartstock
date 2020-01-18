@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="" />
+    <list default="true" id="e2418af4-84fe-49f2-8415-ea0ed6417ea5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +34,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="bfast-live" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -281,14 +283,7 @@
       <workItem from="1578761706621" duration="644000" />
       <workItem from="1578832709402" duration="3543000" />
       <workItem from="1579194823128" duration="1849000" />
-      <workItem from="1579340558910" duration="15407000" />
-    </task>
-    <task id="LOCAL-00054" summary="add get products functionality in retail sale UI">
-      <created>1572508516619</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1572508516621</updated>
+      <workItem from="1579340558910" duration="15690000" />
     </task>
     <task id="LOCAL-00055" summary="add get products functionality in retail sale UI">
       <created>1572509613869</created>
@@ -626,7 +621,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579359782936</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="update master to 0.4.0 beta">
+      <created>1579359936494</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1579359936494</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,8 +651,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update create new stock" />
-    <MESSAGE value="it save new product" />
     <MESSAGE value="update local fetch of stocks and update stock and delete of a product in a stock" />
     <MESSAGE value="update create category UI/UX" />
     <MESSAGE value="update category logic" />
@@ -674,7 +674,9 @@
     <MESSAGE value="sales now reduce stock" />
     <MESSAGE value="bump to 0.4.0-beta1" />
     <MESSAGE value="update name to smartstock" />
-    <option name="LAST_COMMIT_MESSAGE" value="update name to smartstock" />
+    <MESSAGE value="update master to 0.4.0 beta" />
+    <MESSAGE value="refresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="refresh" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -694,50 +696,50 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="536" y="180" width="524" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1548.873@52.27.1548.873" timestamp="1577014971368" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1579359887521">
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2" timestamp="1579360076756">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode" timestamp="1578393261371">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="52" y="22" width="1544" height="878" key="CommitChangelistDialog2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393261371" />
-    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1579359887521" />
+    <state x="386" y="22" width="824" height="819" key="CommitChangelistDialog2/52.27.1548.873@52.27.1548.873" timestamp="1579360076756" />
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode" timestamp="1578164210597">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="188" y="177" width="1219" height="521" key="EditFileWatcherDialog.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578164210597" />
-    <state width="1578" height="284" key="GridCell.Tab.0.bottom" timestamp="1579344519034">
+    <state width="1578" height="284" key="GridCell.Tab.0.bottom" timestamp="1579360147970">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1578391519216">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.bottom.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519216" />
-    <state width="1578" height="284" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1579344519034" />
-    <state width="1578" height="284" key="GridCell.Tab.0.center" timestamp="1579344519032">
+    <state width="1578" height="284" key="GridCell.Tab.0.bottom/52.27.1548.873@52.27.1548.873" timestamp="1579360147970" />
+    <state width="1578" height="284" key="GridCell.Tab.0.center" timestamp="1579360147969">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1578391519213">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.center.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519213" />
-    <state width="1578" height="284" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1579344519032" />
-    <state width="1578" height="284" key="GridCell.Tab.0.left" timestamp="1579344519031">
+    <state width="1578" height="284" key="GridCell.Tab.0.center/52.27.1548.873@52.27.1548.873" timestamp="1579360147969" />
+    <state width="1578" height="284" key="GridCell.Tab.0.left" timestamp="1579360147969">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1578391519212">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.left.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519212" />
-    <state width="1578" height="284" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1579344519031" />
-    <state width="1578" height="284" key="GridCell.Tab.0.right" timestamp="1579344519033">
+    <state width="1578" height="284" key="GridCell.Tab.0.left/52.27.1548.873@52.27.1548.873" timestamp="1579360147969" />
+    <state width="1578" height="284" key="GridCell.Tab.0.right" timestamp="1579360147970">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1578391519215">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state width="1600" height="350" key="GridCell.Tab.0.right.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578391519214" />
-    <state width="1578" height="284" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1579344519033" />
+    <state width="1578" height="284" key="GridCell.Tab.0.right/52.27.1548.873@52.27.1548.873" timestamp="1579360147970" />
     <state x="177" y="58" width="1238" height="741" key="MergeDialog" timestamp="1577442013613">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
@@ -750,14 +752,14 @@
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="299" y="65" width="1001" height="743" key="SettingsEditor/52.27.1548.873@52.27.1548.873" timestamp="1577012811258" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1579359902785">
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2" timestamp="1579359938191">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode" timestamp="1578393264019">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
     <state x="397" y="132" width="802" height="582" key="Vcs.Push.Dialog.v2.inPresentationMode/52.27.1548.873@52.27.1548.873" timestamp="1578393264019" />
-    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1579359902785" />
+    <state x="398" y="22" width="800" height="564" key="Vcs.Push.Dialog.v2/52.27.1548.873@52.27.1548.873" timestamp="1579359938191" />
     <state x="585" y="332" width="432" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577027016377">
       <screen x="52" y="27" width="1548" height="873" />
     </state>
