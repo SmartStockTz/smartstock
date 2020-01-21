@@ -9,13 +9,15 @@ import {NgForage} from 'ngforage';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  slides = [11, 2, 4, 5, 7];
   log: boolean;
   message = 'The revolution smart stock manage and sales point is here now. ' +
-    'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
+    'Let us take care of your business so you can focus on profit. Start using' +
+    ' our service today, its easy, simple and secure';
 
   constructor(private router: Router,
               private snack: MatSnackBar,
-              private indexDb: NgForage,) {
+              private indexDb: NgForage) {
   }
 
   ngOnInit() {

@@ -1,0 +1,25 @@
+.foo {
+  background-color: #F5F5F5;
+   /*margin: 100 px 0 0 0;*/
+}
+
+.top-box {
+  height: 200px;
+  padding: 0 50px;
+  margin: 0;
+}
+
+.top-box div {
+  margin: auto 0;
+}
+
+.bottom-box {
+  margin: 0;
+  padding: 20px 50px;
+  background-color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
