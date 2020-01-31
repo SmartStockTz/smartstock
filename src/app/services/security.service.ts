@@ -10,7 +10,7 @@ export class SecurityService<T> implements SecurityAdapter {
   }
 
   decryptData(data: string, password: string): T {
-    new Crypto().subtle.digest()
+    // new Crypto().subtle.digest()
     return undefined;
   }
 
