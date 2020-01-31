@@ -12,7 +12,7 @@ export class SettingsServiceService {
   }
 
   ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
-  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
+  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com';
 
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock_lb'

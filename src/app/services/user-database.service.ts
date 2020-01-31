@@ -6,7 +6,6 @@ import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -48,26 +47,36 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   deleteUser(user: UserI, callback?: (value: any) => void) {
   }
 
-  getAllUser(callback?: (users: UserI[]) => void) {
-    this.httpClient.get<any>(this.serverUrl + '/users', {
-      headers: this.getHeader
-    }).subscribe(value => {
-      callback(value.results);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
+  getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
+    return new Promise<UserI[]>(async (resolve, reject) => {
+      const projectId = await this.settings.getCustomerProjectId();
+      const where = {
+        projectId: projectId,
+        role: {
+          '$in': ['user', 'manager']
+        }
+      };
+      const urlencoded = encodeURI(JSON.stringify(where) + '&limit=' + 1000000);
+      // console.log(urlencoded);
+      this.httpClient.get<any>(this.settings.ssmServerURL + '/users?where=' + urlencoded, {
+        headers: this.settings.ssmHeader
+      }).subscribe(value => {
+        resolve(value.results);
+      }, error1 => {
+        reject(error1);
+      });
     });
   }
 
   getUser(user: UserI, callback?: (user: UserI) => void) {
-    this.httpClient.get<UserI>(this.serverUrl + '/users/' + user.objectId, {
-      headers: this.getHeader
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this.httpClient.get<UserI>(this.serverUrl + '/users/' + user.objectId, {
+    //   headers: this.getHeader
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   async login(user: { username: string, password: string }): Promise<UserI> {
@@ -95,7 +104,6 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       });
     });
   }
-
 
   logout(user: UserI, callback?: (value: any) => void) {
     // console.log(this.serverUrl + '/logout');
@@ -127,7 +135,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         printerHeader: '',
         saleWithoutPrinter: true,
       };
-      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/users/create', user, {
+      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/create', user, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {
         this.indexD.setItem<UserI>('user', value).then(_ => {
@@ -155,16 +163,14 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     // });
   }
 
-  updateUser(user: UserI, callback?: (value: any) => void) {
-    this.httpClient.put(this.serverUrl + '/users/' + user.objectId, user, {
-      headers: {
-        'X-Parse-Application-Id': 'lbpharmacy',
-        'X-Parse-Session-Token': user.sessionToken,
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(value => callback(value), error1 => {
-      console.log(error1);
-      callback(null);
+  updateUser(user: { objectId: string, value: string, field: string }): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      this.httpClient.put(this.settings.ssmFunctionsURL + '/functions/users/update' + user.objectId, user, {
+        headers: await this.settings.getCustomerPostHeader()
+      }).subscribe(value => resolve(value), error1 => {
+        console.log(error1);
+        reject(null);
+      });
     });
   }
 
@@ -179,6 +185,18 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     }, error1 => {
       console.log(error1);
       callback(null);
+    });
+  }
+
+  addUser(user: UserI): Promise<UserI> {
+    return new Promise<UserI>((resolve, reject) => {
+      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/create', user, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
     });
   }
 }

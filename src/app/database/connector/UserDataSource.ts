@@ -1,6 +1,9 @@
 import {UserI} from '../../model/UserI';
 
 export interface UserDataSource {
+
+  addUser(user: UserI): Promise<UserI>;
+
   login(user: { username: string, password: string }): Promise<UserI>;
 
   logout(user: UserI, callback?: (value: any) => void);
@@ -9,13 +12,13 @@ export interface UserDataSource {
 
   resetPassword(user: UserI, callback?: (value: any) => void);
 
-  getAllUser(callback?: (users: UserI[]) => void);
+  getAllUser(pagination: {size: number, skip: number}): Promise<UserI[]>;
 
   getUser(user: UserI, callback?: (user: UserI) => void);
 
   deleteUser(user: UserI, callback?: (value: any) => void);
 
-  updateUser(user: UserI, callback?: (value: any) => void);
+  updateUser(user: { objectId: string, value: string, field: string }, callback?: (value: any) => void);
 
   createUser(user: UserI, callback?: (value: any) => void);
 

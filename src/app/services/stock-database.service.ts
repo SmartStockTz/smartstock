@@ -20,7 +20,7 @@ export class StockDatabaseService implements StockDataSource {
 
   exportToExcel(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.get(this.settings.ssmFunctionsURL + '/stocks/export', {
+      this.httpClient.get(this.settings.ssmFunctionsURL + '/functions/stocks/export', {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
@@ -309,7 +309,8 @@ export class StockDatabaseService implements StockDataSource {
 
   addPurchase(purchaseI: PurchaseI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.post(this.settings.ssmFunctionsURL + '/purchases/' + await this.settings.getCustomerProjectId(), purchaseI, {
+      this.httpClient.post(this.settings.ssmFunctionsURL
+        + '/functions/purchases/' + await this.settings.getCustomerProjectId(), purchaseI, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(purchase => {
         resolve(purchase);

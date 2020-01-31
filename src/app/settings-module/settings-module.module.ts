@@ -7,19 +7,32 @@ import {AccountComponent} from './account/account.component';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule, MatProgressSpinnerModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatTableModule,
+  MatTabsModule,
   MatTooltipModule
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {DialogUserDeleteComponent, DialogUserNewComponent, UsersComponent} from './users/users.component';
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
   declarations: [
     SettingComponent,
-    AccountComponent
+    AccountComponent,
+    UsersComponent,
+    ProfileComponent,
+    DialogUserDeleteComponent,
+    DialogUserNewComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +46,18 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSelectModule
+  ],
+  entryComponents: [
+    DialogUserNewComponent,
+    DialogUserDeleteComponent,
   ]
 })
 export class SettingsModuleModule {
