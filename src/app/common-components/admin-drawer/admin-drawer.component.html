@@ -3,8 +3,8 @@
   <mat-toolbar>
     <span>Menu</span>
   </mat-toolbar>
-  <mat-accordion class="mat-elevation-z0">
-    <mat-expansion-panel class="mat-elevation-z0">
+  <mat-accordion [multi]="true" class="mat-elevation-z0">
+    <mat-expansion-panel [expanded]="shouldExpand('dashboard')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">dashboard</mat-icon>
         <span style="margin-left: 8px">Dashboard</span>
@@ -14,7 +14,7 @@
       </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
-    <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">shop_front</mat-icon>
         <span style="margin-left: 8px">Sale</span>
@@ -27,28 +27,29 @@
       </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
-
-    <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel [expanded]="shouldExpand('purchase')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">receipts</mat-icon>
         <span style="margin-left: 8px">Purchase</span>
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/purchase">All Purchase</a>
+        <a mat-list-item routerLink="/purchase">Purchases</a>
       </mat-nav-list>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/purchase/create">Add Purchase</a>
-      </mat-nav-list>
+      <!--      <mat-nav-list>-->
+      <!--        <a mat-list-item routerLink="/purchase/create">Add Purchase</a>-->
+      <!--      </mat-nav-list>-->
     </mat-expansion-panel>
     <mat-divider></mat-divider>
-    <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel [expanded]="shouldExpand('stock')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">store</mat-icon>
         <span style="margin-left: 8px">Stock</span>
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/stock">All Stocks</a>
-        <a mat-list-item routerLink="/stock/create">Add Product</a>
+        <a mat-list-item routerLink="/stock" [queryParams]="{t:'0'}">Products</a>
+        <a mat-list-item routerLink="/stock" [queryParams]="{t:'1'}">Categories</a>
+        <a mat-list-item routerLink="/stock" [queryParams]="{t:'2'}">Units</a>
+        <a mat-list-item routerLink="/stock" [queryParams]="{t:'3'}">Suppliers</a>
       </mat-nav-list>
     </mat-expansion-panel>
     <mat-divider></mat-divider>
@@ -58,7 +59,7 @@
     <!--      </mat-expansion-panel-header>-->
     <!--    </mat-expansion-panel>-->
     <!--    <mat-divider></mat-divider>-->
-    <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel [expanded]="shouldExpand('settings')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">settings</mat-icon>
         <span style="margin-left: 8px">Settings</span>
@@ -69,6 +70,5 @@
         <!--        <a mat-list-item routerLink="/sales">Manage Users</a>-->
       </mat-nav-list>
     </mat-expansion-panel>
-
   </mat-accordion>
 </div>

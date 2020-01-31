@@ -13,4 +13,8 @@ export class AdminDrawerComponent implements OnInit {
   ngOnInit() {
   }
 
+  shouldExpand(route: string) {
+    const url = new URL(location.href);
+    return url.pathname.startsWith('/' + route);
+  }
 }

@@ -12,10 +12,11 @@ import {UnitsI} from '../../model/UnitsI';
 export class UnitsComponent implements OnInit {
 
   unitsDatasource: MatTableDataSource<UnitsI>;
-  unitsTableColums = ['name', 'description', 'actions'];
+  unitsTableColums = ['name', 'abbreviation', 'description', 'actions'];
   unitsArray: UnitsI[];
   fetchUnitsFlag = false;
   nameFormControl = new FormControl();
+  abbreviationFormControl = new FormControl();
   descriptionFormControl = new FormControl();
 
   constructor(private readonly stockDatabase: StockDatabaseService,
@@ -64,6 +65,14 @@ export class UnitsComponent implements OnInit {
     if (unit && unit.value) {
       unit.field = 'name';
       this.updateUnit(unit);
+    }
+  }
+
+  updateUnitAbbreviation(abbreviation, matMenu: MatMenuTrigger) {
+    matMenu.toggleMenu();
+    if (abbreviation && abbreviation.value) {
+      abbreviation.field = 'abbreviation';
+      this.updateUnit(abbreviation);
     }
   }
 
@@ -169,6 +178,7 @@ export class DialogUnitNewComponent implements OnInit {
   initiateForm() {
     this.newUnitForm = this.formBuilder.group({
       name: ['', [Validators.nullValidator, Validators.required]],
+      abbreviation: ['', [Validators.nullValidator, Validators.required]],
       description: ['']
     });
   }
