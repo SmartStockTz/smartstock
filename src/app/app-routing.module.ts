@@ -7,6 +7,7 @@ import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
 import {LandingComponent} from './landing/landing.component';
+import { ChooseShopComponent } from './choose-shop/choose-shop.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: 'register',
     canActivate: [AuthenticatedUserGuard],
     component: RegisterComponent
+  },
+  {
+    path: 'choose-shop',
+    canActivate: [AuthenticatedUserGuard],
+    component: ChooseShopComponent
   },
   {
     path: 'dashboard',

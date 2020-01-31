@@ -1,0 +1,88 @@
+body{
+    margin: 0;
+    padding: 0;
+ }
+ 
+ .main{
+    background-color:#027206;
+    height: 100vh;
+    width: 100%;
+    
+ }
+ /* .main > .container_logo{}
+  */
+ 
+ /* Container for the shop profiles*/
+ .main > .container_shops{
+    height: 100vh;
+    padding-top: 15%;
+ }
+ 
+ /* Container for the title of the shops profiles*/
+ .ct_shops_title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+ 
+    color: #FFFFFF;
+ }
+ 
+ /* Container for the logo of the page*/
+ .container_logo{
+    position: absolute;
+    padding: 2%;
+ }
+ 
+ /*Container for all shops profiles*/
+ .ct_shops_profile{
+    margin-top: 4%
+ }
+ 
+ /*Container for each shop's profile*/
+ .ct_shop_profile{
+    margin-right: 4%;
+ }
+ .shop_profile{
+    width: 150px;
+    height: 150px;
+    transition: all .4s ease-in-out;
+    background: #FFFFFF;
+    border-radius: 4px;
+ }
+ 
+ .shop_profile:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+ }
+ 
+ .ct_add_shop{
+    transition: all .4s ease-in-out;
+    width: 150px;
+    height: 150px;
+ 
+    background: rgba(0, 170, 7, 0.1);
+    border-radius: 4px;
+ }
+ 
+ .ct_add_shop:hover{
+    transform: scale(1.1);
+    background: #FFFFFF;
+    cursor: pointer;
+ }
+ .add_shop_btn{
+  
+ }
+ 
+ .shop_name{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    margin-top: 7%;
+    color: #FFFFFF;
+ }
+ 
+ 

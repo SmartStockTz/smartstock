@@ -35,7 +35,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatRippleModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -47,6 +48,8 @@ import {RegisterComponent} from './register/register.component';
 import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
 import { FooterComponent } from './landing/footer/footer.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
+import { ChooseShopComponent } from './choose-shop/choose-shop.component';
+import { CreateShopComponent } from './choose-shop/create-shop/create-shop.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,8 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
     DialogDeleteComponent,
     RegisterComponent,
     FooterComponent,
+    ChooseShopComponent,
+    CreateShopComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,12 +100,14 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
     MatStepperModule,
     MatTooltipModule,
     MatCarouselModule,
+    MatRippleModule,
   ],
   providers: [],
   entryComponents: [
     DialogComponent,
     DialogDeleteComponent,
     NoStockDialogComponent,
+    CreateShopComponent,
   ],
   bootstrap: [AppComponent]
 })

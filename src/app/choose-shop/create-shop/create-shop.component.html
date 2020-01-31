@@ -1,0 +1,29 @@
+<form [formGroup]="createShopForm" (ngSubmit)="createShop()" class="create-shop-form-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Shop Name</mat-label>
+            <input matInput formControlName="businessName" placeholder="Shop Name">
+            <mat-error>Shop name required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" placeholder="Country">
+            <mat-error>Country required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Region</mat-label>
+            <input matInput formControlName="region"  placeholder="Region">
+            <mat-error>Region required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Street</mat-label>
+            <input matInput formControlName="street" placeholder="Street/ Location">
+            <mat-error>Street required</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button class="d-flex align-self-end btn-create-shop" (click)="createShop()">
+            Create Shop
+        </button>
+</form>
