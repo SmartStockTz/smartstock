@@ -9,22 +9,21 @@
                 Which Shop?
             </div>
             <div class="ct_shops_profile d-flex justify-content-center">
-                <div class="ct_shop_profile d-flex flex-column justify-content-center">
+                <div *ngFor="let shop of shops | async" class="ct_shop_profile">
                     <div  matRipple class="shop_profile"></div>
-                    <div class="shop_name d-flex justify-content-center"> Default </div>
+                    <div class="shop_name d-flex justify-content-center"> {{shop.businessName}} </div>
                 </div>
 
-                <div class="ct_shop_profile">
-                    <div  matRipple class="shop_profile"></div>
-                    <div class="shop_name d-flex justify-content-center"> Mbagala </div>
-                </div>
+<!--                <div class="ct_shop_profile">-->
+<!--                    <div  matRipple class="shop_profile"></div>-->
+<!--                    <div class="shop_name d-flex justify-content-center"> Mbagala </div>-->
+<!--                </div>-->
 
                 <div class="ct_shop_profile">
                     <div matRipple class="ct_add_shop d-flex justify-content-center" (click)="openCreateShopDialog()">
                         <div class="add_shop_btn d-flex justify-content-center">
                             <img src="./assets/img/plus_sign.svg">
                         </div>
-
                     </div>
                     <div class="shop_name d-flex justify-content-center"> Add Shop </div>
                 </div>

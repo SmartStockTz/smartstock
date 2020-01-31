@@ -12,7 +12,7 @@ export interface UserDataSource {
 
   resetPassword(user: UserI, callback?: (value: any) => void);
 
-  getAllUser(pagination: {size: number, skip: number}): Promise<UserI[]>;
+  getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]>;
 
   getUser(user: UserI, callback?: (user: UserI) => void);
 
@@ -23,4 +23,6 @@ export interface UserDataSource {
   createUser(user: UserI, callback?: (value: any) => void);
 
   refreshToken(user: UserI, callback: (value: any) => void);
+
+  getShops(): Promise<UserI[]>;
 }

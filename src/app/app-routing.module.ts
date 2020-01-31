@@ -7,7 +7,8 @@ import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
 import {LandingComponent} from './landing/landing.component';
-import { ChooseShopComponent } from './choose-shop/choose-shop.component';
+import {ChooseShopComponent} from './choose-shop/choose-shop.component';
+import {ActiveShopGuard} from './guards/active-shop.guard';
 
 const routes: Routes = [
   {
@@ -26,33 +27,33 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'choose-shop',
-    canActivate: [AuthenticatedUserGuard],
+    path: 'shop',
+    canActivate: [AdminRoleGuard],
     component: ChooseShopComponent
   },
   {
     path: 'dashboard',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AdminRoleGuard, ActiveShopGuard],
     loadChildren: () => import('./dashboard-module/dashboard-module.module').then(mod => mod.DashboardModuleModule)
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, AdminRoleGuard, StockExistGuard],
+    canActivate: [AuthenticationGuard, StockExistGuard, ActiveShopGuard],
     loadChildren: () => import('./sales-module/sales-module.module').then(mod => mod.SalesModuleModule)
   },
   {
     path: 'stock',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AdminRoleGuard, ActiveShopGuard],
     loadChildren: () => import('./stock-module/stock-module.module').then(mod => mod.StockModuleModule)
   },
   {
     path: 'purchase',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AdminRoleGuard, ActiveShopGuard],
     loadChildren: () => import('./purchase-module/purchase-module.module').then(mod => mod.PurchaseModuleModule)
   },
   {
     path: 'settings',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AdminRoleGuard, ActiveShopGuard],
     loadChildren: () => import('./settings-module/settings-module.module').then(mod => mod.SettingsModuleModule)
   },
   {

@@ -27,6 +27,7 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
+  MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
@@ -35,8 +36,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatRippleModule
+  MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -46,10 +46,10 @@ import {CommonComponentsModule} from './common-components/common-components.modu
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
 import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
-import { FooterComponent } from './landing/footer/footer.component';
+import {FooterComponent} from './landing/footer/footer.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
-import { ChooseShopComponent } from './choose-shop/choose-shop.component';
-import { CreateShopComponent } from './choose-shop/create-shop/create-shop.component';
+import {ChooseShopComponent} from './choose-shop/choose-shop.component';
+import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
 
 @NgModule({
   declarations: [

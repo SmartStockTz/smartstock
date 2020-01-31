@@ -199,4 +199,12 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       });
     });
   }
+
+  async getShops(): Promise<UserI[]> {
+    try {
+      const user = await this.indexD.getItem('user');
+    } catch (e) {
+
+    }
+  }
 }

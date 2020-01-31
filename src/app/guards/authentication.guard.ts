@@ -16,7 +16,7 @@ export class AuthenticationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser().then(user => {
-        if (user && user.applicationId && user.projectUrlId && user.projectId) {
+        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role) {
           resolve(true);
         } else {
           this.router.navigateByUrl('/login').catch(reason => console.log(reason));
