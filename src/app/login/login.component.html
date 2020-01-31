@@ -24,7 +24,8 @@
         <div class="col-sm-12 col-12 col-md-6 col-xl-4 col-lg-4 offset-xl-4 offset-lg-4 offset-md-3">
           <mat-progress-bar *ngIf="showProgress"
                             class="full-width rounded-top"
-                            mode="indeterminate"></mat-progress-bar>
+                            mode="indeterminate">
+          </mat-progress-bar>
 
           <form [formGroup]="loginForm" (ngSubmit)="login()">
             <mat-card>
@@ -96,7 +97,8 @@
           <i class="icon ion-social-facebook"></i>
         </a>
       </div>
-      <p class="copyright">FahamuTech © 2019</p>
+      <a class="text-center btn-block" routerLink="/">Home</a>
+      <p class="copyright">FahamuTech © 2020</p>
     </footer>
   </div>
 </div>

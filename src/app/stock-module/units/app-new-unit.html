@@ -1,17 +1,23 @@
 <div style="min-width: 300px">
-  <div mat-dialog-title>Create Unity</div>
+  <div mat-dialog-title>Create Unit</div>
   <div mat-dialog-content>
     <form class="d-flex flex-column" [formGroup]="newUnitForm" (ngSubmit)="createUnit()">
 
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" required>
+        <input placeholder="e.g Kilogram" matInput type="text" formControlName="name" required>
         <mat-error>Name required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+        <mat-label>Abbreviation</mat-label>
+        <input placeholder="e.g Kg" matInput type="text" formControlName="abbreviation" required>
+        <mat-error>Abbreviation required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" [rows]="3"></textarea>
+        <textarea matInput formControlName="description" [rows]="2"></textarea>
       </mat-form-field>
 
       <button color="primary" [disabled]="createUnitProgress" mat-flat-button class="ft-button">

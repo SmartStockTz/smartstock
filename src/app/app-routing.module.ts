@@ -6,12 +6,13 @@ import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
+import {LandingComponent} from './landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AuthenticatedUserGuard],
-    component: LoginComponent
+    component: LandingComponent
   },
   {
     path: 'login',

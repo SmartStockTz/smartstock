@@ -4,11 +4,8 @@ import {UserI} from '../model/UserI';
 import {NgForage} from 'ngforage';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
-import * as Parse from 'node_modules/parse';
 import {SettingsServiceService} from './Settings-service.service';
 
-Parse.initialize('lbpharmacy');
-Parse.serverURL = serverUrl;
 
 @Injectable({
   providedIn: 'root'

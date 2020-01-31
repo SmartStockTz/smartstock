@@ -1,301 +1,91 @@
-<nav class="sticky-top">
-  <mat-toolbar color="primary">
-    <button mat-icon-button="">
-      <mat-icon>home</mat-icon>
-    </button>
-    <span mat-card-title="">SSM</span>
-    <span class="toolbar-spacer"></span>
-    <button mat-icon-button="" [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu>
-      <button mat-menu-item (click)="login()" *ngIf="!log">
-        <mat-icon>arrow_forward</mat-icon>
-        Login
-      </button>
-      <!--<button mat-menu-item (click)="register()">-->
-      <!--<mat-icon>person_add</mat-icon>-->
-      <!--Register-->
-      <!--</button>-->
-      <button mat-menu-item (click)="goToShop()" *ngIf="log">
-        <mat-icon>person</mat-icon>
-        Shop
-      </button>
-      <button mat-menu-item (click)="logout()" *ngIf="log">
-        <mat-icon>arrow_back</mat-icon>
-        Logout
-      </button>
-    </mat-menu>
+<section class="header">
+  <mat-toolbar>
+    <a routerLink="/" class="h4 font-weight-bold">SmartStock</a>
+    <!--    <a href="" class="link">Show me</a>-->
+    <span style="flex: 1 1 auto"></span>
+    <a routerLink="/login" class="link">SignIn</a>
+    <a routerLink="/register" class="link ">Register</a>
   </mat-toolbar>
-</nav>
-
-<div id="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2" style="color: #fff; padding-top: 20%">
-        <h1>Smart Stock Manager</h1>
-        <p style="font-family: Roboto; font-size: 28px; color: #f5f5f5;" class="justify-content-center">{{message}}</p>
-        <div class="d-flex justify-content-center">
-          <button (click)="goToShop()" mat-raised-button="" color="primary" class="btn-primary align-self-center">
-            Get Started
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="header-jumbo">
+    <h4 class="col-md-6">You can’t continue using papers to keep records of your business.</h4>
+    <p style="padding: 10px 10px 20px 10px">Start your sales with us, today</p>
+    <a routerLink="/login" class=" header-btn"> Get Started</a>
   </div>
-</div>
-<div class="features-boxed">
-  <div class="container">
-    <div class="intro">
-      <h2 class="text-center">Features</h2>
-      <!--<p class="text-center">-->
-        <!--Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,-->
-        <!--pellentesque ut laoreet vitae.-->
-      <!--</p>-->
-    </div>
-    <div class="row justify-content-center features">
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-12 item" style="margin-bottom: 16px">
-        <mat-card>
-          <mat-card-content>
-            <i class="fa fa-map-marker icon"></i>
-            <h3 class="name">Works everywhere</h3>
-            <p class="description">
-              Due to internet connectivity challenge our service available offline and online
-            </p>
-          </mat-card-content>
-          <!--<mat-card-actions>-->
-          <!--<button mat-button color="primary">Learn more</button>-->
-          <!--</mat-card-actions>-->
-        </mat-card>
-      </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-12 item" style="margin-bottom: 16px">
-        <mat-card>
-          <mat-card-content>
-            <i class="fa fa-clock-o icon"></i>
-            <h3 class="name">Always available</h3>
-            <p class="description">
-              You will never experience down time or have to wait for something
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-12 item" style="margin-bottom: 16px">
-        <mat-card>
-          <mat-card-content>
-            <i class="fa fa-list-alt icon"></i>
-            <h3 class="name">Customizable </h3>
-            <p class="description">
-              Say how you want it to work for you and it will work the way you want
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-      <!--<div class="box">-->
-      <!--<i class="fa fa-leaf icon"></i>-->
-      <!--<h3 class="name">Organic </h3>-->
-      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
-      <!--</div>-->
-      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-      <!--<div class="box"><i class="fa fa-plane icon"></i>-->
-      <!--<h3 class="name">Fast </h3>-->
-      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
-      <!--</div>-->
-      <!--<div class="col-sm-6 col-md-5 col-lg-4 item">-->
-      <!--<div class="box"><i class="fa fa-phone icon"></i>-->
-      <!--<h3 class="name">Mobile-first</h3>-->
-      <!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-      <!--tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>-->
-      <!--</div>-->
-    </div>
-  </div>
-</div>
-<section class="clean-block clean-pricing dark" style="display: none">
-  <div class="container">
-    <div class="block-heading">
-      <h2 class="text-info">Pricing Table</h2>
-      <p>Our service offered in following price</p>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-md-5 col-lg-4">
-        <mat-card class="clean-pricing-item">
-          <mat-card-content>
-            <div class="heading">
-              <h3>BASIC</h3>
-            </div>
-            <p>For small business or entrepreneur </p>
-            <div class="features">
-              <h4><span class="feature">Number Of Users:&nbsp;</span><span>1</span></h4>
-              <h4><span class="feature">Wholesale:&nbsp;</span><span>No</span></h4>
-              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
-              <h4><span class="feature">Duration:&nbsp;</span><span>30 Days</span></h4>
-              <h4><span class="feature">Storage:&nbsp;</span><span>Unlimited</span></h4>
-            </div>
-            <div class="price">
-              <h4>20,000 TZS</h4>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button="" class=" btn-block" color="primary">BUY NOW</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="col-md-5 col-lg-4">
-        <mat-card class="clean-pricing-item">
-          <mat-card-content>
-            <div class="ribbon"><span>Best Value</span></div>
-            <div class="heading">
-              <h3>PRO</h3>
-            </div>
-            <p>Medium business</p>
-            <div class="features">
-              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
-              <h4><span class="feature">Wholesale:&nbsp;</span><span>Yes</span></h4>
-              <h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>
-              <h4><span class="feature">Duration:&nbsp;</span><span>30 Days</span></h4>
-              <h4><span class="feature">Storage:&nbsp;</span><span>Unlimited</span></h4>
-            </div>
-            <div class="price">
-              <h4>30,000 TZS</h4>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" class="btn btn-block">BUY NOW</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="col-md-5 col-lg-4">
-        <mat-card class="clean-pricing-item">
-          <mat-card-content>
-            <div class="heading">
-              <h3>PREMIUM</h3>
-            </div>
-            <p>Enterprises of large business</p>
-            <div class="features">
-              <h4><span class="feature">Contact us for talking&nbsp;</span><span></span></h4>
-              <!--<h4><span class="feature">Full Support:&nbsp;</span><span>Yes</span></h4>-->
-              <!--<h4><span class="feature">Duration:&nbsp;</span><span>120 Days</span></h4>-->
-              <!--<h4><span class="feature">Storage:&nbsp;</span><span>150GB</span></h4>-->
-            </div>
-            <div class="price">
-              <h4>Pay as you go</h4>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button class="btn btn-block" mat-button color="primary">BUY NOW</button>
-          </mat-card-actions>
+</section>
 
-        </mat-card>
-      </div>
+
+<section class="why-smartstock">
+  <h3>Why Smartstock?</h3>
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <img src="../../../assets/img/everyWhere_icon.png">
+      <h4>Work everywhere</h4>
+      <p>Due to internet connectivity challenge
+        our service available offline and online</p>
+    </div>
+    <div class="col-md-3 text-center">
+      <img src="../../../assets/img/“99.9%25”.png" width="50%" style="padding: 40px 10px">
+      <h4>Always available</h4>
+      <p>You will never experience down
+        time or have to wait for something</p>
+    </div>
+    <div class="col-md-3 text-center">
+      <img src="../../../assets/img/customisable_icon.png">
+      <h4>Customizable</h4>
+      <p>Say how you want it to work for you
+        and it will work the way you want</p>
     </div>
   </div>
 </section>
 
-<!--<div class="team-boxed">-->
-<!--<div class="container">-->
-<!--<div class="intro">-->
-<!--<h2 class="text-center">Team </h2>-->
-<!--<p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,-->
-<!--pellentesque ut laoreet vitae.</p>-->
-<!--</div>-->
-<!--<div class="row people">-->
-<!--<div class="col-md-6 col-lg-4 item">-->
-<!--<div class="box"><img class="rounded-circle" src="assets/img/1.jpg">-->
-<!--<h3 class="name">Ben Johnson</h3>-->
-<!--<p class="title">Musician</p>-->
-<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-<!--semper massa. </p>-->
-<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-6 col-lg-4 item">-->
-<!--<div class="box"><img class="rounded-circle" src="assets/img/2.jpg">-->
-<!--<h3 class="name">Emily Clark</h3>-->
-<!--<p class="title">Artist</p>-->
-<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-<!--semper massa. </p>-->
-<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-6 col-lg-4 item">-->
-<!--<div class="box"><img class="rounded-circle" src="assets/img/3.jpg">-->
-<!--<h3 class="name">Carl Kent</h3>-->
-<!--<p class="title">Stylist</p>-->
-<!--<p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in-->
-<!--tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a-->
-<!--semper massa. </p>-->
-<!--<div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i-->
-<!--class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 
-<div class="testimonials-clean" style="display: none;">
-  <div class="container">
-    <div class="intro">
-      <h2 class="text-center">Testimonials </h2>
-      <p class="text-center">Our customers love us! Read what they have to say below. Aliquam sed justo ligula.
-        Vestibulum nibh erat, pellentesque ut laoreet vitae.</p>
-    </div>
-    <div class="row people">
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box">
-          <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in
-            tellus eu gravida. Aliquam varius finibus est.</p>
+<section>
+
+  <mat-carousel
+    timings="250ms ease-in"
+    [autoplay]="false"
+    interval="400"
+    color="primary"
+    maxWidth="500"
+    proportion="30"
+    slides="5"
+    [loop]="true"
+    [hideArrows]="false"
+    [hideIndicators]="true"
+    [useKeyboard]="false"
+    [useMouseWheel]="false"
+    orientation="ltr"
+    overlay-origin="false"
+  >
+    <!--[image]="slide.image"-->
+    <mat-carousel-slide
+      #matCarouselSlide overlayColor=" #F0F0F0"
+      *ngFor="let slide of slides; let i = index">
+      <div class="row testmon-container">
+
+        <div class="col-md-4 text-center testmon-info">
+          <h3>LB Pharmacy</h3>
+          <p class="details">
+            “Now I can see my business from far and be able to add purchases”
+          </p>
+          <!--          <button mat-button><h3>Read</h3></button>-->
         </div>
-        <div class="author"><img class="rounded-circle" src="assets/img/1.jpg">
-          <h5 class="name">Ben Johnson</h5>
-          <p class="title">CEO of Company Inc.</p>
+        <div class="col-md-6">
+          <img src="../../../assets/img/calculate.jpg" width="500px" height="300px">
         </div>
+
       </div>
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box">
-          <p class="description">Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo
-            suscipit id.</p>
-        </div>
-        <div class="author"><img class="rounded-circle" src="assets/img/3.jpg">
-          <h5 class="name">Carl Kent</h5>
-          <p class="title">Founder of Style Co.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 item">
-        <div class="box">
-          <p class="description">Aliquam varius finibus est, et interdum justo suscipit. Vulputate quis leo in, vehicula
-            rhoncus lacus. Praesent aliquam in tellus eu.</p>
-        </div>
-        <div class="author"><img class="rounded-circle" src="assets/img/2.jpg">
-          <h5 class="name">Emily Clark</h5>
-          <p class="title">Owner of Creative Ltd.</p>
-        </div>
-      </div>
-    </div>
+    </mat-carousel-slide>
+  </mat-carousel>
+</section>
+
+
+<section class="row sale-on-go">
+  <img class="col-md-7" src="../../../assets/img/Rectangle12.png" height="400">
+  <div class="col-md-4 text-center right-box">
+    <h3>Sales on the go? <br>
+      You will love our app, soon we will be available in play store and app store
+    </h3>
   </div>
-</div>
-<div class="map-clean">
-  <div class="container">
-    <div class="intro">
-      <h2 class="text-center">Location </h2>
-      <p class="text-center"></p>
-    </div>
-  </div>
-  <iframe allowfullscreen="" frameborder="0" width="100%" height="450"
-          src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJVVVVVZ5OXBgR68k8cONMwzE&key=AIzaSyAHav8WP9TwFjy63CajdMI__LrD4PUUlmI"></iframe>
-</div>
-<div class="footer-basic">
-  <footer>
-    <div class="social">
-      <a href="#"><i class="icon ion-social-instagram"></i></a>
-      <a href="#"><i class="icon ion-social-twitter"></i></a>
-      <a href="#"><i class="icon ion-social-facebook"></i></a>
-    </div>
-    <p class="copyright">Smart Stock Manager - Fahamutech © 2019</p>
-  </footer>
-</div>
+</section>
+<app-footer></app-footer>
