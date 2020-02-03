@@ -50,6 +50,9 @@ body{
     transition: all .4s ease-in-out;
     background: #FFFFFF;
     border-radius: 4px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
  }
 
  .shop_profile:hover{

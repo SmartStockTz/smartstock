@@ -1,7 +1,16 @@
 <div class="my-side-nav">
   <!--  <div class="drawer-head"></div>-->
   <mat-toolbar>
-    <span>Menu</span>
+    <!--    <button mat-icon-button>-->
+    <!--      <mat-icon>-->
+    <!--        arrow_down-->
+    <!--      </mat-icon>-->
+    <!--    </button>-->
+    <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" *ngIf="shop">{{shop.businessName}}</span>
+    <span class="flex-grow-1"></span>
+    <button routerLink="/shop" mat-icon-button>
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
   </mat-toolbar>
   <mat-accordion [multi]="true" class="mat-elevation-z0">
     <mat-expansion-panel [expanded]="shouldExpand('dashboard')" class="mat-elevation-z0">

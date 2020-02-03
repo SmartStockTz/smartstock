@@ -1,4 +1,5 @@
 import {UserI} from '../../model/UserI';
+import {ShopI} from '../../model/ShopI';
 
 export interface UserDataSource {
 
@@ -24,5 +25,9 @@ export interface UserDataSource {
 
   refreshToken(user: UserI, callback: (value: any) => void);
 
-  getShops(): Promise<UserI[]>;
+  getShops(): Promise<ShopI[]>;
+
+  getCurrentShop(): Promise<ShopI>;
+
+  saveCurrentShop(shop: ShopI): Promise<ShopI>;
 }

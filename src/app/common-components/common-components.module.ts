@@ -6,41 +6,42 @@ import {AdminDrawerComponent} from './admin-drawer/admin-drawer.component';
 import {NavUserComponent} from './user-drawer/nav-user.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule, MatSelectModule,
+    MatToolbarModule
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatDividerModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatDividerModule,
+        MatListModule,
+        MatProgressBarModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule,
+        RouterModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatSelectModule,
+    ],
   exports: [
     CheckUserProgressComponent,
     NavUserComponent,

@@ -5,6 +5,7 @@ import {NgForage} from 'ngforage';
 import {ParseBackend, serverUrl} from '../database/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
+import {ShopI} from '../model/ShopI';
 
 @Injectable({
   providedIn: 'root'
@@ -89,9 +90,19 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         headers: this.settings.ssmHeader
       }).subscribe(async value => {
         try {
-          const cProjectId = await this.indexD.getItem('cPID');
-          if (cProjectId && cProjectId !== value.projectId) {
-            await this.indexD.clear();
+          // empty local storage if user is not admin and current project differ from last one
+          if (value.role !== 'admin') {
+            const cProjectId = await this.indexD.getItem('cPID');
+            if (cProjectId && cProjectId !== value.projectId) {
+              await this.indexD.clear();
+            }
+            await this.indexD.setItem<ShopI>('activeShop', {
+              settings: value.settings,
+              businessName: value.businessName,
+              projectId: value.projectId,
+              projectUrlId: value.projectUrlId,
+              applicationId: value.applicationId
+            });
           }
           await this.indexD.setItem<UserI>('user', value);
           await this.indexD.setItem('cPID', value.projectId);
@@ -105,7 +116,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
-  logout(user: UserI, callback?: (value: any) => void) {
+  async logout(user: UserI, callback?: (value: any) => void) {
     // console.log(this.serverUrl + '/logout');
     // console.log(user.sessionToken);
     // this.httpClient.post(this.serverUrl + '/logout', {}, {
@@ -114,13 +125,15 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     //     'X-Parse-Session-Token': user.sessionToken
     //   }
     // }).subscribe(value => {
-    this.indexD.removeItem('user').then(value1 => {
+    try {
+      await this.indexD.removeItem('user');
+      await this.indexD.removeItem('activeShop');
       // console.log('user removed from cache is ---> successful');
       callback('Ok');
-    }).catch(reason => {
+    } catch (reason) {
       console.log(reason);
       callback(null);
-    });
+    }
     // }, error1 => {
     //   console.log(error1);
     //   callback(null);
@@ -189,7 +202,14 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   addUser(user: UserI): Promise<UserI> {
-    return new Promise<UserI>((resolve, reject) => {
+    return new Promise<UserI>(async (resolve, reject) => {
+      const shop = await this.indexD.getItem<ShopI>('activeShop');
+      user.shops = [];
+      user.applicationId = shop.applicationId;
+      user.projectUrlId = shop.projectUrlId;
+      user.projectId = shop.projectId;
+      user.businessName = shop.businessName;
+      user.settings = shop.settings;
       this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/create', user, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {
@@ -202,9 +222,49 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async getShops(): Promise<UserI[]> {
     try {
-      const user = await this.indexD.getItem('user');
+      const user = await this.indexD.getItem<UserI>('user');
+      const shops = [];
+      user.shops.forEach(element => {
+        shops.push(element);
+      });
+      shops.push({
+        businessName: user.businessName,
+        projectId: user.projectId,
+        applicationId: user.applicationId,
+        projectUrlId: user.projectUrlId,
+        settings: user.settings,
+        street: user.street,
+        country: user.country,
+        region: user.region
+      });
+      return shops;
     } catch (e) {
+      throw e;
+    }
+  }
 
+  async getCurrentShop(): Promise<ShopI> {
+    try {
+      const activeShop = await this.indexD.getItem<ShopI>('activeShop');
+      if (activeShop && activeShop.projectId && activeShop.applicationId && activeShop.projectUrlId) {
+        return activeShop;
+      } else {
+        throw new Error('No active shop in records');
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async saveCurrentShop(shop: ShopI): Promise<ShopI> {
+    try {
+      const cProjectId = await this.indexD.getItem('cPID');
+      if (cProjectId && cProjectId !== shop.projectId) {
+        await this.indexD.removeItem('stocks');
+      }
+      return await this.indexD.setItem<ShopI>('activeShop', shop);
+    } catch (e) {
+      throw e;
     }
   }
 }
