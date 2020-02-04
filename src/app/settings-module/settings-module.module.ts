@@ -31,6 +31,7 @@ import {
   UsersComponent
 } from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
+import { BillingComponent } from './billing/billing.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {ProfileComponent} from './profile/profile.component';
     ProfileComponent,
     DialogUserDeleteComponent,
     DialogUserNewComponent,
-    UpdateUserPasswordDialogComponent
+    UpdateUserPasswordDialogComponent,
+    BillingComponent
   ],
   imports: [
     CommonModule,

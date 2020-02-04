@@ -3,13 +3,14 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, M
 import {UserI} from '../../model/UserI';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../../services/user-database.service';
+import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends DeviceInfo implements OnInit {
 
   usersDatasource: MatTableDataSource<UserI>;
   usersTableColums = ['name', 'role', 'actions'];
@@ -20,6 +21,7 @@ export class UsersComponent implements OnInit {
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
               private readonly snack: MatSnackBar) {
+    super();
   }
 
   ngOnInit() {
