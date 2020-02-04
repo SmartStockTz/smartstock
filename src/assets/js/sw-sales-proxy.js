@@ -21,20 +21,20 @@ addEventListener('message', ({data}) => {
 
   setInterval(() => {
 
-    _mainStorage.getItem('user').then(user => {
+    _mainStorage.getItem('activeShop').then(activeShop => {
 
-      if (!user) {
-        console.log('user is not available yet');
-        throw 'user is not available yet';
+      if (!activeShop) {
+        console.log('active shop is not available yet');
+        throw 'active shop is not available yet';
       }
 
-      if (user && user.applicationId && user.projectId && user.projectUrlId) {
-        let _salesStorage = _getStorage(user.projectId + '_sales');
+      if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
+        let _salesStorage = _getStorage(activeShop.projectId + '_sales');
         _salesStorage.keys().then(keys => {
           if (keys.length > 0) {
             keys.forEach(key => {
               _salesStorage.getItem(key).then(sales => {
-                axios.post(`https://smartstock-faas.bfast.fahamutech.com/functions/sales/${user.projectId}`,
+                axios.post(`https://smartstock-faas.bfast.fahamutech.com/functions/sales/${activeShop.projectId}`,
                   {
                     'requests': sales
                   },
@@ -61,7 +61,7 @@ addEventListener('message', ({data}) => {
       console.log('error when fetch user');
     });
 
-  }, 5000);
+  }, 4000);
 
   postMessage("sales routine started");
 

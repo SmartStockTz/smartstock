@@ -3,7 +3,7 @@
                [fixedInViewport]="true"
                #sidenav
                [mode]="enoughWidth()?'side':'over'"
-               [opened]="false">
+               [opened]="enoughWidth()">
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 

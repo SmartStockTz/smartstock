@@ -4,7 +4,7 @@ body{
  }
 
  .main{
-    background-color:#027206;
+   background-color: #0b2e13;
     height: 100vh;
     width: 100%;
 
@@ -20,7 +20,7 @@ body{
 
  /* Container for the title of the shops profiles*/
  .ct_shops_title{
-    font-family: Roboto;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 48px;

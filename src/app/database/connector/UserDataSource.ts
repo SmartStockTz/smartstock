@@ -17,7 +17,7 @@ export interface UserDataSource {
 
   getUser(user: UserI, callback?: (user: UserI) => void);
 
-  deleteUser(user: UserI, callback?: (value: any) => void);
+  deleteUser(user: UserI): Promise<any>;
 
   updateUser(user: { objectId: string, value: string, field: string }, callback?: (value: any) => void);
 
@@ -26,6 +26,10 @@ export interface UserDataSource {
   refreshToken(user: UserI, callback: (value: any) => void);
 
   getShops(): Promise<ShopI[]>;
+
+  createShop(data: { admin: UserI, shop: ShopI }): Promise<ShopI>;
+
+  deleteShop(shop: ShopI): Promise<ShopI>;
 
   getCurrentShop(): Promise<ShopI>;
 

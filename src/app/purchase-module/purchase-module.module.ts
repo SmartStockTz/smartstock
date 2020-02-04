@@ -16,7 +16,8 @@ import {
   MatInputModule,
   MatMenuModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule, MatSelectModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatTableModule,
@@ -25,16 +26,12 @@ import {
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PurchasesInvoiceComponent} from './purchases-invoice/purchases-invoice.component';
-import {PurchasesReceiptsComponent} from './purchases-receipts/purchases-receipts.component';
 import {PurchaseCreateComponent} from './purchase-create/purchase-create.component';
 
 
 @NgModule({
   declarations: [
     PurchaseComponent,
-    PurchasesInvoiceComponent,
-    PurchasesReceiptsComponent,
     PurchaseDetailsComponent,
     PurchaseCreateComponent
   ],

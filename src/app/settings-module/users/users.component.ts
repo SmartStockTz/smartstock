@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {UserI} from '../../model/UserI';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../../services/user-database.service';
 
 @Component({
@@ -12,11 +12,9 @@ import {UserDatabaseService} from '../../services/user-database.service';
 export class UsersComponent implements OnInit {
 
   usersDatasource: MatTableDataSource<UserI>;
-  usersTableColums = ['name', 'role', 'shop', 'actions'];
+  usersTableColums = ['name', 'role', 'actions'];
   usersArray: UserI[];
   fetchUsersFlag = false;
-  nameFormControl = new FormControl();
-  descriptionFormControl = new FormControl();
 
   constructor(private readonly userDatabase: UserDatabaseService,
               private readonly formBuilder: FormBuilder,
@@ -54,7 +52,6 @@ export class UsersComponent implements OnInit {
       this.usersArray = JSON.parse(JSON.stringify(data));
       this.usersDatasource = new MatTableDataSource<UserI>(this.usersArray);
       this.fetchUsersFlag = false;
-      console.log(this.usersArray);
     }).catch(reason => {
       console.log(reason);
       this.fetchUsersFlag = false;
@@ -129,6 +126,12 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  updatePassword(element: any) {
+    this.dialog.open(UpdateUserPasswordDialogComponent, {
+      data: element
+    });
+  }
 }
 
 @Component({
@@ -147,15 +150,16 @@ export class DialogUserDeleteComponent {
   }
 
   deleteUser(user: any) {
-    // this.errorUserMessage = undefined;
-    // this.deleteProgress = true;
-    // this.userDatabase.deleteUser(user).then(value => {
-    //   this.dialogRef.close(user);
-    //   this.deleteProgress = false;
-    // }).catch(reason => {
-    //   this.errorUserMessage = reason && reason.message ? reason.message : reason.toString();
-    //   this.deleteProgress = false;
-    // });
+    this.errorUserMessage = undefined;
+    this.deleteProgress = true;
+    this.userDatabase.deleteUser(user).then(value => {
+      this.dialogRef.close(user);
+      this.deleteProgress = false;
+      console.log(value);
+    }).catch(reason => {
+      this.errorUserMessage = reason && reason.message ? reason.message : reason.toString();
+      this.deleteProgress = false;
+    });
   }
 
   cancel() {
@@ -189,7 +193,6 @@ export class DialogUserNewComponent implements OnInit {
       username: ['', [Validators.nullValidator, Validators.required]],
       password: ['', [Validators.nullValidator, Validators.required]],
       role: ['user', [Validators.nullValidator, Validators.required]],
-      description: ['']
     });
   }
 
@@ -200,10 +203,8 @@ export class DialogUserNewComponent implements OnInit {
       });
       return;
     }
-
     this.createUserProgress = true;
     this.userDatabase.addUser(this.newUserForm.value).then(value => {
-      console.log(value);
       this.createUserProgress = false;
       value.username = this.newUserForm.value.username;
       value.role = this.newUserForm.value.role;
@@ -214,8 +215,7 @@ export class DialogUserNewComponent implements OnInit {
     }).catch(reason => {
       console.log(reason);
       this.createUserProgress = false;
-      // this.dialogRef.close(null);
-      this.snack.open('User not created, try again', 'Ok', {
+      this.snack.open(reason && reason.error && reason.error.message ? reason.error.message : 'User not created, try again', 'Ok', {
         duration: 3000
       });
     });
@@ -227,3 +227,35 @@ export class DialogUserNewComponent implements OnInit {
   }
 }
 
+@Component({
+  selector: 'app-user-update-password',
+  templateUrl: 'app-user-update-password.html',
+  styleUrls: ['users.component.css']
+})
+export class UpdateUserPasswordDialogComponent implements OnInit {
+  updatePasswordFormGroup: FormGroup;
+
+  constructor(public dialogRef: MatDialogRef<UpdateUserPasswordDialogComponent>,
+              private readonly _formBuilder: FormBuilder,
+              private readonly _snack: MatSnackBar,
+              private readonly _userApi: UserDatabaseService,
+              @Inject(MAT_DIALOG_DATA) public data: UserI) {
+  }
+
+  ngOnInit(): void {
+    this.updatePasswordFormGroup = this._formBuilder.group({
+      password: ['', [Validators.required, Validators.nullValidator]]
+    });
+  }
+
+
+  updatePassword() {
+    if (this.updatePasswordFormGroup.valid) {
+
+    } else {
+      this._snack.open('Please enter new password', 'Ok', {
+        duration: 3000
+      });
+    }
+  }
+}

@@ -29,11 +29,11 @@ addEventListener('message', ({data}) => {
   setInterval(async () => {
     if (!onFetch) {
       onFetch = true;
-      const user = await _stockStorage.getItem('user');
-      if (user && user.applicationId && user.projectId && user.projectUrlId) {
+      const activeShop = await _stockStorage.getItem('activeShop');
+      if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
         // const serverURL = `https://${user.projectUrlId}.bfast.fahamutech.com`;
-        const fetchStockURL = `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${user.projectId}`;
-        fetchStocks(user.applicationId, fetchStockURL, _stockStorage).then(done => {
+        const fetchStockURL = `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${activeShop.projectId}`;
+        fetchStocks(activeShop.applicationId, fetchStockURL, _stockStorage).then(done => {
           firstFetch = false;
           onFetch = false;
           // postMessage("stock comparison thread started");
@@ -49,7 +49,7 @@ addEventListener('message', ({data}) => {
       // console.log('on fetch');
       // console.log(onFetch);
     }
-  }, 3000);
+  }, 5000);
 });
 
 /**

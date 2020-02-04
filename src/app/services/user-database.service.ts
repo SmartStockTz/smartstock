@@ -45,7 +45,16 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   // implement on cloud functions
-  deleteUser(user: UserI, callback?: (value: any) => void) {
+  deleteUser(user: UserI): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.delete(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
@@ -80,6 +89,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     // });
   }
 
+  // needs to be reviewed
   async login(user: { username: string, password: string }): Promise<UserI> {
     return new Promise((resolve, reject) => {
       this.httpClient.get<UserI>(this.settings.ssmServerURL + '/login', {
@@ -90,12 +100,15 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         headers: this.settings.ssmHeader
       }).subscribe(async value => {
         try {
-          // empty local storage if user is not admin and current project differ from last one
+          // empty local storage if current project differ from last one
           if (value.role !== 'admin') {
             const cProjectId = await this.indexD.getItem('cPID');
             if (cProjectId && cProjectId !== value.projectId) {
               await this.indexD.clear();
             }
+            // set current shop
+            await this.indexD.setItem('cPID', value.projectId);
+            // set active shop
             await this.indexD.setItem<ShopI>('activeShop', {
               settings: value.settings,
               businessName: value.businessName,
@@ -105,7 +118,6 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
             });
           }
           await this.indexD.setItem<UserI>('user', value);
-          await this.indexD.setItem('cPID', value.projectId);
           resolve(value);
         } catch (e) {
           reject(e);
@@ -210,7 +222,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       user.projectId = shop.projectId;
       user.businessName = shop.businessName;
       user.settings = shop.settings;
-      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/create', user, {
+      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/seller', user, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
@@ -262,9 +274,30 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       if (cProjectId && cProjectId !== shop.projectId) {
         await this.indexD.removeItem('stocks');
       }
+      await this.indexD.setItem('cPID', shop.projectId);
       return await this.indexD.setItem<ShopI>('activeShop', shop);
     } catch (e) {
       throw e;
     }
+  }
+
+  createShop(data: { admin: UserI, shop: ShopI }): Promise<ShopI> {
+    return new Promise<ShopI>(async (resolve, reject) => {
+      this.httpClient.post<ShopI>(this.settings.ssmFunctionsURL + '/functions/shop', data, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  deleteShop(shop: ShopI): Promise<ShopI> {
+    return undefined;
+    // return new Promise<ShopI>((resolve, reject) => {
+    //   this.httpClient.delete(this.settings.ssmFunctionsURL + '/functions/shop', {
+    //   })
+    // });
   }
 }

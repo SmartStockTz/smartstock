@@ -9,6 +9,7 @@ import {StockExistGuard} from './guards/stock-exist.guard';
 import {LandingComponent} from './landing/landing.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
+import {StockManagerGuard} from './guards/stock-manager.guard';
 
 const routes: Routes = [
   {
@@ -43,12 +44,12 @@ const routes: Routes = [
   },
   {
     path: 'stock',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [StockManagerGuard, ActiveShopGuard],
     loadChildren: () => import('./stock-module/stock-module.module').then(mod => mod.StockModuleModule)
   },
   {
     path: 'purchase',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [StockManagerGuard, ActiveShopGuard],
     loadChildren: () => import('./purchase-module/purchase-module.module').then(mod => mod.PurchaseModuleModule)
   },
   {

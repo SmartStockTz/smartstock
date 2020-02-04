@@ -1,3 +1,28 @@
-.full-width{
+.full-width {
+  width: 100%;
+}
+
+.login-title{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 56px;
+  margin-bottom: 10px;
+
+  color: #FFFFFF;
+}
+
+.login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #0b2e13;
+}
+
+
+.login-sec{
   width: 100%;
 }

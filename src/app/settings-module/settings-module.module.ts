@@ -13,7 +13,9 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatProgressSpinnerModule, MatSelectModule,
+  MatProgressSpinnerModule,
+  MatRippleModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatTableModule,
@@ -22,7 +24,12 @@ import {
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DialogUserDeleteComponent, DialogUserNewComponent, UsersComponent} from './users/users.component';
+import {
+  DialogUserDeleteComponent,
+  DialogUserNewComponent,
+  UpdateUserPasswordDialogComponent,
+  UsersComponent
+} from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
@@ -32,7 +39,8 @@ import {ProfileComponent} from './profile/profile.component';
     UsersComponent,
     ProfileComponent,
     DialogUserDeleteComponent,
-    DialogUserNewComponent
+    DialogUserNewComponent,
+    UpdateUserPasswordDialogComponent
   ],
   imports: [
     CommonModule,
@@ -53,11 +61,13 @@ import {ProfileComponent} from './profile/profile.component';
     MatTableModule,
     MatExpansionModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRippleModule
   ],
   entryComponents: [
     DialogUserNewComponent,
     DialogUserDeleteComponent,
+    UpdateUserPasswordDialogComponent
   ]
 })
 export class SettingsModuleModule {
