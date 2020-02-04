@@ -234,6 +234,7 @@ export class DialogUserNewComponent implements OnInit {
 })
 export class UpdateUserPasswordDialogComponent implements OnInit {
   updatePasswordFormGroup: FormGroup;
+  updateProgress = false;
 
   constructor(public dialogRef: MatDialogRef<UpdateUserPasswordDialogComponent>,
               private readonly _formBuilder: FormBuilder,
@@ -251,7 +252,20 @@ export class UpdateUserPasswordDialogComponent implements OnInit {
 
   updatePassword() {
     if (this.updatePasswordFormGroup.valid) {
-
+      this.updateProgress = true;
+      this._userApi.updatePassword(this.data, this.updatePasswordFormGroup.value.password).then(value => {
+        this._snack.open('Password updated successful', 'Ok', {
+          duration: 3000
+        });
+        this.updateProgress = false;
+        this.dialogRef.close();
+      }).catch(reason => {
+        console.log(reason);
+        this._snack.open('Failure when try to update password, try again', 'Ok', {
+          duration: 3000
+        });
+        this.updateProgress = false;
+      });
     } else {
       this._snack.open('Please enter new password', 'Ok', {
         duration: 3000

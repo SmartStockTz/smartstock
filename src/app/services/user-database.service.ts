@@ -300,4 +300,18 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     //   })
     // });
   }
+
+  updatePassword(user: UserI, password: string): Promise<any> {
+    return new Promise<UserI>((resolve, reject) => {
+      this.httpClient.put<any>(this.settings.ssmFunctionsURL + '/functions/users/password/' + user.objectId, {
+        password: password
+      }, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }
