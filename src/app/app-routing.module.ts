@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [StockManagerGuard, ActiveShopGuard],
     loadChildren: () => import('./dashboard-module/dashboard-module.module').then(mod => mod.DashboardModuleModule)
   },
   {
@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [StockManagerGuard, ActiveShopGuard],
     loadChildren: () => import('./settings-module/settings-module.module').then(mod => mod.SettingsModuleModule)
   },
   {

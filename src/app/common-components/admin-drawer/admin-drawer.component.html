@@ -7,7 +7,8 @@
     </button>
   </mat-toolbar>
   <mat-accordion [multi]="true" class="mat-elevation-z0">
-    <mat-expansion-panel *ngIf="currentUser && currentUser.role==='admin'" [expanded]="shouldExpand('dashboard')"
+    <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
+                         [expanded]="shouldExpand('dashboard')"
                          class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">dashboard</mat-icon>
@@ -18,7 +19,7 @@
       </mat-nav-list>
     </mat-expansion-panel>
 
-    <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
+    <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
 
     <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
@@ -31,7 +32,7 @@
       </mat-nav-list>
     </mat-expansion-panel>
 
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="currentUser && currentUser.role!=='user'"></mat-divider>
 
     <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
                          [expanded]="shouldExpand('purchase')" class="mat-elevation-z0">
@@ -64,7 +65,8 @@
 
     <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
 
-    <mat-expansion-panel *ngIf="currentUser && currentUser.role==='admin'" [expanded]="shouldExpand('settings')"
+    <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
+                         [expanded]="shouldExpand('settings')"
                          class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">supervisor_account</mat-icon>
