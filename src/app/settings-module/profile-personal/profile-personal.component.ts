@@ -53,12 +53,30 @@ export class ProfilePersonalComponent implements OnInit {
   updatePersonalInformation() {
     if (this.personalForm.valid) {
       this.updateUserProgress = true;
-      this._userApi.updateUser(this.currentUser, this.personalForm.value).then(value => {
-        console.log(value);
+      this._userApi.updateUser(this.currentUser, this.personalForm.value).then(async user => {
         this.updateUserProgress = false;
+        this._snack.open('Your personal information is updated', 'Ok', {
+          duration: 3000
+        });
+        await this._userApi.updateCurrentUser(user);
+        this.personalForm.reset({
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          mobile: user.mobile
+        });
       }).catch(reason => {
         console.log(reason);
         this.updateUserProgress = false;
+        this._snack.open('Fails to update your persona information try again later', 'Ok', {
+          duration: 3000
+        });
+        this.personalForm.reset({
+          firstname: this.currentUser.firstname,
+          lastname: this.currentUser.lastname,
+          email: this.currentUser.email,
+          mobile: this.currentUser.mobile
+        });
       });
     } else {
       this._snack.open('Please fill all required fields', 'Ok', {

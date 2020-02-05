@@ -291,15 +291,21 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
-
   updateUser(user: UserI, data: { [p: string]: any }): Promise<UserI> {
     return new Promise(async (resolve, reject) => {
-      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, user, {
+      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, data, {
         headers: this.settings.ssmFunctionsHeader
       }).subscribe(value => resolve(value), error1 => {
-        console.log(error1);
-        reject(null);
+        reject(error1);
       });
     });
+  }
+
+  async updateCurrentUser(user: UserI): Promise<UserI> {
+    try {
+      return await this.indexD.setItem<UserI>('user', user);
+    } catch (e) {
+      throw e;
+    }
   }
 }

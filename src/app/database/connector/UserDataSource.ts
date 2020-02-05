@@ -23,6 +23,8 @@ export interface UserDataSource {
 
   updateUser(user: UserI, data: { [name: string]: any }): Promise<UserI>;
 
+  updateCurrentUser(user: UserI): Promise<UserI>;
+
   createUser(user: UserI, callback?: (value: any) => void);
 
   refreshToken(user: UserI, callback: (value: any) => void);
