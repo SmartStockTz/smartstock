@@ -7,13 +7,13 @@ import {AccountComponent} from './account/account.component';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialogModule,
+  MatDialogModule, MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatProgressSpinnerModule,
+  MatProgressSpinnerModule, MatRadioModule,
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
@@ -23,7 +23,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {CommonComponentsModule} from '../common-components/common-components.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   DialogUserDeleteComponent,
   DialogUserNewComponent,
@@ -35,6 +35,8 @@ import { BillingComponent } from './billing/billing.component';
 import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
 import { ProfileAddressComponent } from './profile-address/profile-address.component';
 import { ProfileAuthenticationComponent } from './profile-authentication/profile-authentication.component';
+import { BillingInvoicesComponent } from './billing-invoices/billing-invoices.component';
+import { BillingReceiptsComponent } from './billing-receipts/billing-receipts.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ProfileAuthenticationComponent } from './profile-authentication/profile
     BillingComponent,
     ProfilePersonalComponent,
     ProfileAddressComponent,
-    ProfileAuthenticationComponent
+    ProfileAuthenticationComponent,
+    BillingInvoicesComponent,
+    BillingReceiptsComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +74,10 @@ import { ProfileAuthenticationComponent } from './profile-authentication/profile
     MatExpansionModule,
     MatDialogModule,
     MatSelectModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDividerModule,
+    MatRadioModule,
+    FormsModule
   ],
   entryComponents: [
     DialogUserNewComponent,
