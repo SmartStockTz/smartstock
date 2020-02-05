@@ -308,4 +308,18 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
       throw e;
     }
   }
+
+  changePasswordFromOld(data: { lastPassword: string; password: string; user: UserI }): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/password/change/' + data.user.objectId, {
+        lastPassword: data.lastPassword,
+        username: data.user.username,
+        password: data.password
+      }, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => resolve(value), error1 => {
+        reject(error1);
+      });
+    });
+  }
 }

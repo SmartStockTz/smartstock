@@ -3,6 +3,8 @@ import {ShopI} from '../../model/ShopI';
 
 export interface UserDataSource {
 
+  changePasswordFromOld(data: { lastPassword: string, password: string, user: UserI }): Promise<any>;
+
   updatePassword(user: UserI, password: string): Promise<UserI>;
 
   addUser(user: UserI): Promise<UserI>;
