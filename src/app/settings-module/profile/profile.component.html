@@ -14,7 +14,17 @@
     </app-toolbar>
 
     <div class="container my-profile-wrapper">
-
+      <mat-tab-group>
+        <mat-tab label="Personal Information">
+          <app-profile-personal></app-profile-personal>
+        </mat-tab>
+        <mat-tab label="Address">
+          <app-profile-address></app-profile-address>
+        </mat-tab>
+        <mat-tab label="Authentication">
+          <app-profile-authentication></app-profile-authentication>
+        </mat-tab>
+      </mat-tab-group>
     </div>
 
   </mat-sidenav-content>

@@ -21,7 +21,7 @@ export interface UserDataSource {
 
   deleteUser(user: UserI): Promise<any>;
 
-  updateUser(user: { objectId: string, value: string, field: string }, callback?: (value: any) => void);
+  updateUser(user: UserI, data: { [name: string]: any }): Promise<UserI>;
 
   createUser(user: UserI, callback?: (value: any) => void);
 

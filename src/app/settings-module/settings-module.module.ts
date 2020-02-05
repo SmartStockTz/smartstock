@@ -32,6 +32,9 @@ import {
 } from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import { BillingComponent } from './billing/billing.component';
+import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
+import { ProfileAddressComponent } from './profile-address/profile-address.component';
+import { ProfileAuthenticationComponent } from './profile-authentication/profile-authentication.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { BillingComponent } from './billing/billing.component';
     DialogUserDeleteComponent,
     DialogUserNewComponent,
     UpdateUserPasswordDialogComponent,
-    BillingComponent
+    BillingComponent,
+    ProfilePersonalComponent,
+    ProfileAddressComponent,
+    ProfileAuthenticationComponent
   ],
   imports: [
     CommonModule,

@@ -129,27 +129,14 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   async logout(user: UserI, callback?: (value: any) => void) {
-    // console.log(this.serverUrl + '/logout');
-    // console.log(user.sessionToken);
-    // this.httpClient.post(this.serverUrl + '/logout', {}, {
-    //   headers: {
-    //     'X-Parse-Application-Id': 'lbpharmacy',
-    //     'X-Parse-Session-Token': user.sessionToken
-    //   }
-    // }).subscribe(value => {
     try {
       await this.indexD.removeItem('user');
       await this.indexD.removeItem('activeShop');
-      // console.log('user removed from cache is ---> successful');
       callback('Ok');
     } catch (reason) {
       console.log(reason);
       callback(null);
     }
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
   }
 
   register(user: UserI): Promise<UserI> {
@@ -186,17 +173,6 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     //   console.log(error1);
     //   callback(null);
     // });
-  }
-
-  updateUser(user: { objectId: string, value: string, field: string }): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-      this.httpClient.put(this.settings.ssmFunctionsURL + '/functions/users/update' + user.objectId, user, {
-        headers: await this.settings.getCustomerPostHeader()
-      }).subscribe(value => resolve(value), error1 => {
-        console.log(error1);
-        reject(null);
-      });
-    });
   }
 
   refreshToken(user: UserI, callback: (value: any) => void) {
@@ -311,6 +287,18 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         resolve(value);
       }, error => {
         reject(error);
+      });
+    });
+  }
+
+
+  updateUser(user: UserI, data: { [p: string]: any }): Promise<UserI> {
+    return new Promise(async (resolve, reject) => {
+      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, user, {
+        headers: this.settings.ssmFunctionsHeader
+      }).subscribe(value => resolve(value), error1 => {
+        console.log(error1);
+        reject(null);
       });
     });
   }

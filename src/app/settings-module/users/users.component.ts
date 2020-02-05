@@ -80,41 +80,41 @@ export class UsersComponent extends DeviceInfo implements OnInit {
   }
 
   updateUserName(user, matMenu: MatMenuTrigger) {
-    matMenu.toggleMenu();
-    if (user && user.value) {
-      user.field = 'username';
-      this.updateUser(user);
-    }
+    // matMenu.toggleMenu();
+    // if (user && user.value) {
+    //   user.field = 'username';
+    //   this.updateUser(user);
+    // }
   }
 
   updateUser(user: { objectId: string, value: string, field: string }) {
-    this.snack.open('Update in progress..', 'Ok');
-    this.userDatabase.updateUser(user).then(data => {
-      const editedObjectIndex = this.usersArray.findIndex(value => value.objectId === data.objectId);
-      this.usersArray = this.usersArray.filter(value => value.objectId !== user.objectId);
-      if (editedObjectIndex !== -1) {
-        const updatedObject = this.usersArray[editedObjectIndex];
-        updatedObject[user.field] = user.value;
-        this.usersDatasource.data[editedObjectIndex] = updatedObject;
-      } else {
-        console.warn('fails to update user table');
-      }
-      this.snack.open('User updated', 'Ok', {
-        duration: 3000
-      });
-    }).catch(reason => {
-      this.snack.open(reason && reason.message ? reason.message : 'Fail to update user', 'Ok', {
-        duration: 3000
-      });
-    });
+    // this.snack.open('Update in progress..', 'Ok');
+    // this.userDatabase.updateUser(user).then(data => {
+    //   const editedObjectIndex = this.usersArray.findIndex(value => value.objectId === data.objectId);
+    //   this.usersArray = this.usersArray.filter(value => value.objectId !== user.objectId);
+    //   if (editedObjectIndex !== -1) {
+    //     const updatedObject = this.usersArray[editedObjectIndex];
+    //     updatedObject[user.field] = user.value;
+    //     this.usersDatasource.data[editedObjectIndex] = updatedObject;
+    //   } else {
+    //     console.warn('fails to update user table');
+    //   }
+    //   this.snack.open('User updated', 'Ok', {
+    //     duration: 3000
+    //   });
+    // }).catch(reason => {
+    //   this.snack.open(reason && reason.message ? reason.message : 'Fail to update user', 'Ok', {
+    //     duration: 3000
+    //   });
+    // });
   }
 
   updateUserDescription(user, matMenu: MatMenuTrigger) {
-    matMenu.toggleMenu();
-    if (user && user.value) {
-      user.field = 'description';
-      this.updateUser(user);
-    }
+    // matMenu.toggleMenu();
+    // if (user && user.value) {
+    //   user.field = 'description';
+    //   this.updateUser(user);
+    // }
   }
 
   openAddUserDialog() {
