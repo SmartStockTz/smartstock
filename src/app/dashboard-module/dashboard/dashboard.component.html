@@ -12,13 +12,15 @@
     <mat-sidenav-content>
       <app-toolbar [heading]="'DASHBOARD'" [sidenav]="sidenav" [showProgress]="false"></app-toolbar>
 
-      <div style="margin-top: 24px" class="container d-flex justify-content-center align-items-center">
-        <mat-card class="mat-elevation-z0">
-          <mat-card-content>
-            <img src="assets/img/data.svg" width="200" height="200">
-          </mat-card-content>
-          <mat-card-subtitle>Reports are not ready yet</mat-card-subtitle>
-        </mat-card>
+      <div style="padding: 24px 36px;" class="container">
+        <!--        <mat-card class="mat-elevation-z0">-->
+        <!--          <mat-card-content>-->
+        <!--            <img src="assets/img/data.svg" width="200" height="200">-->
+        <!--          </mat-card-content>-->
+        <!--          <mat-card-subtitle>Reports are not ready yet</mat-card-subtitle>-->
+        <!--        </mat-card>-->
+        <app-dashboard-quick-report></app-dashboard-quick-report>
+        <app-dashboard-sale-trends></app-dashboard-sale-trends>
       </div>
 
     </mat-sidenav-content>

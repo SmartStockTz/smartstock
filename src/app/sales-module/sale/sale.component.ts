@@ -181,6 +181,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
         idOld: randomString(8),
         idTra: idTra,
         user: this.currentUser.objectId,
+        stock: value.stock,
         stockId: value.stock.objectId// for reference only
       });
     });

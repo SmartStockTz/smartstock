@@ -37,6 +37,7 @@
     "@angular/service-worker": "^8.2.14",
     "@ngmodule/material-carousel": "^0.5.1",
     "hammerjs": "^2.0.8",
+    "highcharts": "^8.0.0",
     "localforage": "^1.7.3",
     "ngforage": "^5.0.1",
     "parse": "^2.11.0",

@@ -1,0 +1,52 @@
+<div class="btn-block">
+  <div class="d-flex flex-row flex-wrap btn-block align-items-center">
+    <mat-card-subtitle>Sales Trends</mat-card-subtitle>
+    <span class="flex-grow-1"></span>
+    <mat-form-field appearance="legacy" style="margin-right: 8px">
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="pickerFromSaleTrendDay" [formControl]="salesTrendDayFromDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="pickerFromSaleTrendDay"></mat-datepicker-toggle>
+      <mat-datepicker [touchUi]="true" #pickerFromSaleTrendDay></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="pickerToSaleTrendDay" [formControl]="salesTrendDayToDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="pickerToSaleTrendDay"></mat-datepicker-toggle>
+      <mat-datepicker [touchUi]="true" #pickerToSaleTrendDay></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="row" style="margin-bottom: 26px">
+    <div class="col-12" style="padding: 8px">
+      <mat-card class="mat-elevation-z0">
+        <mat-card-content>
+          <div id="salesTrendByDay"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!--    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding: 8px">-->
+    <!--      <mat-card class="mat-elevation-z0">-->
+    <!--        <mat-card-header>-->
+    <!--          <mat-form-field appearance="outline" style="margin-right: 8px">-->
+    <!--            <mat-label>From Date</mat-label>-->
+    <!--            <input matInput [matDatepicker]="pickerFromSaleTrend" [formControl]="salesTrendMonthFromDateFormControl">-->
+    <!--            <mat-datepicker-toggle matSuffix [for]="pickerFromSaleTrend"></mat-datepicker-toggle>-->
+    <!--            <mat-datepicker [touchUi]="true" #pickerFromSaleTrend></mat-datepicker>-->
+    <!--          </mat-form-field>-->
+    <!--          <mat-form-field appearance="outline">-->
+    <!--            <mat-label>To Date</mat-label>-->
+    <!--            <input matInput [matDatepicker]="pickerToSaleTrendMonth" [formControl]="salesTrendMonthToDateFormControl">-->
+    <!--            <mat-datepicker-toggle matSuffix [for]="pickerToSaleTrendMonth"></mat-datepicker-toggle>-->
+    <!--            <mat-datepicker [touchUi]="true" #pickerToSaleTrendMonth></mat-datepicker>-->
+    <!--          </mat-form-field>-->
+    <!--        </mat-card-header>-->
+    <!--        <mat-card-content>-->
+    <!--          <div style="height: 300px" id="salesTrendByMonth"></div>-->
+    <!--        </mat-card-content>-->
+    <!--      </mat-card>-->
+    <!--    </div>-->
+
+  </div>
+
+</div>

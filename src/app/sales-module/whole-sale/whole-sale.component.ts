@@ -187,6 +187,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
         channel: 'whole',
         date: stringDate,
         idOld: '',
+        stock: this.stock,
         idTra: idTra,
         user: this.currentUser.objectId,
         stockId: value.stock.objectId
