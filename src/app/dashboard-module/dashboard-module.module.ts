@@ -3,7 +3,15 @@ import {CommonModule} from '@angular/common';
 import {DashboardModuleRoutingModule} from './dashboard-module-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
-import {MatCardModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSidenavModule} from '@angular/material';
+import {
+  MatCardModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatSidenavModule,
+  MatTableModule
+} from '@angular/material';
 import { DashboardQuickReportComponent } from './dashboard-quick-report/dashboard-quick-report.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { DashboardSaleTrendsComponent } from './dashboard-sale-trends/dashboard-sale-trends.component';
@@ -25,7 +33,9 @@ import { DashboardFrequentSoldProductComponent } from './dashboard-frequent-sold
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class DashboardModuleModule {

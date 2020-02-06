@@ -16,6 +16,25 @@ export class AdminDashboardService implements AdminReportAdapter {
               private readonly _settings: SettingsServiceService) {
   }
 
+  getFrequentlySoldProductsByDate(date: string): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const user = await this._storage.getItem<UserI>('user');
+        const activeShop = await this._storage.getItem<ShopI>('activeShop');
+        this._httpClient.get(this._settings.ssmFunctionsURL +
+          `/dashboard/admin/dailySales/${activeShop.projectId}/${date}`, {
+          headers: this._settings.ssmFunctionsHeader
+        }).subscribe(value => {
+          resolve(value);
+        }, error => {
+          reject(error);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
   getSalesTrendByDates(from: string, to: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {

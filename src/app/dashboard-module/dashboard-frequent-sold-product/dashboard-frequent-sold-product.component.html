@@ -1,6 +1,6 @@
 <div>
   <div class="d-flex flex-row flex-wrap btn-block align-items-center">
-    <mat-card-subtitle>Sold Products</mat-card-subtitle>
+    <mat-card-subtitle>Frequently Sold Products</mat-card-subtitle>
     <span class="flex-grow-1"></span>
     <mat-form-field appearance="legacy" style="margin-right: 8px">
       <mat-label>Date</mat-label>
@@ -18,12 +18,12 @@
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <th mat-header-cell *matHeaderCellDef>Total Sold</th>
         <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef>Amount (TZ)</th>
+        <th mat-header-cell *matHeaderCellDef>Total Revenue</th>
         <td mat-cell *matCellDef="let element">{{element.amount}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>

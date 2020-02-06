@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {CashSaleI} from '../../model/CashSale';
-import {SellerDashboardService} from '../../services/seller-dashboard.service';
 import {toSqlDate} from '../../utils/date';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
 
@@ -32,8 +31,8 @@ export class DashboardFrequentSoldProductComponent implements OnInit {
     const initDate = toSqlDate(new Date());
     this.dateFormControl.setValue(initDate);
     this.getProductsProgress = true;
-    this._report.getSoldProductsByDate(initDate).then(value => {
-      // console.log(value);
+    this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
+      console.log(value);
       this.soldProductsArray = value;
       this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
       this.soldProductsDatasource.paginator = this.soldProductPaginator;

@@ -5,5 +5,5 @@ export interface AdminReportAdapter {
 
   getSalesTrendByDates(from: string, to: string): Promise<any>;
 
-  // getSoldProductsByDate(date: string): Promise<any>;
+  getFrequentlySoldProductsByDate(date: string): Promise<any>;
 }
