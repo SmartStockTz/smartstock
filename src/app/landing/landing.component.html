@@ -1,91 +1,180 @@
-<section class="header">
-  <mat-toolbar>
-    <a routerLink="/" class="h4 font-weight-bold">SmartStock</a>
-    <!--    <a href="" class="link">Show me</a>-->
-    <span style="flex: 1 1 auto"></span>
-    <a routerLink="/login" class="link">SignIn</a>
-    <a routerLink="/register" class="link ">Register</a>
-  </mat-toolbar>
-  <div class="header-jumbo">
-    <h4 class="col-md-6">You can’t continue using papers to keep records of your business.</h4>
-    <p style="padding: 10px 10px 20px 10px">Start your sales with us, today</p>
-    <a routerLink="/login" class=" header-btn"> Get Started</a>
+<nav style="top: 0; z-index: 10000" class="navbar position-sticky navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="">
+    SmartStock
+  </a>
+  <button class="navbar-toggler" type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!--      <li class="nav-item active">-->
+      <!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+      <!--      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="#why-us">Why Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#testimonies">Testimonies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#pricing">Pricing</a>
+      </li>
+      <!--      <li class="nav-item dropdown">-->
+      <!--        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+      <!--          Dropdown-->
+      <!--        </a>-->
+      <!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+      <!--          <a class="dropdown-item" href="#">Action</a>-->
+      <!--          <a class="dropdown-item" href="#">Another action</a>-->
+      <!--          <div class="dropdown-divider"></div>-->
+      <!--          <a class="dropdown-item" href="#">Something else here</a>-->
+      <!--        </div>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link disabled" href="#">Disabled</a>-->
+      <!--      </li>-->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+      <!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
+    <button routerLink="/login" class="btn btn-outline-success">Login</button>
+    <span style="width: 10px; height: 10px"></span>
+    <button routerLink="/register" class="btn btn-outline-success">Register</button>
   </div>
+</nav>
+
+<section class="header d-flex flex-column" xmlns="http://www.w3.org/1999/html">
+  <div class="header-jumbo flex-grow-1 container d-flex align-items-start justify-content-center flex-column">
+    <h4 class="">
+      You can’t continue using papers <br> to keep records of your business.
+    </h4>
+    <p style="padding: 10px">Start your sales with us, today</p>
+    <button mat-flat-button color="primary" routerLink="/register" class=" header-btn">Open Account For Free</button>
+    <!--    <button style="font-size: 18px;" mat-button routerLink="/login" class="">Login To Your Shop</button>-->
+  </div>
+
 </section>
 
 
-<section class="why-smartstock">
-  <h3>Why Smartstock?</h3>
-  <div class="row">
-    <div class="col-md-3 text-center">
-      <img src="../../../assets/img/everyWhere_icon.png">
-      <h4>Work everywhere</h4>
-      <p>Due to internet connectivity challenge
-        our service available offline and online</p>
-    </div>
-    <div class="col-md-3 text-center">
-      <img src="../../../assets/img/“99.9%25”.png" width="50%" style="padding: 40px 10px">
-      <h4>Always available</h4>
-      <p>You will never experience down
-        time or have to wait for something</p>
-    </div>
-    <div class="col-md-3 text-center">
-      <img src="../../../assets/img/customisable_icon.png">
-      <h4>Customizable</h4>
-      <p>Say how you want it to work for you
-        and it will work the way you want</p>
-    </div>
-  </div>
-</section>
-
-
-<section>
-
-  <mat-carousel
-    timings="250ms ease-in"
-    [autoplay]="false"
-    interval="400"
-    color="primary"
-    maxWidth="500"
-    proportion="30"
-    slides="5"
-    [loop]="true"
-    [hideArrows]="false"
-    [hideIndicators]="true"
-    [useKeyboard]="false"
-    [useMouseWheel]="false"
-    orientation="ltr"
-    overlay-origin="false"
-  >
-    <!--[image]="slide.image"-->
-    <mat-carousel-slide
-      #matCarouselSlide overlayColor=" #F0F0F0"
-      *ngFor="let slide of slides; let i = index">
-      <div class="row testmon-container">
-
-        <div class="col-md-4 text-center testmon-info">
-          <h3>LB Pharmacy</h3>
-          <p class="details">
-            “Now I can see my business from far and be able to add purchases”
-          </p>
-          <!--          <button mat-button><h3>Read</h3></button>-->
-        </div>
-        <div class="col-md-6">
-          <img src="../../../assets/img/calculate.jpg" width="500px" height="300px">
-        </div>
-
+<section style="padding-top: 16px" class="why-smartstock" id="why-us">
+  <div class="container">
+    <h4>Why Smartstock?</h4>
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/everyWhere_icon.png">
+        <h4>Work everywhere</h4>
+        <p>Due to internet connectivity challenge
+          our service available offline and online</p>
       </div>
-    </mat-carousel-slide>
-  </mat-carousel>
-</section>
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/“99.9%25”.png" width="50%" style="padding: 40px 10px">
+        <h4>Always available</h4>
+        <p>You will never experience down
+          time or have to wait for something</p>
+      </div>
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/customisable_icon.png">
+        <h4>Customizable</h4>
+        <p>Say how you want it to work for you
+          and it will work the way you want</p>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/everyWhere_icon.png">
+        <h4>Customer Engagement</h4>
+        <p>
+          Create your online shop for customer to make order and see your products.
+        </p>
+      </div>
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/“99.9%25”.png" width="50%" style="padding: 40px 10px">
+        <h4>Pay As You Use</h4>
+        <p>
+          Pay for what you have use for a month, no additional cost
+        </p>
+      </div>
+      <div class="col-md-3 text-center">
+        <img src="../../../assets/img/customisable_icon.png">
+        <h4>Customizable</h4>
+        <p>Say how you want it to work for you
+          and it will work the way you want</p>
+      </div>
+    </div>
 
-<section class="row sale-on-go">
-  <img class="col-md-7" src="../../../assets/img/Rectangle12.png" height="400">
-  <div class="col-md-4 text-center right-box">
-    <h3>Sales on the go? <br>
-      You will love our app, soon we will be available in play store and app store
-    </h3>
   </div>
 </section>
+
+<!--<section style="padding-top: 16px" id="testimonies">-->
+<!--  <div class="container">-->
+<!--    <h4>Testimonies</h4>-->
+<!--    <mat-carousel-->
+<!--      timings="250ms ease-in"-->
+<!--      [autoplay]="false"-->
+<!--      interval="400"-->
+<!--      color="primary"-->
+<!--      proportion="30"-->
+<!--      slides="1"-->
+<!--      [loop]="true"-->
+<!--      [hideArrows]="false"-->
+<!--      [hideIndicators]="false"-->
+<!--      [useKeyboard]="false"-->
+<!--      [useMouseWheel]="false"-->
+<!--      orientation="ltr"-->
+<!--      overlay-origin="false">-->
+<!--      &lt;!&ndash;[image]="slide.image"&ndash;&gt;-->
+<!--      <mat-carousel-slide-->
+<!--        #matCarouselSlide overlayColor="#F0F0F0"-->
+<!--        *ngFor="let slide of slides; let i = index">-->
+<!--        <div class="row testmon-container">-->
+
+<!--          <div class="col-md-4 text-center testmon-info">-->
+<!--            <h3>LB Pharmacy</h3>-->
+<!--            <p class="details">-->
+<!--              “Now I can see my business from far and be able to add purchases”-->
+<!--            </p>-->
+<!--            &lt;!&ndash;          <button mat-button><h3>Read</h3></button>&ndash;&gt;-->
+<!--          </div>-->
+<!--          <div class="col-md-6">-->
+<!--            <img src="../../assets/img/header.png" width="400px">-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </mat-carousel-slide>-->
+<!--    </mat-carousel>-->
+<!--  </div>-->
+<!--</section>-->
+
+<section style="padding-top: 16px" id="pricing">
+  <div class="container">
+    <h4>Pricing</h4>
+    <p>add pricing here</p>
+  </div>
+</section>
+
+<section style="padding-top: 16px; padding-bottom: 16px">
+  <div class="container">
+    <h4>Downloads</h4>
+    <div class="row">
+      <img class="col-12 col-sm-12 col-md-4 col-xl-6 col-lg-6" src="../../../assets/img/Rectangle12.png" height="400">
+      <div
+        style="padding: 16px"
+        class="col-md-8 col-12 col-sm-12 col-xl-6 col-lg-6 text-center right-box d-flex align-items-center justify-content-center">
+        <p>
+          Sales on the go? <br>
+          You will love our app, soon we will be available in play store and app store
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <app-footer></app-footer>

@@ -59,7 +59,7 @@ export class SaleReportComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  private _getProfit() {
+   _getProfit() {
     return this.totalSale - this.totalCostOfGoodSold;
   }
 

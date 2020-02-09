@@ -38,7 +38,7 @@ addEventListener('message', ({data}) => {
           onFetch = false;
           // postMessage("stock comparison thread started");
         }).catch(reason => {
-          console.log(reason);
+          // console.log(reason);
           onFetch = false;
           // postMessage(false);
         });

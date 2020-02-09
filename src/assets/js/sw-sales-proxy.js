@@ -24,7 +24,7 @@ addEventListener('message', ({data}) => {
     _mainStorage.getItem('activeShop').then(activeShop => {
 
       if (!activeShop) {
-        console.log('active shop is not available yet');
+        // console.log('active shop is not available yet');
         throw 'active shop is not available yet';
       }
 
@@ -46,7 +46,7 @@ addEventListener('message', ({data}) => {
                   }).then(_ => {
                   _salesStorage.removeItem(key).catch(reason => console.log(reason));
                 }).catch(reason => {
-                  console.log(reason);
+                  // console.log(reason);
                 });
               });
             });
@@ -57,8 +57,8 @@ addEventListener('message', ({data}) => {
       }
 
     }).catch(reason => {
-      console.warn(reason);
-      console.log('error when fetch user');
+      // console.warn(reason);
+      // console.log('error when fetch user');
     });
 
   }, 4000);
