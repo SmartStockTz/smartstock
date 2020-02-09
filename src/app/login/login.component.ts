@@ -22,12 +22,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-    // this.userDatabase.currentUser(value => {
-    //   if (value) {
-    //     this.isLogin = true;
-    //     this.showMainUi(value.role);
-    //   }
-    // });
   }
 
   initializeForm() {
@@ -61,14 +55,14 @@ export class LoginComponent implements OnInit {
 
   private stopProgressAndCleanForm() {
     this.showProgress = false;
-    this.loginForm.reset();
+    // this.loginForm.reset();
   }
 
   private showMainUi(role: string) {
     if (role === 'admin') {
-      this.routes.navigateByUrl('dashboard').catch(reason => console.log(reason));
+      this.routes.navigateByUrl('/dashboard').catch(reason => console.log(reason)).then(() => this.loginForm.reset());
     } else {
-      this.routes.navigateByUrl('sale').catch(reason => console.log(reason));
+      this.routes.navigateByUrl('/sale/report').catch(reason => console.log(reason)).then(() => this.loginForm.reset());
     }
   }
 
@@ -78,7 +72,6 @@ export class LoginComponent implements OnInit {
     this.snack.open(
       'Please contact us @ +255764943055 to recover your password',
       'Ok',
-      {duration: 10000}
     );
   }
 }
