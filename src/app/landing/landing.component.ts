@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {NgForage} from 'ngforage';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-landing',
@@ -9,11 +10,10 @@ import {NgForage} from 'ngforage';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  slides = [11, 2, 4, 5, 7];
-  log: boolean;
-  message = 'The revolution smart stock manage and sales point is here now. ' +
-    'Let us take care of your business so you can focus on profit. Start using' +
-    ' our service today, its easy, simple and secure';
+  currencyFormControl = new FormControl('TZS');
+  totalProducts = 1;
+  totalSales = 1;
+  totalPurchases = 1;
 
   constructor(private router: Router,
               private snack: MatSnackBar,
@@ -21,24 +21,6 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.message = 'The revolution smart stock manage and sales point is here now. ' +
-    //   'Let us take care of your business so you can focus on profit. Start using our service today, its easy, simple and secure';
-  }
-
-  logout() {
-    // this.userDatabase.currentUser(user => {
-    //   if (user === null) {
-    //     this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
-    //   } else {
-    //     this.userDatabase.logout(user, value => {
-    //       if (value === null) {
-    //         this.snack.open('Can\'t log you out', 'Ok', {duration: 3000});
-    //       } else {
-    //         this.router.navigateByUrl('').catch(reason => console.log(reason));
-    //       }
-    //     });
-    //   }
-    // });
   }
 
   login() {
@@ -48,7 +30,53 @@ export class LandingComponent implements OnInit {
       });
   }
 
-  goToShop() {
-    this.login();
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    if (value === 99990) {
+      return '10k + ';
+    }
+
+    return value;
+  }
+
+  monthlyCost() {
+    const actual = this.calculateBill(30, this.totalSales, this.totalPurchases, this.totalProducts, this.currencyFormControl.value);
+    const maxmun = this.currencyFormControl.value === 'TZS' ? 23000 : 10;
+    if (actual > maxmun) {
+      return maxmun;
+    } else {
+      return actual;
+    }
+  }
+
+  actualMonthlyCost() {
+    return this.calculateBill(30, this.totalSales, this.totalPurchases, this.totalProducts, this.currencyFormControl.value);
+  }
+
+  discount() {
+    const actual = this.calculateBill(30, this.totalSales, this.totalPurchases, this.totalProducts, this.currencyFormControl.value);
+    const maxmun = this.currencyFormControl.value === 'TZS' ? 23000 : 10;
+    if (actual > maxmun) {
+      return actual - maxmun;
+    } else {
+      return 0;
+    }
+  }
+
+  // getMonthlyCost() {
+  //   return this.calculateBill(30, this.totalSales, this.totalPurchases, this.totalProducts, this.currencyFormControl.value);
+  // }
+
+  calculateBill(days: number, soldItems: number, purchaseItems: number, products: number, currency: 'USD' | 'TZS'): number {
+    const exRate = currency === 'TZS' ? 2300 : 1;
+    const salesCost = 0.000133333 * days * exRate * soldItems;
+    const purchaseCost = 0.0004 * days * exRate * purchaseItems;
+    const stockCost = 0.0003 * days * exRate * products;
+    const analyticsCost = 0.01 * days * exRate;
+    return (salesCost + purchaseCost + stockCost + analyticsCost);
   }
 }

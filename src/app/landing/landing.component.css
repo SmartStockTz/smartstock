@@ -45,6 +45,17 @@ a {
   border-radius: 6px;
 }
 
+.header-btn-secondary {
+  /*margin-left: 10px;*/
+  margin-bottom: 5px;
+  padding: 15px;
+  font-weight: 500;
+  font-size: 24px;
+  /*background: #00AA07;*/
+  border: solid #00AA07;
+  border-radius: 6px;
+}
+
 
 .why-smartstock {
   margin: 30px 50px 20px 50px;
@@ -99,3 +110,19 @@ mat-carousel ::ng-deep mat-icon {
   font-size: 50px !important;
   color: #1b1e21;
 }
+
+mat-card-subtitle{
+  margin-bottom: 8px !important;
+}
+
+
+/*.pricingInput{*/
+/*  width: 80px;*/
+/*  outline: solid #0b2e13;*/
+/*  background-color: #0b2e1325;*/
+/*  box-shadow: none;*/
+/*}*/
+
+/*.pricingInput:focus{*/
+/*  outline: none;*/
+/*}*/
