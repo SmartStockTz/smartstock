@@ -1,7 +1,7 @@
 {
   "name": "smartstock",
   "short_name": "smartstock",
-  "theme_color": "#1b5e20",
+  "theme_color": "#0b2e13",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
