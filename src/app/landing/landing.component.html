@@ -2,20 +2,17 @@
   <a class="navbar-brand" href="">
     SmartStock
   </a>
-  <button class="navbar-toggler" type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <!--  <button class="navbar-toggler" type="button"-->
+  <!--          data-toggle="collapse"-->
+  <!--          data-target="#navbarSupportedContent"-->
+  <!--          aria-controls="navbarSupportedContent"-->
+  <!--          aria-expanded="false"-->
+  <!--          aria-label="Toggle navigation">-->
+  <!--    <span class="navbar-toggler-icon"></span>-->
+  <!--  </button>-->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <!--      <li class="nav-item active">-->
-      <!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-      <!--      </li>-->
       <li class="nav-item">
         <a class="nav-link" href="#why-us">Why Us</a>
       </li>
@@ -25,26 +22,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#pricing">Pricing</a>
       </li>
-      <!--      <li class="nav-item dropdown">-->
-      <!--        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-      <!--          Dropdown-->
-      <!--        </a>-->
-      <!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-      <!--          <a class="dropdown-item" href="#">Action</a>-->
-      <!--          <a class="dropdown-item" href="#">Another action</a>-->
-      <!--          <div class="dropdown-divider"></div>-->
-      <!--          <a class="dropdown-item" href="#">Something else here</a>-->
-      <!--        </div>-->
-      <!--      </li>-->
-      <!--      <li class="nav-item">-->
-      <!--        <a class="nav-link disabled" href="#">Disabled</a>-->
-      <!--      </li>-->
     </ul>
-    <!--    <form class="form-inline my-2 my-lg-0">-->
-    <!--      &lt;!&ndash;      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;-->
-    <!--      &lt;!&ndash;      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
-    <!--    </form>-->
   </div>
+  <span class="flex-grow-1"></span>
   <button routerLink="/login" class="btn btn-outline-success">Login</button>
   <span style="width: 10px; height: 10px"></span>
   <button routerLink="/register" class="btn btn-outline-success">Register</button>
@@ -129,7 +109,7 @@
         <b>TZS 23,000 ( $10 )</b>
 
       </span>
-      <div class="row">
+      <div style="margin-bottom: 24px" class="row">
         <div
           class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-8 box-shadow d-flex flex-column align-items-start justify-content-center">
           <div class="btn-block">
@@ -187,16 +167,17 @@
               <mat-option [value]="'$'">USD</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-card-subtitle>Actual cost</mat-card-subtitle>
-          <h5>{{actualMonthlyCost() | currency: currencyFormControl.value + ' '}}</h5>
-          <mat-card-subtitle>Discount</mat-card-subtitle>
-          <h5>{{discount() | currency: currencyFormControl.value + ' '}}</h5>
+          <!--          <mat-card-subtitle>Actual cost</mat-card-subtitle>-->
+          <!--          <h6>{{actualMonthlyCost() | currency: currencyFormControl.value + ' '}}</h6>-->
+          <!--          <mat-card-subtitle>Discount</mat-card-subtitle>-->
+          <!--          <h6>{{discount() | currency: currencyFormControl.value + ' '}}</h6>-->
           <mat-card-subtitle>Your Approximately Monthly Payment</mat-card-subtitle>
           <h4>{{monthlyCost() | currency: currencyFormControl.value + ' '}}</h4>
           <span class="flex-grow-1"></span>
         </div>
 
-        <button mat-button color="primary" routerLink="/register" class="header-btn-secondary">
+        <button mat-button color="primary" routerLink="/register"
+                class="col-sm-12 col-md-12 col-12 header-btn-secondary">
           Open Account For Free
         </button>
 
@@ -246,23 +227,5 @@
     </div>
   </div>
 </section>
-
-<!--<section style="padding-top: 16px; padding-bottom: 16px">-->
-<!--  <div class="container">-->
-<!--    <h4>Downloads</h4>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <div class="row">-->
-<!--      <img class="col-12 col-sm-12 col-md-4 col-xl-6 col-lg-6" src="../../../assets/img/Rectangle12.png" height="400">-->
-<!--      <div-->
-<!--        style="padding: 16px"-->
-<!--        class="col-md-8 col-12 col-sm-12 col-xl-6 col-lg-6 text-center right-box d-flex align-items-center justify-content-center">-->
-<!--        <p>-->
-<!--          Sales on the go? <br>-->
-<!--          You will love our app, soon we will be available in play store and app store-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
 
 <app-footer></app-footer>
