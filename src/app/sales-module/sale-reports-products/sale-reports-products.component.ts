@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {CashSaleI} from '../../model/CashSale';
 import {SellerDashboardService} from '../../services/seller-dashboard.service';
 import {toSqlDate} from '../../utils/date';
@@ -17,25 +17,28 @@ export class SaleReportsProductsComponent implements OnInit {
   soldProductsDatasource: MatTableDataSource<CashSaleI>;
   soldProductsArray: CashSaleI[] = [];
 
-  @ViewChild('soldProductPaginator', {static: true}) soldProductPaginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) soldProductPaginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private readonly _report: SellerDashboardService,
               private readonly _snack: MatSnackBar) {
   }
 
   ngOnInit() {
-    this._getSoldProduct();
+    this.dateFormControl.setValue(toSqlDate(new Date()));
+    this._getSoldProduct(toSqlDate(new Date()));
+    this.dateFormControl.valueChanges.subscribe(value => {
+      this.refreshProducts();
+    });
   }
 
-  private _getSoldProduct() {
-    const initDate = toSqlDate(new Date());
-    this.dateFormControl.setValue(initDate);
+  private _getSoldProduct(date: string) {
     this.getProductsProgress = true;
-    this._report.getSoldProductsByDate(initDate).then(value => {
-      // console.log(value);
+    this._report.getSoldProductsByDate(date).then(value => {
       this.soldProductsArray = value;
       this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
       this.soldProductsDatasource.paginator = this.soldProductPaginator;
+      this.soldProductsDatasource.sort = this.sort;
       this.getProductsProgress = false;
     }).catch(reason => {
       console.log(reason);
@@ -44,4 +47,7 @@ export class SaleReportsProductsComponent implements OnInit {
     });
   }
 
+  refreshProducts() {
+    this._getSoldProduct(toSqlDate(new Date(this.dateFormControl.value)));
+  }
 }

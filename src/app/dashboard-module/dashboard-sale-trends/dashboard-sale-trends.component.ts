@@ -56,7 +56,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
     });
     this.trendChart = Highcharts.chart('salesTrendByDay', {
       chart: {
-        type: 'line'
+        type: 'areaspline'
       },
       title: {
         text: 'Sales By Date'
@@ -107,6 +107,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
       // @ts-ignore
       series: [{
         name: 'Sales',
+        color: '#0b2e13',
         data: totalSales
       }]
     });

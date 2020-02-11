@@ -24,13 +24,16 @@ export class SaleReportComponent extends DeviceInfo implements OnInit {
 
   ngOnInit() {
     this.quickReportDateFormControl.setValue(toSqlDate(new Date()));
-    this._getTotalSaleReport();
-    this._getTotalCostOfGoodSold();
+    this._getTotalSaleReport(toSqlDate(new Date()));
+    this._getTotalCostOfGoodSold(toSqlDate(new Date()));
+    this.quickReportDateFormControl.valueChanges.subscribe(value => {
+      this.refreshQuickReport();
+    });
   }
 
-  private _getTotalSaleReport() {
+  private _getTotalSaleReport(date: string) {
     this.totalSaleGetProgress = true;
-    this._report.getTotalSaleOfUserByDate(toSqlDate(new Date())).then(data => {
+    this._report.getTotalSaleOfUserByDate(date).then(data => {
       this.totalSale = data.length > 0 ? data[0].total : 0;
       this.totalSaleGetProgress = false;
     }).catch(reason => {
@@ -43,10 +46,9 @@ export class SaleReportComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  private _getTotalCostOfGoodSold() {
+  private _getTotalCostOfGoodSold(date: string) {
     this.costOfGoodSoldProgress = true;
-    this._report.getTotalCostOfGoodSoldOfUserByDate(toSqlDate(new Date())).then(data => {
-      // console.log(data);
+    this._report.getTotalCostOfGoodSoldOfUserByDate(date).then(data => {
       this.totalCostOfGoodSold = data.length > 0 ? data[0].total : 0;
       this.costOfGoodSoldProgress = false;
     }).catch(reason => {
@@ -59,8 +61,12 @@ export class SaleReportComponent extends DeviceInfo implements OnInit {
     });
   }
 
-   _getProfit() {
+  _getProfit() {
     return this.totalSale - this.totalCostOfGoodSold;
   }
 
+  refreshQuickReport() {
+    this._getTotalSaleReport(toSqlDate(new Date(this.quickReportDateFormControl.value)));
+    this._getTotalCostOfGoodSold(toSqlDate(new Date(this.quickReportDateFormControl.value)));
+  }
 }

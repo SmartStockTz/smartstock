@@ -11,7 +11,7 @@ import {
     MatFormFieldModule, MatIconModule,
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSidenavModule,
-    MatSlideToggleModule, MatTableModule, MatTabsModule
+    MatSlideToggleModule, MatSortModule, MatTableModule, MatTabsModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SaleReportComponent } from './sale-report/sale-report.component';
@@ -37,7 +37,8 @@ import { SaleReportsProductsComponent } from './sale-reports-products/sale-repor
         MatButtonModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatSortModule
     ],
   declarations: [
     WholeSaleComponent,

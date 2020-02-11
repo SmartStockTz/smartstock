@@ -100,3 +100,9 @@ button {
   margin-left: 4px !important;
 }
 
+.bill-card-top {
+  height: 125px;
+  /*// background: #FFFFFF;*/
+  border-radius: 4px;
+  padding: 5px;
+}

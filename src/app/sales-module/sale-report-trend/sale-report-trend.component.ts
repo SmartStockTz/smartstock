@@ -1,19 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {SellerDashboardService} from '../../services/seller-dashboard.service';
-import {MatSnackBar} from '@angular/material';
 import {toSqlDate} from '../../utils/date';
 import * as Highcharts from 'highcharts';
-
-declare var require: any;
-const Boost = require('highcharts/modules/boost');
-const noData = require('highcharts/modules/no-data-to-display');
-const More = require('highcharts/highcharts-more');
-
-Boost(Highcharts);
-noData(Highcharts);
-More(Highcharts);
-noData(Highcharts);
 
 @Component({
   selector: 'app-sale-report-trend',
@@ -22,14 +11,12 @@ noData(Highcharts);
 })
 export class SaleReportTrendComponent implements OnInit {
   salesTrendDayFromDateFormControl = new FormControl();
-  salesTrendMonthFromDateFormControl = new FormControl();
   salesTrendDayToDateFormControl = new FormControl();
-  salesTrendMonthToDateFormControl = new FormControl();
+  trendChart: Highcharts.Chart = undefined;
 
   salesByDayTrendProgress = false;
 
-  constructor(private readonly _report: SellerDashboardService,
-              private readonly _snack: MatSnackBar) {
+  constructor(private readonly _report: SellerDashboardService) {
   }
 
   ngOnInit() {
@@ -38,6 +25,12 @@ export class SaleReportTrendComponent implements OnInit {
     this.salesTrendDayFromDateFormControl.setValue(fromDate);
     this.salesTrendDayToDateFormControl.setValue(date);
     this._getSalesTrend(toSqlDate(fromDate), toSqlDate(date));
+    this.salesTrendDayFromDateFormControl.valueChanges.subscribe(_ => {
+      this.refreshTrendReport();
+    });
+    this.salesTrendDayToDateFormControl.valueChanges.subscribe(_ => {
+      this.refreshTrendReport();
+    });
   }
 
   private _getSalesTrend(from: string, to: string) {
@@ -58,9 +51,9 @@ export class SaleReportTrendComponent implements OnInit {
       saleDays.push(data[key]._id);
       totalSales.push(data[key].total);
     });
-    Highcharts.chart('salesTrendByDay', {
+    this.trendChart = Highcharts.chart('salesTrendByDay', {
       chart: {
-        type: 'area'
+        type: 'areaspline'
       },
       title: {
         text: 'Sales By Date'
@@ -110,9 +103,14 @@ export class SaleReportTrendComponent implements OnInit {
       // @ts-ignore
       series: [{
         name: 'Sales',
-        data: totalSales
+        data: totalSales,
+        color: '#0b2e13'
       }]
     });
   }
 
+  refreshTrendReport() {
+    this._getSalesTrend(toSqlDate(new Date(this.salesTrendDayFromDateFormControl.value)),
+      toSqlDate(new Date(this.salesTrendDayToDateFormControl.value)));
+  }
 }

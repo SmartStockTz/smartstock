@@ -14,11 +14,11 @@
 
 }
 
-.bill-card-top {
-  /*background: #FFFFFF;*/
-  border-radius: 4px;
-  padding: 5px;
-}
+/*.bill-card-top {*/
+/*  !*background: #FFFFFF;*!*/
+/*  border-radius: 4px;*/
+/*  padding: 5px;*/
+/*}*/
 
 .bill-card-top > mat-card {
   height: 125px;
