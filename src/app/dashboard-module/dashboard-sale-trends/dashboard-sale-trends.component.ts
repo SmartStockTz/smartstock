@@ -64,7 +64,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
       // @ts-ignore
       xAxis: {
         // allowDecimals: false,
-       // categories: saleDays,
+        categories: saleDays,
         title: {
           text: 'Day'
         },
