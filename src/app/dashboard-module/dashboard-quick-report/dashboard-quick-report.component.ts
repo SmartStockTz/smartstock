@@ -22,13 +22,22 @@ export class DashboardQuickReportComponent implements OnInit {
 
   ngOnInit() {
     this.quickReportDateFormControl.setValue(toSqlDate(new Date()));
-    this._getTotalSaleReport();
-    this._getTotalCostOfGoodSold();
+    this._getTotalSaleReport(toSqlDate(new Date()));
+    this._getTotalCostOfGoodSold(toSqlDate(new Date()));
+
+    this.quickReportDateFormControl.valueChanges.subscribe(value => {
+      this.refreshQuickReport();
+    });
   }
 
-  private _getTotalSaleReport() {
+  refreshQuickReport() {
+    this._getTotalSaleReport(toSqlDate(new Date(this.quickReportDateFormControl.value)));
+    this._getTotalCostOfGoodSold(toSqlDate(new Date(this.quickReportDateFormControl.value)));
+  }
+
+  private _getTotalSaleReport(date: string) {
     this.totalSaleGetProgress = true;
-    this._report.getTotalSaleByDate(toSqlDate(new Date())).then(data => {
+    this._report.getTotalSaleByDate(date).then(data => {
       this.totalSale = data.length > 0 ? data[0].total : 0;
       this.totalSaleGetProgress = false;
     }).catch(reason => {
@@ -41,10 +50,9 @@ export class DashboardQuickReportComponent implements OnInit {
     });
   }
 
-  private _getTotalCostOfGoodSold() {
+  private _getTotalCostOfGoodSold(date: string) {
     this.costOfGoodSoldProgress = true;
-    this._report.getTotalCostOfGoodSoldByDate(toSqlDate(new Date())).then(data => {
-      // console.log(data);
+    this._report.getTotalCostOfGoodSoldByDate(date).then(data => {
       this.totalCostOfGoodSold = data.length > 0 ? data[0].total : 0;
       this.costOfGoodSoldProgress = false;
     }).catch(reason => {
@@ -57,7 +65,7 @@ export class DashboardQuickReportComponent implements OnInit {
     });
   }
 
-   _getProfit() {
+  _getProfit() {
     return this.totalSale - this.totalCostOfGoodSold;
   }
 

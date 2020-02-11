@@ -2,7 +2,7 @@
   <div class="d-flex flex-row flex-wrap btn-block align-items-center">
     <mat-card-subtitle>Frequently Sold Products</mat-card-subtitle>
     <span class="flex-grow-1"></span>
-    <mat-form-field appearance="legacy" style="margin-right: 8px">
+    <mat-form-field appearance="outline" style="margin-right: 8px">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="pickerDate" [formControl]="dateFormControl">
       <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
@@ -31,6 +31,8 @@
       <tr mat-row *matRowDef="let row; columns: columns;"></tr>
       <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="columns"></tr>
     </table>
+
     <mat-paginator #soldProductPaginator [pageSizeOptions]="[25, 50, 75, 100]" showFirstLastButtons></mat-paginator>
+
   </mat-card>
 </div>

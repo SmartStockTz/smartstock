@@ -95,3 +95,8 @@ button {
   outline: none;
 }
 
+.dashboard-refresh-button {
+  margin-top: 6px !important;
+  margin-left: 4px !important;
+}
+

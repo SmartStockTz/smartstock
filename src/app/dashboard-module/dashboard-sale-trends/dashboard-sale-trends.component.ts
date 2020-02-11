@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
 import {toSqlDate} from '../../utils/date';
 import * as Highcharts from 'highcharts';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
@@ -12,14 +11,11 @@ import {AdminDashboardService} from '../../services/admin-dashboard.service';
 })
 export class DashboardSaleTrendsComponent implements OnInit {
   salesTrendDayFromDateFormControl = new FormControl();
-  salesTrendMonthFromDateFormControl = new FormControl();
   salesTrendDayToDateFormControl = new FormControl();
-  salesTrendMonthToDateFormControl = new FormControl();
-
   salesByDayTrendProgress = false;
+  trendChart: Highcharts.Chart = undefined;
 
-  constructor(private readonly _report: AdminDashboardService,
-              private readonly _snack: MatSnackBar) {
+  constructor(private readonly _report: AdminDashboardService) {
   }
 
   ngOnInit() {
@@ -28,6 +24,16 @@ export class DashboardSaleTrendsComponent implements OnInit {
     this.salesTrendDayFromDateFormControl.setValue(fromDate);
     this.salesTrendDayToDateFormControl.setValue(date);
     this._getSalesTrend(toSqlDate(fromDate), toSqlDate(date));
+    this._listenForDateChange();
+  }
+
+  private _listenForDateChange() {
+    this.salesTrendDayFromDateFormControl.valueChanges.subscribe(value => {
+      this.refreshTrendReport();
+    });
+    this.salesTrendDayToDateFormControl.valueChanges.subscribe(value => {
+      this.refreshTrendReport();
+    });
   }
 
   private _getSalesTrend(from: string, to: string) {
@@ -48,9 +54,9 @@ export class DashboardSaleTrendsComponent implements OnInit {
       saleDays.push(data[key]._id);
       totalSales.push(data[key].total);
     });
-    Highcharts.chart('salesTrendByDay', {
+    this.trendChart = Highcharts.chart('salesTrendByDay', {
       chart: {
-        type: 'area'
+        type: 'line'
       },
       title: {
         text: 'Sales By Date'
@@ -58,7 +64,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
       // @ts-ignore
       xAxis: {
         // allowDecimals: false,
-        categories: saleDays,
+       // categories: saleDays,
         title: {
           text: 'Day'
         },
@@ -73,6 +79,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
         title: {
           text: 'Total Sales'
         },
+        // lineColor: '#1b5e20',
         labels: {
           formatter: function () {
             return this.value;
@@ -88,7 +95,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
           marker: {
             enabled: false,
             symbol: 'circle',
-            radius: 2,
+            radius: 4,
             states: {
               hover: {
                 enabled: true
@@ -105,4 +112,8 @@ export class DashboardSaleTrendsComponent implements OnInit {
     });
   }
 
+  refreshTrendReport() {
+    this._getSalesTrend(toSqlDate(new Date(this.salesTrendDayFromDateFormControl.value)),
+      toSqlDate(new Date(this.salesTrendDayToDateFormControl.value)));
+  }
 }

@@ -1,51 +1,63 @@
 <div class="d-flex flex-row flex-wrap btn-block align-items-center">
   <mat-card-subtitle>Sales Overview</mat-card-subtitle>
   <span class="flex-grow-1"></span>
-  <mat-form-field appearance="legacy">
-    <mat-label>Choose Date</mat-label>
-    <input matInput [matDatepicker]="pickerDue" [formControl]="quickReportDateFormControl">
-    <mat-datepicker-toggle matSuffix [for]="pickerDue"></mat-datepicker-toggle>
-    <mat-datepicker [touchUi]="true" #pickerDue></mat-datepicker>
-  </mat-form-field>
+  <div class="d-flex flex-nowrap flex-row justify-content-start align-items-start">
+    <mat-form-field appearance="outline">
+      <mat-label>Choose Date</mat-label>
+      <input matInput [matDatepicker]="pickerDue" [formControl]="quickReportDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="pickerDue"></mat-datepicker-toggle>
+      <mat-datepicker [touchUi]="true" #pickerDue></mat-datepicker>
+    </mat-form-field>
+    <button (click)="refreshQuickReport()" [disabled]="costOfGoodSoldProgress || totalSaleGetProgress" mat-flat-button
+            class="ft-button dashboard-refresh-button" color="primary">
+      <mat-icon *ngIf="!costOfGoodSoldProgress && !totalSaleGetProgress">refresh</mat-icon>
+      <mat-progress-spinner *ngIf="costOfGoodSoldProgress|| totalSaleGetProgress" style="display: inline-block"
+                            mode="indeterminate"
+                            [diameter]="15" color="primary"></mat-progress-spinner>
+    </button>
+  </div>
 </div>
 
 <div class="row" style="margin-bottom: 16px">
-  <mat-card
-    class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-    <mat-card-header>
-      <h5 class="bill-card-top-title text-center">
-        Total Sale
-      </h5>
-    </mat-card-header>
-    <hr style="width: 100%; height: 1px">
-    <mat-card-content class="d-flex justify-content-center align-items-center">
-      <span class="bill-card-top-number">{{totalSale | number}}</span>
-    </mat-card-content>
-  </mat-card>
+  <div class="bill-card-top col-12 col-sm-12 col-md-4 col-xl-4 col-lg-4">
+    <mat-card class="d-flex flex-column">
+      <mat-card-header>
+        <h5 class="bill-card-top-title text-center">
+          Total Sale
+        </h5>
+      </mat-card-header>
+      <hr style="width: 100%; height: 1px">
+      <mat-card-content class="d-flex justify-content-center align-items-center">
+        <span class="bill-card-top-number">{{totalSale | number}}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-  <mat-card
-    class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-    <mat-card-header>
-      <h5 class="bill-card-top-title text-center">
-        Cost Of Good Sold
-      </h5>
-    </mat-card-header>
-    <hr style="width: 100%; height: 1px">
-    <mat-card-content class="d-flex justify-content-center align-items-center">
-      <span class="bill-card-top-number">{{totalCostOfGoodSold | number}}</span>
-    </mat-card-content>
-  </mat-card>
+  <div class="bill-card-top col-12 col-sm-12 col-md-4 col-xl-4 col-lg-4">
+    <mat-card class="d-flex flex-column">
+      <mat-card-header>
+        <h5 class="bill-card-top-title text-center">
+          Cost Of Good Sold
+        </h5>
+      </mat-card-header>
+      <hr style="width: 100%; height: 1px">
+      <mat-card-content class="d-flex justify-content-center align-items-center">
+        <span class="bill-card-top-number">{{totalCostOfGoodSold | number}}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-  <mat-card
-    class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-    <mat-card-header>
-      <h5 class="bill-card-top-title text-center">
-        Gross Profit
-      </h5>
-    </mat-card-header>
-    <hr style="width: 100%; height: 1px">
-    <mat-card-content class="d-flex justify-content-center align-items-center">
-      <span class="bill-card-top-number">{{_getProfit() | number}}</span>
-    </mat-card-content>
-  </mat-card>
+  <div class="bill-card-top col-12 col-sm-12 col-md-4 col-xl-4 col-lg-4">
+    <mat-card class=" d-flex flex-column">
+      <mat-card-header>
+        <h5 class="bill-card-top-title text-center">
+          Gross Profit
+        </h5>
+      </mat-card-header>
+      <hr style="width: 100%; height: 1px">
+      <mat-card-content class="d-flex justify-content-center align-items-center">
+        <span class="bill-card-top-number">{{_getProfit() | number}}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

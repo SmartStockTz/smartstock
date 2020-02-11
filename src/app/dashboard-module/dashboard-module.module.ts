@@ -4,11 +4,12 @@ import {DashboardModuleRoutingModule} from './dashboard-module-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {
+  MatButtonModule,
   MatCardModule,
   MatDatepickerModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressSpinnerModule,
   MatSidenavModule,
   MatTableModule
 } from '@angular/material';
@@ -35,7 +36,10 @@ import { DashboardFrequentSoldProductComponent } from './dashboard-frequent-sold
     ReactiveFormsModule,
     MatInputModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ]
 })
 export class DashboardModuleModule {
