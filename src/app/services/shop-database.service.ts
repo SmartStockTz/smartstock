@@ -19,7 +19,9 @@ export class ShopDatabaseService implements ShopDatabaseAdapter {
     return new Promise<ShopI>(async (resolve, reject) => {
       try {
         const user = await this._storage.getActiveUser();
-        this._httpClient.post<ShopI>(this._settings.ssmFunctionsURL + '/shops/' + user.objectId, shop).subscribe(value => {
+        this._httpClient.post<ShopI>(this._settings.ssmFunctionsURL + '/shops/' + user.objectId, shop, {
+          headers: this._settings.ssmFunctionsHeader
+        }).subscribe(value => {
           resolve(value);
         }, error => {
           reject(error);

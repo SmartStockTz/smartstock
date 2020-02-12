@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import {ShopI} from '../model/ShopI';
 import {UserDatabaseService} from '../services/user-database.service';
 import {Router} from '@angular/router';
+import {NgForage} from 'ngforage';
 
 @Component({
   selector: 'app-choose-shop',
@@ -19,6 +20,7 @@ export class ChooseShopComponent implements OnInit {
   constructor(public createShopDialog: MatDialog,
               private readonly _snack: MatSnackBar,
               private readonly _router: Router,
+              private readonly _storage: NgForage,
               private readonly userDatabase: UserDatabaseService) {
   }
 
@@ -32,7 +34,12 @@ export class ChooseShopComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        console.log(result);
+        // this._storage.getItem('');
+      } else {
+        console.log('no shop to append');
+      }
     });
   }
 
