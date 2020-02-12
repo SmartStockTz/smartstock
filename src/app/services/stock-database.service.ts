@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {StockDataSource} from '../database/connector/StockDataSource';
+import {StockDataSource} from '../adapter/StockDataSource';
 import {CategoryI} from '../model/CategoryI';
 import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {randomString} from '../database/ParseBackend';
+import {randomString} from '../adapter/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
 

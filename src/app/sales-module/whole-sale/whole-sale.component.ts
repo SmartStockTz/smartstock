@@ -15,6 +15,8 @@ import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
 import {PrintServiceService} from '../../services/print-service.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
+import {toSqlDate} from '../../utils/date';
+import {randomString} from '../../adapter/ParseBackend';
 
 export interface DialogData {
   customer?: string;
@@ -168,7 +170,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    const stringDate = SalesDatabaseService.getCurrentDate();
+    const stringDate = toSqlDate(new Date());
     let idTra: string;
     if (this.traRadioControl.value === false) {
       idTra = 'n';
@@ -183,6 +185,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
         quantity: value.quantity,
         product: value.product,
         category: value.stock.category,
+        batch: randomString(12),
         unit: value.stock.unit,
         channel: 'whole',
         date: stringDate,
@@ -209,7 +212,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
     } else {
       this.showProgressBar();
       this.saleDatabase.addOrder({
-        date: SalesDatabaseService.getCurrentDate(),
+        date: toSqlDate(new Date()),
         customer: this.customerControl.value,
         amount: this.totalBill,
         cart: this.cartDatasourceArray,

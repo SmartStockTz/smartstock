@@ -11,7 +11,7 @@ import {CartI} from '../../model/cart';
 import {SalesDatabaseService} from '../../services/sales-database.service';
 import {CashSaleI} from '../../model/CashSale';
 import {PrintServiceService} from '../../services/print-service.service';
-import {randomString} from '../../database/ParseBackend';
+import {randomString} from '../../adapter/ParseBackend';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
 import {toSqlDate} from '../../utils/date';

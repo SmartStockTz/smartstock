@@ -1,5 +1,5 @@
-import {UserI} from '../../model/UserI';
-import {ShopI} from '../../model/ShopI';
+import {UserI} from '../model/UserI';
+import {ShopI} from '../model/ShopI';
 
 export interface UserDataSource {
 

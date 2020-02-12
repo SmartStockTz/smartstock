@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {SellerReportAdapter} from '../database/connector/SellerReportAdapter';
+import {SellerReportAdapter} from '../adapter/SellerReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {NgForage} from 'ngforage';

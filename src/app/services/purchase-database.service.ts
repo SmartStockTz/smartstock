@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PurchaseDataSource} from '../database/connector/PurchaseDataSource';
+import {PurchaseDataSource} from '../adapter/PurchaseDataSource';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {HttpClient} from '@angular/common/http';

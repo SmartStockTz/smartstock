@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AdminReportAdapter} from '../database/connector/AdminReportAdapter';
+import {AdminReportAdapter} from '../adapter/AdminReportAdapter';
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {HttpClient} from '@angular/common/http';

@@ -1,5 +1,5 @@
-import {PurchaseI} from '../../model/PurchaseI';
-import {ReceiptI} from '../../model/ReceiptI';
+import {PurchaseI} from '../model/PurchaseI';
+import {ReceiptI} from '../model/ReceiptI';
 
 export interface PurchaseDataSource {
   recordPayment(objectId: string): Promise<any>;

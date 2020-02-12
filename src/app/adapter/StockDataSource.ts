@@ -1,8 +1,8 @@
-import {Stock} from '../../model/stock';
-import {CategoryI} from '../../model/CategoryI';
-import {SupplierI} from '../../model/SupplierI';
-import {UnitsI} from '../../model/UnitsI';
-import {PurchaseI} from '../../model/PurchaseI';
+import {Stock} from '../model/stock';
+import {CategoryI} from '../model/CategoryI';
+import {SupplierI} from '../model/SupplierI';
+import {UnitsI} from '../model/UnitsI';
+import {PurchaseI} from '../model/PurchaseI';
 
 export interface StockDataSource {
   getStock(id: string, callback: (stock: Stock) => void);

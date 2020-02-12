@@ -4,7 +4,7 @@ import {CartI} from '../model/cart';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {environment} from '../../environments/environment';
-import {randomString} from '../database/ParseBackend';
+import {randomString} from '../adapter/ParseBackend';
 
 @Injectable({
   providedIn: 'root',

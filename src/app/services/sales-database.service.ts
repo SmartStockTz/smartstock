@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {SalesDatasource} from '../database/connector/SalesDatasource';
+import {SalesDatasource} from '../adapter/SalesDatasource';
 import {CashSaleI} from '../model/CashSale';
 import {OrderI} from '../model/OderI';
 import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import {BatchI} from '../model/batchI';
-import {randomString} from '../database/ParseBackend';
+import {randomString} from '../adapter/ParseBackend';
 import {ShopI} from '../model/ShopI';
 
 @Injectable({

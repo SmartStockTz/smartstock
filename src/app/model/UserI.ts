@@ -8,6 +8,7 @@ export interface UserI {
   lastname: string;
   mobile: string;
   email: string;
+  category?: string; // default shop category
   role: 'admin' | 'manager' | 'user';
   businessName: string;
   country: string;

@@ -25,8 +25,10 @@ export class ChooseShopComponent implements OnInit {
   openCreateShopDialog() {
     const dialogRef = this.createShopDialog.open(CreateShopComponent, {
       minWidth: 350,
-      maxWidth: 400,
-      data: this.shopDetails
+      // maxWidth: 400,
+      data: this.shopDetails,
+      disableClose: true,
+      closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

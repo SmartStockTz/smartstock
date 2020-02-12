@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {UserDataSource} from '../database/connector/UserDataSource';
+import {UserDataSource} from '../adapter/UserDataSource';
 import {UserI} from '../model/UserI';
 import {NgForage} from 'ngforage';
-import {ParseBackend, serverUrl} from '../database/ParseBackend';
+import {ParseBackend, serverUrl} from '../adapter/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {ShopI} from '../model/ShopI';
@@ -113,6 +113,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
               settings: value.settings,
               businessName: value.businessName,
               projectId: value.projectId,
+              category: value.category,
               projectUrlId: value.projectUrlId,
               applicationId: value.applicationId
             });
@@ -208,7 +209,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
     });
   }
 
-  async getShops(): Promise<UserI[]> {
+  async getShops(): Promise<ShopI[]> {
     try {
       const user = await this.indexD.getItem<UserI>('user');
       const shops = [];

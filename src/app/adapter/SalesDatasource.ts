@@ -1,5 +1,5 @@
-import {CashSaleI} from '../../model/CashSale';
-import {OrderI} from '../../model/OderI';
+import {CashSaleI} from '../model/CashSale';
+import {OrderI} from '../model/OderI';
 
 export interface SalesDatasource {
   addCashSale(sale: CashSaleI, callback: (value: any) => void);
