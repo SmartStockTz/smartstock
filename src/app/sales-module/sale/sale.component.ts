@@ -14,6 +14,7 @@ import {PrintServiceService} from '../../services/print-service.service';
 import {randomString} from '../../database/ParseBackend';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
+import {toSqlDate} from '../../utils/date';
 
 @Component({
   selector: 'app-sale',
@@ -153,7 +154,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    const stringDate = SalesDatabaseService.getCurrentDate();
+    const stringDate = toSqlDate(new Date());
     let idTra: string;
     let channel: string;
     if (this.traRadioControl.value === false) {
@@ -167,7 +168,6 @@ export class SaleComponent extends DeviceInfo implements OnInit {
       channel = 'retail';
     }
     const saleM: CashSaleI[] = [];
-    // console.log(stringDate);
     this.cartDatasourceArray.forEach(value => {
       saleM.push({
         amount: value.amount,
@@ -181,6 +181,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
         idOld: randomString(8),
         idTra: idTra,
         user: this.currentUser.objectId,
+        batch: randomString(12),
         stock: value.stock,
         stockId: value.stock.objectId// for reference only
       });

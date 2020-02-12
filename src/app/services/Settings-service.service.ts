@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
 import {UserI} from '../model/UserI';
+import {ShopI} from '../model/ShopI';
 
 @Injectable({
   providedIn: 'root'
@@ -121,15 +122,13 @@ export class SettingsServiceService {
 
   saveSettings(settings: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.indexDb.getItem<UserI>('user').then(async user => {
-        this.httpClient.put(this.ssmServerURL + '/users/' + user.objectId, {
-          settings: settings
-        }, {
-          headers: await this.getSSMUserHeader()
+      this.indexDb.getItem<ShopI>('activeShop').then(async activeShop => {
+        this.httpClient.put<any>(this.ssmFunctionsURL + '/settings/' + activeShop.projectId, settings, {
+          headers: this.ssmFunctionsHeader
         }).subscribe(_ => {
-          user.settings = settings;
-          this.indexDb.setItem('user', user).then(_1 => {
-            resolve('User settings updated');
+          activeShop.settings = _.settings;
+          this.indexDb.setItem('activeShop', activeShop).then(_1 => {
+            resolve('Shop settings updated');
           }).catch(reason => {
             reject(reason);
           });
@@ -144,15 +143,15 @@ export class SettingsServiceService {
 
   async getSettings(): Promise<{ printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean }> {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this.indexDb.getItem<UserI>('activeShop');
+      if (!activeShop || !activeShop.settings) {
         return {
           'printerFooter': 'Thank you',
           'printerHeader': '',
           'saleWithoutPrinter': true
         };
       }
-      return user.settings;
+      return activeShop.settings;
     } catch (e) {
       throw {message: 'Fails to get settings', reason: e.toString()};
     }

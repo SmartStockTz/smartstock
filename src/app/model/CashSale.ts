@@ -13,6 +13,7 @@ export interface CashSaleI {
   discount: number;
   user: string;
   channel: string;
-  stock: Stock,
+  stock: Stock;
+  batch: string;
   stockId: string;
 }

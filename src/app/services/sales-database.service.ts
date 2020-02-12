@@ -2,38 +2,22 @@ import {Injectable} from '@angular/core';
 import {SalesDatasource} from '../database/connector/SalesDatasource';
 import {CashSaleI} from '../model/CashSale';
 import {OrderI} from '../model/OderI';
-import {HttpClient} from '@angular/common/http';
 import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import {BatchI} from '../model/batchI';
-import {ParseBackend, randomString} from '../database/ParseBackend';
-import {UserI} from '../model/UserI';
+import {randomString} from '../database/ParseBackend';
+import {ShopI} from '../model/ShopI';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SalesDatabaseService extends ParseBackend implements SalesDatasource {
+export class SalesDatabaseService implements SalesDatasource {
 
-  constructor(private indexDb: NgForage,
-              private httpClient: HttpClient) {
-    super();
-  }
-
-  static getCurrentDate(): string {
-    const date = new Date();
-    const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString(10);
-    let day = (date.getDate()).toString(10);
-    if (month.length === 1) {
-      month = '0' + month;
-    }
-    if (day.length === 1) {
-      day = '0' + day;
-    }
-    return year + '-' + month + '-' + day;
+  constructor(private indexDb: NgForage) {
   }
 
   addAllCashSale(sales: CashSaleI[]): Promise<any> {
+    console.log(sales);
     return new Promise<any>(async (resolve, reject) => {
       try {
         const batchs: BatchI[] = [];
@@ -44,9 +28,9 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
             path: '/classes/sales'
           });
         });
-        const user = await this.indexDb.getItem<UserI>('user');
+        const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
         this.indexDb
-          .clone({name: user.projectId + '_sales'})
+          .clone({name: activeShop.projectId + '_sales'})
           .setItem<BatchI[]>(randomString(8), batchs).then(_ => {
           resolve('Ok');
         }).catch(reason => {
@@ -92,33 +76,33 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   private getSales(id: string, res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
-      headers: this.getHeader,
-      params: {
-        'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"retail" }',
-        'limit': '10000000'
-      }
-    }).subscribe(value => {
-      res(value.results);
-    }, error1 => {
-      console.log(error1);
-      res([]);
-    });
+    // this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
+    //   headers: this.getHeader,
+    //   params: {
+    //     'where': '{ "user":"' + id + '", "date":"' + toSqlDate(new Date()) + '", "channel":"retail" }',
+    //     'limit': '10000000'
+    //   }
+    // }).subscribe(value => {
+    //   res(value.results);
+    // }, error1 => {
+    //   console.log(error1);
+    //   res([]);
+    // });
   }
 
   private getWholeSale(id: string, res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
-      headers: this.getHeader,
-      params: {
-        'where': '{ "user":"' + id + '", "date":"' + SalesDatabaseService.getCurrentDate() + '", "channel":"whole" }',
-        'limit': '10000000'
-      }
-    }).subscribe(value => {
-      res(value.results);
-    }, error1 => {
-      console.log(error1);
-      res([]);
-    });
+    // this.httpClient.get<any>(this.serverUrl + '/classes/sales', {
+    //   headers: this.getHeader,
+    //   params: {
+    //     'where': '{ "user":"' + id + '", "date":"' + toSqlDate(new Date()) + '", "channel":"whole" }',
+    //     'limit': '10000000'
+    //   }
+    // }).subscribe(value => {
+    //   res(value.results);
+    // }, error1 => {
+    //   console.log(error1);
+    //   res([]);
+    // });
   }
 
   getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
@@ -138,31 +122,31 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   addOrder(order: OrderI, callback?: (value) => void) {
-    order.idOld = randomString(8);
-    this.httpClient.post<OrderI>(this.serverUrl + '/classes/orders', order, {
-      headers: this.postHeader
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // order.idOld = randomString(8);
+    // this.httpClient.post<OrderI>(this.serverUrl + '/classes/orders', order, {
+    //   headers: this.postHeader
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   addOrders(orders: OrderI[], callback?: (value) => void) {
   }
 
   deleteOrder(order: OrderI, callback?: (value) => void) {
-    this.httpClient.delete(this.serverUrl + '/classes/orders/' + order.objectId, {
-      headers: {
-        'X-Parse-Application-Id': 'lbpharmacy'
-      }
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this.httpClient.delete(this.serverUrl + '/classes/orders/' + order.objectId, {
+    //   headers: {
+    //     'X-Parse-Application-Id': 'lbpharmacy'
+    //   }
+    // }).subscribe(value => {
+    //   callback(value);
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   getAllOrders(callback: (orders: OrderI[]) => void) {
@@ -183,17 +167,17 @@ export class SalesDatabaseService extends ParseBackend implements SalesDatasourc
   }
 
   private getOrders(res: any) {
-    this.httpClient.get<any>(this.serverUrl + '/classes/orders', {
-      headers: this.getHeader,
-      params: {
-        'limit': '100000'
-      }
-    }).subscribe(value => {
-      res(value.results);
-    }, error1 => {
-      console.log(error1);
-      res(null);
-    });
+    // this.httpClient.get<any>(this.serverUrl + '/classes/orders', {
+    //   headers: this.getHeader,
+    //   params: {
+    //     'limit': '100000'
+    //   }
+    // }).subscribe(value => {
+    //   res(value.results);
+    // }, error1 => {
+    //   console.log(error1);
+    //   res(null);
+    // });
   }
 
   getOrder(id: string, callback: (order: OrderI) => void) {
