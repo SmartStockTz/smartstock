@@ -16,7 +16,6 @@ function _getStorage(name) {
   });
 }
 
-
 addEventListener('message', ({data}) => {
   // const appId = JSON.parse(data).appId;
   // const projectId = JSON.parse(data).projectId;
@@ -32,7 +31,8 @@ addEventListener('message', ({data}) => {
       const activeShop = await _stockStorage.getItem('activeShop');
       if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
         // const serverURL = `https://${user.projectUrlId}.bfast.fahamutech.com`;
-        const fetchStockURL = `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${activeShop.projectId}`;
+        const fetchStockURL =
+          `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${activeShop.projectId}`;
         fetchStocks(activeShop.applicationId, fetchStockURL, _stockStorage).then(done => {
           firstFetch = false;
           onFetch = false;

@@ -7,7 +7,7 @@
     </button>
   </mat-toolbar>
   <mat-accordion [multi]="true" class="mat-elevation-z0">
-    <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
+    <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin')"
                          [expanded]="shouldExpand('dashboard')"
                          class="mat-elevation-z0">
       <mat-expansion-panel-header>
@@ -66,29 +66,30 @@
 
     <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
 
-    <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
-                         [expanded]="shouldExpand('settings')"
+    <mat-expansion-panel [expanded]="shouldExpand('settings')"
                          class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-icon matPrefix color="primary">supervisor_account</mat-icon>
         <span style="margin-left: 8px">Account</span>
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/settings/general">
+        <a *ngIf="currentUser.role==='admin' || currentUser.role==='manager'" mat-list-item
+           routerLink="/settings/general">
           <div class="d-flex flex-row flex-nowrap btn-block">
             <span>Settings</span>
             <span class="flex-grow-1"></span>
             <mat-icon color="primary">settings</mat-icon>
           </div>
         </a>
-        <a mat-list-item routerLink="/settings/bill">
+        <a *ngIf="currentUser.role === 'admin'" mat-list-item routerLink="/settings/bill">
           <div class="d-flex flex-row flex-nowrap btn-block">
             <span>Billing</span>
             <span class="flex-grow-1"></span>
             <mat-icon color="primary">payment</mat-icon>
           </div>
         </a>
-        <a mat-list-item routerLink="/settings/users">
+        <a *ngIf="currentUser.role==='admin' || currentUser.role==='manager'" mat-list-item
+           routerLink="/settings/users">
           <div class="d-flex flex-row flex-nowrap btn-block">
             <span>Users</span>
             <span class="flex-grow-1"></span>

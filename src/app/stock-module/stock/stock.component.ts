@@ -47,24 +47,6 @@ export class StockComponent extends DeviceInfo implements OnInit {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  static getSqlDate(date: any): string {
-    try {
-      const year = date.getFullYear();
-      let month = (date.getMonth() + 1).toString(10);
-      let day = (date.getDate()).toString(10);
-      if (month.length === 1) {
-        month = '0'.concat(month);
-      }
-      if (day.length === 1) {
-        day = '0'.concat(day);
-      }
-      return year + '-' + month + '-' + day;
-    } catch (e) {
-      console.log('date has an error : ' + e);
-      return date;
-    }
-  }
-
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(value => {
       if (value) {

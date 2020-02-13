@@ -23,7 +23,7 @@ export class AuthenticatedUserGuard implements CanActivate {
           this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
           reject(false);
         } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'manager') {
-          this.router.navigateByUrl('/stock').catch(reason => console.log(reason));
+          this.router.navigateByUrl('/sale/report').catch(reason => console.log(reason));
           reject(false);
         } else {
           resolve(true);

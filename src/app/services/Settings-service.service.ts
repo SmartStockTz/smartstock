@@ -27,11 +27,12 @@ export class SettingsServiceService {
   async getSSMUserHeader() {
     try {
       const user = await this.indexDb.getItem<UserI>('user');
+      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
       if (!user) {
         console.log('no user records found');
         throw new Error('no user records found');
       }
-      if (user && user.sessionToken && user.applicationId) {
+      if (user && user.sessionToken && activeShop && activeShop.applicationId) {
         return {
           'X-Parse-Application-Id': 'smartstock_lb',
           'X-Parse-Session-Token': user.sessionToken,
@@ -47,11 +48,11 @@ export class SettingsServiceService {
 
   async getCustomerApplicationId() {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      if (!activeShop) {
         throw new Error('No user record');
       }
-      return user.applicationId;
+      return activeShop.applicationId;
     } catch (e) {
       throw {message: 'Fails to get application id', reason: e.toString()};
     }
@@ -59,11 +60,11 @@ export class SettingsServiceService {
 
   async getCustomerServerURLId() {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      if (!activeShop) {
         throw new Error('No user in local storage');
       }
-      return user.projectUrlId;
+      return activeShop.projectUrlId;
     } catch (reason) {
       throw {message: 'Fails to get user', reason: reason.toString()};
     }
@@ -101,11 +102,11 @@ export class SettingsServiceService {
 
   async getCustomerProjectId(): Promise<string> {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      if (!activeShop) {
         throw new Error('No user in local storage');
       }
-      return user.projectId;
+      return activeShop.projectId;
     } catch (e) {
       throw {message: 'Fails to get project id', reason: e.toString()};
     }

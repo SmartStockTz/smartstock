@@ -259,6 +259,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   createShop(data: { admin: UserI, shop: ShopI }): Promise<ShopI> {
+    return undefined;
     // return new Promise<ShopI>(async (resolve, reject) => {
     //   this.httpClient.post<ShopI>(this.settings.ssmFunctionsURL + '/functions/shop', data, {
     //     headers: this.settings.ssmFunctionsHeader
