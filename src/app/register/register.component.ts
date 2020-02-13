@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
     });
     this.businessFormGroup = this._formBuilder.group({
       businessName: ['', Validators.required],
+      category: ['', [Validators.required, Validators.nullValidator]],
       country: ['', Validators.required],
       region: ['', Validators.required],
       street: ['', Validators.required]
