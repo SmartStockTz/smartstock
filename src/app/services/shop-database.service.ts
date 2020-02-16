@@ -5,9 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {LocalStorageService} from './local-storage.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ShopDatabaseService implements ShopDatabaseAdapter {
 
   constructor(private readonly _httpClient: HttpClient,

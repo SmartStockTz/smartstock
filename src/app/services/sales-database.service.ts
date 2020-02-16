@@ -2,22 +2,17 @@ import {Injectable} from '@angular/core';
 import {SalesDatasource} from '../adapter/SalesDatasource';
 import {CashSaleI} from '../model/CashSale';
 import {OrderI} from '../model/OderI';
-import {NgForage} from 'ngforage';
 import {CartI} from '../model/cart';
 import {BatchI} from '../model/batchI';
-import {randomString} from '../adapter/ParseBackend';
-import {ShopI} from '../model/ShopI';
+import {LocalStorageService} from './local-storage.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SalesDatabaseService implements SalesDatasource {
 
-  constructor(private indexDb: NgForage) {
+  constructor(private readonly _storage: LocalStorageService) {
   }
 
   addAllCashSale(sales: CashSaleI[]): Promise<any> {
-    // console.log(sales);
     return new Promise<any>(async (resolve, reject) => {
       try {
         const batchs: BatchI[] = [];
@@ -28,15 +23,7 @@ export class SalesDatabaseService implements SalesDatasource {
             path: '/classes/sales'
           });
         });
-        const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
-        this.indexDb
-          .clone({name: activeShop.projectId + '_sales'})
-          .setItem<BatchI[]>(randomString(12), batchs).then(_ => {
-          resolve('Ok');
-        }).catch(reason => {
-          console.log(reason);
-          reject(null);
-        });
+        resolve(await this._storage.saveSales(batchs));
       } catch (e) {
         reject(e);
       }

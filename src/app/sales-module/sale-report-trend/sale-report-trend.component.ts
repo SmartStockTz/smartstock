@@ -7,7 +7,10 @@ import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-sale-report-trend',
   templateUrl: './sale-report-trend.component.html',
-  styleUrls: ['./sale-report-trend.component.css']
+  styleUrls: ['./sale-report-trend.component.css'],
+  providers: [
+    SellerDashboardService
+  ]
 })
 export class SaleReportTrendComponent implements OnInit {
   salesTrendDayFromDateFormControl = new FormControl();

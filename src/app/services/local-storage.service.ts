@@ -42,7 +42,67 @@ export class LocalStorageService implements StorageAdapter {
     }
   }
 
-  saveActiveShop(shop: ShopI): Promise<any> {
-    return undefined;
+  async saveActiveShop(shop: ShopI): Promise<any> {
+    try {
+      return await this._storage.setItem<ShopI>('activeShop', shop);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async getCurrentProjectId(): Promise<string> {
+    try {
+      return await this._storage.getItem<string>('cPID');
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async saveCurrentProjectId(projectId: string): Promise<any> {
+    try {
+      return await this._storage.setItem<string>('cPID', projectId);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async clearSsmStorage(): Promise<any> {
+    try {
+      return await this._storage.clear();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async saveActiveUser(user: UserI): Promise<any> {
+    try {
+      return await this._storage.setItem<UserI>('user', user);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async removeActiveShop(): Promise<any> {
+    try {
+      return await this._storage.removeItem('activeShop');
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async removeActiveUser(): Promise<any> {
+    try {
+      return await this._storage.removeItem('user');
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async removeStocks(): Promise<any> {
+    try {
+      return await this._storage.removeItem('stocks');
+    } catch (e) {
+      throw e;
+    }
   }
 }

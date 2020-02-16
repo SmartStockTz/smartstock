@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SecurityAdapter} from '../adapter/SecurityAdapter';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SecurityService<T> implements SecurityAdapter {
 
   constructor() {

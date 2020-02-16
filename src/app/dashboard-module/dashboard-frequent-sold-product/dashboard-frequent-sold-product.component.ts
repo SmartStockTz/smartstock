@@ -8,7 +8,10 @@ import {AdminDashboardService} from '../../services/admin-dashboard.service';
 @Component({
   selector: 'app-dashboard-frequent-sold-product',
   templateUrl: './dashboard-frequent-sold-product.component.html',
-  styleUrls: ['./dashboard-frequent-sold-product.component.css']
+  styleUrls: ['./dashboard-frequent-sold-product.component.css'],
+  providers: [
+    AdminDashboardService
+  ]
 })
 export class DashboardFrequentSoldProductComponent implements OnInit {
   dateFormControl = new FormControl();

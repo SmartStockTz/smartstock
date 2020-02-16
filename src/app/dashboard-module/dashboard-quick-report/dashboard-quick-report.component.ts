@@ -7,7 +7,10 @@ import {AdminDashboardService} from '../../services/admin-dashboard.service';
 @Component({
   selector: 'app-dashboard-quick-report',
   templateUrl: './dashboard-quick-report.component.html',
-  styleUrls: ['./dashboard-quick-report.component.css']
+  styleUrls: ['./dashboard-quick-report.component.css'],
+  providers: [
+    AdminDashboardService
+  ]
 })
 export class DashboardQuickReportComponent implements OnInit {
   quickReportDateFormControl = new FormControl();

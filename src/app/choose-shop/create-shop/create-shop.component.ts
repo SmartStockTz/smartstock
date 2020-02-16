@@ -14,6 +14,9 @@ export interface DialogData {
   selector: 'app-create-shop',
   templateUrl: './create-shop.component.html',
   styleUrls: ['./create-shop.component.css'],
+  providers: [
+    ShopDatabaseService
+  ]
 })
 export class CreateShopComponent implements OnInit {
 

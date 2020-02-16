@@ -19,7 +19,10 @@ import {toSqlDate} from '../../utils/date';
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
-  styleUrls: ['./sale.component.css']
+  styleUrls: ['./sale.component.css'],
+  providers: [
+    SalesDatabaseService
+  ]
 })
 export class SaleComponent extends DeviceInfo implements OnInit {
   private currentUser: UserI;

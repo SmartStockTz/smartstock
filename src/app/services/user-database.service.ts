@@ -1,54 +1,48 @@
 import {Injectable} from '@angular/core';
 import {UserDataSource} from '../adapter/UserDataSource';
 import {UserI} from '../model/UserI';
-import {NgForage} from 'ngforage';
-import {ParseBackend, serverUrl} from '../adapter/ParseBackend';
+import {serverUrl} from '../adapter/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {ShopI} from '../model/ShopI';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDatabaseService extends ParseBackend implements UserDataSource {
+export class UserDatabaseService implements UserDataSource {
 
-  constructor(private readonly httpClient: HttpClient,
-              private readonly settings: SettingsServiceService,
-              private readonly indexD: NgForage) {
-    super();
+  constructor(private readonly _httpClient: HttpClient,
+              private readonly _settings: SettingsServiceService,
+              private readonly _storage: LocalStorageService) {
   }
 
   async currentUser(): Promise<UserI> {
-    try {
-      return await this.indexD.getItem<UserI>('user');
-    } catch (reason) {
-      console.log(reason);
-      throw {message: 'Fails to get current user'};
-    }
+    return this._storage.getActiveUser();
   }
 
   createUser(user: UserI, callback?: (value: any) => void) {
-    this.httpClient.post<UserI>(this.serverUrl + '/users', user, {
-      headers: this.postHeaderUser
-    }).subscribe(value => {
-      this.indexD.setItem<UserI>('user_created', value).then(value1 => {
-        console.log('saved user_created in cache is ---> ' + value1.objectId);
-        callback(value);
-      }).catch(reason => {
-        console.log(reason);
-        callback(null);
-      });
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+    // this._httpClient.post<UserI>(this._settings.ssmServerURL + '/users', user, {
+    //   headers: this._settings.ssmHeader
+    // }).subscribe(value => {
+    //   this._indexD.setItem<UserI>('user_created', value).then(value1 => {
+    //     console.log('saved user_created in cache is ---> ' + value1.objectId);
+    //     callback(value);
+    //   }).catch(reason => {
+    //     console.log(reason);
+    //     callback(null);
+    //   });
+    // }, error1 => {
+    //   console.log(error1);
+    //   callback(null);
+    // });
   }
 
   // implement on cloud functions
   deleteUser(user: UserI): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.delete(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.delete(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId, {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -59,7 +53,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
     return new Promise<UserI[]>(async (resolve, reject) => {
-      const projectId = await this.settings.getCustomerProjectId();
+      const projectId = await this._settings.getCustomerProjectId();
       const where = {
         projectId: projectId,
         role: {
@@ -67,9 +61,8 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
         }
       };
       const urlencoded = encodeURI(JSON.stringify(where) + '&limit=' + 1000000);
-      // console.log(urlencoded);
-      this.httpClient.get<any>(this.settings.ssmServerURL + '/users?where=' + urlencoded, {
-        headers: this.settings.ssmHeader
+      this._httpClient.get<any>(this._settings.ssmServerURL + '/users?where=' + urlencoded, {
+        headers: this._settings.ssmHeader
       }).subscribe(value => {
         resolve(value.results);
       }, error1 => {
@@ -92,24 +85,24 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   // needs to be reviewed
   async login(user: { username: string, password: string }): Promise<UserI> {
     return new Promise((resolve, reject) => {
-      this.httpClient.get<UserI>(this.settings.ssmServerURL + '/login', {
+      this._httpClient.get<UserI>(this._settings.ssmServerURL + '/login', {
         params: {
           'username': user.username,
           'password': user.password
         },
-        headers: this.settings.ssmHeader
+        headers: this._settings.ssmHeader
       }).subscribe(async value => {
         try {
           // empty local storage if current project differ from last one
           if (value.role !== 'admin') {
-            const cProjectId = await this.indexD.getItem('cPID');
+            const cProjectId = await this._storage.getCurrentProjectId();
             if (cProjectId && cProjectId !== value.projectId) {
-              await this.indexD.clear();
+              await this._storage.clearSsmStorage();
             }
             // set current shop
-            await this.indexD.setItem('cPID', value.projectId);
+            await this._storage.saveCurrentProjectId(value.projectId);
             // set active shop
-            await this.indexD.setItem<ShopI>('activeShop', {
+            await this._storage.saveActiveShop({
               settings: value.settings,
               businessName: value.businessName,
               projectId: value.projectId,
@@ -118,7 +111,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
               applicationId: value.applicationId
             });
           }
-          await this.indexD.setItem<UserI>('user', value);
+          await this._storage.saveActiveUser(value);
           resolve(value);
         } catch (e) {
           reject(e);
@@ -131,8 +124,8 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async logout(user: UserI, callback?: (value: any) => void) {
     try {
-      await this.indexD.removeItem('user');
-      await this.indexD.removeItem('activeShop');
+      await this._storage.removeActiveUser();
+      await this._storage.removeActiveShop();
       callback('Ok');
     } catch (reason) {
       console.log(reason);
@@ -142,16 +135,15 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   register(user: UserI): Promise<UserI> {
     return new Promise<UserI>((resolve, reject) => {
-      // console.log(user);
       user.settings = {
         printerFooter: 'Thank you',
         printerHeader: '',
         saleWithoutPrinter: true,
       };
-      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/create', user, {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.post<UserI>(this._settings.ssmFunctionsURL + '/functions/users/create', user, {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
-        this.indexD.setItem<UserI>('user', value).then(_ => {
+        this._storage.saveActiveUser(value).then(_ => {
           resolve(value);
         }).catch(reason => {
           reject(reason);
@@ -177,7 +169,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
   }
 
   refreshToken(user: UserI, callback: (value: any) => void) {
-    this.httpClient.get(serverUrl + '/sessions/me', {
+    this._httpClient.get(serverUrl + '/sessions/me', {
       headers: {
         'X-Parse-Application-Id': 'lbpharmacy',
         'X-Parse-Session-Token': user.sessionToken
@@ -192,15 +184,15 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   addUser(user: UserI): Promise<UserI> {
     return new Promise<UserI>(async (resolve, reject) => {
-      const shop = await this.indexD.getItem<ShopI>('activeShop');
+      const shop = await this._storage.getActiveShop();
       user.shops = [];
       user.applicationId = shop.applicationId;
       user.projectUrlId = shop.projectUrlId;
       user.projectId = shop.projectId;
       user.businessName = shop.businessName;
       user.settings = shop.settings;
-      this.httpClient.post<UserI>(this.settings.ssmFunctionsURL + '/functions/users/seller', user, {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.post<UserI>(this._settings.ssmFunctionsURL + '/functions/users/seller', user, {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -211,7 +203,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async getShops(): Promise<ShopI[]> {
     try {
-      const user = await this.indexD.getItem<UserI>('user');
+      const user = await this._storage.getActiveUser();
       const shops = [];
       user.shops.forEach(element => {
         shops.push(element);
@@ -234,7 +226,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async getCurrentShop(): Promise<ShopI> {
     try {
-      const activeShop = await this.indexD.getItem<ShopI>('activeShop');
+      const activeShop = await this._storage.getActiveShop();
       if (activeShop && activeShop.projectId && activeShop.applicationId && activeShop.projectUrlId) {
         return activeShop;
       } else {
@@ -247,12 +239,12 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async saveCurrentShop(shop: ShopI): Promise<ShopI> {
     try {
-      const cProjectId = await this.indexD.getItem('cPID');
+      const cProjectId = await this._storage.getCurrentProjectId();
       if (cProjectId && cProjectId !== shop.projectId) {
-        await this.indexD.removeItem('stocks');
+        await this._storage.removeStocks();
       }
-      await this.indexD.setItem('cPID', shop.projectId);
-      return await this.indexD.setItem<ShopI>('activeShop', shop);
+      await this._storage.saveCurrentProjectId(shop.projectId);
+      return await this._storage.saveActiveShop(shop);
     } catch (e) {
       throw e;
     }
@@ -281,10 +273,10 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   updatePassword(user: UserI, password: string): Promise<any> {
     return new Promise<UserI>((resolve, reject) => {
-      this.httpClient.put<any>(this.settings.ssmFunctionsURL + '/functions/users/password/' + user.objectId, {
+      this._httpClient.put<any>(this._settings.ssmFunctionsURL + '/functions/users/password/' + user.objectId, {
         password: password
       }, {
-        headers: this.settings.ssmFunctionsHeader
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -295,8 +287,8 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   updateUser(user: UserI, data: { [p: string]: any }): Promise<UserI> {
     return new Promise(async (resolve, reject) => {
-      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/' + user.objectId, data, {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.put<UserI>(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId, data, {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => resolve(value), error1 => {
         reject(error1);
       });
@@ -305,7 +297,7 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   async updateCurrentUser(user: UserI): Promise<UserI> {
     try {
-      return await this.indexD.setItem<UserI>('user', user);
+      return await this._storage.saveActiveUser(user);
     } catch (e) {
       throw e;
     }
@@ -313,12 +305,12 @@ export class UserDatabaseService extends ParseBackend implements UserDataSource 
 
   changePasswordFromOld(data: { lastPassword: string; password: string; user: UserI }): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.put<UserI>(this.settings.ssmFunctionsURL + '/functions/users/password/change/' + data.user.objectId, {
+      this._httpClient.put<UserI>(this._settings.ssmFunctionsURL + '/functions/users/password/change/' + data.user.objectId, {
         lastPassword: data.lastPassword,
         username: data.user.username,
         password: data.password
       }, {
-        headers: this.settings.ssmFunctionsHeader
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => resolve(value), error1 => {
         reject(error1);
       });

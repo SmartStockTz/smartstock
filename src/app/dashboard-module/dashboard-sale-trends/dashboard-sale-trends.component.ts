@@ -7,7 +7,10 @@ import {AdminDashboardService} from '../../services/admin-dashboard.service';
 @Component({
   selector: 'app-dashboard-sale-trends',
   templateUrl: './dashboard-sale-trends.component.html',
-  styleUrls: ['./dashboard-sale-trends.component.css']
+  styleUrls: ['./dashboard-sale-trends.component.css'],
+  providers: [
+    AdminDashboardService
+  ]
 })
 export class DashboardSaleTrendsComponent implements OnInit {
   salesTrendDayFromDateFormControl = new FormControl();

@@ -27,7 +27,10 @@ export interface DialogData {
 @Component({
   selector: 'app-whole-sale',
   templateUrl: './whole-sale.component.html',
-  styleUrls: ['./whole-sale.component.css']
+  styleUrls: ['./whole-sale.component.css'],
+  providers: [
+    SalesDatabaseService
+  ]
 })
 export class WholeSaleComponent extends DeviceInfo implements OnInit {
   private currentUser: UserI;

@@ -1,9 +1,12 @@
 import {Injectable} from '@angular/core';
 import {SettingsServiceService} from './Settings-service.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+/*
+This should handle sockets and when data found check
+workers if available push updates to worker if not
+handle updates in main thread
+ */
+@Injectable()
 export class ThreadsService {
 
   constructor(private readonly settings: SettingsServiceService) {
@@ -39,7 +42,7 @@ export class ThreadsService {
       if (typeof Worker !== 'undefined') {
         const worker = new Worker('assets/js/sw-local-data.js');
         worker.onmessage = ({data}) => {
-           console.log(`page got message: ${data}`);
+          console.log(`page got message: ${data}`);
         };
         // const projectUrlId = await this.settings.getCustomerServerURLId();
         // const projectId = await this.settings.getCustomerProjectId();
