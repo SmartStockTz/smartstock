@@ -1,8 +1,8 @@
 {
-  "name": "lbpharmacy",
+  "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "0.4.0-beta2",
+  "version": "0.4.0-beta3",
   "main": "main.js",
   "build": {
     "appId": "com.fahamutech.ssm",

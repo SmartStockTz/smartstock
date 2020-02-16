@@ -24,7 +24,6 @@ addEventListener('message', ({data}) => {
     _mainStorage.getItem('activeShop').then(activeShop => {
 
       if (!activeShop) {
-        // console.log('active shop is not available yet');
         throw 'active shop is not available yet';
       }
 
@@ -61,7 +60,7 @@ addEventListener('message', ({data}) => {
       // console.log('error when fetch user');
     });
 
-  }, 4000);
+  }, 3000);
 
   postMessage("sales routine started");
 

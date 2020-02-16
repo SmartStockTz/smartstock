@@ -8,16 +8,16 @@ import {SettingsServiceService} from './Settings-service.service';
 @Injectable()
 export class PurchaseDatabaseService implements PurchaseDataSource {
 
-  constructor(private readonly httpClient: HttpClient,
-              private readonly settings: SettingsServiceService) {
+  constructor(private readonly _httpClient: HttpClient,
+              private readonly _settings: SettingsServiceService) {
   }
 
   recordPayment(objectId: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.put(await this.settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
+      this._httpClient.put(await this._settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
         paid: true
       }, {
-        headers: await this.settings.getCustomerPostHeader()
+        headers: await this._settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -39,10 +39,10 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
     //   });
     // });
     // if (purchases.length <= 50) {
-    //   this.httpClient.post(this.settings.getCustomerServerURL() + '/batch', {
+    //   this.httpClient.post(this._settings.getCustomerServerURL() + '/batch', {
     //     'requests': bat
     //   }, {
-    //     headers: this.settings.getCustomerPostHeader()
+    //     headers: this._settings.getCustomerPostHeader()
     //   }).subscribe(value => {
     //     callback(value);
     //   }, error1 => {
@@ -62,8 +62,8 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   addPurchase(purchase: PurchaseI, callback: (value: any) => void) {
-    // this.httpClient.post<PurchaseI>(this.settings.getCustomerServerURL() + '/classes/purchases', purchase, {
-    //   headers: this.settings.getCustomerPostHeader()
+    // this.httpClient.post<PurchaseI>(this._settings.getCustomerServerURL() + '/classes/purchases', purchase, {
+    //   headers: this._settings.getCustomerPostHeader()
     // }).subscribe(value => {
     //   callback(value);
     // }, error1 => {
@@ -73,8 +73,8 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   addReceipt(invoice: ReceiptI, callback: (value: any) => void) {
-    // this.httpClient.post<ReceiptI>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', invoice, {
-    //   headers: this.settings.getCustomerPostHeader(),
+    // this.httpClient.post<ReceiptI>(this._settings.getCustomerServerURL() + '/classes/purchaseRefs', invoice, {
+    //   headers: this._settings.getCustomerPostHeader(),
     // }).subscribe(value => {
     //   callback(value);
     // }, error1 => {
@@ -98,9 +98,10 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
 
   getAllPurchase(page: { size?: number, skip?: number }): Promise<PurchaseI[]> {
     return new Promise<PurchaseI[]>(async (resolve, reject) => {
-      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/purchases', {
-        headers: await this.settings.getCustomerHeader(),
+      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/purchases', {
+        headers: await this._settings.getCustomerHeader(),
         params: {
+          'order': '-updatedAt',
           'limit': page.size ? page.size.toString() : '100',
           'skip': page.skip ? page.skip.toString() : '0',
         }
@@ -137,8 +138,8 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   private updateCachedPurchaseRefs() {
-    // this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchaseRefs', {
-    //   headers: this.settings.getCustomerHeader(),
+    // this.httpClient.get<any>(this._settings.getCustomerServerURL() + '/classes/purchaseRefs', {
+    //   headers: this._settings.getCustomerHeader(),
     //   params: {
     //     'limit': '1000'
     //   }
@@ -155,8 +156,8 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   }
 
   getPurchase(id: string, callback: (purchase: PurchaseI) => void) {
-    // this.httpClient.get<any>(this.settings.getCustomerServerURL() + '/classes/purchases/' + id, {
-    //   headers: this.settings.getCustomerHeader()
+    // this.httpClient.get<any>(this._settings.getCustomerServerURL() + '/classes/purchases/' + id, {
+    //   headers: this._settings.getCustomerHeader()
     // }).subscribe(value => {
     //   callback(value);
     // }, error1 => {
