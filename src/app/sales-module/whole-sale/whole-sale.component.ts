@@ -126,9 +126,15 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   }
 
   private getProduct(product: string) {
-    this.indexDb.getItem<Stock[]>('stocks').then(value => {
-      const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
-      this.filteredOptions = of(stocksFiltered);
+    this._storage.getStocks().then(value => {
+      if (value) {
+        const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
+        this.filteredOptions = of(stocksFiltered);
+      } else {
+        this.snack.open('No products found, try again or refresh products', 'Ok', {
+          duration: 3000
+        });
+      }
     }).catch(reason => {
       console.log(reason);
       this.snack.open(reason, 'Ok');
@@ -216,7 +222,6 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   }
 
   saveOrder() {
-    // this.openDialog(0);
     if (this.customerControl.value === null || this.customerControl.value === '') {
       this.snack.open('Please enter customer name to save order');
     } else {
