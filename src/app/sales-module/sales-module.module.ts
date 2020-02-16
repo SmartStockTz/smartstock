@@ -17,6 +17,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { SaleReportComponent } from './sale-report/sale-report.component';
 import { SaleReportTrendComponent } from './sale-report-trend/sale-report-trend.component';
 import { SaleReportsProductsComponent } from './sale-reports-products/sale-reports-products.component';
+import { CartComponent } from './cart/cart.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
     imports: [
@@ -45,7 +47,9 @@ import { SaleReportsProductsComponent } from './sale-reports-products/sale-repor
     SaleComponent,
     SaleReportComponent,
     SaleReportTrendComponent,
-    SaleReportsProductsComponent
+    SaleReportsProductsComponent,
+    CartComponent,
+    ProductCardComponent
   ]
 })
 export class SalesModuleModule {

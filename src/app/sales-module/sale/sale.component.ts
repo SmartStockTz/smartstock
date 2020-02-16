@@ -70,16 +70,14 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   saleDatasourceArray: CashSaleI[];
   salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
-  saleColums = ['Date', 'product', 'quantity', 'amount', 'discount'];
   activeTab = 0;
   @ViewChild('cartPaginator', {static: false}) paginator: MatPaginator;
-  @ViewChild('salePaginator', {static: false}) salePaginator: MatPaginator;
 
   printProgress = false;
 
   constructor(private router: Router,
               private userDatabase: UserDatabaseService,
-              private indexDb: NgForage,
+              private readonly indexDb: NgForage,
               private snack: MatSnackBar,
               private readonly settings: SettingsServiceService,
               private printS: PrintServiceService,
