@@ -17,6 +17,8 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
 import {toSqlDate} from '../../utils/date';
 import {randomString} from '../../adapter/ParseBackend';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {StockDatabaseService} from '../../services/stock-database.service';
 
 export interface DialogData {
   customer?: string;
@@ -33,6 +35,9 @@ export interface DialogData {
   ]
 })
 export class WholeSaleComponent extends DeviceInfo implements OnInit {
+
+  refreshProductsProgress = false;
+
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
@@ -93,14 +98,16 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   printProgress = false;
 
-  constructor(private router: Router,
-              private userDatabase: UserDatabaseService,
-              private indexDb: NgForage,
+  constructor(private readonly router: Router,
+              private readonly userDatabase: UserDatabaseService,
+              private readonly indexDb: NgForage,
+              private readonly _storage: LocalStorageService,
+              private readonly _stockApi: StockDatabaseService,
               private readonly settings: SettingsServiceService,
-              private snack: MatSnackBar,
-              private dialog: MatDialog,
-              private printS: PrintServiceService,
-              private saleDatabase: SalesDatabaseService) {
+              private readonly snack: MatSnackBar,
+              private readonly dialog: MatDialog,
+              private readonly printS: PrintServiceService,
+              private readonly saleDatabase: SalesDatabaseService) {
     super();
   }
 
@@ -472,6 +479,32 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
       }
     });
   }
+
+  refreshProducts() {
+    this.refreshProductsProgress = true;
+    this._stockApi.getAllStock().then(async stocks => {
+      try {
+        await this._storage.saveStocks(stocks);
+        this.snack.open('Products refreshed', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      } catch (e) {
+        console.log(e);
+        this.snack.open('Fails to fetch products from server', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      }
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Fails to fetch products from server', 'Ok', {
+        duration: 3000
+      });
+      this.refreshProductsProgress = false;
+    });
+  }
+
 }
 
 @Component({

@@ -5,6 +5,7 @@ import {NgForage} from 'ngforage';
 import {ShopI} from '../model/ShopI';
 import {BatchI} from '../model/batchI';
 import {randomString} from '../adapter/ParseBackend';
+import {Stock} from '../model/stock';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +102,22 @@ export class LocalStorageService implements StorageAdapter {
   async removeStocks(): Promise<any> {
     try {
       return await this._storage.removeItem('stocks');
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async getStocks(): Promise<Stock[]> {
+    try {
+      return await this._storage.getItem<Stock[]>('stocks');
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async saveStocks(stocks: Stock[]): Promise<any> {
+    try {
+      return await this._storage.setItem<Stock[]>('stocks', stocks);
     } catch (e) {
       throw e;
     }

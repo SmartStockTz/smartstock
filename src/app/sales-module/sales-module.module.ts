@@ -11,7 +11,7 @@ import {
     MatFormFieldModule, MatIconModule,
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSidenavModule,
-    MatSlideToggleModule, MatSortModule, MatTableModule, MatTabsModule
+    MatSlideToggleModule, MatSortModule, MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SaleReportComponent } from './sale-report/sale-report.component';
@@ -40,7 +40,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
-        MatSortModule
+        MatSortModule,
+        MatTooltipModule
     ],
   declarations: [
     WholeSaleComponent,

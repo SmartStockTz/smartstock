@@ -8,7 +8,10 @@ import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-sale-report',
   templateUrl: './sale-report.component.html',
-  styleUrls: ['./sale-report.component.css']
+  styleUrls: ['./sale-report.component.css'],
+  providers: [
+    SellerDashboardService
+  ]
 })
 export class SaleReportComponent extends DeviceInfo implements OnInit {
   quickReportDateFormControl = new FormControl();

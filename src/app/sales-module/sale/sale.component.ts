@@ -3,9 +3,7 @@ import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Stock} from '../../model/stock';
-import {NgForage} from 'ngforage';
 import {UserI} from '../../model/UserI';
-import {UserDatabaseService} from '../../services/user-database.service';
 import {Observable, of} from 'rxjs';
 import {CartI} from '../../model/cart';
 import {SalesDatabaseService} from '../../services/sales-database.service';
@@ -15,6 +13,8 @@ import {randomString} from '../../adapter/ParseBackend';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
 import {toSqlDate} from '../../utils/date';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {StockDatabaseService} from '../../services/stock-database.service';
 
 @Component({
   selector: 'app-sale',
@@ -74,27 +74,24 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   @ViewChild('cartPaginator', {static: false}) paginator: MatPaginator;
 
   printProgress = false;
+  refreshProductsProgress = false;
 
   constructor(private router: Router,
-              private userDatabase: UserDatabaseService,
-              private readonly indexDb: NgForage,
-              private snack: MatSnackBar,
+              private readonly _stockApi: StockDatabaseService,
+              private readonly _storage: LocalStorageService,
+              private readonly snack: MatSnackBar,
               private readonly settings: SettingsServiceService,
-              private printS: PrintServiceService,
-              private saleDatabase: SalesDatabaseService) {
+              private readonly printS: PrintServiceService,
+              private readonly saleDatabase: SalesDatabaseService) {
     super();
   }
 
   ngOnInit() {
-    this.indexDb.getItem<UserI>('user').then(value => {
+    this._storage.getActiveUser().then(value => {
       if (value === null) {
-        this.isLogin = false;
         this.router.navigateByUrl('login').catch(reason => console.log(reason));
       } else {
-        this.isAdmin = value.role === 'admin';
-        this.isLogin = true;
         this.currentUser = value;
-        // control input initialize
         this.initializeView();
       }
     }).catch(reason => {
@@ -103,9 +100,15 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   }
 
   private getProduct(product: string) {
-    this.indexDb.getItem<Stock[]>('stocks').then(value => {
-      const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
-      this.filteredOptions = of(stocksFiltered);
+    this._storage.getStocks().then(value => {
+      if (value) {
+        const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
+        this.filteredOptions = of(stocksFiltered);
+      } else {
+        this.snack.open('No products found, try again or refresh products', 'Ok', {
+          duration: 3000
+        });
+      }
     }).catch(reason => {
       console.log(reason);
       this.snack.open(reason, 'Ok');
@@ -386,5 +389,30 @@ export class SaleComponent extends DeviceInfo implements OnInit {
       s += value.amount;
     });
     this.totalSaleAmount = s;
+  }
+
+  refreshProducts() {
+    this.refreshProductsProgress = true;
+    this._stockApi.getAllStock().then(async stocks => {
+      try {
+        await this._storage.saveStocks(stocks);
+        this.snack.open('Products refreshed', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      } catch (e) {
+        console.log(e);
+        this.snack.open('Fails to fetch products from server', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      }
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Fails to fetch products from server', 'Ok', {
+        duration: 3000
+      });
+      this.refreshProductsProgress = false;
+    });
   }
 }

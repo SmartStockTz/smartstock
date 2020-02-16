@@ -8,8 +8,8 @@
     <app-toolbar [heading]="'SSM-Sale'" [sidenav]="sidenav" [showProgress]="showProgress"></app-toolbar>
     <div class="container-fluid" style="padding: 24px 48px;">
       <div class="row">
-        <div class="col-12">
-          <mat-form-field appearance="outline" style="margin-top: 8px" class="my-input">
+        <div class="col-12 d-flex flex-row">
+          <mat-form-field appearance="outline" style="" class="flex-grow-1">
             <mat-label>Product Name</mat-label>
             <input type="text" placeholder="Product Name" matInput [formControl]="productNameControlInput"
                    [matAutocomplete]="auto">
@@ -20,6 +20,18 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <div style="margin-top: 7px; margin-left: 4px; margin-right: 4px" class="flex-grow-0">
+            <button (click)="refreshProducts()" [disabled]="refreshProductsProgress" matTooltip="Refresh products" color="primary" mat-flat-button class="ft-button">
+              <mat-icon>refresh</mat-icon>
+              <mat-progress-spinner
+                *ngIf="refreshProductsProgress"
+                style="display: inline-block"
+                mode="indeterminate" color="primary"
+                [diameter]="20">
+              </mat-progress-spinner>
+            </button>
+          </div>
         </div>
 
         <mat-card class="full-width col-lg-3 col-sm-12 col-md-4 col-xl-3 col-12 mat-elevation-z0"

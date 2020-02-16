@@ -8,7 +8,10 @@ import {toSqlDate} from '../../utils/date';
 @Component({
   selector: 'app-sale-reports-products',
   templateUrl: './sale-reports-products.component.html',
-  styleUrls: ['./sale-reports-products.component.css']
+  styleUrls: ['./sale-reports-products.component.css'],
+  providers: [
+    SellerDashboardService
+  ]
 })
 export class SaleReportsProductsComponent implements OnInit {
   dateFormControl = new FormControl();
