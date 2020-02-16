@@ -55,7 +55,6 @@ export class ChooseShopComponent implements OnInit {
   }
 
   setCurrentProject(shop: ShopI) {
-    console.log(shop);
     this._snack.open('We prepare your shop...', 'Ok', {
       duration: 1000
     });
