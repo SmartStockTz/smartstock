@@ -22,20 +22,6 @@ export class UserDatabaseService implements UserDataSource {
   }
 
   createUser(user: UserI, callback?: (value: any) => void) {
-    // this._httpClient.post<UserI>(this._settings.ssmServerURL + '/users', user, {
-    //   headers: this._settings.ssmHeader
-    // }).subscribe(value => {
-    //   this._indexD.setItem<UserI>('user_created', value).then(value1 => {
-    //     console.log('saved user_created in cache is ---> ' + value1.objectId);
-    //     callback(value);
-    //   }).catch(reason => {
-    //     console.log(reason);
-    //     callback(null);
-    //   });
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
   }
 
   // implement on cloud functions
@@ -72,14 +58,7 @@ export class UserDatabaseService implements UserDataSource {
   }
 
   getUser(user: UserI, callback?: (user: UserI) => void) {
-    // this.httpClient.get<UserI>(this.serverUrl + '/users/' + user.objectId, {
-    //   headers: this.getHeader
-    // }).subscribe(value => {
-    //   callback(value);
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
+
   }
 
   // needs to be reviewed

@@ -6,6 +6,7 @@ import {ShopI} from '../model/ShopI';
 import {BatchI} from '../model/batchI';
 import {randomString} from '../adapter/ParseBackend';
 import {Stock} from '../model/stock';
+import {SsmEvents} from '../utils/eventsNames';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,9 @@ export class LocalStorageService implements StorageAdapter {
 
   async saveActiveShop(shop: ShopI): Promise<any> {
     try {
-      return await this._storage.setItem<ShopI>('activeShop', shop);
+      const response = await this._storage.setItem<ShopI>('activeShop', shop);
+      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
+      return response;
     } catch (e) {
       throw e;
     }
@@ -85,7 +88,9 @@ export class LocalStorageService implements StorageAdapter {
 
   async removeActiveShop(): Promise<any> {
     try {
-      return await this._storage.removeItem('activeShop');
+      const response = await this._storage.removeItem('activeShop');
+      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_REMOVE));
+      return response;
     } catch (e) {
       throw e;
     }
