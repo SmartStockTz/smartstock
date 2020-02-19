@@ -50,6 +50,7 @@ import {FooterComponent} from './landing/footer/footer.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
+import { PrivancyComponent } from './privancy/privancy.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {CreateShopComponent} from './choose-shop/create-shop/create-shop.compone
     FooterComponent,
     ChooseShopComponent,
     CreateShopComponent,
+    PrivancyComponent,
   ],
     imports: [
         BrowserModule,
