@@ -33,7 +33,7 @@ import {
 import {ProfileComponent} from './profile/profile.component';
 import { BillingComponent } from './billing/billing.component';
 import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
-import { ProfileAddressComponent } from './profile-address/profile-address.component';
+import { ProfileBusinessComponent } from './profile-business/profile-business.component';
 import { ProfileAuthenticationComponent } from './profile-authentication/profile-authentication.component';
 import { BillingInvoicesComponent } from './billing-invoices/billing-invoices.component';
 import { BillingReceiptsComponent } from './billing-receipts/billing-receipts.component';
@@ -49,7 +49,7 @@ import { BillingReceiptsComponent } from './billing-receipts/billing-receipts.co
     UpdateUserPasswordDialogComponent,
     BillingComponent,
     ProfilePersonalComponent,
-    ProfileAddressComponent,
+    ProfileBusinessComponent,
     ProfileAuthenticationComponent,
     BillingInvoicesComponent,
     BillingReceiptsComponent

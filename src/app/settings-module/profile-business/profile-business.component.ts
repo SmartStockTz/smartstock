@@ -3,21 +3,25 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserI} from '../../model/UserI';
 import {MatSnackBar} from '@angular/material';
 import {UserDatabaseService} from '../../services/user-database.service';
+import {ShopI} from '../../model/ShopI';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-profile-address',
-  templateUrl: './profile-address.component.html',
-  styleUrls: ['./profile-address.component.css']
+  templateUrl: './profile-business.component.html',
+  styleUrls: ['./profile-business.component.css']
 })
-export class ProfileAddressComponent implements OnInit {
+export class ProfileBusinessComponent implements OnInit {
   businessForm: FormGroup;
   currentUser: UserI;
+  currentShop: ShopI;
   getBusinessProgress = false;
   updateBusinessProgress = false;
   businessFormControl = new FormControl('', [Validators.nullValidator, Validators.required]);
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
+              private readonly _storage: LocalStorageService,
               private readonly _userApi: UserDatabaseService) {
   }
 
@@ -36,7 +40,7 @@ export class ProfileAddressComponent implements OnInit {
 
   private _getCurrentBusiness() {
     this.getBusinessProgress = true;
-    this._userApi.currentUser().then(user => {
+    this._storage.getActiveUser().then(user => {
       this.currentUser = user;
       this._initializeForm(this.currentUser);
       this.getBusinessProgress = false;
