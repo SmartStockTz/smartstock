@@ -1,0 +1,10 @@
+{
+  "appId": "com.fahamutech.smartstock",
+  "appName": "smartstock",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/smartstock",
+  "cordova": {},
+  "server": {
+  }
+}
