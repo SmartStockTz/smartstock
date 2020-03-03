@@ -46,7 +46,6 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
 import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
 import { FooterComponent } from './landing/footer/footer.component';
-import {MatCarouselModule} from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -94,7 +93,6 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     MatTooltipModule,
-    MatCarouselModule,
   ],
   providers: [],
   entryComponents: [
