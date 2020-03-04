@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "0.4.0-beta3",
+  "version": "0.5.0-beta0",
   "main": "main.js",
   "build": {
     "appId": "com.fahamutech.ssm",
@@ -16,7 +16,7 @@
     "build:web": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -29,10 +29,8 @@
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
-    "@angular/pwa": "^0.803.22",
     "@angular/router": "~8.2.9",
     "@angular/service-worker": "^8.2.14",
-    "@ngmodule/material-carousel": "^0.5.1",
     "hammerjs": "^2.0.8",
     "highcharts": "^8.0.0",
     "localforage": "^1.7.3",

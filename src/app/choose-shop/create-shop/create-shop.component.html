@@ -43,15 +43,18 @@
     </mat-form-field>
 
 
-    <div mat-dialog-actions class="d-flex flex-row align-items-end align-self-end">
-      <button class="ft-button" mat-button color="primary" (click)="closeDialog($event)">
-        Close
-      </button>
-      <button [disabled]="createShopProgress" class="ft-button" color="primary" mat-raised-button>
+    <div class="">
+      <button [disabled]="createShopProgress" class="ft-button btn-block" color="primary" mat-raised-button>
         Create Shop
         <mat-progress-spinner style="display: inline-block" *ngIf="createShopProgress" mode="indeterminate"
                               color="primary" [diameter]="20"></mat-progress-spinner>
       </button>
     </div>
   </form>
+</div>
+
+<div style="margin-top: 6px">
+  <button class="btn-block" mat-button color="primary" (click)="closeDialog($event)">
+    Close
+  </button>
 </div>

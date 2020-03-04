@@ -9,4 +9,7 @@ export interface ShopI {
     printerFooter: string,
     printerHeader: string
   };
+  country?: string;
+  region?: string;
+  street?: string;
 }

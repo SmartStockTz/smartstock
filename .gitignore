@@ -45,6 +45,5 @@ server/logs
 .firebase
 /.firebase
 
-/android
 android
-
+/android

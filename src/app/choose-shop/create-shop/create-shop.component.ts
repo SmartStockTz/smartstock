@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {DialogData} from 'src/app/sales-module/whole-sale/whole-sale.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShopDatabaseService} from '../../services/shop-database.service';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 export interface DialogData {
   customer?: string;
@@ -26,6 +27,7 @@ export class CreateShopComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CreateShopComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
               private readonly snack: MatSnackBar,
+              private readonly _storage: LocalStorageService,
               private readonly _shopApi: ShopDatabaseService,
               private readonly formBuilder: FormBuilder) {
   }
@@ -33,12 +35,19 @@ export class CreateShopComponent implements OnInit {
   createShop() {
     if (this.createShopForm.valid) {
       this.createShopProgress = true;
-      this._shopApi.createShop(this.createShopForm.value).then(value => {
-        this.dialogRef.close(value);
-        this.snack.open('Shop created successful', 'Ok', {
-          duration: 3000
-        });
-        this.createShopProgress = false;
+      this._shopApi.createShop(this.createShopForm.value).then(async value => {
+        try {
+          const user = await this._storage.getActiveUser();
+          user.shops.push(value);
+          await this._storage.saveActiveUser(user);
+          this.dialogRef.close(value);
+          this.snack.open('Shop created successful', 'Ok', {
+            duration: 3000
+          });
+          this.createShopProgress = false;
+        } catch (e) {
+
+        }
       }).catch(reason => {
         console.log(reason);
         this.snack.open(reason.message, 'Ok', {duration: 3000});

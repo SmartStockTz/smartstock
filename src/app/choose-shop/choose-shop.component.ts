@@ -5,7 +5,7 @@ import {Observable, of} from 'rxjs';
 import {ShopI} from '../model/ShopI';
 import {UserDatabaseService} from '../services/user-database.service';
 import {Router} from '@angular/router';
-import {NgForage} from 'ngforage';
+import {LocalStorageService} from '../services/local-storage.service';
 
 @Component({
   selector: 'app-choose-shop',
@@ -20,14 +20,13 @@ export class ChooseShopComponent implements OnInit {
   constructor(public createShopDialog: MatDialog,
               private readonly _snack: MatSnackBar,
               private readonly _router: Router,
-              private readonly _storage: NgForage,
+              private readonly _storage: LocalStorageService,
               private readonly userDatabase: UserDatabaseService) {
   }
 
   openCreateShopDialog() {
     const dialogRef = this.createShopDialog.open(CreateShopComponent, {
       minWidth: 350,
-      // maxWidth: 400,
       data: this.shopDetails,
       disableClose: true,
       closeOnNavigation: true
@@ -35,15 +34,18 @@ export class ChooseShopComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
-        // this._storage.getItem('');
+        this._getShops();
       } else {
-        console.log('no shop to append');
+        // console.log('no shop to append');
       }
     });
   }
 
   ngOnInit() {
+    this._getShops();
+  }
+
+  private _getShops() {
     this.userDatabase.getShops().then(shops => {
       this.shops = of(shops);
     }).catch(reason => {

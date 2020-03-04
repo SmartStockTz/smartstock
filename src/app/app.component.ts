@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
-import {MatDialog} from '@angular/material';
+import {SsmEvents} from './utils/eventsNames';
+import {LocalStorageService} from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +13,36 @@ import {MatDialog} from '@angular/material';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private readonly thread: ThreadsService,
-              private readonly dialog: MatDialog) {
+  constructor(private readonly threadProxy: ThreadsService,
+              private readonly _storage: LocalStorageService) {
   }
 
-  async ngOnInit() {
-    try {
-      await this.thread.startSalesProxy();
-      await this.thread.startStockUpdateProxy();
-    } catch (e) {
-      console.warn(e);
-    }
+  ngOnInit() {
+    this._storage.getActiveShop().then(_ => {
+      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
+    }).catch(_ => {
+      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_REMOVE));
+    });
+
+    window.addEventListener(SsmEvents.ACTIVE_SHOP_SET, async ($event) => {
+      try {
+        await this.threadProxy.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+    window.addEventListener(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
+      try {
+        await this.threadProxy.stop();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+    // try {
+    //   await this.threadProxy.start();
+    // } catch (e) {
+    //   console.warn(e);
+    // }
   }
 
   // private _checkNewVersion() {
