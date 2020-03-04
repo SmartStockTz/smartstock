@@ -28,7 +28,7 @@ import {
   MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatStepperModule,
@@ -45,10 +45,10 @@ import {CommonComponentsModule} from './common-components/common-components.modu
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
 import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
-import { FooterComponent } from './landing/footer/footer.component';
-import {MatCarouselModule} from '@ngmodule/material-carousel';
-import { CreateShopComponent } from './choose-shop/create-shop/create-shop.component';
-import { PrivancyComponent } from './privancy/privancy.component';
+import {FooterComponent} from './landing/footer/footer.component';
+import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
+import {PrivancyComponent} from './privancy/privancy.component';
+import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,8 @@ import { PrivancyComponent } from './privancy/privancy.component';
     RegisterComponent,
     FooterComponent,
     CreateShopComponent,
-    PrivancyComponent
+    PrivancyComponent,
+    ChooseShopComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +99,7 @@ import { PrivancyComponent } from './privancy/privancy.component';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     MatTooltipModule,
-    MatCarouselModule,
+    MatSliderModule,
   ],
   providers: [],
   entryComponents: [
