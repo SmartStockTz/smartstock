@@ -1,6 +1,6 @@
 <mat-sidenav-container class="match-parent">
 
-  <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="false">
+  <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
@@ -65,7 +65,8 @@
                       </button>
                       <mat-menu #opts>
                         <button (click)="showPurchaseDetails(purchase)" mat-menu-item>View</button>
-                        <button (click)="recordPayment(purchase)" mat-menu-item *ngIf="!purchase.paid">Record Payment</button>
+                        <button (click)="recordPayment(purchase)" mat-menu-item *ngIf="!purchase.paid">Record Payment
+                        </button>
                       </mat-menu>
                     </div>
                   </td>

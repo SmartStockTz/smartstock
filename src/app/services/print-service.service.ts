@@ -4,7 +4,7 @@ import {CartI} from '../model/cart';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {environment} from '../../environments/environment';
-import {randomString} from '../database/ParseBackend';
+import {randomString} from '../adapter/ParseBackend';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +12,15 @@ import {randomString} from '../database/ParseBackend';
 export class PrintServiceService {
   url: string;
 
-  constructor(private ssmSettings: SettingsServiceService,
-              private httpClient: HttpClient) {
+  constructor(private readonly _settings: SettingsServiceService,
+              private readonly _httpClient: HttpClient) {
   }
 
   printOrder(order: OrderI, callback: (value: any) => void) {
     let data = '\t' + new Date().toString() + '\n';
     data = data.concat('**************************\n');
-    data = data.concat('To ---> ' + order.customer + '\n*************************\n');
+    data = data.concat('To ---> ' + order.customer +
+      '\n*************************\n');
     let tT = 0;
     order.cart.forEach((value, index) => {
       tT += <number>value.amount;
@@ -30,13 +31,13 @@ export class PrintServiceService {
         'Amount   --> ' + value.amount + ' \n');
     });
     data = data.concat('\n**********\n| Total Bill : ' + tT + '\n**********');
-    this.ssmSettings.getPrinterAddress(value1 => {
+    this._settings.getPrinterAddress(value1 => {
       if (value1 === null) {
         this.url = `${environment.printerUrl}/print`;
       } else {
         this.url = value1.ip;
       }
-      this.httpClient.post(this.url, {
+      this._httpClient.post(this.url, {
         data: data,
         id: order.objectId
       }, {
@@ -59,7 +60,7 @@ export class PrintServiceService {
   async printCartRetail(carts: CartI[], customer: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
 
-      const cSettings = await this.ssmSettings.getSettings();
+      const cSettings = await this._settings.getSettings();
       let data = '';
       data = data.concat(cSettings.printerHeader + '\n');
       data = data.concat('-----------------------------------\n');
@@ -77,9 +78,9 @@ export class PrintServiceService {
       data = data.concat('Total Bill : ' + tT + '\n-----------------------------------\n');
       data = data.concat(cSettings.printerFooter);
 
-      this.ssmSettings.getPrinterAddress(value1 => {
+      this._settings.getPrinterAddress(value1 => {
         this.url = `${environment.printerUrl}/print`;
-        this.httpClient.post(this.url, {
+        this._httpClient.post(this.url, {
           data: data,
           id: randomString(8),
         }, {
@@ -103,7 +104,7 @@ export class PrintServiceService {
 
   printCartWholesale(carts: CartI[], customer: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      const cSettings = await this.ssmSettings.getSettings();
+      const cSettings = await this._settings.getSettings();
       let data = '';
       data = data.concat(cSettings.printerHeader + '\n');
       data = data.concat('-----------------------------------\n');
@@ -123,9 +124,9 @@ export class PrintServiceService {
         'Total Bill : ' + tT + '\n-----------------------------------\n');
       data = data.concat(cSettings.printerFooter);
 
-      this.ssmSettings.getPrinterAddress(value1 => {
+      this._settings.getPrinterAddress(value1 => {
         this.url = `${environment.printerUrl}/print`;
-        this.httpClient.post(this.url, {
+        this._httpClient.post(this.url, {
           data: data,
           id: Date.now().toString()
         }, {

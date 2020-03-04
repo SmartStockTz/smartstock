@@ -37,6 +37,29 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="abbreviation">
+        <th mat-header-cell *matHeaderCellDef>Abbreviation</th>
+        <td class="editable" [matMenuTriggerFor]="abbreviationMenu"
+            #nameMenuTrigger="matMenuTrigger"
+            [matMenuTriggerData]="{objectId: element.objectId, data: element.abbreviation}" matRipple mat-cell
+            *matCellDef="let element">{{element.abbreviation}}
+          <mat-menu #abbreviationMenu>
+            <ng-template matMenuContent let-objectId="objectId" let-data="data">
+              <div (click)="$event.stopPropagation()" style="padding: 16px">
+                <mat-form-field class="my-input" appearance="outline">
+                  <mat-label>Abbreviation</mat-label>
+                  <input [value]="data" [formControl]="abbreviationFormControl" matInput>
+                </mat-form-field>
+                <button
+                  (click)="updateUnitAbbreviation({objectId: objectId, value: abbreviationFormControl.value}, nameMenuTrigger)"
+                  mat-button>Update
+                </button>
+              </div>
+            </ng-template>
+          </mat-menu>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef>Description</th>
         <td class="editable" [matMenuTriggerFor]="descriptionMenu"

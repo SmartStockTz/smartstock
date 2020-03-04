@@ -2,35 +2,38 @@ import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
 import {UserI} from '../model/UserI';
+import {ShopI} from '../model/ShopI';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsServiceService {
-  constructor(private readonly httpClient: HttpClient,
-              private readonly indexDb: NgForage) {
-  }
 
   ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
-  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com/functions';
-
+  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com';
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock_lb'
   };
-
   ssmFunctionsHeader = {
     'bfast-application-id': 'smartstock_lb',
     'content-type': 'application/json'
   };
 
+  constructor(private readonly _httpClient: HttpClient,
+              private readonly _storage: LocalStorageService,
+              private readonly indexDb: NgForage) {
+  }
+
   async getSSMUserHeader() {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
+      const user = await this._storage.getActiveUser();
+      const activeShop = await this._storage.getActiveShop();
       if (!user) {
         console.log('no user records found');
         throw new Error('no user records found');
       }
-      if (user && user.sessionToken && user.applicationId) {
+      if (user && user.sessionToken && activeShop && activeShop.applicationId) {
         return {
           'X-Parse-Application-Id': 'smartstock_lb',
           'X-Parse-Session-Token': user.sessionToken,
@@ -46,11 +49,11 @@ export class SettingsServiceService {
 
   async getCustomerApplicationId() {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this._storage.getActiveShop();
+      if (!activeShop) {
         throw new Error('No user record');
       }
-      return user.applicationId;
+      return activeShop.applicationId;
     } catch (e) {
       throw {message: 'Fails to get application id', reason: e.toString()};
     }
@@ -58,11 +61,11 @@ export class SettingsServiceService {
 
   async getCustomerServerURLId() {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this._storage.getActiveShop();
+      if (!activeShop) {
         throw new Error('No user in local storage');
       }
-      return user.projectUrlId;
+      return activeShop.projectUrlId;
     } catch (reason) {
       throw {message: 'Fails to get user', reason: reason.toString()};
     }
@@ -100,16 +103,19 @@ export class SettingsServiceService {
 
   async getCustomerProjectId(): Promise<string> {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      if (!activeShop) {
         throw new Error('No user in local storage');
       }
-      return user.projectId;
+      return activeShop.projectId;
     } catch (e) {
       throw {message: 'Fails to get project id', reason: e.toString()};
     }
   }
 
+  /**
+   * @deprecated
+   */
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
     this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
       callback(null);
@@ -120,39 +126,38 @@ export class SettingsServiceService {
   }
 
   saveSettings(settings: any): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.indexDb.getItem<UserI>('user').then(async user => {
-        this.httpClient.put(this.ssmServerURL + '/users/' + user.objectId, {
-          settings: settings
-        }, {
-          headers: await this.getSSMUserHeader()
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const activeShop = await this._storage.getActiveShop();
+        this._httpClient.put<any>(this.ssmFunctionsURL + '/settings/' + activeShop.projectId, settings, {
+          headers: this.ssmFunctionsHeader
         }).subscribe(_ => {
-          user.settings = settings;
-          this.indexDb.setItem('user', user).then(_1 => {
-            resolve('User settings updated');
+          activeShop.settings = _.settings;
+          this._storage.saveActiveShop(activeShop).then(_1 => {
+            resolve('Shop settings updated');
           }).catch(reason => {
             reject(reason);
           });
         }, error => {
           reject(error);
         });
-      }).catch(reason => {
-        reject(reason);
-      });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 
   async getSettings(): Promise<{ printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean }> {
     try {
-      const user = await this.indexDb.getItem<UserI>('user');
-      if (!user) {
+      const activeShop = await this._storage.getActiveShop();
+      if (!activeShop || !activeShop.settings) {
         return {
           'printerFooter': 'Thank you',
           'printerHeader': '',
           'saleWithoutPrinter': true
         };
       }
-      return user.settings;
+      return activeShop.settings;
     } catch (e) {
       throw {message: 'Fails to get settings', reason: e.toString()};
     }

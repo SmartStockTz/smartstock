@@ -17,7 +17,7 @@ export class StockManagerGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser().then(user => {
-        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role === 'manager') {
+        if (user && user.applicationId && user.projectUrlId && user.projectId && (user.role === 'manager' || user.role === 'admin')) {
           resolve(true);
         } else {
           this.router.navigateByUrl('/login').catch(reason => console.log(reason));

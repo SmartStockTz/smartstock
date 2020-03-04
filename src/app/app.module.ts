@@ -28,7 +28,7 @@ import {
   MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatStepperModule,
@@ -45,7 +45,10 @@ import {CommonComponentsModule} from './common-components/common-components.modu
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
 import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
-import { FooterComponent } from './landing/footer/footer.component';
+import {FooterComponent} from './landing/footer/footer.component';
+import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
+import {PrivancyComponent} from './privancy/privancy.component';
+import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { FooterComponent } from './landing/footer/footer.component';
     DialogDeleteComponent,
     RegisterComponent,
     FooterComponent,
+    CreateShopComponent,
+    PrivancyComponent,
+    ChooseShopComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,7 @@ import { FooterComponent } from './landing/footer/footer.component';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     MatTooltipModule,
+    MatSliderModule,
   ],
   providers: [],
   entryComponents: [

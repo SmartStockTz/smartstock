@@ -6,8 +6,12 @@
 
 .drawer-head {
   height: 180px;
-  background-image: url("../../../assets/img/calculate.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+
+div.mat-list-item-content {
+  width: 100% !important;
 }

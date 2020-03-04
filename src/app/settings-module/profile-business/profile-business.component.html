@@ -1,0 +1,62 @@
+<div class="profile-business-wrapper">
+  <mat-card class="mat-elevation-z0">
+    <form *ngIf="!getBusinessProgress && businessForm" [formGroup]="businessForm"
+          (ngSubmit)="updatePersonalInformation()">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+
+          <mat-form-field appearance="outline" class="btn-block" matTooltip="read only field">
+            <mat-label>Principal Shop</mat-label>
+            <input style="color: gray" matInput [formControl]="businessFormControl" type="text" [readonly]="true">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="btn-block">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" type="text">
+            <mat-error>country field required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="btn-block">
+            <mat-label>Region</mat-label>
+            <input matInput formControlName="region" type="text">
+            <mat-error>last name field required</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+
+          <mat-form-field appearance="outline" class="btn-block">
+            <mat-label>street</mat-label>
+            <textarea [rows]="3" matInput formControlName="street" type="text"></textarea>
+            <mat-error>street field required</mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="row">
+        <button [disabled]="updateBusinessProgress" class="ft-button" mat-flat-button color="primary">
+          SAVE
+          <mat-progress-spinner *ngIf="updateBusinessProgress"
+                                style="display: inline-block" [diameter]="30"
+                                mode="indeterminate"
+                                color="primary"></mat-progress-spinner>
+        </button>
+      </div>
+    </form>
+
+    <mat-progress-spinner *ngIf="getBusinessProgress" mode="indeterminate" color="primary"
+                          [diameter]="25"></mat-progress-spinner>
+
+    <div *ngIf="!getBusinessProgress && !businessForm">
+      <mat-card-subtitle>
+        Failure when try to fetch your business information, try to refresh
+      </mat-card-subtitle>
+      <button (click)="_getCurrentBusiness()" mat-icon-button>
+        <mat-icon color="primary">
+          refresh
+        </mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>

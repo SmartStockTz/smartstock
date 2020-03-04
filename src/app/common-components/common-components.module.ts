@@ -1,9 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {CheckUserProgressComponent} from './check-user-progress/check-user-progress.component';
 import {AdminDrawerComponent} from './admin-drawer/admin-drawer.component';
-import {NavUserComponent} from './user-drawer/nav-user.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {
   MatButtonModule,
@@ -17,6 +14,7 @@ import {
   MatMenuModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
@@ -40,17 +38,14 @@ import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.componen
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSelectModule,
   ],
   exports: [
-    CheckUserProgressComponent,
-    NavUserComponent,
     AdminDrawerComponent,
     ToolbarComponent
   ],
   declarations: [
-    CheckUserProgressComponent,
     AdminDrawerComponent,
-    NavUserComponent,
     ToolbarComponent,
     NoStockDialogComponent
   ]

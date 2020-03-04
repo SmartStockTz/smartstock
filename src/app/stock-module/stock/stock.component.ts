@@ -13,7 +13,7 @@ import {
   MatSnackBar,
   MatTableDataSource
 } from '@angular/material';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgForage} from 'ngforage';
 import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
@@ -25,6 +25,7 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent extends DeviceInfo implements OnInit {
+  selectedTab = 0;
   private stockFetchProgress = false;
 
   constructor(private readonly router: Router,
@@ -32,6 +33,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
               private readonly dialog: MatDialog,
+              private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
@@ -45,25 +47,12 @@ export class StockComponent extends DeviceInfo implements OnInit {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  static getSqlDate(date: any): string {
-    try {
-      const year = date.getFullYear();
-      let month = (date.getMonth() + 1).toString(10);
-      let day = (date.getDate()).toString(10);
-      if (month.length === 1) {
-        month = '0'.concat(month);
-      }
-      if (day.length === 1) {
-        day = '0'.concat(day);
-      }
-      return year + '-' + month + '-' + day;
-    } catch (e) {
-      console.log('date has an error : ' + e);
-      return date;
-    }
-  }
-
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(value => {
+      if (value) {
+        this.selectedTab = Number(value.t);
+      }
+    });
     window.addEventListener('ssm_stocks_updated', (e) => {
       console.log(e);
       console.log('stock is updated from worker thread check it out');
@@ -171,6 +160,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   // affect performance
+
   handleSearch(query: string) {
     this.getStocksFromCache(() => {
       // this.stockDatasource.filter = query.toString().toLowerCase();

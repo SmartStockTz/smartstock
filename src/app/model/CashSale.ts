@@ -1,3 +1,5 @@
+import {Stock} from './stock';
+
 export interface CashSaleI {
   idOld: string;
   objectId?: string;
@@ -11,5 +13,7 @@ export interface CashSaleI {
   discount: number;
   user: string;
   channel: string;
+  stock: Stock;
+  batch: string;
   stockId: string;
 }

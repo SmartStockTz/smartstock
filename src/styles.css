@@ -2,12 +2,13 @@
 /*@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";*/
 
 html, body {
-  height: 100%;
+  /*height: 100%;*/
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -39,7 +40,7 @@ button {
   outline: none !important;
 }
 
-.ft-button{
+.ft-button {
   height: 54px;
   color: white;
   font-size: 24px;
@@ -53,4 +54,79 @@ button {
 .editable:hover {
   outline: #0b2e13 solid 1px;
   cursor: pointer;
+}
+
+
+.toolbar-input {
+  width: 80%;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  background: rgba(191, 191, 191, 0.76);
+  color: #000000;
+  padding: 8px;
+  outline: none;
+}
+
+.toolbar-input::placeholder {
+  color: #535353;
+}
+
+.toolbar-input:focus {
+  outline: none;
+}
+
+.pricing-input {
+  width: 80px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  background: rgba(191, 191, 191, 0.61);
+  color: #000000;
+  padding: 8px;
+  outline: none;
+}
+
+.pricing-input::placeholder {
+  color: #535353;
+}
+
+.pricing-input:focus {
+  outline: none;
+}
+
+.dashboard-refresh-button {
+  margin-top: 6px !important;
+  margin-left: 4px !important;
+}
+
+.bill-card-top {
+  height: 125px;
+  /*// background: #FFFFFF;*/
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 170, 7, 0.33);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0d3b18;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0b2e13;
 }

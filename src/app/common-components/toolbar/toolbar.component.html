@@ -13,17 +13,18 @@
       <!--        <mat-icon>search</mat-icon>-->
       <!--      </button>-->
     </span>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
+    <button class="ft-button" mat-button color="primary" [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+      <span *ngIf="currentUser">{{"  "+currentUser.username}}</span>
     </button>
     <mat-menu #menu>
-      <!--      <button mat-menu-item routerLink="">-->
-      <!--        <mat-icon>home</mat-icon>-->
-      <!--        Home-->
-      <!--      </button>-->
       <button mat-menu-item (click)="logout()">
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon>exit_to_app</mat-icon>
         Logout
+      </button>
+      <button mat-menu-item routerLink="/settings/profile">
+        <mat-icon>person</mat-icon>
+        My Profile
       </button>
     </mat-menu>
   </mat-toolbar>

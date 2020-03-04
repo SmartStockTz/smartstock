@@ -1,0 +1,9 @@
+.create-shop-form-container{
+    display: flex;
+    flex-direction: column
+}
+
+.btn-create-shop{
+    /*background-color:#027206;*/
+    /*color: #ffffff*/
+}

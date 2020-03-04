@@ -1,0 +1,53 @@
+<div>
+  <div class="d-flex flex-row flex-wrap btn-block align-items-center">
+    <mat-card-subtitle>Sold Products</mat-card-subtitle>
+    <span class="flex-grow-1"></span>
+    <div class="d-flex flex-nowrap flex-row justify-content-start align-items-start">
+      <mat-form-field appearance="outline" style="margin-right: 8px">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="pickerDate" [formControl]="dateFormControl">
+        <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+        <mat-datepicker [touchUi]="true" #pickerDate></mat-datepicker>
+      </mat-form-field>
+      <button (click)="refreshProducts()" [disabled]="getProductsProgress"
+              mat-flat-button
+              class="ft-button dashboard-refresh-button" color="primary">
+        <mat-icon *ngIf="!getProductsProgress">refresh</mat-icon>
+        <mat-progress-spinner *ngIf="getProductsProgress" style="display: inline-block"
+                              mode="indeterminate"
+                              [diameter]="15" color="primary">
+        </mat-progress-spinner>
+      </button>
+    </div>
+
+  </div>
+  <mat-card>
+    <div style="margin-top: 10px; margin-bottom: 10px" *ngIf="!soldProductsDatasource"
+         class="d-flex flex-column justify-content-center align-items-center">
+      <img alt="no data" src="./assets/img/data.svg" width="200" height="200"/>
+      <span>Data is not ready</span>
+    </div>
+    <table matSort *ngIf="soldProductsDatasource" mat-table [dataSource]="soldProductsDatasource">
+      <ng-container matColumnDef="product">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Product</th>
+        <td mat-cell *matCellDef="let element">{{element.product}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>Amount (TZ)</th>
+        <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="columns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 75, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card>
+</div>

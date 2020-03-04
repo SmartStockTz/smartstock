@@ -19,11 +19,11 @@ export class AuthenticatedUserGuard implements CanActivate {
         if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'admin') {
           this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
           reject(false);
-        } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role !== 'user') {
+        } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'user') {
           this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
           reject(false);
-        } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role !== 'manager') {
-          this.router.navigateByUrl('/stock').catch(reason => console.log(reason));
+        } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'manager') {
+          this.router.navigateByUrl('/sale/report').catch(reason => console.log(reason));
           reject(false);
         } else {
           resolve(true);

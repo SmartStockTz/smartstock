@@ -15,6 +15,10 @@ import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
 import {PrintServiceService} from '../../services/print-service.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {SettingsServiceService} from '../../services/Settings-service.service';
+import {toSqlDate} from '../../utils/date';
+import {randomString} from '../../adapter/ParseBackend';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {StockDatabaseService} from '../../services/stock-database.service';
 
 export interface DialogData {
   customer?: string;
@@ -25,9 +29,15 @@ export interface DialogData {
 @Component({
   selector: 'app-whole-sale',
   templateUrl: './whole-sale.component.html',
-  styleUrls: ['./whole-sale.component.css']
+  styleUrls: ['./whole-sale.component.css'],
+  providers: [
+    SalesDatabaseService
+  ]
 })
 export class WholeSaleComponent extends DeviceInfo implements OnInit {
+
+  refreshProductsProgress = false;
+
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
@@ -88,14 +98,16 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   printProgress = false;
 
-  constructor(private router: Router,
-              private userDatabase: UserDatabaseService,
-              private indexDb: NgForage,
+  constructor(private readonly router: Router,
+              private readonly userDatabase: UserDatabaseService,
+              private readonly indexDb: NgForage,
+              private readonly _storage: LocalStorageService,
+              private readonly _stockApi: StockDatabaseService,
               private readonly settings: SettingsServiceService,
-              private snack: MatSnackBar,
-              private dialog: MatDialog,
-              private printS: PrintServiceService,
-              private saleDatabase: SalesDatabaseService) {
+              private readonly snack: MatSnackBar,
+              private readonly dialog: MatDialog,
+              private readonly printS: PrintServiceService,
+              private readonly saleDatabase: SalesDatabaseService) {
     super();
   }
 
@@ -114,9 +126,15 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   }
 
   private getProduct(product: string) {
-    this.indexDb.getItem<Stock[]>('stocks').then(value => {
-      const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
-      this.filteredOptions = of(stocksFiltered);
+    this._storage.getStocks().then(value => {
+      if (value) {
+        const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
+        this.filteredOptions = of(stocksFiltered);
+      } else {
+        this.snack.open('No products found, try again or refresh products', 'Ok', {
+          duration: 3000
+        });
+      }
     }).catch(reason => {
       console.log(reason);
       this.snack.open(reason, 'Ok');
@@ -168,7 +186,7 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   submitBill() {
     this.showProgressBar();
-    const stringDate = SalesDatabaseService.getCurrentDate();
+    const stringDate = toSqlDate(new Date());
     let idTra: string;
     if (this.traRadioControl.value === false) {
       idTra = 'n';
@@ -183,10 +201,12 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
         quantity: value.quantity,
         product: value.product,
         category: value.stock.category,
+        batch: randomString(12),
         unit: value.stock.unit,
         channel: 'whole',
         date: stringDate,
         idOld: '',
+        stock: this.stock,
         idTra: idTra,
         user: this.currentUser.objectId,
         stockId: value.stock.objectId
@@ -202,13 +222,12 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
   }
 
   saveOrder() {
-    // this.openDialog(0);
     if (this.customerControl.value === null || this.customerControl.value === '') {
       this.snack.open('Please enter customer name to save order');
     } else {
       this.showProgressBar();
       this.saleDatabase.addOrder({
-        date: SalesDatabaseService.getCurrentDate(),
+        date: toSqlDate(new Date()),
         customer: this.customerControl.value,
         amount: this.totalBill,
         cart: this.cartDatasourceArray,
@@ -465,6 +484,32 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
       }
     });
   }
+
+  refreshProducts() {
+    this.refreshProductsProgress = true;
+    this._stockApi.getAllStock().then(async stocks => {
+      try {
+        await this._storage.saveStocks(stocks);
+        this.snack.open('Products refreshed', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      } catch (e) {
+        console.log(e);
+        this.snack.open('Fails to fetch products from server', 'Ok', {
+          duration: 3000
+        });
+        this.refreshProductsProgress = false;
+      }
+    }).catch(reason => {
+      console.log(reason);
+      this.snack.open('Fails to fetch products from server', 'Ok', {
+        duration: 3000
+      });
+      this.refreshProductsProgress = false;
+    });
+  }
+
 }
 
 @Component({

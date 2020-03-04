@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {StockDataSource} from '../database/connector/StockDataSource';
+import {StockDataSource} from '../adapter/StockDataSource';
 import {CategoryI} from '../model/CategoryI';
 import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {randomString} from '../database/ParseBackend';
+import {randomString} from '../adapter/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
 
@@ -14,14 +14,14 @@ import {PurchaseI} from '../model/PurchaseI';
 })
 export class StockDatabaseService implements StockDataSource {
 
-  constructor(private readonly httpClient: HttpClient,
-              private readonly settings: SettingsServiceService) {
+  constructor(private readonly _httpClient: HttpClient,
+              private readonly _settings: SettingsServiceService) {
   }
 
   exportToExcel(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.httpClient.get(this.settings.ssmFunctionsURL + '/stocks/export', {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export', {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
       }, error => {
@@ -41,8 +41,8 @@ export class StockDatabaseService implements StockDataSource {
 
   addCategory(category: CategoryI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.post(await this.settings.getCustomerServerURL() + '/classes/categories', category, {
-        headers: await this.settings.getCustomerPostHeader()
+      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/categories', category, {
+        headers: await this._settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -53,8 +53,8 @@ export class StockDatabaseService implements StockDataSource {
 
   addUnit(unit: UnitsI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.post(await this.settings.getCustomerServerURL() + '/classes/units', unit, {
-        headers: await this.settings.getCustomerPostHeader()
+      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/units', unit, {
+        headers: await this._settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -65,9 +65,10 @@ export class StockDatabaseService implements StockDataSource {
 
   getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
     return new Promise<UnitsI[]>(async (resolve, reject) => {
-      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/units', {
-        headers: await this.settings.getCustomerHeader(),
+      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/units', {
+        headers: await this._settings.getCustomerHeader(),
         params: {
+          'order': '-updatedAt',
           'limit': '1000'
         }
       }).subscribe(value => {
@@ -82,8 +83,8 @@ export class StockDatabaseService implements StockDataSource {
   addStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>(async (resolve, reject) => {
       stock.idOld = randomString(8);
-      this.httpClient.post<Stock>(await this.settings.getCustomerServerURL() + '/classes/stocks', stock, {
-        headers: await this.settings.getCustomerPostHeader()
+      this._httpClient.post<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks', stock, {
+        headers: await this._settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -94,9 +95,8 @@ export class StockDatabaseService implements StockDataSource {
 
   addSupplier(supplier: SupplierI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      // supplier.idOld = randomString(8);
-      this.httpClient.post(await this.settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
-        headers: await this.settings.getCustomerPostHeader()
+      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
+        headers: await this._settings.getCustomerPostHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -117,8 +117,8 @@ export class StockDatabaseService implements StockDataSource {
 
   deleteCategory(category: CategoryI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.delete(await this.settings.getCustomerServerURL() + '/classes/categories/' + category.objectId, {
-        headers: await this.settings.getCustomerHeader()
+      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/categories/' + category.objectId, {
+        headers: await this._settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -129,8 +129,8 @@ export class StockDatabaseService implements StockDataSource {
 
   deleteStock(stock: Stock, callback?: (value: any) => void): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      this.httpClient.delete(await this.settings.getCustomerServerURL() + '/classes/stocks/' + stock.objectId, {
-        headers: await this.settings.getCustomerHeader()
+      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/stocks/' + stock.objectId, {
+        headers: await this._settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -141,8 +141,8 @@ export class StockDatabaseService implements StockDataSource {
 
   deleteSupplier(objectId: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.delete(await this.settings.getCustomerServerURL() + '/classes/suppliers/' + objectId, {
-        headers: await this.settings.getCustomerHeader()
+      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/suppliers/' + objectId, {
+        headers: await this._settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -153,9 +153,10 @@ export class StockDatabaseService implements StockDataSource {
 
   getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
     return new Promise<CategoryI[]>(async (resolve, reject) => {
-      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/categories', {
-        headers: await this.settings.getCustomerHeader(),
+      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/categories', {
+        headers: await this._settings.getCustomerHeader(),
         params: {
+          'order': '-updatedAt',
           'limit': pagination.size ? pagination.size.toString() : '1000'
         }
       }).subscribe(value => {
@@ -169,9 +170,10 @@ export class StockDatabaseService implements StockDataSource {
 
   getAllStock(): Promise<Stock[]> {
     return new Promise<Stock[]>(async (resolve, reject) => {
-      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/stocks', {
-        headers: await this.settings.getCustomerHeader(),
+      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/stocks', {
+        headers: await this._settings.getCustomerHeader(),
         params: {
+          'order': '-updatedAt',
           'limit': '100000'
         }
       }).subscribe(value => {
@@ -185,9 +187,10 @@ export class StockDatabaseService implements StockDataSource {
 
   getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
     return new Promise<SupplierI[]>(async (resolve, reject) => {
-      this.httpClient.get<any>(await this.settings.getCustomerServerURL() + '/classes/suppliers', {
-        headers: await this.settings.getCustomerHeader(),
+      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/suppliers', {
+        headers: await this._settings.getCustomerHeader(),
         params: {
+          'order': '-updatedAt',
           'limit': '1000'
         }
       }).subscribe(value => {
@@ -231,9 +234,9 @@ export class StockDatabaseService implements StockDataSource {
       const data = {};
       data[category.field] = category.value;
       delete category.objectId;
-      this.httpClient.put<CategoryI>(await this.settings.getCustomerServerURL() + '/classes/categories/' + categoryId, data,
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories/' + categoryId, data,
         {
-          headers: await this.settings.getCustomerPostHeader()
+          headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value => {
         value.objectId = categoryId;
         resolve(value);
@@ -247,10 +250,10 @@ export class StockDatabaseService implements StockDataSource {
     return new Promise<Stock>(async (resolve, reject) => {
       const stockId = stock.objectId;
       delete stock.objectId;
-      this.httpClient.put<Stock>(await this.settings.getCustomerServerURL() + '/classes/stocks/' + stockId,
+      this._httpClient.put<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks/' + stockId,
         stock,
         {
-          headers: await this.settings.getCustomerPostHeader()
+          headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -265,9 +268,9 @@ export class StockDatabaseService implements StockDataSource {
       const data = {};
       data[value.field] = value.value;
       delete value.objectId;
-      this.httpClient.put<CategoryI>(await this.settings.getCustomerServerURL() + '/classes/suppliers/' + supplierId, data,
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/suppliers/' + supplierId, data,
         {
-          headers: await this.settings.getCustomerPostHeader()
+          headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value1 => {
         value1.objectId = supplierId;
         resolve(value1);
@@ -283,9 +286,9 @@ export class StockDatabaseService implements StockDataSource {
       const data = {};
       data[unit.field] = unit.value;
       delete unit.objectId;
-      this.httpClient.put<CategoryI>(await this.settings.getCustomerServerURL() + '/classes/units/' + unitId, data,
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/units/' + unitId, data,
         {
-          headers: await this.settings.getCustomerPostHeader()
+          headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value => {
         value.objectId = unitId;
         resolve(value);
@@ -297,8 +300,8 @@ export class StockDatabaseService implements StockDataSource {
 
   deleteUnit(unit: UnitsI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.delete(await this.settings.getCustomerServerURL() + '/classes/units/' + unit.objectId, {
-        headers: await this.settings.getCustomerHeader()
+      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/units/' + unit.objectId, {
+        headers: await this._settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);
       }, error1 => {
@@ -309,8 +312,9 @@ export class StockDatabaseService implements StockDataSource {
 
   addPurchase(purchaseI: PurchaseI): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.httpClient.post(this.settings.ssmFunctionsURL + '/purchases/' + await this.settings.getCustomerProjectId(), purchaseI, {
-        headers: this.settings.ssmFunctionsHeader
+      this._httpClient.post(this._settings.ssmFunctionsURL
+        + '/functions/purchases/' + await this._settings.getCustomerProjectId(), purchaseI, {
+        headers: this._settings.ssmFunctionsHeader
       }).subscribe(purchase => {
         resolve(purchase);
       }, error => {

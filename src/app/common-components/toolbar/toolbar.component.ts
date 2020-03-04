@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatSidenav, MatSnackBar} from '@angular/material';
+import {MatSidenav} from '@angular/material';
 import {Router} from '@angular/router';
-import {NgForage} from 'ngforage';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {FormControl, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {UserI} from '../../model/UserI';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,12 +20,17 @@ export class ToolbarComponent implements OnInit {
   @Output() searchCallback = new EventEmitter<string>();
   searchInputControl = new FormControl('', [Validators.nullValidator, Validators.required]);
   @Input() searchPlaceholder: string | 'Type to search';
+  currentUser: UserI;
 
-  constructor(private router: Router, private indexDb: NgForage,
+  constructor(private router: Router,
+              private readonly _storage: LocalStorageService,
               private userDatabase: UserDatabaseService) {
   }
 
   ngOnInit() {
+    this._storage.getActiveUser().then(user => {
+      this.currentUser = user;
+    });
     this.searchInputControl.valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -36,10 +42,6 @@ export class ToolbarComponent implements OnInit {
   logout() {
     this.userDatabase.logout(null, value => {
       this.router.navigateByUrl('').catch(reason => console.log(reason));
-    });
-  }
-
-  searchItem() {
-    // this.searchInputControl.reset();
+    }).catch(reason => console.log(reason));
   }
 }

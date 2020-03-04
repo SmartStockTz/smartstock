@@ -16,31 +16,22 @@ function _getStorage(name) {
   });
 }
 
-
 addEventListener('message', ({data}) => {
-  // const appId = JSON.parse(data).appId;
-  // const projectId = JSON.parse(data).projectId;
-  // const projectUrlId = JSON.parse(data).projectUrlId;
-
   let onFetch = false;
-
   let _stockStorage = _getStorage('ssm');
 
   setInterval(async () => {
     if (!onFetch) {
       onFetch = true;
-      const user = await _stockStorage.getItem('user');
-      if (user && user.applicationId && user.projectId && user.projectUrlId) {
-        // const serverURL = `https://${user.projectUrlId}.bfast.fahamutech.com`;
-        const fetchStockURL = `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${user.projectId}`;
-        fetchStocks(user.applicationId, fetchStockURL, _stockStorage).then(done => {
+      const activeShop = await _stockStorage.getItem('activeShop');
+      if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
+        const fetchStockURL =
+          `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${activeShop.projectId}`;
+        fetchStocks(activeShop.applicationId, fetchStockURL, _stockStorage).then(done => {
           firstFetch = false;
           onFetch = false;
-          // postMessage("stock comparison thread started");
-        }).catch(reason => {
-          console.log(reason);
+        }).catch(_ => {
           onFetch = false;
-          // postMessage(false);
         });
       } else {
         console.log('user not available yet');
@@ -49,7 +40,7 @@ addEventListener('message', ({data}) => {
       // console.log('on fetch');
       // console.log(onFetch);
     }
-  }, 3000);
+  }, 5000);
 });
 
 /**
@@ -60,7 +51,6 @@ addEventListener('message', ({data}) => {
  * @returns {Promise<void>}
  */
 async function fetchStocks(appId, url, _stockStorage) {
-  // console.log(firstFetch);
   try {
     // if (firstFetch) {
     //   await _stockStorage.removeItem('lastUpdate');
@@ -97,11 +87,11 @@ async function fetchStocks(appId, url, _stockStorage) {
           }
         });
         await _stockStorage.setItem('stocks', oldProducts);
-        // window.dispatchEvent(new Event('ssm_stocks_updated'));
+        postMessage('ssm_stocks_updated');
         return Promise.resolve();
       } else {
         await _stockStorage.setItem('stocks', newProducts);
-        // window.dispatchEvent(new Event('ssm_stocks_updated'));
+        postMessage('ssm_stocks_updated');
         return Promise.resolve();
       }
     }
@@ -110,3 +100,31 @@ async function fetchStocks(appId, url, _stockStorage) {
     throw {message: 'Fails to update stocks', reason: e.toString()};
   }
 }
+//
+// async function listenForStocks() {
+//   const stockStorage = _getStorage('ssm');
+//   const activeShop = await stockStorage.getItem('activeShop');
+//   console.log(activeShop);
+//   if (activeShop && activeShop.projectUrlId && activeShop.applicationId) {
+//     const _sock = new WebSocket(`wss://${activeShop.projectUrlId}.bfast.fahamutech.com`);
+//     _sock.addEventListener('open', ev => {
+//       console.log(ev);
+//       console.log('connection established');
+//     });
+//     _sock.addEventListener("close", ev => {
+//       console.log(ev);
+//       console.log('connection closed');
+//     });
+//     _sock.addEventListener('message', (message) => {
+//       console.log(message);
+//     });
+//     _sock.addEventListener("error", ev => {
+//       console.log(ev);
+//     })
+//
+//   } else {
+//     console.warn('active shop not selected yet')
+//   }
+// }
+//
+// listenForStocks();

@@ -7,13 +7,18 @@ import {SaleComponent} from './sale/sale.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {
     MatAutocompleteModule, MatButtonModule,
-    MatCardModule, MatDividerModule,
+    MatCardModule, MatDatepickerModule, MatDividerModule,
     MatFormFieldModule, MatIconModule,
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSidenavModule,
-    MatSlideToggleModule, MatTableModule, MatTabsModule
+    MatSlideToggleModule, MatSortModule, MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SaleReportComponent } from './sale-report/sale-report.component';
+import { SaleReportTrendComponent } from './sale-report-trend/sale-report-trend.component';
+import { SaleReportsProductsComponent } from './sale-reports-products/sale-reports-products.component';
+import { CartComponent } from './cart/cart.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
     imports: [
@@ -33,11 +38,19 @@ import {ReactiveFormsModule} from '@angular/forms';
         MatTableModule,
         MatButtonModule,
         MatPaginatorModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDatepickerModule,
+        MatSortModule,
+        MatTooltipModule
     ],
   declarations: [
     WholeSaleComponent,
-    SaleComponent
+    SaleComponent,
+    SaleReportComponent,
+    SaleReportTrendComponent,
+    SaleReportsProductsComponent,
+    CartComponent,
+    ProductCardComponent
   ]
 })
 export class SalesModuleModule {
