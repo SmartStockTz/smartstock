@@ -17,8 +17,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:electron": "ng build --prod --base-href ./",
-    "build:snap": "electron-builder --linux snap"
   },
   "private": true,
   "dependencies": {
