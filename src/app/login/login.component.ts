@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
       this.snack.open('Enter all required field', 'Ok', {duration: 3000});
     } else {
       this.showProgress = true;
+      this.loginForm.value.username.trim();
+      this.loginForm.value.password.trim();
       this.userDatabase.login(this.loginForm.value).then(user => {
         if (user.role === 'admin') {
           this.stopProgressAndCleanForm();

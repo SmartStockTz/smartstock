@@ -206,6 +206,8 @@ export class DialogUserNewComponent implements OnInit {
       return;
     }
     this.createUserProgress = true;
+    this.newUserForm.value.username.trim();
+    this.newUserForm.value.password.trim();
     this.userDatabase.addUser(this.newUserForm.value).then(value => {
       this.createUserProgress = false;
       value.username = this.newUserForm.value.username;
