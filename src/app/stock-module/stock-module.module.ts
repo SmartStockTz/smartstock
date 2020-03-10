@@ -32,7 +32,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {StockNewComponent} from './stock-new/stock-new.component';
 import {StockEditComponent} from './stock-edit/stock-edit.component';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './categories/categories.component';
-import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './suppliers/suppliers.component';
+import {DialogSupplierDeleteComponent, SuppliersComponent} from './suppliers/suppliers.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
 
@@ -77,14 +77,16 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent
+    DialogUnitNewComponent,
+    DialogSupplierDeleteComponent
   ],
   entryComponents: [
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent
+    DialogUnitNewComponent,
+    DialogSupplierDeleteComponent
   ]
 })
 export class StockModuleModule {

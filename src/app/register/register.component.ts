@@ -73,14 +73,14 @@ export class RegisterComponent implements OnInit {
       });
       // @ts-ignore
       delete user.confPassword;
-      console.log(user);
+      // console.log(user);
       this.registerProgress = true;
       this.userDatabase.register(user).then(value => {
         this.registerProgress = false;
-        console.log(value);
+        // console.log(value);
         this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
       }).catch(reason => {
-        console.log(reason);
+        // console.log(reason);
         this.registerProgress = false;
       });
     } else {
