@@ -205,9 +205,9 @@ export class DialogSupplierNewComponent implements OnInit {
   initiateForm() {
     this.newSupplierForm = this.formBuilder.group({
       name: ['', [Validators.nullValidator, Validators.required]],
-      email: ['', [Validators.nullValidator, Validators.required]],
-      number: ['', [Validators.nullValidator, Validators.required]],
-      address: ['', [Validators.nullValidator, Validators.required]]
+      email: [''],
+      number: [''],
+      address: ['']
     });
   }
 

@@ -2,6 +2,7 @@ export interface Stock {
   idOld?: string;
   createdAt?: any;
   updatedAt?: any;
+  image?: any;
   objectId?: string;
   product: string;
   active?: boolean | true;

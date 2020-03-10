@@ -20,6 +20,8 @@ import {
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.component';
+import {DialogImageCropComponent} from './dialog-image-crop/dialog-image-crop.component';
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
@@ -39,6 +41,7 @@ import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.componen
     ReactiveFormsModule,
     MatDialogModule,
     MatSelectModule,
+    ImageCropperModule,
   ],
   exports: [
     AdminDrawerComponent,
@@ -47,7 +50,11 @@ import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.componen
   declarations: [
     AdminDrawerComponent,
     ToolbarComponent,
-    NoStockDialogComponent
+    NoStockDialogComponent,
+    DialogImageCropComponent
+  ],
+  entryComponents: [
+    DialogImageCropComponent
   ]
 })
 export class CommonComponentsModule {

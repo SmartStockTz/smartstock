@@ -8,6 +8,7 @@ import {UnitsI} from '../model/UnitsI';
 import {randomString} from '../adapter/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
+import * as Parse from 'parse';
 
 @Injectable({
   providedIn: 'root'
@@ -82,14 +83,29 @@ export class StockDatabaseService implements StockDataSource {
 
   addStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>(async (resolve, reject) => {
-      stock.idOld = randomString(8);
-      this._httpClient.post<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks', stock, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
+      try {
+        const serverUrl = await this._settings.getCustomerServerURL();
+        stock.idOld = randomString(8);
+        if (stock.image) {
+          Parse.initialize(await this._settings.getCustomerApplicationId());
+          Parse.serverURL = serverUrl;
+          const file = new Parse.File('product.png', {base64: stock.image});
+          const imageRequest = await file.save();
+          // imageRequest = await this._httpClient.post<any>(serverUrl + '/files/product.png', stock.image, {
+          //   headers: await this._settings.getCustomerPostHeader('image/png')
+          // }).toPromise();
+          // console.log(imageRequest.toJSON());
+          stock.image = imageRequest.toJSON().url;
+        }
+        const addStockRequest = this._httpClient.post<Stock>(serverUrl + '/classes/stocks', stock, {
+          headers: await this._settings.getCustomerPostHeader()
+        }).toPromise();
+        const response = await addStockRequest;
+        // @ts-ignore
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 

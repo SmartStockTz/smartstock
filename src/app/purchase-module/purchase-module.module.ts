@@ -61,7 +61,7 @@ import {PurchaseCreateComponent} from './purchase-create/purchase-create.compone
     MatSelectModule,
   ],
   entryComponents: [
-    PurchaseDetailsComponent
+    PurchaseDetailsComponent,
   ]
 })
 export class PurchaseModuleModule {

@@ -28,7 +28,8 @@ import {
   MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
-  MatSidenavModule, MatSliderModule,
+  MatSidenavModule,
+  MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatStepperModule,
@@ -49,6 +50,7 @@ import {FooterComponent} from './landing/footer/footer.component';
 import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
 import {PrivancyComponent} from './privancy/privancy.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
+import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import {ChooseShopComponent} from './choose-shop/choose-shop.component';
     FooterComponent,
     CreateShopComponent,
     PrivancyComponent,
-    ChooseShopComponent
+    ChooseShopComponent,
+    DialogSupplierNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +109,7 @@ import {ChooseShopComponent} from './choose-shop/choose-shop.component';
     DialogComponent,
     DialogDeleteComponent,
     NoStockDialogComponent,
+    DialogSupplierNewComponent,
   ],
   bootstrap: [AppComponent]
 })

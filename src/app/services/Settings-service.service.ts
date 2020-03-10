@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
-import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 
@@ -82,11 +81,11 @@ export class SettingsServiceService {
     }
   }
 
-  async getCustomerPostHeader(): Promise<any> {
+  async getCustomerPostHeader(contentType?: string): Promise<any> {
     try {
       return {
         'X-Parse-Application-Id': await this.getCustomerApplicationId(),
-        'content-type': 'application/json'
+        'content-type': contentType ? contentType : 'application/json'
       };
     } catch (e) {
       throw {message: 'Fails to get customer post header', reason: e.toString()};

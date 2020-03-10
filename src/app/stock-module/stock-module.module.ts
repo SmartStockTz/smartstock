@@ -34,6 +34,7 @@ import {StockEditComponent} from './stock-edit/stock-edit.component';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './categories/categories.component';
 import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './suppliers/suppliers.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from 
     MatRadioModule,
     MatExpansionModule,
     MatDialogModule,
+    ImageCropperModule,
   ],
   declarations: [
     StockComponent,
@@ -75,18 +77,14 @@ import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from 
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent,
-    DialogSupplierNewComponent,
-    DialogSupplierDeleteComponent
+    DialogUnitNewComponent
   ],
   entryComponents: [
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
-    DialogUnitNewComponent,
-    DialogSupplierNewComponent,
-    DialogSupplierDeleteComponent
+    DialogUnitNewComponent
   ]
 })
 export class StockModuleModule {
