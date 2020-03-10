@@ -264,17 +264,29 @@ export class StockDatabaseService implements StockDataSource {
 
   updateStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>(async (resolve, reject) => {
-      const stockId = stock.objectId;
-      delete stock.objectId;
-      this._httpClient.put<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks/' + stockId,
-        stock,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
+      try {
+        const serverUrl = await this._settings.getCustomerServerURL();
+        const stockId = stock.objectId;
+        delete stock.objectId;
+        if (stock.image && !stock.image.toString().startsWith('http://')) {
+          Parse.initialize(await this._settings.getCustomerApplicationId());
+          Parse.serverURL = serverUrl;
+          const file = new Parse.File('product.png', {base64: stock.image});
+          const imageRequest = await file.save();
+          stock.image = imageRequest.toJSON().url;
+        }
+        this._httpClient.put<Stock>(serverUrl + '/classes/stocks/' + stockId,
+          stock,
+          {
+            headers: await this._settings.getCustomerPostHeader()
+          }).subscribe(value => {
+          resolve(value);
+        }, error1 => {
+          reject(error1);
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 
