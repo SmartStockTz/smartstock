@@ -12,7 +12,7 @@
                         mode="indeterminate">
       </mat-progress-bar>
 
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <form [formGroup]="loginForm" #formElement="ngForm" (ngSubmit)="login(formElement)">
         <mat-card>
           <!--          <mat-card-header>-->
           <!--            <mat-card-title>Login</mat-card-title>-->

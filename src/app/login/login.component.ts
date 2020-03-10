@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../services/user-database.service';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  login(formElement: FormGroupDirective) {
     if (!this.loginForm.valid) {
       this.snack.open('Enter all required field', 'Ok', {duration: 3000});
     } else {
@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password.trim();
       this.userDatabase.login(this.loginForm.value).then(user => {
         if (user.role === 'admin') {
-          this.stopProgressAndCleanForm();
-          this.showMainUi('admin');
+          this.stopProgressAndCleanForm(formElement);
+          this.showMainUi('admin', formElement);
         } else {
-          this.stopProgressAndCleanForm();
-          this.showMainUi('cashier');
+          this.stopProgressAndCleanForm(formElement);
+          this.showMainUi('cashier', formElement);
         }
       }).catch(reason => {
         console.log(reason);
@@ -55,16 +55,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private stopProgressAndCleanForm() {
+  private stopProgressAndCleanForm(formElement: FormGroupDirective) {
     this.showProgress = false;
-    // this.loginForm.reset();
+    this.loginForm.reset();
+    formElement.resetForm();
   }
 
-  private showMainUi(role: string) {
+  private showMainUi(role: string, formElement: FormGroupDirective) {
     if (role === 'admin') {
-      this.routes.navigateByUrl('/dashboard').catch(reason => console.log(reason)).then(() => this.loginForm.reset());
+      this.routes.navigateByUrl('/dashboard').catch(reason => console.log(reason)).then(() => {
+        this.loginForm.reset();
+        formElement.resetForm();
+      });
     } else {
-      this.routes.navigateByUrl('/sale/report').catch(reason => console.log(reason)).then(() => this.loginForm.reset());
+      this.routes.navigateByUrl('/sale/report').catch(reason => console.log(reason)).then(() => {
+        this.loginForm.reset();
+        formElement.resetForm();
+      });
     }
   }
 
