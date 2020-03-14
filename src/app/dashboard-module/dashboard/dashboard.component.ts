@@ -8,7 +8,7 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent extends DeviceInfo implements OnInit {
-  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor() {
     super();
