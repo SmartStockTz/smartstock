@@ -110,6 +110,7 @@ import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.com
     DialogDeleteComponent,
     NoStockDialogComponent,
     DialogSupplierNewComponent,
+    CreateShopComponent
   ],
   bootstrap: [AppComponent]
 })
