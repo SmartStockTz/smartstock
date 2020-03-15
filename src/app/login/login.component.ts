@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../services/user-database.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {LogService} from '../services/log.service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,11 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   showProgress = false;
-  isLogin = true;
   loginForm: FormGroup;
 
   constructor(private readonly snack: MatSnackBar,
               private readonly routes: Router,
+              private readonly log: LogService,
               private readonly formBuilder: FormBuilder,
               private readonly userDatabase: UserDatabaseService) {
   }
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.showMainUi('cashier', formElement);
         }
       }).catch(reason => {
-        console.log(reason);
+        this.log.i(reason);
         this.showProgress = false;
         this.snack.open('Username or password is wrong or check your' +
           ' internet connection, enter the details correctly and try again', 'Ok');
@@ -63,12 +64,12 @@ export class LoginComponent implements OnInit {
 
   private showMainUi(role: string, formElement: FormGroupDirective) {
     if (role === 'admin') {
-      this.routes.navigateByUrl('/dashboard').catch(reason => console.log(reason)).then(() => {
+      this.routes.navigateByUrl('/dashboard').catch(reason => this.log.i(reason)).then(() => {
         this.loginForm.reset();
         formElement.resetForm();
       });
     } else {
-      this.routes.navigateByUrl('/sale/report').catch(reason => console.log(reason)).then(() => {
+      this.routes.navigateByUrl('/sale/report').catch(reason => this.log.i(reason)).then(() => {
         this.loginForm.reset();
         formElement.resetForm();
       });

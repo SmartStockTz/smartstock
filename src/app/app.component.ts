@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   // }
 }
 
-export class UpdateApplicationDialog {
-  constructor() {
-  }
-}
+// export class UpdateApplicationDialog {
+//   constructor() {
+//   }
+// }

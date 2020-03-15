@@ -15,7 +15,7 @@ import {PrivancyComponent} from './privancy/privancy.component';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthenticatedUserGuard],
+    canActivate: [],
     component: LandingComponent
   },
   {

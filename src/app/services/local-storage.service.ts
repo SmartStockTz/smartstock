@@ -17,7 +17,11 @@ export class LocalStorageService implements StorageAdapter {
   }
 
   async getActiveUser(): Promise<UserI> {
-    return await this._storage.getItem<UserI>('user');
+    try {
+      return await this._storage.getItem<UserI>('user');
+    } catch (e) {
+      return e;
+    }
   }
 
   async saveSales(batchs: BatchI[]): Promise<any> {
@@ -56,6 +60,7 @@ export class LocalStorageService implements StorageAdapter {
 
   async getCurrentProjectId(): Promise<string> {
     try {
+      console.log(await this._storage.getItem<string>('cPID'));
       return await this._storage.getItem<string>('cPID');
     } catch (e) {
       throw e;
@@ -82,6 +87,7 @@ export class LocalStorageService implements StorageAdapter {
     try {
       return await this._storage.setItem<UserI>('user', user);
     } catch (e) {
+      console.log('Fail to set user');
       throw e;
     }
   }

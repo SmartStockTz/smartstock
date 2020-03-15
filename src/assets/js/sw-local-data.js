@@ -100,6 +100,7 @@ async function fetchStocks(appId, url, _stockStorage) {
     throw {message: 'Fails to update stocks', reason: e.toString()};
   }
 }
+
 //
 // async function listenForStocks() {
 //   const stockStorage = _getStorage('ssm');
