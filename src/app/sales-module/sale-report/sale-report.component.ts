@@ -3,7 +3,7 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {FormControl} from '@angular/forms';
 import {SellerDashboardService} from '../../services/seller-dashboard.service';
 import {toSqlDate} from '../../utils/date';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sale-report',

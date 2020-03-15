@@ -1,18 +1,12 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Stock} from '../../model/stock';
-import {
-  MAT_BOTTOM_SHEET_DATA,
-  MAT_DIALOG_DATA,
-  MatBottomSheet,
-  MatBottomSheetRef,
-  MatDialog,
-  MatDialogRef,
-  MatPaginator,
-  MatSidenav,
-  MatSnackBar,
-  MatTableDataSource
-} from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForage} from 'ngforage';
 import {UnitsI} from '../../model/UnitsI';

@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {CashSaleI} from '../../model/CashSale';
 import {toSqlDate} from '../../utils/date';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';

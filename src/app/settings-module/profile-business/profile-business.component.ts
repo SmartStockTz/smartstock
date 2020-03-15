@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserI} from '../../model/UserI';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {ShopI} from '../../model/ShopI';
 import {LocalStorageService} from '../../services/local-storage.service';

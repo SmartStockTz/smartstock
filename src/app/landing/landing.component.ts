@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {NgForage} from 'ngforage';
 import {FormControl} from '@angular/forms';
 

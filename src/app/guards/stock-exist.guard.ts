@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {NgForage} from 'ngforage';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {NoStockDialogComponent} from '../common-components/no-stock-dialog/no-stock-dialog.component';
 import {UserDatabaseService} from '../services/user-database.service';
 

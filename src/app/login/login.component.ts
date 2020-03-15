@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../services/user-database.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 
 @Component({

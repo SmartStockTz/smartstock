@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';

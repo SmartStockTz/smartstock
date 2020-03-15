@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Stock} from '../../model/stock';

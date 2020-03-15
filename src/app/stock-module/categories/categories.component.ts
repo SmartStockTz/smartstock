@@ -1,5 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {CategoryI} from '../../model/CategoryI';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {StockDatabaseService} from '../../services/stock-database.service';
