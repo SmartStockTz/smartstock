@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatSidenav} from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {FormControl, Validators} from '@angular/forms';

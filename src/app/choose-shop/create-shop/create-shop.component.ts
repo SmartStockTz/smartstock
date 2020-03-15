@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {DialogData} from 'src/app/sales-module/whole-sale/whole-sale.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShopDatabaseService} from '../../services/shop-database.service';

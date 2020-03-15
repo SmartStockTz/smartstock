@@ -1,9 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
+import {DialogUnitNewComponent} from '../units/units.component';
+import {DialogCategoryNewComponent} from '../categories/categories.component';
+import {DialogSupplierNewComponent} from '../suppliers/suppliers.component';
+import {DialogImageCropComponent} from '../../common-components/dialog-image-crop/dialog-image-crop.component';
 
 @Component({
   selector: 'app-stock-new',
@@ -11,6 +16,8 @@ import {StockDatabaseService} from '../../services/stock-database.service';
   styleUrls: ['./stock-new.component.css']
 })
 export class StockNewComponent extends DeviceInfo implements OnInit {
+
+  croppedImage: any = '';
 
   productForm: FormGroup;
   units: Observable<[any]>;
@@ -28,6 +35,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
+              private readonly _dialog: MatDialog,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
@@ -38,6 +46,20 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     this.getUnits();
     this.getSuppliers();
     this.metas = of([]);
+  }
+
+  fileChangeEvent(event: any): void {
+    if (event) {
+      this._dialog.open(DialogImageCropComponent, {
+        data: {
+          event: event
+        }
+      }).afterClosed().subscribe(value => {
+        if (value) {
+          this.croppedImage = value;
+        }
+      });
+    }
   }
 
   initialize() {
@@ -96,13 +118,20 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  addProduct() {
+  addProduct(formElement: FormGroupDirective) {
     if (!this.productForm.valid) {
       this.snack.open('Fill all required fields', 'Ok', {
         duration: 3000
       });
       return;
     }
+
+    // if (!this.croppedImage) {
+    //   this.snack.open('Please upload, product image', 'Ok', {
+    //     duration: 3000
+    //   });
+    //   return;
+    // }
 
     if (this.productForm.get('canExpire').value && !this.productForm.get('expire').value) {
       this.snack.open('Please enter expire date', 'Ok', {
@@ -112,12 +141,17 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     }
 
     this.mainProgress = true;
+    if (this.croppedImage) {
+      this.productForm.value.image = this.croppedImage;
+    }
     this.stockDatabase.addStock(this.productForm.value).then(_ => {
       this.mainProgress = false;
       this.snack.open('Product added', 'Ok', {
-        duration: 4000
+        duration: 3000
       });
+      this.croppedImage = null;
       this.productForm.reset();
+      formElement.resetForm();
     }).catch(reason => {
       console.warn(reason);
       this.mainProgress = false;
@@ -127,4 +161,65 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     });
   }
 
+  addNewUnit($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._dialog.open(DialogUnitNewComponent, {
+      // minWidth: '80%',
+      closeOnNavigation: true
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.getUnits();
+      }
+    });
+  }
+
+  refreshUnits($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.getUnits();
+  }
+
+  addNewCategory($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._dialog.open(DialogCategoryNewComponent, {
+      // minWidth: '80%',
+      closeOnNavigation: true
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.getCategories();
+      }
+    });
+  }
+
+  refreshCategories($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.getCategories();
+  }
+
+  addNewSupplier($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._dialog.open(DialogSupplierNewComponent, {
+      // minWidth: '80%',
+      closeOnNavigation: true
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.getSuppliers();
+      }
+    });
+  }
+
+  refreshSuppliers($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.getSuppliers();
+  }
+
+  removeImage(imageInput: HTMLInputElement) {
+    imageInput.value = '';
+    this.croppedImage = null;
+  }
 }

@@ -1,0 +1,23 @@
+<div>
+  <mat-progress-spinner mode="indeterminate" color="primary"
+                        [diameter]="30" *ngIf="loadImageFlag">
+  </mat-progress-spinner>
+  <span *ngIf="loadImageFlag">Load Image</span>
+  <div style="width: 400px">
+    <image-cropper
+      [imageChangedEvent]="fileEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="16 / 9"
+      [imageQuality]="80"
+      [onlyScaleDown]="true"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded()"
+      (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()">
+    </image-cropper>
+  </div>
+  <div *ngIf="!loadImageFlag" style="padding: 16px">
+    <button color="primary" (click)="closeDialog()" mat-flat-button class="ft-button">Done</button>
+  </div>
+</div>

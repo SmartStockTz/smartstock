@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {PurchaseI} from '../../model/PurchaseI';
 import {PurchaseDatabaseService} from '../../services/purchase-database.service';
 import {StockDetailsComponent} from '../../stock-module/stock/stock.component';

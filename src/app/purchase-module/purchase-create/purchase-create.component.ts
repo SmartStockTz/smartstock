@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {NgForage} from 'ngforage';
 import {Stock} from '../../model/stock';
 import {Router} from '@angular/router';
+import {DialogSupplierNewComponent} from '../../stock-module/suppliers/suppliers.component';
 
 @Component({
   selector: 'app-purchase-create',
@@ -28,6 +30,7 @@ export class PurchaseCreateComponent extends DeviceInfo implements OnInit {
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
               private readonly router: Router,
+              private readonly _dialog: MatDialog,
               private readonly indexDb: NgForage,
               private readonly stockDatabase: StockDatabaseService) {
     super();
@@ -120,6 +123,25 @@ export class PurchaseCreateComponent extends DeviceInfo implements OnInit {
         duration: 3000
       });
     });
+  }
+
+  addNewSupplier($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._dialog.open(DialogSupplierNewComponent, {
+      // minWidth: '80%',
+      closeOnNavigation: true
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.getSuppliers();
+      }
+    });
+  }
+
+  refreshSuppliers($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.getSuppliers();
   }
 
   getSuppliers() {

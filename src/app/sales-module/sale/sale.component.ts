@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Stock} from '../../model/stock';
@@ -71,7 +73,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   salesDatasource: MatTableDataSource<CashSaleI>;
   cartColums = ['product', 'quantity', 'amount', 'discount', 'action'];
   activeTab = 0;
-  @ViewChild('cartPaginator', {static: false}) paginator: MatPaginator;
+  @ViewChild('cartPaginator') paginator: MatPaginator;
 
   printProgress = false;
   refreshProductsProgress = false;

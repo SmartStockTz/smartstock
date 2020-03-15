@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {CreateShopComponent} from './create-shop/create-shop.component';
 import {Observable, of} from 'rxjs';
 import {ShopI} from '../model/ShopI';

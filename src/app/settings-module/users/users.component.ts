@@ -1,5 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, MatTableDataSource} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import {UserI} from '../../model/UserI';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../../services/user-database.service';
@@ -206,6 +209,8 @@ export class DialogUserNewComponent implements OnInit {
       return;
     }
     this.createUserProgress = true;
+    this.newUserForm.value.username.trim();
+    this.newUserForm.value.password.trim();
     this.userDatabase.addUser(this.newUserForm.value).then(value => {
       this.createUserProgress = false;
       value.username = this.newUserForm.value.username;

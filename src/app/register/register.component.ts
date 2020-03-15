@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {UserDatabaseService} from '../services/user-database.service';
 import {UserI} from '../model/UserI';
 import {Router} from '@angular/router';
@@ -73,14 +73,14 @@ export class RegisterComponent implements OnInit {
       });
       // @ts-ignore
       delete user.confPassword;
-      console.log(user);
+      // console.log(user);
       this.registerProgress = true;
       this.userDatabase.register(user).then(value => {
         this.registerProgress = false;
-        console.log(value);
+        // console.log(value);
         this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
       }).catch(reason => {
-        console.log(reason);
+        // console.log(reason);
         this.registerProgress = false;
       });
     } else {
