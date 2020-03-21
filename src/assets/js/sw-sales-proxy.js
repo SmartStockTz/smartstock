@@ -54,7 +54,9 @@ async function _syncSales() {
       }
     } catch (e) {
       console.log(e);
-      resolve();
+      setTimeout(() => {
+        resolve();
+      }, 2000);
     }
   })
 }
