@@ -38,7 +38,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {NgForageConfig} from 'ngforage';
 import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -113,10 +112,4 @@ import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.com
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  public constructor(ngfConfig: NgForageConfig) {
-    ngfConfig.configure({
-      name: 'ssm',
-      size: 2000000000
-    });
-  }
 }

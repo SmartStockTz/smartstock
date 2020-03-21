@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {NgForage} from 'ngforage';
 import {Stock} from '../../model/stock';
 import {Router} from '@angular/router';
 import {DialogSupplierNewComponent} from '../../stock-module/suppliers/suppliers.component';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-purchase-create',
@@ -31,7 +31,7 @@ export class PurchaseCreateComponent extends DeviceInfo implements OnInit {
               private readonly snack: MatSnackBar,
               private readonly router: Router,
               private readonly _dialog: MatDialog,
-              private readonly indexDb: NgForage,
+              private readonly indexDb: LocalStorageService,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
@@ -65,7 +65,7 @@ export class PurchaseCreateComponent extends DeviceInfo implements OnInit {
   searchProduct(productName: string) {
     if (!this.selectedProduct || (this.selectedProduct && this.selectedProduct.product !== productName)) {
       this.searchProductProgress = true;
-      this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+      this.indexDb.getStocks().then(stocks => {
         const dataArray =
           stocks.filter(value => value.product.toLowerCase().indexOf(productName.toLowerCase()) !== -1);
         // const dataArray = JSON.parse(JSON.stringify(stocks));

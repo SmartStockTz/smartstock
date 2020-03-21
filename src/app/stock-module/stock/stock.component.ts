@@ -1,17 +1,17 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Stock} from '../../model/stock';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSidenav } from '@angular/material/sidenav';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSidenav} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgForage} from 'ngforage';
 import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-stock',
@@ -23,7 +23,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
   private stockFetchProgress = false;
 
   constructor(private readonly router: Router,
-              private readonly indexDb: NgForage,
+              private readonly indexDb: LocalStorageService,
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
               private readonly dialog: MatDialog,
@@ -68,7 +68,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
 
   private getStocksFromCache(callback?: (error) => void) {
     this.stockFetchProgress = true;
-    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+    this.indexDb.getStocks().then(stocks => {
       if (!stocks && !Array.isArray(stocks)) {
         // stocks = [];
         this.hotReloadStocks();
@@ -100,7 +100,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.stockDatabase.getAllStock().then(async stocks => {
       try {
         this.hotReloadProgress = false;
-        await this.indexDb.setItem('stocks', stocks);
+        await this.indexDb.saveStocks(stocks);
         this.stockDatasource = new MatTableDataSource(stocks);
         this.stockDatasource.paginator = this.paginator;
         this._getTotalPurchaseOfStock(stocks);
@@ -170,9 +170,9 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.stockDatasource.data = this.stockDatasource.data.filter(value => value.objectId !== element.objectId);
     this._getTotalPurchaseOfStock(this.stockDatasource.data);
     // update stocks
-    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+    this.indexDb.getStocks().then(stocks => {
       const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
-      this.indexDb.setItem('stocks', updatedStock).catch(reason => console.warn('Fails to update stock due to deleted item'));
+      this.indexDb.saveStocks(updatedStock).catch(reason => console.warn('Fails to update stock due to deleted item'));
     }).catch(reason => {
       console.warn('fails to update stocks to to deleted item');
     });

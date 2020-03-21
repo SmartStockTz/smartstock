@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
-import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
@@ -21,7 +19,7 @@ export class SettingsServiceService {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _storage: LocalStorageService,
-              private readonly indexDb: NgForage) {
+              private readonly indexDb: LocalStorageService) {
   }
 
   async getSSMUserHeader() {
@@ -102,7 +100,7 @@ export class SettingsServiceService {
 
   async getCustomerProjectId(): Promise<string> {
     try {
-      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      const activeShop = await this.indexDb.getActiveShop();
       if (!activeShop) {
         throw new Error('No user in local storage');
       }
@@ -116,12 +114,13 @@ export class SettingsServiceService {
    * @deprecated
    */
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
-    this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
-      callback(null);
-    }).catch(reason => {
-      console.log(reason);
-      callback(null);
-    });
+    // this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
+    //   callback(null);
+    // }).catch(reason => {
+    //   console.log(reason);
+    //   callback(null);
+    // });
+    callback(null);
   }
 
   saveSettings(settings: any): Promise<any> {

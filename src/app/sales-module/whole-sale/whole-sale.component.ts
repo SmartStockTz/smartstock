@@ -12,7 +12,6 @@ import {CartI} from '../../model/cart';
 import {CashSaleI} from '../../model/CashSale';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
-import {NgForage} from 'ngforage';
 import {SalesDatabaseService} from '../../services/sales-database.service';
 import {OrderI} from '../../model/OderI';
 import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
@@ -98,7 +97,6 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly indexDb: NgForage,
               private readonly _storage: LocalStorageService,
               private readonly _stockApi: StockDatabaseService,
               private readonly settings: SettingsServiceService,
