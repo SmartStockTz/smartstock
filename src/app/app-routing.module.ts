@@ -6,7 +6,6 @@ import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
-import {LandingComponent} from './landing/landing.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
@@ -15,8 +14,8 @@ import {PrivancyComponent} from './privancy/privancy.component';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [],
-    component: LandingComponent
+    canActivate: [AuthenticatedUserGuard],
+    component: LoginComponent
   },
   {
     path: 'privacy',
@@ -64,7 +63,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: ''
+    redirectTo: 'dashboard'
   },
 ];
 
