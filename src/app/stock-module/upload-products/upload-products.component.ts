@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-upload-products',
@@ -13,6 +14,7 @@ export class UploadProductsComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<UploadProductsComponent>,
               private snack: MatSnackBar,
+              private readonly logger: LogService,
               private readonly stockApi: StockDatabaseService) {
   }
 
@@ -25,8 +27,22 @@ export class UploadProductsComponent implements OnInit {
     if (file) {
       const fileReader = new FileReader();
       fileReader.onload = (evt) => {
-        console.log(evt.target.result);
-        console.log(this.csvToJSON(evt.target.result, null));
+        this.csvToJSON(evt.target.result, (products) => {
+          this.importProgress = true;
+          this.stockApi.addAllStock(products).then(_ => {
+            this.importProgress = false;
+            this.dialogRef.close(true);
+            this.snack.open('Products imported', 'Ok', {
+              duration: 3000
+            });
+          }).catch(reason => {
+            this.logger.e(reason);
+            this.importProgress = false;
+            this.snack.open('Products not imported, try again', 'Ok', {
+              duration: 3000
+            });
+          });
+        });
       };
       fileReader.readAsText(file, 'UTF-8');
     } else {

@@ -34,7 +34,15 @@ export class StockDatabaseService implements StockDataSource {
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
   }
 
-  addAllStock(stocks: Stock[], callback: (value: any) => void) {
+  async addAllStock(stocks: Stock[]): Promise<any> {
+    try {
+      return await this._httpClient.post(this._settings.ssmFunctionsURL +
+        '/functions/stocks/import/' + await this._settings.getCustomerProjectId(), stocks, {
+        headers: this._settings.ssmFunctionsHeader
+      }).toPromise();
+    } catch (e) {
+      throw e;
+    }
   }
 
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {

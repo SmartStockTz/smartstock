@@ -200,7 +200,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
       this.exportProgress = false;
       this.snack.open('Your request received we will send you an email' +
         ' contain link to download your stocks', 'Ok', {
-        duration: 5000
+        duration: 10000
       });
     }).catch(reason => {
       this.logger.e(reason);
@@ -214,6 +214,10 @@ export class StockComponent extends DeviceInfo implements OnInit {
   importStocks() {
     this.dialog.open(UploadProductsComponent, {
       closeOnNavigation: true,
+    }).afterClosed().subscribe(value => {
+      if (value === true) {
+        this.hotReloadStocks();
+      }
     });
   }
 }
