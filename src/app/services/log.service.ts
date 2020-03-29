@@ -9,21 +9,21 @@ export class LogService {
   constructor() {
   }
 
-  i(message: string) {
+  i(message: string, tag?: string) {
     if (!environment.production) {
-      console.log(message);
+      console.log(tag, message);
     }
   }
 
-  e(message: string) {
+  e(message: string, tag?: string) {
     if (!environment.production) {
-      console.error(message);
+      console.error(tag, message);
     }
   }
 
-  w(message: string) {
+  w(message: string, tag?: string) {
     if (!environment.production) {
-      console.warn(message);
+      console.warn(tag, message);
     }
   }
 }

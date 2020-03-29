@@ -5,6 +5,9 @@ import {UnitsI} from '../model/UnitsI';
 import {PurchaseI} from '../model/PurchaseI';
 
 export interface StockDataSource {
+
+  // importStocks(): Promise<any>;
+
   getStock(id: string, callback: (stock: Stock) => void);
 
   getAllStock(callback: (stocks: Stock[]) => void);
@@ -45,7 +48,7 @@ export interface StockDataSource {
 
   getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]>;
 
-  updateSupplier(data: {objectId: string, field: string, value: string}): Promise<any>;
+  updateSupplier(data: { objectId: string, field: string, value: string }): Promise<any>;
 
   updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any>;
 

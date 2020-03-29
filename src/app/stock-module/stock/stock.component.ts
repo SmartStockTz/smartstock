@@ -12,6 +12,8 @@ import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {LocalStorageService} from '../../services/local-storage.service';
+import {LogService} from '../../services/log.service';
+import {UploadProductsComponent} from '../upload-products/upload-products.component';
 
 @Component({
   selector: 'app-stock',
@@ -26,12 +28,14 @@ export class StockComponent extends DeviceInfo implements OnInit {
               private readonly indexDb: LocalStorageService,
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
+              private readonly logger: LogService,
               private readonly dialog: MatDialog,
               private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
 
+  exportProgress = false;
   showProgress = false;
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
@@ -154,7 +158,6 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   // affect performance
-
   handleSearch(query: string) {
     this.getStocksFromCache(() => {
       // this.stockDatasource.filter = query.toString().toLowerCase();
@@ -192,16 +195,25 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   exportStock() {
+    this.exportProgress = true;
     this.stockDatabase.exportToExcel().then(_ => {
-      this.snack.open('Your request received we will send your an email' +
+      this.exportProgress = false;
+      this.snack.open('Your request received we will send you an email' +
         ' contain link to download your stocks', 'Ok', {
-        duration: 6000
+        duration: 5000
       });
     }).catch(reason => {
-      console.log(reason);
+      this.logger.e(reason);
+      this.exportProgress = false;
       this.snack.open('Request fails try again later', 'Ok', {
         duration: 3000
       });
+    });
+  }
+
+  importStocks() {
+    this.dialog.open(UploadProductsComponent, {
+      closeOnNavigation: true,
     });
   }
 }

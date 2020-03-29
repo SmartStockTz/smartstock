@@ -20,8 +20,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   exportToExcel(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export', {
+    return new Promise<any>(async (resolve, reject) => {
+      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + await this._settings.getCustomerProjectId(), {
         headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
