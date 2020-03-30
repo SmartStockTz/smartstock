@@ -46,7 +46,9 @@ export class UploadProductsComponent implements OnInit {
       };
       fileReader.readAsText(file, 'UTF-8');
     } else {
-      this.snack.open('Error while read csv');
+      this.snack.open('Error while read csv', 'Ok', {
+        duration: 3000
+      });
     }
   }
 

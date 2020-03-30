@@ -9,19 +9,19 @@ export class LogService {
   constructor() {
   }
 
-  i(message: string, tag?: string) {
+  i(message: any, tag?: string) {
     if (!environment.production) {
       console.log(tag, message);
     }
   }
 
-  e(message: string, tag?: string) {
+  e(message: any, tag?: string) {
     if (!environment.production) {
       console.error(tag, message);
     }
   }
 
-  w(message: string, tag?: string) {
+  w(message: any, tag?: string) {
     if (!environment.production) {
       console.warn(tag, message);
     }

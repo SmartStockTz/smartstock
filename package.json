@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": "main.js",
   "build": {
     "appId": "com.fahamutech.ssm",
@@ -14,6 +14,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:desktop": "ng build --prod --base-href ./",
+    "build:web": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

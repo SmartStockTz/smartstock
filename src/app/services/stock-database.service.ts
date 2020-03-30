@@ -9,6 +9,7 @@ import {randomString} from '../adapter/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
 import * as Parse from 'parse';
+import {UserDatabaseService} from './user-database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,16 @@ import * as Parse from 'parse';
 export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
+              private readonly _user: UserDatabaseService,
               private readonly _settings: SettingsServiceService) {
   }
 
   exportToExcel(): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + await this._settings.getCustomerProjectId(), {
+      const user = await this._user.currentUser();
+      const projectId = await this._settings.getCustomerProjectId();
+      const email = encodeURIComponent(user.email);
+      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email, {
         headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
