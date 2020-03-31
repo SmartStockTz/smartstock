@@ -27,14 +27,15 @@ addEventListener('message', ({data}) => {
       if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
         const fetchStockURL =
           `https://smartstock-faas.bfast.fahamutech.com/functions/stocks/sync/${activeShop.projectId}`;
-        fetchStocks(activeShop.applicationId, fetchStockURL, _stockStorage).then(done => {
+        fetchStocks(activeShop.applicationId, fetchStockURL, _stockStorage, activeShop.projectId).then(done => {
+          // postMessage('stock ( s ) updated');
           firstFetch = false;
           onFetch = false;
         }).catch(_ => {
           onFetch = false;
         });
       } else {
-       // console.log('user not available yet');
+        // console.log('user not available yet');
       }
     } else {
       // console.log('on fetch');
@@ -48,9 +49,10 @@ addEventListener('message', ({data}) => {
  * @param appId {string}
  * @param url {string}
  * @param _stockStorage {LocalForage}
+ * @param projectId {string}
  * @returns {Promise<void>}
  */
-async function fetchStocks(appId, url, _stockStorage) {
+async function fetchStocks(appId, url, _stockStorage, projectId) {
   try {
     // if (firstFetch) {
     //   await _stockStorage.removeItem('lastUpdate');
@@ -75,22 +77,28 @@ async function fetchStocks(appId, url, _stockStorage) {
       if (response.data['lastUpdateTime']) {
         await _stockStorage.setItem('lastUpdate', response.data['lastUpdateTime']);
       }
-      const oldProducts = await _stockStorage.getItem('stocks');
+      // console.log('start-----------------------------start');
+      const oldProducts = await _stockStorage.getItem(projectId + '_stocks');
       if (!firstFetch && oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
         newProducts.forEach((newProduct) => {
-          // console.log('get new entry');
+          // console.log(newProduct);
           const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
           if (indexOld >= 0) {
-            oldProducts[indexOld] = newProduct;
+            oldProducts.splice(indexOld, 1);
+            //  console.log('removed')
           } else {
-            oldProducts.push(newProduct);
+            // console.log('skipped');
           }
         });
-        await _stockStorage.setItem('stocks', oldProducts);
+        // console.log('end-----------------------------end');
+        newProducts.forEach(element => {
+          oldProducts.push(element);
+        });
+        await _stockStorage.setItem(projectId + '_stocks', oldProducts);
         postMessage('ssm_stocks_updated');
         return Promise.resolve();
       } else {
-        await _stockStorage.setItem('stocks', newProducts);
+        await _stockStorage.setItem(projectId + '_stocks', newProducts);
         postMessage('ssm_stocks_updated');
         return Promise.resolve();
       }

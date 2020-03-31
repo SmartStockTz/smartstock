@@ -19,4 +19,8 @@ export class EventApiService implements EventApiAdapter {
   listen(eventName: string, handler: (data: any) => void): void {
     window.addEventListener(eventName, handler);
   }
+
+  unListen(eventName: string, handler?: (data: any) => void): void {
+    window.removeEventListener(eventName, handler);
+  }
 }

@@ -125,7 +125,8 @@ export class LocalStorageService implements StorageAdapter {
 
   async removeStocks(): Promise<any> {
     try {
-      return await _storage.removeItem('stocks');
+      const shop = await this.getActiveShop();
+      return await _storage.removeItem(shop.projectId + '_stocks');
     } catch (e) {
       throw e;
     }
@@ -133,7 +134,8 @@ export class LocalStorageService implements StorageAdapter {
 
   async getStocks(): Promise<Stock[]> {
     try {
-      return await _storage.getItem<Stock[]>('stocks');
+      const shop = await this.getActiveShop();
+      return await _storage.getItem<Stock[]>(shop.projectId + '_stocks');
     } catch (e) {
       throw e;
     }
@@ -141,7 +143,8 @@ export class LocalStorageService implements StorageAdapter {
 
   async saveStocks(stocks: Stock[]): Promise<any> {
     try {
-      return await _storage.setItem<Stock[]>('stocks', stocks);
+      const shop = await this.getActiveShop();
+      return await _storage.setItem<Stock[]>(shop.projectId + '_stocks', stocks);
     } catch (e) {
       throw e;
     }

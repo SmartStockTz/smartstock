@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Stock} from '../../model/stock';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
@@ -14,13 +14,15 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {LogService} from '../../services/log.service';
 import {UploadProductsComponent} from '../upload-products/upload-products.component';
+import {EventApiService} from '../../services/event-api.service';
+import {SsmEvents} from '../../utils/eventsNames';
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.css']
 })
-export class StockComponent extends DeviceInfo implements OnInit {
+export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
 
@@ -30,6 +32,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly dialog: MatDialog,
+              private readonly eventApi: EventApiService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockDatabaseService) {
     super();
@@ -51,9 +54,8 @@ export class StockComponent extends DeviceInfo implements OnInit {
         this.selectedTab = Number(value.t);
       }
     });
-    window.addEventListener('ssm_stocks_updated', (e) => {
-      this.logger.i(e);
-      this.logger.i('stock is updated from worker thread check it out');
+    this.eventApi.listen(SsmEvents.STOCK_UPDATED, data => {
+      this.reload();
     });
     this.initializeView();
   }
@@ -221,6 +223,10 @@ export class StockComponent extends DeviceInfo implements OnInit {
         this.hotReloadStocks();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.eventApi.unListen(SsmEvents.STOCK_UPDATED);
   }
 }
 

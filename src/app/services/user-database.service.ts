@@ -73,23 +73,23 @@ export class UserDatabaseService implements UserDataSource {
       }).subscribe(async value => {
         try {
           // empty local storage if current project differ from last one
-          if (value.role !== 'admin') {
-            const cProjectId = await this._storage.getCurrentProjectId();
-            if (cProjectId && cProjectId !== value.projectId) {
-              await this._storage.clearSsmStorage();
-            }
-            // set current shop
-            await this._storage.saveCurrentProjectId(value.projectId);
-            // set active shop
-            await this._storage.saveActiveShop({
-              settings: value.settings,
-              businessName: value.businessName,
-              projectId: value.projectId,
-              category: value.category,
-              projectUrlId: value.projectUrlId,
-              applicationId: value.applicationId
-            });
-          }
+          // if (value.role !== 'admin') {
+          //   const cProjectId = await this._storage.getCurrentProjectId();
+          //   if (cProjectId && cProjectId !== value.projectId) {
+          //     await this._storage.clearSsmStorage();
+          //   }
+          //   // set current shop
+          //   await this._storage.saveCurrentProjectId(value.projectId);
+          //   // set active shop
+          //   // await this._storage.saveActiveShop({
+          //   //   settings: value.settings,
+          //   //   businessName: value.businessName,
+          //   //   projectId: value.projectId,
+          //   //   category: value.category,
+          //   //   projectUrlId: value.projectUrlId,
+          //   //   applicationId: value.applicationId
+          //   // });
+          // }
           await this._storage.saveActiveUser(value);
           resolve(value);
         } catch (e) {
@@ -222,10 +222,10 @@ export class UserDatabaseService implements UserDataSource {
 
   async saveCurrentShop(shop: ShopI): Promise<ShopI> {
     try {
-      const cProjectId = await this._storage.getCurrentProjectId();
-      if (cProjectId && cProjectId !== shop.projectId) {
-        await this._storage.removeStocks();
-      }
+      // const cProjectId = await this._storage.getCurrentProjectId();
+      // if (cProjectId && cProjectId !== shop.projectId) {
+      //   await this._storage.removeStocks();
+      // }
       await this._storage.saveCurrentProjectId(shop.projectId);
       return await this._storage.saveActiveShop(shop);
     } catch (e) {
