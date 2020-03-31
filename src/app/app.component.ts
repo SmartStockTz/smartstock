@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
 import {SsmEvents} from './utils/eventsNames';
 import {LocalStorageService} from './services/local-storage.service';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    Capacitor.Plugins.Device.getInfo().then(value => {
+      console.log(value);
+    }).catch(reason => {
+      console.log(reason);
+    });
     this._storage.getActiveShop().then(_ => {
       window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
     }).catch(_ => {

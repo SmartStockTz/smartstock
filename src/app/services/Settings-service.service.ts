@@ -145,14 +145,19 @@ export class SettingsServiceService {
     });
   }
 
-  async getSettings(): Promise<{ printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean }> {
+  async getSettings(): Promise<{
+    printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean,
+    allowRetail: boolean, allowWholesale: boolean
+  }> {
     try {
       const activeShop = await this._storage.getActiveShop();
       if (!activeShop || !activeShop.settings) {
         return {
           'printerFooter': 'Thank you',
           'printerHeader': '',
-          'saleWithoutPrinter': true
+          'saleWithoutPrinter': true,
+          'allowRetail': true,
+          'allowWholesale': true,
         };
       }
       return activeShop.settings;

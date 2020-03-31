@@ -7,7 +7,9 @@ export interface ShopI {
   settings: {
     saleWithoutPrinter: boolean,
     printerFooter: string,
-    printerHeader: string
+    printerHeader: string,
+    allowRetail: boolean,
+    allowWholesale: boolean,
   };
   country?: string;
   region?: string;

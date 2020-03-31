@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ShopI} from '../../model/ShopI';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {UserI} from '../../model/UserI';
+import {EventApiService} from '../../services/event-api.service';
+import {SsmEvents} from '../../utils/eventsNames';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-admin-drawer',
@@ -12,8 +15,9 @@ export class AdminDrawerComponent implements OnInit {
   shop: ShopI;
   currentUser: UserI;
 
-  constructor(
-    private readonly _userApi: UserDatabaseService) {
+  constructor(private readonly _userApi: UserDatabaseService,
+              private readonly logger: LogService,
+              private readonly eventApi: EventApiService) {
   }
 
   ngOnInit() {
@@ -25,6 +29,14 @@ export class AdminDrawerComponent implements OnInit {
     });
     this._userApi.currentUser().then(user => {
       this.currentUser = user;
+    });
+    this.eventApi.listen(SsmEvents.SETTINGS_UPDATED, data => {
+      this._userApi.getCurrentShop().then(shop => {
+        this.shop = shop;
+      }).catch(reason => {
+        this.logger.e(reason, 'AdminDrawerComponent:37');
+        this.shop = undefined;
+      });
     });
   }
 

@@ -5,7 +5,7 @@
   "version": "0.5.2",
   "main": "main.js",
   "build": {
-    "appId": "com.fahamutech.ssm",
+    "appId": "com.fahamutech.smartstock",
     "mac": {
       "category": "productivity"
     }
@@ -32,13 +32,15 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "@angular/service-worker": "^9.0.6",
+    "@capacitor/angular": "^1.0.2",
     "highcharts": "^8.0.4",
     "localforage": "^1.7.3",
     "ngx-image-cropper": "^3.1.3",
     "parse": "^2.11.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@capacitor/core": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.6",
@@ -61,6 +63,7 @@
     "protractor": "^5.4.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.7.5"
+    "typescript": "~3.7.5",
+    "@capacitor/cli": "latest"
   }
 }

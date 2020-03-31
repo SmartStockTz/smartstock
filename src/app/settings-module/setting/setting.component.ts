@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SettingsServiceService} from '../../services/Settings-service.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {EventApiService} from '../../services/event-api.service';
+import {SsmEvents} from '../../utils/eventsNames';
 
 @Component({
   selector: 'app-setting',
@@ -16,6 +18,7 @@ export class SettingComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
+              private readonly eventApi: EventApiService,
               private readonly settings: SettingsServiceService) {
     super();
   }
@@ -34,7 +37,9 @@ export class SettingComponent extends DeviceInfo implements OnInit {
       this._initiateSettingsForm({
         saleWithoutPrinter: true,
         printerHeader: '',
-        printerFooter: ''
+        printerFooter: '',
+        allowRetail: true,
+        allowWholesale: true,
       });
       this.getSettingsProgress = false;
     });
@@ -45,6 +50,8 @@ export class SettingComponent extends DeviceInfo implements OnInit {
       'saleWithoutPrinter': [settings.saleWithoutPrinter],
       'printerHeader': [settings.printerHeader],
       'printerFooter': [settings.printerFooter],
+      'allowRetail': [settings.allowRetail],
+      'allowWholesale': [settings.allowWholesale],
     });
   }
 
@@ -55,6 +62,7 @@ export class SettingComponent extends DeviceInfo implements OnInit {
         duration: 3000
       });
       this.saveSettingProgress = false;
+      this.eventApi.broadcast(SsmEvents.SETTINGS_UPDATED);
     }).catch(reason => {
       console.warn(reason);
       this.snack.open('Fails to save settings, try again later', 'Ok', {

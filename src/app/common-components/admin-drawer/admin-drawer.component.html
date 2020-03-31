@@ -47,8 +47,8 @@
         <span style="margin-left: 8px">Sale</span>
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item routerLink="/sale">Retails</a>
-        <a mat-list-item routerLink="/sale/whole">WholeSale</a>
+        <a *ngIf="shop && shop.settings.allowRetail" mat-list-item routerLink="/sale">Retails</a>
+        <a *ngIf="shop && shop.settings.allowWholesale" mat-list-item routerLink="/sale/whole">WholeSale</a>
         <a mat-list-item routerLink="/sale/report">Quick Reports</a>
       </mat-nav-list>
     </mat-expansion-panel>
