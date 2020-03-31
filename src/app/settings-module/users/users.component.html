@@ -53,6 +53,14 @@
                     </td>
                   </ng-container>
 
+                  <ng-container matColumnDef="shops">
+                    <th mat-header-cell *matHeaderCellDef>Shops</th>
+                    <td class=""
+                        matRipple mat-cell
+                        *matCellDef="let element">{{element.shops | shopsPipe | async }}
+                    </td>
+                  </ng-container>
+
                   <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef>
                       <div class="d-flex justify-content-end align-items-end">

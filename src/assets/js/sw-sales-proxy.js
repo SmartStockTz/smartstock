@@ -53,7 +53,7 @@ async function _syncSales() {
         }, 2000);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       setTimeout(() => {
         resolve();
       }, 2000);

@@ -21,7 +21,9 @@ export interface UserI {
   settings: {
     saleWithoutPrinter: boolean,
     printerFooter: string,
-    printerHeader: string
+    printerHeader: string,
+    allowRetail: boolean,
+    allowWholesale: boolean,
   };
   shops: {
     projectId: string,

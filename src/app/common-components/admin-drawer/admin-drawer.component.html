@@ -13,8 +13,7 @@
     </div>
     <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" *ngIf="shop">{{shop.businessName}}</span>
     <span style="width: 4px; height: 4px"></span>
-    <button *ngIf="currentUser && currentUser.role === 'admin'"
-            style="width: 80%"
+    <button style="width: 80%"
             color="primary"
             class="btn-block"
             routerLink="/shop" mat-button>
@@ -39,7 +38,7 @@
       </mat-nav-list>
     </mat-expansion-panel>
 
-    <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
+    <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
 
     <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">
       <mat-expansion-panel-header>
@@ -53,7 +52,7 @@
       </mat-nav-list>
     </mat-expansion-panel>
 
-    <mat-divider *ngIf="currentUser && currentUser.role!=='user'"></mat-divider>
+    <mat-divider></mat-divider>
 
     <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
                          [expanded]="shouldExpand('purchase')" class="mat-elevation-z0">
@@ -101,7 +100,8 @@
             <mat-icon color="primary">settings</mat-icon>
           </div>
         </a>
-        <a *ngIf="currentUser && (currentUser.role === 'admin')" mat-list-item routerLink="/settings/bill">
+        <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item
+           routerLink="/settings/bill">
           <div class="d-flex flex-row flex-nowrap btn-block">
             <span>Billing</span>
             <span class="flex-grow-1"></span>

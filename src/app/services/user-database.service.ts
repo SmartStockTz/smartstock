@@ -118,6 +118,8 @@ export class UserDatabaseService implements UserDataSource {
         printerFooter: 'Thank you',
         printerHeader: '',
         saleWithoutPrinter: true,
+        allowRetail: true,
+        allowWholesale: true
       };
       this._httpClient.post<UserI>(this._settings.ssmFunctionsURL + '/functions/users/create', user, {
         headers: this._settings.ssmFunctionsHeader
@@ -164,12 +166,14 @@ export class UserDatabaseService implements UserDataSource {
   addUser(user: UserI): Promise<UserI> {
     return new Promise<UserI>(async (resolve, reject) => {
       const shop = await this._storage.getActiveShop();
-      user.shops = [];
+      const shops = user.shops ? user.shops : [];
+      const shops1 = shops.filter(value => value.applicationId !== shop.applicationId);
       user.applicationId = shop.applicationId;
       user.projectUrlId = shop.projectUrlId;
       user.projectId = shop.projectId;
       user.businessName = shop.businessName;
       user.settings = shop.settings;
+      user.shops = shops1;
       this._httpClient.post<UserI>(this._settings.ssmFunctionsURL + '/functions/users/seller', user, {
         headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {

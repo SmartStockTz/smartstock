@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'shop',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AuthenticationGuard],
     component: ChooseShopComponent
   },
   {

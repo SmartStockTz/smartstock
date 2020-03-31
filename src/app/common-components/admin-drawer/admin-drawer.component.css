@@ -15,3 +15,10 @@
 div.mat-list-item-content {
   width: 100% !important;
 }
+
+
+mat-divider{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}

@@ -34,7 +34,7 @@ addEventListener('message', ({data}) => {
           onFetch = false;
         });
       } else {
-        console.log('user not available yet');
+       // console.log('user not available yet');
       }
     } else {
       // console.log('on fetch');
@@ -96,7 +96,7 @@ async function fetchStocks(appId, url, _stockStorage) {
       }
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     throw {message: 'Fails to update stocks', reason: e.toString()};
   }
 }

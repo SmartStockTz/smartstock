@@ -24,6 +24,14 @@
         <mat-error>Role required</mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Shop ( s )</mat-label>
+        <mat-select [multiple]="true" formControlName="shops">
+          <mat-option *ngFor="let shop of shops | async" [value]="shop">{{shop.businessName}}</mat-option>
+        </mat-select>
+        <mat-error>Shop ( s ) required</mat-error>
+      </mat-form-field>
+
       <button color="primary" [disabled]="createUserProgress" mat-flat-button class="ft-button">
         Save
         <mat-progress-spinner style="display: inline-block" *ngIf="createUserProgress" [diameter]="20"

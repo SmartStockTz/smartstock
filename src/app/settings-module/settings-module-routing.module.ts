@@ -4,13 +4,12 @@ import {SettingComponent} from './setting/setting.component';
 import {UsersComponent} from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
-import {AdminRoleGuard} from '../guards/admin-role.guard';
 import {StockManagerGuard} from '../guards/stock-manager.guard';
 
 const routes: Routes = [
-  {path: 'general', canActivate: [AdminRoleGuard, StockManagerGuard], component: SettingComponent},
-  {path: 'bill', canActivate: [AdminRoleGuard], component: BillingComponent},
-  {path: 'users', canActivate: [AdminRoleGuard, StockManagerGuard], component: UsersComponent},
+  {path: 'general', canActivate: [StockManagerGuard], component: SettingComponent},
+  {path: 'bill', canActivate: [StockManagerGuard], component: BillingComponent},
+  {path: 'users', canActivate: [StockManagerGuard], component: UsersComponent},
   {path: 'profile', component: ProfileComponent},
 ];
 
