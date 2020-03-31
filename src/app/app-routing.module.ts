@@ -10,12 +10,13 @@ import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
 import {PrivancyComponent} from './privancy/privancy.component';
+import {LandingComponent} from './landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AuthenticatedUserGuard],
-    component: LoginComponent
+    component: LandingComponent
   },
   {
     path: 'privacy',
