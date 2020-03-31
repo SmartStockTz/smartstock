@@ -1,11 +1,31 @@
 <div class="my-side-nav">
-  <mat-toolbar>
+  <!--  <mat-toolbar>-->
+  <!--    <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" *ngIf="shop">{{shop.businessName}}</span>-->
+  <!--    <span class="flex-grow-1"></span>-->
+  <!--    <button *ngIf="currentUser && currentUser.role === 'admin'" routerLink="/shop" mat-icon-button>-->
+  <!--      <mat-icon>arrow_drop_down</mat-icon>-->
+  <!--    </button>-->
+  <!--  </mat-toolbar>-->
+
+  <div class="d-flex justify-content-center align-items-center flex-column" style="padding-bottom: 8px">
+    <div style="padding: 16px; justify-content: center; align-items: center">
+      <mat-icon style="width: 70px; height: 70px; font-size: 70px" color="primary">store</mat-icon>
+    </div>
     <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" *ngIf="shop">{{shop.businessName}}</span>
-    <span class="flex-grow-1"></span>
-    <button *ngIf="currentUser && currentUser.role === 'admin'" routerLink="/shop" mat-icon-button>
-      <mat-icon>arrow_drop_down</mat-icon>
+    <span style="width: 4px; height: 4px"></span>
+    <button *ngIf="currentUser && currentUser.role === 'admin'"
+            style="width: 80%"
+            color="primary"
+            class="btn-block"
+            routerLink="/shop" mat-button>
+      Change Shop
     </button>
-  </mat-toolbar>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <mat-divider></mat-divider>
+  </div>
+
   <mat-accordion [multi]="true" class="mat-elevation-z0">
     <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin')"
                          [expanded]="shouldExpand('dashboard')"

@@ -12,6 +12,8 @@ import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {LocalStorageService} from '../../services/local-storage.service';
+import {LogService} from '../../services/log.service';
+import {UploadProductsComponent} from '../upload-products/upload-products.component';
 
 @Component({
   selector: 'app-stock',
@@ -26,12 +28,14 @@ export class StockComponent extends DeviceInfo implements OnInit {
               private readonly indexDb: LocalStorageService,
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
+              private readonly logger: LogService,
               private readonly dialog: MatDialog,
               private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
 
+  exportProgress = false;
   showProgress = false;
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
@@ -48,8 +52,8 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     });
     window.addEventListener('ssm_stocks_updated', (e) => {
-      console.log(e);
-      console.log('stock is updated from worker thread check it out');
+      this.logger.i(e);
+      this.logger.i('stock is updated from worker thread check it out');
     });
     this.initializeView();
   }
@@ -87,7 +91,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     }).catch(error1 => {
       this.stockFetchProgress = false;
-      // console.log(error1);
+      this.logger.e(error1);
       this.snack.open('Failed to get stocks from local storage', 'Ok', {duration: 3000});
       if (callback) {
         callback(error1);
@@ -113,7 +117,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     }).catch(reason => {
       this.hotReloadProgress = false;
-      console.log(reason);
+      this.logger.e(reason);
       this.snack.open('Fails to get stocks from server, try again', 'Ok', {
         duration: 3000
       });
@@ -122,7 +126,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
 
   editStock(element: Stock) {
     this.router.navigateByUrl('/stock/edit/' + element.objectId + '?stock=' + encodeURI(JSON.stringify(element)))
-      .catch(reason => console.log(reason));
+      .catch(reason => this.logger.e(reason));
   }
 
   deleteStock(element: Stock) {
@@ -138,7 +142,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
           // update table
           this._removeProductFromTable(element);
         }).catch(reason => {
-          console.log(reason);
+          this.logger.e(reason);
           this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
           this.hideProgressBar();
         });
@@ -154,7 +158,6 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   // affect performance
-
   handleSearch(query: string) {
     this.getStocksFromCache(() => {
       // this.stockDatasource.filter = query.toString().toLowerCase();
@@ -172,9 +175,9 @@ export class StockComponent extends DeviceInfo implements OnInit {
     // update stocks
     this.indexDb.getStocks().then(stocks => {
       const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
-      this.indexDb.saveStocks(updatedStock).catch(reason => console.warn('Fails to update stock due to deleted item'));
+      this.indexDb.saveStocks(updatedStock).catch(reason => this.logger.w('Fails to update stock due to deleted item'));
     }).catch(reason => {
-      console.warn('fails to update stocks to to deleted item');
+      this.logger.w('fails to update stocks to to deleted item');
     });
   }
 
@@ -192,16 +195,31 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   exportStock() {
+    this.exportProgress = true;
     this.stockDatabase.exportToExcel().then(_ => {
-      this.snack.open('Your request received we will send your an email' +
-        ' contain link to download your stocks', 'Ok', {
-        duration: 6000
+      // const blob = new Blob([value.csv], {type: 'text/plain'});
+      // const url = window.URL.createObjectURL(blob);
+      // window.open(url);
+      this.exportProgress = false;
+      this.snack.open('Stock sent to your email, visit your email to download it', 'Ok', {
+        duration: 10000
       });
     }).catch(reason => {
-      console.log(reason);
+      this.logger.e(reason);
+      this.exportProgress = false;
       this.snack.open('Request fails try again later', 'Ok', {
         duration: 3000
       });
+    });
+  }
+
+  importStocks() {
+    this.dialog.open(UploadProductsComponent, {
+      closeOnNavigation: true,
+    }).afterClosed().subscribe(value => {
+      if (value === true) {
+        this.hotReloadStocks();
+      }
     });
   }
 }

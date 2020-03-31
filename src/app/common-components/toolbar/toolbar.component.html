@@ -1,6 +1,6 @@
-<nav class="sticky-top">
+<nav class="sticky-top mat-elevation-z2">
   <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
-  <mat-toolbar>
+  <mat-toolbar color="primary">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -13,9 +13,9 @@
       <!--        <mat-icon>search</mat-icon>-->
       <!--      </button>-->
     </span>
-    <button class="ft-button" mat-button color="primary" [matMenuTriggerFor]="menu">
+    <button class="ft-button" mat-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
-      <span *ngIf="currentUser">{{"  "+currentUser.username}}</span>
+      <span *ngIf="currentUser">{{"  " + currentUser.username}}</span>
     </button>
     <mat-menu #menu>
       <button mat-menu-item (click)="logout()">

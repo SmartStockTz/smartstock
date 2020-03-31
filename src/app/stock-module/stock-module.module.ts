@@ -33,6 +33,7 @@ import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewCom
 import {DialogSupplierDeleteComponent, SuppliersComponent} from './suppliers/suppliers.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import { UploadProductsComponent } from './upload-products/upload-products.component';
 
 @NgModule({
   imports: [
@@ -76,7 +77,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     DialogCategoryNewComponent,
     DialogUnitDeleteComponent,
     DialogUnitNewComponent,
-    DialogSupplierDeleteComponent
+    DialogSupplierDeleteComponent,
+    UploadProductsComponent
   ],
   entryComponents: [
     StockDetailsComponent,

@@ -31,6 +31,7 @@
                     <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
                       Add Product
                     </button>
+                    <span class="toolbar-spacer"></span>
                     <span style="width: 8px; height: 8px"></span>
                     <button (click)="hotReloadStocks()" [disabled]="hotReloadProgress" matTooltip="Reload from server"
                             color="primary"
@@ -42,15 +43,32 @@
                                             color="primary">
                       </mat-progress-spinner>
                     </button>
-                    <span class="toolbar-spacer"></span>
+                    <span style="width: 8px; height: 8px"></span>
+                    <button (click)="exportStock()" [disabled]="exportProgress" matTooltip="Export Products To Csv"
+                            color="primary"
+                            class="ft-button" mat-flat-button>
+                      <mat-icon *ngIf="!exportProgress">cloud_download</mat-icon>
+                      <mat-progress-spinner *ngIf="exportProgress" [diameter]="20"
+                                            matTooltip="Export Products InProgress.."
+                                            mode="indeterminate"
+                                            color="primary">
+                      </mat-progress-spinner>
+                    </button>
+                    <span style="width: 8px; height: 8px"></span>
+                    <button (click)="importStocks()" matTooltip="Import Products"
+                            color="primary"
+                            class="ft-button" mat-flat-button>
+                      <mat-icon>cloud_upload</mat-icon>
+                    </button>
+
                     <button [matMenuTriggerFor]="stockMenu" color="primary" mat-icon-button>
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #stockMenu>
                       <button (click)="reload()" matTooltip="refresh products in table" mat-menu-item>Reload</button>
-                      <button (click)="exportStock()" matTooltip="refresh products in table" mat-menu-item>
-                        Export to excel
-                      </button>
+<!--                      <button (click)="exportStock()" matTooltip="refresh products in table" mat-menu-item>-->
+<!--                        Export to excel-->
+<!--                      </button>-->
                     </mat-menu>
 
                   </mat-card-title>
@@ -72,7 +90,7 @@
                       <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
                       <td mat-cell *matCellDef="let element">{{element.purchase | number}}</td>
                       <td mat-footer-cell *matFooterCellDef>
-<!--                        <b>{{totalPurchase | async | currency:'TZS '}}</b>-->
+                        <!--                        <b>{{totalPurchase | async | currency:'TZS '}}</b>-->
                       </td>
                     </ng-container>
 
