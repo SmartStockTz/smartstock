@@ -1,19 +1,20 @@
 {
-  "name": "capacitor-app",
+  "name": "SmartStock",
   "version": "1.0.0",
-  "description": "An Amazing Capacitor App",
+  "description": "Manage business",
   "main": "index.js",
   "scripts": {
     "electron:start": "electron ./"
   },
   "dependencies": {
-    "electron-is-dev": "^1.1.0"
+    "electron-is-dev": "^1.1.0",
+    "@capacitor/electron": "latest"
   },
   "devDependencies": {
     "electron": "^7.0.0"
   },
   "keywords": [
-    "capacitor",
+    "smartstock",
     "electron"
   ],
   "author": "",
