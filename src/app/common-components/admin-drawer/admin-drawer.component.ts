@@ -12,13 +12,37 @@ import {LogService} from '../../services/log.service';
   styleUrls: ['./admin-drawer.component.css']
 })
 export class AdminDrawerComponent implements OnInit {
-  shop: ShopI;
-  currentUser: UserI;
 
   constructor(private readonly _userApi: UserDatabaseService,
               private readonly logger: LogService,
               private readonly eventApi: EventApiService) {
   }
+
+  shop: ShopI;
+  currentUser: UserI;
+
+  // async shouldShow(menuName: string): Promise<boolean> {
+  //   try {
+  //     // const user = await this._userApi.currentUser();
+  //     // switch (menuName) {
+  //     //   case 'dashboard':
+  //     //     return user.role === 'admin';
+  //     //   case 'sale':
+  //     //     return (user.role === 'admin' || user.role === 'manager' || user.role === 'user');
+  //     //   case 'purchase':
+  //     //     return (user.role === 'admin' || user.role === 'manager');
+  //     //   case 'stock':
+  //     //     return (user.role === 'admin' || user.role === 'manager');
+  //     //   case 'settings':
+  //     //     return user.role === 'admin';
+  //     // }
+  //     return true;
+  //   } catch (e) {
+  //     console.log(e);
+  //     return false;
+  //   }
+  // }
+  versionNumber = '20.04.1+0';
 
   ngOnInit() {
     this._userApi.getCurrentShop().then(shop => {
@@ -44,26 +68,4 @@ export class AdminDrawerComponent implements OnInit {
     const url = new URL(location.href);
     return url.pathname.startsWith('/' + route);
   }
-
-  // async shouldShow(menuName: string): Promise<boolean> {
-  //   try {
-  //     // const user = await this._userApi.currentUser();
-  //     // switch (menuName) {
-  //     //   case 'dashboard':
-  //     //     return user.role === 'admin';
-  //     //   case 'sale':
-  //     //     return (user.role === 'admin' || user.role === 'manager' || user.role === 'user');
-  //     //   case 'purchase':
-  //     //     return (user.role === 'admin' || user.role === 'manager');
-  //     //   case 'stock':
-  //     //     return (user.role === 'admin' || user.role === 'manager');
-  //     //   case 'settings':
-  //     //     return user.role === 'admin';
-  //     // }
-  //     return true;
-  //   } catch (e) {
-  //     console.log(e);
-  //     return false;
-  //   }
-  // }
 }
