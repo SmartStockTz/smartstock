@@ -1,1 +1,1 @@
-# Lb Pharmacy ( SmartStock )
+# StockApp
