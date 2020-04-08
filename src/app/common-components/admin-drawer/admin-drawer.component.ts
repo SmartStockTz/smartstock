@@ -5,6 +5,7 @@ import {UserI} from '../../model/UserI';
 import {EventApiService} from '../../services/event-api.service';
 import {SsmEvents} from '../../utils/eventsNames';
 import {LogService} from '../../services/log.service';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-admin-drawer',
@@ -42,9 +43,15 @@ export class AdminDrawerComponent implements OnInit {
   //     return false;
   //   }
   // }
-  versionNumber = '20.04.1+0';
+  versionNumber: Observable<string> = of();
 
   ngOnInit() {
+
+    // @ts-ignore
+    import('../../../../package.json').then(pkg => {
+      this.versionNumber = of(pkg.version);
+    });
+
     this._userApi.getCurrentShop().then(shop => {
       this.shop = shop;
     }).catch(reason => {

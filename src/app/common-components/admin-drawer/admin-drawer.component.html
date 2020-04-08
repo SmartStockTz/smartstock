@@ -4,7 +4,8 @@
       <div style="padding: 16px; justify-content: center; align-items: center">
         <mat-icon style="width: 70px; height: 70px; font-size: 70px" color="primary">store</mat-icon>
       </div>
-      <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" *ngIf="shop">{{shop.businessName}}</span>
+      <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;"
+            *ngIf="shop">{{shop.businessName}}</span>
       <span style="width: 4px; height: 4px"></span>
       <button style="width: 80%"
               color="primary"
@@ -124,6 +125,6 @@
   </div>
   <span style="flex-grow: 1"></span>
   <div style="display: flex; justify-content: center; align-items: center">
-    <span>Ver: {{versionNumber}}</span>
+    <span>Ver: {{versionNumber | async}}</span>
   </div>
 </div>
