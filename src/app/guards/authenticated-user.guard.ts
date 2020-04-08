@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserDatabaseService} from '../services/user-database.service';
+import {LocalStorageService} from '../services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticatedUserGuard implements CanActivate {
-  constructor(private readonly userDatabase: UserDatabaseService,
+  constructor(private readonly userDatabase: LocalStorageService,
               private readonly router: Router) {
   }
 
@@ -15,16 +15,16 @@ export class AuthenticatedUserGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
-      this.userDatabase.currentUser().then(value => {
+      this.userDatabase.getActiveUser().then(value => {
         if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'admin') {
           this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
-          reject(false);
+          // reject(false);
         } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'user') {
-          this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
-          reject(false);
+          this.router.navigateByUrl('/sale/report').catch(reason => console.log(reason));
+          // reject(false);
         } else if (value && value.applicationId && value.projectUrlId && value.projectId && value.role === 'manager') {
           this.router.navigateByUrl('/sale/report').catch(reason => console.log(reason));
-          reject(false);
+          // reject(false);
         } else {
           resolve(true);
         }

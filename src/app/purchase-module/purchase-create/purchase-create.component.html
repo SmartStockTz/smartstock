@@ -46,6 +46,16 @@
                                         mode="indeterminate"
                                         [diameter]="20"></mat-progress-spinner>
                   <mat-error>Supplier required</mat-error>
+                  <div matSuffix class="d-flex flex-row">
+                    <button (click)="refreshSuppliers($event)" mat-icon-button matTooltip="refresh suppliers"
+                            *ngIf="!supplierFetching">
+                      <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button (click)="addNewSupplier($event)" mat-icon-button matTooltip="add new supplier"
+                            *ngIf="!supplierFetching">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="my-input">

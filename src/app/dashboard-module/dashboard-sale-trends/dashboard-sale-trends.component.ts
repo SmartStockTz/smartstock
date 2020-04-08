@@ -57,6 +57,7 @@ export class DashboardSaleTrendsComponent implements OnInit {
       saleDays.push(data[key]._id);
       totalSales.push(data[key].total);
     });
+    // @ts-ignore
     this.trendChart = Highcharts.chart('salesTrendByDay', {
       chart: {
         type: 'areaspline'

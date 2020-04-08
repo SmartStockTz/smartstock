@@ -1,5 +1,9 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSidenav, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSidenav} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTableDataSource} from '@angular/material/table';
 import {UserI} from '../../model/UserI';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
@@ -8,7 +12,6 @@ import {CartI} from '../../model/cart';
 import {CashSaleI} from '../../model/CashSale';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
-import {NgForage} from 'ngforage';
 import {SalesDatabaseService} from '../../services/sales-database.service';
 import {OrderI} from '../../model/OderI';
 import {DialogDeleteComponent} from '../../stock-module/stock/stock.component';
@@ -19,12 +22,6 @@ import {toSqlDate} from '../../utils/date';
 import {randomString} from '../../adapter/ParseBackend';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {StockDatabaseService} from '../../services/stock-database.service';
-
-export interface DialogData {
-  customer?: string;
-  name?: string;
-  type: number;
-}
 
 @Component({
   selector: 'app-whole-sale',
@@ -100,7 +97,6 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly indexDb: NgForage,
               private readonly _storage: LocalStorageService,
               private readonly _stockApi: StockDatabaseService,
               private readonly settings: SettingsServiceService,
@@ -521,7 +517,11 @@ export class DialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: {
+      customer?: string;
+      name?: string;
+      type: number;
+    }) {
   }
 
   done(ans: number) {

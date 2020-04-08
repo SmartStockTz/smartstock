@@ -20,6 +20,33 @@
       <form *ngIf="!getSettingsProgress && settingsForm" [formGroup]="settingsForm"
             style="margin-top: 16px"
             class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+
+        <h4>Sales</h4>
+        <mat-card class="mat-elevation-z0">
+          <mat-card-content>
+
+            <div class="d-flex flex-row align-items-center">
+              <mat-card-subtitle>Allow Retail</mat-card-subtitle>
+              <span class="toolbar-spacer"></span>
+              <mat-slide-toggle
+                formControlName="allowRetail"
+                matTooltip="If you disable you wont sale without printer" color="primary"
+                labelPosition="after">
+              </mat-slide-toggle>
+            </div>
+            <div style="height: 20px"></div>
+            <div class="d-flex flex-row align-items-center">
+              <mat-card-subtitle>Allow Wholesale</mat-card-subtitle>
+              <span class="toolbar-spacer"></span>
+              <mat-slide-toggle
+                formControlName="allowWholesale"
+                matTooltip="If you disable you wont sale without printer" color="primary"
+                labelPosition="after">
+              </mat-slide-toggle>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <div style="height: 20px"></div>
         <h4>Printer</h4>
         <mat-card class="mat-elevation-z0">
           <mat-card-content>
@@ -57,7 +84,8 @@
 
           </mat-card-content>
         </mat-card>
-        <button [disabled]="saveSettingProgress"
+
+        <button [disabled]="saveSettingProgress || !settingsForm.dirty"
                 style="margin-top: 16px; margin-bottom: 16px"
                 color="primary"
                 mat-flat-button
@@ -68,6 +96,7 @@
                                 mode="indeterminate">
           </mat-progress-spinner>
         </button>
+
       </form>
 
     </div>

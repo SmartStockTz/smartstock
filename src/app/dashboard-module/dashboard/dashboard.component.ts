@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 
 @Component({
@@ -8,7 +8,7 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent extends DeviceInfo implements OnInit {
-  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor() {
     super();

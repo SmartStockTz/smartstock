@@ -2,6 +2,7 @@ export interface Stock {
   idOld?: string;
   createdAt?: any;
   updatedAt?: any;
+  image?: any;
   objectId?: string;
   product: string;
   active?: boolean | true;
@@ -9,19 +10,19 @@ export interface Stock {
   description?: string;
   unit: string;
   category: string;
-  shelf: string;
+  shelf?: string;
   quantity: number;
   wholesaleQuantity: number;
-  q_status: string;
+  q_status?: string;
   reorder: number;
   purchase: number;
   retailPrice: number;
   wholesalePrice: any;
-  profit: number;
-  times: number;
+  profit?: number;
+  times?: number;
   supplier: string;
   expire: string;
-  nhifPrice: number;
-  retailWholesalePrice: number;
-  retail_stockcol: string;
+  nhifPrice?: number;
+  retailWholesalePrice?: number;
+  retail_stockcol?: string;
 }

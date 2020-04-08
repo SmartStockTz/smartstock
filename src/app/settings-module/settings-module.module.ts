@@ -4,24 +4,24 @@ import {CommonModule} from '@angular/common';
 import {SettingsModuleRoutingModule} from './settings-module-routing.module';
 import {SettingComponent} from './setting/setting.component';
 import {AccountComponent} from './account/account.component';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDialogModule, MatDividerModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatMenuModule,
-  MatProgressSpinnerModule, MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSlideToggleModule,
-  MatTableModule,
-  MatTabsModule,
-  MatTooltipModule
-} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatRippleModule} from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -31,12 +31,12 @@ import {
   UsersComponent
 } from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
-import { BillingComponent } from './billing/billing.component';
-import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
-import { ProfileBusinessComponent } from './profile-business/profile-business.component';
-import { ProfileAuthenticationComponent } from './profile-authentication/profile-authentication.component';
-import { BillingInvoicesComponent } from './billing-invoices/billing-invoices.component';
-import { BillingReceiptsComponent } from './billing-receipts/billing-receipts.component';
+import {BillingComponent} from './billing/billing.component';
+import {ProfilePersonalComponent} from './profile-personal/profile-personal.component';
+import {ProfileBusinessComponent} from './profile-business/profile-business.component';
+import {ProfileAuthenticationComponent} from './profile-authentication/profile-authentication.component';
+import {BillingInvoicesComponent} from './billing-invoices/billing-invoices.component';
+import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { BillingReceiptsComponent } from './billing-receipts/billing-receipts.co
     MatRippleModule,
     MatDividerModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
   ],
   entryComponents: [
     DialogUserNewComponent,

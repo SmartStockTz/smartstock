@@ -1,8 +1,9 @@
 import {Injectable, OnInit} from '@angular/core';
-import {SettingsServiceService} from './Settings-service.service';
 import * as Parse from 'parse/dist/parse';
 import {LocalStorageService} from './local-storage.service';
 import {ShopI} from '../model/ShopI';
+import {EventApiService} from './event-api.service';
+import {SsmEvents} from '../utils/eventsNames';
 
 /*
 This should handle sockets and when data found check
@@ -12,7 +13,7 @@ handle updates in main thread
 @Injectable()
 export class ThreadsService implements OnInit {
 
-  constructor(private readonly _settings: SettingsServiceService,
+  constructor(private readonly eventApi: EventApiService,
               private readonly _storage: LocalStorageService) {
   }
 
@@ -64,7 +65,7 @@ export class ThreadsService implements OnInit {
       if (typeof Worker !== 'undefined') {
         this.salesWorkerProxy = new Worker('assets/js/sw-sales-proxy.js');
         this.salesWorkerProxy.onmessage = ({data}) => {
-          console.log(`page got message: ${data}`);
+          // this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
         };
         this.salesWorkerProxy.postMessage({});
         return 'Ok';
@@ -82,7 +83,7 @@ export class ThreadsService implements OnInit {
       if (typeof Worker !== 'undefined') {
         this.stocksWorkerProxy = new Worker('assets/js/sw-local-data.js');
         this.stocksWorkerProxy.onmessage = ({data}) => {
-          console.log(`page got message: ${data}`);
+          this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
         };
         this.stocksWorkerProxy.postMessage({});
         return 'Ok';

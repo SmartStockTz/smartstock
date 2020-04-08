@@ -3,9 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Stock} from '../../model/stock';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DialogImageCropComponent} from '../../common-components/dialog-image-crop/dialog-image-crop.component';
 
 @Component({
   selector: 'app-stock-edit',
@@ -23,11 +25,13 @@ export class StockEditComponent extends DeviceInfo implements OnInit {
   categoriesFetching = true;
   suppliersFetching = true;
   stock: Stock;
+  croppedImage: any;
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
               private readonly router: Router,
+              private readonly _dialog: MatDialog,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
@@ -54,6 +58,9 @@ export class StockEditComponent extends DeviceInfo implements OnInit {
   }
 
   initialize(stock: Stock) {
+    if (stock.image) {
+      this.croppedImage = stock.image;
+    }
     this.updateForm = this.formBuilder.group({
       product: [stock.product, [Validators.nullValidator, Validators.required]],
       description: [stock.description],
@@ -127,6 +134,7 @@ export class StockEditComponent extends DeviceInfo implements OnInit {
     this.mainProgress = true;
     const newStock = this.updateForm.value;
     newStock.objectId = this.stock.objectId;
+    newStock.image = this.croppedImage;
     this.stockDatabase.updateStock(newStock).then(_ => {
       this.mainProgress = false;
       this.snack.open('Product updated', 'Ok', {
@@ -143,4 +151,23 @@ export class StockEditComponent extends DeviceInfo implements OnInit {
     });
   }
 
+  removeImage(imageInput: HTMLInputElement) {
+    this.croppedImage = null;
+    imageInput.value = '';
+  }
+
+  fileChangeEvent(event: Event) {
+    if (event) {
+      this._dialog.open(DialogImageCropComponent, {
+        data: {
+          event: event
+        }
+      }).afterClosed().subscribe(value => {
+        if (value) {
+          this.croppedImage = value;
+          // console.log(this.croppedImage);
+        }
+      });
+    }
+  }
 }

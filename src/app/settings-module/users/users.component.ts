@@ -1,9 +1,16 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuTrigger, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatMenuTrigger} from '@angular/material/menu';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTableDataSource} from '@angular/material/table';
 import {UserI} from '../../model/UserI';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {Observable, of} from 'rxjs';
+import {ShopI} from '../../model/ShopI';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-users',
@@ -13,13 +20,14 @@ import {DeviceInfo} from '../../common-components/DeviceInfo';
 export class UsersComponent extends DeviceInfo implements OnInit {
 
   usersDatasource: MatTableDataSource<UserI>;
-  usersTableColums = ['name', 'role', 'actions'];
+  usersTableColums = ['name', 'role', 'shops', 'actions'];
   usersArray: UserI[];
   fetchUsersFlag = false;
 
   constructor(private readonly userDatabase: UserDatabaseService,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
+              private readonly logger: LogService,
               private readonly snack: MatSnackBar) {
     super();
   }
@@ -55,7 +63,7 @@ export class UsersComponent extends DeviceInfo implements OnInit {
       this.usersDatasource = new MatTableDataSource<UserI>(this.usersArray);
       this.fetchUsersFlag = false;
     }).catch(reason => {
-      console.log(reason);
+      this.logger.i(reason);
       this.fetchUsersFlag = false;
     });
   }
@@ -148,6 +156,7 @@ export class DialogUserDeleteComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogUserDeleteComponent>,
     private readonly userDatabase: UserDatabaseService,
+    private readonly logger: LogService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -157,7 +166,7 @@ export class DialogUserDeleteComponent {
     this.userDatabase.deleteUser(user).then(value => {
       this.dialogRef.close(user);
       this.deleteProgress = false;
-      console.log(value);
+      this.logger.i(value);
     }).catch(reason => {
       this.errorUserMessage = reason && reason.message ? reason.message : reason.toString();
       this.deleteProgress = false;
@@ -178,15 +187,19 @@ export class DialogUserDeleteComponent {
 export class DialogUserNewComponent implements OnInit {
   newUserForm: FormGroup;
   createUserProgress = false;
+  shops: Observable<ShopI[]>;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly snack: MatSnackBar,
+    private readonly storage: LocalStorageService,
     private readonly userDatabase: UserDatabaseService,
+    private readonly logger: LogService,
     public dialogRef: MatDialogRef<DialogUserDeleteComponent>) {
   }
 
   ngOnInit(): void {
+    this._getShops();
     this.initiateForm();
   }
 
@@ -194,6 +207,7 @@ export class DialogUserNewComponent implements OnInit {
     this.newUserForm = this.formBuilder.group({
       username: ['', [Validators.nullValidator, Validators.required]],
       password: ['', [Validators.nullValidator, Validators.required]],
+      shops: [[], [Validators.nullValidator, Validators.required]],
       role: ['user', [Validators.nullValidator, Validators.required]],
     });
   }
@@ -206,6 +220,8 @@ export class DialogUserNewComponent implements OnInit {
       return;
     }
     this.createUserProgress = true;
+    this.newUserForm.value.username.trim();
+    this.newUserForm.value.password.trim();
     this.userDatabase.addUser(this.newUserForm.value).then(value => {
       this.createUserProgress = false;
       value.username = this.newUserForm.value.username;
@@ -215,9 +231,10 @@ export class DialogUserNewComponent implements OnInit {
         duration: 3000
       });
     }).catch(reason => {
-      console.log(reason);
+      this.logger.i(reason);
       this.createUserProgress = false;
-      this.snack.open(reason && reason.error && reason.error.message ? reason.error.message : 'User not created, try again', 'Ok', {
+      this.snack.open(reason && reason.error && reason.error.message ?
+        reason.error.message : 'User not created, try again', 'Ok', {
         duration: 3000
       });
     });
@@ -226,6 +243,15 @@ export class DialogUserNewComponent implements OnInit {
   cancel($event: Event) {
     $event.preventDefault();
     this.dialogRef.close(null);
+  }
+
+  private _getShops() {
+    this.userDatabase.getShops().then(value => {
+      this.shops = of(value);
+    }).catch(reason => {
+      this.logger.e(reason, 'DialogUserNewComponent:203');
+      this.shops = of([]);
+    });
   }
 }
 
@@ -241,6 +267,7 @@ export class UpdateUserPasswordDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<UpdateUserPasswordDialogComponent>,
               private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
+              private readonly logger: LogService,
               private readonly _userApi: UserDatabaseService,
               @Inject(MAT_DIALOG_DATA) public data: UserI) {
   }
@@ -262,7 +289,7 @@ export class UpdateUserPasswordDialogComponent implements OnInit {
         this.updateProgress = false;
         this.dialogRef.close();
       }).catch(reason => {
-        console.log(reason);
+        this.logger.i(reason);
         this._snack.open('Failure when try to update password, try again', 'Ok', {
           duration: 3000
         });

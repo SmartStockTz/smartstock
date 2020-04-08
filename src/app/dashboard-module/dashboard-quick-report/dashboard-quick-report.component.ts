@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {toSqlDate} from '../../utils/date';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {FormControl} from '@angular/forms';
-import {MatRadioChange} from '@angular/material';
+import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-billing',

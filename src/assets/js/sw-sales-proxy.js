@@ -14,54 +14,63 @@ function _getStorage(name) {
   });
 }
 
-
-addEventListener('message', ({data}) => {
-
-  let _mainStorage = _getStorage('ssm');
-
-  setInterval(() => {
-
-    _mainStorage.getItem('activeShop').then(activeShop => {
-
+async function _syncSales() {
+  return new Promise(async (resolve, _) => {
+    try {
+      const _mainStorage = _getStorage('ssm');
+      const activeShop = await _mainStorage.getItem('activeShop');
       if (!activeShop) {
         throw 'active shop is not available yet';
       }
-
       if (activeShop && activeShop.applicationId && activeShop.projectId && activeShop.projectUrlId) {
         let _salesStorage = _getStorage(activeShop.projectId + '_sales');
-        _salesStorage.keys().then(keys => {
-          if (keys.length > 0) {
-            keys.forEach(key => {
-              _salesStorage.getItem(key).then(sales => {
-                axios.post(`https://smartstock-faas.bfast.fahamutech.com/functions/sales/${activeShop.projectId}`,
-                  {
-                    'requests': sales
-                  },
-                  {
-                    headers: {
-                      'bfast-application-id': 'smartstock_lb',
-                      'Content-Type': 'application/json'
-                    }
-                  }).then(_ => {
-                  _salesStorage.removeItem(key).catch(reason => console.log(reason));
-                }).catch(reason => {
-                  // console.log(reason);
-                });
+        const keys = await _salesStorage.keys();
+        if (keys.length > 0) {
+          for (const key of keys) {
+            const sales = await _salesStorage.getItem(key);
+            await axios.post(`https://smartstock-faas.bfast.fahamutech.com/functions/sales/${activeShop.projectId}`,
+              {
+                'requests': sales
+              },
+              {
+                headers: {
+                  'bfast-application-id': 'smartstock_lb',
+                  'Content-Type': 'application/json'
+                }
               });
-            });
+            await _salesStorage.removeItem(key);
           }
-        });
+          resolve();
+        } else {
+          // console.log('project required parameters not available yet');
+          setTimeout(() => {
+            resolve();
+          }, 2000);
+        }
       } else {
-        console.log('project required parameters not available yet');
+        setTimeout(() => {
+          resolve();
+        }, 2000);
       }
+    } catch (e) {
+      // console.log(e);
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    }
+  })
+}
 
-    }).catch(reason => {
-      // console.warn(reason);
-      // console.log('error when fetch user');
-    });
-
-  }, 3000);
-
+addEventListener('message', async ({data}) => {
+  let wait = false;
   postMessage("sales routine started");
-
+  while (true) {
+    if (wait) {
+      // console.log('in wait mode');
+    } else {
+      wait = true;
+      await _syncSales();
+      wait = false;
+    }
+  }
 });

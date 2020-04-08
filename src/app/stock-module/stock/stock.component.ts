@@ -1,43 +1,44 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Stock} from '../../model/stock';
-import {
-  MAT_BOTTOM_SHEET_DATA,
-  MAT_DIALOG_DATA,
-  MatBottomSheet,
-  MatBottomSheetRef,
-  MatDialog,
-  MatDialogRef,
-  MatPaginator,
-  MatSidenav,
-  MatSnackBar,
-  MatTableDataSource
-} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSidenav} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgForage} from 'ngforage';
 import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {LogService} from '../../services/log.service';
+import {UploadProductsComponent} from '../upload-products/upload-products.component';
+import {EventApiService} from '../../services/event-api.service';
+import {SsmEvents} from '../../utils/eventsNames';
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.css']
 })
-export class StockComponent extends DeviceInfo implements OnInit {
+export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
 
   constructor(private readonly router: Router,
-              private readonly indexDb: NgForage,
+              private readonly indexDb: LocalStorageService,
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
+              private readonly logger: LogService,
               private readonly dialog: MatDialog,
+              private readonly eventApi: EventApiService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
 
+  exportProgress = false;
   showProgress = false;
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
@@ -53,9 +54,8 @@ export class StockComponent extends DeviceInfo implements OnInit {
         this.selectedTab = Number(value.t);
       }
     });
-    window.addEventListener('ssm_stocks_updated', (e) => {
-      console.log(e);
-      console.log('stock is updated from worker thread check it out');
+    this.eventApi.listen(SsmEvents.STOCK_UPDATED, data => {
+      this.reload();
     });
     this.initializeView();
   }
@@ -74,7 +74,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
 
   private getStocksFromCache(callback?: (error) => void) {
     this.stockFetchProgress = true;
-    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+    this.indexDb.getStocks().then(stocks => {
       if (!stocks && !Array.isArray(stocks)) {
         // stocks = [];
         this.hotReloadStocks();
@@ -93,7 +93,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     }).catch(error1 => {
       this.stockFetchProgress = false;
-      // console.log(error1);
+      this.logger.e(error1);
       this.snack.open('Failed to get stocks from local storage', 'Ok', {duration: 3000});
       if (callback) {
         callback(error1);
@@ -106,7 +106,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.stockDatabase.getAllStock().then(async stocks => {
       try {
         this.hotReloadProgress = false;
-        await this.indexDb.setItem('stocks', stocks);
+        await this.indexDb.saveStocks(stocks);
         this.stockDatasource = new MatTableDataSource(stocks);
         this.stockDatasource.paginator = this.paginator;
         this._getTotalPurchaseOfStock(stocks);
@@ -119,7 +119,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
       }
     }).catch(reason => {
       this.hotReloadProgress = false;
-      console.log(reason);
+      this.logger.e(reason);
       this.snack.open('Fails to get stocks from server, try again', 'Ok', {
         duration: 3000
       });
@@ -128,7 +128,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
 
   editStock(element: Stock) {
     this.router.navigateByUrl('/stock/edit/' + element.objectId + '?stock=' + encodeURI(JSON.stringify(element)))
-      .catch(reason => console.log(reason));
+      .catch(reason => this.logger.e(reason));
   }
 
   deleteStock(element: Stock) {
@@ -144,7 +144,7 @@ export class StockComponent extends DeviceInfo implements OnInit {
           // update table
           this._removeProductFromTable(element);
         }).catch(reason => {
-          console.log(reason);
+          this.logger.e(reason);
           this.snack.open('Product is not deleted successful, try again', 'Ok', {duration: 3000});
           this.hideProgressBar();
         });
@@ -160,7 +160,6 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   // affect performance
-
   handleSearch(query: string) {
     this.getStocksFromCache(() => {
       // this.stockDatasource.filter = query.toString().toLowerCase();
@@ -176,11 +175,11 @@ export class StockComponent extends DeviceInfo implements OnInit {
     this.stockDatasource.data = this.stockDatasource.data.filter(value => value.objectId !== element.objectId);
     this._getTotalPurchaseOfStock(this.stockDatasource.data);
     // update stocks
-    this.indexDb.getItem<Stock[]>('stocks').then(stocks => {
+    this.indexDb.getStocks().then(stocks => {
       const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
-      this.indexDb.setItem('stocks', updatedStock).catch(reason => console.warn('Fails to update stock due to deleted item'));
+      this.indexDb.saveStocks(updatedStock).catch(reason => this.logger.w('Fails to update stock due to deleted item'));
     }).catch(reason => {
-      console.warn('fails to update stocks to to deleted item');
+      this.logger.w('fails to update stocks to to deleted item');
     });
   }
 
@@ -198,17 +197,36 @@ export class StockComponent extends DeviceInfo implements OnInit {
   }
 
   exportStock() {
+    this.exportProgress = true;
     this.stockDatabase.exportToExcel().then(_ => {
-      this.snack.open('Your request received we will send your an email' +
-        ' contain link to download your stocks', 'Ok', {
-        duration: 6000
+      // const blob = new Blob([value.csv], {type: 'text/plain'});
+      // const url = window.URL.createObjectURL(blob);
+      // window.open(url);
+      this.exportProgress = false;
+      this.snack.open('Stock sent to your email, visit your email to download it', 'Ok', {
+        duration: 10000
       });
     }).catch(reason => {
-      console.log(reason);
+      this.logger.e(reason);
+      this.exportProgress = false;
       this.snack.open('Request fails try again later', 'Ok', {
         duration: 3000
       });
     });
+  }
+
+  importStocks() {
+    this.dialog.open(UploadProductsComponent, {
+      closeOnNavigation: true,
+    }).afterClosed().subscribe(value => {
+      if (value === true) {
+        this.hotReloadStocks();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.eventApi.unListen(SsmEvents.STOCK_UPDATED);
   }
 }
 

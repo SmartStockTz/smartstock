@@ -14,16 +14,28 @@
     </app-toolbar>
 
     <div class="container stock-new-wrapper">
-      <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+
+      <div style="padding: 16px" class="row d-flex flex-column justify-content-center align-items-center">
+        <h4 style="padding: 0" class="col-12 col-xl-9 col-lg-9">
+          Product Image
+        </h4>
+        <div matRipple (click)="imageInput.click()"
+             class="col-12 col-xl-9 col-lg-9 d-flex flex-column justify-content-center align-items-center"
+             style="width: 100%; min-height: 100px; border-radius: 4px; background-color: #f5f5f5">
+          <img style="width: 100%; height: auto; margin-top: 4px" [src]="croppedImage" alt=""/>
+          <button *ngIf="!croppedImage" mat-button color="primary">Upload Image</button>
+        </div>
+        <div *ngIf="croppedImage" style="padding: 0"
+             class="col-12 col-xl-9 col-lg-9 d-flex justify-content-center align-items-center">
+          <button color="warn" (click)="removeImage(imageInput)" mat-button>Remove Image</button>
+        </div>
+        <input (change)="fileChangeEvent($event)" #imageInput style="display: none" type="file">
+      </div>
+
+      <form [formGroup]="productForm" #formElement="ngForm" (ngSubmit)="addProduct(formElement)">
         <div class="row d-flex justify-content-center align-items-center">
 
           <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
-
-            <mat-card-title>
-              <button routerLink="/stock" color="warn" class="ft-button" mat-flat-button>
-                Cancel
-              </button>
-            </mat-card-title>
             <h4>
               Product Information
             </h4>
@@ -52,6 +64,16 @@
                                         mode="indeterminate"
                                         [diameter]="20"></mat-progress-spinner>
                   <mat-error>Category required</mat-error>
+                  <div matSuffix class="d-flex flex-row">
+                    <button (click)="refreshCategories($event)" mat-icon-button matTooltip="refresh categories"
+                            *ngIf="!categoriesFetching">
+                      <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button (click)="addNewCategory($event)" mat-icon-button matTooltip="add new category"
+                            *ngIf="!categoriesFetching">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="my-input">
@@ -66,6 +88,16 @@
                                         mode="indeterminate"
                                         [diameter]="20"></mat-progress-spinner>
                   <mat-error>Supplier required</mat-error>
+                  <div matSuffix class="d-flex flex-row">
+                    <button (click)="refreshSuppliers($event)" mat-icon-button matTooltip="refresh suppliers"
+                            *ngIf="!suppliersFetching">
+                      <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button (click)="addNewSupplier($event)" mat-icon-button matTooltip="add new supplier"
+                            *ngIf="!suppliersFetching">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
                 </mat-form-field>
 
               </mat-card-content>
@@ -140,6 +172,16 @@
                                         mode="indeterminate"
                                         [diameter]="20"></mat-progress-spinner>
                   <mat-error>Unit required</mat-error>
+                  <div matSuffix class="d-flex flex-row">
+                    <button (click)="refreshUnits($event)" mat-icon-button matTooltip="refresh units"
+                            *ngIf="!unitsFetching">
+                      <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button (click)="addNewUnit($event)" mat-icon-button matTooltip="add new unit"
+                            *ngIf="!unitsFetching">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
                 </mat-form-field>
 
                 <mat-checkbox matTooltip="Select if a product can expire" labelPosition="after"
@@ -182,6 +224,11 @@
                 <mat-progress-spinner style="display: inline-block" *ngIf="mainProgress" diameter="30"
                                       mode="indeterminate"></mat-progress-spinner>
               </button>
+              <div style="padding: 16px 0">
+                <button class="btn-block" routerLink="/stock" color="primary" mat-button>
+                  Cancel
+                </button>
+              </div>
             </div>
 
           </div>

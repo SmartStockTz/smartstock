@@ -8,6 +8,8 @@ import {UnitsI} from '../model/UnitsI';
 import {randomString} from '../adapter/ParseBackend';
 import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
+import * as Parse from 'parse';
+import {UserDatabaseService} from './user-database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,16 @@ import {PurchaseI} from '../model/PurchaseI';
 export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
+              private readonly _user: UserDatabaseService,
               private readonly _settings: SettingsServiceService) {
   }
 
   exportToExcel(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export', {
+    return new Promise<any>(async (resolve, reject) => {
+      const user = await this._user.currentUser();
+      const projectId = await this._settings.getCustomerProjectId();
+      const email = encodeURIComponent(user.email);
+      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email, {
         headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => {
         resolve(value);
@@ -33,7 +39,15 @@ export class StockDatabaseService implements StockDataSource {
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
   }
 
-  addAllStock(stocks: Stock[], callback: (value: any) => void) {
+  async addAllStock(stocks: Stock[]): Promise<any> {
+    try {
+      return await this._httpClient.post(this._settings.ssmFunctionsURL +
+        '/functions/stocks/import/' + await this._settings.getCustomerProjectId(), stocks, {
+        headers: this._settings.ssmFunctionsHeader
+      }).toPromise();
+    } catch (e) {
+      throw e;
+    }
   }
 
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {
@@ -82,14 +96,29 @@ export class StockDatabaseService implements StockDataSource {
 
   addStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>(async (resolve, reject) => {
-      stock.idOld = randomString(8);
-      this._httpClient.post<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks', stock, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
+      try {
+        const serverUrl = await this._settings.getCustomerServerURL();
+        stock.idOld = randomString(8);
+        if (stock.image) {
+          Parse.initialize(await this._settings.getCustomerApplicationId());
+          Parse.serverURL = serverUrl;
+          const file = new Parse.File('product.png', {base64: stock.image});
+          const imageRequest = await file.save();
+          // imageRequest = await this._httpClient.post<any>(serverUrl + '/files/product.png', stock.image, {
+          //   headers: await this._settings.getCustomerPostHeader('image/png')
+          // }).toPromise();
+          // console.log(imageRequest.toJSON());
+          stock.image = imageRequest.toJSON().url;
+        }
+        const addStockRequest = this._httpClient.post<Stock>(serverUrl + '/classes/stocks', stock, {
+          headers: await this._settings.getCustomerPostHeader()
+        }).toPromise();
+        const response = await addStockRequest;
+        // @ts-ignore
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 
@@ -248,17 +277,29 @@ export class StockDatabaseService implements StockDataSource {
 
   updateStock(stock: Stock): Promise<Stock> {
     return new Promise<Stock>(async (resolve, reject) => {
-      const stockId = stock.objectId;
-      delete stock.objectId;
-      this._httpClient.put<Stock>(await this._settings.getCustomerServerURL() + '/classes/stocks/' + stockId,
-        stock,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
+      try {
+        const serverUrl = await this._settings.getCustomerServerURL();
+        const stockId = stock.objectId;
+        delete stock.objectId;
+        if (stock.image && !stock.image.toString().startsWith('http://')) {
+          Parse.initialize(await this._settings.getCustomerApplicationId());
+          Parse.serverURL = serverUrl;
+          const file = new Parse.File('product.png', {base64: stock.image});
+          const imageRequest = await file.save();
+          stock.image = imageRequest.toJSON().url;
+        }
+        this._httpClient.put<Stock>(serverUrl + '/classes/stocks/' + stockId,
+          stock,
+          {
+            headers: await this._settings.getCustomerPostHeader()
+          }).subscribe(value => {
+          resolve(value);
+        }, error1 => {
+          reject(error1);
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 

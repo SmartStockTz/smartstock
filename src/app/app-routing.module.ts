@@ -6,11 +6,11 @@ import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
-import {LandingComponent} from './landing/landing.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
 import {PrivancyComponent} from './privancy/privancy.component';
+import {LandingComponent} from './landing/landing.component';
 
 const routes: Routes = [
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'shop',
-    canActivate: [AdminRoleGuard],
+    canActivate: [AuthenticationGuard],
     component: ChooseShopComponent
   },
   {
@@ -64,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: ''
+    redirectTo: 'dashboard'
   },
 ];
 

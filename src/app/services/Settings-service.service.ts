@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NgForage} from 'ngforage';
 import {HttpClient} from '@angular/common/http';
-import {UserI} from '../model/UserI';
-import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
@@ -22,7 +19,7 @@ export class SettingsServiceService {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _storage: LocalStorageService,
-              private readonly indexDb: NgForage) {
+              private readonly indexDb: LocalStorageService) {
   }
 
   async getSSMUserHeader() {
@@ -82,11 +79,11 @@ export class SettingsServiceService {
     }
   }
 
-  async getCustomerPostHeader(): Promise<any> {
+  async getCustomerPostHeader(contentType?: string): Promise<any> {
     try {
       return {
         'X-Parse-Application-Id': await this.getCustomerApplicationId(),
-        'content-type': 'application/json'
+        'content-type': contentType ? contentType : 'application/json'
       };
     } catch (e) {
       throw {message: 'Fails to get customer post header', reason: e.toString()};
@@ -103,7 +100,7 @@ export class SettingsServiceService {
 
   async getCustomerProjectId(): Promise<string> {
     try {
-      const activeShop = await this.indexDb.getItem<ShopI>('activeShop');
+      const activeShop = await this.indexDb.getActiveShop();
       if (!activeShop) {
         throw new Error('No user in local storage');
       }
@@ -117,12 +114,13 @@ export class SettingsServiceService {
    * @deprecated
    */
   public getPrinterAddress(callback: (value: { ip: string, name: string }) => void) {
-    this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
-      callback(null);
-    }).catch(reason => {
-      console.log(reason);
-      callback(null);
-    });
+    // this.indexDb.getItem<{ ip: string, name: string }>('printerAddress').then(value => {
+    //   callback(null);
+    // }).catch(reason => {
+    //   console.log(reason);
+    //   callback(null);
+    // });
+    callback(null);
   }
 
   saveSettings(settings: any): Promise<any> {
@@ -147,14 +145,19 @@ export class SettingsServiceService {
     });
   }
 
-  async getSettings(): Promise<{ printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean }> {
+  async getSettings(): Promise<{
+    printerFooter: string, printerHeader: string, saleWithoutPrinter: boolean,
+    allowRetail: boolean, allowWholesale: boolean
+  }> {
     try {
       const activeShop = await this._storage.getActiveShop();
       if (!activeShop || !activeShop.settings) {
         return {
           'printerFooter': 'Thank you',
           'printerHeader': '',
-          'saleWithoutPrinter': true
+          'saleWithoutPrinter': true,
+          'allowRetail': true,
+          'allowWholesale': true,
         };
       }
       return activeShop.settings;

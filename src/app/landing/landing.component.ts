@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
-import {NgForage} from 'ngforage';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -15,9 +13,7 @@ export class LandingComponent implements OnInit {
   totalSales = 1;
   totalPurchases = 1;
 
-  constructor(private router: Router,
-              private snack: MatSnackBar,
-              private indexDb: NgForage) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
