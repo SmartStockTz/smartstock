@@ -1,6 +1,6 @@
-<div class="btn-block">
+<div class="col-12">
   <div class="d-flex flex-row flex-wrap btn-block align-items-center">
-    <mat-card-subtitle>Sales Trends</mat-card-subtitle>
+    <mat-card-subtitle>Sales</mat-card-subtitle>
     <span class="flex-grow-1"></span>
     <div>
       <mat-form-field appearance="outline" style="margin-right: 8px">
@@ -20,7 +20,8 @@
         <mat-icon *ngIf="!salesByDayTrendProgress">refresh</mat-icon>
         <mat-progress-spinner *ngIf="salesByDayTrendProgress" style="display: inline-block"
                               mode="indeterminate"
-                              [diameter]="15" color="primary"></mat-progress-spinner>
+                              [diameter]="15" color="primary">
+        </mat-progress-spinner>
       </button>
     </div>
   </div>
@@ -30,11 +31,7 @@
       <mat-card>
         <mat-card-content>
           <div id="salesTrendByDay"></div>
-          <div style="margin-top: 10px; margin-bottom: 10px" *ngIf="!trendChart"
-               class="d-flex flex-column justify-content-center align-items-center">
-            <img alt="no data" src="./assets/img/data.svg" width="200" height="200"/>
-            <span>Graph is not ready yet</span>
-          </div>
+          <app-data-not-ready *ngIf="!trendChart"></app-data-not-ready>
         </mat-card-content>
       </mat-card>
     </div>

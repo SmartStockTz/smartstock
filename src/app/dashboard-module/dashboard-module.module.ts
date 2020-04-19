@@ -17,13 +17,17 @@ import { DashboardQuickReportComponent } from './dashboard-quick-report/dashboar
 import {ReactiveFormsModule} from '@angular/forms';
 import { DashboardSaleTrendsComponent } from './dashboard-sale-trends/dashboard-sale-trends.component';
 import { DashboardFrequentSoldProductComponent } from './dashboard-frequent-sold-product/dashboard-frequent-sold-product.component';
+import { DataNotReadyComponent } from './data-not-ready/data-not-ready.component';
+import { GeneralDashboardComponent } from './general-dashboard/general-dashboard.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardQuickReportComponent,
     DashboardSaleTrendsComponent,
-    DashboardFrequentSoldProductComponent
+    DashboardFrequentSoldProductComponent,
+    DataNotReadyComponent,
+    GeneralDashboardComponent
   ],
   imports: [
     CommonModule,

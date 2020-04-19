@@ -1,6 +1,6 @@
-<div>
+<div class="col-12">
   <div class="d-flex flex-row flex-wrap btn-block align-items-center">
-    <mat-card-subtitle>Frequently Sold Products</mat-card-subtitle>
+    <mat-card-subtitle>Product Sold By Date</mat-card-subtitle>
     <span class="flex-grow-1"></span>
     <mat-form-field appearance="outline" style="margin-right: 8px">
       <mat-label>Date</mat-label>
@@ -8,13 +8,32 @@
       <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
       <mat-datepicker [touchUi]="true" #pickerDate></mat-datepicker>
     </mat-form-field>
+    <button (click)="_getSoldProduct()" [disabled]="getProductsProgress" mat-flat-button
+            class="ft-button dashboard-refresh-button" color="primary">
+      <mat-icon *ngIf="!getProductsProgress">refresh</mat-icon>
+      <mat-progress-spinner *ngIf="getProductsProgress" style="display: inline-block"
+                            mode="indeterminate"
+                            [diameter]="15" color="primary">
+      </mat-progress-spinner>
+    </button>
   </div>
-  <mat-card class="mat-elevation-z0">
 
-    <table mat-table [dataSource]="soldProductsDatasource">
+  <div class="col-12">
+    <mat-form-field style="width: 100%">
+      <mat-label>Filter</mat-label>
+      <input matInput [formControl]="productFilterControl">
+    </mat-form-field>
+  </div>
+  <mat-card class="mat-elevation-z1">
+    <table *ngIf="soldProductsDatasource" mat-table [dataSource]="soldProductsDatasource">
       <ng-container matColumnDef="product">
         <th mat-header-cell *matHeaderCellDef>Product</th>
-        <td mat-cell *matCellDef="let element">{{element.product}}</td>
+        <td style="max-width: 200px" mat-cell *matCellDef="let element">{{element.product}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let element">{{element.createdAt | date}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <ng-container matColumnDef="quantity">
@@ -32,7 +51,10 @@
       <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="columns"></tr>
     </table>
 
-    <mat-paginator #soldProductPaginator [pageSizeOptions]="[25, 50, 75, 100]" showFirstLastButtons></mat-paginator>
+    <app-data-not-ready *ngIf="!soldProductsDatasource"></app-data-not-ready>
+
+    <mat-paginator #soldProductPaginator [pageSizeOptions]="[25, 50, 75, 100]"
+                   showFirstLastButtons></mat-paginator>
 
   </mat-card>
 </div>
