@@ -8,7 +8,7 @@
       <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
       <mat-datepicker [touchUi]="true" #pickerDate></mat-datepicker>
     </mat-form-field>
-    <button (click)="_getSoldProduct()" [disabled]="getProductsProgress" mat-flat-button
+    <button (click)="reloadProducts()" [disabled]="getProductsProgress" mat-flat-button
             class="ft-button dashboard-refresh-button" color="primary">
       <mat-icon *ngIf="!getProductsProgress">refresh</mat-icon>
       <mat-progress-spinner *ngIf="getProductsProgress" style="display: inline-block"

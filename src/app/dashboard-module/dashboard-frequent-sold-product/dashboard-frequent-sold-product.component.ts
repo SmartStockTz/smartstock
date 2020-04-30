@@ -39,6 +39,22 @@ export class DashboardFrequentSoldProductComponent implements OnInit {
     this._getSoldProduct();
   }
 
+  reloadProducts() {
+    this.getProductsProgress = true;
+    const initDate = toSqlDate(new Date(this.dateFormControl.value));
+    this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
+      this._logger.i(value, 'DashboardFrequentSoldProductComponent:42');
+      this.soldProductsArray = value;
+      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.soldProductsDatasource.paginator = this.soldProductPaginator;
+      this.getProductsProgress = false;
+    }).catch(reason => {
+      this._logger.e(reason, 'DashboardFrequentSoldProductComponent:47');
+      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.getProductsProgress = false;
+    });
+  }
+
   _getSoldProduct() {
     const initDate = toSqlDate(new Date());
     this.dateFormControl.setValue(initDate);
