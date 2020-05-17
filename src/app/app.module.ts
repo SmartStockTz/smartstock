@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginComponent} from './login/login.component';
 import {LandingComponent} from './landing/landing.component';
 import {AppRoutingModule} from './app-routing.module';
 import {environment} from '../environments/environment';
@@ -42,12 +41,15 @@ import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
-import {NoStockDialogComponent} from './common-components/no-stock-dialog/no-stock-dialog.component';
 import {FooterComponent} from './landing/footer/footer.component';
 import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
 import {PrivancyComponent} from './privancy/privancy.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.component';
+import {RegisterDialogComponent} from './register/rdialog.component';
+import {LoginComponent} from './login/login.component';
+import {VerifyEMailDialogComponent} from './login/verify-dialog.component';
+import {BFast} from 'bfastjs';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.com
     PrivancyComponent,
     ChooseShopComponent,
     DialogSupplierNewComponent,
+    RegisterDialogComponent,
+    VerifyEMailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -102,14 +106,14 @@ import {DialogSupplierNewComponent} from './stock-module/suppliers/suppliers.com
     MatSliderModule,
   ],
   providers: [],
-  entryComponents: [
-    DialogComponent,
-    DialogDeleteComponent,
-    NoStockDialogComponent,
-    DialogSupplierNewComponent,
-    CreateShopComponent
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    BFast.init({
+      applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
+        enable: false
+      }
+    });
+  }
 }

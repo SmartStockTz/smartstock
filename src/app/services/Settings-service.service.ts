@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageService} from './local-storage.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsServiceService {
 
-  ssmServerURL = 'https://smartstock-daas.bfast.fahamutech.com';
-  ssmFunctionsURL = 'https://smartstock-faas.bfast.fahamutech.com';
+  ssmServerURL = environment.databaseURL;
+  ssmFunctionsURL = environment.functionsURL;
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock_lb'
   };

@@ -6,21 +6,26 @@ import {BatchI} from '../model/batchI';
 import {randomString} from '../adapter/ParseBackend';
 import {Stock} from '../model/stock';
 import {SsmEvents} from '../utils/eventsNames';
-import * as localforage from 'localforage';
 import {EventApiService} from './event-api.service';
+import {BFast} from 'bfastjs';
+import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
 
-const _storage = localforage.createInstance({
-  name: 'ssm',
-  storeName: 'ng_forage',
-  size: 200 * 1024
-});
+const cache: CacheAdapter = BFast.cache({cacheName: 'ssm', storeName: 'ng_forage'});
 
-_storage['clone'] = function ({name}) {
-  return localforage.createInstance({
-    name: name,
-    storeName: 'ng_forage',
-    size: 200 * 1024
-  });
+//   localforage.createInstance({
+//   name: 'ssm',
+//   storeName: 'ng_forage',
+//   size: 200 * 1024
+// });
+
+
+const cacheClone = function ({name}): CacheAdapter {
+  return BFast.cache({cacheName: name, storeName: 'ng_forage'});
+  // return localforage.createInstance({
+  //   name: name,
+  //   storeName: 'ng_forage',
+  //   size: 200 * 1024
+  // });
 };
 
 @Injectable({
@@ -32,74 +37,52 @@ export class LocalStorageService implements StorageAdapter {
   }
 
   async getActiveUser(): Promise<UserI> {
-    try {
-      return await _storage.getItem<UserI>('user');
-    } catch (e) {
-      return e;
-    }
+    return await BFast.auth().currentUser();
   }
 
   async saveSales(batchs: BatchI[]): Promise<any> {
-    try {
-      const activeShop = await this.getActiveShop();
-      return await _storage['clone']({name: activeShop.projectId + '_sales'})
-        .setItem<BatchI[]>(randomString(12), batchs);
-    } catch (e) {
-      throw e;
-    }
+    const activeShop = await this.getActiveShop();
+    const sales = batchs.map<BatchI>(value => {
+      value.body.syncId = new Date().getFullYear().toString() + randomString(20);
+      return {
+        body: value.body,
+        method: value.method,
+        path: value.path
+      };
+    });
+    await cacheClone({name: activeShop.projectId + '_sales'}).set<BatchI[]>(randomString(12), sales);
   }
 
   async getActiveShop(): Promise<ShopI> {
-    try {
-      const response = await _storage.getItem<ShopI>('activeShop');
-      if (response) {
-        return response;
-      } else {
-        throw {message: 'No Active Shop'};
-      }
-    } catch (e) {
-      throw e;
+    const response = await cache.get<ShopI>('activeShop');
+    if (response) {
+      return response;
+    } else {
+      throw {message: 'No Active Shop'};
     }
   }
 
   async saveActiveShop(shop: ShopI): Promise<any> {
-    try {
-      const response = await _storage.setItem<ShopI>('activeShop', shop);
-      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
-      return response;
-    } catch (e) {
-      throw e;
-    }
+    const response = await cache.set<ShopI>('activeShop', shop);
+    window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
+    return response;
   }
 
   async getCurrentProjectId(): Promise<string> {
-    try {
-      console.log(await _storage.getItem<string>('cPID'));
-      return await _storage.getItem<string>('cPID');
-    } catch (e) {
-      throw e;
-    }
+    return await cache.get<string>('cPID');
   }
 
   async saveCurrentProjectId(projectId: string): Promise<any> {
-    try {
-      return await _storage.setItem<string>('cPID', projectId);
-    } catch (e) {
-      throw e;
-    }
+    return await cache.set<string>('cPID', projectId);
   }
 
   async clearSsmStorage(): Promise<any> {
-    try {
-      return await _storage.clear();
-    } catch (e) {
-      throw e;
-    }
+    return await cache.clearAll();
   }
 
   async saveActiveUser(user: UserI): Promise<any> {
     try {
-      return await _storage.setItem<UserI>('user', user);
+      return await BFast.auth().setCurrentUser<UserI>(user);
     } catch (e) {
       console.log('Fail to set user');
       throw e;
@@ -107,47 +90,27 @@ export class LocalStorageService implements StorageAdapter {
   }
 
   async removeActiveShop(): Promise<any> {
-    try {
-      const response = await _storage.removeItem('activeShop');
-      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
-      return response;
-    } catch (e) {
-      throw e;
-    }
+    const response = await cache.set('activeShop', undefined);
+    this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
+    return response;
   }
 
   async removeActiveUser(): Promise<any> {
-    try {
-      return await _storage.removeItem('user');
-    } catch (e) {
-      throw e;
-    }
+    return await BFast.auth().setCurrentUser(undefined);
   }
 
   async removeStocks(): Promise<any> {
-    try {
-      const shop = await this.getActiveShop();
-      return await _storage.removeItem(shop.projectId + '_stocks');
-    } catch (e) {
-      throw e;
-    }
+    const shop = await this.getActiveShop();
+    return await cache.set(shop.projectId + '_stocks', undefined);
   }
 
   async getStocks(): Promise<Stock[]> {
-    try {
-      const shop = await this.getActiveShop();
-      return await _storage.getItem<Stock[]>(shop.projectId + '_stocks');
-    } catch (e) {
-      throw e;
-    }
+    const shop = await this.getActiveShop();
+    return await cache.get<Stock[]>(shop.projectId + '_stocks');
   }
 
   async saveStocks(stocks: Stock[]): Promise<any> {
-    try {
-      const shop = await this.getActiveShop();
-      return await _storage.setItem<Stock[]>(shop.projectId + '_stocks', stocks);
-    } catch (e) {
-      throw e;
-    }
+    const shop = await this.getActiveShop();
+    return await cache.set<Stock[]>(shop.projectId + '_stocks', stocks);
   }
 }

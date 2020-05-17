@@ -100,7 +100,7 @@ export class ThreadsService implements OnInit {
   }
 
   private _noWorkerStockSync() {
-    // const query = BFast.database.collection('stocks').query();
+    // const query = BFast.database().collection('stocks').query();
     // query.subscribe().then(stockLiveQuery => {
     //   stockLiveQuery.on('open', () => {
     //     console.log('connection open for stocks');

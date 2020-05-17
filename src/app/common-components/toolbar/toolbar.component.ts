@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {FormControl, Validators} from '@angular/forms';
@@ -40,8 +40,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.logout(null, value => {
-      this.router.navigateByUrl('').catch(reason => console.log(reason));
+    this.userDatabase.logout(null).then(_ => {
+      return this.router.navigateByUrl('');
     }).catch(reason => console.log(reason));
   }
 }

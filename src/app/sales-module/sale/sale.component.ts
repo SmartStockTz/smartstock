@@ -17,6 +17,7 @@ import {SettingsServiceService} from '../../services/Settings-service.service';
 import {toSqlDate} from '../../utils/date';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {StockDatabaseService} from '../../services/stock-database.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-sale',
@@ -184,7 +185,6 @@ export class SaleComponent extends DeviceInfo implements OnInit {
         unit: value.stock.unit,
         channel: channel,
         date: stringDate,
-        idOld: randomString(8),
         idTra: idTra,
         user: this.currentUser.objectId,
         batch: randomString(12),
@@ -213,7 +213,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     try {
       this.printProgress = true;
       const settings = await this.settings.getSettings();
-      if (settings && settings.saleWithoutPrinter) {
+      if (!environment.production || settings && settings.saleWithoutPrinter) {
         this.submitBill();
         this.snack.open('Cart saved successful', 'Ok', {
           duration: 3000

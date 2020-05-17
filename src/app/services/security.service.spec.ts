@@ -1,12 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SecurityService } from './security.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('SecurityService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [
+      SecurityService,
+      HttpClientModule
+    ]
+  }));
 
   it('should be created', () => {
-    const service: SecurityService = TestBed.get(SecurityService);
+    const service: SecurityService<any> = TestBed.inject(SecurityService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,47 +1,62 @@
 import {Injectable} from '@angular/core';
 import {UserDataSource} from '../adapter/UserDataSource';
 import {UserI} from '../model/UserI';
-import {serverUrl} from '../adapter/ParseBackend';
 import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 import {BFast} from 'bfastjs';
+import {MatDialog} from '@angular/material/dialog';
+import {VerifyEMailDialogComponent} from '../login/verify-dialog.component';
+import {LogService} from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDatabaseService implements UserDataSource {
 
+
   constructor(private readonly _httpClient: HttpClient,
               private readonly _settings: SettingsServiceService,
+              private readonly dialog: MatDialog,
+              private readonly logger: LogService,
               private readonly _storage: LocalStorageService) {
   }
 
   async currentUser(): Promise<UserI> {
-    return this._storage.getActiveUser();
-  }
-
-  createUser(user: UserI, callback?: (value: any) => void) {
+    this.refreshToken().catch(reason => {
+      if (reason && reason.response && reason.response.data && reason.response.data.code === 209) {
+        return BFast.auth().logOut();
+      }
+      return {};
+    }).catch(this.logger.w);
+    const user = await BFast.auth().currentUser<UserI>();
+    if (user && user.verified === true) {
+      return user;
+    } else {
+      return await BFast.auth().setCurrentUser(undefined);
+    }
   }
 
   async deleteUser(user: UserI): Promise<any> {
-    return BFast.functions.request(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId)
-      .delete({context: {admin: this._storage.getActiveUser()}}, this._settings.ssmFunctionsHeader);
+    return BFast.functions()
+      .request('/functions/users/' + user.objectId)
+      .delete({context: {admin: await BFast.auth().currentUser()}});
   }
 
   async getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
     const projectId = await this._settings.getCustomerProjectId();
-    return BFast.functions.request(this._settings.ssmServerURL + '/users').get({
-      where: {
+    return BFast.database().collection('_User').query().find<UserI>({
+      size: pagination.size,
+      skip: pagination.skip,
+      filter: {
         projectId: projectId,
+        // @ts-ignore
         role: {
           '$in': ['user', 'manager']
         }
-      },
-      limit: 1000000,
-      context: {admin: this._storage.getActiveUser()}
-    }, this._settings.ssmHeader);
+      }
+    });
   }
 
   getUser(user: UserI, callback?: (user: UserI) => void) {
@@ -49,39 +64,29 @@ export class UserDatabaseService implements UserDataSource {
   }
 
   async login(user: { username: string, password: string }): Promise<UserI> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get<UserI>(this._settings.ssmServerURL + '/login', {
-        params: {
-          'username': user.username,
-          'password': user.password
-        },
-        headers: this._settings.ssmHeader
-      }).subscribe(async value => {
-        try {
-          await this._storage.saveActiveUser(value);
-          resolve(value);
-        } catch (e) {
-          reject(e);
-        }
-      }, error1 => {
-        reject(error1);
+    const authUser = await BFast.auth().logIn<UserI>(user.username, user.password);
+    if (authUser && authUser.verified === true) {
+      await this._storage.saveActiveUser(authUser);
+      return authUser;
+    } else {
+      await BFast.functions().request(this._settings.ssmFunctionsURL + '/functions/users/reVerifyAccount/' + user.username).post();
+      this.dialog.open(VerifyEMailDialogComponent, {
+        closeOnNavigation: true,
+        disableClose: true
       });
-    });
-  }
-
-  async logout(user: UserI, callback?: (value: any) => void) {
-    try {
-      await this._storage.removeActiveUser();
-      await this._storage.removeActiveShop();
-      callback('Ok');
-    } catch (reason) {
-      console.log(reason);
-      callback(null);
+      throw {code: 4003, err: 'account not verified'};
     }
   }
 
-  register(user: UserI): Promise<UserI> {
-    return new Promise<UserI>((resolve, reject) => {
+  async logout(user: UserI) {
+    await BFast.auth().logOut();
+    await this._storage.removeActiveUser();
+    await this._storage.removeActiveShop();
+    return;
+  }
+
+  async register(user: UserI): Promise<UserI> {
+    try {
       user.settings = {
         printerFooter: 'Thank you',
         printerHeader: '',
@@ -89,46 +94,25 @@ export class UserDatabaseService implements UserDataSource {
         allowRetail: true,
         allowWholesale: true
       };
-      this._httpClient.post<UserI>(this._settings.ssmFunctionsURL + '/functions/users/create', user, {
+      user.shops = [];
+      await BFast.functions().request('/functions/users/create').post(user, {
         headers: this._settings.ssmFunctionsHeader
-      }).subscribe(value => {
-        this._storage.saveActiveUser(value).then(_ => {
-          resolve(value);
-        }).catch(reason => {
-          reject(reason);
-        });
-      }, error => {
-        reject(error);
       });
-    });
+    } catch (e) {
+      if (e && e.response && e.response.data) {
+        return e.response.data;
+      } else {
+        return e;
+      }
+    }
   }
 
   resetPassword(user: UserI, callback?: (value: any) => void) {
     callback('');
-    // this.httpClient.post(this.serverUrl + '/requestPasswordReset', {
-    //   'email': user.meta.email
-    // }, {
-    //   headers: this.postHeader
-    // }).subscribe(value => {
-    //   callback(value);
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
   }
 
-  refreshToken(user: UserI, callback: (value: any) => void) {
-    this._httpClient.get(serverUrl + '/sessions/me', {
-      headers: {
-        'X-Parse-Application-Id': 'lbpharmacy',
-        'X-Parse-Session-Token': user.sessionToken
-      }
-    }).subscribe(value => {
-      callback(value);
-    }, error1 => {
-      console.log(error1);
-      callback(null);
-    });
+  async refreshToken(): Promise<any> {
+    return BFast.auth().authenticated();
   }
 
   addUser(user: UserI): Promise<UserI> {
@@ -190,10 +174,6 @@ export class UserDatabaseService implements UserDataSource {
 
   async saveCurrentShop(shop: ShopI): Promise<ShopI> {
     try {
-      // const cProjectId = await this._storage.getCurrentProjectId();
-      // if (cProjectId && cProjectId !== shop.projectId) {
-      //   await this._storage.removeStocks();
-      // }
       await this._storage.saveCurrentProjectId(shop.projectId);
       return await this._storage.saveActiveShop(shop);
     } catch (e) {

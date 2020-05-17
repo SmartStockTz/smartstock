@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {UserDatabaseService} from '../services/user-database.service';
 import {UserI} from '../model/UserI';
 import {Router} from '@angular/router';
+import {LogService} from '../services/log.service';
+import {MatDialog} from '@angular/material/dialog';
+import {RegisterDialogComponent} from './rdialog.component';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +18,12 @@ export class RegisterComponent implements OnInit {
   businessFormGroup: FormGroup;
   loginFormGroup: FormGroup;
   registerProgress = false;
+  showPasswordFlag = false;
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly router: Router,
+              private readonly dialog: MatDialog,
+              private readonly logger: LogService,
               private readonly userDatabase: UserDatabaseService,
               private readonly snack: MatSnackBar) {
   }
@@ -28,22 +34,26 @@ export class RegisterComponent implements OnInit {
 
   initializeForm() {
     this.personalFormGroup = this._formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      mobile: ['', Validators.required]
+      firstname: ['', [Validators.required, Validators.nullValidator]],
+      lastname: ['', [Validators.required, Validators.nullValidator]],
+      email: ['', [Validators.required, Validators.nullValidator, Validators.email]],
+      mobile: ['', [Validators.required, Validators.nullValidator]]
     });
     this.businessFormGroup = this._formBuilder.group({
-      businessName: ['', Validators.required],
+      businessName: ['', [Validators.required, Validators.nullValidator]],
       category: ['', [Validators.required, Validators.nullValidator]],
-      country: ['', Validators.required],
-      region: ['', Validators.required],
-      street: ['', Validators.required]
+      country: ['', [Validators.required, Validators.nullValidator]],
+      region: ['', [Validators.required, Validators.nullValidator]],
+      street: ['', [Validators.required, Validators.nullValidator]]
     });
     this.loginFormGroup = this._formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      confPassword: ['', Validators.required]
+      username: ['', [Validators.required, Validators.nullValidator, Validators.minLength(6)]],
+      password: ['', [
+        Validators.required,
+        Validators.nullValidator,
+        // Validators.pattern(new RegExp('^(?=.*[A-Z].*[A-Z])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$')),
+        Validators.minLength(8)
+      ]],
     });
   }
 
@@ -52,41 +62,53 @@ export class RegisterComponent implements OnInit {
       && this.personalFormGroup.valid
       && this.loginFormGroup.valid;
     if (valid) {
-      if (this.loginFormGroup.get('password').value
-        !== this.loginFormGroup.get('confPassword').value) {
-        this.snack.open('Password not match', 'Ok', {
-          duration: 3000
-        });
-        return;
-      }
       // @ts-ignore
       const user: UserI = {};
 
-      Object.keys(this.personalFormGroup.value).forEach(key => {
-        user[key] = this.personalFormGroup.value[key];
-      });
-      Object.keys(this.businessFormGroup.value).forEach(key => {
-        user[key] = this.businessFormGroup.value[key];
-      });
-      Object.keys(this.loginFormGroup.value).forEach(key => {
-        user[key] = this.loginFormGroup.value[key];
-      });
+      Object.assign(user, this.personalFormGroup.value);
+      Object.assign(user, this.businessFormGroup.value);
+      Object.assign(user, this.loginFormGroup.value);
+
       // @ts-ignore
       delete user.confPassword;
-      // console.log(user);
       this.registerProgress = true;
-      this.userDatabase.register(user).then(value => {
-        this.registerProgress = false;
-        // console.log(value);
-        this.router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
-      }).catch(reason => {
-        // console.log(reason);
-        this.registerProgress = false;
-      });
+      this.userDatabase.register(user)
+        .then(value => {
+          this.registerProgress = false;
+          this.logger.i(value);
+          this.dialog.open(RegisterDialogComponent, {
+            closeOnNavigation: true,
+            disableClose: true,
+            data: {
+              message: `Account verification email sent to this email: ${user.email}. Go and verify your account to be able to login`
+            }
+          }).afterClosed().subscribe(_ => {
+            this.router.navigateByUrl('/login').catch(reason => console.log(reason));
+          });
+        })
+        .catch(reason => {
+          this.logger.e(reason);
+          this.registerProgress = false;
+          this.dialog.open(RegisterDialogComponent, {
+            closeOnNavigation: true,
+            disableClose: true,
+            data: {
+              message: (reason && reason.error && reason.error.message && reason)
+                ? (typeof reason.error.message === 'object' && reason.error.message.error)
+                  ? reason.error.message.error : 'Your request was not successful, try again'
+                : 'Your request was not successful, try again'
+            }
+          });
+        });
     } else {
       this.snack.open('Enter all required information', 'Ok', {
         duration: 3000
       });
     }
+  }
+
+  showPassword($event: MouseEvent) {
+    $event.preventDefault();
+    this.showPasswordFlag = !this.showPasswordFlag;
   }
 }

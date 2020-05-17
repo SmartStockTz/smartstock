@@ -15,7 +15,7 @@ import {LandingComponent} from './landing/landing.component';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthenticatedUserGuard],
+    canActivate: [],
     component: LandingComponent
   },
   {

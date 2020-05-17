@@ -6,19 +6,20 @@ let firstFetch = true;
 /**
  *
  * @param name{string}
+ * @param store {string | null}
  * @returns {LocalForage}
  * @private
  */
-function _getStorage(name) {
+function _getStorage(name, store = null) {
   return localforage.createInstance({
     name: name,
-    storeName: 'ng_forage'
+    storeName: store ? store : 'ng_forage_DEFAULT'
   });
 }
 
 addEventListener('message', ({data}) => {
   let onFetch = false;
-  let _stockStorage = _getStorage('ssm');
+  let _stockStorage = _getStorage('ssm_DEFAULT_smartstock');
 
   setInterval(async () => {
     if (!onFetch) {
@@ -41,7 +42,7 @@ addEventListener('message', ({data}) => {
       // console.log('on fetch');
       // console.log(onFetch);
     }
-  }, 5000);
+  }, 3000);
 });
 
 /**
@@ -69,32 +70,37 @@ async function fetchStocks(appId, url, _stockStorage, projectId) {
         'bfast-application-id': 'smartstock_lb',
       }
     });
-    /*
-    will be implemented
-     */
+
     const newProducts = response.data.results;
     if (newProducts && Array.isArray(newProducts) && newProducts.length > 0) {
       if (response.data['lastUpdateTime']) {
         await _stockStorage.setItem('lastUpdate', response.data['lastUpdateTime']);
       }
-      // console.log('start-----------------------------start');
+
+      const newData = [];
+
       const oldProducts = await _stockStorage.getItem(projectId + '_stocks');
-      if (!firstFetch && oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
-        newProducts.forEach((newProduct) => {
-          // console.log(newProduct);
-          const indexOld = oldProducts.findIndex(oldProduct => oldProduct.objectId === newProduct.objectId);
-          if (indexOld >= 0) {
-            oldProducts.splice(indexOld, 1);
-            //  console.log('removed')
-          } else {
-            // console.log('skipped');
-          }
+      if (oldProducts && Array.isArray(oldProducts) && oldProducts.length > 0) {
+
+        // if (newProducts.length > oldProducts.length) {
+        //
+        // } else if (newProducts.length < oldProducts.length) {
+        //   oldProducts
+        // } else if (newProducts.length === oldProducts.length) {
+        //
+        // }
+
+        newProducts.forEach(newProduct => {
+          oldProducts.forEach(oldProduct => {
+            if (oldProduct.objectId === newProduct.objectId) {
+              newData.push(newProduct);
+            } else {
+              newData.push(oldProduct);
+            }
+          });
         });
-        // console.log('end-----------------------------end');
-        newProducts.forEach(element => {
-          oldProducts.push(element);
-        });
-        await _stockStorage.setItem(projectId + '_stocks', oldProducts);
+
+        await _stockStorage.setItem(projectId + '_stocks', newData);
         postMessage('ssm_stocks_updated');
         return Promise.resolve();
       } else {
@@ -105,35 +111,6 @@ async function fetchStocks(appId, url, _stockStorage, projectId) {
     }
   } catch (e) {
     // console.log(e);
-    throw {message: 'Fails to update stocks', reason: e.toString()};
+    // throw {message: 'Fails to update stocks', reason: e.toString()};
   }
 }
-
-//
-// async function listenForStocks() {
-//   const stockStorage = _getStorage('ssm');
-//   const activeShop = await stockStorage.getItem('activeShop');
-//   console.log(activeShop);
-//   if (activeShop && activeShop.projectUrlId && activeShop.applicationId) {
-//     const _sock = new WebSocket(`wss://${activeShop.projectUrlId}.bfast.fahamutech.com`);
-//     _sock.addEventListener('open', ev => {
-//       console.log(ev);
-//       console.log('connection established');
-//     });
-//     _sock.addEventListener("close", ev => {
-//       console.log(ev);
-//       console.log('connection closed');
-//     });
-//     _sock.addEventListener('message', (message) => {
-//       console.log(message);
-//     });
-//     _sock.addEventListener("error", ev => {
-//       console.log(ev);
-//     })
-//
-//   } else {
-//     console.warn('active shop not selected yet')
-//   }
-// }
-//
-// listenForStocks();

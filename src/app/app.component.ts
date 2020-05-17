@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this._storage.getActiveShop().then(_ => {
       this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
     }).catch(_ => {
@@ -31,13 +30,7 @@ export class AppComponent implements OnInit {
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_SET, async ($event) => {
       try {
         const activeShop = await this._storage.getActiveShop();
-        BFast.init({
-          applicationId: activeShop.applicationId, projectId: activeShop.projectId, cache: {
-            enable: true,
-            cacheStoreName: `bfastLocalDatabase_${activeShop.projectId}`,
-            cacheStoreTTLName: `bfast_ttl`,
-          }
-        });
+        BFast.init({applicationId: activeShop.applicationId, projectId: activeShop.projectId}, activeShop.projectId);
         await this.threadProxy.start();
       } catch (e) {
         console.log(e);
@@ -45,22 +38,12 @@ export class AppComponent implements OnInit {
     });
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
       try {
-        BFast.init({
-          applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-            enable: true,
-            cacheStoreName: `bfastLocalDatabase_smartstock`,
-            cacheStoreTTLName: `bfastLocalDatabaseTTL_smartstock`,
-          }
-        });
+        BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
         await this.threadProxy.stop();
       } catch (e) {
         console.log(e);
       }
     });
   }
-
-  // private _checkNewVersion() {
-  //
-  // }
 }
 

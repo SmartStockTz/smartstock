@@ -13,6 +13,7 @@ import {LogService} from '../services/log.service';
 export class LoginComponent implements OnInit {
   showProgress = false;
   loginForm: FormGroup;
+  showPasswordFlag = false;
 
   constructor(private readonly snack: MatSnackBar,
               private readonly routes: Router,
@@ -50,8 +51,10 @@ export class LoginComponent implements OnInit {
       }).catch(reason => {
         this.log.i(reason);
         this.showProgress = false;
-        this.snack.open('Username or password is wrong or check your' +
-          ' internet connection, enter the details correctly and try again', 'Ok');
+        this.snack.open((reason && reason.error && reason.error.error)
+          ? reason.error.error : 'Your request was not successful try again', 'Ok', {
+          duration: 7000
+        });
       });
     }
   }
@@ -83,5 +86,10 @@ export class LoginComponent implements OnInit {
       'Please contact us @ +255764943055 to recover your password',
       'Ok',
     );
+  }
+
+  showPassword($event: MouseEvent) {
+    $event.preventDefault();
+    this.showPasswordFlag = !this.showPasswordFlag;
   }
 }

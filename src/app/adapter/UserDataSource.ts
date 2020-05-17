@@ -11,7 +11,7 @@ export interface UserDataSource {
 
   login(user: { username: string, password: string }): Promise<UserI>;
 
-  logout(user: UserI, callback?: (value: any) => void);
+  logout(user: UserI): Promise<any>;
 
   register(user: UserI): Promise<UserI>;
 
@@ -27,9 +27,11 @@ export interface UserDataSource {
 
   updateCurrentUser(user: UserI): Promise<UserI>;
 
-  createUser(user: UserI, callback?: (value: any) => void);
+  // createUser(user: UserI, callback?: (value: any) => void);
 
-  refreshToken(user: UserI, callback: (value: any) => void);
+  currentUser(): Promise<UserI>;
+
+  refreshToken(): Promise<any>;
 
   getShops(): Promise<ShopI[]>;
 

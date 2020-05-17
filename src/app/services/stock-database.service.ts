@@ -24,7 +24,7 @@ export class StockDatabaseService implements StockDataSource {
     const user = await this._user.currentUser();
     const projectId = await this._settings.getCustomerProjectId();
     const email = encodeURIComponent(user.email);
-    return BFast.functions
+    return BFast.functions()
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
       .get({}, this._settings.ssmFunctionsHeader);
   }
@@ -33,24 +33,24 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async importStocks(stocks: Stock[]): Promise<any> {
-    return BFast.functions
+    return BFast.functions()
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + await this._settings.getCustomerProjectId())
-      .post(stocks, {}, this._settings.ssmFunctionsHeader);
+      .post(stocks, this._settings.ssmFunctionsHeader);
   }
 
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {
   }
 
   async addCategory(category: CategoryI): Promise<any> {
-    return BFast.database.collection<CategoryI>('categories').save(category);
+    return BFast.database().collection<CategoryI>('categories').save(category);
   }
 
   async addUnit(unit: UnitsI): Promise<any> {
-    return BFast.database.collection<UnitsI>('units').save(unit);
+    return BFast.database().collection<UnitsI>('units').save(unit);
   }
 
   async getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
-    const units = await BFast.database.collection('units').getAll<UnitsI>();
+    const units = await BFast.database().collection('units').getAll<UnitsI>();
     units.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
@@ -59,14 +59,14 @@ export class StockDatabaseService implements StockDataSource {
 
   async addStock(stock: Stock): Promise<Stock> {
     if (stock.image) {
-      const imageRequest = await BFast.storage.getInstance({fileName: 'product.png', data: {base64: stock.image}}).save();
-      stock.image = imageRequest.url({forceSecure: true});
+      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      stock.image = imageRequest.url;
     }
-    return BFast.database.collection('stocks').save(stock);
+    return BFast.database().collection('stocks').save(stock);
   }
 
   async addSupplier(supplier: SupplierI): Promise<any> {
-    return BFast.database.collection('suppliers').save(supplier);
+    return BFast.database().collection('suppliers').save(supplier);
   }
 
   deleteAllCategory(categories: CategoryI[], callback: (value: any) => void) {
@@ -79,23 +79,23 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async deleteCategory(category: CategoryI): Promise<any> {
-    return BFast.database.collection('categories').delete(category.objectId);
+    return BFast.database().collection('categories').delete(category.objectId);
   }
 
   async deleteStock(stock: Stock, callback?: (value: any) => void): Promise<any> {
-    return BFast.database.collection('stocks').delete(stock.objectId);
+    return BFast.database().collection('stocks').delete(stock.objectId);
   }
 
   async deleteSupplier(objectId: string): Promise<any> {
-    return BFast.database.collection('suppliers').delete(objectId);
+    return BFast.database().collection('suppliers').delete(objectId);
   }
 
   async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
-    return BFast.database.collection('categories').getAll();
+    return BFast.database().collection('categories').getAll();
   }
 
   async getAllStock(): Promise<Stock[]> {
-    const stocks: Stock[] = await BFast.database.collection<Stock>('stocks').getAll<Stock>(null, {
+    const stocks: Stock[] = await BFast.database().collection<Stock>('stocks').getAll<Stock>(null, {
       cacheEnable: true,
       dtl: 1
     });
@@ -106,7 +106,7 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
-    const suppliers: SupplierI[] = await BFast.database.collection<SupplierI>('suppliers').getAll<SupplierI>();
+    const suppliers: SupplierI[] = await BFast.database().collection<SupplierI>('suppliers').getAll<SupplierI>();
     suppliers.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
@@ -117,7 +117,7 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async getStock(id: string, callback: (stock: Stock) => void) {
-    return BFast.database.collection('stocks').get(id, {
+    return BFast.database().collection('stocks').get(id, {
       cacheEnable: false,
       dtl: 0
     });
@@ -140,7 +140,7 @@ export class StockDatabaseService implements StockDataSource {
     const data = {};
     data[category.field] = category.value;
     delete category.objectId;
-    const response = await BFast.database.collection('categories').update<any>(categoryId, data);
+    const response = await BFast.database().collection('categories').update<any>(categoryId, data);
     response.objectId = categoryId;
     return response;
   }
@@ -149,10 +149,10 @@ export class StockDatabaseService implements StockDataSource {
     const stockId = stock.objectId;
     delete stock.objectId;
     if (stock.image && !stock.image.toString().startsWith('http://')) {
-      const imageRequest = await BFast.storage.getInstance({fileName: 'product.png', data: {base64: stock.image}}).save();
-      stock.image = imageRequest.url({forceSecure: true});
+      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      stock.image = imageRequest.url;
     }
-    return BFast.database.collection('stocks').update<Stock>(stockId, stock);
+    return BFast.database().collection('stocks').update<Stock>(stockId, stock);
   }
 
   async updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
@@ -160,7 +160,7 @@ export class StockDatabaseService implements StockDataSource {
     const data = {};
     data[value.field] = value.value;
     delete value.objectId;
-    const response = await BFast.database.collection('suppliers').update<any>(supplierId, data);
+    const response = await BFast.database().collection('suppliers').update<any>(supplierId, data);
     response.objectId = supplierId;
     return response;
   }
@@ -170,19 +170,19 @@ export class StockDatabaseService implements StockDataSource {
     const data = {};
     data[unit.field] = unit.value;
     delete unit.objectId;
-    const response = await BFast.database.collection('units').update<any>(unitId, data);
+    const response = await BFast.database().collection('units').update<any>(unitId, data);
     response.objectId = unitId;
     return response;
   }
 
   deleteUnit(unit: UnitsI): Promise<any> {
-    return BFast.database.collection('units').delete(unit.objectId);
+    return BFast.database().collection('units').delete(unit.objectId);
   }
 
   async addPurchase(purchaseI: PurchaseI): Promise<any> {
-    return BFast.functions.request(
+    return BFast.functions().request(
       this._settings.ssmFunctionsURL + '/functions/purchases/' + await this._settings.getCustomerProjectId())
-      .post(purchaseI, null, this._settings.ssmFunctionsHeader);
+      .post(purchaseI, this._settings.ssmFunctionsHeader);
   }
 }
 
