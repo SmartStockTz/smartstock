@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {SettingsServiceService} from './Settings-service.service';
 import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
+import {BFast} from 'bfastjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,44 +25,29 @@ export class UserDatabaseService implements UserDataSource {
   createUser(user: UserI, callback?: (value: any) => void) {
   }
 
-  // implement on cloud functions
-  deleteUser(user: UserI): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this._httpClient.delete(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId, {
-        headers: this._settings.ssmFunctionsHeader
-      }).subscribe(value => {
-        resolve(value);
-      }, error => {
-        reject(error);
-      });
-    });
+  async deleteUser(user: UserI): Promise<any> {
+    return BFast.functions.request(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId)
+      .delete({context: {admin: this._storage.getActiveUser()}}, this._settings.ssmFunctionsHeader);
   }
 
-  getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
-    return new Promise<UserI[]>(async (resolve, reject) => {
-      const projectId = await this._settings.getCustomerProjectId();
-      const where = {
+  async getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
+    const projectId = await this._settings.getCustomerProjectId();
+    return BFast.functions.request(this._settings.ssmServerURL + '/users').get({
+      where: {
         projectId: projectId,
         role: {
           '$in': ['user', 'manager']
         }
-      };
-      const urlencoded = encodeURI(JSON.stringify(where) + '&limit=' + 1000000);
-      this._httpClient.get<any>(this._settings.ssmServerURL + '/users?where=' + urlencoded, {
-        headers: this._settings.ssmHeader
-      }).subscribe(value => {
-        resolve(value.results);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+      },
+      limit: 1000000,
+      context: {admin: this._storage.getActiveUser()}
+    }, this._settings.ssmHeader);
   }
 
   getUser(user: UserI, callback?: (user: UserI) => void) {
 
   }
 
-  // needs to be reviewed
   async login(user: { username: string, password: string }): Promise<UserI> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<UserI>(this._settings.ssmServerURL + '/login', {
@@ -72,24 +58,6 @@ export class UserDatabaseService implements UserDataSource {
         headers: this._settings.ssmHeader
       }).subscribe(async value => {
         try {
-          // empty local storage if current project differ from last one
-          // if (value.role !== 'admin') {
-          //   const cProjectId = await this._storage.getCurrentProjectId();
-          //   if (cProjectId && cProjectId !== value.projectId) {
-          //     await this._storage.clearSsmStorage();
-          //   }
-          //   // set current shop
-          //   await this._storage.saveCurrentProjectId(value.projectId);
-          //   // set active shop
-          //   // await this._storage.saveActiveShop({
-          //   //   settings: value.settings,
-          //   //   businessName: value.businessName,
-          //   //   projectId: value.projectId,
-          //   //   category: value.category,
-          //   //   projectUrlId: value.projectUrlId,
-          //   //   applicationId: value.applicationId
-          //   // });
-          // }
           await this._storage.saveActiveUser(value);
           resolve(value);
         } catch (e) {

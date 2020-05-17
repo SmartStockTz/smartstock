@@ -7,6 +7,7 @@ import {randomString} from '../adapter/ParseBackend';
 import {Stock} from '../model/stock';
 import {SsmEvents} from '../utils/eventsNames';
 import * as localforage from 'localforage';
+import {EventApiService} from './event-api.service';
 
 const _storage = localforage.createInstance({
   name: 'ssm',
@@ -27,7 +28,7 @@ _storage['clone'] = function ({name}) {
 })
 export class LocalStorageService implements StorageAdapter {
 
-  constructor() {
+  constructor(private readonly eventApi: EventApiService) {
   }
 
   async getActiveUser(): Promise<UserI> {
@@ -108,7 +109,7 @@ export class LocalStorageService implements StorageAdapter {
   async removeActiveShop(): Promise<any> {
     try {
       const response = await _storage.removeItem('activeShop');
-      window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_REMOVE));
+      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
       return response;
     } catch (e) {
       throw e;

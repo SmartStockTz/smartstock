@@ -5,4 +5,6 @@ export interface SupplierI {
   number: string;
   email: string;
   address: string;
+  createdAt?: any;
+  updatedAt?: any;
 }

@@ -29,7 +29,7 @@ export class UploadProductsComponent implements OnInit {
       fileReader.onload = (evt) => {
         this.csvToJSON(evt.target.result, (products) => {
           this.importProgress = true;
-          this.stockApi.addAllStock(products).then(_ => {
+          this.stockApi.importStocks(products).then(_ => {
             this.importProgress = false;
             this.dialogRef.close(true);
             this.snack.open('Products imported', 'Ok', {

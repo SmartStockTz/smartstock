@@ -18,7 +18,7 @@ export interface StockDataSource {
 
   addStock(stock: Stock): Promise<Stock>;
 
-  addAllStock(stocks: Stock[]): Promise<any>;
+  importStocks(stocks: Stock[]): Promise<any>;
 
   updateStock(stock: Stock): Promise<Stock>;
 
