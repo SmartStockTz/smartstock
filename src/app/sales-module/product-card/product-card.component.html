@@ -1,1 +1,40 @@
-<p>product-card works!</p>
+<div>
+    <div class='card-container' [ngClass]="{'flipped':productIndex == flipped}">
+      <div class='flippable-card' [ngClass]="{'flipped':productIndex == flipped}">
+        <mat-card class='front' style="text-align: center;" (click)='flip(productIndex)'>
+          <mat-card-content>
+            <p style="color: gray;">{{product.category}}</p>
+            <p style="font-weight: bold;">{{product.product}}</p>
+            <p style="font-weight: 500;">{{salesType === 'wholesale' ? product.wholesalePrice : product.retailPrice  | currency: 'TZS '}}</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class='back'>
+          <mat-card-content>
+             <button mat-icon-button (click)="flipped = null" style="margin: 0;padding: 0;float: right;">
+              <mat-icon>close</mat-icon>
+            </button>
+            <p>
+              <span style="font-weight: 500;">{{salesType === 'wholesale' ? product.wholesalePrice : product.retailPrice  | currency: 'TZS '}}</span><br>
+            <span style="color: gray;">{{product.product}}</span>
+         
+           </p>
+           <p style="display: flex;flex-direction: row;">
+              <label style="padding-top: 10px;">Qty</label>
+              <span style="display: flex;flex-direction: row;">
+                <button mat-icon-button color="primary"  (click)="decrementQty()">
+                  <mat-icon>arrow_left</mat-icon>
+                </button>
+                <input autocomplete="false" style="border: none; text-align: center;background-color: rgba(0, 170, 7, 0.1); border-radius: 4px;width: 50%;"
+               [formControl]="quantityFormControl" type="number" min="0">
+                <button mat-icon-button color="primary"  (click)="incrementQty()">
+                  <mat-icon>arrow_right</mat-icon>
+                </button>
+              </span>
+              <button mat-flat-button color="primary" (click)="addToCart(product)">Add</button>
+
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>

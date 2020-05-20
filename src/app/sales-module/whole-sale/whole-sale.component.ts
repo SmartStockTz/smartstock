@@ -34,8 +34,6 @@ import {StockDatabaseService} from '../../services/stock-database.service';
 export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   refreshProductsProgress = false;
-  flipped = false;
-  flip;
   
   private currentUser: UserI;
   isAdmin = false;
@@ -97,6 +95,11 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   printProgress = false;
 
+  private size = 5;
+  private skip = 0;
+  productsObservable;
+  fetchDataProgress = false;
+
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
               private readonly _storage: LocalStorageService,
@@ -120,6 +123,22 @@ export class WholeSaleComponent extends DeviceInfo implements OnInit {
       console.log(reason);
       this.isLogin = false;
       this.router.navigateByUrl('login').catch(reason1 => console.log(reason1));
+    });
+
+
+    this.getProducts();
+  }
+
+  private getProducts() {
+    this.fetchDataProgress = true;
+    this.productsObservable = undefined;
+    this._storage.getStocks().then(products => {
+      this.fetchDataProgress = false;
+      this.productsObservable = products;
+       console.log(products);
+    }).catch(reason => {
+      this.fetchDataProgress = false;
+      console.log(reason);
     });
   }
 

@@ -1,0 +1,20 @@
+<mat-sidenav-container class="match-parent">
+
+    <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
+      <app-admin-drawer></app-admin-drawer>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <app-toolbar [heading]="'SSM-RetailSale'" [sidenav]="sidenav" [showProgress]="showProgress"></app-toolbar>
+      <div *ngIf="productsObservable && !fetchDataProgress"
+             style="padding: 8px;display: flex;flex-direction: row; flex-wrap: wrap">
+         <app-product-card [product]="product" [productIndex]="idx" [salesType]="'retail'" *ngFor="let product of productsObservable; let idx = index"></app-product-card>
+      </div>
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+  
+  
+  
+  
+  
