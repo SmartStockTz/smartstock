@@ -6,8 +6,50 @@
 
   <mat-sidenav-content>
     <app-toolbar [heading]="'SSM-WholeSale'" [sidenav]="sidenav" [showProgress]="showProgress"></app-toolbar>
-    <div class="container-fluid"
-         style="padding: 24px 48px;">
+    <div class="container-fluid" style="padding: 24px 48px; ">
+      <div style="display: flex;flex-direction: row;flex-wrap: wrap;align-content: center;">
+        <div class='card-container' [ngClass]="{'flipped':y == flip}" *ngFor="let x of [1,2,3,4,5,6,7,8,9]; let y = index">
+          <div class='flippable-card' [ngClass]="{'flipped':y == flip}">
+            <mat-card class='front' style="text-align: center;" (click)='flip = y'>
+              <mat-card-content>
+                <p style="color: gray;">Medicine</p>
+                <p style="font-weight: bold;">Paracetamol Tables 100mg</p>
+                <p style="font-weight: 500;">TZS 2,000</p>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class='back'>
+              <mat-card-content>
+                 <button mat-icon-button (click)="flip = null" style="margin: 0;padding: 0;float: right;">
+                  <mat-icon>close</mat-icon>
+                </button>
+                <p>
+                  <span style="font-weight: 500;">TZS 2,000</span><br>
+                <span style="color: gray;">Paracetamol Tables 100mg</span>
+             
+               </p>
+                <p style="">Retail Wholesale</p>
+                <p style="display: flex;flex-direction: row;">
+                  <label style="padding-top: 10px;">Qty</label>
+                  <span style="display: flex;flex-direction: row;">
+                    <button mat-icon-button color="primary" style="margin: 0;padding: 0;">
+                      <mat-icon>arrow_left</mat-icon>
+                    </button>
+                      <input matInput value="1" style="background-color: rgba(0, 170, 7, 0.1);;width: 50%;padding: 0;text-align: center;">
+                    <button mat-icon-button color="primary">
+                      <mat-icon>arrow_right</mat-icon>
+                    </button>
+                  </span>
+                  <button mat-flat-button color="primary" >Add</button>
+
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      
+  
       <div class="row" style="margin: 8px">
         <div class="col-12">
           <div class="d-flex flex-row">

@@ -49,7 +49,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
         MatProgressSpinnerModule,
         MatDatepickerModule,
         MatSortModule,
-        MatTooltipModule
+        MatTooltipModule,
+        
     ],
   declarations: [
     WholeSaleComponent,

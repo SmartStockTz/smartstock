@@ -34,7 +34,9 @@ import {StockDatabaseService} from '../../services/stock-database.service';
 export class WholeSaleComponent extends DeviceInfo implements OnInit {
 
   refreshProductsProgress = false;
-
+  flipped = false;
+  flip;
+  
   private currentUser: UserI;
   isAdmin = false;
   isLogin = false;
