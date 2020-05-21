@@ -27,12 +27,14 @@
                 <input autocomplete="false" style="border: none; text-align: center;background-color: rgba(0, 170, 7, 0.1); border-radius: 4px;width: 50%;"
                [formControl]="quantityFormControl" type="number" min="0">
                 <button mat-icon-button color="primary"  (click)="incrementQty()">
-                  <mat-icon>arrow_right</mat-icon>
+                  <mat-icon >arrow_right</mat-icon>
                 </button>
               </span>
               <button mat-flat-button color="primary" (click)="addToCart(product)">Add</button>
 
             </p>
+            <mat-error *ngIf="displayError">Product must be atleast 1</mat-error>
+
           </mat-card-content>
         </mat-card>
       </div>

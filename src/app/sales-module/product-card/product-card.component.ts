@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { EventApiService } from 'src/app/services/event-api.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-product-card',
@@ -11,10 +12,13 @@ export class ProductCardComponent implements OnInit {
   @Input() product;
   @Input() productIndex;
   @Input() salesType: string;
+  @Input() cartdrawer: MatSidenav;
+
   detailView = false;
   quantityFormControl = new FormControl(0, [Validators.nullValidator, Validators.min(1)]);
 
   flipped;
+  displayError = false;
   
   constructor(
     private readonly eventService: EventApiService
@@ -44,8 +48,15 @@ export class ProductCardComponent implements OnInit {
   addToCart(product) {
     const quantity = this.quantityFormControl.value;
     const cartEvent = new CustomEvent('add_cart', {detail: {product: product, quantity: quantity}});
-    window.dispatchEvent(cartEvent);
-    this.quantityFormControl.reset(0);
-    this.detailView = false;
+    if(quantity > 0) {
+      window.dispatchEvent(cartEvent);
+      this.quantityFormControl.reset(0);
+      this.detailView = false;
+      this.flipped = null;
+      this.cartdrawer.opened = true;
+      this.displayError = false;
+    } else {
+      this.displayError = true;
+    }
   }
 }

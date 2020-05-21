@@ -8,10 +8,12 @@
     <app-toolbar [heading]="'SSM-WholeSale'" [sidenav]="sidenav" [showProgress]="showProgress"></app-toolbar>
     <div *ngIf="productsObservable && !fetchDataProgress"
            style="padding: 8px;display: flex;flex-direction: row; flex-wrap: wrap">
-       <app-product-card [product]="product" [productIndex]="idx" [salesType]="'wholesale'" *ngFor="let product of productsObservable; let idx = index"></app-product-card>
+           <app-product-card [cartdrawer]="cartdrawer" [product]="product" [productIndex]="idx" [salesType]="'wholesale'" *ngFor="let product of productsObservable; let idx = index"></app-product-card>
     </div>
   </mat-sidenav-content>
-
+  <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="'side'" [opened]="false" >
+    <app-cart [cartdrawer]="cartdrawer" [isViewedInWholesale]="true"></app-cart>
+  </mat-sidenav>
 </mat-sidenav-container>
 
 

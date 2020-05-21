@@ -28,6 +28,9 @@ import { SaleReportsProductsComponent } from './sale-reports-products/sale-repor
 import { CartComponent } from './cart/cart.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { RetailSaleComponent } from './retail-sale/retail-sale.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 @NgModule({
     imports: [
@@ -51,6 +54,8 @@ import { RetailSaleComponent } from './retail-sale/retail-sale.component';
         MatDatepickerModule,
         MatSortModule,
         MatTooltipModule,
+        MatToolbarModule,
+        MatBadgeModule
         
     ],
   declarations: [
@@ -62,7 +67,7 @@ import { RetailSaleComponent } from './retail-sale/retail-sale.component';
     CartComponent,
     ProductCardComponent,
     RetailSaleComponent
-  ]
+  ],
 })
 export class SalesModuleModule {
 }
