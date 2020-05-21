@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../common-components/DeviceInfo';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DialogUnitNewComponent} from '../units/units.component';
 import {DialogCategoryNewComponent} from '../categories/categories.component';
@@ -126,12 +126,13 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
       return;
     }
 
-    // if (!this.croppedImage) {
-    //   this.snack.open('Please upload, product image', 'Ok', {
-    //     duration: 3000
-    //   });
-    //   return;
-    // }
+    if ((this.productForm.value.purchase >= this.productForm.value.retailPrice)
+      || (this.productForm.value.purchase >= this.productForm.value.wholesalePrice)) {
+      this.snack.open('Purchase price must not be greater than retailPrice/wholesalePrice', 'Ok', {
+        duration: 3000
+      });
+      return;
+    }
 
     if (this.productForm.get('canExpire').value && !this.productForm.get('expire').value) {
       this.snack.open('Please enter expire date', 'Ok', {
@@ -165,7 +166,6 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this._dialog.open(DialogUnitNewComponent, {
-      // minWidth: '80%',
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
@@ -184,7 +184,6 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this._dialog.open(DialogCategoryNewComponent, {
-      // minWidth: '80%',
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
@@ -203,7 +202,6 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this._dialog.open(DialogSupplierNewComponent, {
-      // minWidth: '80%',
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {

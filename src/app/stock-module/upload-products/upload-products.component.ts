@@ -10,12 +10,26 @@ import {LogService} from '../../services/log.service';
   styleUrls: ['./upload-products.component.css']
 })
 export class UploadProductsComponent implements OnInit {
-  importProgress = false;
 
   constructor(private dialogRef: MatDialogRef<UploadProductsComponent>,
               private snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly stockApi: StockDatabaseService) {
+  }
+
+  importProgress = false;
+
+  private static _sanitizeField(value: string): any {
+    if (!isNaN(Number(value))) {
+      return Number(value);
+    }
+    if (value.trim().startsWith('[', 0)) {
+      return JSON.parse(value);
+    }
+    if (value.trim().startsWith('{', 0)) {
+      return JSON.parse(value);
+    }
+    return value;
   }
 
   ngOnInit(): void {
@@ -60,8 +74,20 @@ export class UploadProductsComponent implements OnInit {
       const obj = {};
       const currentline = lines[i].split(',');
       for (let j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
+        const originalValue: string = currentline[j];
+        let value = originalValue.split('').map((value1, index, array) => {
+          if (index === 0 && value1 === '"') {
+            return '';
+          }
+          if (index === array.length - 1 && value1 === '"') {
+            return '';
+          }
+          return value1;
+        }).join('');
+        value = UploadProductsComponent._sanitizeField(value);
+        obj[headers[j].toString().split('"').join('')] = value;
       }
+      console.log(obj);
       result.push(obj);
     }
     if (callback && (typeof callback === 'function')) {
@@ -69,5 +95,4 @@ export class UploadProductsComponent implements OnInit {
     }
     return result;
   }
-
 }

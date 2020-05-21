@@ -115,5 +115,10 @@ export class AppModule {
         enable: false
       }
     });
+
+    // const evtSource = new EventSource('http://localhost:3000/tryEventFromBrowser');
+    // evtSource.onmessage = function (event1: MessageEvent) {
+    //   console.log(event1);
+    // };
   }
 }
