@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Stock} from '../../model/stock';
 import {Router} from '@angular/router';

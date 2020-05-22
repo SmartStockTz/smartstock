@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 
 @Component({
   selector: 'app-profile',

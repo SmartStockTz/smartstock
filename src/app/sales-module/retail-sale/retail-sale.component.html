@@ -4,6 +4,11 @@
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
+  <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
+               [opened]="false">
+    <app-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></app-cart>
+  </mat-sidenav>
+
   <mat-sidenav-content style="display:flex; flex-direction: column">
 
     <app-toolbar (searchCallback)="filterProduct($event)"
@@ -14,7 +19,7 @@
                  [cartdrawer]="cartdrawer"
                  [showProgress]="showProgress"></app-toolbar>
 
-    <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="30" *ngIf="productsObservable && !fetchDataProgress">
+    <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
       <app-product-card style="margin: 0 5px; display: inline-block" [cartdrawer]="cartdrawer" [product]="product"
                         [productIndex]="idx"
                         [isViewedInWholesale]="isViewedInWholesale"
@@ -25,13 +30,16 @@
     <app-on-fetch *ngIf="fetchDataProgress && !productsObservable" [isLoading]="fetchDataProgress"
                   (refreshCallback)="getProducts()"></app-on-fetch>
 
+    <button mat-button color="primary"
+            *ngIf="!fetchDataProgress"
+            (click)="getProductsFromServer()"
+            matTooltip="Refresh products from server"
+            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"
+            class="mat-fab">
+      <mat-icon>refresh</mat-icon>
+    </button>
 
   </mat-sidenav-content>
-
-  <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
-               [opened]="false">
-    <app-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></app-cart>
-  </mat-sidenav>
 
 </mat-sidenav-container>
 

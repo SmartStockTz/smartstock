@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import {StockDatabaseService} from '../../services/stock-database.service';
 import {DialogUnitNewComponent} from '../units/units.component';
 import {DialogCategoryNewComponent} from '../categories/categories.component';
 import {DialogSupplierNewComponent} from '../suppliers/suppliers.component';
-import {DialogImageCropComponent} from '../../common-components/dialog-image-crop/dialog-image-crop.component';
+import {DialogImageCropComponent} from '../../shared-components/dialog-image-crop/dialog-image-crop.component';
 
 @Component({
   selector: 'app-stock-new',

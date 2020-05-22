@@ -7,8 +7,8 @@ import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 import {BFast} from 'bfastjs';
 import {MatDialog} from '@angular/material/dialog';
-import {VerifyEMailDialogComponent} from '../login/verify-dialog.component';
 import {LogService} from './log.service';
+import {VerifyEMailDialogComponent} from '../main-module/login/verify-dialog.component';
 
 @Injectable({
   providedIn: 'root'

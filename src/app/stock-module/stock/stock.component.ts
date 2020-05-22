@@ -10,7 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UnitsI} from '../../model/UnitsI';
 import {StockDatabaseService} from '../../services/stock-database.service';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {LogService} from '../../services/log.service';
 import {UploadProductsComponent} from '../upload-products/upload-products.component';

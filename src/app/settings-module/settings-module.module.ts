@@ -22,7 +22,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {CommonComponentsModule} from '../common-components/common-components.module';
+import {CommonComponentsModule} from '../shared-components/common-components.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   DialogUserDeleteComponent,

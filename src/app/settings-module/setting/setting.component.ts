@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SettingsServiceService} from '../../services/Settings-service.service';
 import {MatSnackBar} from '@angular/material/snack-bar';

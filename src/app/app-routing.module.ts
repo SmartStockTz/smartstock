@@ -1,41 +1,16 @@
 import {NgModule} from '@angular/core';
-import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
-import {RegisterComponent} from './register/register.component';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
-import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {StockExistGuard} from './guards/stock-exist.guard';
-import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
-import {PrivancyComponent} from './privancy/privancy.component';
-import {LandingComponent} from './landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [],
-    component: LandingComponent
-  },
-  {
-    path: 'privacy',
-    component: PrivancyComponent
-  },
-  {
-    path: 'login',
-    canActivate: [AuthenticatedUserGuard],
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    canActivate: [AuthenticatedUserGuard],
-    component: RegisterComponent
-  },
-  {
-    path: 'shop',
-    canActivate: [AuthenticationGuard],
-    component: ChooseShopComponent
+    loadChildren: () => import('./main-module/main-module.module').then(mod => mod.MainModuleModule)
   },
   {
     path: 'dashboard',
@@ -66,6 +41,9 @@ const routes: Routes = [
     path: 'home',
     redirectTo: 'dashboard'
   },
+  {
+    path: '**', loadChildren: () => import('./main-module/main-module.module').then(mod => mod.MainModuleModule)
+  }
 ];
 
 @NgModule({

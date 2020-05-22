@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {UserDatabaseService} from 'src/app/services/user-database.service';
 import {LocalStorageService} from 'src/app/services/local-storage.service';
 import {StockDatabaseService} from 'src/app/services/stock-database.service';
-import {DeviceInfo} from 'src/app/common-components/DeviceInfo';
+import {DeviceInfo} from 'src/app/shared-components/DeviceInfo';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
@@ -38,12 +38,23 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
     this.getProducts();
   }
 
+  getProductsFromServer() {
+    this.fetchDataProgress = true;
+    this.productsObservable = undefined;
+    this._stockApi.getAllStock().then(products => {
+      this.fetchDataProgress = false;
+      this.productsObservable = of(products);
+    }).catch(reason => {
+      this.fetchDataProgress = false;
+      this.logger.i(reason);
+    });
+  }
+
   getProducts() {
     this.fetchDataProgress = true;
     this.productsObservable = undefined;
     this._storage.getStocks().then(products => {
       this.fetchDataProgress = false;
-      // .slice(0, products.length > 50 ? 50 : products.length)
       this.productsObservable = of(products);
     }).catch(reason => {
       this.fetchDataProgress = false;
@@ -56,6 +67,7 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
     if (product === '') {
       this.getProducts();
       this.searchProgressFlag = false;
+      return;
     }
     this._storage.getStocks().then(value => {
       this.searchProgressFlag = false;

@@ -6,7 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {UserI} from '../../model/UserI';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserDatabaseService} from '../../services/user-database.service';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {Observable, of} from 'rxjs';
 import {ShopI} from '../../model/ShopI';

@@ -4,7 +4,8 @@ import {EventApiService} from 'src/app/services/event-api.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Stock} from '../../model/stock';
 import {SsmEvents} from '../../utils/eventsNames';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-card',
@@ -21,9 +22,9 @@ export class ProductCardComponent extends DeviceInfo implements OnInit {
   quantityFormControl = new FormControl(1, [Validators.nullValidator, Validators.min(1)]);
 
   flipped: number;
-  displayError = false;
 
-  constructor(private readonly eventService: EventApiService) {
+  constructor(private readonly eventService: EventApiService,
+              private readonly snack: MatSnackBar) {
     super();
   }
 
@@ -35,7 +36,6 @@ export class ProductCardComponent extends DeviceInfo implements OnInit {
       this.flipped = data.detail;
     });
     this.eventService.broadcast('flipping', value);
-
   }
 
   decrementQty() {
@@ -49,18 +49,20 @@ export class ProductCardComponent extends DeviceInfo implements OnInit {
   }
 
   addToCart(product) {
-    const quantity = this.quantityFormControl.value;
-    if (quantity > 0) {
-      this.eventService.broadcast(SsmEvents.CART, {product: product, quantity: quantity});
-      if (this.enoughWidth()) {
-        this.cartdrawer.opened = true;
-      }
-      this.quantityFormControl.reset(0);
-      this.detailView = false;
-      this.flipped = null;
-      this.displayError = false;
-    } else {
-      this.displayError = true;
+    if (!this.quantityFormControl.valid) {
+      this.snack.open('Quantity must be greater than 1', 'Ok', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
+      return;
     }
+    const quantity = this.quantityFormControl.value;
+    this.eventService.broadcast(SsmEvents.CART, {product: product, quantity: quantity});
+    if (this.enoughWidth()) {
+      this.cartdrawer.opened = true;
+    }
+    this.quantityFormControl.reset(0);
+    this.detailView = false;
+    this.flipped = null;
   }
 }

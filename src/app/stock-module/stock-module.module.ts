@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {StockModuleRoutingModule} from './stock-module-routing.module';
 import {StockComponent, StockDetailsComponent} from './stock/stock.component';
-import {CommonComponentsModule} from '../common-components/common-components.module';
+import {CommonComponentsModule} from '../shared-components/common-components.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatButtonModule} from '@angular/material/button';

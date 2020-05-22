@@ -6,8 +6,8 @@ import {Observable, of} from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {StockDatabaseService} from '../../services/stock-database.service';
-import {DeviceInfo} from '../../common-components/DeviceInfo';
-import {DialogImageCropComponent} from '../../common-components/dialog-image-crop/dialog-image-crop.component';
+import {DeviceInfo} from '../../shared-components/DeviceInfo';
+import {DialogImageCropComponent} from '../../shared-components/dialog-image-crop/dialog-image-crop.component';
 
 @Component({
   selector: 'app-stock-edit',

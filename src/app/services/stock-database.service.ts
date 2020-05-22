@@ -9,6 +9,7 @@ import {SettingsServiceService} from './Settings-service.service';
 import {PurchaseI} from '../model/PurchaseI';
 import {UserDatabaseService} from './user-database.service';
 import {BFast} from 'bfastjs';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _user: UserDatabaseService,
+              private readonly _storage: LocalStorageService,
               private readonly _settings: SettingsServiceService) {
   }
 
@@ -96,9 +98,10 @@ export class StockDatabaseService implements StockDataSource {
 
   async getAllStock(): Promise<Stock[]> {
     const stocks: Stock[] = await BFast.database().collection<Stock>('stocks').getAll<Stock>(null, {
-      cacheEnable: true,
+      cacheEnable: false,
       dtl: 1
     });
+    await this._storage.saveStocks(stocks);
     stocks.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });

@@ -8,8 +8,9 @@
           <p style="color: gray;">{{product.category}}</p>
           <p matTooltip="{{product.product}}"
              style="font-weight: bold;overflow: hidden; height: 46px;">{{product.product}}</p>
-          <p style="font-weight: 500;">{{isViewedInWholesale ?
-            product.wholesalePrice : product.retailPrice  | currency: 'TZS '}}</p>
+          <p style="font-weight: 500;">
+            {{(isViewedInWholesale ? product.wholesalePrice : product.retailPrice)  | currency: 'TZS '}}
+          </p>
         </mat-card-content>
       </mat-card>
 
@@ -19,8 +20,9 @@
             <mat-icon>close</mat-icon>
           </button>
           <p>
-            <span
-              style="font-weight: 500;">{{isViewedInWholesale ? product.wholesalePrice : product.retailPrice  | currency: 'TZS '}}</span><br>
+            <span style="font-weight: 500;">
+              {{(isViewedInWholesale ? product.wholesalePrice : product.retailPrice)  | currency: 'TZS '}}
+            </span><br>
             <span style="color: gray;">{{product.product}}</span>
 
           </p>
@@ -32,15 +34,13 @@
                 </button>
                 <input autocomplete="false"
                        style="border: none; text-align: center;background-color: rgba(0, 170, 7, 0.1); border-radius: 4px;width: 50%;"
-                       [formControl]="quantityFormControl" type="number" min="0">
+                       [formControl]="quantityFormControl" type="number" min="1">
                 <button mat-icon-button color="primary" (click)="incrementQty()">
                   <mat-icon>add_circle</mat-icon>
                 </button>
               </span>
             <button mat-flat-button color="primary" (click)="addToCart(product)">Add</button>
-
           </p>
-          <mat-error *ngIf="displayError">Product must be atleast 1</mat-error>
         </mat-card-content>
       </mat-card>
 

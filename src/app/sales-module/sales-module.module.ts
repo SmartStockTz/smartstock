@@ -3,8 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {SalesModuleRoutingModule} from './sales-module-routing.module';
 import {DialogComponent, WholeSaleComponent} from './whole-sale/whole-sale.component';
-import {SaleComponent} from './sale/sale.component';
-import {CommonComponentsModule} from '../common-components/common-components.module';
+import {CommonComponentsModule} from '../shared-components/common-components.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -21,10 +20,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ReactiveFormsModule} from '@angular/forms';
-import {SaleReportComponent} from './sale-report/sale-report.component';
-import {SaleReportTrendComponent} from './sale-report-trend/sale-report-trend.component';
-import {SaleReportsProductsComponent} from './sale-reports-products/sale-reports-products.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CartComponent} from './cart/cart.component';
 import {ProductCardComponent} from './product-card/product-card.component';
 import {RetailSaleComponent} from './retail-sale/retail-sale.component';
@@ -61,15 +57,12 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatBadgeModule,
     MatRippleModule,
     MatListModule,
-    ScrollingModule
+    ScrollingModule,
+    FormsModule
 
   ],
   declarations: [
     WholeSaleComponent,
-    SaleComponent,
-    SaleReportComponent,
-    SaleReportTrendComponent,
-    SaleReportsProductsComponent,
     CartComponent,
     ProductCardComponent,
     DialogComponent,
