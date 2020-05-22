@@ -9,11 +9,16 @@
       <input [formControl]="searchInputControl"
              *ngIf="showSearch"
              class="toolbar-input" type="text" placeholder="{{searchPlaceholder}}">
-      <!--      <button (click)="searchItem()" *ngIf="showSearch && searchInputControl.valid" matSuffix>-->
-      <!--        <mat-icon>search</mat-icon>-->
-      <!--      </button>-->
+            <mat-progress-spinner style="display: inline-block; margin-left: -30px"
+                                  mode="indeterminate" diameter="25"
+                                  color="primary"
+                                  *ngIf="showSearch && searchProgressFlag"
+                                  matSuffix>
+              <mat-icon>search</mat-icon>
+            </mat-progress-spinner>
     </span>
-    <button *ngIf="noOfProductsInCart > 0" mat-icon-button (click)="cartdrawer.toggle()" [matBadge]="noOfProductsInCart"  >
+    <button *ngIf="noOfProductsInCart > 0" mat-icon-button (click)="cartdrawer.toggle()"
+            [matBadge]="noOfProductsInCart">
       <mat-icon>shopping_cart</mat-icon>
     </button>
     <button class="ft-button" mat-button [matMenuTriggerFor]="menu">

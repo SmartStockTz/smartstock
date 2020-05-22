@@ -22,6 +22,8 @@ import {DialogImageCropComponent} from './dialog-image-crop/dialog-image-crop.co
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ShopsPipe} from './pipes/shops.pipe';
 import { MatBadgeModule } from '@angular/material/badge';
+import { OnFetchComponent } from './on-fetch/on-fetch.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -43,19 +45,22 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDialogModule,
     MatSelectModule,
     ImageCropperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
-  exports: [
-    AdminDrawerComponent,
-    ToolbarComponent,
-    ShopsPipe
-  ],
+    exports: [
+        AdminDrawerComponent,
+        ToolbarComponent,
+        ShopsPipe,
+        OnFetchComponent
+    ],
   declarations: [
     AdminDrawerComponent,
     ToolbarComponent,
     NoStockDialogComponent,
     DialogImageCropComponent,
-    ShopsPipe
+    ShopsPipe,
+    OnFetchComponent
       ],
   entryComponents: [
     DialogImageCropComponent

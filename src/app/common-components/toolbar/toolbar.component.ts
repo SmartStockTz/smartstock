@@ -6,7 +6,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {UserI} from '../../model/UserI';
-import { EventApiService } from 'src/app/services/event-api.service';
+import {EventApiService} from 'src/app/services/event-api.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,6 +25,8 @@ export class ToolbarComponent implements OnInit {
   currentUser: UserI;
 
   noOfProductsInCart;
+  @Input() searchProgressFlag = false;
+
   constructor(private router: Router,
               private readonly _storage: LocalStorageService,
               private userDatabase: UserDatabaseService,
@@ -45,7 +47,7 @@ export class ToolbarComponent implements OnInit {
     this.getProductsInCart();
   }
 
-  getProductsInCart(){
+  getProductsInCart() {
     this.eventService.listen('noofProductsCart', (data) => {
       this.noOfProductsInCart = data.detail;
     });

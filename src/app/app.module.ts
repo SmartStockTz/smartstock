@@ -37,7 +37,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {DialogComponent} from './sales-module/whole-sale/whole-sale.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {RegisterComponent} from './register/register.component';
@@ -56,7 +55,6 @@ import {BFast} from 'bfastjs';
     AppComponent,
     LoginComponent,
     LandingComponent,
-    DialogComponent,
     DialogDeleteComponent,
     RegisterComponent,
     FooterComponent,

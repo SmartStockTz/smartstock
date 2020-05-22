@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { MatSidenav } from '@angular/material/sidenav';
-import { EventApiService } from 'src/app/services/event-api.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {Observable, of} from 'rxjs';
+import {MatSidenav} from '@angular/material/sidenav';
+import {EventApiService} from 'src/app/services/event-api.service';
+import {SsmEvents} from '../../utils/eventsNames';
+import {Stock} from '../../model/stock';
 
 @Component({
   selector: 'app-cart',
@@ -14,75 +16,92 @@ export class CartComponent implements OnInit {
   @Input() cartdrawer: MatSidenav;
 
   totalCost = 0;
-  discountFormControl = new FormControl('', [Validators.nullValidator, Validators.min(0)]);
+  discountFormControl = new FormControl(0, [Validators.nullValidator, Validators.min(0)]);
   customerFormControl = new FormControl('', [Validators.nullValidator]);
   filteredOptions: Observable<string[]>;
   cartProductsArray: { quantity: number, product }[] = [];
-  cartProducts: Observable<{ quantity: number, product }[]> = of([]);
+  cartProducts: Observable<{ quantity: number, product: Stock }[]> = of([]);
 
-  constructor(private readonly eventService: EventApiService) { }
+  constructor(private readonly eventService: EventApiService) {
+  }
 
   ngOnInit() {
-    this._addCart();
+    this._cartListener();
+    this._discountListener();
+    this._hideCartListener();
   }
 
-  numberOnly(event): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    } 
-    this._getTotal(this.discountFormControl.value);
-    return true;
-  }
-  private _addCart() {
-    window.addEventListener('add_cart', (event) => {
-      // @ts-ignore
+  private _cartListener() {
+    this.eventService.listen(SsmEvents.CART, (event) => {
       const cart = event.detail;
-       let updateItem = this.cartProductsArray.find(x=>x.product.objectId === cart.product.objectId);
-       if(updateItem != null){
-        let index = this.cartProductsArray.indexOf(updateItem);
+      const updateItem = this.cartProductsArray.find(x => x.product.objectId === cart.product.objectId);
+      if (updateItem != null) {
+        const index = this.cartProductsArray.indexOf(updateItem);
         this.cartProductsArray[index].quantity = this.cartProductsArray[index].quantity + cart.quantity;
-       } else {
-        this.cartProductsArray.push(cart)
-       }
+      } else {
+        this.cartProductsArray.push(cart);
+      }
       this.cartProducts = of(this.cartProductsArray);
-      this.eventService.broadcast('noofProductsCart', this.cartProductsArray.length);
+      this.eventService.broadcast(SsmEvents.NO_OF_CART, this.cartProductsArray.length);
       this._getTotal(this.discountFormControl.value);
     });
   }
 
-   _getTotal(discount: number){
-    let cost = 0;
-    if(discount != null) {
-    this.cartProductsArray.forEach(cart=>{
-      cost += (cart.quantity * cart.product.retailPrice)
-    });
-    this.totalCost = cost - Number(discount);
-
+  private _getTotal(discount: number) {
+    if (discount != null) {
+      this.totalCost = this.cartProductsArray
+        .map<number>(value => {
+          return value.quantity * (this.isViewedInWholesale ? value.product.wholesalePrice : value.product.retailPrice) as number;
+        })
+        .reduce((a, b) => {
+          return a + b;
+        }, -discount);
     }
+    this.eventService.broadcast(SsmEvents.NO_OF_CART, this.cartProductsArray.length);
   }
 
-  decrementQty(value) {
+  decrementQty(indexOfProductInCart: number) {
     this.cartProducts.subscribe(cart => {
-      if (cart[value].quantity  > 0) {
-        cart[value].quantity = cart[value].quantity - 1;
+      if (cart[indexOfProductInCart].quantity > 1) {
+        cart[indexOfProductInCart].quantity = cart[indexOfProductInCart].quantity - 1;
       }
-    })
-    this._getTotal(this.discountFormControl.value?this.discountFormControl.value:0);
+    });
+    this._getTotal(this.discountFormControl.value ? this.discountFormControl.value : 0);
   }
 
-  incrementQty(value) {
+  incrementQty(indexOfProductInCart: number) {
     this.cartProducts.subscribe(cart => {
-      cart[value].quantity = cart[value].quantity + 1;
-    })
-    this._getTotal(this.discountFormControl.value?this.discountFormControl.value:0);
+      cart[indexOfProductInCart].quantity = cart[indexOfProductInCart].quantity + 1;
+    });
+    this._getTotal(this.discountFormControl.value ? this.discountFormControl.value : 0);
   }
 
-  removeCart(index: number) {
-    console.log(index);
-    // this.cartProducts = undefined;
-    this.cartProductsArray.splice(index,1);
+  removeCart(indexOfProductInCart: number) {
+    this.cartProductsArray.splice(indexOfProductInCart, 1);
     this.cartProducts = of(this.cartProductsArray);
-    this._getTotal(this.discountFormControl.value?this.discountFormControl.value:0);
+    this._getTotal(this.discountFormControl.value ? this.discountFormControl.value : 0);
+
+  }
+
+  private _discountListener() {
+    this.discountFormControl.valueChanges.subscribe(value => {
+      if (!value) {
+        this._getTotal(0);
+      }
+      if (!isNaN(value)) {
+        this._getTotal(value);
+      }
+    });
+  }
+
+  private _hideCartListener() {
+    this.eventService.listen(SsmEvents.NO_OF_CART, (data) => {
+      if (!data && !data.detail) {
+        this.cartdrawer.opened = false;
+      }
+      if (!isNaN(data.detail) && data.detail === 0) {
+        this.cartdrawer.opened = false;
+      }
+    });
   }
 }

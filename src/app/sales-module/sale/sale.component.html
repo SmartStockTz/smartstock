@@ -22,7 +22,8 @@
           </mat-form-field>
 
           <div style="margin-top: 7px; margin-left: 4px; margin-right: 4px" class="flex-grow-0">
-            <button (click)="refreshProducts()" [disabled]="refreshProductsProgress" matTooltip="Refresh products" color="primary" mat-flat-button class="ft-button">
+            <button (click)="refreshProducts()" [disabled]="refreshProductsProgress" matTooltip="Refresh products"
+                    color="primary" mat-flat-button class="ft-button">
               <mat-icon>refresh</mat-icon>
               <mat-progress-spinner
                 *ngIf="refreshProductsProgress"
