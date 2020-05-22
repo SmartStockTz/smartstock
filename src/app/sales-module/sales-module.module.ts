@@ -27,6 +27,10 @@ import { SaleReportTrendComponent } from './sale-report-trend/sale-report-trend.
 import { SaleReportsProductsComponent } from './sale-reports-products/sale-reports-products.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { RetailSaleComponent } from './retail-sale/retail-sale.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 @NgModule({
     imports: [
@@ -49,7 +53,10 @@ import { ProductCardComponent } from './product-card/product-card.component';
         MatProgressSpinnerModule,
         MatDatepickerModule,
         MatSortModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatToolbarModule,
+        MatBadgeModule
+        
     ],
   declarations: [
     WholeSaleComponent,
@@ -58,8 +65,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
     SaleReportTrendComponent,
     SaleReportsProductsComponent,
     CartComponent,
-    ProductCardComponent
-  ]
+    ProductCardComponent,
+    RetailSaleComponent
+  ],
 })
 export class SalesModuleModule {
 }

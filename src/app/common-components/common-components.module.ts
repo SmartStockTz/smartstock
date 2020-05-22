@@ -21,6 +21,8 @@ import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.componen
 import {DialogImageCropComponent} from './dialog-image-crop/dialog-image-crop.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ShopsPipe} from './pipes/shops.pipe';
+import { MatBadgeModule } from '@angular/material/badge';
+
 
 @NgModule({
   imports: [
@@ -41,11 +43,12 @@ import {ShopsPipe} from './pipes/shops.pipe';
     MatDialogModule,
     MatSelectModule,
     ImageCropperModule,
+    MatBadgeModule
   ],
   exports: [
     AdminDrawerComponent,
     ToolbarComponent,
-    ShopsPipe,
+    ShopsPipe
   ],
   declarations: [
     AdminDrawerComponent,
@@ -53,7 +56,7 @@ import {ShopsPipe} from './pipes/shops.pipe';
     NoStockDialogComponent,
     DialogImageCropComponent,
     ShopsPipe
-  ],
+      ],
   entryComponents: [
     DialogImageCropComponent
   ]

@@ -13,6 +13,9 @@
       <!--        <mat-icon>search</mat-icon>-->
       <!--      </button>-->
     </span>
+    <button *ngIf="noOfProductsInCart > 0" mat-icon-button (click)="cartdrawer.toggle()" [matBadge]="noOfProductsInCart"  >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
     <button class="ft-button" mat-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
       <span *ngIf="currentUser">{{"  " + currentUser.username}}</span>

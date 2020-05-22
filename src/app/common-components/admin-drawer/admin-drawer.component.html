@@ -41,7 +41,7 @@
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a *ngIf="shop && (shop.settings.allowRetail===undefined?true:shop.settings.allowRetail)" mat-list-item
-             routerLink="/sale">Retails</a>
+             routerLink="/sale/retail">Retails</a>
           <a *ngIf="shop && (shop.settings.allowWholesale===undefined?true:shop.settings.allowWholesale)" mat-list-item
              routerLink="/sale/whole">WholeSale</a>
           <a mat-list-item routerLink="/sale/report">Quick Reports</a>

@@ -1,1 +1,92 @@
-<p>cart works!</p>
+<div id="cart_view" class="cart">
+    <mat-toolbar class="mat-elevation-z0" style="z-index: 10000">
+     
+      <span [matBadge]="cartProductsArray.length" matBadgeOverlap="false">Cart</span>
+      <span  style="flex-grow: 1;"></span>
+        <button mat-icon-button (click)="cartdrawer.toggle()" style="float: right;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+ 
+  
+    <div style="padding: 8px 8px 16px 8px;bottom: 0;width: 100%;position: absolute;background-color: white;z-index: 1000;">
+        <mat-divider></mat-divider>
+        <div class="cart-total">
+            <h6 style="display: flex ;">
+                <span style="flex-grow: 1;">Total</span>
+                <span >{{totalCost | currency: 'TZS '}}</span>
+            </h6>
+            <p style="color: #868688;display: flex;">
+                <span style="flex-grow: 1;">Discount</span>
+                {{discountFormControl.value | currency: 'TZS'}}
+            </p>
+          </div>
+      <button style="width: 100%;text-align:left;height: 54px;" color="primary" mat-raised-button>
+        <h6>
+            <span >Checkout</span>
+            <span style="float: right;">{{totalCost | currency: 'TZS '}}</span>
+        </h6>
+      </button>
+    </div>
+  
+    <div style="padding: 16px">
+        
+      <!--    <span>Discount</span>-->
+      <!--    <input  type="number" style="width: 100%">-->
+      <mat-form-field style="width: 100%">
+        <mat-label>Discount</mat-label>
+        <input matInput type="number" min="0" [formControl]="discountFormControl" (keypress)="numberOnly($event)" (keydown)="_getTotal(this.discountFormControl.value)">
+        <mat-error>Must be number and greater than zero</mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div style="padding: 0 16px 16px 16px" *ngIf="isViewedInWholesale">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Customer Name</mat-label>
+        <input type="text"  
+         matInput [formControl]="customerFormControl" placeholder="Customer Name"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!--    <mat-form-field style="width: 100%">-->
+      <!--      <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="customerFormControl" [matAutocomplete]="auto">-->
+      <!--      <mat-autocomplete #auto="matAutocomplete">-->
+      <!--        <mat-option *ngFor="let option of options" [value]="option">-->
+      <!--          {{option}}-->
+      <!--        </mat-option>-->
+      <!--      </mat-autocomplete>-->
+      <!--    </mat-form-field>-->
+    </div>
+  
+    <div *ngFor="let cart of cartProducts | async; let i = index">
+      <div class="cart-products">
+          <div>
+            <span style="display: flex;flex-direction: column;justify-content: center;">
+                <mat-icon class="cart-up-down" color="primary" (click)="incrementQty(i)" style="margin: 0 0 12px -10px;">arrow_drop_up</mat-icon>
+              <label style="background-color: #027206;text-align: center;z-index:1000;color: white;width: fit-content;width: 36px;padding: 4px;margin: 0;font-size: 12px;border-radius: 6px;">
+                {{cart.quantity}}
+              </label>
+                <mat-icon class="cart-up-down" color="primary"  (click)="decrementQty(i)" style="margin: -20px 0 0 -10px;">arrow_drop_down</mat-icon>
+            </span>
+          </div>
+        <div class="cart-products-detail">
+          <h6 class="cart-product-title">{{cart.product.product}}</h6>
+          <span style="color: gray;font-size: 12px;flex-grow: 0;">{{cart.product.retailPrice | currency: 'TZS '}}</span>
+
+        </div>
+
+        <div class="cart-products-action">
+            <a (click)="removeCart(i)" [matTooltip]="'remove item from cart'" style="right: 0;color: #027206;float:right;"><mat-icon>delete</mat-icon></a><br>
+            <h6 style="margin: 0;font-size: 14px;float:right">{{(cart.quantity * cart.product.retailPrice) | currency: 'TZS '}}</h6>
+        </div>
+  
+      </div>
+      <mat-divider style="margin: 16px 16px 0 16px;"></mat-divider>
+    </div>
+  
+  </div>
+  
