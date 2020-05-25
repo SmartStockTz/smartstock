@@ -29,6 +29,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { SaleComponent } from './sale/sale.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     CartComponent,
     ProductCardComponent,
     DialogComponent,
-    RetailSaleComponent
+    RetailSaleComponent,
+    SaleComponent
   ],
 })
 export class SalesModuleModule {
