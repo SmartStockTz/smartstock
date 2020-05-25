@@ -11,6 +11,9 @@ import {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {HttpClientModule} from '@angular/common/http';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,12 @@ import {AppRoutingModule} from './app-routing.module';
     CommonComponentsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
+    HttpClientModule,
     MatTooltipModule,
     MatSliderModule,
+    MatSnackBarModule,
     RouterModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
