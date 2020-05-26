@@ -63,6 +63,12 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
   }
 
   filterProduct(product: string) {
+    // this.productsObservable.subscribe((data) => {
+    //
+    // }, (error) => {
+    //
+    // });
+    //
     this.searchProgressFlag = true;
     if (product === '') {
       this.getProducts();
@@ -72,7 +78,9 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
     this._storage.getStocks().then(value => {
       this.searchProgressFlag = false;
       if (value) {
-        const result = value.filter(value1 => (value1.product.toLowerCase().includes(product.toLowerCase())));
+        const result = value.filter(value1 =>
+          (value1.product.toLowerCase().includes(product.toLowerCase()))
+        );
         this.productsObservable = of(result.slice(0, result.length > 50 ? 50 : result.length));
       } else {
         this.snack.open('No products found, try again or refresh products', 'Ok', {
