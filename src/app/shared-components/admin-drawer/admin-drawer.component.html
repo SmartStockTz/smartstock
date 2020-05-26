@@ -29,6 +29,18 @@
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item routerLink="/dashboard">General</a>
+
+
+          <mat-expansion-panel style="margin-left: -7px;" *ngIf="currentUser && (currentUser.role==='admin')" class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <span >Reports</span>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item routerLink="/dashboard/sales-reports"> Sales Reports</a>
+              <a mat-list-item routerLink="/dashboard/stock-reports"> Stock Reports</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
         </mat-nav-list>
       </mat-expansion-panel>
 
