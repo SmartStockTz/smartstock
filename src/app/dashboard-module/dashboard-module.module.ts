@@ -27,6 +27,7 @@ import { ProductPerformanceReportComponent } from './reports/sales-reports/produ
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,

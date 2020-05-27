@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Stock } from 'src/app/model/stock';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -12,6 +11,7 @@ import { UnitsI } from 'src/app/model/UnitsI';
 import { DeviceInfo } from 'src/app/shared-components/DeviceInfo';
 import { FormControl, Validators } from '@angular/forms';
 import { AdminDashboardService } from 'src/app/services/admin-dashboard.service';
+import { toSqlDate } from 'src/app/utils/date';
 
 
 export interface ProductPerformanceI {
@@ -61,6 +61,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
 
 
   ngOnInit() {
+    this.channelFormControl.setValue('retail')
     this._getProductReport(this.channel, this.startDate, this.endDate);
     this._dateRangeListener();
   }
@@ -85,35 +86,19 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
 
   private _dateRangeListener() {
     this.startDateFormControl.valueChanges.subscribe(value => {
-      if (value !== '') {
-        this.startDate =  new Date(value);
-        this._getProductReport(this.channel, this.startDate, this.endDate);
-        console.log(this.startDate);
-
-      } else {
-        console.log(this.startDate);
-      }
+        this.startDate =  toSqlDate(value);
+          this._getProductReport(this.channel, this.startDate, this.endDate);
     });
     this.endDateFormControl.valueChanges.subscribe(value => {
-      if (value) {
-        this.endDate = new Date(value);
-        this._getProductReport(this.channel, this.startDate, this.endDate);
-        console.log(this.startDate);
-        console.log(this.endDate);
-
-
-      } else {
-        this.endDate = this.endDate;
-      }
+        this.endDate = toSqlDate(value);
+          this._getProductReport(this.channel, this.startDate, this.endDate);
     });
     this.channelFormControl.valueChanges.subscribe(value => {
-      if (value) {
         this.channel = value;
-        this._getProductReport(this.channel, this.startDate, this.endDate);
-      } else {
-        this.endDate = null;
-      }
+          this._getProductReport(this.channel, this.startDate, this.endDate);
     });
+
+   
   }
 
 }

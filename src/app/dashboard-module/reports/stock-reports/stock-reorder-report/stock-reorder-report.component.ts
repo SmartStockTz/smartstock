@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -11,6 +10,7 @@ import { Observable, of } from 'rxjs';
 import { UnitsI } from 'src/app/model/UnitsI';
 import { Stock } from 'src/app/model/stock';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { AdminDashboardService } from 'src/app/services/admin-dashboard.service';
 
 
@@ -46,6 +46,7 @@ export class StockReorderReportComponent implements OnInit {
   stockReorderDatasource: MatTableDataSource<Stock>;
   stockColumns = ['product', 'quantity', 'reorder', 'supplier'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
   ngOnInit() {
@@ -57,10 +58,9 @@ export class StockReorderReportComponent implements OnInit {
     this._report.getStockReorderReportReport().then(data => {
       this.stockReport = data.length > 0 ? data[0].total : 0;
       this.stockReorderDatasource = new MatTableDataSource(data);
-      this.stockReorderDatasource.paginator = this.paginator;     
+      this.stockReorderDatasource.paginator = this.paginator;  
+      this.stockReorderDatasource.sort = this.sort;  
       this.stockReportGetProgress = false;
-      console.log(data);
-      console.log(this.stockReorderDatasource);
     }).catch(reason => {
       this.stockReport = 0;
       console.log(reason);
