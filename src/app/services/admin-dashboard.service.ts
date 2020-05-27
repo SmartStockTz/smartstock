@@ -83,4 +83,40 @@ export class AdminDashboardService implements AdminReportAdapter {
       }
     });
   }
+
+  getProductPerformanceReport(channel: string, from: string, to: string): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const activeShop = await this._storage.getActiveShop();
+        this._httpClient.get(this._settings.ssmFunctionsURL +
+          `/dashboard/sales-reports/productPerformanceReport/${activeShop.projectId}/${channel}/${from}/${to}`, {
+          headers: this._settings.ssmFunctionsHeader
+        }).subscribe(value => {
+          resolve(value);
+        }, error => {
+          reject(error);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  getStockReorderReportReport(): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const activeShop = await this._storage.getActiveShop();
+        this._httpClient.get(this._settings.ssmFunctionsURL +
+          `/dashboard/stock-reports/stockReorderReport/${activeShop.projectId}`, {
+          headers: this._settings.ssmFunctionsHeader
+        }).subscribe(value => {
+          resolve(value);
+        }, error => {
+          reject(error);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 }

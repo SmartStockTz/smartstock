@@ -19,6 +19,14 @@ import { DashboardSaleTrendsComponent } from './dashboard-sale-trends/dashboard-
 import { DashboardFrequentSoldProductComponent } from './dashboard-frequent-sold-product/dashboard-frequent-sold-product.component';
 import { DataNotReadyComponent } from './data-not-ready/data-not-ready.component';
 import { GeneralDashboardComponent } from './general-dashboard/general-dashboard.component';
+import { SalesReportsComponent } from './reports/sales-reports/sales-reports.component';
+import { StockReportsComponent } from './reports/stock-reports/stock-reports.component';
+import { StockReorderReportComponent } from './reports/stock-reports/stock-reorder-report/stock-reorder-report.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ProductPerformanceReportComponent } from './reports/sales-reports/product-performance-report/product-performance-report.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -27,7 +35,12 @@ import { GeneralDashboardComponent } from './general-dashboard/general-dashboard
     DashboardSaleTrendsComponent,
     DashboardFrequentSoldProductComponent,
     DataNotReadyComponent,
-    GeneralDashboardComponent
+    GeneralDashboardComponent,
+    StockReportsComponent,
+    StockReorderReportComponent,
+    SalesReportsComponent,
+    ProductPerformanceReportComponent 
+
   ],
   imports: [
     CommonModule,
@@ -43,7 +56,10 @@ import { GeneralDashboardComponent } from './general-dashboard/general-dashboard
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatSelectModule
   ]
 })
 export class DashboardModuleModule {
