@@ -27,7 +27,7 @@ const cacheClone = function ({name}): CacheAdapter {
   //   size: 200 * 1024
   // });
 };
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -113,4 +113,5 @@ export class LocalStorageService implements StorageAdapter {
     const shop = await this.getActiveShop();
     return await cache.set<Stock[]>(shop.projectId + '_stocks', stocks);
   }
+  
 }

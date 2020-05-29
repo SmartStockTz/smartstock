@@ -14,18 +14,10 @@ import {AppRoutingModule} from './app-routing.module';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
-import { ProductPerformanceReportComponent } from './dashboard-module/reports/sales-reports/product-performance-report/product-performance-report.component';
-import { StockReorderReportComponent } from './dashboard-module/reports/stock-reports/stock-reorder-report/stock-reorder-report.component';
-import { StockReportsComponent } from './dashboard-module/reports/stock-reports/stock-reports.component';
-import { SalesReportsComponent } from './dashboard-module/reports/sales-reports/sales-reports.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProductPerformanceReportComponent,
-    StockReorderReportComponent,
-    StockReportsComponent,
-    SalesReportsComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
