@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {UserDataSource} from '../adapter/UserDataSource';
 import {UserI} from '../model/UserI';
 import {HttpClient} from '@angular/common/http';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 import {ShopI} from '../model/ShopI';
 import {LocalStorageService} from './local-storage.service';
 import {BFast} from 'bfastjs';
@@ -17,7 +17,7 @@ export class UserDatabaseService implements UserDataSource {
 
 
   constructor(private readonly _httpClient: HttpClient,
-              private readonly _settings: SettingsServiceService,
+              private readonly _settings: SettingsService,
               private readonly dialog: MatDialog,
               private readonly logger: LogService,
               private readonly _storage: LocalStorageService) {

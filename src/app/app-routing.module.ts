@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
-import {StockExistGuard} from './guards/stock-exist.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
 import {LandingComponent} from './main-module/landing/landing.component';
@@ -40,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, StockExistGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, ActiveShopGuard],
     loadChildren: () => import('./sales-module/sales-module.module').then(mod => mod.SalesModuleModule)
   },
   {

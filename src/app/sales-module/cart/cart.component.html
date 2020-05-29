@@ -35,7 +35,7 @@
           <mat-card-subtitle
             matLine>{{isViewedInWholesale ? '(' + cart.product.wholesaleQuantity + ') ' : ''}}{{cart.quantity}} {{cart.product.unit}}
             @{{isViewedInWholesale ? cart.product.wholesalePrice : cart.product.retailPrice}}
-            = {{cart.quantity * (isViewedInWholesale ? cart.product.wholesalePrice : cart.product.retailPrice)}}
+            = {{cart.quantity * (isViewedInWholesale ? cart.product.wholesalePrice : cart.product.retailPrice) | number}}
           </mat-card-subtitle>
           <div class="d-flex flex-row" matLine>
             <button color="primary" (click)="decrementQty(i)" mat-icon-button>
@@ -67,8 +67,10 @@
                type="number" min="0" [formControl]="discountFormControl">
       </p>
     </div>
-    <button (click)="checkout()" style="width: 100%;text-align:left;height: 54px;font-size: 20px" color="primary" mat-raised-button>
-      <span>Checkout</span>
+    <button [disabled]="checkoutProgress" (click)="checkout()" style="width: 100%;text-align:left;height: 54px;font-size: 20px" color="primary"
+            mat-raised-button>
+      <span *ngIf="!checkoutProgress">Checkout</span>
+      <mat-progress-spinner color="primary" *ngIf="checkoutProgress" mode="indeterminate" diameter="25" style="display: inline-block"></mat-progress-spinner>
       <span style="float: right;">{{totalCost | currency: 'TZS '}}</span>
     </button>
   </div>

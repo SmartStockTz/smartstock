@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {SalesDatasource} from '../adapter/SalesDatasource';
-import {CashSaleI} from '../model/CashSale';
-import {OrderI} from '../model/OderI';
-import {CartI} from '../model/cart';
-import {BatchI} from '../model/batchI';
+import {SalesModel} from '../model/CashSale';
+import {OrderModel} from '../model/OderI';
+import {BatchModel} from '../model/batchModel';
 import {LocalStorageService} from './local-storage.service';
+import {Security} from '../utils/security';
 
 @Injectable()
 export class SalesDatabaseService implements SalesDatasource {
@@ -12,77 +12,49 @@ export class SalesDatabaseService implements SalesDatasource {
   constructor(private readonly _storage: LocalStorageService) {
   }
 
-  addAllCashSale(sales: CashSaleI[]): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      try {
-        const batchs: BatchI[] = [];
-        sales.forEach(value => {
-          batchs.push({
-            method: 'POST',
-            body: value,
-            path: '/classes/sales'
-          });
-        });
-        resolve(await this._storage.saveSales(batchs));
-      } catch (e) {
-        reject(e);
-      }
+  async getSalesByUser(userId: string, channel: string): Promise<SalesModel[]> {
+    return Promise.reject('not implemented');
+  }
+
+  async saveOrder(order: OrderModel): Promise<OrderModel> {
+    return Promise.reject('not implemented');
+  }
+
+  async saveOrders(orders: OrderModel[]): Promise<any> {
+    return Promise.reject('not implemented');
+  }
+
+  async deleteOrder(orderId: string): Promise<any> {
+    return Promise.reject('not implemented');
+  }
+
+  async getOrders(): Promise<OrderModel[]> {
+    return Promise.reject('not implemented');
+  }
+
+  async getOrder(id: string): Promise<OrderModel> {
+    return Promise.reject('not implemented');
+  }
+
+  async updateOrder(orderId: string, order: OrderModel): Promise<OrderModel> {
+    return Promise.reject('not implemented');
+  }
+
+  async saveSales(sales: SalesModel[]): Promise<any> {
+    const batchs: BatchModel[] = [];
+    const cartId = Security.generateUUID();
+    sales.forEach(sale => {
+      sale.cartId = cartId;
+      sale.batch = Security.generateUUID();
+      batchs.push({
+        method: 'POST',
+        body: sale,
+        path: '/classes/sales'
+      });
     });
-  }
-
-  addWholeCashSale(sale: CashSaleI[]): Promise<any> {
-    return this.addAllCashSale(sale);
-  }
-
-  deleteCashSale(sale: CashSaleI, callback: (value: any) => void) {
-  }
-
-  getAllCashSale(callback: (sales: CashSaleI[]) => void) {
-  }
-
-  getCashSale(id: string, callback: (sale: CashSaleI) => void) {
-  }
-
-  updateCashSale(sale: CashSaleI, callback: (value: any) => void) {
-  }
-
-  getAllCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-  }
-
-  private getSales(id: string, res: any) {
-  }
-
-  private getWholeSale(id: string, res: any) {
-  }
-
-  getAllWholeCashSaleOfUser(id: string, results: (datasource: CashSaleI[]) => void) {
-  }
-
-  addOrder(order: OrderI, callback?: (value) => void) {
-  }
-
-  addOrders(orders: OrderI[], callback?: (value) => void) {
-  }
-
-  deleteOrder(order: OrderI, callback?: (value) => void) {
-  }
-
-  getAllOrders(callback: (orders: OrderI[]) => void) {
-  }
-
-  private getOrders(res: any) {
-  }
-
-  getOrder(id: string, callback: (order: OrderI) => void) {
-  }
-
-  updateOrder(order: OrderI, callback?: (value) => void) {
-  }
-
-  addCashSale(sale: CashSaleI, callback: (value: any) => void) {
-  }
-
-  addCashSaleToCache(sales: CartI[], callback: (value: any) => void) {
-    callback('Ok');
+    return await this._storage.saveSales(batchs);
+    // return new Promise(resolve => {
+    //   setTimeout(resolve, 6000);
+    // });
   }
 }

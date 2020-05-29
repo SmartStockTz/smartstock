@@ -1,34 +1,20 @@
-import {CashSaleI} from '../model/CashSale';
-import {OrderI} from '../model/OderI';
+import {SalesModel} from '../model/CashSale';
+import {OrderModel} from '../model/OderI';
 
 export interface SalesDatasource {
-  addCashSale(sale: CashSaleI, callback: (value: any) => void);
+  saveSales(sale: SalesModel[]): Promise<any>;
 
-  addAllCashSale(sale: CashSaleI[]): Promise<any>;
+  getSalesByUser(userId: string, channel?: string): Promise<SalesModel[]>;
 
-  getCashSale(id: string, callback: (sale: CashSaleI) => void);
+  getOrder(orderId: string): Promise<OrderModel>;
 
-  getAllCashSale(callback: (sales: CashSaleI[]) => void);
+  getOrders(pagination?: {size: number, limit: number}): Promise<OrderModel[]>;
 
-  getAllCashSaleOfUser(id: string, results: (sales: CashSaleI[]) => void);
+  deleteOrder(orderId: string): Promise<any>;
 
-  updateCashSale(sale: CashSaleI, callback: (value: any) => void);
+  updateOrder(orderId: string, order: OrderModel): Promise<OrderModel>;
 
-  deleteCashSale(sale: CashSaleI, callback: (value: any) => void);
+  saveOrder(order: OrderModel): Promise<OrderModel>;
 
-  getAllWholeCashSaleOfUser(id: string, results: (sales: CashSaleI[]) => void);
-
-  addWholeCashSale(sale: CashSaleI[]): Promise<any>;
-
-  getOrder(id: string, callback: (order: OrderI) => void);
-
-  getAllOrders(callback: (orders: OrderI[]) => void);
-
-  deleteOrder(order: OrderI, callback: (value: any) => void);
-
-  updateOrder(order: OrderI, callback: (value: any) => void);
-
-  addOrder(order: OrderI, callback: (value: any) => void);
-
-  addOrders(orders: OrderI[], callback: (value: any) => void);
+  saveOrders(orders: OrderModel[]): Promise<any>;
 }

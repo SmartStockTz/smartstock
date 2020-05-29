@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsServiceService {
+export class SettingsService {
 
   ssmServerURL = environment.databaseURL;
   ssmFunctionsURL = environment.functionsURL;

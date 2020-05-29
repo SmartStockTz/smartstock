@@ -1,17 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DeviceInfo} from '../../shared-components/DeviceInfo';
 
 @Component({
   selector: 'app-whole-sale',
   templateUrl: './whole-sale.component.html',
   styleUrls: ['./whole-sale.component.css'],
 })
-export class WholeSaleComponent extends DeviceInfo implements OnInit {
-
+export class WholeSaleComponent implements OnInit {
 
   constructor() {
-    super();
   }
 
   ngOnInit() {

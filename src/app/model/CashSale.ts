@@ -1,6 +1,6 @@
 import {Stock} from './stock';
 
-export interface CashSaleI {
+export interface SalesModel {
   objectId?: string;
   idTra?: string;
   date: string;
@@ -9,11 +9,12 @@ export interface CashSaleI {
   unit: string;
   quantity: number;
   amount: number;
-  syncId?: string;
+  customer?: string;
+  cartId?: string; // for retrieve sold items per cart/order
   discount: number;
   user: string;
   channel: string;
   stock: Stock;
-  batch: string;
+  batch?: string; // for offline sync
   stockId: string;
 }

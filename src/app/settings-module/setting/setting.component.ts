@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../shared-components/DeviceInfo';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {SettingsServiceService} from '../../services/Settings-service.service';
+import {SettingsService} from '../../services/settings.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {EventApiService} from '../../services/event-api.service';
 import {SsmEvents} from '../../utils/eventsNames';
@@ -19,7 +19,7 @@ export class SettingComponent extends DeviceInfo implements OnInit {
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
               private readonly eventApi: EventApiService,
-              private readonly settings: SettingsServiceService) {
+              private readonly settings: SettingsService) {
     super();
   }
 

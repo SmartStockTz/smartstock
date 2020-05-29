@@ -19,6 +19,9 @@
                  [cartdrawer]="cartdrawer"
                  [showProgress]="showProgress"></app-toolbar>
 
+    <app-on-fetch *ngIf="!productsObservable" [isLoading]="fetchDataProgress"
+                  (refreshCallback)="getProductsFromServer()"></app-on-fetch>
+
     <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
       <app-product-card style="margin: 0 5px; display: inline-block" [cartdrawer]="cartdrawer" [product]="product"
                         [productIndex]="idx"
@@ -27,11 +30,8 @@
       </app-product-card>
     </cdk-virtual-scroll-viewport>
 
-    <app-on-fetch *ngIf="fetchDataProgress && !productsObservable" [isLoading]="fetchDataProgress"
-                  (refreshCallback)="getProducts()"></app-on-fetch>
-
     <button mat-button color="primary"
-            *ngIf="!fetchDataProgress"
+            *ngIf="!fetchDataProgress && productsObservable"
             (click)="getProductsFromServer()"
             matTooltip="Refresh products from server"
             style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"

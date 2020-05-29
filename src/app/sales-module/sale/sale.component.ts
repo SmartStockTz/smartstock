@@ -9,19 +9,24 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from '../../services/log.service';
 import {StockDatabaseService} from '../../services/stock-database.service';
 import {DeviceInfo} from '../../shared-components/DeviceInfo';
+import {SalesDatabaseService} from '../../services/sales-database.service';
 
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
-  styleUrls: ['./sale.component.css']
+  styleUrls: ['./sale.component.css'],
+  providers: [
+    SalesDatabaseService,
+    UserDatabaseService
+  ]
 })
 export class SaleComponent extends DeviceInfo implements OnInit {
-  productsObservable: Observable<Stock[]>;
+  productsObservable: Observable<Stock[]> = undefined;
   fetchDataProgress = false;
   showProgress = false;
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   searchProgressFlag = false;
-  @Input() isViewedInWholesale = false;
+  @Input() isViewedInWholesale = true;
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
@@ -39,7 +44,6 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   getProductsFromServer() {
     this.fetchDataProgress = true;
-    this.productsObservable = undefined;
     this._stockApi.getAllStock().then(products => {
       this.fetchDataProgress = false;
       this.productsObservable = of(products);
@@ -54,7 +58,9 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     this.productsObservable = undefined;
     this._storage.getStocks().then(products => {
       this.fetchDataProgress = false;
-      this.productsObservable = of(products);
+      if (products && products.length > 0) {
+        this.productsObservable = of(products);
+      }
     }).catch(reason => {
       this.fetchDataProgress = false;
       this.logger.i(reason);

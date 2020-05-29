@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
-import {CashSaleI} from '../../model/CashSale';
+import {SalesModel} from '../../model/CashSale';
 import {toSqlDate} from '../../utils/date';
 import {AdminDashboardService} from '../../services/admin-dashboard.service';
 import {LogService} from '../../services/log.service';
@@ -20,8 +20,8 @@ export class DashboardFrequentSoldProductComponent implements OnInit {
   dateFormControl = new FormControl();
   getProductsProgress = false;
   columns = ['product', 'date', 'quantity', 'amount'];
-  soldProductsDatasource: MatTableDataSource<CashSaleI>;
-  soldProductsArray: CashSaleI[] = [];
+  soldProductsDatasource: MatTableDataSource<SalesModel>;
+  soldProductsArray: SalesModel[] = [];
   @ViewChild('soldProductPaginator', {static: true}) soldProductPaginator: MatPaginator;
   productFilterControl = new FormControl('');
 
@@ -45,12 +45,12 @@ export class DashboardFrequentSoldProductComponent implements OnInit {
     this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
       this._logger.i(value, 'DashboardFrequentSoldProductComponent:42');
       this.soldProductsArray = value;
-      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
       this.soldProductsDatasource.paginator = this.soldProductPaginator;
       this.getProductsProgress = false;
     }).catch(reason => {
       this._logger.e(reason, 'DashboardFrequentSoldProductComponent:47');
-      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
       this.getProductsProgress = false;
     });
   }
@@ -62,12 +62,12 @@ export class DashboardFrequentSoldProductComponent implements OnInit {
     this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
       this._logger.i(value, 'DashboardFrequentSoldProductComponent:42');
       this.soldProductsArray = value;
-      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
       this.soldProductsDatasource.paginator = this.soldProductPaginator;
       this.getProductsProgress = false;
     }).catch(reason => {
       this._logger.e(reason, 'DashboardFrequentSoldProductComponent:47');
-      this.soldProductsDatasource = new MatTableDataSource<CashSaleI>(this.soldProductsArray);
+      this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
       this.getProductsProgress = false;
     });
   }
