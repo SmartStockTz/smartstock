@@ -41,7 +41,7 @@ export class LocalStorageService implements StorageAdapter {
 
   async saveActiveShop(shop: ShopI): Promise<any> {
     const response = await this.smartStockCache.set<ShopI>('activeShop', shop);
-    window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_SET));
+    this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
     return response;
   }
 
@@ -87,8 +87,8 @@ export class LocalStorageService implements StorageAdapter {
     // const keys: string[] = await stocksCache.keys();
     // const stocks: Stock[] = [];
     // for (const key of keys) {
-      return await stocksCache.get<Stock[]>('all');
-   // }
+    return await stocksCache.get<Stock[]>('all');
+    // }
     // return stocks;
   }
 
@@ -97,8 +97,8 @@ export class LocalStorageService implements StorageAdapter {
     const shop = await this.getActiveShop();
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
     // stocks.forEach(stock => {
-      return await stocksCache.set('all', stocks);
-   // });
+    return await stocksCache.set('all', stocks);
+    // });
     // return true;
   }
 
@@ -107,4 +107,5 @@ export class LocalStorageService implements StorageAdapter {
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
     return stocksCache.set(stock.objectId, stock);
   }
+
 }

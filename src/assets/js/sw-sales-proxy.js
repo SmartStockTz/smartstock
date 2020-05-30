@@ -1,7 +1,7 @@
-importScripts('bfastjs');
-
-
-addEventListener('message', async ({data}) => {
-
-});
-
+// importScripts('bfastjs');
+//
+//
+// addEventListener('message', async ({data}) => {
+//
+// });
+//
