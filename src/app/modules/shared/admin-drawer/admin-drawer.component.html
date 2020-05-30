@@ -34,20 +34,20 @@
 
       <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
 
-      <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin')"
-                           [expanded]="shouldExpand('report')"
-                           class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-          <mat-icon matPrefix color="primary">table_chart</mat-icon>
-          <span style="margin-left: 8px">Reports</span>
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-list-item routerLink="/report/sales">Sales Reports</a>
-          <a mat-list-item routerLink="/report/stocks">Stock Reports</a>
-        </mat-nav-list>
-      </mat-expansion-panel>
+<!--      <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin')"-->
+<!--                           [expanded]="shouldExpand('report')"-->
+<!--                           class="mat-elevation-z0">-->
+<!--        <mat-expansion-panel-header>-->
+<!--          <mat-icon matPrefix color="primary">table_chart</mat-icon>-->
+<!--          <span style="margin-left: 8px">Reports</span>-->
+<!--        </mat-expansion-panel-header>-->
+<!--        <mat-nav-list>-->
+<!--          <a mat-list-item routerLink="/report/sales">Sales Reports</a>-->
+<!--          <a mat-list-item routerLink="/report/stocks">Stock Reports</a>-->
+<!--        </mat-nav-list>-->
+<!--      </mat-expansion-panel>-->
 
-      <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
+<!--      <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>-->
 
       <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">
         <mat-expansion-panel-header>

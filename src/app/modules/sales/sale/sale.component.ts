@@ -83,7 +83,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
         const keywords = product.toLowerCase().split(' ').filter(value => {
           return value !== '';
         });
-        console.log(keywords);
+        // console.log(keywords);
         const result = allStocks.filter(stock => {
           const targetSentence =
             `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
@@ -97,7 +97,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
           }
           return flag;
         });
-        console.log(result);
+        // console.log(result);
         this.productsObservable = of(result);
       } else {
         this.snack.open('No products found, try again or refresh products', 'Ok', {
