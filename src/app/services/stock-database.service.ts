@@ -9,7 +9,7 @@ import {SettingsService} from './settings.service';
 import {PurchaseI} from '../model/PurchaseI';
 import {UserDatabaseService} from './user-database.service';
 import {BFast} from 'bfastjs';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _user: UserDatabaseService,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly _settings: SettingsService) {
   }
 

@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {ShopI} from '../model/ShopI';
 import {EventApiService} from './event-api.service';
 import {SsmEvents} from '../utils/eventsNames';
@@ -13,7 +13,7 @@ handle updates in main thread
 export class ThreadsService implements OnInit {
 
   constructor(private readonly eventApi: EventApiService,
-              private readonly _storage: LocalStorageService) {
+              private readonly _storage: StorageService) {
   }
 
   private salesWorkerProxy: Worker;

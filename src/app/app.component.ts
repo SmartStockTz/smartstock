@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
 import {SsmEvents} from './utils/eventsNames';
-import {LocalStorageService} from './services/local-storage.service';
+import {StorageService} from './services/storage.service';
 import {EventApiService} from './services/event-api.service';
 import {BFast} from 'bfastjs';
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(private readonly threadProxy: ThreadsService,
               private readonly eventApi: EventApiService,
-              private readonly _storage: LocalStorageService) {
+              private readonly _storage: StorageService) {
   }
 
   ngOnInit() {

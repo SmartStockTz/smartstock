@@ -4,7 +4,7 @@ import {UserI} from '../model/UserI';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 import {ShopI} from '../model/ShopI';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {BFast} from 'bfastjs';
 import {MatDialog} from '@angular/material/dialog';
 import {LogService} from './log.service';
@@ -20,7 +20,7 @@ export class UserDatabaseService implements UserDataSource {
               private readonly _settings: SettingsService,
               private readonly dialog: MatDialog,
               private readonly logger: LogService,
-              private readonly _storage: LocalStorageService) {
+              private readonly _storage: StorageService) {
   }
 
   async currentUser(): Promise<UserI> {

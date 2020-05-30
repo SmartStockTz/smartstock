@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {EventApiService} from 'src/app/services/event-api.service';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
 
@@ -28,7 +28,7 @@ export class ToolbarComponent implements OnInit {
   @Input() searchProgressFlag = false;
 
   constructor(private router: Router,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private userDatabase: UserDatabaseService,
               private readonly eventService: EventApiService) {
   }

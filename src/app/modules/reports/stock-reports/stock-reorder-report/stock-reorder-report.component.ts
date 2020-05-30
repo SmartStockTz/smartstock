@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LogService } from 'src/app/services/log.service';
 import { StockDatabaseService } from 'src/app/services/stock-database.service';
@@ -31,9 +31,9 @@ export class StockReorderReportComponent implements OnInit {
   endDate;
   stockReportGetProgress = false;
   stockReport;
- 
+
   constructor(private readonly router: Router,
-              private readonly indexDb: LocalStorageService,
+              private readonly indexDb: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly _report: AdminDashboardService,
@@ -58,8 +58,8 @@ export class StockReorderReportComponent implements OnInit {
     this._report.getStockReorderReportReport().then(data => {
       this.stockReport = data.length > 0 ? data[0].total : 0;
       this.stockReorderDatasource = new MatTableDataSource(data);
-      this.stockReorderDatasource.paginator = this.paginator;  
-      this.stockReorderDatasource.sort = this.sort;  
+      this.stockReorderDatasource.paginator = this.paginator;
+      this.stockReorderDatasource.sort = this.sort;
       this.stockReportGetProgress = false;
     }).catch(reason => {
       this.stockReport = 0;

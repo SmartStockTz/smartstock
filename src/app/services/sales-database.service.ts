@@ -3,13 +3,13 @@ import {SalesDatasource} from '../adapter/SalesDatasource';
 import {SalesModel} from '../model/CashSale';
 import {OrderModel} from '../model/OderI';
 import {BatchModel} from '../model/batchModel';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {Security} from '../utils/security';
 
 @Injectable()
 export class SalesDatabaseService implements SalesDatasource {
 
-  constructor(private readonly _storage: LocalStorageService) {
+  constructor(private readonly _storage: StorageService) {
   }
 
   async getSalesByUser(userId: string, channel: string): Promise<SalesModel[]> {

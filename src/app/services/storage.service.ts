@@ -9,12 +9,13 @@ import {EventApiService} from './event-api.service';
 import {BFast} from 'bfastjs';
 import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
 import {Security} from '../utils/security';
+import {CustomerModel} from '../model/CustomerModel';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocalStorageService implements StorageAdapter {
+export class StorageService implements StorageAdapter {
   smartStockCache: CacheAdapter = BFast.cache({database: 'smartstock', collection: 'config'});
 
   constructor(private readonly eventApi: EventApiService) {
@@ -27,7 +28,9 @@ export class LocalStorageService implements StorageAdapter {
   async saveSales(batchs: BatchModel[]): Promise<any> {
     const activeShop = await this.getActiveShop();
     await BFast.cache({database: 'sales', collection: activeShop.projectId})
-      .set<BatchModel[]>(Security.randomString(12), batchs);
+      .set<BatchModel[]>(Security.randomString(12), batchs, {
+        dtl: 720
+      });
   }
 
   async getActiveShop(): Promise<ShopI> {
@@ -40,7 +43,9 @@ export class LocalStorageService implements StorageAdapter {
   }
 
   async saveActiveShop(shop: ShopI): Promise<any> {
-    const response = await this.smartStockCache.set<ShopI>('activeShop', shop);
+    const response = await this.smartStockCache.set<ShopI>('activeShop', shop, {
+      dtl: 7
+    });
     this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
     return response;
   }
@@ -50,7 +55,9 @@ export class LocalStorageService implements StorageAdapter {
   }
 
   async saveCurrentProjectId(projectId: string): Promise<any> {
-    return await this.smartStockCache.set<string>('cPID', projectId);
+    return await this.smartStockCache.set<string>('cPID', projectId, {
+      dtl: 7
+    });
   }
 
   async clearSmartStockCache(): Promise<any> {
@@ -84,28 +91,41 @@ export class LocalStorageService implements StorageAdapter {
   async getStocks(): Promise<Stock[]> {
     const shop = await this.getActiveShop();
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
-    // const keys: string[] = await stocksCache.keys();
-    // const stocks: Stock[] = [];
-    // for (const key of keys) {
     return await stocksCache.get<Stock[]>('all');
-    // }
-    // return stocks;
   }
 
   async saveStocks(stocks: Stock[]): Promise<any> {
-    // console.log(stocks);
     const shop = await this.getActiveShop();
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
-    // stocks.forEach(stock => {
-    return await stocksCache.set('all', stocks);
-    // });
-    // return true;
+    return await stocksCache.set('all', stocks, {
+      dtl: 360
+    });
   }
 
   async saveStock(stock: Stock): Promise<Stock> {
+    // const shop = await this.getActiveShop();
+    // const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
+    // return stocksCache.set(stock.objectId, stock);
+    return undefined;
+  }
+
+  async getCustomers(): Promise<CustomerModel[]> {
     const shop = await this.getActiveShop();
-    const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
-    return stocksCache.set(stock.objectId, stock);
+    const customersCache = BFast.cache({database: 'customers', collection: shop.projectId});
+    const customersKey = await customersCache.keys();
+    const customers = [];
+    for (const key of customersKey) {
+      customers.push(await customersCache.get<CustomerModel>(key));
+    }
+    return customers;
+  }
+
+  async saveCustomer(customer: CustomerModel): Promise<CustomerModel> {
+    const shop = await this.getActiveShop();
+    const customersCache = BFast.cache({database: 'customers', collection: shop.projectId});
+    return await customersCache.set<CustomerModel>(customer.displayName, customer, {
+      dtl: 360
+    });
   }
 
 }

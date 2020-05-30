@@ -4,7 +4,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {SalesDatabaseService} from '../../../services/sales-database.service';
 import {StockDatabaseService} from '../../../services/stock-database.service';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Stock} from '../../../model/stock';
@@ -30,7 +30,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly _stockApi: StockDatabaseService,

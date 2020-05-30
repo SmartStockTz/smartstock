@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -19,8 +19,8 @@ export class SettingsService {
   };
 
   constructor(private readonly _httpClient: HttpClient,
-              private readonly _storage: LocalStorageService,
-              private readonly indexDb: LocalStorageService) {
+              private readonly _storage: StorageService,
+              private readonly indexDb: StorageService) {
   }
 
   async getSSMUserHeader() {

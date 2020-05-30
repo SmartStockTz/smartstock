@@ -15,6 +15,7 @@ import {CartModel} from '../../../model/cart';
 import {Stock} from '../../../model/stock';
 import {toSqlDate} from '../../../utils/date';
 import {environment} from '../../../../environments/environment';
+import {CustomerApiService} from '../../../services/customer-api.service';
 
 @Component({
   selector: 'app-cart',
@@ -32,6 +33,7 @@ export class CartComponent implements OnInit {
               private readonly settings: SettingsService,
               private readonly printer: PrintServiceService,
               private readonly userApi: UserDatabaseService,
+              private readonly customerApi: CustomerApiService,
               private readonly snack: MatSnackBar) {
   }
 
@@ -58,6 +60,7 @@ export class CartComponent implements OnInit {
     this._discountListener();
     this._hideCartListener();
     this._handleCustomerNameControl();
+    this._getCustomers();
   }
 
   private getUser() {
@@ -72,9 +75,20 @@ export class CartComponent implements OnInit {
 
   private _handleCustomerNameControl() {
     this.customersArray = [];
-    this.customerFormControl.valueChanges.subscribe((value: string) => {
-      if (value) {
-        this.customers = of(this.customersArray.filter(value1 => value1.toLowerCase().startsWith(value.toLowerCase())));
+    this.customerFormControl.valueChanges.subscribe((enteredName: string) => {
+      if (enteredName) {
+        this.customerApi.getCustomers()
+          .then(customers => {
+            if (!customers) {
+              customers = [];
+            }
+            this.customers = of(
+              customers
+                .map(customer => customer.displayName)
+                .filter(value1 => value1.toLowerCase().startsWith(enteredName.toLowerCase()))
+            );
+          })
+          .catch();
       }
     });
   }
@@ -161,6 +175,11 @@ export class CartComponent implements OnInit {
       return;
     }
     this.checkoutProgress = true;
+    if (this.customerFormControl.valid) {
+      this.customerApi.saveCustomer({
+        displayName: this.customerFormControl.value,
+      }).catch();
+    }
     this.printCart()
       .then(_ => {
         this.checkoutProgress = false;
@@ -279,5 +298,19 @@ export class CartComponent implements OnInit {
       });
     });
     return sales;
+  }
+
+  private _getCustomers() {
+    if (!this.isViewedInWholesale) {
+      return;
+    }
+    this.customerApi.getCustomers()
+      .then(customers => {
+        if (!customers) {
+          customers = [];
+        }
+        this.customers = of(customers.map(value => value.displayName));
+      })
+      .catch();
   }
 }

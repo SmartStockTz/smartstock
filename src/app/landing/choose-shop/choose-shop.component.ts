@@ -5,7 +5,7 @@ import {CreateShopComponent} from './create-shop/create-shop.component';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {ShopI} from '../../model/ShopI';
-import {LocalStorageService} from '../../services/local-storage.service';
+import {StorageService} from '../../services/storage.service';
 import {UserDatabaseService} from '../../services/user-database.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class ChooseShopComponent implements OnInit {
   constructor(public createShopDialog: MatDialog,
               private readonly _snack: MatSnackBar,
               private readonly _router: Router,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly userDatabase: UserDatabaseService) {
   }
 

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {ShopDatabaseService} from '../../../services/shop-database.service';
 
 export interface DialogData {
@@ -27,7 +27,7 @@ export class CreateShopComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CreateShopComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
               private readonly snack: MatSnackBar,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly _shopApi: ShopDatabaseService,
               private readonly formBuilder: FormBuilder) {
   }
