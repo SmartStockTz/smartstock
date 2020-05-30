@@ -1,6 +1,6 @@
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
-import {BatchI} from '../model/batchI';
+import {BatchModel} from '../model/batchModel';
 import {Stock} from '../model/stock';
 
 export interface StorageAdapter {
@@ -10,7 +10,7 @@ export interface StorageAdapter {
 
   removeActiveUser(): Promise<any>;
 
-  saveSales(batchs: BatchI[]): Promise<any>;
+  saveSales(batchs: BatchModel[]): Promise<any>;
 
   getActiveShop(): Promise<ShopI>;
 
@@ -22,11 +22,13 @@ export interface StorageAdapter {
 
   getCurrentProjectId(): Promise<string>;
 
-  clearSsmStorage(): Promise<any>;
+  clearSmartStockCache(): Promise<any>;
 
   removeStocks(): Promise<any>;
 
   getStocks(): Promise<Stock[]>;
 
   saveStocks(stocks: Stock[]): Promise<any>;
+
+  saveStock(stock: Stock): Promise<Stock>;
 }

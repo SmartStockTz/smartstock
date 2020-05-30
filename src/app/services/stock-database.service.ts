@@ -5,7 +5,7 @@ import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 import {PurchaseI} from '../model/PurchaseI';
 import {UserDatabaseService} from './user-database.service';
 import {BFast} from 'bfastjs';
@@ -19,7 +19,7 @@ export class StockDatabaseService implements StockDataSource {
   constructor(private readonly _httpClient: HttpClient,
               private readonly _user: UserDatabaseService,
               private readonly _storage: LocalStorageService,
-              private readonly _settings: SettingsServiceService) {
+              private readonly _settings: SettingsService) {
   }
 
   async exportToExcel(): Promise<any> {

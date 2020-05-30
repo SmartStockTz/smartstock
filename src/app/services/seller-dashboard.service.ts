@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SellerReportAdapter} from '../adapter/SellerReportAdapter';
 import {HttpClient} from '@angular/common/http';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 import {LocalStorageService} from './local-storage.service';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class SellerDashboardService implements SellerReportAdapter {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _storage: LocalStorageService,
-              private readonly _settings: SettingsServiceService) {
+              private readonly _settings: SettingsService) {
   }
 
   getTotalSaleOfUserByDate(date: string): Promise<{ total: number }[]> {

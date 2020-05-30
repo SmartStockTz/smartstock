@@ -5,13 +5,13 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {CommonComponentsModule} from './shared-components/common-components.module';
+import {CommonComponentsModule} from './modules/shared/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 

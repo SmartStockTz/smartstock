@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ShopDatabaseAdapter} from '../adapter/ShopDatabaseAdapter';
 import {ShopI} from '../model/ShopI';
 import {HttpClient} from '@angular/common/http';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 import {LocalStorageService} from './local-storage.service';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class ShopDatabaseService implements ShopDatabaseAdapter {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _storage: LocalStorageService,
-              private readonly _settings: SettingsServiceService) {
+              private readonly _settings: SettingsService) {
   }
 
   createShop(shop: ShopI): Promise<ShopI> {

@@ -1,23 +1,22 @@
-// importScripts('https://unpkg.com/bfastjs');
+// importScripts('/assets/js/bfastjs');
 //
 // addEventListener('message', async ({data}) => {
 //
 //   BFast.init({
 //     applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-//       enable: false
-//     },
-//     functionsURL: 'http://localhost:3000'
+//       enable: true
+//     }
 //   });
 //
-//   const event = BFast.functions().event('/stocksUpdate', () => {
-//     console.log('socket connect');
-//   }, () => {
-//     console.log('socket disconnect');
-//   });
+//   // const event = BFast.functions().event('/stocksUpdate', () => {
+//   //   console.log('socket connect');
+//   // }, () => {
+//   //   console.log('socket disconnect');
+//   // });
 //
-//   event.listener(data => {
-//     console.log(data);
-//   });
+//   // event.listener(data => {
+//   //   console.log(data);
+//   // });
 //
 //   // setInterval(() => {
 //   event.emit({auth: null, payload: {message: 'getStocks', projectId: 'any'}});
