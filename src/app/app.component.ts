@@ -21,12 +21,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._storage.getActiveShop().then(_ => {
-      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
-    }).catch(_ => {
-      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
-    });
-
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_SET, async ($event) => {
       try {
         const activeShop = await this._storage.getActiveShop();
@@ -43,6 +37,11 @@ export class AppComponent implements OnInit {
       } catch (e) {
         console.log(e);
       }
+    });
+    this._storage.getActiveShop().then(_ => {
+      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
+    }).catch(_ => {
+      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
     });
   }
 }

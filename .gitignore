@@ -47,5 +47,7 @@ server/logs
 .firebase
 /.firebase
 
-android
-/android
+#android
+#/android
+.idea
+.vscode

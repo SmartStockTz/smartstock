@@ -94,7 +94,7 @@ export class CartComponent implements OnInit {
   }
 
   private _cartListener() {
-    this.eventService.listen(SsmEvents.CART, (event) => {
+    this.eventService.listen(SsmEvents.ADD_CART, (event) => {
       const cart = event.detail;
       const updateItem = this.cartProductsArray.find(x => x.product.objectId === cart.product.objectId);
       if (updateItem != null) {

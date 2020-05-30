@@ -10,6 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
+import {EventApiService} from '../../../services/event-api.service';
 
 @Component({
   selector: 'app-sale',
@@ -30,10 +31,11 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly _storage: StorageService,
+              private readonly storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
-              private readonly _stockApi: StockDatabaseService,
+              private readonly eventApi: EventApiService,
+              private readonly stockApi: StockDatabaseService,
   ) {
     super();
   }
@@ -44,7 +46,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   getProductsFromServer() {
     this.fetchDataProgress = true;
-    this._stockApi.getAllStock().then(products => {
+    this.stockApi.getAllStock().then(products => {
       this.fetchDataProgress = false;
       this.productsObservable = of(products);
     }).catch(reason => {
@@ -56,7 +58,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   getProducts() {
     this.fetchDataProgress = true;
     this.productsObservable = undefined;
-    this._storage.getStocks().then(products => {
+    this.storage.getStocks().then(products => {
       this.fetchDataProgress = false;
       if (products && products.length > 0) {
         this.productsObservable = of(products);
@@ -75,13 +77,13 @@ export class SaleComponent extends DeviceInfo implements OnInit {
       this.searchProgressFlag = false;
       return;
     }
-    this._storage.getStocks().then(allStocks => {
+    this.storage.getStocks().then(allStocks => {
       this.searchProgressFlag = false;
       if (allStocks) {
         const keywords = product.toLowerCase().split(' ').filter(value => {
           return value !== '';
         });
-        console.log(keywords);
+        // console.log(keywords);
         const result = allStocks.filter(stock => {
           const targetSentence =
             `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
@@ -95,7 +97,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
           }
           return flag;
         });
-        console.log(result);
+        // console.log(result);
         this.productsObservable = of(result);
       } else {
         this.snack.open('No products found, try again or refresh products', 'Ok', {

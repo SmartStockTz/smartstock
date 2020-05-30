@@ -19,7 +19,7 @@
                  [cartdrawer]="cartdrawer"
                  [showProgress]="showProgress"></app-toolbar>
 
-    <app-on-fetch *ngIf="!productsObservable" [isLoading]="fetchDataProgress"
+    <app-on-fetch *ngIf="!productsObservable || fetchDataProgress" [isLoading]="fetchDataProgress"
                   (refreshCallback)="getProductsFromServer()"></app-on-fetch>
 
     <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">

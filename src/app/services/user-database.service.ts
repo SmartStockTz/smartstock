@@ -46,7 +46,7 @@ export class UserDatabaseService implements UserDataSource {
 
   async getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
     const projectId = await this._settings.getCustomerProjectId();
-    return BFast.database().collection('_User').query().find<UserI>({
+    return BFast.database(projectId).collection('_User').query().find<UserI>({
       size: pagination.size,
       skip: pagination.skip,
       filter: {

@@ -57,11 +57,11 @@ export class ProductCardComponent extends DeviceInfo implements OnInit {
       return;
     }
     const quantity = this.quantityFormControl.value;
-    this.eventService.broadcast(SsmEvents.CART, {product: product, quantity: quantity});
+    this.eventService.broadcast(SsmEvents.ADD_CART, {product: product, quantity: quantity});
     if (this.enoughWidth()) {
       this.cartdrawer.opened = true;
     }
-    this.quantityFormControl.reset(0);
+    this.quantityFormControl.reset(1);
     this.detailView = false;
     this.flipped = null;
   }

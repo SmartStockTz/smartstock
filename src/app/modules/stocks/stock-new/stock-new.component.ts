@@ -9,6 +9,7 @@ import {DialogCategoryNewComponent} from '../categories/categories.component';
 import {DialogSupplierNewComponent} from '../suppliers/suppliers.component';
 import {DialogImageCropComponent} from '../../shared/dialog-image-crop/dialog-image-crop.component';
 import {StockDatabaseService} from '../../../services/stock-database.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-stock-new',
@@ -35,7 +36,8 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
-              private readonly _dialog: MatDialog,
+              private readonly dialog: MatDialog,
+              private readonly router: Router,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }
@@ -50,7 +52,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
 
   fileChangeEvent(event: any): void {
     if (event) {
-      this._dialog.open(DialogImageCropComponent, {
+      this.dialog.open(DialogImageCropComponent, {
         data: {
           event: event
         }
@@ -153,8 +155,9 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
       this.croppedImage = null;
       this.productForm.reset();
       formElement.resetForm();
+      this.router.navigateByUrl('/stock').catch(console.log);
     }).catch(reason => {
-      console.warn(reason);
+      // console.warn(reason);
       this.mainProgress = false;
       this.snack.open(reason.message ? reason.message : 'Unknown', 'Ok', {
         duration: 3000
@@ -165,7 +168,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   addNewUnit($event: MouseEvent) {
     $event.preventDefault();
     $event.stopPropagation();
-    this._dialog.open(DialogUnitNewComponent, {
+    this.dialog.open(DialogUnitNewComponent, {
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
@@ -183,7 +186,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   addNewCategory($event: MouseEvent) {
     $event.preventDefault();
     $event.stopPropagation();
-    this._dialog.open(DialogCategoryNewComponent, {
+    this.dialog.open(DialogCategoryNewComponent, {
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
@@ -201,7 +204,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   addNewSupplier($event: MouseEvent) {
     $event.preventDefault();
     $event.stopPropagation();
-    this._dialog.open(DialogSupplierNewComponent, {
+    this.dialog.open(DialogSupplierNewComponent, {
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
