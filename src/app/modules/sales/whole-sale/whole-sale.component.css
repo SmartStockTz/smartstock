@@ -1,0 +1,51 @@
+.space{
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.example-option-img {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+[dir='rtl'] .example-option-img {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.input-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dawer-head{
+  height: 30vh;
+  background-image: url("/assets/img/calculate.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+table{
+  width: 100%;
+}
+
+.wholesale-container{
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+
+

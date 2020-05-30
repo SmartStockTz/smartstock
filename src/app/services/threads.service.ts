@@ -1,6 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import * as Parse from 'parse/dist/parse';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {ShopI} from '../model/ShopI';
 import {EventApiService} from './event-api.service';
 import {SsmEvents} from '../utils/eventsNames';
@@ -14,15 +13,16 @@ handle updates in main thread
 export class ThreadsService implements OnInit {
 
   constructor(private readonly eventApi: EventApiService,
-              private readonly _storage: LocalStorageService) {
+              private readonly _storage: StorageService) {
   }
 
   private salesWorkerProxy: Worker;
   private stocksWorkerProxy: Worker;
 
-  private static _setUpParseServer(activeShop: ShopI) {
-    Parse.initialize(activeShop.applicationId, '');
-    Parse.serverURL = `https://${activeShop.projectUrlId}.bfast.fahamutech.com`;
+  private _setUpParseServer(activeShop: ShopI) {
+    // this.parseSdk = BFast.directAccess.parseSdk;
+    // this.parseSdk.initialize(activeShop.applicationId, '');
+    // this.parseSdk.serverURL = `https://${activeShop.projectUrlId}.bfast.fahamutech.com`;
   }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class ThreadsService implements OnInit {
   async start() {
     try {
       const activeShop = await this._storage.getActiveShop();
-      ThreadsService._setUpParseServer(activeShop);
+      // this._setUpParseServer(activeShop);
       await this.startSalesProxy();
       await this.startStockUpdateProxy();
       return 'Done start proxy';
@@ -42,9 +42,9 @@ export class ThreadsService implements OnInit {
 
   async stop() {
     this._stopWorkers();
-    if (Parse.applicationId && Parse.serverURL) {
-      Parse.LiveQuery.close();
-    }
+    // if (BFast.directAccess.parseSdk.applicationId && BFast.directAccess.parseSdk.serverURL) {
+    //   BFast.directAccess.parseSdk.LiveQuery.close();
+    // }
   }
 
   private _stopWorkers() {
@@ -91,7 +91,6 @@ export class ThreadsService implements OnInit {
         this._noWorkerStockSync();
       }
     } catch (e) {
-      console.log(e);
       throw {message: 'Fails to start stocks proxy'};
     }
   }
@@ -100,44 +99,43 @@ export class ThreadsService implements OnInit {
 
   }
 
-  private async _noWorkerStockSync() {
-    // const query = new Parse.Query('stocks');
-    // query.equalTo('product', 'Test1');
-    // const stockLiveQuery = await query.subscribe();
+  private _noWorkerStockSync() {
+    // const query = BFast.database().collection('stocks').query();
+    // query.subscribe().then(stockLiveQuery => {
+    //   stockLiveQuery.on('open', () => {
+    //     console.log('connection open for stocks');
+    //   });
     //
-    // console.log(stockLiveQuery);
+    //   stockLiveQuery.on('create', (stocks) => {
+    //     console.log('stocks created');
+    //     console.log(stocks);
+    //   });
     //
-    // stockLiveQuery.on('open', () => {
-    //   console.log('connection open for stocks');
-    // });
+    //   stockLiveQuery.on('update', (stocks) => {
+    //     console.log('stocks updated');
+    //     console.log(stocks);
+    //   });
+    //   //
+    //   // stockLiveQuery.on('delete', (stocks) => {
+    //   //   console.log('stocks deleted');
+    //   //   console.log(stocks);
+    //   // });
+    //   //
+    //   // stockLiveQuery.on('enter', (stocks) => {
+    //   //   console.log('stocks enter');
+    //   //   console.log(stocks);
+    //   // });
+    //   //
+    //   // stockLiveQuery.on('leave', (stocks) => {
+    //   //   console.log('stocks leave');
+    //   //   console.log(stocks);
+    //   // });
     //
-    // // stockLiveQuery.on('create', (stocks) => {
-    // //   console.log('stocks created');
-    // //   console.log(stocks);
-    // // });
-    // //
-    // stockLiveQuery.on('update', (stocks) => {
-    //   console.log('stocks updated');
-    //   console.log(stocks);
-    // });
-    // //
-    // // stockLiveQuery.on('delete', (stocks) => {
-    // //   console.log('stocks deleted');
-    // //   console.log(stocks);
-    // // });
-    // //
-    // // stockLiveQuery.on('enter', (stocks) => {
-    // //   console.log('stocks enter');
-    // //   console.log(stocks);
-    // // });
-    // //
-    // // stockLiveQuery.on('leave', (stocks) => {
-    // //   console.log('stocks leave');
-    // //   console.log(stocks);
-    // // });
-    //
-    // stockLiveQuery.on('close', (stocks) => {
-    //   console.log('stocks connection closed');
+    //   stockLiveQuery.on('close', (stocks) => {
+    //     console.log('stocks connection closed');
+    //   });
+    // }).catch(reason => {
+    //   console.log(reason);
     // });
   }
 

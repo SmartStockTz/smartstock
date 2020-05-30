@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {SsmEvents} from '../utils/eventsNames';
-import {LocalStorageService} from '../services/local-storage.service';
+import {StorageService} from '../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActiveShopGuard implements CanActivate {
-  constructor(private readonly _storage: LocalStorageService,
+  constructor(private readonly _storage: StorageService,
               private readonly _router: Router) {
   }
 

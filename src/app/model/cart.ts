@@ -1,9 +1,9 @@
 import {Stock} from './stock';
 
-export interface CartI {
+export interface CartModel {
   product: string;
   quantity: number;
   amount: number;
-  discount: number;
+  discount?: number;
   stock: Stock;
 }

@@ -1,0 +1,11 @@
+.no-data-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.no-data-wrapper > h4 {
+  padding: 8px;
+}

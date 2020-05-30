@@ -1,0 +1,40 @@
+
+.card-container {
+  width: 135px;
+  height: 160px;
+  margin: 0 7px;
+  position: relative;
+  transition: width 0.2s;
+}
+
+.flippable-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+
+}
+
+.flippable-card mat-card {
+  margin: 0;
+  display: block;
+  position: absolute;
+  width: 132px;
+  min-height: 150px;
+  backface-visibility: hidden;
+}
+
+.flippable-card .back {
+  background: white;
+  transform: rotateY(180deg);
+  width: 326px;
+  height: 160px;
+}
+
+.flippable-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-container.flipped {
+  width: 326px;
+}
+

@@ -1,26 +1,21 @@
 import {NgModule} from '@angular/core';
-import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
-import {RegisterComponent} from './register/register.component';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
-import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
-import {StockExistGuard} from './guards/stock-exist.guard';
-import {ChooseShopComponent} from './choose-shop/choose-shop.component';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {StockManagerGuard} from './guards/stock-manager.guard';
-import {PrivancyComponent} from './privancy/privancy.component';
-import {LandingComponent} from './landing/landing.component';
+import {LandingComponent} from './landing/landing/landing.component';
+import {PrivacyComponent} from './landing/privacy/privacy.component';
+import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
+import {LoginComponent} from './landing/login/login.component';
+import {RegisterComponent} from './landing/register/register.component';
+import {ChooseShopComponent} from './landing/choose-shop/choose-shop.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    canActivate: [AuthenticatedUserGuard],
-    component: LandingComponent
-  },
+  {path: '', component: LandingComponent},
   {
     path: 'privacy',
-    component: PrivancyComponent
+    component: PrivacyComponent
   },
   {
     path: 'login',
@@ -40,32 +35,40 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AdminRoleGuard, ActiveShopGuard],
-    loadChildren: () => import('./dashboard-module/dashboard-module.module').then(mod => mod.DashboardModuleModule)
+    loadChildren: () => import('./modules/dashboard/dashboard-module.module').then(mod => mod.DashboardModuleModule)
+  },
+  {
+    path: 'report',
+    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    loadChildren: () => import('./modules/reports/reports.module').then(mod => mod.ReportsModule)
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, StockExistGuard, ActiveShopGuard],
-    loadChildren: () => import('./sales-module/sales-module.module').then(mod => mod.SalesModuleModule)
+    canActivate: [AuthenticationGuard, ActiveShopGuard],
+    loadChildren: () => import('./modules/sales/sales-module.module').then(mod => mod.SalesModuleModule)
   },
   {
     path: 'stock',
     canActivate: [StockManagerGuard, ActiveShopGuard],
-    loadChildren: () => import('./stock-module/stock-module.module').then(mod => mod.StockModuleModule)
+    loadChildren: () => import('./modules/stocks/stock-module.module').then(mod => mod.StockModuleModule)
   },
   {
     path: 'purchase',
     canActivate: [StockManagerGuard, ActiveShopGuard],
-    loadChildren: () => import('./purchase-module/purchase-module.module').then(mod => mod.PurchaseModuleModule)
+    loadChildren: () => import('./modules/purchase/purchase-module.module').then(mod => mod.PurchaseModuleModule)
   },
   {
     path: 'settings',
     canActivate: [AuthenticationGuard, ActiveShopGuard],
-    loadChildren: () => import('./settings-module/settings-module.module').then(mod => mod.SettingsModuleModule)
+    loadChildren: () => import('./modules/settings/settings-module.module').then(mod => mod.SettingsModuleModule)
   },
   {
     path: 'home',
     redirectTo: 'dashboard'
   },
+  {
+    path: '**', loadChildren: () => import('./landing/main-module.module').then(mod => mod.MainModuleModule)
+  }
 ];
 
 @NgModule({

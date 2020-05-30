@@ -5,11 +5,11 @@ import {Stock} from '../model/stock';
 import {SupplierI} from '../model/SupplierI';
 import {HttpClient} from '@angular/common/http';
 import {UnitsI} from '../model/UnitsI';
-import {randomString} from '../adapter/ParseBackend';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 import {PurchaseI} from '../model/PurchaseI';
-import * as Parse from 'parse';
 import {UserDatabaseService} from './user-database.service';
+import {BFast} from 'bfastjs';
+import {StorageService} from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,121 +18,57 @@ export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _user: UserDatabaseService,
-              private readonly _settings: SettingsServiceService) {
+              private readonly _storage: StorageService,
+              private readonly _settings: SettingsService) {
   }
 
-  exportToExcel(): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      const user = await this._user.currentUser();
-      const projectId = await this._settings.getCustomerProjectId();
-      const email = encodeURIComponent(user.email);
-      this._httpClient.get(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email, {
-        headers: this._settings.ssmFunctionsHeader
-      }).subscribe(value => {
-        resolve(value);
-      }, error => {
-        reject(error);
-      });
-    });
+  async exportToExcel(): Promise<any> {
+    const user = await this._user.currentUser();
+    const projectId = await this._settings.getCustomerProjectId();
+    const email = encodeURIComponent(user.email);
+    return BFast.functions()
+      .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
+      .get({}, this._settings.ssmFunctionsHeader);
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
   }
 
-  async addAllStock(stocks: Stock[]): Promise<any> {
-    try {
-      return await this._httpClient.post(this._settings.ssmFunctionsURL +
-        '/functions/stocks/import/' + await this._settings.getCustomerProjectId(), stocks, {
-        headers: this._settings.ssmFunctionsHeader
-      }).toPromise();
-    } catch (e) {
-      throw e;
-    }
+  async importStocks(stocks: Stock[]): Promise<any> {
+    return BFast.functions()
+      .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + await this._settings.getCustomerProjectId())
+      .post(stocks, this._settings.ssmFunctionsHeader);
   }
 
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {
   }
 
-  addCategory(category: CategoryI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/categories', category, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async addCategory(category: CategoryI): Promise<any> {
+    return BFast.database().collection<CategoryI>('categories').save(category);
   }
 
-  addUnit(unit: UnitsI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/units', unit, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async addUnit(unit: UnitsI): Promise<any> {
+    return BFast.database().collection<UnitsI>('units').save(unit);
   }
 
-  getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
-    return new Promise<UnitsI[]>(async (resolve, reject) => {
-      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/units', {
-        headers: await this._settings.getCustomerHeader(),
-        params: {
-          'order': '-updatedAt',
-          'limit': '1000'
-        }
-      }).subscribe(value => {
-        const unt: UnitsI[] = value.results;
-        resolve(unt);
-      }, error1 => {
-        reject(error1);
-      });
+  async getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
+    const units = await BFast.database().collection('units').getAll<UnitsI>();
+    units.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
+    return units;
   }
 
-  addStock(stock: Stock): Promise<Stock> {
-    return new Promise<Stock>(async (resolve, reject) => {
-      try {
-        const serverUrl = await this._settings.getCustomerServerURL();
-        stock.idOld = randomString(8);
-        if (stock.image) {
-          Parse.initialize(await this._settings.getCustomerApplicationId());
-          Parse.serverURL = serverUrl;
-          const file = new Parse.File('product.png', {base64: stock.image});
-          const imageRequest = await file.save();
-          // imageRequest = await this._httpClient.post<any>(serverUrl + '/files/product.png', stock.image, {
-          //   headers: await this._settings.getCustomerPostHeader('image/png')
-          // }).toPromise();
-          // console.log(imageRequest.toJSON());
-          stock.image = imageRequest.toJSON().url;
-        }
-        const addStockRequest = this._httpClient.post<Stock>(serverUrl + '/classes/stocks', stock, {
-          headers: await this._settings.getCustomerPostHeader()
-        }).toPromise();
-        const response = await addStockRequest;
-        // @ts-ignore
-        resolve(response);
-      } catch (e) {
-        reject(e);
-      }
-    });
+  async addStock(stock: Stock): Promise<Stock> {
+    if (stock.image) {
+      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      stock.image = imageRequest.url;
+    }
+    return BFast.database().collection('stocks').save(stock);
   }
 
-  addSupplier(supplier: SupplierI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.post(await this._settings.getCustomerServerURL() + '/classes/suppliers', supplier, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        console.log(error1);
-        reject(null);
-      });
-    });
+  async addSupplier(supplier: SupplierI): Promise<any> {
+    return BFast.database().collection('suppliers').save(supplier);
   }
 
   deleteAllCategory(categories: CategoryI[], callback: (value: any) => void) {
@@ -144,105 +80,50 @@ export class StockDatabaseService implements StockDataSource {
   deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void) {
   }
 
-  deleteCategory(category: CategoryI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/categories/' + category.objectId, {
-        headers: await this._settings.getCustomerHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async deleteCategory(category: CategoryI): Promise<any> {
+    return BFast.database().collection('categories').delete(category.objectId);
   }
 
-  deleteStock(stock: Stock, callback?: (value: any) => void): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/stocks/' + stock.objectId, {
-        headers: await this._settings.getCustomerHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async deleteStock(stock: Stock, callback?: (value: any) => void): Promise<any> {
+    return BFast.database().collection('stocks').delete(stock.objectId);
   }
 
-  deleteSupplier(objectId: string): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/suppliers/' + objectId, {
-        headers: await this._settings.getCustomerHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async deleteSupplier(objectId: string): Promise<any> {
+    return BFast.database().collection('suppliers').delete(objectId);
   }
 
-  getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
-    return new Promise<CategoryI[]>(async (resolve, reject) => {
-      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/categories', {
-        headers: await this._settings.getCustomerHeader(),
-        params: {
-          'order': '-updatedAt',
-          'limit': pagination.size ? pagination.size.toString() : '1000'
-        }
-      }).subscribe(value => {
-        const categ: CategoryI[] = value.results;
-        resolve(categ);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
+    return BFast.database().collection('categories').getAll();
   }
 
-  getAllStock(): Promise<Stock[]> {
-    return new Promise<Stock[]>(async (resolve, reject) => {
-      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/stocks', {
-        headers: await this._settings.getCustomerHeader(),
-        params: {
-          'order': '-updatedAt',
-          'limit': '100000'
-        }
-      }).subscribe(value => {
-        const result: Stock[] = value.results;
-        resolve(result);
-      }, error1 => {
-        reject(error1);
-      });
+  async getAllStock(): Promise<Stock[]> {
+    const stocks: Stock[] = await BFast.database().collection<Stock>('stocks').getAll<Stock>(null, {
+      cacheEnable: false,
+      dtl: 1
     });
+    await this._storage.saveStocks(stocks);
+    stocks.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
+    return stocks;
   }
 
-  getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
-    return new Promise<SupplierI[]>(async (resolve, reject) => {
-      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/suppliers', {
-        headers: await this._settings.getCustomerHeader(),
-        params: {
-          'order': '-updatedAt',
-          'limit': '1000'
-        }
-      }).subscribe(value => {
-        const supp: SupplierI[] = value.results;
-        resolve(supp);
-      }, error1 => {
-        reject(error1);
-      });
+  async getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
+    const suppliers: SupplierI[] = await BFast.database().collection<SupplierI>('suppliers').getAll<SupplierI>();
+    suppliers.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
+    return suppliers;
   }
 
   getCategory(id: string, callback: (category: CategoryI) => void) {
   }
 
-  getStock(id: string, callback: (stock: Stock) => void) {
-    // this.httpClient.get<Stock>(this.settings.getCustomerServerURL() + '/classes/stocks/' + id, {
-    //   headers: this.settings.getCustomerHeader()
-    // }).subscribe(value => {
-    //   callback(value);
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
+  async getStock(id: string, callback: (stock: Stock) => void) {
+    return BFast.database().collection('stocks').get(id, {
+      cacheEnable: false,
+      dtl: 0
+    });
   }
 
   getSupplier(id: string, callback: (supplier: SupplierI) => void) {
@@ -257,111 +138,54 @@ export class StockDatabaseService implements StockDataSource {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
-  updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      const categoryId = category.objectId;
-      const data = {};
-      data[category.field] = category.value;
-      delete category.objectId;
-      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories/' + categoryId, data,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value => {
-        value.objectId = categoryId;
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
+    const categoryId = category.objectId;
+    const data = {};
+    data[category.field] = category.value;
+    delete category.objectId;
+    const response = await BFast.database().collection('categories').update<any>(categoryId, data);
+    response.objectId = categoryId;
+    return response;
   }
 
-  updateStock(stock: Stock): Promise<Stock> {
-    return new Promise<Stock>(async (resolve, reject) => {
-      try {
-        const serverUrl = await this._settings.getCustomerServerURL();
-        const stockId = stock.objectId;
-        delete stock.objectId;
-        if (stock.image && !stock.image.toString().startsWith('http://')) {
-          Parse.initialize(await this._settings.getCustomerApplicationId());
-          Parse.serverURL = serverUrl;
-          const file = new Parse.File('product.png', {base64: stock.image});
-          const imageRequest = await file.save();
-          stock.image = imageRequest.toJSON().url;
-        }
-        this._httpClient.put<Stock>(serverUrl + '/classes/stocks/' + stockId,
-          stock,
-          {
-            headers: await this._settings.getCustomerPostHeader()
-          }).subscribe(value => {
-          resolve(value);
-        }, error1 => {
-          reject(error1);
-        });
-      } catch (e) {
-        reject(e);
-      }
-    });
+  async updateStock(stock: Stock): Promise<Stock> {
+    const stockId = stock.objectId;
+    delete stock.objectId;
+    if (stock.image && !stock.image.toString().startsWith('http://')) {
+      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      stock.image = imageRequest.url;
+    }
+    return BFast.database().collection('stocks').update<Stock>(stockId, stock);
   }
 
-  updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      const supplierId = value.objectId;
-      const data = {};
-      data[value.field] = value.value;
-      delete value.objectId;
-      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/suppliers/' + supplierId, data,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value1 => {
-        value1.objectId = supplierId;
-        resolve(value1);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
+    const supplierId = value.objectId;
+    const data = {};
+    data[value.field] = value.value;
+    delete value.objectId;
+    const response = await BFast.database().collection('suppliers').update<any>(supplierId, data);
+    response.objectId = supplierId;
+    return response;
   }
 
-  updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      const unitId = unit.objectId;
-      const data = {};
-      data[unit.field] = unit.value;
-      delete unit.objectId;
-      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/units/' + unitId, data,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value => {
-        value.objectId = unitId;
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {
+    const unitId = unit.objectId;
+    const data = {};
+    data[unit.field] = unit.value;
+    delete unit.objectId;
+    const response = await BFast.database().collection('units').update<any>(unitId, data);
+    response.objectId = unitId;
+    return response;
   }
 
   deleteUnit(unit: UnitsI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.delete(await this._settings.getCustomerServerURL() + '/classes/units/' + unit.objectId, {
-        headers: await this._settings.getCustomerHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+    return BFast.database().collection('units').delete(unit.objectId);
   }
 
-  addPurchase(purchaseI: PurchaseI): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.post(this._settings.ssmFunctionsURL
-        + '/functions/purchases/' + await this._settings.getCustomerProjectId(), purchaseI, {
-        headers: this._settings.ssmFunctionsHeader
-      }).subscribe(purchase => {
-        resolve(purchase);
-      }, error => {
-        reject(error);
-      });
-    });
+  async addPurchase(purchaseI: PurchaseI): Promise<any> {
+    return BFast.functions().request(
+      this._settings.ssmFunctionsURL + '/functions/purchases/' + await this._settings.getCustomerProjectId())
+      .post(purchaseI, this._settings.ssmFunctionsHeader);
   }
 }
 

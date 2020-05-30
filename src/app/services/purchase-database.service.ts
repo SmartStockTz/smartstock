@@ -3,13 +3,13 @@ import {PurchaseDataSource} from '../adapter/PurchaseDataSource';
 import {ReceiptI} from '../model/ReceiptI';
 import {PurchaseI} from '../model/PurchaseI';
 import {HttpClient} from '@angular/common/http';
-import {SettingsServiceService} from './Settings-service.service';
+import {SettingsService} from './settings.service';
 
 @Injectable()
 export class PurchaseDatabaseService implements PurchaseDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
-              private readonly _settings: SettingsServiceService) {
+              private readonly _settings: SettingsService) {
   }
 
   recordPayment(objectId: string): Promise<any> {
