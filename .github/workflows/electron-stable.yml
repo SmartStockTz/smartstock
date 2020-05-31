@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - electron
     pull_request:
       branches: [ master ]
 
@@ -44,12 +43,12 @@ jobs:
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
       with:
-        snapcraft_token: ${{ secrets.SNAP_STORE_EDGE }}
+        snapcraft_token: ${{ secrets.SNAP_STORE_STABLE }}
         # skip_install: true # optional, if already installed in an earlier step
     - run: npm install
     - run: npm run build:desktop
     - run: npm run prepare:snap
-    - run: npm run push:snap:edge
+    - run: npm run push:snap:stable
       env:
         CI: true
         PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
