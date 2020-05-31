@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   firebase: {
     apiKey: 'AIzaSyAlcMxXCZ25jAVWQ5RY98AUsdK5-UP_iew',
     authDomain: 'smart-stock-manager.firebaseapp.com',
@@ -8,8 +8,8 @@ export const environment = {
     storageBucket: 'smart-stock-manager.appspot.com',
     messagingSenderId: '23694341104',
   },
-  browser: true,
-  electron: false,
+  browser: false,
+  electron: true,
   printerUrl: 'https://localhost:8080',
   functionsURL: 'https://smartstock-faas.bfast.fahamutech.com',
   databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'

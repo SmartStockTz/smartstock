@@ -2,17 +2,35 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "20.05.0",
+  "version": "20.5.2",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
-      "category": "productivity"
+      "category": "Office"
+    },
+    "linux": {
+      "category": "Office"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:desktop": "ng build --prod --base-href ./",
+    "start:desktop": "ng serve -c=electron",
+    "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx cap sync",
+    "prepare:snap": "cd electron && npm install && npm run build:snap",
+    "push:snap:edge": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release edge",
+    "push:snap:stable": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release stable",
     "build:web": "ng build --prod",
     "deploy:web": "firebase deploy --token \"$FIREBASE_TOKEN\"",
     "test": "ng test",
@@ -34,6 +52,7 @@
     "@angular/service-worker": "^9.0.6",
     "@capacitor/angular": "^1.0.2",
     "@capacitor/core": "latest",
+    "@capacitor/electron": "^2.1.2",
     "bfastjs": "^3.0.1",
     "highcharts": "^8.0.4",
     "moment": "^2.26.0",

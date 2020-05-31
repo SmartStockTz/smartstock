@@ -51,3 +51,6 @@ server/logs
 #/android
 .idea
 .vscode
+electron/node_modules
+node_modules
+dist

@@ -58,6 +58,22 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "serviceWorker": true
+            },
+            "electronProd": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.electronProd.ts"
+                }
+              ]
+            },
+            "electron": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.electron.ts"
+                }
+              ]
             }
           }
         },
@@ -69,6 +85,9 @@
           "configurations": {
             "production": {
               "browserTarget": "smartstock:build:production"
+            },
+            "electron": {
+              "browserTarget": "smartstock:build:electron"
             }
           }
         },
