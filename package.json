@@ -6,15 +6,12 @@
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
-      "category": "Office",
-      "publish": ["github"]
+      "category": "Office"
     },
     "linux": {
-      "category": "Office",
-      "publish": ["github"]
+      "category": "Office"
     },
     "win": {
-      "publish": ["github"],
       "target": [
         {
           "target": "nsis",
