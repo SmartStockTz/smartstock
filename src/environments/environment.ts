@@ -12,6 +12,8 @@ export const environment = {
     storageBucket: 'smart-stock-manager.appspot.com',
     messagingSenderId: '23694341104',
   },
+  browser: true,
+  electron: false,
   printerUrl: 'https://localhost:8080',
   functionsURL: 'http://localhost:3000',  // 'https://smartstock-faas.bfast.fahamutech.com', // 'http://localhost:3000',
   databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'
