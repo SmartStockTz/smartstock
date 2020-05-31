@@ -2,11 +2,28 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "20.05.0",
+  "version": "20.05.1",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
-      "category": "productivity"
+      "category": "Office",
+      "publish": ["github"]
+    },
+    "linux": {
+      "category": "Office",
+      "publish": ["github"]
+    },
+    "win": {
+      "publish": ["github"],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
@@ -14,6 +31,8 @@
     "start": "ng serve",
     "start:desktop": "ng serve -c=electron",
     "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx cap sync",
+    "prepare:snap": "cd electron && npm install && npm run build:snap",
+    "push:snap:edge": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release edge",
     "build:web": "ng build --prod",
     "deploy:web": "firebase deploy --token \"$FIREBASE_TOKEN\"",
     "test": "ng test",

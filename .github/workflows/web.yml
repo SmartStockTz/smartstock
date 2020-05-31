@@ -25,7 +25,6 @@ jobs:
     - run: npm ci
     - run: npm run build:web
     - run: npm run deploy:web
-    #- run: npm test
       env:
         CI: true
         FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
