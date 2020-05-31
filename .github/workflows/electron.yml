@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - electron
 
 jobs:
   buidWin:
@@ -20,7 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run build:win
+      - run: npm run build:desktop
+      - run: cd electron && npm install && npm run build:win
         env:
           CI: true
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -40,7 +42,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run build:snap
+    - run: npm run build:desktop
+    - run: cd electron && npm install && npm run build:snap
       env:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
