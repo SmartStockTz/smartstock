@@ -4,16 +4,15 @@ const { CapacitorSplashScreen, configCapacitor } = require('@capacitor/electron'
 
 const path = require('path');
 
-// Place holders for our windows so they don't get garbage collected.
+app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
+app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
+
 let mainWindow = null;
 
-// Placeholder for SplashScreen ref
 let splashScreen = null;
 
-//Change this if you do not wish to have a splash screen
 let useSplashScreen = true;
 
-// Create simple menu for easy devtools access, and for demo
 const menuTemplateDev = [
   {
     label: 'Options',
@@ -28,11 +27,17 @@ const menuTemplateDev = [
   },
 ];
 
+const gotTheLock = app.requestSingleInstanceLock();
+if (gotTheLock){
+
+}else {
+
+}
+
 async function createWindow () {
-  // Define our main window size
   mainWindow = new BrowserWindow({
-    height: 920,
-    width: 1600,
+    height: 800,
+    width: 1100,
     show: false,
     webPreferences: {
       nodeIntegration: true,
@@ -40,12 +45,10 @@ async function createWindow () {
     }
   });
 
-  configCapacitor(mainWindow);
+  configCapacitor(mainWindow).catch(console.log);
 
   if (isDevMode) {
-    // Set our above template to the Menu Object if we are in development mode, dont want users having the devtools.
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
-    // If we are developers we might as well open the devtools by default.
     mainWindow.webContents.openDevTools();
   }
 
@@ -53,7 +56,7 @@ async function createWindow () {
     splashScreen = new CapacitorSplashScreen(mainWindow);
     splashScreen.init();
   } else {
-    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
+    await mainWindow.loadURL(`file://${__dirname}/app/index.html`);
     mainWindow.webContents.on('dom-ready', () => {
       mainWindow.show();
     });
@@ -79,7 +82,7 @@ app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow();
+    createWindow().catch(console.log);
   }
 });
 
