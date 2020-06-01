@@ -42,7 +42,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   endDate;
   channel = 'retail';
   productPerformanceReport: any;
- 
+
   constructor(private readonly router: Router,
               private readonly indexDb: LocalStorageService,
               private readonly snack: MatSnackBar,
@@ -72,7 +72,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
    this._report.getProductPerformanceReport(channel, from, to).then(data => {
      this.productPerformanceReport = data.length > 0 ? data[0].total : 0;
      this.productPerformanceDatasource = new MatTableDataSource(data);
-     this.productPerformanceDatasource.paginator = this.paginator;     
+     this.productPerformanceDatasource.paginator = this.paginator;
      this.productPerformanceFetchProgress = false;
    }).catch(reason => {
      this.productPerformanceReport = 0;
@@ -98,7 +98,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
           this._getProductReport(this.channel, this.startDate, this.endDate);
     });
 
-   
+
   }
 
 }
