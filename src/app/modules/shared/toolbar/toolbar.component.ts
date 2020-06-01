@@ -8,6 +8,7 @@ import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
 import {SsmEvents} from '../../../utils/eventsNames';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -27,6 +28,7 @@ export class ToolbarComponent implements OnInit {
 
   noOfProductsInCart;
   @Input() searchProgressFlag = false;
+  isMobile = environment.android;
 
   constructor(private readonly router: Router,
               private readonly storage: StorageService,

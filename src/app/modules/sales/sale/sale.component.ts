@@ -11,6 +11,7 @@ import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {EventApiService} from '../../../services/event-api.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sale',
@@ -28,6 +29,8 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   searchProgressFlag = false;
   @Input() isViewedInWholesale = true;
+  isMobile = environment.android;
+  noOfProductsInCart = 1;
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
