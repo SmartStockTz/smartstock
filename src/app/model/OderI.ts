@@ -1,11 +1,11 @@
-import {CartI} from './cart';
+import {CartModel} from './cart';
 
-export interface OrderI {
-  idOld: string;
+export interface OrderModel {
   objectId?: string;
   amount: number;
-  customer: string;
+  customer: any;
   date: string;
-  cart: CartI[];
+  cart: CartModel[];
+  status: 'pending' | 'processed' | 'delivered';
   complete: boolean;
 }

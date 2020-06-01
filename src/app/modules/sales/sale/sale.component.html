@@ -1,0 +1,46 @@
+<mat-sidenav-container class="match-parent">
+
+  <mat-sidenav class="match-parent-side" #sidenav [mode]="'over'" [opened]="false">
+    <app-admin-drawer></app-admin-drawer>
+  </mat-sidenav>
+
+  <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
+               [opened]="false">
+    <app-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></app-cart>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="display:flex; flex-direction: column">
+
+    <app-toolbar (searchCallback)="filterProduct($event)"
+                 [showSearch]="true"
+                 searchPlaceholder="Filter product"
+                 [searchProgressFlag]="searchProgressFlag"
+                 [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
+                 [cartdrawer]="cartdrawer"
+                 [showProgress]="showProgress"></app-toolbar>
+
+    <app-on-fetch *ngIf="!productsObservable" [isLoading]="fetchDataProgress"
+                  (refreshCallback)="getProductsFromServer()"></app-on-fetch>
+
+    <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
+      <app-product-card style="margin: 0 5px; display: inline-block" [cartdrawer]="cartdrawer" [product]="product"
+                        [productIndex]="idx"
+                        [isViewedInWholesale]="isViewedInWholesale"
+                        *cdkVirtualFor="let product of productsObservable | async; let idx = index">
+      </app-product-card>
+    </cdk-virtual-scroll-viewport>
+
+    <button mat-button color="primary"
+            *ngIf="!fetchDataProgress && productsObservable"
+            (click)="getProductsFromServer()"
+            matTooltip="Refresh products from server"
+            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"
+            class="mat-fab">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
