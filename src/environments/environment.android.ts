@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   firebase: {
     apiKey: 'AIzaSyAlcMxXCZ25jAVWQ5RY98AUsdK5-UP_iew',
     authDomain: 'smart-stock-manager.firebaseapp.com',
@@ -9,7 +9,7 @@ export const environment = {
     messagingSenderId: '23694341104',
   },
   browser: false,
-  electron: true,
+  electron: false,
   android: true,
   printerUrl: 'https://localhost:8080',
   functionsURL: 'https://smartstock-faas.bfast.fahamutech.com',
