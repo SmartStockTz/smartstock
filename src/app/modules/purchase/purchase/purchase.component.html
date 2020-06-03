@@ -1,4 +1,4 @@
-<mat-sidenav-container class="match-parent">
+<mat-sidenav-container *ngIf="!isMobile" class="match-parent">
 
   <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
     <app-admin-drawer></app-admin-drawer>
@@ -344,4 +344,7 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+
+<app-purchase-mobile *ngIf="isMobile"></app-purchase-mobile>
 
