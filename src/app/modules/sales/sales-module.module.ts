@@ -32,6 +32,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { SaleComponent } from './sale/sale.component';
 import { LandingComponent } from './landing/landing.component';
 import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
+import { CartPreviewComponent } from './cart-preview/cart-preview.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
     DialogComponent,
     RetailSaleComponent,
     SaleComponent,
-    LandingComponent
+    LandingComponent,
+    CartPreviewComponent
   ],
 })
 export class SalesModuleModule {

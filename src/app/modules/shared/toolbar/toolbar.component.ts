@@ -7,7 +7,6 @@ import {EventApiService} from 'src/app/services/event-api.service';
 import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
-import {SsmEvents} from '../../../utils/eventsNames';
 import {environment} from '../../../../environments/environment';
 
 @Component({
@@ -19,6 +18,8 @@ export class ToolbarComponent implements OnInit {
   @Input() heading: string;
   @Input() showProgress = false;
   @Input() sidenav: MatSidenav;
+  @Input() hasBackRoute = false;
+  @Input() backLink: string;
   @Input() cartdrawer: MatSidenav;
   @Input() showSearch = false;
   @Output() searchCallback = new EventEmitter<string>();

@@ -1,8 +1,11 @@
 <mat-toolbar color="primary" class="sticky-top mat-elevation-z3">
-  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>
+<!--  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgress"></mat-progress-bar>-->
   <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button *ngIf="!hasBackRoute && !backLink" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
+    </button>
+    <button routerLink="{{backLink}}" *ngIf="hasBackRoute && backLink" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>arrow_back</mat-icon>
     </button>
     <span>{{heading}}</span>
     <span style="flex: 1 1 auto"></span>

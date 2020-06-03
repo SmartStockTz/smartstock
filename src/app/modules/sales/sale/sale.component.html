@@ -13,6 +13,7 @@
 
     <app-toolbar (searchCallback)="filterProduct($event)"
                  [showSearch]="true"
+                 [hasBackRoute]="true" [backLink]="'/sale/'"
                  searchPlaceholder="Filter product"
                  [searchProgressFlag]="searchProgressFlag"
                  [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
@@ -23,31 +24,34 @@
                   (refreshCallback)="getProductsFromServer()"></app-on-fetch>
 
     <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
-      <app-product-card style="margin: 0 5px; display: inline-block" [cartdrawer]="cartdrawer" [product]="product"
+      <app-product-card style="margin: 0 5px; display: inline-block"
+                        [cartdrawer]="cartdrawer"
+                        [product]="product"
                         [productIndex]="idx"
                         [isViewedInWholesale]="isViewedInWholesale"
                         *cdkVirtualFor="let product of productsObservable | async; let idx = index">
       </app-product-card>
     </cdk-virtual-scroll-viewport>
 
-    <button mat-button color="primary"
-            *ngIf="!fetchDataProgress && productsObservable"
-            (click)="getProductsFromServer()"
-            matTooltip="Refresh products from server"
-            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"
-            class="mat-fab">
-      <mat-icon>refresh</mat-icon>
-    </button>
+<!--    <button mat-button color="primary"-->
+<!--            *ngIf="!fetchDataProgress && productsObservable"-->
+<!--            (click)="getProductsFromServer()"-->
+<!--            matTooltip="Refresh products from server"-->
+<!--            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"-->
+<!--            class="mat-fab">-->
+<!--      <mat-icon>refresh</mat-icon>-->
+<!--    </button>-->
 
-    <button class="mat-fab"
-            color="primary"
-            *ngIf="!fetchDataProgress"
-            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 88px; bottom: 20px;"
-            mat-button (click)="cartdrawer.toggle()"
-            [matBadge]="noOfProductsInCart.toString()">
-      <mat-icon>shopping_cart</mat-icon>
-    </button>
+<!--    <button class="mat-fab"-->
+<!--            color="primary"-->
+<!--            *ngIf="!fetchDataProgress"-->
+<!--            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 88px; bottom: 20px;"-->
+<!--            mat-button (click)="cartdrawer.toggle()"-->
+<!--            [matBadge]="noOfProductsInCart.toString()">-->
+<!--      <mat-icon>shopping_cart</mat-icon>-->
+<!--    </button>-->
 
+    <app-cart-preview [isWholeSale]="isViewedInWholesale" *ngIf="isMobile"></app-cart-preview>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

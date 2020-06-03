@@ -1,0 +1,5 @@
+<div style="padding: 16px" class="fixed-bottom" *ngIf="cartItems.length>0">
+  <button (click)="showMainCart()" mat-flat-button class="ft-button btn-block" color="primary">
+    {{totalItems | number}} Items = {{totalCost | currency: 'TZS '}}
+  </button>
+</div>
