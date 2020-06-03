@@ -1,0 +1,81 @@
+<mat-sidenav-container class="match-parent">
+
+<mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
+<app-admin-drawer></app-admin-drawer>
+</mat-sidenav>
+
+<mat-sidenav-content>
+<app-toolbar [heading]="'Purchases'"
+(searchCallback)="handleSearch($event)"
+[showSearch]="true"
+searchPlaceholder="Search purchase"
+[sidenav]="sidenav" [showProgress]="false">
+</app-toolbar>
+
+<div style="margin-top: 16px">
+
+<div *ngIf="purchases && !getPurchaseProgress">
+
+<div class="d-flex flex-row align-items-center">
+<h6 style="margin: 16px  16px 4px 16px">Purchases</h6>
+<span class="flex-grow-1"></span>
+<button style="margin: 3px 16px 0 4px" *ngIf="!getPurchaseProgress"
+(click)="_getAllPurchases()" mat-icon-button color="primary">
+<mat-icon>refresh</mat-icon>
+</button>
+</div>
+
+<cdk-virtual-scroll-viewport itemSize="30" style="height: 100vh;">
+<mat-list style="width: 100vw">
+<div *cdkVirtualFor="let purchase of purchases | async">
+<mat-divider></mat-divider>
+<mat-list-item>
+<div style="width: 40px; height: 40px; border-radius: 60px; background: #f5f5f5; color: black"
+class="text-center"
+matListIcon>
+{{purchase.supplier.name ? purchase.supplier.name.substring(0, 1).toUpperCase()
+: purchase.supplier.toString().substring(0, 1).toUpperCase()}}
+</div>
+<h1 matLine>{{purchase.refNumber}}</h1>
+<span matLine>{{purchase.type}} - {{purchase.paid ? 'Paid' : 'Not Paid'}}</span>
+<h6 matLine>{{purchase.amount | currency: 'TZS '}}</h6>
+<button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{purchase: purchase}" matSuffix
+mat-icon-button>
+<mat-icon>more_vert</mat-icon>
+</button>
+</mat-list-item>
+
+</div>
+</mat-list>
+</cdk-virtual-scroll-viewport>
+
+</div>
+
+<div style="min-height: 70vh; width: 100vw"
+class="d-flex justify-content-center align-items-center flex-column"
+*ngIf="getPurchaseProgress">
+<mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+<span>Fetch purchases</span>
+</div>
+
+</div>
+
+<app-bottom-bar></app-bottom-bar>
+
+<button routerLink="/purchase/create" mat-flat-button color="primary"
+class="mat-fab" style="position: fixed; bottom: 74px; right: 24px">
+<mat-icon>add</mat-icon>
+</button>
+
+</mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-menu #menu>
+<ng-template matMenuContent let-purchase="purchase">
+<button (click)="showPurchaseDetails(purchase)" mat-menu-item>View</button>
+<button (click)="recordPayment(purchase)" mat-menu-item *ngIf="!purchase.paid">
+Record Payment
+</button>
+<button (click)="deletePurchase(purchase)" mat-menu-item>Delete</button>
+</ng-template>
+</mat-menu>

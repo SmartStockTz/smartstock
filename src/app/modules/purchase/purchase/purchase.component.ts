@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {StockDetailsComponent} from '../../stocks/stock/stock.component';
 import {PurchaseI} from '../../../model/PurchaseI';
 import {PurchaseDatabaseService} from '../../../services/purchase-database.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-purchase',
@@ -22,6 +23,8 @@ export class PurchaseComponent extends DeviceInfo implements OnInit {
   loadMoreProgress = false;
   size: 100;
   skip: 0;
+
+  isMobile = environment.android;
 
   constructor(private readonly purchaseDatabase: PurchaseDatabaseService,
               private readonly bottomSheet: MatBottomSheet,
