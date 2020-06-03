@@ -16,6 +16,7 @@ import {StorageService} from '../../../services/storage.service';
 import {SsmEvents} from '../../../utils/eventsNames';
 import {LogService} from '../../../services/log.service';
 import {Stock} from '../../../model/stock';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-stock',
@@ -25,6 +26,8 @@ import {Stock} from '../../../model/stock';
 export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
+
+  isMobile = environment.android;
 
   constructor(private readonly router: Router,
               private readonly indexDb: StorageService,

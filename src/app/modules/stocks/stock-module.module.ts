@@ -34,6 +34,7 @@ import {DialogSupplierDeleteComponent, SuppliersComponent} from './suppliers/sup
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './units/units.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {UploadProductsComponent} from './upload-products/upload-products.component';
+import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import {UploadProductsComponent} from './upload-products/upload-products.compone
     MatExpansionModule,
     MatDialogModule,
     ImageCropperModule,
+    MobileUiModule
   ],
   declarations: [
     StockComponent,
