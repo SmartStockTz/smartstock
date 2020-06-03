@@ -16,6 +16,7 @@ import {Stock} from '../../../model/stock';
 import {toSqlDate} from '../../../utils/date';
 import {environment} from '../../../../environments/environment';
 import {CustomerApiService} from '../../../services/customer-api.service';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-cart',
@@ -168,6 +169,11 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+
+    if (Capacitor.Plugins.Printer) {
+      Capacitor.Plugins.Printer.print().then(console.log);
+    }
+
     if (this.isViewedInWholesale && !this.customerFormControl.valid) {
       this.snack.open('Please enter customer name, atleast three characters required', 'Ok', {
         duration: 3000

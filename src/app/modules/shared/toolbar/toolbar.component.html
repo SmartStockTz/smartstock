@@ -14,7 +14,7 @@
                       [searchPlaceholder]="searchPlaceholder">
     </app-search-input>
     <span *ngIf="!isMobile && showSearch" style="width: 16px"></span>
-    <button *ngIf="noOfProductsInCart && !isMobile> 0" mat-icon-button (click)="cartdrawer.toggle()"
+    <button *ngIf="noOfProductsInCart> 0 && !isMobile" mat-icon-button (click)="cartdrawer.toggle()"
             [matBadge]="noOfProductsInCart">
       <mat-icon>shopping_cart</mat-icon>
     </button>

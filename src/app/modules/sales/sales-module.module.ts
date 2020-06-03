@@ -30,45 +30,49 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { SaleComponent } from './sale/sale.component';
+import { LandingComponent } from './landing/landing.component';
+import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SalesModuleRoutingModule,
-    CommonComponentsModule,
-    MatSidenavModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatIconModule,
-    MatTabsModule,
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatDatepickerModule,
-    MatSortModule,
-    MatTooltipModule,
-    MatToolbarModule,
-    MatBadgeModule,
-    MatRippleModule,
-    MatListModule,
-    ScrollingModule,
-    FormsModule
+    imports: [
+        CommonModule,
+        SalesModuleRoutingModule,
+        CommonComponentsModule,
+        MatSidenavModule,
+        MatFormFieldModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        MatIconModule,
+        MatTabsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatDatepickerModule,
+        MatSortModule,
+        MatTooltipModule,
+        MatToolbarModule,
+        MatBadgeModule,
+        MatRippleModule,
+        MatListModule,
+        ScrollingModule,
+        FormsModule,
+        MobileUiModule
 
-  ],
+    ],
   declarations: [
     WholeSaleComponent,
     CartComponent,
     ProductCardComponent,
     DialogComponent,
     RetailSaleComponent,
-    SaleComponent
+    SaleComponent,
+    LandingComponent
   ],
 })
 export class SalesModuleModule {
