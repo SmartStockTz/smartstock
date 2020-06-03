@@ -8,7 +8,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {DialogSupplierNewComponent} from '../../stocks/suppliers/suppliers.component';
 import {StockDatabaseService} from '../../../services/stock-database.service';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {Stock} from '../../../model/stock';
 
 @Component({
@@ -31,7 +31,7 @@ export class PurchaseCreateComponent extends DeviceInfo implements OnInit {
               private readonly snack: MatSnackBar,
               private readonly router: Router,
               private readonly _dialog: MatDialog,
-              private readonly indexDb: LocalStorageService,
+              private readonly indexDb: StorageService,
               private readonly stockDatabase: StockDatabaseService) {
     super();
   }

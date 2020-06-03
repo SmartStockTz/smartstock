@@ -9,7 +9,7 @@ import {SettingsService} from './settings.service';
 import {PurchaseI} from '../model/PurchaseI';
 import {UserDatabaseService} from './user-database.service';
 import {BFast} from 'bfastjs';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class StockDatabaseService implements StockDataSource {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _user: UserDatabaseService,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly _settings: SettingsService) {
   }
 
@@ -26,7 +26,7 @@ export class StockDatabaseService implements StockDataSource {
     const user = await this._user.currentUser();
     const projectId = await this._settings.getCustomerProjectId();
     const email = encodeURIComponent(user.email);
-    return BFast.functions()
+    return BFast.functions(projectId)
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
       .get({}, this._settings.ssmFunctionsHeader);
   }
@@ -35,8 +35,9 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async importStocks(stocks: Stock[]): Promise<any> {
-    return BFast.functions()
-      .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + await this._settings.getCustomerProjectId())
+    const shop = await this._storage.getActiveShop();
+    return BFast.functions(shop.projectId)
+      .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + shop.projectId)
       .post(stocks, this._settings.ssmFunctionsHeader);
   }
 
@@ -44,15 +45,18 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async addCategory(category: CategoryI): Promise<any> {
-    return BFast.database().collection<CategoryI>('categories').save(category);
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection<CategoryI>('categories').save(category);
   }
 
   async addUnit(unit: UnitsI): Promise<any> {
-    return BFast.database().collection<UnitsI>('units').save(unit);
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection<UnitsI>('units').save(unit);
   }
 
   async getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]> {
-    const units = await BFast.database().collection('units').getAll<UnitsI>();
+    const shop = await this._storage.getActiveShop();
+    const units = await BFast.database(shop.projectId).collection('units').getAll<UnitsI>();
     units.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
@@ -60,15 +64,17 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async addStock(stock: Stock): Promise<Stock> {
+    const shop = await this._storage.getActiveShop();
     if (stock.image) {
-      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
       stock.image = imageRequest.url;
     }
-    return BFast.database().collection('stocks').save(stock);
+    return BFast.database(shop.projectId).collection('stocks').save(stock);
   }
 
   async addSupplier(supplier: SupplierI): Promise<any> {
-    return BFast.database().collection('suppliers').save(supplier);
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('suppliers').save(supplier);
   }
 
   deleteAllCategory(categories: CategoryI[], callback: (value: any) => void) {
@@ -81,25 +87,30 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async deleteCategory(category: CategoryI): Promise<any> {
-    return BFast.database().collection('categories').delete(category.objectId);
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('categories').delete(category.objectId);
   }
 
-  async deleteStock(stock: Stock, callback?: (value: any) => void): Promise<any> {
-    return BFast.database().collection('stocks').delete(stock.objectId);
+  async deleteStock(stock: Stock): Promise<any> {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('stocks').delete(stock._id ? stock._id : stock.objectId);
   }
 
   async deleteSupplier(objectId: string): Promise<any> {
-    return BFast.database().collection('suppliers').delete(objectId);
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('suppliers').delete(objectId);
   }
 
   async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
-    return BFast.database().collection('categories').getAll();
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('categories').getAll();
   }
 
   async getAllStock(): Promise<Stock[]> {
-    const stocks: Stock[] = await BFast.database().collection<Stock>('stocks').getAll<Stock>(null, {
+    const shop = await this._storage.getActiveShop();
+    const stocks: Stock[] = await BFast.database(shop.projectId).collection<Stock>('stocks').getAll<Stock>(null, {
       cacheEnable: false,
-      dtl: 1
+      dtl: 7
     });
     await this._storage.saveStocks(stocks);
     stocks.sort((a, b) => {
@@ -109,7 +120,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]> {
-    const suppliers: SupplierI[] = await BFast.database().collection<SupplierI>('suppliers').getAll<SupplierI>();
+    const shop = await this._storage.getActiveShop();
+    const suppliers: SupplierI[] = await BFast.database(shop.projectId).collection<SupplierI>('suppliers').getAll<SupplierI>();
     suppliers.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
@@ -120,7 +132,8 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async getStock(id: string, callback: (stock: Stock) => void) {
-    return BFast.database().collection('stocks').get(id, {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('stocks').get(id, {
       cacheEnable: false,
       dtl: 0
     });
@@ -139,52 +152,58 @@ export class StockDatabaseService implements StockDataSource {
   }
 
   async updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
+    const shop = await this._storage.getActiveShop();
     const categoryId = category.objectId;
     const data = {};
     data[category.field] = category.value;
     delete category.objectId;
-    const response = await BFast.database().collection('categories').update<any>(categoryId, data);
+    const response = await BFast.database(shop.projectId).collection('categories').update<any>(categoryId, data);
     response.objectId = categoryId;
     return response;
   }
 
   async updateStock(stock: Stock): Promise<Stock> {
-    const stockId = stock.objectId;
+    const shop = await this._storage.getActiveShop();
+    const stockId = stock._id ? stock._id : stock.objectId;
     delete stock.objectId;
     if (stock.image && !stock.image.toString().startsWith('http://')) {
-      const imageRequest = await BFast.storage().save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
+      const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
       stock.image = imageRequest.url;
     }
-    return BFast.database().collection('stocks').update<Stock>(stockId, stock);
+    return BFast.database(shop.projectId).collection('stocks').update<Stock>(stockId, stock);
   }
 
   async updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
+    const shop = await this._storage.getActiveShop();
     const supplierId = value.objectId;
     const data = {};
     data[value.field] = value.value;
     delete value.objectId;
-    const response = await BFast.database().collection('suppliers').update<any>(supplierId, data);
+    const response = await BFast.database(shop.projectId).collection('suppliers').update<any>(supplierId, data);
     response.objectId = supplierId;
     return response;
   }
 
   async updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {
+    const shop = await this._storage.getActiveShop();
     const unitId = unit.objectId;
     const data = {};
     data[unit.field] = unit.value;
     delete unit.objectId;
-    const response = await BFast.database().collection('units').update<any>(unitId, data);
+    const response = await BFast.database(shop.projectId).collection('units').update<any>(unitId, data);
     response.objectId = unitId;
     return response;
   }
 
-  deleteUnit(unit: UnitsI): Promise<any> {
-    return BFast.database().collection('units').delete(unit.objectId);
+  async deleteUnit(unit: UnitsI): Promise<any> {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('units').delete(unit.objectId);
   }
 
   async addPurchase(purchaseI: PurchaseI): Promise<any> {
-    return BFast.functions().request(
-      this._settings.ssmFunctionsURL + '/functions/purchases/' + await this._settings.getCustomerProjectId())
+    const shop = await this._storage.getActiveShop();
+    return BFast.functions(shop.projectId).request(
+      this._settings.ssmFunctionsURL + '/functions/purchases/' + shop.projectId)
       .post(purchaseI, this._settings.ssmFunctionsHeader);
   }
 }

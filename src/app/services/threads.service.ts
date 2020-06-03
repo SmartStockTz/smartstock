@@ -1,29 +1,24 @@
 import {Injectable, OnInit} from '@angular/core';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 import {ShopI} from '../model/ShopI';
 import {EventApiService} from './event-api.service';
 import {SsmEvents} from '../utils/eventsNames';
 
 /*
-This should handle sockets and when data found check
-workers if available push updates to worker if not
-handle updates in main thread
+This should use web sockets when web workers not available
+in a browser
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ThreadsService implements OnInit {
 
   constructor(private readonly eventApi: EventApiService,
-              private readonly _storage: LocalStorageService) {
+              private readonly _storage: StorageService) {
   }
 
   private salesWorkerProxy: Worker;
   private stocksWorkerProxy: Worker;
-
-  private _setUpParseServer(activeShop: ShopI) {
-    // this.parseSdk = BFast.directAccess.parseSdk;
-    // this.parseSdk.initialize(activeShop.applicationId, '');
-    // this.parseSdk.serverURL = `https://${activeShop.projectUrlId}.bfast.fahamutech.com`;
-  }
 
   ngOnInit(): void {
   }
@@ -42,9 +37,6 @@ export class ThreadsService implements OnInit {
 
   async stop() {
     this._stopWorkers();
-    // if (BFast.directAccess.parseSdk.applicationId && BFast.directAccess.parseSdk.serverURL) {
-    //   BFast.directAccess.parseSdk.LiveQuery.close();
-    // }
   }
 
   private _stopWorkers() {
@@ -96,47 +88,9 @@ export class ThreadsService implements OnInit {
   }
 
   private _noWorkerSalesProxy() {
-
   }
 
   private _noWorkerStockSync() {
-    // const query = BFast.database().collection('stocks').query();
-    // query.subscribe().then(stockLiveQuery => {
-    //   stockLiveQuery.on('open', () => {
-    //     console.log('connection open for stocks');
-    //   });
-    //
-    //   stockLiveQuery.on('create', (stocks) => {
-    //     console.log('stocks created');
-    //     console.log(stocks);
-    //   });
-    //
-    //   stockLiveQuery.on('update', (stocks) => {
-    //     console.log('stocks updated');
-    //     console.log(stocks);
-    //   });
-    //   //
-    //   // stockLiveQuery.on('delete', (stocks) => {
-    //   //   console.log('stocks deleted');
-    //   //   console.log(stocks);
-    //   // });
-    //   //
-    //   // stockLiveQuery.on('enter', (stocks) => {
-    //   //   console.log('stocks enter');
-    //   //   console.log(stocks);
-    //   // });
-    //   //
-    //   // stockLiveQuery.on('leave', (stocks) => {
-    //   //   console.log('stocks leave');
-    //   //   console.log(stocks);
-    //   // });
-    //
-    //   stockLiveQuery.on('close', (stocks) => {
-    //     console.log('stocks connection closed');
-    //   });
-    // }).catch(reason => {
-    //   console.log(reason);
-    // });
   }
 
 }

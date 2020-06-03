@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ShopI} from '../../../model/ShopI';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UserI} from '../../../model/UserI';
@@ -21,7 +21,7 @@ export class ProfileBusinessComponent implements OnInit {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly _userApi: UserDatabaseService) {
   }
 

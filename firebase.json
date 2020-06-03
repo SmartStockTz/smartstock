@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "./dist/smartstock",
+    "public": "dist/smartstock",
     "ignore": [
       "firebase.json",
       "**/.*",

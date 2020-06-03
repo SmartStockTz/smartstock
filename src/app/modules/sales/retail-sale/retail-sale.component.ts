@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from 'src/app/services/user-database.service';
-import {LocalStorageService} from 'src/app/services/local-storage.service';
+import {StorageService} from 'src/app/services/storage.service';
 import {StockDatabaseService} from 'src/app/services/stock-database.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -26,7 +26,7 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly _stockApi: StockDatabaseService,

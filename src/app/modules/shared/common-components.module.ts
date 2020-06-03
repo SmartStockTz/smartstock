@@ -24,6 +24,8 @@ import {ShopsPipe} from './pipes/shops.pipe';
 import { MatBadgeModule } from '@angular/material/badge';
 import { OnFetchComponent } from './on-fetch/on-fetch.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { SearchInputComponent } from './toolbar/search-input/search-input.component';
+import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         AdminDrawerComponent,
         ToolbarComponent,
         ShopsPipe,
-        OnFetchComponent
+        OnFetchComponent,
+        BottomBarComponent
     ],
   declarations: [
     AdminDrawerComponent,
@@ -60,7 +63,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     NoStockDialogComponent,
     DialogImageCropComponent,
     ShopsPipe,
-    OnFetchComponent
+    OnFetchComponent,
+    SearchInputComponent,
+    BottomBarComponent
       ],
   entryComponents: [
     DialogImageCropComponent

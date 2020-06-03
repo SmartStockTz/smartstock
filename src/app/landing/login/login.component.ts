@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {LogService} from '../../services/log.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   showProgress = false;
   loginForm: FormGroup;
   showPasswordFlag = false;
+  isBrowser = environment.browser;
 
   constructor(private readonly snack: MatSnackBar,
               private readonly routes: Router,

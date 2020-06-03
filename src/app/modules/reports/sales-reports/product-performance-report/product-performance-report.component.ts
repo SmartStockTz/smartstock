@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {LocalStorageService} from 'src/app/services/local-storage.service';
+import {StorageService} from 'src/app/services/storage.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -43,7 +43,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   productPerformanceReport: any;
 
   constructor(private readonly router: Router,
-              private readonly indexDb: LocalStorageService,
+              private readonly indexDb: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly _report: AdminDashboardService,

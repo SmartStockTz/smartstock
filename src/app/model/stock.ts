@@ -4,6 +4,7 @@ export interface Stock {
   updatedAt?: any;
   image?: any;
   objectId?: string;
+  _id?: string;
   product: string;
   active?: boolean | true;
   canExpire?: boolean | true;

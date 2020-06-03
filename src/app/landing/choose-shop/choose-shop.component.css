@@ -1,13 +1,12 @@
-body {
-  margin: 0;
-  padding: 0;
-}
+/*body {*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
 
 .main {
   background-color: #0b2e13;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-
 }
 
 /* .main > .container_logo{}
@@ -15,7 +14,7 @@ body {
 
 /* Container for the shop profiles*/
 .main > .container_shops {
-  height: 100vh;
+  min-height: 100vh;
   /*padding-top: 15%;*/
 }
 
@@ -32,8 +31,9 @@ body {
 
 /* Container for the logo of the page*/
 .container_logo {
-  position: absolute;
-  padding: 2%;
+  /*position: absolute;*/
+  /*padding: 2%;*/
+  padding-bottom: 24px;
 }
 
 /*Container for all shops profiles*/
