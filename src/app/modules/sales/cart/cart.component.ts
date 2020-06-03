@@ -177,16 +177,18 @@ export class CartComponent implements OnInit {
 
   checkout() {
 
-    if (Capacitor.Plugins.Printer) {
-      Capacitor.Plugins.Printer.print().then(console.log);
-    }
-
     if (this.isViewedInWholesale && !this.customerFormControl.valid) {
       this.snack.open('Please enter customer name, atleast three characters required', 'Ok', {
         duration: 3000
       });
       return;
     }
+
+    // test mode
+    if (Capacitor.isNative && Capacitor.Plugins.Printer) {
+      Capacitor.Plugins.Printer.print().then(console.log);
+    }
+
     this.checkoutProgress = true;
     if (this.customerFormControl.valid) {
       this.customerApi.saveCustomer({
