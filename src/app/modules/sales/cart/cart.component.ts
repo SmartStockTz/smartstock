@@ -105,9 +105,17 @@ export class CartComponent implements OnInit {
         this.cartProductsArray.push(cart);
       }
       this.cartProducts = of(this.cartProductsArray);
-      this.eventService.broadcast(SsmEvents.NO_OF_CART, this.cartProductsArray.length);
+      this.eventService.broadcast(SsmEvents.CART_ITEMS, this.cartProductsArray);
+      this.eventService.broadcast(
+        SsmEvents.NO_OF_CART,
+        this.cartProductsArray.map(cartItem => cartItem.quantity).reduce((a, b) => a + b, 0)
+      );
       this._getTotal(this.discountFormControl.value);
     });
+  }
+
+  getTotalCartItem() {
+    return this.cartProductsArray.map(cartItem => cartItem.quantity).reduce((a, b) => a + b, 0);
   }
 
   private _getTotal(discount: number) {
@@ -143,7 +151,6 @@ export class CartComponent implements OnInit {
     this.cartProductsArray.splice(indexOfProductInCart, 1);
     this.cartProducts = of(this.cartProductsArray);
     this._getTotal(this.discountFormControl.value ? this.discountFormControl.value : 0);
-
   }
 
   private _discountListener() {
@@ -213,6 +220,7 @@ export class CartComponent implements OnInit {
     this.customerFormControl.setValue(null);
     this._getTotal(0);
     this.snack.open('Done save sales', 'Ok', {duration: 2000});
+    this.eventService.broadcast(SsmEvents.CART_ITEMS, []);
     //  }).catch(_ => {
     //     this.checkoutProgress = false;
     //     this.snack.open('Checkout process fails, try again', 'Ok', {duration: 3000});
