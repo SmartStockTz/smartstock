@@ -4,13 +4,13 @@ import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NoStockDialogComponent} from '../shared/no-stock-dialog/no-stock-dialog.component';
 import {UserDatabaseService} from '../services/user-database.service';
-import {LocalStorageService} from '../services/local-storage.service';
+import {StorageService} from '../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockExistGuard implements CanActivate {
-  constructor(private readonly indexDb: LocalStorageService,
+  constructor(private readonly indexDb: StorageService,
               private readonly _userApi: UserDatabaseService,
               private readonly dialog: MatDialog) {
   }

@@ -10,11 +10,13 @@ import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {LoginComponent} from './landing/login/login.component';
 import {RegisterComponent} from './landing/register/register.component';
 import {ChooseShopComponent} from './landing/choose-shop/choose-shop.component';
+import {BrowserPlatformGuard} from './guards/browser-platform.guard';
 
 const routes: Routes = [
-  {path: '', component: LandingComponent},
+  {path: '', canActivate: [BrowserPlatformGuard], component: LandingComponent},
   {
     path: 'privacy',
+    canActivate: [BrowserPlatformGuard],
     component: PrivacyComponent
   },
   {

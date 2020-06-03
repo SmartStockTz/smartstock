@@ -2,6 +2,7 @@ import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {BatchModel} from '../model/batchModel';
 import {Stock} from '../model/stock';
+import {CustomerModel} from '../model/CustomerModel';
 
 export interface StorageAdapter {
   getActiveUser(): Promise<UserI>;
@@ -31,4 +32,8 @@ export interface StorageAdapter {
   saveStocks(stocks: Stock[]): Promise<any>;
 
   saveStock(stock: Stock): Promise<Stock>;
+
+  saveCustomer(customer: CustomerModel): Promise<CustomerModel>;
+
+  getCustomers(): Promise<CustomerModel[]>;
 }

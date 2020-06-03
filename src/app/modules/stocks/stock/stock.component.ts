@@ -12,7 +12,7 @@ import {EventApiService} from '../../../services/event-api.service';
 import {UnitsI} from '../../../model/UnitsI';
 import {StockDatabaseService} from '../../../services/stock-database.service';
 import {UploadProductsComponent} from '../upload-products/upload-products.component';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {SsmEvents} from '../../../utils/eventsNames';
 import {LogService} from '../../../services/log.service';
 import {Stock} from '../../../model/stock';
@@ -27,7 +27,7 @@ export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   private stockFetchProgress = false;
 
   constructor(private readonly router: Router,
-              private readonly indexDb: LocalStorageService,
+              private readonly indexDb: StorageService,
               public readonly bottomSheet: MatBottomSheet,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,

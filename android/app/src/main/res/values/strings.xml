@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SmartStock</string>
+    <string name="title_activity_main">SmartStock</string>
+    <string name="package_name">com.fahamutech.smartstock</string>
+    <string name="custom_url_scheme">com.fahamutech.smartstock</string>
+</resources>

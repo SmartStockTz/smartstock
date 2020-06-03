@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {AdminReportAdapter} from '../adapter/AdminReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
-import {LocalStorageService} from './local-storage.service';
+import {StorageService} from './storage.service';
 
 @Injectable()
 export class AdminDashboardService implements AdminReportAdapter {
 
   constructor(private readonly _httpClient: HttpClient,
-              private readonly _storage: LocalStorageService,
+              private readonly _storage: StorageService,
               private readonly _settings: SettingsService) {
   }
 

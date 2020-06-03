@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShopI} from '../../../model/ShopI';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {Observable, of} from 'rxjs';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
@@ -192,7 +192,7 @@ export class DialogUserNewComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly snack: MatSnackBar,
-    private readonly storage: LocalStorageService,
+    private readonly storage: StorageService,
     private readonly userDatabase: UserDatabaseService,
     private readonly logger: LogService,
     public dialogRef: MatDialogRef<DialogUserDeleteComponent>) {

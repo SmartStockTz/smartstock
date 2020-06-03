@@ -19,7 +19,7 @@
                  [cartdrawer]="cartdrawer"
                  [showProgress]="showProgress"></app-toolbar>
 
-    <app-on-fetch *ngIf="!productsObservable" [isLoading]="fetchDataProgress"
+    <app-on-fetch *ngIf="!productsObservable || fetchDataProgress" [isLoading]="fetchDataProgress"
                   (refreshCallback)="getProductsFromServer()"></app-on-fetch>
 
     <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
@@ -37,6 +37,15 @@
             style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 16px; bottom: 20px;"
             class="mat-fab">
       <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button class="mat-fab"
+            color="primary"
+            *ngIf="!fetchDataProgress"
+            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 88px; bottom: 20px;"
+            mat-button (click)="cartdrawer.toggle()"
+            [matBadge]="noOfProductsInCart.toString()">
+      <mat-icon>shopping_cart</mat-icon>
     </button>
 
   </mat-sidenav-content>

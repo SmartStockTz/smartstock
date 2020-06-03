@@ -4,12 +4,14 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {SalesDatabaseService} from '../../../services/sales-database.service';
 import {StockDatabaseService} from '../../../services/stock-database.service';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
+import {EventApiService} from '../../../services/event-api.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sale',
@@ -27,13 +29,16 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   searchProgressFlag = false;
   @Input() isViewedInWholesale = true;
+  isMobile = environment.android;
+  noOfProductsInCart = 1;
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
-              private readonly _storage: LocalStorageService,
+              private readonly storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
-              private readonly _stockApi: StockDatabaseService,
+              private readonly eventApi: EventApiService,
+              private readonly stockApi: StockDatabaseService,
   ) {
     super();
   }
@@ -44,7 +49,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
 
   getProductsFromServer() {
     this.fetchDataProgress = true;
-    this._stockApi.getAllStock().then(products => {
+    this.stockApi.getAllStock().then(products => {
       this.fetchDataProgress = false;
       this.productsObservable = of(products);
     }).catch(reason => {
@@ -56,7 +61,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   getProducts() {
     this.fetchDataProgress = true;
     this.productsObservable = undefined;
-    this._storage.getStocks().then(products => {
+    this.storage.getStocks().then(products => {
       this.fetchDataProgress = false;
       if (products && products.length > 0) {
         this.productsObservable = of(products);
@@ -75,13 +80,13 @@ export class SaleComponent extends DeviceInfo implements OnInit {
       this.searchProgressFlag = false;
       return;
     }
-    this._storage.getStocks().then(allStocks => {
+    this.storage.getStocks().then(allStocks => {
       this.searchProgressFlag = false;
       if (allStocks) {
         const keywords = product.toLowerCase().split(' ').filter(value => {
           return value !== '';
         });
-        console.log(keywords);
+        // console.log(keywords);
         const result = allStocks.filter(stock => {
           const targetSentence =
             `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
@@ -95,7 +100,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
           }
           return flag;
         });
-        console.log(result);
+        // console.log(result);
         this.productsObservable = of(result);
       } else {
         this.snack.open('No products found, try again or refresh products', 'Ok', {
