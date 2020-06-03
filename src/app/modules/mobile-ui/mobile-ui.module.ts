@@ -27,13 +27,18 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDividerModule} from '@angular/material/divider';
+import { StockMobileComponent } from './stock-mobile/stock-mobile.component';
+import { StockProductsComponent } from './stock-mobile/stock-products/stock-products.component';
+import { StockProductItemComponent } from './stock-mobile/stock-product-item/stock-product-item.component';
 
 
 @NgModule({
-  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent],
+  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsComponent, StockProductItemComponent],
   exports: [
     SalesLandingMobileComponent,
-    PurchaseMobileComponent
+    PurchaseMobileComponent,
+    StockMobileComponent,
+    StockProductsComponent
   ],
   imports: [
     CommonModule,
