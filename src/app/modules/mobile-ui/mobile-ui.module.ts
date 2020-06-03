@@ -8,11 +8,12 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRippleModule} from '@angular/material/core';
 import {RouterModule} from '@angular/router';
+import { BottomBarComponent } from './shared/bottom-bar/bottom-bar.component';
 
 
 
 @NgModule({
-  declarations: [SalesLandingMobileComponent],
+  declarations: [SalesLandingMobileComponent, BottomBarComponent],
   exports: [
     SalesLandingMobileComponent
   ],
