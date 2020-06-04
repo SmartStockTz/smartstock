@@ -242,6 +242,7 @@ export class CartComponent implements OnInit {
         'Ok',
         {duration: 3000}
       );
+      return Promise.resolve();
     }).finally(() => {
       this.checkoutProgress = false;
     });
