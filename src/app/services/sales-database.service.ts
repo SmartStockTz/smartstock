@@ -40,9 +40,8 @@ export class SalesDatabaseService implements SalesDatasource {
     return Promise.reject('not implemented');
   }
 
-  async saveSales(sales: SalesModel[]): Promise<any> {
+  async saveSales(sales: SalesModel[], cartId: string): Promise<any> {
     const batchs: BatchModel[] = [];
-    const cartId = Security.generateUUID();
     sales.forEach(sale => {
       sale.cartId = cartId;
       sale.batch = Security.generateUUID();
@@ -53,8 +52,6 @@ export class SalesDatabaseService implements SalesDatasource {
       });
     });
     return await this._storage.saveSales(batchs);
-    // return new Promise(resolve => {
-    //   setTimeout(resolve, 6000);
-    // });
   }
+
 }

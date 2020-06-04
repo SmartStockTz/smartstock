@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "20.5.2",
+  "version": "20.6.0",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -27,7 +27,9 @@
     "ng": "ng",
     "start": "ng serve",
     "start:desktop": "ng serve -c=electron",
+    "start:android": "ng serve --host 0.0.0.0 -c=android",
     "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx cap sync",
+    "build:android": "ng build --prod -c=androidProd --base-href ./ && npx cap sync",
     "prepare:snap": "cd electron && npm install && npm run build:snap",
     "push:snap:edge": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release edge",
     "push:snap:stable": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release stable",
@@ -53,6 +55,7 @@
     "@capacitor/angular": "^1.0.2",
     "@capacitor/core": "latest",
     "@capacitor/electron": "^2.1.2",
+    "@capacitor/android": "^2.1.2",
     "bfastjs": "^3.0.1",
     "highcharts": "^8.0.4",
     "moment": "^2.26.0",

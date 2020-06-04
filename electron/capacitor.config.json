@@ -4,5 +4,8 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist/smartstock",
-  "cordova": {}
+  "cordova": {},
+  "server": {
+
+  }
 }

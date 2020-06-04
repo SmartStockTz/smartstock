@@ -5,4 +5,5 @@ export const SsmEvents = {
   STOCK_UPDATED: '_ssm_stock_updated_',
   ADD_CART: 'add_cart',
   NO_OF_CART: 'noofProductsCart',
+  CART_ITEMS: '_cart_items_'
 };

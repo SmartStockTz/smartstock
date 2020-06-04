@@ -32,11 +32,8 @@ import {
 } from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
-import {ProfilePersonalComponent} from './profile-personal/profile-personal.component';
-import {ProfileBusinessComponent} from './profile-business/profile-business.component';
-import {ProfileAuthenticationComponent} from './profile-authentication/profile-authentication.component';
-import {BillingInvoicesComponent} from './billing-invoices/billing-invoices.component';
-import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.component';
+import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
+import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
 
 @NgModule({
   declarations: [
@@ -48,11 +45,6 @@ import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.comp
     DialogUserNewComponent,
     UpdateUserPasswordDialogComponent,
     BillingComponent,
-    ProfilePersonalComponent,
-    ProfileBusinessComponent,
-    ProfileAuthenticationComponent,
-    BillingInvoicesComponent,
-    BillingReceiptsComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +70,8 @@ import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.comp
     MatDividerModule,
     MatRadioModule,
     FormsModule,
+    MobileUiModule,
+    SharedWithMobileModule
   ],
   entryComponents: [
     DialogUserNewComponent,

@@ -11,6 +11,7 @@ import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent extends DeviceInfo implements OnInit {
   usersArray: UserI[];
   fetchUsersFlag = false;
 
+  isMobile = environment.android;
   constructor(private readonly userDatabase: UserDatabaseService,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,

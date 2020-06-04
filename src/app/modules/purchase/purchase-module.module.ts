@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {CommonComponentsModule} from '../shared/common-components.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PurchaseCreateComponent} from './purchase-create/purchase-create.component';
+import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {PurchaseCreateComponent} from './purchase-create/purchase-create.compone
     MatBottomSheetModule,
     MatExpansionModule,
     MatSelectModule,
+    MobileUiModule
   ],
   entryComponents: [
     PurchaseDetailsComponent,

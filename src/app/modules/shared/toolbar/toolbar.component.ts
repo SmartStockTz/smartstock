@@ -7,6 +7,7 @@ import {EventApiService} from 'src/app/services/event-api.service';
 import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
+import {environment} from '../../../../environments/environment';
 import {SsmEvents} from '../../../utils/eventsNames';
 
 @Component({
@@ -18,6 +19,8 @@ export class ToolbarComponent implements OnInit {
   @Input() heading: string;
   @Input() showProgress = false;
   @Input() sidenav: MatSidenav;
+  @Input() hasBackRoute = false;
+  @Input() backLink: string;
   @Input() cartdrawer: MatSidenav;
   @Input() showSearch = false;
   @Output() searchCallback = new EventEmitter<string>();
@@ -27,6 +30,7 @@ export class ToolbarComponent implements OnInit {
 
   noOfProductsInCart;
   @Input() searchProgressFlag = false;
+  isMobile = environment.android;
 
   constructor(private readonly router: Router,
               private readonly storage: StorageService,
@@ -50,7 +54,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getProductsInCart() {
-    this.eventService.listen('noofProductsCart', (data) => {
+    this.eventService.listen(SsmEvents.NO_OF_CART, (data) => {
       this.noOfProductsInCart = data.detail;
     });
   }

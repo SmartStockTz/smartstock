@@ -5,6 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {EventApiService} from '../../../services/event-api.service';
 import {SettingsService} from '../../../services/settings.service';
 import {SsmEvents} from '../../../utils/eventsNames';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-setting',
@@ -16,6 +17,7 @@ export class SettingComponent extends DeviceInfo implements OnInit {
   getSettingsProgress = false;
   saveSettingProgress = false;
 
+  isMobile = environment.android;
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
               private readonly eventApi: EventApiService,
