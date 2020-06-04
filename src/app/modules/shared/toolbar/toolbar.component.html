@@ -4,7 +4,7 @@
     <button *ngIf="!hasBackRoute && !backLink" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <button routerLink="{{backLink}}" *ngIf="hasBackRoute && backLink" mat-icon-button (click)="sidenav.toggle()">
+    <button routerLink="{{backLink}}" *ngIf="hasBackRoute && backLink" mat-icon-button>
       <mat-icon>arrow_back</mat-icon>
     </button>
     <span>{{heading}}</span>
