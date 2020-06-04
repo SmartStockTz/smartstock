@@ -1,16 +1,19 @@
-<mat-sidenav-container *ngIf="!isMobile" class="match-parent">
+<mat-sidenav-container  class="match-parent">
   <mat-sidenav class="match-parent-side"
                [fixedInViewport]="true"
                #sidenav
                [mode]="enoughWidth()?'side':'over'"
-               [opened]="true">
+               [opened]="!isMobile">
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <app-toolbar [heading]=""
                  [sidenav]="sidenav"
-                 [showProgress]="false">
+                 [showProgress]="false"
+                  [backLink]="'/settings'"
+                 [hasBackRoute]="isMobile"
+    >
     </app-toolbar>
 
     <div class="container my-billing-wrapper">
@@ -107,5 +110,5 @@
 
 </mat-sidenav-container>
 
-<app-billing-mobile *ngIf="isMobile"></app-billing-mobile>
+<!--<app-billing-mobile *ngIf="isMobile"></app-billing-mobile>-->
 
