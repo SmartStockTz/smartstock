@@ -1,0 +1,8 @@
+td {
+  padding: 8px;
+}
+
+.editable:hover {
+  outline: #0b2e13 solid 1px;
+  cursor: pointer;
+}

@@ -1,0 +1,28 @@
+<mat-sidenav-container class="match-parent">
+  <mat-sidenav-content>
+    <app-toolbar [heading]="'Settings'"
+                 [hasBackRoute]="true"
+                 [backLink]="'/settings'"
+                 [showProgress]="false">
+    </app-toolbar>
+
+    <div class="my-profile-wrapper">
+      <mat-tab-group>
+        <mat-tab label="Personal Information">
+          <app-profile-personal></app-profile-personal>
+        </mat-tab>
+        <mat-tab label="Shop Information">
+          <app-profile-address></app-profile-address>
+        </mat-tab>
+        <mat-tab label="Authentication">
+          <app-profile-authentication></app-profile-authentication>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <app-bottom-bar></app-bottom-bar>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
