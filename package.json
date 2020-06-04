@@ -27,7 +27,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:desktop": "ng serve -c=electron",
-    "start:android": "ng serve -c=android",
+    "start:android": "ng serve --host 0.0.0.0 -c=android",
     "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx cap sync",
     "build:android": "ng build --prod -c=androidProd --base-href ./ && npx cap sync",
     "prepare:snap": "cd electron && npm install && npm run build:snap",

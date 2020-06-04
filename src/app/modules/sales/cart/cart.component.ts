@@ -249,17 +249,16 @@ export class CartComponent implements OnInit {
 
   private cartItemsToPrinterData(carts: CartModel[], customer: string): string {
     let data = '';
-    data = data.concat('-----------------------------------\n');
+    data = data.concat('-------------------------------\n');
     data = data.concat(new Date().toDateString() + '\n');
-    data = data.concat('-----------------------------------\n');
     if (customer) {
-      data = data.concat('To ---> ' + customer);
+      data = data.concat('-------------------------------\nTo ---> ' + customer);
     }
     let totalBill = 0;
     carts.forEach((cart, index) => {
       totalBill += <number>cart.amount;
       data = data.concat(
-        '\n-----------------------------------\n' +
+        '\n-------------------------------\n' +
         (index + 1) + '.  ' + cart.product + '\n' +
         'Quantity --> ' + CartComponent.getQuantity(this.isViewedInWholesale, cart) + ' \t' +
         'Unit Price --> ' + CartComponent.getPrice(this.isViewedInWholesale, cart) + '\t' +
@@ -267,9 +266,9 @@ export class CartComponent implements OnInit {
       );
     });
     data = data.concat(
-      '\n-----------------------------------\n' +
+      '\n--------------------------------\n' +
       'Total Bill : ' + totalBill +
-      '\n-----------------------------------\n'
+      '\n--------------------------------\n'
     );
     return data;
   }

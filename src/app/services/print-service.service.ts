@@ -42,7 +42,8 @@ export class PrintServiceService {
 
     printModel.data = data;
 
-    if (environment.android && Capacitor.isNative && Printer && Printer.print && cSettings.saleWithoutPrinter) {
+    console.log(cSettings.saleWithoutPrinter);
+    if (environment.android && Capacitor.isNative && !cSettings.saleWithoutPrinter) {
       return await this.printInMobile(printModel);
     }
 
