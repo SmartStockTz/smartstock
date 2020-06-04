@@ -1,0 +1,68 @@
+<mat-sidenav-container class="match-parent">
+
+  <mat-sidenav-content>
+
+    <app-toolbar [heading]="'Stock'"
+                 [hasBackRoute]="true"
+                 [backLink]="'/stock'"
+                 [showProgress]="false">
+    </app-toolbar>
+
+    <div *ngIf="!fetchUnitsFlag">
+
+      <div class="d-flex flex-row align-items-center">
+        <h6 style="padding-left: 16px; margin: 0">Units</h6>
+        <span class="flex-grow-1"></span>
+        <button style="padding-right: 16px" (click)="getUnits()" mat-icon-button color="primary">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+      <cdk-virtual-scroll-viewport itemSize="10" style="height: 100vh; width: 100vw">
+        <mat-list>
+
+          <div *cdkVirtualFor="let unit of units | async">
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div style="width: 40px; height: 40px; border-radius: 60px; background: #f5f5f5; color: black"
+                   class="text-center"
+                   matListIcon>
+                {{unit.name.substring(0, 1).toUpperCase()}}
+              </div>
+              <h1 matLine>{{unit.name}}</h1>
+              <span matLine>{{unit.description}}</span>
+              <button [matMenuTriggerData]="{unit: unit}" [matMenuTriggerFor]="menu" matSuffix mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </mat-list-item>
+          </div>
+
+        </mat-list>
+      </cdk-virtual-scroll-viewport>
+    </div>
+
+    <div *ngIf="fetchUnitsFlag" style="height: 100vh; width: 100vw; position: fixed"
+         class="d-flex justify-content-center align-items-center flex-column">
+      <mat-progress-spinner matTooltip="fetch units"
+                            [diameter]="40" mode="indeterminate"
+                            color="primary">
+      </mat-progress-spinner>
+      <span>Fetching units</span>
+    </div>
+
+    <button style="position: fixed; bottom: 16px; right: 16px" (click)="openAddUnitDialog()"
+            color="primary"
+            class="mat-fab ft-fab-position" mat-flat-button>
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-menu #menu>
+      <ng-template matMenuContent let-unit="unit">
+        <!--            <button mat-menu-item (click)="showDetails(unit)">View</button>-->
+        <button mat-menu-item (click)="updateUnit(unit)">Edit</button>
+        <button mat-menu-item (click)="deleteUnit(unit)">Delete</button>
+      </ng-template>
+    </mat-menu>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
