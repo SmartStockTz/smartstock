@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../shared/DeviceInfo';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -8,6 +9,7 @@ import {DeviceInfo} from '../../shared/DeviceInfo';
 })
 export class ProfileComponent extends DeviceInfo implements OnInit {
 
+  isMobile = environment.android;
   constructor() {
     super();
   }

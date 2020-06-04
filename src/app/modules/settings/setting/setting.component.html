@@ -1,4 +1,4 @@
-<mat-sidenav-container class="match-parent">
+<mat-sidenav-container *ngIf="!isMobile" class="match-parent">
   <mat-sidenav class="match-parent-side"
                [fixedInViewport]="true"
                #sidenav
@@ -103,4 +103,8 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+<app-settings-general *ngIf="isMobile"></app-settings-general>
+
+
 

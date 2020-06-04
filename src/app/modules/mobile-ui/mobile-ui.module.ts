@@ -30,15 +30,35 @@ import {MatDividerModule} from '@angular/material/divider';
 import { StockMobileComponent } from './stock-mobile/stock-mobile.component';
 import { StockProductsComponent } from './stock-mobile/stock-products/stock-products.component';
 import { StockProductItemComponent } from './stock-mobile/stock-product-item/stock-product-item.component';
-
+import { CategoriesComponent } from './stock-mobile/categories/categories.component';
+import { SuppliersComponent } from './stock-mobile/suppliers/suppliers.component';
+import { ShowSupplierComponent } from './stock-mobile/suppliers/show-supplier/show-supplier.component';
+import { UnitsComponent } from './stock-mobile/units/units.component';
+import { SettingsComponent } from './settings-mobile-module/settings/settings.component';
+import { SettingsGeneralComponent } from './settings-mobile-module/settings-general/settings-general.component';
+import { BillingMobileComponent } from './settings-mobile-module/billing-mobile/billing-mobile.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { UsersMobileComponent } from './settings-mobile-module/users-mobile/users-mobile.component';
+import { ProfileMobileComponent } from './settings-mobile-module/profile-mobile/profile-mobile.component';
+import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
 
 @NgModule({
-  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsComponent, StockProductItemComponent],
+  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsComponent,
+    StockProductItemComponent, CategoriesComponent, SuppliersComponent, ShowSupplierComponent, UnitsComponent,
+    SettingsComponent, SettingsGeneralComponent, BillingMobileComponent, UsersMobileComponent, ProfileMobileComponent,
+  ],
   exports: [
     SalesLandingMobileComponent,
     PurchaseMobileComponent,
     StockMobileComponent,
-    StockProductsComponent
+    StockProductsComponent,
+    CategoriesComponent,
+    SuppliersComponent,
+    SettingsComponent,
+    SettingsGeneralComponent,
+    BillingMobileComponent,
+    UsersMobileComponent,
+    ProfileMobileComponent,
   ],
   imports: [
     CommonModule,
@@ -73,6 +93,8 @@ import { StockProductItemComponent } from './stock-mobile/stock-product-item/sto
     ScrollingModule,
     MatListModule,
     MatRippleModule,
+    MatRadioModule,
+    SharedWithMobileModule
   ]
 })
 export class MobileUiModule { }

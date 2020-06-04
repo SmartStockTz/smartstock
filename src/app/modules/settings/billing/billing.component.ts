@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormControl} from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-billing',
@@ -12,6 +13,7 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   isMobilePay = true;
   amountFormControl = new FormControl(0);
 
+  isMobile = environment.android;
   constructor() {
     super();
   }
