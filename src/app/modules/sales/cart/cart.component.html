@@ -1,4 +1,5 @@
-<div id="cart_view" class="cart">
+<div id="cart_view" [ngClass]="isMobile?'cart-mobile':'cart'">
+
   <mat-toolbar class="mat-elevation-z3" style="z-index: 10000">
 
     <span [matBadge]="getTotalCartItem().toString()" matBadgeOverlap="false">Cart</span>
@@ -52,8 +53,7 @@
     </mat-list>
   </div>
 
-  <div
-    style="padding: 8px 8px 16px 8px;bottom: 0;width: 100%;position: absolute;background-color: white;z-index: 1000;">
+  <div style="padding: 8px 8px 16px 8px;bottom: 0;width: 100%;position: absolute;background-color: white;z-index: 1000;">
     <mat-divider style="margin-bottom: 7px"></mat-divider>
     <div class="cart-total">
       <h6 style="display: flex;">
