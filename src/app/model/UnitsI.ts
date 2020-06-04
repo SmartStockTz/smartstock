@@ -4,4 +4,5 @@ export interface UnitsI {
   createdAt?: string;
   updatedAt?: string;
   description?: string;
+  abbreviation?: string;
 }

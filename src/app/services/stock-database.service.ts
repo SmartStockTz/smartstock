@@ -151,6 +151,7 @@ export class StockDatabaseService implements StockDataSource {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
+  // @ts-ignore
   async updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
     const categoryId = category.objectId;
@@ -160,6 +161,19 @@ export class StockDatabaseService implements StockDataSource {
     const response = await BFast.database(shop.projectId).collection('categories').update<any>(categoryId, data);
     response.objectId = categoryId;
     return response;
+  }
+
+  updateCategoryMobile(category: CategoryI, categoryId): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories/' + categoryId, category,
+        {
+          headers: await this._settings.getCustomerPostHeader()
+        }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   async updateStock(stock: Stock): Promise<Stock> {
