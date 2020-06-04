@@ -235,16 +235,15 @@ export class CartComponent implements OnInit {
     }).then(_ => {
       return this.submitBill(cartId);
     }).then(_ => {
+      this.checkoutProgress = false;
       this.snack.open('Done save sales', 'Ok', {duration: 2000});
     }).catch(reason => {
+      this.checkoutProgress = false;
       this.snack.open(
         reason && reason.message ? reason.message : reason.toString(),
         'Ok',
         {duration: 3000}
       );
-      return Promise.resolve();
-    }).finally(() => {
-      this.checkoutProgress = false;
     });
   }
 
