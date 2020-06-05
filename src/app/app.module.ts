@@ -39,7 +39,7 @@ export class AppModule {
   constructor() {
     BFast.init({
       applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-        enable: false
+        enable: true
       }
     });
 

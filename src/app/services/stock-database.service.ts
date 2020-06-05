@@ -103,14 +103,20 @@ export class StockDatabaseService implements StockDataSource {
 
   async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('categories').getAll();
+    return BFast.database(shop.projectId).collection('categories').getAll(null, {
+      cacheEnable: true,
+      dtl: 7,
+      freshDataCallback: value => {
+        console.log(value);
+      }
+    });
   }
 
   async getAllStock(): Promise<Stock[]> {
     const shop = await this._storage.getActiveShop();
     const stocks: Stock[] = await BFast.database(shop.projectId).collection<Stock>('stocks').getAll<Stock>(null, {
       cacheEnable: false,
-      dtl: 7
+      dtl: 0
     });
     await this._storage.saveStocks(stocks);
     stocks.sort((a, b) => {

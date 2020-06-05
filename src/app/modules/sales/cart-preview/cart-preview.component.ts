@@ -5,6 +5,8 @@ import {EventApiService} from '../../../services/event-api.service';
 import {SaleUtilsService} from '../../../services/sale-utils.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Observable, of} from 'rxjs';
+import {environment} from '../../../../environments/environment';
+import {DeviceInfo} from '../../shared/DeviceInfo';
 
 @Component({
   selector: 'app-cart-preview',
@@ -14,15 +16,17 @@ import {Observable, of} from 'rxjs';
     SaleUtilsService
   ]
 })
-export class CartPreviewComponent implements OnInit {
+export class CartPreviewComponent extends DeviceInfo implements OnInit {
   totalCost = 0;
   totalItems: Observable<number> = of(0);
   @Input() isWholeSale = false;
   @Input() cartSidenav: MatSidenav;
+  isMobile = environment.android;
 
   constructor(private readonly eventApi: EventApiService,
               private readonly changeDetectorRef: ChangeDetectorRef,
               private readonly _saleUtils: SaleUtilsService) {
+    super();
   }
 
   ngOnInit() {
