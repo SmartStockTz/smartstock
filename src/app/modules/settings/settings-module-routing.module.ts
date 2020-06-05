@@ -5,7 +5,7 @@ import {UsersComponent} from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
 import {StockManagerGuard} from '../../guards/stock-manager.guard';
-import {SettingsComponent} from '../mobile-ui/settings-mobile-module/settings/settings.component';
+import {SettingsComponent} from '../mobile-ui/settings/settings/settings.component';
 
 const routes: Routes = [
   {path: '', component: SettingsComponent},

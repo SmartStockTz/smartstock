@@ -1,14 +1,14 @@
 import {Component, Inject} from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import {SupplierI} from '../../../../../model/SupplierI';
+import {SupplierI} from '../../../../model/SupplierI';
 
 
 @Component({
-  templateUrl: './show-supplier.component.html',
-  styleUrls: ['./show-supplier.component.css']
+  templateUrl: './show-supplier-mobile-ui.component.html',
+  styleUrls: ['./show-supplier.component-mobile-ui.css']
 })
-export class ShowSupplierComponent {
-  constructor(public readonly bottomSheetRef: MatBottomSheetRef<ShowSupplierComponent>,
+export class ShowSupplierMobileUiComponent {
+  constructor(public readonly bottomSheetRef: MatBottomSheetRef<ShowSupplierMobileUiComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: SupplierI) {
   }
 

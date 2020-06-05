@@ -1,18 +1,18 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {FormBuilder, FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {CategoryI} from '../../../../model/CategoryI';
-import {StockDatabaseService} from '../../../../services/stock-database.service';
+import {CategoryI} from '../../../model/CategoryI';
+import {StockDatabaseService} from '../../../services/stock-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DialogCategoryDeleteComponent, DialogCategoryNewComponent} from '../../../stocks/categories/categories.component';
+import {DialogCategoryDeleteComponent, DialogCategoryNewComponent} from '../../stocks/categories/categories.component';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-categories-mobile-ui',
+  templateUrl: './categories-mobile-ui.component.html',
+  styleUrls: ['./categories-mobile-ui.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesMobileUiComponent implements OnInit {
 
   fetchCategoriesFlag = false;
   nameFormControl = new FormControl();
@@ -27,26 +27,6 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
-  }
-
-  searchCategory(query: string) {
-    // if ($event && $event.query) {
-    //   this.fetchCategoriesFlag = true;
-    //   this.stockDatabase.searchCategory($event.query, {size: 20}).then(data => {
-    //     this.categoriesArray = JSON.parse(JSON.stringify(data));
-    //     // this.skip +=this.productsArray.length;
-    //     this.categoriesDatasource = new MatTableDataSource(this.categoriesArray);
-    //     this.fetchCategoriesFlag = false;
-    //     // this.size = 0;
-    //   }).catch(reason => {
-    //     this.snack.open(reason, 'Ok', {
-    //       duration: 3000
-    //     });
-    //     this.fetchCategoriesFlag = false;
-    //   });
-    // } else {
-    //   this.getCategories();
-    // }
   }
 
   getCategories() {
@@ -100,12 +80,6 @@ export class CategoriesComponent implements OnInit {
       hasBackdrop: true
     }).afterClosed().subscribe(value => {
       if (value) {
-        // let prevData = [];
-        // this.categories.subscribe(value1 => {
-        //   prevData = value1;
-        // });
-        // prevData.push(value);
-        // this.categories = of(prevData);
         this.getCategories();
       }
     });

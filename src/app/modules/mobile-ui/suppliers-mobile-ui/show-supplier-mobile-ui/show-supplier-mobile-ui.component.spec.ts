@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShowSupplierComponent } from './show-supplier.component';
+import { ShowSupplierMobileUiComponent } from './show-supplier-mobile-ui.component';
 
 describe('ShowSupplierComponent', () => {
-  let component: ShowSupplierComponent;
-  let fixture: ComponentFixture<ShowSupplierComponent>;
+  let component: ShowSupplierMobileUiComponent;
+  let fixture: ComponentFixture<ShowSupplierMobileUiComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowSupplierComponent ]
+      declarations: [ ShowSupplierMobileUiComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShowSupplierComponent);
+    fixture = TestBed.createComponent(ShowSupplierMobileUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

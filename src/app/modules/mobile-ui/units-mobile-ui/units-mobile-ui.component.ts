@@ -1,20 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {FormBuilder, FormControl} from '@angular/forms';
 
 import {Observable, of} from 'rxjs';
-import {UnitsI} from '../../../../model/UnitsI';
-import {StockDatabaseService} from '../../../../services/stock-database.service';
-import {InfoMessageService} from '../../../../services/info-message.service';
-import {DialogUnitDeleteComponent, DialogUnitNewComponent} from '../../../stocks/units/units.component';
+import {UnitsI} from '../../../model/UnitsI';
+import {StockDatabaseService} from '../../../services/stock-database.service';
+import {InfoMessageService} from '../../../services/info-message.service';
+import {DialogUnitDeleteComponent, DialogUnitNewComponent} from '../../stocks/units/units.component';
 
 
 @Component({
-  selector: 'app-units',
-  templateUrl: './units.component.html',
-  styleUrls: ['./units.component.css']
+  selector: 'app-units-mobile-ui',
+  templateUrl: './units-mobile-ui.component.html',
+  styleUrls: ['./units-mobile-ui.component.css']
 })
-export class UnitsComponent implements OnInit {
+export class UnitsMobileUiComponent implements OnInit {
 
   unitsArray: UnitsI[];
   fetchUnitsFlag = false;
@@ -75,7 +75,7 @@ export class UnitsComponent implements OnInit {
         // // this.unitsArray = this.unitsArray.filter(value2 => value2.objectId !== value.objectId);
         // if (editedObjectIndex !== -1) {
         //   this.unitsArray[editedObjectIndex] = value;
-        //   this.units = of(this.unitsArray);
+        //   this.units-mobile-ui = of(this.unitsArray);
         // } else {
         //   console.warn('fails to update unit table');
         // }

@@ -1,21 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {FormBuilder, FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {SupplierI} from '../../../../model/SupplierI';
-import {StockDatabaseService} from '../../../../services/stock-database.service';
-import {InfoMessageService} from '../../../../services/info-message.service';
-import {ShowSupplierComponent} from './show-supplier/show-supplier.component';
-import {DialogSupplierDeleteComponent, DialogSupplierNewComponent} from '../../../stocks/suppliers/suppliers.component';
+import {SupplierI} from '../../../model/SupplierI';
+import {StockDatabaseService} from '../../../services/stock-database.service';
+import {ShowSupplierMobileUiComponent} from './show-supplier-mobile-ui/show-supplier-mobile-ui.component';
+import {DialogSupplierDeleteComponent, DialogSupplierNewComponent} from '../../stocks/suppliers/suppliers.component';
 
 @Component({
-  selector: 'app-suppliers',
-  templateUrl: './suppliers.component.html',
-  styleUrls: ['./suppliers.component.css']
+  selector: 'app-suppliers-mobile-ui',
+  templateUrl: './suppliers-mobile-ui.component.html',
+  styleUrls: ['./suppliers-mobile-ui.component.css']
 })
-export class SuppliersComponent implements OnInit {
+export class SuppliersMobileUiComponent implements OnInit {
 
   suppliersArray: SupplierI[];
   fetchSuppliersFlag = false;
@@ -114,7 +113,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   showDetails(supplier) {
-    this.bottomSheet.open(ShowSupplierComponent, {
+    this.bottomSheet.open(ShowSupplierMobileUiComponent, {
       data: supplier
     });
   }

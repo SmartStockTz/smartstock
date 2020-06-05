@@ -107,7 +107,7 @@ export class StockDatabaseService implements StockDataSource {
       cacheEnable: true,
       dtl: 7,
       freshDataCallback: value => {
-        console.log(value);
+        // console.log(value);
       }
     });
   }
@@ -171,7 +171,7 @@ export class StockDatabaseService implements StockDataSource {
 
   updateCategoryMobile(category: CategoryI, categoryId): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories/' + categoryId, category,
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories-mobile-ui/' + categoryId, category,
         {
           headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value => {
