@@ -31,7 +31,9 @@ export class UserDatabaseService implements UserDataSource {
       return {};
     }).catch(this.logger.w);
     const user = await BFast.auth().currentUser<UserI>();
-    if (user && user.verified === true) {
+    if (user && user.role !== 'admin') {
+      return user;
+    } else if (user && user.verified === true) {
       return user;
     } else {
       return await BFast.auth().setCurrentUser(undefined);
@@ -46,7 +48,7 @@ export class UserDatabaseService implements UserDataSource {
 
   async getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
     const projectId = await this._settings.getCustomerProjectId();
-    return BFast.database(projectId).collection('_User').query().find<UserI>({
+    return BFast.database().collection('_User').query().find<UserI>({
       size: pagination.size,
       skip: pagination.skip,
       filter: {
@@ -65,7 +67,10 @@ export class UserDatabaseService implements UserDataSource {
 
   async login(user: { username: string, password: string }): Promise<UserI> {
     const authUser = await BFast.auth().logIn<UserI>(user.username, user.password);
-    if (authUser && authUser.verified === true) {
+    if (authUser && authUser.role !== 'admin') {
+      await this._storage.saveActiveUser(authUser);
+      return authUser;
+    } else if (authUser && authUser.verified === true) {
       await this._storage.saveActiveUser(authUser);
       return authUser;
     } else {

@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         formElement.resetForm();
       });
     } else {
-      this.routes.navigateByUrl('/sale/report').catch(reason => this.log.i(reason)).then(() => {
+      this.routes.navigateByUrl('/sale').catch(reason => this.log.i(reason)).then(() => {
         this.loginForm.reset();
         formElement.resetForm();
       });
