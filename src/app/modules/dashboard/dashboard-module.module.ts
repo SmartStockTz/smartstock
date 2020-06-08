@@ -31,6 +31,7 @@ import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
 import { CurrentShopComponent } from './current-shop/current-shop.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { DashCardComponent } from './dash-card/dash-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MatDividerModule} from '@angular/material/divider';
     ProductPerformanceReportComponent,
     TotalSalesComponent,
     DateRangeSelectorComponent,
-    CurrentShopComponent
+    CurrentShopComponent,
+    DashCardComponent
 
   ],
   imports: [

@@ -1,40 +1,35 @@
 <mat-card>
   <mat-card-content class="d-flex flex-row">
 
-    <div>
-      <div class="d-flex justify-content-center align-items-center flex-column" style="padding-bottom: 8px">
-        <div style="padding: 16px; justify-content: center; align-items: center">
-          <mat-icon style="width: 70px; height: 70px; font-size: 70px" color="primary">store</mat-icon>
-        </div>
-        <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;"
-              *ngIf="shop">{{shop.businessName}}</span>
-        <span style="width: 4px; height: 4px"></span>
-<!--        <button style="width: 80%"-->
-<!--                color="primary"-->
-<!--                class="btn-block"-->
-<!--                routerLink="/shop" mat-button>-->
-<!--          Change Shop-->
-<!--        </button>-->
+    <div class="d-flex justify-content-center align-items-center flex-column" style="padding-bottom: 8px">
+      <div style="padding: 8px; justify-content: center; align-items: center">
+        <mat-icon style="width: 70px; height: 70px; font-size: 70px" color="primary">store</mat-icon>
       </div>
     </div>
 
-    <span style="flex: 1 1 auto"></span>
-
-    <div>
-      <div>
-        <mat-form-field>
-          <input matInput
-                 placeholder="Choose a date"
-                 [satDatepicker]="picker6">
-          <sat-datepicker #picker6 [rangeMode]="true"
-                          [touchUi]="!enoughWidth()"
-                          panelClass="range-datepicker"
-                          [selectFirstDateOnClose]="true">
-          </sat-datepicker>
-          <sat-datepicker-toggle matSuffix [for]="picker6"></sat-datepicker-toggle>
-        </mat-form-field>
+    <div class="flex-grow-1 d-flex flex-row">
+      <div class="d-flex flex-column justify-content-center">
+        <h4 style="overflow: hidden; text-overflow: ellipsis;"
+            *ngIf="shop">{{shop.businessName}}</h4>
+        <span style="width: 4px; height: 4px"></span>
+        <mat-card-subtitle *ngIf="shop">{{shop.category}}</mat-card-subtitle>
       </div>
-      <mat-divider></mat-divider>
+      <span style="flex: 1 1 auto"></span>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <mat-form-field>
+        <input matInput
+               (focus)="picker6.open()"
+               placeholder="Choose a date"
+               [satDatepicker]="picker6">
+        <sat-datepicker #picker6 [rangeMode]="true"
+                        [touchUi]="!enoughWidth()"
+                        panelClass="range-datepicker"
+                        [selectFirstDateOnClose]="true">
+        </sat-datepicker>
+        <sat-datepicker-toggle matSuffix [for]="picker6"></sat-datepicker-toggle>
+      </mat-form-field>
     </div>
 
   </mat-card-content>
