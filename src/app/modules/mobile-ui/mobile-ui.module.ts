@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SalesLandingMobileComponent } from './sales-landing-mobile/sales-landing-mobile.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {SalesLandingMobileComponent} from './sales/sales-landing-mobile.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatCardModule} from '@angular/material/card';
@@ -8,7 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRippleModule} from '@angular/material/core';
 import {RouterModule} from '@angular/router';
-import { PurchaseMobileComponent } from './purchase-mobile-module/purchase-mobile/purchase-mobile.component';
+import {PurchaseMobileComponent} from './purchases/purchase-mobile/purchase-mobile.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -27,33 +27,33 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDividerModule} from '@angular/material/divider';
-import { StockMobileComponent } from './stock-mobile/stock-mobile.component';
-import { StockProductsComponent } from './stock-mobile/stock-products/stock-products.component';
-import { StockProductItemComponent } from './stock-mobile/stock-product-item/stock-product-item.component';
-import { CategoriesComponent } from './stock-mobile/categories/categories.component';
-import { SuppliersComponent } from './stock-mobile/suppliers/suppliers.component';
-import { ShowSupplierComponent } from './stock-mobile/suppliers/show-supplier/show-supplier.component';
-import { UnitsComponent } from './stock-mobile/units/units.component';
-import { SettingsComponent } from './settings-mobile-module/settings/settings.component';
-import { SettingsGeneralComponent } from './settings-mobile-module/settings-general/settings-general.component';
-import { BillingMobileComponent } from './settings-mobile-module/billing-mobile/billing-mobile.component';
+import {StockMobileComponent} from './stocks/stock-mobile.component';
+import {StockProductsMobileUiComponent} from './stock-products-mobile-ui/stock-products-mobile-ui.component';
+import {StockProductItemMobileUiComponent} from './stock-product-item-mobile-ui/stock-product-item-mobile-ui.component';
+import {CategoriesMobileUiComponent} from './categories-mobile-ui/categories-mobile-ui.component';
+import {SuppliersMobileUiComponent} from './suppliers-mobile-ui/suppliers-mobile-ui.component';
+import {ShowSupplierMobileUiComponent} from './suppliers-mobile-ui/show-supplier-mobile-ui/show-supplier-mobile-ui.component';
+import {UnitsMobileUiComponent} from './units-mobile-ui/units-mobile-ui.component';
+import {SettingsComponent} from './settings/settings/settings.component';
+import {SettingsGeneralComponent} from './settings/settings-general/settings-general.component';
+import {BillingMobileComponent} from './settings/billing-mobile/billing-mobile.component';
 import {MatRadioModule} from '@angular/material/radio';
-import { UsersMobileComponent } from './settings-mobile-module/users-mobile/users-mobile.component';
-import { ProfileMobileComponent } from './settings-mobile-module/profile-mobile/profile-mobile.component';
+import {UsersMobileComponent} from './settings/users-mobile/users-mobile.component';
+import {ProfileMobileComponent} from './settings/profile-mobile/profile-mobile.component';
 import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
 
 @NgModule({
-  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsComponent,
-    StockProductItemComponent, CategoriesComponent, SuppliersComponent, ShowSupplierComponent, UnitsComponent,
+  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsMobileUiComponent,
+    StockProductItemMobileUiComponent, CategoriesMobileUiComponent, SuppliersMobileUiComponent, ShowSupplierMobileUiComponent, UnitsMobileUiComponent,
     SettingsComponent, SettingsGeneralComponent, BillingMobileComponent, UsersMobileComponent, ProfileMobileComponent,
   ],
   exports: [
     SalesLandingMobileComponent,
     PurchaseMobileComponent,
     StockMobileComponent,
-    StockProductsComponent,
-    CategoriesComponent,
-    SuppliersComponent,
+    StockProductsMobileUiComponent,
+    CategoriesMobileUiComponent,
+    SuppliersMobileUiComponent,
     SettingsComponent,
     SettingsGeneralComponent,
     BillingMobileComponent,
@@ -97,4 +97,5 @@ import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.m
     SharedWithMobileModule
   ]
 })
-export class MobileUiModule { }
+export class MobileUiModule {
+}

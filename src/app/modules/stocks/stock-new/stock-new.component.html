@@ -10,6 +10,8 @@
   <mat-sidenav-content>
     <app-toolbar [heading]="'New Product'"
                  [sidenav]="sidenav"
+                 [hasBackRoute]="isMobile"
+                 backLink="/stock/products"
                  [showProgress]="false">
     </app-toolbar>
 

@@ -3,19 +3,19 @@ import {Router} from '@angular/router';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import {Observable, of} from 'rxjs';
-import {StorageService} from '../../../../services/storage.service';
-import {InfoMessageService} from '../../../../services/info-message.service';
-import {StockDatabaseService} from '../../../../services/stock-database.service';
-import {UnitsI} from '../../../../model/UnitsI';
-import {Stock} from '../../../../model/stock';
-import {DialogDeleteComponent} from '../../../stocks/stock/stock.component';
+import {StorageService} from '../../../services/storage.service';
+import {InfoMessageService} from '../../../services/info-message.service';
+import {StockDatabaseService} from '../../../services/stock-database.service';
+import {UnitsI} from '../../../model/UnitsI';
+import {Stock} from '../../../model/stock';
+import {DialogDeleteComponent} from '../../stocks/stock/stock.component';
 
 @Component({
-  selector: 'app-stock-products',
-  templateUrl: './stock-products.component.html',
-  styleUrls: ['./stock-products.component.css']
+  selector: 'app-stock-products-mobile-ui',
+  templateUrl: './stock-products-mobile-ui.component.html',
+  styleUrls: ['./stock-products-mobile-ui.component.css']
 })
-export class StockProductsComponent implements OnInit {
+export class StockProductsMobileUiComponent implements OnInit {
   stockFetchProgress = false;
 
   constructor(private readonly _router: Router,

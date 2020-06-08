@@ -1,0 +1,33 @@
+<app-toolbar [heading]="'Stock'" [sidenav]="sidenav"></app-toolbar>
+
+<div style="margin-top: 16px">
+  <mat-card-subtitle>Manage</mat-card-subtitle>
+  <mat-list>
+    <mat-list-item matRipple routerLink="/stock/products">
+      <mat-icon color="primary" matListIcon>redeem</mat-icon>
+      <h4 matLine>Products</h4>
+      <p matLine>add, edit & delete product</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item matRipple routerLink="/stock/categories">
+      <mat-icon color="primary" matListIcon>category</mat-icon>
+      <h4 matLine>Categories</h4>
+      <p matLine>manage product category</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item matRipple routerLink="/stock/suppliers">
+      <mat-icon color="primary" matListIcon>local_shipping</mat-icon>
+      <h4 matLine>Suppliers</h4>
+      <p matLine>add, edit & delete supplier</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item matRipple routerLink="/stock/units">
+      <mat-icon color="primary" matListIcon>linear_scale</mat-icon>
+      <h4 matLine>Units</h4>
+      <p matLine>manage quantity unit</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>
+
+<app-bottom-bar></app-bottom-bar>

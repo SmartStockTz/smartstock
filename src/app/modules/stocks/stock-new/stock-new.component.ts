@@ -10,6 +10,7 @@ import {DialogSupplierNewComponent} from '../suppliers/suppliers.component';
 import {DialogImageCropComponent} from '../../shared/dialog-image-crop/dialog-image-crop.component';
 import {StockDatabaseService} from '../../../services/stock-database.service';
 import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-stock-new',
@@ -33,6 +34,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   unitsFetching = true;
   categoriesFetching = true;
   suppliersFetching = true;
+  isMobile = environment.android;
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,

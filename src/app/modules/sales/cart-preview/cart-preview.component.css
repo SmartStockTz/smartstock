@@ -1,0 +1,14 @@
+.fixed-bottom-web-enough-width{
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-bottom-web-enough-width>button{
+  width: 350px;
+}
+
+.fixed-bottom-web{
+  display: none;
+}

@@ -22,13 +22,13 @@
 
         <cdk-virtual-scroll-viewport itemSize="10" style="height: 100vh;">
           <mat-list style="width: 100vw">
-            <app-stock-product-item
+            <app-stock-product-item-mobile-ui
               [product]="product"
               (deleteCallback)="deleteStock($event)"
               (editCallback)="editStock($event)"
               [bottomSheet]="_bottomSheet"
               *cdkVirtualFor="let product of products | async">
-            </app-stock-product-item>
+            </app-stock-product-item-mobile-ui>
           </mat-list>
         </cdk-virtual-scroll-viewport>
 

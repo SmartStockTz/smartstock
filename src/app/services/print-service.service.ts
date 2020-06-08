@@ -30,6 +30,7 @@ export class PrintServiceService {
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
+      responseType: 'text'
     }).toPromise();
   }
 
@@ -42,16 +43,16 @@ export class PrintServiceService {
 
     printModel.data = data;
 
-    console.log(cSettings.saleWithoutPrinter);
+    // console.log(cSettings.saleWithoutPrinter);
     if (environment.android && Capacitor.isNative && !cSettings.saleWithoutPrinter) {
       return await this.printInMobile(printModel);
     }
 
-    if (environment.electron && cSettings.saleWithoutPrinter) {
+    if (environment.electron && !cSettings.saleWithoutPrinter) {
       return await this.printInDesktop(printModel);
     }
 
-    if (environment.browser && cSettings.saleWithoutPrinter) {
+    if (environment.browser && !cSettings.saleWithoutPrinter) {
       return await this.printInDesktop(printModel);
     }
 

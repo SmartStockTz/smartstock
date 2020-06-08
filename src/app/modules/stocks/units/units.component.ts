@@ -80,7 +80,7 @@ export class UnitsComponent implements OnInit {
   }
 
   updateUnit(unit: { objectId: string, value: string, field: string }) {
-    this.snack.open('Update units in progress..', 'Ok');
+    this.snack.open('Update units-mobile-ui in progress..', 'Ok');
     this.stockDatabase.updateUnit(unit).then(data => {
       const editedObjectIndex = this.unitsArray.findIndex(value => value.objectId === data.objectId);
       this.unitsArray = this.unitsArray.filter(value => value.objectId !== unit.objectId);
