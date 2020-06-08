@@ -3,10 +3,10 @@ import {FormControl} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
-import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
-import {SalesModel} from '../../../../model/CashSale';
-import {LogService} from '../../../../services/log.service';
-import {toSqlDate} from '../../../../utils/date';
+import {AdminDashboardService} from '../../../services/admin-dashboard.service';
+import {SalesModel} from '../../../model/CashSale';
+import {LogService} from '../../../services/log.service';
+import {toSqlDate} from '../../../utils/date';
 
 @Component({
   selector: 'app-dashboard-sales-product-frequency',

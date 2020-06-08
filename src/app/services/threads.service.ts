@@ -55,7 +55,7 @@ export class ThreadsService implements OnInit {
   private async startSalesProxy() {
     try {
       if (typeof Worker !== 'undefined') {
-        this.salesWorkerProxy = new Worker('assets/js/sw-sales-proxy.js');
+        this.salesWorkerProxy = new Worker('assets/js/sw-landing-proxy.js');
         this.salesWorkerProxy.onmessage = ({data}) => {
           // this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
         };
@@ -66,7 +66,7 @@ export class ThreadsService implements OnInit {
       }
     } catch (e) {
       console.log(e);
-      throw {message: 'Fails to start sales proxy'};
+      throw {message: 'Fails to start landing proxy'};
     }
   }
 

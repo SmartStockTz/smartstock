@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
-import {toSqlDate} from '../../../../utils/date';
+import {AdminDashboardService} from '../../../services/admin-dashboard.service';
+import {toSqlDate} from '../../../utils/date';
 
 @Component({
   selector: 'app-dashboard-sales-general',
@@ -46,7 +46,7 @@ export class SalesGeneralComponent implements OnInit {
     }).catch(reason => {
       this.totalSale = 0;
       console.log(reason);
-      this._snack.open('Fails to get total sales', 'Ok', {
+      this._snack.open('Fails to get total landing', 'Ok', {
         duration: 3000
       });
       this.totalSaleGetProgress = false;

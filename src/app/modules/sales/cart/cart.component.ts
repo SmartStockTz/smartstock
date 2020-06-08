@@ -236,7 +236,7 @@ export class CartComponent implements OnInit {
       return this.submitBill(cartId);
     }).then(_ => {
       this.checkoutProgress = false;
-      this.snack.open('Done save sales', 'Ok', {duration: 2000});
+      this.snack.open('Done save landing', 'Ok', {duration: 2000});
     }).catch(reason => {
       this.checkoutProgress = false;
       this.snack.open(

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import * as Highcharts from 'highcharts';
-import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
-import {toSqlDate} from '../../../../utils/date';
+import {AdminDashboardService} from '../../../services/admin-dashboard.service';
+import {toSqlDate} from '../../../utils/date';
 
 @Component({
   selector: 'app-dashboard-sale-trends',

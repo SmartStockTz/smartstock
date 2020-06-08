@@ -65,6 +65,9 @@ export class UserDatabaseService implements UserDataSource {
 
   async login(user: { username: string, password: string }): Promise<UserI> {
     const authUser = await BFast.auth().logIn<UserI>(user.username, user.password);
+    if (authUser && authUser.role !== 'admin') {
+      return authUser;
+    }
     if (authUser && authUser.verified === true) {
       await this._storage.saveActiveUser(authUser);
       return authUser;

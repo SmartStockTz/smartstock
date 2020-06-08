@@ -12,12 +12,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
-import {SalesGeneralComponent} from './sales/general/sales-general.component';
+import {SalesGeneralComponent} from './general/sales-general.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {SalesTrendsComponent} from './sales/trends/sales-trends.component';
-import {SalesProductFrequencyComponent} from './sales/product-frequency/sales-product-frequency.component';
+import {SalesTrendsComponent} from './trends/sales-trends.component';
+import {SalesProductFrequencyComponent} from './product-frequency/sales-product-frequency.component';
 import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
-import {SalesDashboardComponent} from './sales/sales-dashboard.component';
+import {DashboardComponent} from './landing/dashboard.component';
 import {SalesReportsComponent} from '../reports/sales-reports/sales-reports.component';
 import {StockReportsComponent} from '../reports/stock-reports/stock-reports.component';
 import {StockReorderReportComponent} from '../reports/stock-reports/stock-reorder-report/stock-reorder-report.component';
@@ -26,9 +26,11 @@ import {ProductPerformanceReportComponent} from '../reports/sales-reports/produc
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
-import { TotalSalesComponent } from './sales/general/total-sales/total-sales.component';
+import { TotalSalesComponent } from './total-sales/total-sales.component';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
+import { CurrentShopComponent } from './current-shop/current-shop.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,14 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
     DataNotReadyComponent,
-    SalesDashboardComponent,
+    DashboardComponent,
     StockReportsComponent,
     StockReorderReportComponent,
     SalesReportsComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
-    DateRangeSelectorComponent
+    DateRangeSelectorComponent,
+    CurrentShopComponent
 
   ],
   imports: [
@@ -66,6 +69,7 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
     MatSelectModule,
     SatDatepickerModule,
     SatNativeDateModule,
+    MatDividerModule,
   ]
 })
 export class DashboardModuleModule {

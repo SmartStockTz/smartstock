@@ -6,13 +6,12 @@ import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard-sales',
-  templateUrl: './sales-dashboard.component.html',
-  styleUrls: ['./sales-dashboard.component.css']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class SalesDashboardComponent extends DeviceInfo implements OnInit {
+export class DashboardComponent extends DeviceInfo implements OnInit {
 
   @ViewChild('sidenav') sidenav: MatSidenav;
-  rangesFooter = DateRangeSelectorComponent;
 
   isMobile = environment.android;
 

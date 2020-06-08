@@ -5,8 +5,8 @@ import {StockReportsComponent} from './stock-reports/stock-reports.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'sales', pathMatch: 'full'},
-  {path: 'sales', component: SalesReportsComponent},
+  {path: '', redirectTo: 'landing', pathMatch: 'full'},
+  {path: 'landing', component: SalesReportsComponent},
   {path: 'stocks', component: StockReportsComponent},
 ];
 

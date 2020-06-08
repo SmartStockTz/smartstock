@@ -93,7 +93,7 @@ async function saveSaleAndUpdateStock(sales, shop, salesCache, key) {
       before: async transactionModels => {
         await prepareSalesCollection(shop);
         const salesFromTransactionModel = transactionModels.filter(value =>
-          value.path.toLowerCase()==='/classes/sales' && value.method.toLowerCase()==='post');
+          value.path.toLowerCase()==='/classes/landing' && value.method.toLowerCase()==='post');
         // console.log(salesFromTransactionModel);
         for (const sale of salesFromTransactionModel){
           const duplicateResults = await BFast.database(shop.projectId)
@@ -154,7 +154,7 @@ addEventListener('message', async ({data}) => {
           shouldRun = true;
         });
     } else {
-      // console.log('another save sales routine runs');
+      // console.log('another save landing routine runs');
     }
   }, 3000);
 });
