@@ -50,7 +50,7 @@ export class ChooseShopComponent implements OnInit {
     this.userDatabase.getShops().then(shops => {
       this.shops = of(shops);
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this._snack.open('Error when fetch available shops', 'Ok', {
         duration: 3000
       });
@@ -64,7 +64,7 @@ export class ChooseShopComponent implements OnInit {
     this.userDatabase.saveCurrentShop(shop).then(_ => {
       this._router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this._snack.open('Error when trying to save your current shop', 'Ok', {
         duration: 3000
       });
