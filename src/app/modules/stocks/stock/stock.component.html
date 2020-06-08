@@ -8,168 +8,178 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [heading]="'Stock'"
-                 [showSearch]="true"
-                 [searchPlaceholder]="'Type to search'"
-                 (searchCallback)="handleSearch($event)"
-                 [sidenav]="sidenav"
-                 [showProgress]="showProgress">
-    </app-toolbar>
 
-    <div class="container">
+    <div>
+      <app-toolbar [heading]="'Stock'"
+                   [showSearch]="true"
+                   [searchPlaceholder]="'Type to search'"
+                   (searchCallback)="handleSearch($event)"
+                   [sidenav]="sidenav"
+                   [showProgress]="showProgress">
+      </app-toolbar>
 
-      <div class="row" style="margin: 16px">
-        <div class="full-width col-12">
-          <mat-tab-group [selectedIndex]="selectedTab" color="primary">
-            <mat-tab label="Products">
-              <!--              <mat-form-field class="my-input" style="margin-top: 8px">-->
-              <!--                <input matInput placeholder="Search" type="text" [formControl]="searchStockControl"/>-->
-              <!--              </mat-form-field>-->
-              <div>
-                <mat-card class="mat-elevation-z0">
-                  <mat-card-title class="d-flex flex-row">
-                    <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
-                      Add Product
-                    </button>
-                    <span class="toolbar-spacer"></span>
-                    <span style="width: 8px; height: 8px"></span>
-                    <button (click)="hotReloadStocks()" [disabled]="hotReloadProgress" matTooltip="Reload from server"
-                            color="primary"
-                            class="ft-button" mat-flat-button>
-                      <mat-icon *ngIf="!hotReloadProgress">refresh</mat-icon>
-                      <mat-progress-spinner *ngIf="hotReloadProgress" [diameter]="20"
-                                            matTooltip="Fetch products from server"
-                                            mode="indeterminate"
-                                            color="primary">
-                      </mat-progress-spinner>
-                    </button>
-                    <span style="width: 8px; height: 8px"></span>
-                    <button (click)="exportStock()" [disabled]="exportProgress" matTooltip="Export Products To Csv"
-                            color="primary"
-                            class="ft-button" mat-flat-button>
-                      <mat-icon *ngIf="!exportProgress">cloud_download</mat-icon>
-                      <mat-progress-spinner *ngIf="exportProgress" [diameter]="20"
-                                            matTooltip="Export Products InProgress.."
-                                            mode="indeterminate"
-                                            color="primary">
-                      </mat-progress-spinner>
-                    </button>
-                    <span style="width: 8px; height: 8px"></span>
-                    <button (click)="importStocks()" matTooltip="Import Products"
-                            color="primary"
-                            class="ft-button" mat-flat-button>
-                      <mat-icon>cloud_upload</mat-icon>
-                    </button>
+      <div class="container">
 
-                    <button [matMenuTriggerFor]="stockMenu" color="primary" mat-icon-button>
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #stockMenu>
-                      <button (click)="reload()" matTooltip="refresh products in table" mat-menu-item>Reload</button>
-<!--                      <button (click)="exportStock()" matTooltip="refresh products in table" mat-menu-item>-->
-<!--                        Export to excel-->
-<!--                      </button>-->
-                    </mat-menu>
+        <div class="row" style="margin: 16px">
 
-                  </mat-card-title>
-                  <table mat-table [dataSource]="stockDatasource">
+          <div class="full-width col-12">
+            <mat-tab-group [selectedIndex]="selectedTab" color="primary">
+              <mat-tab label="Products">
+                <!--              <mat-form-field class="my-input" style="margin-top: 8px">-->
+                <!--                <input matInput placeholder="Search" type="text" [formControl]="searchStockControl"/>-->
+                <!--              </mat-form-field>-->
+                <div>
+                  <mat-card class="mat-elevation-z0">
+                    <mat-card-title class="d-flex flex-row">
+                      <button routerLink="/stock/create" color="primary" class="ft-button" mat-flat-button>
+                        Add Product
+                      </button>
+                      <span class="toolbar-spacer"></span>
+                      <span style="width: 8px; height: 8px"></span>
+                      <button (click)="hotReloadStocks()" [disabled]="hotReloadProgress" matTooltip="Reload from server"
+                              color="primary"
+                              class="ft-button" mat-flat-button>
+                        <mat-icon *ngIf="!hotReloadProgress">refresh</mat-icon>
+                        <mat-progress-spinner *ngIf="hotReloadProgress" [diameter]="20"
+                                              matTooltip="Fetch products from server"
+                                              mode="indeterminate"
+                                              color="primary">
+                        </mat-progress-spinner>
+                      </button>
+                      <span style="width: 8px; height: 8px"></span>
+                      <button (click)="exportStock()" [disabled]="exportProgress" matTooltip="Export Products To Csv"
+                              color="primary"
+                              class="ft-button" mat-flat-button>
+                        <mat-icon *ngIf="!exportProgress">cloud_download</mat-icon>
+                        <mat-progress-spinner *ngIf="exportProgress" [diameter]="20"
+                                              matTooltip="Export Products InProgress.."
+                                              mode="indeterminate"
+                                              color="primary">
+                        </mat-progress-spinner>
+                      </button>
+                      <span style="width: 8px; height: 8px"></span>
+                      <button (click)="importStocks()" matTooltip="Import Products"
+                              color="primary"
+                              class="ft-button" mat-flat-button>
+                        <mat-icon>cloud_upload</mat-icon>
+                      </button>
 
-                    <ng-container matColumnDef="product">
-                      <th mat-header-cell *matHeaderCellDef>Product</th>
-                      <td mat-cell *matCellDef="let element">{{element.product}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                      <button [matMenuTriggerFor]="stockMenu" color="primary" mat-icon-button>
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #stockMenu>
+                        <button (click)="reload()" matTooltip="refresh products in table" mat-menu-item>Reload</button>
+                        <!--                      <button (click)="exportStock()" matTooltip="refresh products in table" mat-menu-item>-->
+                        <!--                        Export to excel-->
+                        <!--                      </button>-->
+                      </mat-menu>
 
-                    <ng-container matColumnDef="quantity">
-                      <th mat-header-cell *matHeaderCellDef>Quantity</th>
-                      <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                    </mat-card-title>
+                    <table mat-table [dataSource]="stockDatasource">
 
-                    <ng-container matColumnDef="purchase">
-                      <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
-                      <td mat-cell *matCellDef="let element">{{element.purchase | number}}</td>
-                      <td mat-footer-cell *matFooterCellDef>
-                        <!--                        <b>{{totalPurchase | async | currency:'TZS '}}</b>-->
-                      </td>
-                    </ng-container>
+                      <ng-container matColumnDef="product">
+                        <th mat-header-cell *matHeaderCellDef>Product</th>
+                        <td mat-cell *matCellDef="let element">{{element.product}}</td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
 
-                    <ng-container matColumnDef="retailPrice">
-                      <th mat-header-cell *matHeaderCellDef>R.Price (TZS)</th>
-                      <td matRipple mat-cell *matCellDef="let element">{{element.retailPrice | number}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                      <ng-container matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                        <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
 
-                    <ng-container matColumnDef="wholesalePrice">
-                      <th mat-header-cell *matHeaderCellDef>W.Price (TZS)</th>
-                      <td mat-cell
-                          *matCellDef="let element">{{element.wholesalePrice | number}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                      <ng-container matColumnDef="purchase">
+                        <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
+                        <td mat-cell *matCellDef="let element">{{element.purchase | number}}</td>
+                        <td mat-footer-cell *matFooterCellDef>
+                          <!--                        <b>{{totalPurchase | async | currency:'TZS '}}</b>-->
+                        </td>
+                      </ng-container>
 
-                    <ng-container matColumnDef="expire">
-                      <th mat-header-cell *matHeaderCellDef>Expire</th>
-                      <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                      <ng-container matColumnDef="retailPrice">
+                        <th mat-header-cell *matHeaderCellDef>R.Price (TZS)</th>
+                        <td matRipple mat-cell *matCellDef="let element">{{element.retailPrice | number}}</td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
 
-                    <ng-container matColumnDef="action">
-                      <th mat-header-cell *matHeaderCellDef>
-                        <div class="d-flex flex-row justify-content-end align-items-end">
-                          <span>Actions</span>
-                        </div>
-                      </th>
-                      <td mat-cell *matCellDef="let element">
-                        <div class="d-flex flex-row flex-nowrap justify-content-end align-items-end">
-                          <button [matMenuTriggerFor]="menu"
-                                  mat-icon-button>
-                            <mat-icon color="primary">more_vert</mat-icon>
-                          </button>
-                          <mat-menu #menu>
-                            <button mat-menu-item [matTooltip]="'change product information'"
-                                    (click)="viewProduct(element)">View
+                      <ng-container matColumnDef="wholesalePrice">
+                        <th mat-header-cell *matHeaderCellDef>W.Price (TZS)</th>
+                        <td mat-cell
+                            *matCellDef="let element">{{element.wholesalePrice | number}}</td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="expire">
+                        <th mat-header-cell *matHeaderCellDef>Expire</th>
+                        <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>
+                          <div class="d-flex flex-row justify-content-end align-items-end">
+                            <span>Actions</span>
+                          </div>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          <div class="d-flex flex-row flex-nowrap justify-content-end align-items-end">
+                            <button [matMenuTriggerFor]="menu"
+                                    mat-icon-button>
+                              <mat-icon color="primary">more_vert</mat-icon>
                             </button>
-                            <button mat-menu-item [matTooltip]="'change product information'"
-                                    (click)="editStock(element)">Edit
-                            </button>
-                            <button mat-menu-item [matTooltip]="'permanent delete stock'"
-                                    (click)="deleteStock(element)">Delete
-                            </button>
-                          </mat-menu>
-                        </div>
-                      </td>
-                      <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
+                            <mat-menu #menu>
+                              <button mat-menu-item [matTooltip]="'change product information'"
+                                      (click)="viewProduct(element)">View
+                              </button>
+                              <button mat-menu-item [matTooltip]="'change product information'"
+                                      (click)="editStock(element)">Edit
+                              </button>
+                              <button mat-menu-item [matTooltip]="'permanent delete stock'"
+                                      (click)="deleteStock(element)">Delete
+                              </button>
+                            </mat-menu>
+                          </div>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                      </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
-                    <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
-                        *matRowDef="let row; columns: stockColumns;"></tr>
-                    <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
+                      <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
+                      <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
+                          *matRowDef="let row; columns: stockColumns;"></tr>
+                      <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
 
-                  </table>
-                  <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
-                </mat-card>
-              </div>
-            </mat-tab>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
+                  </mat-card>
+                </div>
+              </mat-tab>
 
-            <mat-tab label="Categories">
-              <app-categories></app-categories>
-            </mat-tab>
+              <mat-tab label="Categories">
+                <app-categories></app-categories>
+              </mat-tab>
 
-            <mat-tab label="Units">
-              <app-units></app-units>
-            </mat-tab>
+              <mat-tab label="Units">
+                <app-units></app-units>
+              </mat-tab>
 
-            <mat-tab label="Suppliers">
-              <app-suppliers></app-suppliers>
-            </mat-tab>
-          </mat-tab-group>
+              <mat-tab label="Suppliers">
+                <app-suppliers></app-suppliers>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+
         </div>
 
       </div>
-
     </div>
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+<!--<div *ngIf="isMobile">-->
+<!--  <app-stock-mobile *ngIf="isMobile"></app-stock-mobile>-->
+<!--</div>-->
+
 

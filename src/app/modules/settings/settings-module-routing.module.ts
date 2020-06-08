@@ -5,8 +5,10 @@ import {UsersComponent} from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
 import {StockManagerGuard} from '../../guards/stock-manager.guard';
+import {SettingsComponent} from '../mobile-ui/settings/settings/settings.component';
 
 const routes: Routes = [
+  {path: '', component: SettingsComponent},
   {path: 'general', canActivate: [StockManagerGuard], component: SettingComponent},
   {path: 'bill', canActivate: [StockManagerGuard], component: BillingComponent},
   {path: 'users', canActivate: [StockManagerGuard], component: UsersComponent},

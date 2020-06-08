@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "smart-stock-manager"
+  },
+  "targets": {
+    "smart-stock-manager": {
+      "hosting": {
+        "web": [
+          "smart-stock-manager"
+        ],
+        "mobile": [
+          "m-smartstock"
+        ]
+      }
+    }
   }
 }

@@ -1,9 +1,9 @@
-name: Node.js CI
+name: Deploy Desktop
 
 on:
   push:
     branches:
-      - electron
+      - master
 
 jobs:
   buidWin:

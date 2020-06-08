@@ -16,6 +16,7 @@ import {Stock} from '../../../model/stock';
 import {toSqlDate} from '../../../utils/date';
 import {environment} from '../../../../environments/environment';
 import {CustomerApiService} from '../../../services/customer-api.service';
+import {Security} from '../../../utils/security';
 
 @Component({
   selector: 'app-cart',
@@ -49,9 +50,18 @@ export class CartComponent implements OnInit {
   cartProducts: Observable<{ quantity: number, product: Stock }[]> = of(this.cartProductsArray);
   checkoutProgress = false;
   private currentUser: UserModel;
+  isMobile = environment.android;
 
   private static _getCartItemDiscount(data: { totalDiscount: number, totalItems: number }): number {
     return (data.totalDiscount / data.totalItems);
+  }
+
+  private static getQuantity(isViewedInWholesale: boolean, cart: CartModel) {
+    return isViewedInWholesale ? (cart.quantity / cart.stock.wholesaleQuantity) : cart.quantity;
+  }
+
+  private static getPrice(isViewedInWholesale: boolean, cart: CartModel) {
+    return isViewedInWholesale ? cart.stock.wholesalePrice : cart.stock.retailPrice;
   }
 
   ngOnInit() {
@@ -104,9 +114,19 @@ export class CartComponent implements OnInit {
         this.cartProductsArray.push(cart);
       }
       this.cartProducts = of(this.cartProductsArray);
-      this.eventService.broadcast(SsmEvents.NO_OF_CART, this.cartProductsArray.length);
+      this.eventService.broadcast(SsmEvents.CART_ITEMS, this.cartProductsArray);
+      this.eventService.broadcast(
+        SsmEvents.NO_OF_CART,
+        this.cartProductsArray.map(cartItem => cartItem.quantity).reduce((a, b) => a + b, 0)
+      );
       this._getTotal(this.discountFormControl.value);
     });
+  }
+
+  getTotalCartItem() {
+    const totalCart = this.cartProductsArray.map(cartItem => cartItem.quantity).reduce((a, b) => a + b, 0);
+    this.eventService.broadcast(SsmEvents.NO_OF_CART, totalCart);
+    return totalCart;
   }
 
   private _getTotal(discount: number) {
@@ -142,7 +162,6 @@ export class CartComponent implements OnInit {
     this.cartProductsArray.splice(indexOfProductInCart, 1);
     this.cartProducts = of(this.cartProductsArray);
     this._getTotal(this.discountFormControl.value ? this.discountFormControl.value : 0);
-
   }
 
   private _discountListener() {
@@ -168,25 +187,23 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+
     if (this.isViewedInWholesale && !this.customerFormControl.valid) {
       this.snack.open('Please enter customer name, atleast three characters required', 'Ok', {
         duration: 3000
       });
       return;
     }
+
     this.checkoutProgress = true;
+
     if (this.customerFormControl.valid) {
       this.customerApi.saveCustomer({
         displayName: this.customerFormControl.value,
       }).catch();
     }
-    this.printCart()
-      .then(_ => {
-        this.checkoutProgress = false;
-      })
-      .catch(_ => {
-        this.checkoutProgress = false;
-      });
+
+    this.printCart();
   }
 
   private _getCartItemSubAmount(cart: { quantity: number, product: Stock, totalDiscount: number, totalItems: number }): number {
@@ -196,51 +213,64 @@ export class CartComponent implements OnInit {
     return amount - CartComponent._getCartItemDiscount({totalDiscount: cart.totalDiscount, totalItems: cart.totalItems});
   }
 
-  async submitBill() {
-    // this.checkoutProgress = true;
+  async submitBill(cartId: string) {
     const sales: SalesModel[] = this._getSalesBatch();
-    await this.saleDatabase.saveSales(sales);
-    // .then(_ => {
-    // this.checkoutProgress = false;
+    await this.saleDatabase.saveSales(sales, cartId);
     this.cartProductsArray = [];
     this.cartProducts = of([]);
     this.customerFormControl.setValue(null);
     this._getTotal(0);
-    this.snack.open('Done save sales', 'Ok', {duration: 2000});
-    //  }).catch(_ => {
-    //     this.checkoutProgress = false;
-    //     this.snack.open('Checkout process fails, try again', 'Ok', {duration: 3000});
-    //  });
+    this.eventService.broadcast(SsmEvents.CART_ITEMS, []);
   }
 
-  async printCart() {
-    try {
-      const settings = await this.settings.getSettings();
-      if (!environment.production || settings && settings.saleWithoutPrinter) {
-        await this.submitBill();
-      } else {
-        const cartItems = this._getCartItems();
-        await this.printer.print(
-          cartItems,
-          this.isViewedInWholesale
-            ? this.customerFormControl.value
-            : null
-        );
-        // .then(_ => {
-        await this.submitBill();
-        // this.snack.open('Cart printed and sales', 'Ok', {duration: 3000});
-        // }).catch(reason => {
-        //  console.log(reason);
-        //  this.snack.open('Printer is not connected or printer software is not running',
-        //    'Ok', {duration: 3000});
-        // });
-      }
-    } catch (reason) {
-      // console.error(reason);
-      this.snack.open('Fails to complete your sales request, try again', 'Ok', {
-        duration: 3000
-      });
+  printCart() {
+    this.checkoutProgress = true;
+    const cartId = Security.generateUUID();
+    const cartItems = this._getCartItems();
+    this.printer.print({
+      data: this.cartItemsToPrinterData(cartItems, this.isViewedInWholesale ? this.customerFormControl.value : null),
+      printer: environment.android ? 'jzv3' : 'tm20',
+      id: cartId,
+      qr: cartId
+    }).then(_ => {
+      return this.submitBill(cartId);
+    }).then(_ => {
+      this.checkoutProgress = false;
+      this.snack.open('Done save sales', 'Ok', {duration: 2000});
+    }).catch(reason => {
+      this.checkoutProgress = false;
+      this.snack.open(
+        reason && reason.message ? reason.message : reason.toString(),
+        'Ok',
+        {duration: 3000}
+      );
+    });
+  }
+
+  private cartItemsToPrinterData(carts: CartModel[], customer: string): string {
+    let data = '';
+    data = data.concat('-------------------------------\n');
+    data = data.concat(new Date().toDateString() + '\n');
+    if (customer) {
+      data = data.concat('-------------------------------\nTo ---> ' + customer);
     }
+    let totalBill = 0;
+    carts.forEach((cart, index) => {
+      totalBill += <number>cart.amount;
+      data = data.concat(
+        '\n-------------------------------\n' +
+        (index + 1) + '.  ' + cart.product + '\n' +
+        'Quantity --> ' + CartComponent.getQuantity(this.isViewedInWholesale, cart) + ' \t' +
+        'Unit Price --> ' + CartComponent.getPrice(this.isViewedInWholesale, cart) + '\t' +
+        'Sub Amount  --> ' + cart.amount + ' \t'
+      );
+    });
+    data = data.concat(
+      '\n--------------------------------\n' +
+      'Total Bill : ' + totalBill +
+      '\n--------------------------------\n'
+    );
+    return data;
   }
 
   private _getCartItems(): CartModel[] {
@@ -313,4 +343,5 @@ export class CartComponent implements OnInit {
       })
       .catch();
   }
+
 }

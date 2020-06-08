@@ -1,0 +1,20 @@
+<mat-divider></mat-divider>
+<mat-list-item matRipple>
+  <div style="width: 40px; height: 40px; border-radius: 60px; background: #f5f5f5; color: black"
+       class="text-center"
+       matListIcon>
+    {{product.product.substring(0, 1).toUpperCase()}}
+  </div>
+  <h1 matLine>{{product.product}}</h1>
+  <span matLine>{{product.quantity | number}}</span>
+  <h6 matLine>{{product.category}}</h6>
+  <button [matMenuTriggerFor]="menu" matSuffix mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-list-item>
+
+<mat-menu #menu>
+  <button mat-menu-item (click)="showDetails(product)">View</button>
+  <button mat-menu-item (click)="editCallback.emit(product)">Edit</button>
+  <button mat-menu-item (click)="deleteCallback.emit(product)">Delete</button>
+</mat-menu>

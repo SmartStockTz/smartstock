@@ -103,14 +103,20 @@ export class StockDatabaseService implements StockDataSource {
 
   async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('categories').getAll();
+    return BFast.database(shop.projectId).collection('categories').getAll(null, {
+      cacheEnable: true,
+      dtl: 7,
+      freshDataCallback: value => {
+        // console.log(value);
+      }
+    });
   }
 
   async getAllStock(): Promise<Stock[]> {
     const shop = await this._storage.getActiveShop();
     const stocks: Stock[] = await BFast.database(shop.projectId).collection<Stock>('stocks').getAll<Stock>(null, {
       cacheEnable: false,
-      dtl: 7
+      dtl: 0
     });
     await this._storage.saveStocks(stocks);
     stocks.sort((a, b) => {
@@ -151,6 +157,7 @@ export class StockDatabaseService implements StockDataSource {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
+  // @ts-ignore
   async updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
     const categoryId = category.objectId;
@@ -160,6 +167,19 @@ export class StockDatabaseService implements StockDataSource {
     const response = await BFast.database(shop.projectId).collection('categories').update<any>(categoryId, data);
     response.objectId = categoryId;
     return response;
+  }
+
+  updateCategoryMobile(category: CategoryI, categoryId): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this._httpClient.put<CategoryI>(await this._settings.getCustomerServerURL() + '/classes/categories-mobile-ui/' + categoryId, category,
+        {
+          headers: await this._settings.getCustomerPostHeader()
+        }).subscribe(value => {
+        resolve(value);
+      }, error1 => {
+        reject(error1);
+      });
+    });
   }
 
   async updateStock(stock: Stock): Promise<Stock> {

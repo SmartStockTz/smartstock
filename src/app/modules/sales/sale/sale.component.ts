@@ -11,6 +11,7 @@ import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {EventApiService} from '../../../services/event-api.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sale',
@@ -28,6 +29,8 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
   searchProgressFlag = false;
   @Input() isViewedInWholesale = true;
+  isMobile = environment.android;
+  noOfProductsInCart = 1;
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
@@ -80,23 +83,24 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     this.storage.getStocks().then(allStocks => {
       this.searchProgressFlag = false;
       if (allStocks) {
-        const keywords = product.toLowerCase().split(' ').filter(value => {
-          return value !== '';
-        });
-        // console.log(keywords);
-        const result = allStocks.filter(stock => {
-          const targetSentence =
-            `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
-              .toLowerCase();
-          let flag = false;
-          for (const keyword of keywords) {
-            const searchResult = targetSentence.includes(keyword);
-            if (searchResult === true) {
-              flag = true;
-            }
-          }
-          return flag;
-        });
+        // const keywords = product.toLowerCase().split(' ').filter(value => {
+        //   return value !== '';
+        // });
+        // // console.log(keywords);
+        // const result = allStocks.filter(stock => {
+        //   const targetSentence =
+        //     `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
+        //       .toLowerCase();
+        //   let flag = false;
+        //   for (const keyword of keywords) {
+        //     const searchResult = targetSentence.includes(keyword);
+        //     if (searchResult === true) {
+        //       flag = true;
+        //     }
+        //   }
+        //   return flag;
+        // });
+        const result = allStocks.filter(stock => stock.product.toLowerCase().trim().startsWith(product.trim().toLowerCase()));
         // console.log(result);
         this.productsObservable = of(result);
       } else {

@@ -1,0 +1,51 @@
+<mat-sidenav-container class="match-parent">
+  <mat-sidenav-content class="d-flex flex-column">
+    <app-toolbar [showSearch]="true" [hasBackRoute] ="true"
+                 searchPlaceholder="Type to search..."
+                 [heading]="'Products'"
+                 (searchCallback)="handleSearch($event)"
+                 [backLink] ="'/stock'">
+    </app-toolbar>
+
+    <div>
+
+      <div *ngIf="products && !stockFetchProgress">
+
+        <div class="d-flex flex-row align-items-center">
+          <h6 style="margin: 16px  16px 4px 16px">Products</h6>
+          <span class="flex-grow-1"></span>
+          <button style="margin: 3px 16px 0 4px" *ngIf="!stockFetchProgress"
+                  (click)="hotReloadStocks()" mat-icon-button color="primary">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+
+        <cdk-virtual-scroll-viewport itemSize="10" style="height: 100vh;">
+          <mat-list style="width: 100vw">
+            <app-stock-product-item-mobile-ui
+              [product]="product"
+              (deleteCallback)="deleteStock($event)"
+              (editCallback)="editStock($event)"
+              [bottomSheet]="_bottomSheet"
+              *cdkVirtualFor="let product of products | async">
+            </app-stock-product-item-mobile-ui>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+
+      </div>
+
+      <div style="min-height: 70vh; width: 100vw"
+           class="d-flex justify-content-center align-items-center flex-column"
+           *ngIf="stockFetchProgress">
+        <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+        <span>Fetch products</span>
+      </div>
+
+      <button routerLink="/stock/create" mat-flat-button color="primary"
+              class="mat-fab" style="position: fixed; bottom: 24px; right: 24px">
+        <mat-icon>add</mat-icon>
+      </button>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

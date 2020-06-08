@@ -14,8 +14,9 @@ export const environment = {
   },
   browser: true,
   electron: false,
+  android: false,
   printerUrl: 'https://localhost:8080',
-  functionsURL: 'http://localhost:3000',  // 'https://smartstock-faas.bfast.fahamutech.com', // 'http://localhost:3000',
+  functionsURL:  'https://smartstock-faas.bfast.fahamutech.com', // 'http://localhost:3000',
   databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'
 };
 

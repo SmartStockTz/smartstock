@@ -1,9 +1,9 @@
-name: Node.js CI
+name: Deploy Desktop
 
 on:
   push:
     branches:
-      - master
+      - stable
 
 jobs:
   buidWin:
@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run build:desktop
-      - run: cd electron && npm install && npm run build:win
+      #- run: npm install
+      #- run: npm run build:desktop
+      #- run: cd electron && npm install && npm run build:win
         env:
           CI: true
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -43,10 +43,10 @@ jobs:
       with:
         snapcraft_token: ${{ secrets.SNAP_STORE_STABLE }}
         # skip_install: true # optional, if already installed in an earlier step
-    - run: npm install
-    - run: npm run build:desktop
-    - run: npm run prepare:snap
-    - run: npm run push:snap:stable
+    #- run: npm install
+    #- run: npm run build:desktop
+    #- run: npm run prepare:snap
+    #- run: npm run push:snap:stable
       env:
         CI: true
         PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}

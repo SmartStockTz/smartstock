@@ -62,7 +62,7 @@
 
                       <ng-container matColumnDef="grossProfit">
                         <th mat-header-cell *matHeaderCellDef>Gross profit</th>
-                        <td mat-cell *matCellDef="let element">{{element.grossProfit | currency: ' TZS'}}</td>
+                        <td mat-cell *matCellDef="let element">{{element.sales - element.costOfGoodsSold | currency: ' TZS'}}</td>
                         <td mat-footer-cell *matFooterCellDef></td>
                       </ng-container>
 

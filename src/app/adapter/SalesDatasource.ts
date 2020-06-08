@@ -2,7 +2,7 @@ import {SalesModel} from '../model/CashSale';
 import {OrderModel} from '../model/OderI';
 
 export interface SalesDatasource {
-  saveSales(sale: SalesModel[]): Promise<any>;
+  saveSales(sale: SalesModel[], cartId: string): Promise<any>;
 
   getSalesByUser(userId: string, channel?: string): Promise<SalesModel[]>;
 

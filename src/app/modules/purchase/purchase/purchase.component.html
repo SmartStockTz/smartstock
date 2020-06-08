@@ -1,4 +1,4 @@
-<mat-sidenav-container class="match-parent">
+<mat-sidenav-container *ngIf="!isMobile" class="match-parent">
 
   <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
     <app-admin-drawer></app-admin-drawer>
@@ -155,7 +155,7 @@
       <!--              <input type="text" placeholder="Supplier" matInput [formControl]="supplierControlInput"-->
       <!--                     [matAutocomplete]="autoSupplier">-->
       <!--              <mat-autocomplete #autoSupplier="matAutocomplete">-->
-      <!--                <mat-option *ngFor="let supplier of suppliers | async" [value]="supplier.name">-->
+      <!--                <mat-option *ngFor="let supplier of suppliers-mobile-ui | async" [value]="supplier.name">-->
       <!--                  {{supplier.name}}-->
       <!--                </mat-option>-->
       <!--              </mat-autocomplete>-->
@@ -344,4 +344,7 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+
+<app-purchase-mobile *ngIf="isMobile"></app-purchase-mobile>
 

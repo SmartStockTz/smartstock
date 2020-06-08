@@ -1,0 +1,16 @@
+td {
+  padding: 8px;
+}
+
+.my-users-wrapper {
+  margin-top: 16px;
+}
+
+mat-ink-bar:after{
+  margin-left: 4px !important;
+  height: 5px!important;
+}
+
+mat-card-subtitle{
+  margin: 0 16px;
+}

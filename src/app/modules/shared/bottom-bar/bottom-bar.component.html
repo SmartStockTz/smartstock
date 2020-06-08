@@ -1,0 +1,56 @@
+<mat-toolbar class="fixed-bottom">
+
+  <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
+    <button *ngIf="activeNav('dashboard')" mat-flat-button routerLink="/dashboard"
+            color="{{activeNav('dashboard')?'primary':''}}">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+    <button *ngIf="!activeNav('dashboard')" mat-icon-button routerLink="/dashboard">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+    <span *ngIf="activeNav('dashboard')">Dashboard</span>
+  </div>
+
+  <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
+    <button *ngIf="activeNav('sale')" mat-flat-button routerLink="/sale" color="{{activeNav('sale')?'primary':''}}">
+      <mat-icon>shop</mat-icon>
+    </button>
+    <button *ngIf="!activeNav('sale')" mat-icon-button routerLink="/sale">
+      <mat-icon>shop</mat-icon>
+    </button>
+    <span *ngIf="activeNav('sale')">Sale</span>
+  </div>
+
+  <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
+    <button *ngIf="activeNav('purchase')" mat-flat-button routerLink="/purchase"
+            color="{{activeNav('purchase')?'primary':''}}">
+      <mat-icon>receipt</mat-icon>
+    </button>
+    <button *ngIf="!activeNav('purchase')" mat-icon-button routerLink="/purchase">
+      <mat-icon>receipt</mat-icon>
+    </button>
+    <span *ngIf="activeNav('purchase')">Purchase</span>
+  </div>
+
+  <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
+    <button *ngIf="activeNav('stock')" mat-flat-button routerLink="/stock" color="{{activeNav('stock')?'primary':''}}">
+      <mat-icon>store</mat-icon>
+    </button>
+    <button *ngIf="!activeNav('stock')" mat-icon-button routerLink="/stock">
+      <mat-icon>store</mat-icon>
+    </button>
+    <span *ngIf="activeNav('stock')">Stock</span>
+  </div>
+
+  <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
+    <button *ngIf="activeNav('settings')" mat-flat-button routerLink="/settings"
+            color="{{activeNav('settings')?'primary':''}}">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button *ngIf="!activeNav('settings')" mat-icon-button routerLink="/settings">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <span *ngIf="activeNav('settings')">Settings</span>
+  </div>
+
+</mat-toolbar>

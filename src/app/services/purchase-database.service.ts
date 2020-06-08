@@ -86,13 +86,26 @@ export class PurchaseDatabaseService implements PurchaseDataSource {
   deleteInvoice(id: string, callback: (value: any) => void) {
   }
 
-  deletePurchase(id: string, callback: (value: any) => void) {
-  }
+  // deletePurchase(id: string, callback: (value: any) => void) {
+  // }
 
   deleteReceipts(id: string, callback: (value: any) => void) {
   }
 
   getAllInvoice(callback: (invoices: ReceiptI[]) => void) {
+  }
+
+  // @ts-ignore
+  deletePurchase(purchase: PurchaseI): Promise<PurchaseI> {
+    return new Promise<PurchaseI>(async (resolve, reject) => {
+      this._httpClient.delete<PurchaseI>(await this._settings.getCustomerServerURL() + '/classes/purchases/' + purchase.objectId, {
+        headers: await this._settings.getCustomerHeader()
+      }).subscribe(value => {
+        resolve(value);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
 
