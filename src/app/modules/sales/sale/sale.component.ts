@@ -83,23 +83,24 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     this.storage.getStocks().then(allStocks => {
       this.searchProgressFlag = false;
       if (allStocks) {
-        const keywords = product.toLowerCase().split(' ').filter(value => {
-          return value !== '';
-        });
-        // console.log(keywords);
-        const result = allStocks.filter(stock => {
-          const targetSentence =
-            `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
-              .toLowerCase();
-          let flag = false;
-          for (const keyword of keywords) {
-            const searchResult = targetSentence.includes(keyword);
-            if (searchResult === true) {
-              flag = true;
-            }
-          }
-          return flag;
-        });
+        // const keywords = product.toLowerCase().split(' ').filter(value => {
+        //   return value !== '';
+        // });
+        // // console.log(keywords);
+        // const result = allStocks.filter(stock => {
+        //   const targetSentence =
+        //     `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
+        //       .toLowerCase();
+        //   let flag = false;
+        //   for (const keyword of keywords) {
+        //     const searchResult = targetSentence.includes(keyword);
+        //     if (searchResult === true) {
+        //       flag = true;
+        //     }
+        //   }
+        //   return flag;
+        // });
+        const result = allStocks.filter(stock => stock.product.toLowerCase().trim().startsWith(product.trim().toLowerCase()));
         // console.log(result);
         this.productsObservable = of(result);
       } else {
