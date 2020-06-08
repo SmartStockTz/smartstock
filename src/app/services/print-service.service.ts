@@ -43,6 +43,11 @@ export class PrintServiceService {
 
     printModel.data = data;
 
+    if (!environment.production) {
+      console.warn("print services disabled in dev mode");
+      return;
+    }
+
     // console.log(cSettings.saleWithoutPrinter);
     if (environment.android && Capacitor.isNative && !cSettings.saleWithoutPrinter) {
       return await this.printInMobile(printModel);

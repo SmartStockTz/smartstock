@@ -57,10 +57,11 @@ async function saveSalesAndRemove() {
     const salesKeys = await salesCache.keys();
     for (const key of salesKeys) {
       const sales = await salesCache.get(key);
-      const transactionResult = await saveSaleAndUpdateStock(sales, shop);
+      const transactionResult = await saveSaleAndUpdateStock(sales, shop, salesCache, key);
       // console.log(key);
       await salesCache.remove(key, true);
       // console.log(remove);
+      // console.log(transactionResult);
       return transactionResult;
     }
   }
@@ -70,9 +71,11 @@ async function saveSalesAndRemove() {
  *
  * @param sales {any[]}
  * @param shop {object}
+ * @param salesCache
+ * @param key
  * @return {Promise<void>}
  */
-async function saveSaleAndUpdateStock(sales, shop) {
+async function saveSaleAndUpdateStock(sales, shop, salesCache, key) {
   const dataToSave = sales.map(sale => sale.body);
   await BFast
     .database(shop.projectId)
@@ -87,8 +90,27 @@ async function saveSaleAndUpdateStock(sales, shop) {
       })
     )
     .commit({
-      before: async _ => {
+      before: async transactionModels => {
         await prepareSalesCollection(shop);
+        const salesFromTransactionModel = transactionModels.filter(value =>
+          value.path.toLowerCase()==='/classes/sales' && value.method.toLowerCase()==='post');
+        // console.log(salesFromTransactionModel);
+        for (const sale of salesFromTransactionModel){
+          const duplicateResults = await BFast.database(shop.projectId)
+            .collection('sales')
+            .query()
+            .find({
+              filter: {
+                batch: sale.body.batch
+              }
+            });
+          // console.log(duplicateResults);
+          if (duplicateResults && Array.isArray(duplicateResults) && duplicateResults.length > 0){
+            transactionModels = transactionModels.filter(value => value.body.batch !==  sale.body.batch);
+            await salesCache.remove(key, true);
+          }
+        }
+        return transactionModels;
       }
     });
 }
