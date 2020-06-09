@@ -26,6 +26,7 @@ import { OnFetchComponent } from './on-fetch/on-fetch.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SearchInputComponent } from './toolbar/search-input/search-input.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
         ToolbarComponent,
         ShopsPipe,
         OnFetchComponent,
-        BottomBarComponent
+        BottomBarComponent,
+      DataNotReadyComponent
     ],
   declarations: [
     AdminDrawerComponent,
@@ -65,7 +67,8 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
     ShopsPipe,
     OnFetchComponent,
     SearchInputComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    DataNotReadyComponent
       ],
   entryComponents: [
     DialogImageCropComponent

@@ -16,7 +16,7 @@ import {SalesGeneralComponent} from './general/sales-general.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SalesTrendsComponent} from './trends/sales-trends.component';
 import {SalesProductFrequencyComponent} from './product-frequency/sales-product-frequency.component';
-import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
+import {DataNotReadyComponent} from '../shared/data-not-ready/data-not-ready.component';
 import {DashboardComponent} from './landing/dashboard.component';
 import {SalesReportsComponent} from '../reports/sales-reports/sales-reports.component';
 import {StockReportsComponent} from '../reports/stock-reports/stock-reports.component';
@@ -32,23 +32,23 @@ import { DateRangeHeaderComponent } from './date-range-header/date-range-header.
 import { DateRangeComponent } from './date-range/date-range.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { DashCardComponent } from './dash-card/dash-card.component';
+import {ReportsModule} from '../reports/reports.module';
 
 @NgModule({
   declarations: [
     SalesGeneralComponent,
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
-    DataNotReadyComponent,
     DashboardComponent,
-    StockReportsComponent,
-    StockReorderReportComponent,
-    SalesReportsComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
     DateRangeHeaderComponent,
     DateRangeComponent,
     DashCardComponent
-
+  ],
+  exports:[
+    ProductPerformanceReportComponent,
+    SalesTrendsComponent
   ],
   imports: [
     CommonModule,

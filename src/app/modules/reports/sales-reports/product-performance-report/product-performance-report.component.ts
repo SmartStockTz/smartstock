@@ -70,6 +70,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
     this.productPerformanceFetchProgress = true;
     this._report.getProductPerformanceReport(channel, from, to).then(data => {
       this.productPerformanceReport = data.length > 0 ? data[0].total : 0;
+      console.log(data);
       this.productPerformanceDatasource = new MatTableDataSource(data);
       this.productPerformanceDatasource.paginator = this.paginator;
       this.productPerformanceFetchProgress = false;

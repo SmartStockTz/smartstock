@@ -1,3 +1,5 @@
+import {Stock} from '../model/stock';
+
 export interface AdminReportAdapter {
   getTotalSale(beginDate: Date, endDate: Date): Promise<number>;
 
@@ -6,4 +8,5 @@ export interface AdminReportAdapter {
   getSalesTrend(beginDate: Date, endDate: Date): Promise<any>;
 
   getFrequentlySoldProducts(beginDate: Date, endDate: Date): Promise<any>;
+  getExpiredProducts(date: Date,  skip: number, size: number ): Promise<Stock[]>;
 }
