@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ReportsRoutingModule } from './reports-routing.module';
+import {ReportsRoutingModule} from './reports-routing.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { ExpiredProductsReportComponent } from './stock-reports/expired-products-report/expired-products-report.component';
+import {ExpiredProductsReportComponent} from './stock-reports/expired-products-report/expired-products-report.component';
 import {StockReportsComponent} from './stock-reports/stock-reports.component';
 import {StockReorderReportComponent} from './stock-reports/stock-reorder-report/stock-reorder-report.component';
 import {DashboardModuleRoutingModule} from '../dashboard/dashboard-module-routing.module';
@@ -24,11 +24,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDividerModule} from '@angular/material/divider';
-import { TabularReportComponent } from './tabular-report/tabular-report.component';
 import {DashboardModuleModule} from '../dashboard/dashboard-module.module';
-import { ProductsAboutToExpireComponent } from './stock-reports/products-about-to-expire/products-about-to-expire.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { CartReportComponent } from './sales-reports/cart-report/cart-report.component';
 import {SalesReportsComponent} from './sales-reports/sales-reports.component';
 
 
@@ -75,4 +72,5 @@ import {SalesReportsComponent} from './sales-reports/sales-reports.component';
     DashboardModuleModule
   ]
 })
-export class ReportsModule { }
+export class ReportsModule {
+}
