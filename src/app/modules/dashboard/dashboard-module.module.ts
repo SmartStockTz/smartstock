@@ -16,7 +16,7 @@ import {SalesGeneralComponent} from './general/sales-general.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SalesTrendsComponent} from './trends/sales-trends.component';
 import {SalesProductFrequencyComponent} from './product-frequency/sales-product-frequency.component';
-import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
+import {DataNotReadyComponent} from '../shared/data-not-ready/data-not-ready.component';
 import {DashboardComponent} from './landing/dashboard.component';
 import {SalesReportsComponent} from '../reports/sales-reports/sales-reports.component';
 import {StockReportsComponent} from '../reports/stock-reports/stock-reports.component';
@@ -39,15 +39,16 @@ import {ReportsModule} from '../reports/reports.module';
     SalesGeneralComponent,
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
-    DataNotReadyComponent,
     DashboardComponent,
-    SalesReportsComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
     DateRangeSelectorComponent,
     CurrentShopComponent,
     DashCardComponent
-
+  ],
+  exports:[
+    ProductPerformanceReportComponent,
+    SalesTrendsComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +72,6 @@ import {ReportsModule} from '../reports/reports.module';
     SatDatepickerModule,
     SatNativeDateModule,
     MatDividerModule,
-    ReportsModule
   ]
 })
 export class DashboardModuleModule {

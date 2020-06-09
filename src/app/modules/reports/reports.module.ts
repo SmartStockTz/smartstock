@@ -24,11 +24,28 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDividerModule} from '@angular/material/divider';
+import { TabularReportComponent } from './tabular-report/tabular-report.component';
+import {DashboardModuleModule} from '../dashboard/dashboard-module.module';
+import { ProductsAboutToExpireComponent } from './stock-reports/products-about-to-expire/products-about-to-expire.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { CartReportComponent } from './sales-reports/cart-report/cart-report.component';
+import {SalesReportsComponent} from './sales-reports/sales-reports.component';
 
 
 @NgModule({
-  declarations: [ExpiredProductsReportComponent, StockReportsComponent, StockReorderReportComponent],
-  exports: [ExpiredProductsReportComponent, StockReportsComponent, StockReorderReportComponent],
+  declarations: [
+    ExpiredProductsReportComponent,
+    StockReportsComponent, StockReorderReportComponent,
+    TabularReportComponent, ProductsAboutToExpireComponent,
+    CartReportComponent,
+    SalesReportsComponent
+  ],
+  exports: [
+    ExpiredProductsReportComponent,
+    StockReportsComponent,
+    StockReorderReportComponent,
+    ProductsAboutToExpireComponent
+  ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
@@ -53,6 +70,9 @@ import {MatDividerModule} from '@angular/material/divider';
     SatDatepickerModule,
     SatNativeDateModule,
     MatDividerModule,
+    MatInputModule,
+    MatMenuModule,
+    DashboardModuleModule
   ]
 })
 export class ReportsModule { }

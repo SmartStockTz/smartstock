@@ -12,6 +12,7 @@ import { Stock } from 'src/app/model/stock';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AdminDashboardService } from 'src/app/services/admin-dashboard.service';
+import {json2Csv} from '../../../../utils/json2csv';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class StockReorderReportComponent implements OnInit {
   endDate;
   stockReportGetProgress = false;
   stockReport;
+  isLoading = false;
+  noDataRetrieved = true;
 
   constructor(private readonly router: Router,
               private readonly indexDb: StorageService,
@@ -53,14 +56,23 @@ export class StockReorderReportComponent implements OnInit {
   }
 
   private _getStockReport() {
+    this.isLoading = true;
     this.stockReportGetProgress = true;
-    this._report.getStockReorderReportReport().then(data => {
+    this._report.getStockReorderReportReport(0, 1000).then(data => {
       this.stockReport = data.length > 0 ? data[0].total : 0;
-      this.stockReorderDatasource = new MatTableDataSource(data);
-      this.stockReorderDatasource.paginator = this.paginator;
-      this.stockReorderDatasource.sort = this.sort;
-      this.stockReportGetProgress = false;
+      this.isLoading = false;
+      if (data && Array.isArray(data) && data.length > 0){
+        this.stockReorderDatasource = new MatTableDataSource(data);
+        this.stockReorderDatasource.paginator = this.paginator;
+        this.stockReorderDatasource.sort = this.sort;
+        this.stockReportGetProgress = false;
+        this.noDataRetrieved = false;
+      } else {
+        this.noDataRetrieved = true;
+      }
+
     }).catch(reason => {
+      this.isLoading = false;
       this.stockReport = 0;
       console.log(reason);
       this.snack.open('Fails to get total landing', 'Ok', {
@@ -70,10 +82,14 @@ export class StockReorderReportComponent implements OnInit {
     });
   }
 
-
+  exportReport() {
+    // console.log(this.stocks);
+    json2Csv(this.stockColumns, this.stockReorderDatasource.data).then(console.log);
+  }
   // dateRange() {
   //   if(this.startDateFormControl.value !== '' && this.endDateFormControl.value !== '') {
-  //     this.stockDatasource.data = this.stockDatasource.data.filter(value=>Date.parse(value.expire) >= this.startDate && Date.parse(value.expire) <= this.endDate);
+  //     this.stockDatasource.data = this.stockDatasource.data.filter(value=>Date.parse(value.expire)
+  //     >= this.startDate && Date.parse(value.expire) <= this.endDate);
 
   //   } else if(this.startDateFormControl.value !== '') {
   //     this.stockDatasource.data = this.stockDatasource.data.filter(value=>Date.parse(value.expire) >= this.startDate) ;
