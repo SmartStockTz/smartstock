@@ -10,7 +10,7 @@ export class StockReportsComponent extends DeviceInfo implements OnInit {
 
   constructor() {
     super();
-   }
+  }
 
   ngOnInit(): void {
   }

@@ -3,6 +3,9 @@ import {AdminReportAdapter} from '../adapter/AdminReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 import {StorageService} from './storage.service';
+import {Stock} from '../model/stock';
+import {BFast} from 'bfastjs';
+import {toSqlDate} from '../utils/date';
 
 @Injectable()
 export class AdminDashboardService implements AdminReportAdapter {
@@ -117,6 +120,21 @@ export class AdminDashboardService implements AdminReportAdapter {
       } catch (e) {
         reject(e);
       }
+    });
+  }
+
+  async getExpiredProducts(date: Date, skip = 0, size = 100 ): Promise<Stock[]> {
+    const activeShop = await this._storage.getActiveShop();
+
+    return BFast.database(activeShop.projectId).collection('stocks').query().find<Stock>({
+      filter: {
+        // @ts-ignore
+        expire: {
+          $lte: toSqlDate(date)
+        }
+      },
+      size,
+      skip
     });
   }
 }

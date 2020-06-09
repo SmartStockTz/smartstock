@@ -32,6 +32,7 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
 import { CurrentShopComponent } from './current-shop/current-shop.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { DashCardComponent } from './dash-card/dash-card.component';
+import {ReportsModule} from '../reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -40,8 +41,6 @@ import { DashCardComponent } from './dash-card/dash-card.component';
     SalesProductFrequencyComponent,
     DataNotReadyComponent,
     DashboardComponent,
-    StockReportsComponent,
-    StockReorderReportComponent,
     SalesReportsComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
@@ -72,6 +71,7 @@ import { DashCardComponent } from './dash-card/dash-card.component';
     SatDatepickerModule,
     SatNativeDateModule,
     MatDividerModule,
+    ReportsModule
   ]
 })
 export class DashboardModuleModule {
