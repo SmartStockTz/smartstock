@@ -42,7 +42,7 @@ export class SalesProductFrequencyComponent implements OnInit {
   reloadProducts() {
     this.getProductsProgress = true;
     const initDate = toSqlDate(new Date(this.dateFormControl.value));
-    this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
+    this._report.getFrequentlySoldProducts(initDate).then(value => {
       this._logger.i(value, 'SalesProductFrequencyComponent:42');
       this.soldProductsArray = value;
       this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
@@ -59,7 +59,7 @@ export class SalesProductFrequencyComponent implements OnInit {
     const initDate = toSqlDate(new Date());
     this.dateFormControl.setValue(initDate);
     this.getProductsProgress = true;
-    this._report.getFrequentlySoldProductsByDate(initDate).then(value => {
+    this._report.getFrequentlySoldProducts(initDate).then(value => {
       this._logger.i(value, 'SalesProductFrequencyComponent:42');
       this.soldProductsArray = value;
       this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);

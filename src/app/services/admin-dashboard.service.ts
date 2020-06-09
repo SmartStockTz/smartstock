@@ -3,22 +3,27 @@ import {AdminReportAdapter} from '../adapter/AdminReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 import {StorageService} from './storage.service';
+import {BFast} from 'bfastjs';
+import {toSqlDate} from '../utils/date';
+import {SalesModel} from '../model/CashSale';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AdminDashboardService implements AdminReportAdapter {
 
-  constructor(private readonly _httpClient: HttpClient,
-              private readonly _storage: StorageService,
-              private readonly _settings: SettingsService) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly storage: StorageService,
+              private readonly settings: SettingsService) {
   }
 
-  getFrequentlySoldProductsByDate(date: string): Promise<any> {
+  getFrequentlySoldProducts(beginDate: Date, endDate: Date): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get(this._settings.ssmFunctionsURL +
-          `/dashboard/admin/dailySales/${activeShop.projectId}/${date}`, {
-          headers: this._settings.ssmFunctionsHeader
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get(this.settings.ssmFunctionsURL +
+          `/dashboard/admin/dailySales/${activeShop.projectId}/${beginDate}`, {
+          headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
         }, error => {
@@ -30,13 +35,13 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  getSalesTrendByDates(from: string, to: string): Promise<any> {
+  getSalesTrend(beginDate: Date, endDate: Date): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get(this._settings.ssmFunctionsURL +
-          `/dashboard/admin/salesGraphData/day/${activeShop.projectId}/${from}/${to}`, {
-          headers: this._settings.ssmFunctionsHeader
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get(this.settings.ssmFunctionsURL +
+          `/dashboard/admin/salesGraphData/day/${activeShop.projectId}/${beginDate}/${endDate}`, {
+          headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
         }, error => {
@@ -48,13 +53,13 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  getTotalCostOfGoodSoldByDate(date: string): Promise<{ total: number }[]> {
+  getTotalCostOfGoodSold(beginDate: Date, endDate: Date): Promise<{ total: number }[]> {
     return new Promise<{ total: number }[]>(async (resolve, reject) => {
       try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get<{ total: number }[]>(this._settings.ssmFunctionsURL +
-          `/dashboard/admin/stock/${activeShop.projectId}/${date}`, {
-          headers: this._settings.ssmFunctionsHeader
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get<{ total: number }[]>(this.settings.ssmFunctionsURL +
+          `/dashboard/admin/stock/${activeShop.projectId}/${beginDate}`, {
+          headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
         }, error => {
@@ -66,31 +71,71 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  getTotalSaleByDate(date: string): Promise<{ total: number }[]> {
-    return new Promise<any>(async (resolve, reject) => {
-      try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get<{ total: number }[]>(this._settings.ssmFunctionsURL +
-          `/dashboard/admin/sales/${activeShop.projectId}/${date}`, {
-          headers: this._settings.ssmFunctionsHeader
-        }).subscribe(value => {
-          resolve(value);
-        }, error => {
-          reject(error);
-        });
-      } catch (e) {
-        reject(e);
+  async getTotalSale(beginDate: Date, endDate: Date): Promise<number> {
+    const activeShop = await this.storage.getActiveShop();
+    const total = await BFast.database(activeShop.projectId).collection('sales')
+      .query()
+      .count({
+        date: {
+          $lte: toSqlDate(endDate),
+          $gte: toSqlDate(beginDate)
+        }
+      }, {
+        cacheEnable: false,
+        dtl: 0
+      });
+    let sales = await BFast.database(activeShop.projectId).collection('sales')
+      .query()
+      .find<SalesModel>({
+        filter: {
+          // @ts-ignore
+          date: {
+            $lte: toSqlDate(endDate),
+            $gte: toSqlDate(beginDate)
+          }
+        },
+        skip: 0,
+        size: total,
+        keys: ['amount', 'batch'],
+      }, {
+        cacheEnable: false,
+        dtl: 0
+      });
+
+    const duplication: { batch: string, value: any } = {batch: 'a', value: 'a'};
+
+    sales = sales.filter(value => {
+      if (duplication[value.batch] === value.batch) {
+        return false;
       }
+      duplication[value.batch] = value.batch;
+      return true;
     });
+    return sales.map(value => value.amount).reduce((a, b) => a + b, 0);
+    // return new Promise<any>(async (resolve, reject) => {
+    //   try {
+    //     const activeShop = await this._storage.getActiveShop();
+    //     this._httpClient.get<{ total: number }[]>(this._settings.ssmFunctionsURL +
+    //       `/dashboard/admin/sales/${activeShop.projectId}/${beginDate}`, {
+    //       headers: this._settings.ssmFunctionsHeader
+    //     }).subscribe(value => {
+    //       resolve(value);
+    //     }, error => {
+    //       reject(error);
+    //     });
+    //   } catch (e) {
+    //     reject(e);
+    //   }
+    // });
   }
 
   getProductPerformanceReport(channel: string, from: string, to: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get(this._settings.ssmFunctionsURL +
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get(this.settings.ssmFunctionsURL +
           `/dashboard/sales-reports/productPerformanceReport/${activeShop.projectId}/${channel}/${from}/${to}`, {
-          headers: this._settings.ssmFunctionsHeader
+          headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
         }, error => {
@@ -105,10 +150,10 @@ export class AdminDashboardService implements AdminReportAdapter {
   getStockReorderReportReport(): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const activeShop = await this._storage.getActiveShop();
-        this._httpClient.get(this._settings.ssmFunctionsURL +
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get(this.settings.ssmFunctionsURL +
           `/dashboard/stock-reports/stockReorderReport/${activeShop.projectId}`, {
-          headers: this._settings.ssmFunctionsHeader
+          headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
         }, error => {

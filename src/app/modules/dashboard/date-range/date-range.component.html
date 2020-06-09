@@ -20,14 +20,12 @@
     <div class="d-flex justify-content-center align-items-center">
       <mat-form-field>
         <input matInput
-               (focus)="picker6.open()"
+               (click)="picker6.open()"
+               [formControl]="dashboardDateInput"
                placeholder="Choose a date"
                [satDatepicker]="picker6">
         <sat-datepicker #picker6 [rangeMode]="true"
                         [touchUi]="!enoughWidth()"
-                        [beginDate]="today"
-                        [endDate]="today"
-                        [calendarHeaderComponent]="rangesFooter"
                         panelClass="range-datepicker"
                         [selectFirstDateOnClose]="true">
         </sat-datepicker>

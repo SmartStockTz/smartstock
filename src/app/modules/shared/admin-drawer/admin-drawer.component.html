@@ -21,7 +21,7 @@
 
     <mat-accordion [multi]="true" class="mat-elevation-z0">
       <mat-nav-list *ngIf="currentUser && (currentUser.role==='admin')" class="mat-elevation-z0">
-        <mat-list-item>
+        <mat-list-item routerLink="/dashboard">
           <mat-icon matListIcon matPrefix color="primary">dashboard</mat-icon>
           <span matLine style="margin-left: 8px">Dashboard</span>
         </mat-list-item>

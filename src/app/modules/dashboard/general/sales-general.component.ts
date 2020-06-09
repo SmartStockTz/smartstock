@@ -40,13 +40,13 @@ export class SalesGeneralComponent implements OnInit {
 
   private _getTotalSaleReport(date: string) {
     this.totalSaleGetProgress = true;
-    this._report.getTotalSaleByDate(date).then(data => {
+    this._report.getTotalSale(date).then(data => {
       this.totalSale = data.length > 0 ? data[0].total : 0;
       this.totalSaleGetProgress = false;
     }).catch(reason => {
       this.totalSale = 0;
       console.log(reason);
-      this._snack.open('Fails to get total landing', 'Ok', {
+      this._snack.open('Fails to get total sales', 'Ok', {
         duration: 3000
       });
       this.totalSaleGetProgress = false;
@@ -55,7 +55,7 @@ export class SalesGeneralComponent implements OnInit {
 
   private _getTotalCostOfGoodSold(date: string) {
     this.costOfGoodSoldProgress = true;
-    this._report.getTotalCostOfGoodSoldByDate(date).then(data => {
+    this._report.getTotalCostOfGoodSold(date).then(data => {
       this.totalCostOfGoodSold = data.length > 0 ? data[0].total : 0;
       this.costOfGoodSoldProgress = false;
     }).catch(reason => {

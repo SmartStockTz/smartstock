@@ -14,14 +14,19 @@
 
       <div style="padding: 24px 16px;" [ngClass]="isMobile?'container-fluid':'container'">
         <div class="col-10 offset-1">
-          <app-current-shop></app-current-shop>
+          <app-current-shop (dateSelected)="dateSelected($event)"></app-current-shop>
           <p style="padding: 10px 0">
-            How are your KPIs performing?
+            How are your sales performing?
           </p>
           <div class="row">
             <div class="col-6">
+
               <app-dash-card [title]="'Total Sales'"
+                             [content]="totalSaleComponent"
                              description="Total sale over specified period">
+                <ng-template #totalSaleComponent>
+                  <app-total-sales [initialDataRange]="initialRange" [dateRange]="dateRange"></app-total-sales>
+                </ng-template>
               </app-dash-card>
             </div>
             <div class="col-6">
@@ -30,18 +35,18 @@
               </app-dash-card>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6">
-              <app-dash-card [title]="'Total Retail'"
-                             description="Total retail made over that period">
-              </app-dash-card>
-            </div>
-            <div class="col-6">
-              <app-dash-card [title]="'Total Wholesale'"
-                             description="Total wholesale made over that period">
-              </app-dash-card>
-            </div>
-          </div>
+<!--          <div class="row">-->
+<!--            <div class="col-6">-->
+<!--              <app-dash-card [title]="'Total Retail'"-->
+<!--                             description="Total retail made over that period">-->
+<!--              </app-dash-card>-->
+<!--            </div>-->
+<!--            <div class="col-6">-->
+<!--              <app-dash-card [title]="'Total Wholesale'"-->
+<!--                             description="Total wholesale made over that period">-->
+<!--              </app-dash-card>-->
+<!--            </div>-->
+<!--          </div>-->
           <!--        <app-dashboard-sales-general></app-dashboard-sales-general>-->
           <!--        <app-dashboard-sale-trends></app-dashboard-sale-trends>-->
         </div>

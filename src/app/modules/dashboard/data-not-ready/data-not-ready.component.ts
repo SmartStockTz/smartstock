@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-data-not-ready',
@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data-not-ready.component.css']
 })
 export class DataNotReadyComponent implements OnInit {
+  @Input() width = 200;
+  @Input() height = 200;
+  @Input() isLoading = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

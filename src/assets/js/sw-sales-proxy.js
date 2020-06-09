@@ -93,9 +93,8 @@ async function saveSaleAndUpdateStock(sales, shop, salesCache, key) {
       before: async transactionModels => {
         await prepareSalesCollection(shop);
         const salesFromTransactionModel = transactionModels.filter(value =>
-          value.path.toLowerCase()==='/classes/landing' && value.method.toLowerCase()==='post');
-        // console.log(salesFromTransactionModel);
-        for (const sale of salesFromTransactionModel){
+          value.path.toLowerCase() === '/classes/sales' && value.method.toLowerCase() === 'post');
+        for (const sale of salesFromTransactionModel) {
           const duplicateResults = await BFast.database(shop.projectId)
             .collection('sales')
             .query()
@@ -104,9 +103,8 @@ async function saveSaleAndUpdateStock(sales, shop, salesCache, key) {
                 batch: sale.body.batch
               }
             });
-          // console.log(duplicateResults);
-          if (duplicateResults && Array.isArray(duplicateResults) && duplicateResults.length > 0){
-            transactionModels = transactionModels.filter(value => value.body.batch !==  sale.body.batch);
+          if (duplicateResults && Array.isArray(duplicateResults) && duplicateResults.length > 0) {
+            transactionModels = transactionModels.filter(value => value.body.batch !== sale.body.batch);
             await salesCache.remove(key, true);
           }
         }
@@ -144,6 +142,7 @@ async function prepareSalesCollection(shop) {
 let shouldRun = true;
 
 addEventListener('message', async ({data}) => {
+  console.log('sales worker started');
   setInterval(_ => {
     if (shouldRun) {
       shouldRun = false;
@@ -154,7 +153,7 @@ addEventListener('message', async ({data}) => {
           shouldRun = true;
         });
     } else {
-      // console.log('another save landing routine runs');
+      // console.log('another save sales routine runs');
     }
   }, 3000);
 });

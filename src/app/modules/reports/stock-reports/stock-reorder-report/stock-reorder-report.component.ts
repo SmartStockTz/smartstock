@@ -64,7 +64,7 @@ export class StockReorderReportComponent implements OnInit {
     }).catch(reason => {
       this.stockReport = 0;
       console.log(reason);
-      this.snack.open('Fails to get total landing', 'Ok', {
+      this.snack.open('Fails to get total sales', 'Ok', {
         duration: 3000
       });
       this.stockReportGetProgress = false;

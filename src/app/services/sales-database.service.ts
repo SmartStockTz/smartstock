@@ -48,7 +48,7 @@ export class SalesDatabaseService implements SalesDatasource {
       batchs.push({
         method: 'POST',
         body: sale,
-        path: '/classes/landing'
+        path: '/classes/sales'
       });
     });
     return await this._storage.saveSales(batchs);

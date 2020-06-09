@@ -28,8 +28,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import { TotalSalesComponent } from './total-sales/total-sales.component';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
-import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
-import { CurrentShopComponent } from './current-shop/current-shop.component';
+import { DateRangeHeaderComponent } from './date-range-header/date-range-header.component';
+import { DateRangeComponent } from './date-range/date-range.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { DashCardComponent } from './dash-card/dash-card.component';
 
@@ -45,8 +45,8 @@ import { DashCardComponent } from './dash-card/dash-card.component';
     SalesReportsComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
-    DateRangeSelectorComponent,
-    CurrentShopComponent,
+    DateRangeHeaderComponent,
+    DateRangeComponent,
     DashCardComponent
 
   ],

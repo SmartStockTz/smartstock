@@ -7,10 +7,10 @@ import {DeviceInfo} from '../../shared/DeviceInfo';
 
 @Component({
   selector: 'app-date-range-selector',
-  templateUrl: './date-range-selector.component.html',
-  styleUrls: ['./date-range-selector.component.css']
+  templateUrl: './date-range-header.component.html',
+  styleUrls: ['./date-range-header.component.css']
 })
-export class DateRangeSelectorComponent<Date> extends DeviceInfo implements SatCalendarFooter<Date>, OnInit {
+export class DateRangeHeaderComponent<Date> extends DeviceInfo implements SatCalendarFooter<Date>, OnInit {
   public ranges: Array<{ key: string, label: string }> = [
     {key: 'today', label: 'Today'},
     {key: 'thisWeek', label: 'This Week'},
@@ -32,7 +32,6 @@ export class DateRangeSelectorComponent<Date> extends DeviceInfo implements SatC
   }
 
   ngOnInit(): void {
-   //  this.setRange('today');
   }
 
   setRange(range: string) {
