@@ -57,7 +57,7 @@ export class CartComponent implements OnInit {
   }
 
   private static getQuantity(isViewedInWholesale: boolean, cart: CartModel) {
-    return isViewedInWholesale ? (cart.quantity / cart.stock.wholesaleQuantity) : cart.quantity;
+    return isViewedInWholesale ? (cart.quantity * cart.stock.wholesaleQuantity) : cart.quantity;
   }
 
   private static getPrice(isViewedInWholesale: boolean, cart: CartModel) {
@@ -260,7 +260,7 @@ export class CartComponent implements OnInit {
       data = data.concat(
         '\n-------------------------------\n' +
         (index + 1) + '.  ' + cart.product + '\n' +
-        'Quantity --> ' + CartComponent.getQuantity(this.isViewedInWholesale, cart) + ' \t' +
+        'Quantity --> ' + CartComponent.getQuantity(this.isViewedInWholesale, cart) + ' ' + cart.stock.unit + ' \t' +
         'Unit Price --> ' + CartComponent.getPrice(this.isViewedInWholesale, cart) + '\t' +
         'Sub Amount  --> ' + cart.amount + ' \t'
       );
