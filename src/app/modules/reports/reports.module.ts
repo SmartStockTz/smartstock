@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {ReportsRoutingModule} from './reports-routing.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {ExpiredProductsReportComponent} from './stock-reports/expired-products-report/expired-products-report.component';
 import {StockReportsComponent} from './stock-reports/stock-reports.component';
 import {StockReorderReportComponent} from './stock-reports/stock-reorder-report/stock-reorder-report.component';
 import {DashboardModuleRoutingModule} from '../dashboard/dashboard-module-routing.module';
@@ -27,6 +26,10 @@ import {MatDividerModule} from '@angular/material/divider';
 import {DashboardModuleModule} from '../dashboard/dashboard-module.module';
 import {MatMenuModule} from '@angular/material/menu';
 import {SalesReportsComponent} from './sales-reports/sales-reports.component';
+import {TabularReportComponent} from './tabular-report/tabular-report.component';
+import {ProductsAboutToExpireComponent} from './stock-reports/products-about-to-expire/products-about-to-expire.component';
+import {CartReportComponent} from './sales-reports/cart-report/cart-report.component';
+import {ExpiredProductsReportComponent} from './stock-reports/expired-products-report/expired-products-report.component';
 
 
 @NgModule({

@@ -3,7 +3,6 @@ import {json2Csv} from '../../../../utils/json2csv';
 import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
-import {Stock} from '../../../../model/stock';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {CartModel} from '../../../../model/cart';
@@ -18,18 +17,20 @@ import {CartModel} from '../../../../model/cart';
 })
 export class CartReportComponent implements OnInit {
 
-  constructor(private readonly report: AdminDashboardService, private readonly snack: MatSnackBar) { }
+  constructor(private readonly report: AdminDashboardService, private readonly snack: MatSnackBar) {
+  }
 
   isLoading = false;
   noDataRetrieved = true;
-  stocks = []
+  stocks = [];
   carts: MatTableDataSource<CartModel>;
   cartColumns = ['receipt', 'total_amount', 'total_items', 'seller'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  ngOnInit(): void {this.isLoading = true;
+  ngOnInit(): void {
+    this.isLoading = true;
     this.report.getSoldCarts(new Date()).then(data => {
       console.log(data);
       this.isLoading = false;

@@ -7,6 +7,7 @@ import {Stock} from '../model/stock';
 import {BFast} from 'bfastjs';
 import {toSqlDate} from '../utils/date';
 import {CartModel} from '../model/cart';
+import {SalesModel} from '../model/CashSale';
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +116,7 @@ export class AdminDashboardService implements AdminReportAdapter {
     return sales.map(value => value.amount).reduce((a, b) => a + b, 0);
     // return new Promise<any>(async (resolve, reject) => {
     //   try {
-    //     const activeShop = await this._storage.getActiveShop();
+    //     const activeShop = await this.storage.getActiveShop();
     //     this._httpClient.get<{ total: number }[]>(this._settings.ssmFunctionsURL +
     //       `/dashboard/admin/sales/${activeShop.projectId}/${beginDate}`, {
     //       headers: this._settings.ssmFunctionsHeader
@@ -151,7 +152,7 @@ export class AdminDashboardService implements AdminReportAdapter {
   async getStockReorderReportReport(skip = 0, size = 100): Promise<any> {
     // return new Promise<any>(async (resolve, reject) => {
     //   try {
-    //     const activeShop = await this._storage.getActiveShop();
+    //     const activeShop = await this.storage.getActiveShop();
     //     this._httpClient.get(this._settings.ssmFunctionsURL +
     //       `/dashboard/stock-reports/stockReorderReport/${activeShop.projectId}`, {
     //       headers: this._settings.ssmFunctionsHeader
@@ -165,20 +166,20 @@ export class AdminDashboardService implements AdminReportAdapter {
     //   }
     // // });
 
-    const activeShop = await this._storage.getActiveShop();
-    let stocks = await this._storage.getStocks();
+    const activeShop = await this.storage.getActiveShop();
+    let stocks = await this.storage.getStocks();
 
-    if (! (stocks && Array.isArray(stocks) && stocks.length > 0) ) {
-      stocks = await  BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
+    if (!(stocks && Array.isArray(stocks) && stocks.length > 0)) {
+      stocks = await BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
         cacheEnable: false,
         dtl: 0,
       });
     }
-    return stocks.filter( stock => stock.reorder >= stock.quantity);
+    return stocks.filter(stock => stock.reorder >= stock.quantity);
   }
 
-  async getExpiredProducts(date: Date, skip = 0, size = 1000 ): Promise<Stock[]> {
-    const activeShop = await this._storage.getActiveShop();
+  async getExpiredProducts(date: Date, skip = 0, size = 1000): Promise<Stock[]> {
+    const activeShop = await this.storage.getActiveShop();
 
     return BFast.database(activeShop.projectId).collection('stocks').query().find<Stock>({
       filter: {
@@ -198,22 +199,22 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  async getProductsAboutToExpire(): Promise<Stock[]>{
-    const activeShop = await this._storage.getActiveShop();
-    let stocks = await this._storage.getStocks();
+  async getProductsAboutToExpire(): Promise<Stock[]> {
+    const activeShop = await this.storage.getActiveShop();
+    let stocks = await this.storage.getStocks();
     const today = new Date();
 
-    if (! (stocks && Array.isArray(stocks) && stocks.length > 0) ) {
-      stocks = await  BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
+    if (!(stocks && Array.isArray(stocks) && stocks.length > 0)) {
+      stocks = await BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
         cacheEnable: false,
         dtl: 0,
       });
     }
-    return stocks.filter( stock => stock.expire <= toSqlDate(new Date()));
+    return stocks.filter(stock => stock.expire <= toSqlDate(new Date()));
   }
 
   async getSoldCarts(date: Date, skip = 0, size = 1000): Promise<CartModel[]> {
-    const activeShop = await this._storage.getActiveShop();
+    const activeShop = await this.storage.getActiveShop();
 
     return BFast.database(activeShop.projectId).collection('sales').query().find<CartModel>({
       filter: {

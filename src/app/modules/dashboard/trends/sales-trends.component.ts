@@ -40,14 +40,14 @@ export class SalesTrendsComponent implements OnInit {
   }
 
   private _getSalesTrend(from: string, to: string) {
-    this.salesByDayTrendProgress = true;
-    this._report.getSalesTrend(from, to).then(value => {
-      this.initiateGraph(value);
-      this.salesByDayTrendProgress = false;
-    }).catch(reason => {
-      console.log(reason);
-      this.salesByDayTrendProgress = false;
-    });
+    // this.salesByDayTrendProgress = true;
+    // this._report.getSalesTrend(from, to).then(value => {
+    //   this.initiateGraph(value);
+    //   this.salesByDayTrendProgress = false;
+    // }).catch(reason => {
+    //   console.log(reason);
+    //   this.salesByDayTrendProgress = false;
+    // });
   }
 
   private initiateGraph(data: any) {
