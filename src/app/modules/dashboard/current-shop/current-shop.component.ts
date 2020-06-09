@@ -12,6 +12,7 @@ import {StorageService} from '../../../services/storage.service';
 export class CurrentShopComponent extends DeviceInfo implements OnInit {
   rangesFooter = DateRangeSelectorComponent;
   shop: ShopI;
+  today = new Date();
 
   constructor(private readonly storage: StorageService) {
     super();

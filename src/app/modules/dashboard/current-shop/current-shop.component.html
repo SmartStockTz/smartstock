@@ -25,6 +25,9 @@
                [satDatepicker]="picker6">
         <sat-datepicker #picker6 [rangeMode]="true"
                         [touchUi]="!enoughWidth()"
+                        [beginDate]="today"
+                        [endDate]="today"
+                        [calendarHeaderComponent]="rangesFooter"
                         panelClass="range-datepicker"
                         [selectFirstDateOnClose]="true">
         </sat-datepicker>

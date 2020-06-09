@@ -1,5 +1,9 @@
-<div class="mat-calendar-footer">
-  <button mat-raised-button
-          *ngFor="let range of ranges"
-          (click)="setRange(range.key)">{{range.label}}</button>
+<div style="background: white" [ngClass]="enoughWidth()?'mat-elevation-z3':''">
+  <div style="background: white">
+    <button mat-button
+            color="primary"
+            style="margin: 5px"
+            *ngFor="let range of ranges"
+            (click)="setRange(range.key)">{{range.label}}</button>
+  </div>
 </div>
