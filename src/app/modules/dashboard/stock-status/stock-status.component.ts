@@ -45,7 +45,7 @@ export class StockStatusComponent implements OnInit {
       'stockStatusDiv',
       {
         chart: {
-          type: 'column',
+          type: 'line',
           // height: 400,
           // width: 200
         },
@@ -60,6 +60,7 @@ export class StockStatusComponent implements OnInit {
             text: null
           },
           labels: {
+            enabled: false,
             formatter: function () {
               return this.value;
             }
@@ -72,6 +73,7 @@ export class StockStatusComponent implements OnInit {
           },
           // lineColor: '#1b5e20',
           labels: {
+            enabled: false,
             formatter: function () {
               return this.value;
             }
@@ -100,7 +102,7 @@ export class StockStatusComponent implements OnInit {
           enabled: false
         },
         series: [{
-          type: 'column',
+          type: 'line',
           color: '#0b2e13',
           data: y,
         }]

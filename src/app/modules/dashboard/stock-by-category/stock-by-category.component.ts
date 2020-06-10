@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import {AdminDashboardService} from '../../../services/admin-dashboard.service';
 import {LogService} from '../../../services/log.service';
@@ -23,7 +23,7 @@ export class StockByCategoryComponent implements OnInit {
 
   private getStockStatus() {
     this.stockStatusProgress = true;
-    this.adminDashboardService.getStockStatus().then(status => {
+    this.adminDashboardService.getStockStatusByCategory().then(status => {
       this.stockStatusProgress = false;
       this.stockByCategoryStatus = status;
       this.initiateGraph(this.stockByCategoryStatus);
@@ -37,15 +37,11 @@ export class StockByCategoryComponent implements OnInit {
   private initiateGraph(data: { x: string, y: number }[]) {
     const x: string[] = data.map(value => value.x);
     const y: any[] = data.map(value => value.y);
-    // Object.keys(data).forEach(key => {
-    //   x.push(data[key].x);
-    //   y.push(data[key].total);
-    // });
     this.stockByCategoryChart = Highcharts.chart(
-      'stockStatusDiv',
+      'stockByCategory',
       {
         chart: {
-          type: 'column',
+          type: 'line',
           // height: 400,
           // width: 200
         },
@@ -60,6 +56,7 @@ export class StockByCategoryComponent implements OnInit {
             text: null
           },
           labels: {
+            enabled: false,
             formatter: function () {
               return this.value;
             }
@@ -72,6 +69,7 @@ export class StockByCategoryComponent implements OnInit {
           },
           // lineColor: '#1b5e20',
           labels: {
+            enabled: false,
             formatter: function () {
               return this.value;
             }
@@ -100,7 +98,7 @@ export class StockByCategoryComponent implements OnInit {
           enabled: false
         },
         series: [{
-          type: 'column',
+          type: 'line',
           color: '#0b2e13',
           data: y,
         }]

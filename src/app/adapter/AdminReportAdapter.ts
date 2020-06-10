@@ -12,4 +12,5 @@ export interface AdminReportAdapter {
   getExpiredProducts(date: Date, skip: number, size: number): Promise<Stock[]>;
 
   getStockStatus(): Promise<{ x: string, y: number }[]>;
+  getStockStatusByCategory(): Promise<{ x: string, y: number }[]>;
 }

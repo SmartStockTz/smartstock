@@ -284,4 +284,27 @@ export class AdminDashboardService implements AdminReportAdapter {
     }
     return status;
   }
+
+  async getStockStatusByCategory(): Promise<{ x: string; y: number }[]> {
+    const activeShop = await this.storage.getActiveShop();
+    const categories = {};
+    let stocks = await this.storage.getStocks();
+    const status: { x: string; y: number }[] = [];
+    if (stocks && Array.isArray(stocks) && stocks.length > 0) {
+      stocks.forEach(stock => categories[stock.category] = stock.category);
+      Object.keys(categories).forEach(category => {
+        status.push({x: category, y: stocks.filter(stock => stock.category === category).length});
+      });
+    } else {
+      stocks = await BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
+        cacheEnable: false,
+        dtl: 0
+      });
+      stocks.forEach(stock => categories[stock.category] = stock.category);
+      Object.keys(categories).forEach(category => {
+        status.push({x: category, y: stocks.filter(stock => stock.category === category).length});
+      });
+    }
+    return status;
+  }
 }
