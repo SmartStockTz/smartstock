@@ -20,7 +20,7 @@ async function startStockSocket() {
   const event = BFast.functions().event('stocks', () => {
     console.log('stocks socket connect');
     getMissedStocks(shop, smartStockCache);
-    event.emit({auth: null, payload: {applicationId: shop?.applicationId, projectId: shop?.projectId}});
+    event.emit({auth: null, payload: {applicationId: shop?shop.applicationId: null, projectId: shop?shop.projectId:null}});
   }, () => {
     console.log('stocks socket disconnect');
   });
