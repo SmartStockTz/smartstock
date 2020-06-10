@@ -100,7 +100,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
         //   }
         //   return flag;
         // });
-        const result = allStocks.filter(stock => stock.product.toLowerCase().trim().startsWith(product.trim().toLowerCase()));
+        const result = allStocks.filter(stock => stock.product.toLowerCase().trim().includes(product.trim().toLowerCase()));
         // console.log(result);
         this.productsObservable = of(result);
       } else {
