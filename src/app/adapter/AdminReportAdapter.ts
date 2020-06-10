@@ -8,5 +8,8 @@ export interface AdminReportAdapter {
   getSalesTrend(beginDate: Date, endDate: Date): Promise<any>;
 
   getFrequentlySoldProducts(beginDate: Date, endDate: Date): Promise<any>;
-  getExpiredProducts(date: Date,  skip: number, size: number ): Promise<Stock[]>;
+
+  getExpiredProducts(date: Date, skip: number, size: number): Promise<Stock[]>;
+
+  getStockStatus(): Promise<{ x: string, y: number }[]>;
 }

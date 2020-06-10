@@ -20,7 +20,6 @@
           </p>
           <div class="row">
             <div class="col-6">
-
               <app-dash-card [title]="'Total Sales'"
                              [content]="totalSaleComponent"
                              description="Total sale over specified period">
@@ -31,26 +30,44 @@
             </div>
             <div class="col-6">
               <app-dash-card [title]="'Gross Profit'"
+                             [content]="totalGrossProfit"
                              description="Total gross profit over specified period">
+                <ng-template #totalGrossProfit>
+                  <app-total-gross-sale [initialDataRange]="initialRange"
+                                        [dateRange]="dateRange"></app-total-gross-sale>
+                </ng-template>
               </app-dash-card>
             </div>
           </div>
-<!--          <div class="row">-->
-<!--            <div class="col-6">-->
-<!--              <app-dash-card [title]="'Total Retail'"-->
-<!--                             description="Total retail made over that period">-->
-<!--              </app-dash-card>-->
-<!--            </div>-->
-<!--            <div class="col-6">-->
-<!--              <app-dash-card [title]="'Total Wholesale'"-->
-<!--                             description="Total wholesale made over that period">-->
-<!--              </app-dash-card>-->
-<!--            </div>-->
-<!--          </div>-->
-          <!--        <app-dashboard-sales-general></app-dashboard-sales-general>-->
-          <!--        <app-dashboard-sale-trends></app-dashboard-sale-trends>-->
+
+          <p style="padding: 10px 0">
+            How are your stocks performing?
+          </p>
+          <div class="row">
+            <div class="col-6">
+              <app-dash-card [title]="'Stocks Health'"
+                             [content]="stockHealth"
+                             description="Total products you have">
+                <ng-template #stockHealth>
+                  <app-stock-status></app-stock-status>
+                </ng-template>
+              </app-dash-card>
+            </div>
+            <div class="col-6">
+              <app-dash-card [title]="'Category Wise'"
+                             [content]="stockByCategory"
+                             description="Total products that have zero quantity">
+                <ng-template #stockByCategory>
+                  <app-stock-by-category></app-stock-by-category>
+                </ng-template>
+              </app-dash-card>
+            </div>
+          </div>
+          <!--          <app-dashboard-sale-trends></app-dashboard-sale-trends>-->
         </div>
       </div>
+
+<!--      <div id="stockStatusDiv"></div>-->
 
     </mat-sidenav-content>
   </mat-sidenav-container>

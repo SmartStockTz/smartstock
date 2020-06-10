@@ -114,21 +114,6 @@ export class AdminDashboardService implements AdminReportAdapter {
       return true;
     });
     return sales.map(value => value.amount).reduce((a, b) => a + b, 0);
-    // return new Promise<any>(async (resolve, reject) => {
-    //   try {
-    //     const activeShop = await this.storage.getActiveShop();
-    //     this._httpClient.get<{ total: number }[]>(this._settings.ssmFunctionsURL +
-    //       `/dashboard/admin/sales/${activeShop.projectId}/${beginDate}`, {
-    //       headers: this._settings.ssmFunctionsHeader
-    //     }).subscribe(value => {
-    //       resolve(value);
-    //     }, error => {
-    //       reject(error);
-    //     });
-    //   } catch (e) {
-    //     reject(e);
-    //   }
-    // });
   }
 
   getProductPerformanceReport(channel: string, from: string, to: string): Promise<any> {
@@ -232,5 +217,71 @@ export class AdminDashboardService implements AdminReportAdapter {
         console.log(value);
       }
     });
+  }
+
+  async getTotalGrossSale(beginDate: Date, endDate: Date) {
+    const activeShop = await this.storage.getActiveShop();
+    const total = await BFast.database(activeShop.projectId).collection('sales')
+      .query()
+      .count({
+        date: {
+          $lte: toSqlDate(endDate),
+          $gte: toSqlDate(beginDate)
+        }
+      }, {
+        cacheEnable: false,
+        dtl: 0
+      });
+    let sales = await BFast.database(activeShop.projectId).collection('sales')
+      .query()
+      .find<SalesModel>({
+        filter: {
+          // @ts-ignore
+          date: {
+            $lte: toSqlDate(endDate),
+            $gte: toSqlDate(beginDate)
+          }
+        },
+        skip: 0,
+        size: total,
+        keys: ['amount', 'batch', 'quantity', 'stock'],
+      }, {
+        cacheEnable: false,
+        dtl: 0
+      });
+
+    const duplication: { batch: string, value: any } = {batch: 'a', value: 'a'};
+
+    sales = sales.filter(value => {
+      if (duplication[value.batch] === value.batch) {
+        return false;
+      }
+      duplication[value.batch] = value.batch;
+      return true;
+    });
+
+    const salesCost = sales.map(value => value.amount).reduce((a, b) => a + b, 0);
+    const costOfGoodSold = sales.map(value => (value.quantity * value.stock.purchase)).reduce((a, b) => a + b, 0);
+    return salesCost - costOfGoodSold;
+  }
+
+  async getStockStatus(): Promise<{ x: string; y: number }[]> {
+    const activeShop = await this.storage.getActiveShop();
+    let stocks = await this.storage.getStocks();
+    const status: { x: string; y: number }[] = [];
+    if (stocks && Array.isArray(stocks) && stocks.length > 0) {
+      status.push({x: 'total', y: stocks.length});
+      status.push({x: 'out', y: stocks.filter(stock => stock.quantity <= 0).length});
+      status.push({x: 'order', y: stocks.filter(stock => stock.quantity <= stock.reorder).length});
+    } else {
+      stocks = await BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
+        cacheEnable: false,
+        dtl: 0
+      });
+      status.push({x: 'total', y: stocks.length});
+      status.push({x: 'out', y: stocks.filter(stock => stock.quantity > 0).length});
+      status.push({x: 'order', y: stocks.filter(stock => stock.quantity <= stock.reorder).length});
+    }
+    return status;
   }
 }
