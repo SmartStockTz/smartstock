@@ -114,14 +114,20 @@ export class StockDatabaseService implements StockDataSource {
 
   async getAllStock(): Promise<Stock[]> {
     const shop = await this._storage.getActiveShop();
-    const stocks: Stock[] = await BFast.database(shop.projectId).collection<Stock>('stocks').getAll<Stock>(null, {
-      cacheEnable: false,
-      dtl: 0
-    });
+    // const totalStock = await BFast.database(shop.projectId)
+    //   .collection('stocks')
+    //   .query()
+    //   .count({}, {cacheEnable: false, dtl: 0});
+    const stocks: Stock[] = await BFast.database(shop.projectId)
+      .collection<Stock>('stocks')
+      .getAll<Stock>(undefined, {
+        cacheEnable: false,
+        dtl: 0
+      });
     await this._storage.saveStocks(stocks);
-    stocks.sort((a, b) => {
-      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-    });
+    // stocks.sort((a, b) => {
+    //   return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    // });
     return stocks;
   }
 
