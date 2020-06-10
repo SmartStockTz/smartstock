@@ -155,5 +155,5 @@ addEventListener('message', async ({data}) => {
     } else {
       // console.log('another save sales routine runs');
     }
-  }, 3000);
+  }, 5000);
 });

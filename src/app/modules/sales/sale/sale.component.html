@@ -15,26 +15,27 @@
                  [showSearch]="true"
                  [hasBackRoute]="true" [backLink]="'/sale/'"
                  searchPlaceholder="Filter product"
+                 [searchInputControl]="searchInputControl"
                  [searchProgressFlag]="searchProgressFlag"
                  [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
                  [cartdrawer]="cartdrawer"
                  [showProgress]="showProgress"></app-toolbar>
 
-    <app-on-fetch *ngIf="!productsObservable || fetchDataProgress" [isLoading]="fetchDataProgress"
+    <app-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
                   (refreshCallback)="getProductsFromServer()"></app-on-fetch>
 
-    <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="20" *ngIf="productsObservable && !fetchDataProgress">
+    <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="25" *ngIf="products && !fetchDataProgress">
       <app-product-card style="margin: 0 5px; display: inline-block"
                         [cartdrawer]="cartdrawer"
                         [product]="product"
                         [productIndex]="idx"
                         [isViewedInWholesale]="isViewedInWholesale"
-                        *cdkVirtualFor="let product of productsObservable | async; let idx = index">
+                        *cdkVirtualFor="let product of products; let idx = index">
       </app-product-card>
     </cdk-virtual-scroll-viewport>
 
     <button mat-button color="primary"
-            *ngIf="!fetchDataProgress && productsObservable && !isMobile"
+            *ngIf="!fetchDataProgress && products && !isMobile"
             (click)="getProductsFromServer()"
             matTooltip="Refresh products from server"
             style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 3000; left: 16px; bottom: 20px;"
