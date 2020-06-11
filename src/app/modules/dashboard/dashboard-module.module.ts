@@ -30,6 +30,7 @@ import {DashCardComponent} from './dash-card/dash-card.component';
 import {TotalGrossSaleComponent} from './total-gross-sale/total-gross-sale.component';
 import {StockStatusComponent} from './stock-status/stock-status.component';
 import { StockByCategoryComponent } from './stock-by-category/stock-by-category.component';
+import { StockExpiredComponent } from './stock-expired/stock-expired.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { StockByCategoryComponent } from './stock-by-category/stock-by-category.
     DashCardComponent,
     TotalGrossSaleComponent,
     StockStatusComponent,
-    StockByCategoryComponent
+    StockByCategoryComponent,
+    StockExpiredComponent
   ],
   exports: [
     ProductPerformanceReportComponent,

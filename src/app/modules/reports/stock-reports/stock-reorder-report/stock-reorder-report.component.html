@@ -1,63 +1,56 @@
-<div class="col-12">
-  <div>
-    <mat-card class="mat-elevation-z3">
-      <div style="display: flex; flex-flow: row; align-items: center">
-        <mat-card-title class="col-8">Stock Reorder Report</mat-card-title>
+<div>
+  <mat-card class="mat-elevation-z3">
 
-        <span style="flex-grow: 1"></span>
+    <div style="display: flex; flex-flow: row; align-items: center">
+      <h6>Stock Reorder</h6>
+      <span style="flex-grow: 1"></span>
+      <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
 
-        <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </div>
-      <div style="display: flex; justify-content: center">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-      </div>
+    <!--      <div style="display: flex; justify-content: center">-->
+    <!--        <mat-spinner *ngIf="isLoading"></mat-spinner>-->
+    <!--      </div>-->
 
-      <app-data-not-ready *ngIf="noDataRetrieved && !isLoading"></app-data-not-ready>
+    <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></app-data-not-ready>
 
-      <div *ngIf="!noDataRetrieved  && !isLoading">
-        <table mat-table  [dataSource]="stockReorderDatasource" matSort>
+    <div *ngIf="!noDataRetrieved  && !isLoading">
+      <table mat-table [dataSource]="stockReorderDatasource" matSort>
 
-          <ng-container matColumnDef="product">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
-            <td mat-cell *matCellDef="let element">{{element.product}}</td>
-            <td mat-footer-cell *matFooterCellDef></td>
-          </ng-container>
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+          <td mat-cell *matCellDef="let element">{{element.product}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-            <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
-            <td mat-footer-cell *matFooterCellDef></td>
-          </ng-container>
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+          <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="reorder">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Reorder level</th>
-            <td mat-cell *matCellDef="let element">{{element.reorder | number}}</td>
-            <td mat-footer-cell *matFooterCellDef>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="reorder">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Reorder level</th>
+          <td mat-cell *matCellDef="let element">{{element.reorder | number}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="supplier">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
-            <td matRipple mat-cell *matCellDef="let element">{{element.supplier}}</td>
-            <td mat-footer-cell *matFooterCellDef></td>
-          </ng-container>
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+          <td matRipple mat-cell *matCellDef="let element">{{element.supplier}}</td>
+        </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
-          <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
-              *matRowDef="let row; columns: stockColumns;"></tr>
-          <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
+        <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
+            *matRowDef="let row; columns: stockColumns;"></tr>
 
-        </table>
-      </div>
-      <mat-paginator  [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
-    </mat-card>
-  </div>
+      </table>
+    </div>
 
+    <mat-paginator [pageSizeOptions]="[5, 20, 100]" showFirstLastButtons></mat-paginator>
+
+  </mat-card>
 </div>
 
 <mat-menu #exportMenu>
-  <button mat-menu-item (click)="exportReport()"> Export </button>
+  <button mat-menu-item (click)="exportReport()"> Export</button>
 </mat-menu>
 

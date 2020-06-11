@@ -178,9 +178,9 @@ export class AdminDashboardService implements AdminReportAdapter {
     }, {
       cacheEnable: true,
       dtl: 0,
-      freshDataCallback: value => {
-        console.log(value);
-      }
+      // freshDataCallback: value => {
+      //   console.log(value);
+      // }
     });
   }
 

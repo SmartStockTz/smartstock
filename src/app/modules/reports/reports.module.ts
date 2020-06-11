@@ -18,7 +18,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
@@ -46,34 +46,35 @@ import {ExpiredProductsReportComponent} from './stock-reports/expired-products-r
     StockReorderReportComponent,
     ProductsAboutToExpireComponent
   ],
-  imports: [
-    CommonModule,
-    ReportsRoutingModule,
-    MatDatepickerModule,
-    DashboardModuleRoutingModule,
-    CommonComponentsModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatNativeDateModule,
-    MatTooltipModule,
-    MatSelectModule,
-    SatDatepickerModule,
-    SatNativeDateModule,
-    MatDividerModule,
-    MatInputModule,
-    MatMenuModule,
-    DashboardModuleModule
-  ]
+    imports: [
+        CommonModule,
+        ReportsRoutingModule,
+        MatDatepickerModule,
+        DashboardModuleRoutingModule,
+        CommonComponentsModule,
+        MatSidenavModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatNativeDateModule,
+        MatTooltipModule,
+        MatSelectModule,
+        SatDatepickerModule,
+        SatNativeDateModule,
+        MatDividerModule,
+        MatInputModule,
+        MatMenuModule,
+        DashboardModuleModule,
+        MatRippleModule
+    ]
 })
 export class ReportsModule {
 }

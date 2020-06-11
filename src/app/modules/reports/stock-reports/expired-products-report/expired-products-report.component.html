@@ -1,46 +1,39 @@
-<div class="col-12" style="margin-top: 1em">
-  <div>
-    <mat-card class="mat-elevation-z3">
-      <div style="display: flex; flex-flow: row; align-items: center">
-        <mat-card-title class="col-8">Expired Products</mat-card-title>
+<div>
+  <mat-card class="mat-elevation-z3">
+    <div style="display: flex; flex-flow: row; align-items: center">
+      <h6 class="col-8">Expired</h6>
 
-        <span style="flex-grow: 1"></span>
+      <span style="flex-grow: 1"></span>
 
-        <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </div>
-      <div style="display: flex; justify-content: center">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-      </div>
+      <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
 
-      <app-data-not-ready *ngIf="noDataRetrieved  && !isLoading"></app-data-not-ready>
-      <table mat-table  *ngIf="!noDataRetrieved  && !isLoading" [dataSource]="expiredProducts" matSort>
+    <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved  || isLoading"></app-data-not-ready>
 
-        <ng-container matColumnDef="product">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
-          <td mat-cell *matCellDef="let element">{{element.product}}</td>
-          <td mat-footer-cell *matFooterCellDef></td>
-        </ng-container>
+    <table mat-table *ngIf="!noDataRetrieved  && !isLoading" [dataSource]="expiredProducts" matSort>
 
-        <ng-container matColumnDef="expire">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
-          <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
-          <td mat-footer-cell *matFooterCellDef></td>
-        </ng-container>
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+        <td mat-cell *matCellDef="let element">{{element.product}}</td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
-        <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
-            *matRowDef="let row; columns: stockColumns;"></tr>
-        <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
+      <ng-container matColumnDef="expire">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
+        <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
+      </ng-container>
 
-      </table>
-      <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
-    </mat-card>
-  </div>
+      <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
+      <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
+          *matRowDef="let row; columns: stockColumns;"></tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 20, 100]" showFirstLastButtons></mat-paginator>
+  </mat-card>
 </div>
 
 <mat-menu #exportMenu>
-  <button mat-menu-item (click)="exportReport()"> Export </button>
+  <button mat-menu-item (click)="exportReport()"> Export</button>
 </mat-menu>
 

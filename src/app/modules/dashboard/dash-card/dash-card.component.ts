@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dash-card',
@@ -12,10 +13,15 @@ export class DashCardComponent implements OnInit {
   @Input() reportLink: string;
   @Input() content: TemplateRef<any>;
 
-  constructor() {
+  constructor(private readonly router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  goTo() {
+    if (this.reportLink) {
+      this.router.navigateByUrl(this.reportLink).catch(console.log);
+    }
+  }
 }
