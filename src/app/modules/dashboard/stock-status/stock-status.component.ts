@@ -45,7 +45,7 @@ export class StockStatusComponent implements OnInit {
       'stockStatusDiv',
       {
         chart: {
-          type: 'line',
+          type: 'histogram',
           // height: 400,
           // width: 200
         },
@@ -102,7 +102,7 @@ export class StockStatusComponent implements OnInit {
           enabled: false
         },
         series: [{
-          type: 'line',
+          type: 'column',
           color: '#0b2e13',
           data: y,
         }]
