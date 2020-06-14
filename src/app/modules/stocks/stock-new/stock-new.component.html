@@ -8,7 +8,8 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [heading]="'Create Stock'"
+
+    <app-toolbar [heading]="isUpdateMode?'Update Stock':'Create Stock'"
                  [sidenav]="sidenav"
                  [hasBackRoute]="isMobile"
                  backLink="/stock/products"
@@ -38,7 +39,8 @@
 
       </div>
 
-      <form [formGroup]="productForm" #formElement="ngForm" (ngSubmit)="addProduct(formElement)">
+      <form [formGroup]="productForm" #formElement="ngForm"
+            (ngSubmit)="isUpdateMode?updateProduct(formElement):addProduct(formElement)">
 
         <div class="row d-flex justify-content-center align-items-center">
 
@@ -72,7 +74,8 @@
               Files
             </h5>
             <div *ngIf="getDownloadAbleFormControl().value === true" class="card-wrapper">
-              <app-upload-files [uploadFileFormControl]="getDownloadsFormControl()"></app-upload-files>
+              <app-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
+                                [uploadFileFormControl]="getDownloadsFormControl()"></app-upload-files>
             </div>
 
             <h5>
@@ -235,29 +238,16 @@
           </div>
 
           <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 16px">
-            <!--            <mat-card class="card-wrapper mat-elevation-z1">-->
-
-            <!--              <mat-card-content class="card-content">-->
-            <!--                <mat-checkbox-->
-            <!--                  labelPosition="after"-->
-            <!--                  formControlName="active"-->
-            <!--                  matTooltip="If selected a product can be bought by a customer and be sold by a seller ">-->
-            <!--                  Active?-->
-            <!--                </mat-checkbox>-->
-
-            <!--              </mat-card-content>-->
-
-            <!--            </mat-card>-->
 
             <div>
               <button class="btn-block ft-button" color="primary" mat-raised-button
                       [disabled]="mainProgress">
-                Create Product
+                {{isUpdateMode ? 'Update Product' : 'Create Product'}}
                 <mat-progress-spinner style="display: inline-block" *ngIf="mainProgress" diameter="30"
                                       mode="indeterminate"></mat-progress-spinner>
               </button>
               <div style="padding: 16px 0">
-                <button class="btn-block" routerLink="/stock" color="primary" mat-button>
+                <button class="btn-block ft-button" routerLink="/stock" color="primary" mat-button>
                   Cancel
                 </button>
               </div>

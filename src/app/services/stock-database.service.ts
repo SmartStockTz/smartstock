@@ -28,7 +28,7 @@ export class StockDatabaseService implements StockDataSource {
     const email = encodeURIComponent(user.email);
     return BFast.functions(projectId)
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
-      .get({}, this._settings.ssmFunctionsHeader);
+      .get({});
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
@@ -202,9 +202,21 @@ export class StockDatabaseService implements StockDataSource {
     const shop = await this._storage.getActiveShop();
     const stockId = stock._id ? stock._id : stock.objectId;
     delete stock.objectId;
-    if (stock.image && !stock.image.toString().startsWith('http://')) {
+    if (stock.image && !stock.image.toString().startsWith('http')) {
       const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
       stock.image = imageRequest.url;
+    }
+    if (stock.downloads && stock.downloads.length > 0) {
+      for (const value of stock.downloads) {
+        if (value && !value.url.startsWith('http')) {
+          const fileUpload = await BFast.storage(shop.projectId).save({
+            fileName: `downloadableFile.${value.name.split('.').pop()}`,
+            data: {base64: value.url},
+            fileType: value.type
+          });
+          value.url = fileUpload.url;
+        }
+      }
     }
     return BFast.database(shop.projectId).collection('stocks').update<Stock>(stockId, stock);
   }

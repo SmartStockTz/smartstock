@@ -7,7 +7,7 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./upload-files.component.css']
 })
 export class UploadFilesComponent implements OnInit {
-  files: { name: string, type: string, url: string }[] = [];
+  @Input() files: { name: string, type: string, url: string }[] = [];
   @Input() uploadFileFormControl: FormControl = new FormControl([], [Validators.nullValidator, Validators.required]);
 
   constructor() {
