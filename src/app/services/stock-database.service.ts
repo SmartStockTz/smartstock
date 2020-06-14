@@ -69,6 +69,16 @@ export class StockDatabaseService implements StockDataSource {
       const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
       stock.image = imageRequest.url;
     }
+    if (stock.downloads && stock.downloads.length > 0) {
+      for (const value of stock.downloads) {
+        const fileUpload = await BFast.storage(shop.projectId).save({
+          fileName: `downloadableFile.${value.name.split('.').pop()}`,
+          data: {base64: value.url},
+          fileType: value.type
+        });
+        value.url = fileUpload.url;
+      }
+    }
     return BFast.database(shop.projectId).collection('stocks').save(stock);
   }
 

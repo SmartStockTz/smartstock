@@ -8,7 +8,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [heading]="'New Product'"
+    <app-toolbar [heading]="'Create Stock'"
                  [sidenav]="sidenav"
                  [hasBackRoute]="isMobile"
                  backLink="/stock/products"
@@ -18,30 +18,67 @@
     <div class="container stock-new-wrapper">
 
       <div style="padding: 16px" class="row d-flex flex-column justify-content-center align-items-center">
-        <h4 style="padding: 0" class="col-12 col-xl-9 col-lg-9">
-          Product Image
-        </h4>
-        <div matRipple (click)="imageInput.click()"
-             class="col-12 col-xl-9 col-lg-9 d-flex flex-column justify-content-center align-items-center"
-             style="width: 100%; min-height: 100px; border-radius: 4px; background-color: #f5f5f5">
-          <img style="width: 100%; height: auto; margin-top: 4px" [src]="croppedImage" alt=""/>
+
+        <h5 style="padding: 0" class="col-12 col-xl-9 col-lg-9">
+          Image
+        </h5>
+
+        <mat-card matRipple (click)="imageInput.click()"
+                  class="col-12 col-xl-9 col-lg-9 d-flex flex-column justify-content-center align-items-center"
+                  style="width: 100%; min-height: 100px; border-radius: 4px; background-color: #f5f5f5">
+          <img matCardImageLarge style="width: 100%; height: auto; margin-top: 4px" [src]="croppedImage" alt=""/>
           <button *ngIf="!croppedImage" mat-button color="primary">Upload Image</button>
-        </div>
+        </mat-card>
+
         <div *ngIf="croppedImage" style="padding: 0"
              class="col-12 col-xl-9 col-lg-9 d-flex justify-content-center align-items-center">
           <button color="warn" (click)="removeImage(imageInput)" mat-button>Remove Image</button>
         </div>
         <input (change)="fileChangeEvent($event)" #imageInput style="display: none" type="file">
+
       </div>
 
       <form [formGroup]="productForm" #formElement="ngForm" (ngSubmit)="addProduct(formElement)">
+
         <div class="row d-flex justify-content-center align-items-center">
 
           <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
-            <h4>
-              Product Information
-            </h4>
-            <mat-card class="card-wrapper mat-elevation-z0">
+
+            <h5>
+              Status
+            </h5>
+            <mat-card class="card-wrapper">
+              <mat-list>
+                <mat-list-item>
+                  <p matLine>Can be sold</p>
+                  <mat-checkbox formControlName="saleable" matSuffix></mat-checkbox>
+                </mat-list-item>
+                <mat-list-item>
+                  <p matLine>Can be stocked</p>
+                  <mat-checkbox formControlName="stockable" matSuffix></mat-checkbox>
+                </mat-list-item>
+                <mat-list-item>
+                  <p matLine>Can be downloaded</p>
+                  <mat-checkbox formControlName="downloadable" matSuffix></mat-checkbox>
+                </mat-list-item>
+                <mat-list-item>
+                  <p matLine>Can be purchased</p>
+                  <mat-checkbox formControlName="purchasable" matSuffix></mat-checkbox>
+                </mat-list-item>
+              </mat-list>
+            </mat-card>
+
+            <h5 *ngIf="getDownloadAbleFormControl().value === true">
+              Files
+            </h5>
+            <div *ngIf="getDownloadAbleFormControl().value === true" class="card-wrapper">
+              <app-upload-files [uploadFileFormControl]="getDownloadsFormControl()"></app-upload-files>
+            </div>
+
+            <h5>
+              Product
+            </h5>
+            <mat-card class="card-wrapper">
               <mat-card-content class="card-content">
                 <mat-form-field appearance="fill" class="my-input">
                   <mat-label>Product Name</mat-label>
@@ -78,7 +115,8 @@
                   </div>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="my-input">
+                <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="outline"
+                                class="my-input">
                   <mat-label>Supplier</mat-label>
                   <mat-select [multiple]="false" formControlName="supplier">
                     <mat-option *ngFor="let supplier of suppliers | async" [value]="supplier.name">
@@ -105,42 +143,33 @@
               </mat-card-content>
             </mat-card>
 
-            <h4>
-              Inventory Information
-            </h4>
-            <mat-card class="card-wrapper mat-elevation-z0">
-
-              <mat-checkbox
-                labelPosition="after"
-                formControlName="active"
-                matTooltip="If selected a product can be bought by a customer
-                                and be sold by a seller, otherwise it can be purchased only">
-                For Sale
-              </mat-checkbox>
-
+            <h5>
+              Inventory
+            </h5>
+            <mat-card class="card-wrapper">
               <mat-card-content class="card-content">
-                <mat-form-field appearance="fill" class="my-input">
+                <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="fill" class="my-input">
                   <mat-label>Purchase Price / Unit</mat-label>
                   <span matSuffix>TZS</span>
                   <input min="0" matInput type="number" required formControlName="purchase">
                   <mat-error>Purchase price required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="my-input">
+                <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
                   <mat-label>Retail Price / Unit</mat-label>
                   <span matSuffix>TZS</span>
                   <input min="0" matInput type="number" required formControlName="retailPrice">
                   <mat-error>Retail price required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="my-input">
+                <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
                   <mat-label>Wholesale Price / Unit</mat-label>
                   <span matSuffix>TZS</span>
                   <input min="0" matInput type="number" required formControlName="wholesalePrice">
                   <mat-error>Wholesale price required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="my-input"
+                <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input"
                                 matTooltip="Quantity for this product to be sold as a whole or in bulk">
                   <mat-label>Wholesale Quantity</mat-label>
                   <input min="0" matInput
@@ -149,14 +178,15 @@
                   <mat-error>Wholesale Quantity required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="my-input" matTooltip="Total initial unit quantity available">
+                <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input"
+                                matTooltip="Total initial unit quantity available">
                   <mat-label>Quantity</mat-label>
                   <input min="0" matInput type="number" required
                          formControlName="quantity">
                   <mat-error>Quantity required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="my-input">
+                <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input">
                   <mat-label>Reorder Level</mat-label>
                   <input min="0" matInput type="number" required formControlName="reorder">
                   <mat-error>Reorder field required</mat-error>
@@ -192,7 +222,7 @@
                   Can Expire?
                 </mat-checkbox>
 
-                <mat-form-field appearance="outline" class="my-input">
+                <mat-form-field *ngIf="getCanExpireFormControl().value === true" appearance="outline" class="my-input">
                   <mat-label>Expire Date</mat-label>
                   <input matInput [matDatepicker]="picker" formControlName="expire">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

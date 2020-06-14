@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../shared/DeviceInfo';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -20,7 +20,6 @@ import {environment} from '../../../../environments/environment';
 export class StockNewComponent extends DeviceInfo implements OnInit {
 
   croppedImage: any = '';
-
   productForm: FormGroup;
   units: Observable<[any]>;
   categories: Observable<any[]>;
@@ -69,6 +68,11 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   initialize() {
     this.productForm = this.formBuilder.group({
       product: ['', [Validators.nullValidator, Validators.required]],
+      saleable: [true, [Validators.nullValidator, Validators.required]],
+      downloadable: [false, [Validators.nullValidator, Validators.required]],
+      downloads: [[], [Validators.nullValidator, Validators.required]],
+      stockable: [true, [Validators.nullValidator, Validators.required]],
+      purchasable: [true, [Validators.nullValidator, Validators.required]],
       description: [''],
       purchase: [0, [Validators.nullValidator, Validators.required]],
       retailPrice: [0, [Validators.nullValidator, Validators.required]],
@@ -79,10 +83,33 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
       unit: [null, [Validators.nullValidator, Validators.required]],
       canExpire: [true],
       expire: [null, []],
-      active: [true, [Validators.nullValidator, Validators.required]],
       category: [null, [Validators.required, Validators.nullValidator]],
-      supplier: [null, [Validators.required, Validators.nullValidator]],
+      supplier: ['general', [Validators.required, Validators.nullValidator]],
     });
+  }
+
+  getSaleableFormControl() {
+    return this.productForm.get('saleable') as FormControl;
+  }
+
+  getPurchasableFormControl() {
+    return this.productForm.get('purchasable') as FormControl;
+  }
+
+  getStockableFormControl() {
+    return this.productForm.get('stockable') as FormControl;
+  }
+
+  getDownloadAbleFormControl() {
+    return this.productForm.get('downloadable') as FormControl;
+  }
+
+  getDownloadsFormControl() {
+    return this.productForm.get('downloads') as FormControl;
+  }
+
+  getCanExpireFormControl() {
+    return this.productForm.get('canExpire') as FormControl;
   }
 
   getSuppliers() {
