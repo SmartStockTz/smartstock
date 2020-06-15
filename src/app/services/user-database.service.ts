@@ -74,12 +74,12 @@ export class UserDatabaseService implements UserDataSource {
       await this._storage.saveActiveUser(authUser);
       return authUser;
     } else {
-      await BFast.functions().request(this._settings.ssmFunctionsURL + '/functions/users/reVerifyAccount/' + user.username).post();
+      await BFast.functions().request('/functions/users/reVerifyAccount/' + user.username).post();
       this.dialog.open(VerifyEMailDialogComponent, {
         closeOnNavigation: true,
         disableClose: true
       });
-      throw {code: 4003, err: 'account not verified'};
+      throw {code: 403, err: 'account not verified'};
     }
   }
 
