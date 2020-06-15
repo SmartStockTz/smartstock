@@ -38,7 +38,7 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  getSalesTrend(beginDate: Date, endDate: Date): Promise<any> {
+  getSalesTrend(beginDate: string, endDate: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
         const activeShop = await this.storage.getActiveShop();
@@ -195,23 +195,22 @@ export class AdminDashboardService implements AdminReportAdapter {
     return stocks.filter(stock => (stock.expire > toSqlDate(today) && (stock.expire <= toSqlDate(moment(today).add(3, 'M').toDate()))));
   }
 
-  async getSoldCarts(date: Date, skip = 0, size = 1000): Promise<CartModel[]> {
-    const activeShop = await this.storage.getActiveShop();
+  async getSoldCarts(from: string, to: string, channel: string, skip = 0, size = 100): Promise<CartModel[]> {
+    // const activeShop = await this.storage.getActiveShop();
 
-    return BFast.database(activeShop.projectId).collection('sales').query().find<CartModel>({
-      filter: {
-        // @ts-ignore
-        expire: {
-          $lte: toSqlDate(date)
-        }
-      },
-      skip,
-      size
-    }, {
-      cacheEnable: true,
-      dtl: 0,
-      freshDataCallback: value => {
-        console.log(value);
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const activeShop = await this.storage.getActiveShop();
+        this.httpClient.get(this.settings.ssmFunctionsURL +
+          `/dashboard/sales-reports/cartOrderReport/${activeShop.projectId}/${channel}/${from}/${to}`, {
+          headers: this.settings.ssmFunctionsHeader
+        }).subscribe(value => {
+          resolve(value);
+        }, error => {
+          reject(error);
+        });
+      } catch (e) {
+        reject(e);
       }
     });
   }
