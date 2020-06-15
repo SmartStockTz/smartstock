@@ -43,9 +43,12 @@ import {ProfileMobileComponent} from './settings/profile-mobile/profile-mobile.c
 import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
 
 @NgModule({
-  declarations: [SalesLandingMobileComponent, PurchaseMobileComponent, StockMobileComponent, StockProductsMobileUiComponent,
-    StockProductItemMobileUiComponent, CategoriesMobileUiComponent, SuppliersMobileUiComponent, ShowSupplierMobileUiComponent, UnitsMobileUiComponent,
-    SettingsComponent, SettingsGeneralComponent, BillingMobileComponent, UsersMobileComponent, ProfileMobileComponent,
+  declarations: [SalesLandingMobileComponent,
+    PurchaseMobileComponent, StockMobileComponent, StockProductsMobileUiComponent,
+    StockProductItemMobileUiComponent, CategoriesMobileUiComponent, SuppliersMobileUiComponent,
+    ShowSupplierMobileUiComponent, UnitsMobileUiComponent,
+    SettingsComponent, SettingsGeneralComponent,
+    BillingMobileComponent, UsersMobileComponent, ProfileMobileComponent,
   ],
   exports: [
     SalesLandingMobileComponent,

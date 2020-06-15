@@ -12,38 +12,44 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
-import {SalesGeneralComponent} from './sales/general/sales-general.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {SalesTrendsComponent} from './sales/trends/sales-trends.component';
-import {SalesProductFrequencyComponent} from './sales/product-frequency/sales-product-frequency.component';
-import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
-import {SalesDashboardComponent} from './sales/sales-dashboard.component';
-import {SalesReportsComponent} from '../reports/sales-reports/sales-reports.component';
-import {StockReportsComponent} from '../reports/stock-reports/stock-reports.component';
-import {StockReorderReportComponent} from '../reports/stock-reports/stock-reorder-report/stock-reorder-report.component';
+import {SalesTrendsComponent} from './trends/sales-trends.component';
+import {SalesProductFrequencyComponent} from './product-frequency/sales-product-frequency.component';
+import {DashboardComponent} from './landing/dashboard.component';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ProductPerformanceReportComponent} from '../reports/sales-reports/product-performance-report/product-performance-report.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
-import { TotalSalesComponent } from './sales/general/total-sales/total-sales.component';
+import {TotalSalesComponent} from './total-sales/total-sales.component';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
-import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
+import {DateRangeHeaderComponent} from './date-range-header/date-range-header.component';
+import {DateRangeComponent} from './date-range/date-range.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {DashCardComponent} from './dash-card/dash-card.component';
+import {TotalGrossSaleComponent} from './total-gross-sale/total-gross-sale.component';
+import {StockStatusComponent} from './stock-status/stock-status.component';
+import { StockByCategoryComponent } from './stock-by-category/stock-by-category.component';
+import { StockExpiredComponent } from './stock-expired/stock-expired.component';
 
 @NgModule({
   declarations: [
-    SalesGeneralComponent,
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
-    DataNotReadyComponent,
-    SalesDashboardComponent,
-    StockReportsComponent,
-    StockReorderReportComponent,
-    SalesReportsComponent,
+    DashboardComponent,
     ProductPerformanceReportComponent,
     TotalSalesComponent,
-    DateRangeSelectorComponent
-
+    DateRangeHeaderComponent,
+    DateRangeComponent,
+    DashCardComponent,
+    TotalGrossSaleComponent,
+    StockStatusComponent,
+    StockByCategoryComponent,
+    StockExpiredComponent
+  ],
+  exports: [
+    ProductPerformanceReportComponent,
+    SalesTrendsComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +72,7 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
     MatSelectModule,
     SatDatepickerModule,
     SatNativeDateModule,
+    MatDividerModule,
   ]
 })
 export class DashboardModuleModule {

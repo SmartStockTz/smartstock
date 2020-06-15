@@ -10,6 +10,7 @@
     <span>{{heading}}</span>
     <span *ngIf="isMobile" style="flex: 1 1 auto"></span>
     <span *ngIf="!isMobile && showSearch" style="width: 16px"></span>
+    <span *ngIf="!isMobile && !showSearch" style="flex: 1 1 auto"></span>
     <app-search-input [searchProgressFlag]="searchProgressFlag"
                       *ngIf="!isMobile && showSearch" style="flex: 1 1 auto"
                       [showSearch]="showSearch"

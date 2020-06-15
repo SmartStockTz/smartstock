@@ -10,10 +10,21 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <app-toolbar [heading]="'DASHBOARD'" [sidenav]="sidenav" [showProgress]="false" style="position: fixed;width: 100%;z-index: 1000;"></app-toolbar>
+      <app-toolbar [heading]="'REPORT'"
+                   [sidenav]="sidenav"
+                   [showProgress]="false">
+      </app-toolbar>
 
       <div style="padding: 24px 16px; margin-top: 80px;" class="container">
-        <app-product-performance-report></app-product-performance-report>
+        <app-product-performance-report style="margin-bottom: 1em"></app-product-performance-report>
+
+        <div>
+          <app-dashboard-sale-trends></app-dashboard-sale-trends>
+        </div>
+
+        <div>
+          <app-cart-report></app-cart-report>
+        </div>
       </div>
 
     </mat-sidenav-content>

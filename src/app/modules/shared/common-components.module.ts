@@ -26,6 +26,9 @@ import { OnFetchComponent } from './on-fetch/on-fetch.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SearchInputComponent } from './toolbar/search-input/search-input.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
+import { UploadFilesComponent } from './upload-files/upload-files.component';
+import {MatRippleModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -48,14 +51,17 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
     MatSelectModule,
     ImageCropperModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRippleModule
   ],
     exports: [
         AdminDrawerComponent,
         ToolbarComponent,
         ShopsPipe,
         OnFetchComponent,
-        BottomBarComponent
+        BottomBarComponent,
+        DataNotReadyComponent,
+        UploadFilesComponent
     ],
   declarations: [
     AdminDrawerComponent,
@@ -65,7 +71,9 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
     ShopsPipe,
     OnFetchComponent,
     SearchInputComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    DataNotReadyComponent,
+    UploadFilesComponent
       ],
   entryComponents: [
     DialogImageCropComponent

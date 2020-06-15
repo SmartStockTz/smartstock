@@ -79,18 +79,23 @@ async function mergeStocks(shop, lastUpdate, smartStockCache) {
     && remoteStocks.results.length > 0) {
     const localStocks = await stocksCache.get('all');
     const localStockMap = {};
-    localStocks.forEach(value => {
-      localStockMap[value.objectId] = value;
-    });
-    remoteStocks.results.forEach(value => {
-      localStockMap[value.objectId] = value;
-    });
+    if (localStocks) {
+      localStocks.forEach(value => {
+        localStockMap[value.objectId] = value;
+      });
+    }
+    if (remoteStocks && remoteStocks.results) {
+      remoteStocks.results.forEach(value => {
+        localStockMap[value.objectId] = value;
+      });
+    }
     const newStocks = [];
     Object.keys(localStockMap).forEach(key => {
       newStocks.push(localStockMap[key]);
     });
     await stocksCache.set('all', newStocks);
-    await smartStockCache.set('lastUpdate', remoteStocks.lastUpdateTime);
+    await smartStockCache.set('lastUpdate', (remoteStocks && remoteStocks.lastUpdateTime)
+      ? remoteStocks.lastUpdateTime : undefined);
     // console.log(localStocks);
     /// console.log(remoteStocks);
   } else {

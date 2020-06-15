@@ -1,0 +1,45 @@
+<div>
+  <mat-card class="mat-elevation-z3">
+    <div style="display: flex; flex-flow: row; align-items: center">
+      <h6 class="col-8">Near to Expire</h6>
+
+      <span style="flex-grow: 1"></span>
+
+      <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+
+    <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved  || isLoading"></app-data-not-ready>
+
+    <table mat-table *ngIf="!noDataRetrieved  && !isLoading" [dataSource]="expiredProducts" matSort>
+
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+        <td mat-cell *matCellDef="let element">{{element.product}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="expire">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
+        <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity Remaining</th>
+        <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
+      <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
+          *matRowDef="let row; columns: stockColumns;"></tr>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 20, 100]" showFirstLastButtons></mat-paginator>
+
+  </mat-card>
+</div>
+
+<mat-menu #exportMenu>
+  <button mat-menu-item (click)="exportReport()"> Export</button>
+</mat-menu>

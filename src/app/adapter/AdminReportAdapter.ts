@@ -1,9 +1,16 @@
+import {Stock} from '../model/stock';
+
 export interface AdminReportAdapter {
-  getTotalSaleByDate(date: string): Promise<{ total: number }[]>;
+  getTotalSale(beginDate: Date, endDate: Date): Promise<number>;
 
-  getTotalCostOfGoodSoldByDate(date: string): Promise<{ total: number }[]>;
+  getTotalCostOfGoodSold(beginDate: Date, endDate: Date): Promise<{ total: number }[]>;
 
-  getSalesTrendByDates(from: string, to: string): Promise<any>;
+  getSalesTrend(beginDate: Date, endDate: Date): Promise<any>;
 
-  getFrequentlySoldProductsByDate(date: string): Promise<any>;
+  getFrequentlySoldProducts(beginDate: Date, endDate: Date): Promise<any>;
+
+  getExpiredProducts(date: Date, skip: number, size: number): Promise<Stock[]>;
+
+  getStockStatus(): Promise<{ x: string, y: number }[]>;
+  getStockStatusByCategory(): Promise<{ x: string, y: number }[]>;
 }

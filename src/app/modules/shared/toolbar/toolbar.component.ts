@@ -24,7 +24,7 @@ export class ToolbarComponent implements OnInit {
   @Input() cartdrawer: MatSidenav;
   @Input() showSearch = false;
   @Output() searchCallback = new EventEmitter<string>();
-  searchInputControl = new FormControl('', [Validators.nullValidator, Validators.required]);
+  @Input() searchInputControl = new FormControl('');
   @Input() searchPlaceholder: string | 'Type to search';
   currentUser: UserI;
 

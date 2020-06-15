@@ -1,44 +1,56 @@
+<div>
+  <mat-card class="mat-elevation-z3">
 
-          <div class="col-12">
-            <div>
-              <mat-card class="mat-elevation-z0">
-                <mat-card-title>Stock Reorder Report</mat-card-title>
-                <table mat-table [dataSource]="stockReorderDatasource" matSort>
+    <div style="display: flex; flex-flow: row; align-items: center">
+      <h6>Stock Reorder</h6>
+      <span style="flex-grow: 1"></span>
+      <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
 
-                  <ng-container matColumnDef="product">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
-                    <td mat-cell *matCellDef="let element">{{element.product}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
+    <!--      <div style="display: flex; justify-content: center">-->
+    <!--        <mat-spinner *ngIf="isLoading"></mat-spinner>-->
+    <!--      </div>-->
 
-                  <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-                    <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
+    <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></app-data-not-ready>
 
-                  <ng-container matColumnDef="reorder">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reorder level</th>
-                    <td mat-cell *matCellDef="let element">{{element.reorder | number}}</td>
-                    <td mat-footer-cell *matFooterCellDef>
-                    </td>
-                  </ng-container>
+    <div *ngIf="!noDataRetrieved  && !isLoading">
+      <table mat-table [dataSource]="stockReorderDatasource" matSort>
 
-                  <ng-container matColumnDef="supplier">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
-                    <td matRipple mat-cell *matCellDef="let element">{{element.supplier}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                  </ng-container>
-            
-                  <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
-                  <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
-                      *matRowDef="let row; columns: stockColumns;"></tr>
-                  <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+          <td mat-cell *matCellDef="let element">{{element.product}}</td>
+        </ng-container>
 
-                </table>
-                <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
-              </mat-card>
-            </div>
-      </div>
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+          <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
+        </ng-container>
 
+        <ng-container matColumnDef="reorder">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Reorder level</th>
+          <td mat-cell *matCellDef="let element">{{element.reorder | number}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+          <td matRipple mat-cell *matCellDef="let element">{{element.supplier}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
+        <tr matTooltip="{{row.product}}" class="table-data-row" mat-row
+            *matRowDef="let row; columns: stockColumns;"></tr>
+
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 20, 100]" showFirstLastButtons></mat-paginator>
+
+  </mat-card>
+</div>
+
+<mat-menu #exportMenu>
+  <button mat-menu-item (click)="exportReport()"> Export</button>
+</mat-menu>
 
