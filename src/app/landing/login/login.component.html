@@ -14,9 +14,6 @@
 
       <form [formGroup]="loginForm" #formElement="ngForm" (ngSubmit)="login(formElement)">
         <mat-card>
-          <!--          <mat-card-header>-->
-          <!--            <mat-card-title>Login</mat-card-title>-->
-          <!--          </mat-card-header>-->
           <mat-card-content>
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Username</mat-label>
@@ -32,15 +29,11 @@
               </button>
               <mat-error>Password required</mat-error>
             </mat-form-field>
-            <!--<div class="form-group">-->
-            <!--<div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label-->
-            <!--class="form-check-label" for="checkbox">Remember me</label></div>-->
-            <!--</div>-->
           </mat-card-content>
           <mat-card-actions>
             <button mat-raised-button
                     color="primary"
-                    class="btn-block"
+                    class="btn-block ft-button"
                     *ngIf="!showProgress">
               Login
             </button>
@@ -50,7 +43,7 @@
                     (click)="$event.preventDefault()"
                     mat-raised-button
                     color="primary"
-                    class="btn-block"
+                    class="btn-block ft-button"
                     *ngIf="!showProgress">
               Open Account For Free
             </button>

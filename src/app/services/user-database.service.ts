@@ -112,8 +112,8 @@ export class UserDatabaseService implements UserDataSource {
     }
   }
 
-  resetPassword(user: UserI, callback?: (value: any) => void) {
-    callback('');
+  resetPassword(username: string): Promise<any> {
+    return BFast.functions().request('/functions/users/resetPassword/' + encodeURIComponent(username)).get();
   }
 
   async refreshToken(): Promise<any> {

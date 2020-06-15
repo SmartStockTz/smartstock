@@ -15,7 +15,7 @@ export interface UserDataSource {
 
   register(user: UserI): Promise<UserI>;
 
-  resetPassword(user: UserI, callback?: (value: any) => void);
+  resetPassword(username: string): Promise<any>;
 
   getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]>;
 

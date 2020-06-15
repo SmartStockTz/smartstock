@@ -84,10 +84,15 @@ export class LoginComponent implements OnInit {
   reset($event: Event) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.snack.open(
-      'Please contact us @ +255764943055 to recover your password',
-      'Ok',
-    );
+    if (this.loginForm.value.username) {
+      this.userDatabase.resetPassword(this.loginForm.value.username).then(value => {
+
+      });
+    } else {
+      this.snack.open('Please enter your username to reset your password', 'Ok', {
+        duration: 3000
+      });
+    }
   }
 
   showPassword($event: MouseEvent) {
