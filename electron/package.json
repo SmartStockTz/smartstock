@@ -29,6 +29,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "build:snap": "electron-builder --linux snap",
+    "build:mac": "electron-builder --mac",
     "build:snap32": "electron-builder --linux --ia32 snap",
     "build:win": "electron-builder --win"
   },
