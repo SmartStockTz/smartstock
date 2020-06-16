@@ -28,7 +28,7 @@ export class StockDatabaseService implements StockDataSource {
     const email = encodeURIComponent(user.email);
     return BFast.functions(projectId)
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
-      .get({}, this._settings.ssmFunctionsHeader);
+      .get({});
   }
 
   addAllCategory(categories: CategoryI[], callback?: (value: any) => void) {
