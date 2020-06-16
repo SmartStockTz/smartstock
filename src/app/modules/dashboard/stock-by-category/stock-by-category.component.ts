@@ -36,12 +36,17 @@ export class StockByCategoryComponent implements OnInit {
 
   private initiateGraph(data: { x: string, y: number }[]) {
     const x: string[] = data.map(value => value.x);
-    const y: any[] = data.map(value => value.y);
+    const y: any[] = data.map(value => {
+      return {
+        y: value.y,
+        name: value.x
+      };
+    });
     this.stockByCategoryChart = Highcharts.chart(
       'stockByCategory',
       {
         chart: {
-          type: 'line',
+          // type: 'histogram',
           // height: 400,
           // width: 200
         },
@@ -98,10 +103,10 @@ export class StockByCategoryComponent implements OnInit {
           enabled: false
         },
         series: [{
-          type: 'line',
+          type: 'pie',
           color: '#0b2e13',
           data: y,
-        }]
+        }],
       },
       chart => {
         // console.log(chart);
