@@ -38,6 +38,8 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   startDateFormControl = new FormControl('', [Validators.nullValidator]);
   endDateFormControl = new FormControl('', [Validators.nullValidator]);
   channelFormControl = new FormControl('', [Validators.nullValidator]);
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
+
   startDate;
   endDate;
   channel = 'retail';
@@ -70,6 +72,10 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
 
     this._getProductReport(this.channel, this.startDate, this.endDate);
     this._dateRangeListener();
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.productPerformanceDatasource.filter = filterValue.trim().toLowerCase();
+    });
   }
 
 

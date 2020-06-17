@@ -4,6 +4,10 @@
     <div style="display: flex; flex-flow: row; align-items: center">
       <h6>Stock Reorder</h6>
       <span style="flex-grow: 1"></span>
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput [formControl]="filterFormControl" placeholder="Eg. Piriton">
+      </mat-form-field>
       <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
         <mat-icon>more_vert</mat-icon>
       </button>

@@ -1,14 +1,15 @@
 <div>
   <mat-card class="mat-elevation-z3">
-    <div style="display: flex; flex-flow: row; align-items: center">
-      <h6 class="col-8">Near to Expire</h6>
-
-      <span style="flex-grow: 1"></span>
-
-      <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </div>
+      <div style="display: flex; flex-wrap: wrap; flex-flow: row; align-items: center; margin-right: 100px;">
+        <h6 class="col-8">Near to Expire</h6>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput [formControl]="filterFormControl" placeholder="Eg. Piriton">
+        </mat-form-field>
+        <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
 
     <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved  || isLoading"></app-data-not-ready>
 

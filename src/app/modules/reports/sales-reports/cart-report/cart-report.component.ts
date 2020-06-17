@@ -34,6 +34,7 @@ export class CartReportComponent implements OnInit {
   startDateFormControl = new FormControl('', [Validators.nullValidator]);
   endDateFormControl = new FormControl('', [Validators.nullValidator]);
   channelFormControl = new FormControl('', [Validators.nullValidator]);
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -45,6 +46,10 @@ export class CartReportComponent implements OnInit {
 
     this.getSoldCarts(this.startDate, this.endDate, this.channel);
     this._dateRangeListener();
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.carts.filter = filterValue.trim().toLowerCase();
+    });
   }
 
   getSoldCarts(channel: string, from: string, to: string) {
@@ -70,7 +75,7 @@ export class CartReportComponent implements OnInit {
 
   exportReport() {
     // console.log(this.stocks);
-    json2Csv(this.cartColumns, this.carts.data).then(console.log);
+    json2Csv(this.cartColumns, this.carts.filteredData).then(console.log);
   }
 
   private _dateRangeListener() {

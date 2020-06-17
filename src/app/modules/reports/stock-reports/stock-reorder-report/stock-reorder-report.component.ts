@@ -28,6 +28,8 @@ export class StockReorderReportComponent implements OnInit {
   private stockFetchProgress = false;
   startDateFormControl = new FormControl('', [Validators.nullValidator]);
   endDateFormControl = new FormControl('', [Validators.nullValidator]);
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
+
   startDate;
   endDate;
   stockReportGetProgress = false;
@@ -53,6 +55,10 @@ export class StockReorderReportComponent implements OnInit {
 
   ngOnInit() {
      this._getStockReport();
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.stockReorderDatasource.filter = filterValue.trim().toLowerCase();
+    });
   }
 
   private _getStockReport() {
@@ -84,7 +90,7 @@ export class StockReorderReportComponent implements OnInit {
 
   exportReport() {
     // console.log(this.stocks);
-    json2Csv(this.stockColumns, this.stockReorderDatasource.data).then(console.log);
+    json2Csv(this.stockColumns, this.stockReorderDatasource.filteredData).then(console.log);
   }
   // dateRange() {
   //   if(this.startDateFormControl.value !== '' && this.endDateFormControl.value !== '') {

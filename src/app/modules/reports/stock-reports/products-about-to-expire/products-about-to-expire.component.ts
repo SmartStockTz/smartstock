@@ -6,6 +6,7 @@ import {Stock} from '../../../../model/stock';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {json2Csv} from '../../../../utils/json2csv';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-products-about-to-expire',
@@ -26,6 +27,8 @@ export class ProductsAboutToExpireComponent implements OnInit {
   stocks = []
   expiredProducts: MatTableDataSource<Stock>;
   stockColumns = ['product', 'expire', 'quantity'];
+
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -50,11 +53,15 @@ export class ProductsAboutToExpireComponent implements OnInit {
         duration: 3000
       });
     });
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.expiredProducts.filter = filterValue.trim().toLowerCase();
+    });
   }
 
   exportReport() {
     // console.log(this.stocks);
-    json2Csv(this.stockColumns, this.expiredProducts.data).then(console.log);
+    json2Csv(this.stockColumns, this.expiredProducts.filteredData).then(console.log);
   }
 
 }

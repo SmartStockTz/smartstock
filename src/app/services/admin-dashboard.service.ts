@@ -122,7 +122,7 @@ export class AdminDashboardService implements AdminReportAdapter {
       try {
         const activeShop = await this.storage.getActiveShop();
         this.httpClient.get(this.settings.ssmFunctionsURL +
-          `/dashboard/sales-reports/productPerformanceReport/${activeShop.projectId}/${channel}/${from}/${to}`, {
+          `/dashboard/sales-reports/productPerformanceReport/${activeShop.projectId}/${from}/${to}`, {
           headers: this.settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
