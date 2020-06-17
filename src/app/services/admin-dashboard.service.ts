@@ -8,6 +8,7 @@ import {BFast} from 'bfastjs';
 import {toSqlDate} from '../utils/date';
 import {CartModel} from '../model/cart';
 import {SalesModel} from '../model/CashSale';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -178,9 +179,6 @@ export class AdminDashboardService implements AdminReportAdapter {
     }, {
       cacheEnable: true,
       dtl: 0,
-      // freshDataCallback: value => {
-      //   console.log(value);
-      // }
     });
   }
 
@@ -188,14 +186,13 @@ export class AdminDashboardService implements AdminReportAdapter {
     const activeShop = await this.storage.getActiveShop();
     let stocks = await this.storage.getStocks();
     const today = new Date();
-
     if (!(stocks && Array.isArray(stocks) && stocks.length > 0)) {
       stocks = await BFast.database(activeShop.projectId).collection('stocks').getAll(null, {
         cacheEnable: false,
         dtl: 0,
       });
     }
-    return stocks.filter(stock => stock.expire <= toSqlDate(new Date()));
+    return stocks.filter(stock => (stock.expire > toSqlDate(today) && (stock.expire <= toSqlDate(moment(today).add(3, 'M').toDate()))));
   }
 
   async getSoldCarts(date: Date, skip = 0, size = 1000): Promise<CartModel[]> {

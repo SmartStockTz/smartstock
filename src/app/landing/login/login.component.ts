@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {LogService} from '../../services/log.service';
 import {environment} from '../../../environments/environment';
+import {MatDialog} from '@angular/material/dialog';
+import {ResetPasswordDialogComponent} from './reset-password.component';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly snack: MatSnackBar,
               private readonly routes: Router,
+              private readonly dialog: MatDialog,
               private readonly log: LogService,
               private readonly formBuilder: FormBuilder,
               private readonly userDatabase: UserDatabaseService) {
@@ -84,14 +87,38 @@ export class LoginComponent implements OnInit {
   reset($event: Event) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.snack.open(
-      'Please contact us @ +255764943055 to recover your password',
-      'Ok',
-    );
+    if (this.loginForm.value.username) {
+      this.showProgress = true;
+      this.userDatabase.resetPassword(this.loginForm.value.username).then(value => {
+        this.showProgress = false;
+        this.dialog.open(ResetPasswordDialogComponent, {
+          data: {
+            message: value && value.message ? value.message : null
+          },
+          closeOnNavigation: true
+        });
+      }).catch(reason => {
+        this.showProgress = false;
+        this.snack.open(reason && reason.message ? reason.message : reason.toString(), 'Ok', {
+          duration: 3000
+        });
+      });
+    } else {
+      this.dialog.open(ResetPasswordDialogComponent, {
+        closeOnNavigation: true,
+      });
+    }
   }
 
   showPassword($event: MouseEvent) {
     $event.preventDefault();
     this.showPasswordFlag = !this.showPasswordFlag;
+  }
+
+  handleEnterKey($event: KeyboardEvent, formElement) {
+    const keyCode = $event.code;
+    if (keyCode === 'Enter') {
+      this.login(formElement);
+    }
   }
 }

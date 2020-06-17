@@ -25,9 +25,6 @@
           <mat-icon matListIcon matPrefix color="primary">dashboard</mat-icon>
           <span matLine style="margin-left: 8px">Dashboard</span>
         </mat-list-item>
-<!--        <mat-nav-list>-->
-<!--          <a mat-list-item routerLink="/dashboard/landing">Sales</a>-->
-<!--        </mat-nav-list>-->
       </mat-nav-list>
 
       <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
@@ -40,7 +37,7 @@
           <span style="margin-left: 8px">Reports</span>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item routerLink="/report/sales">Sales Reports</a>
+          <!--          <a mat-list-item routerLink="/report/sales">Sales Reports</a>-->
           <a mat-list-item routerLink="/report/stocks">Stock Reports</a>
         </mat-nav-list>
       </mat-expansion-panel>
@@ -109,14 +106,14 @@
               <mat-icon color="primary">settings</mat-icon>
             </div>
           </a>
-          <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item
-             routerLink="/settings/bill">
-            <div class="d-flex flex-row flex-nowrap btn-block">
-              <span>Billing</span>
-              <span class="flex-grow-1"></span>
-              <mat-icon color="primary">payment</mat-icon>
-            </div>
-          </a>
+          <!--          <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item-->
+          <!--             routerLink="/settings/bill">-->
+          <!--            <div class="d-flex flex-row flex-nowrap btn-block">-->
+          <!--              <span>Billing</span>-->
+          <!--              <span class="flex-grow-1"></span>-->
+          <!--              <mat-icon color="primary">payment</mat-icon>-->
+          <!--            </div>-->
+          <!--          </a>-->
           <a *ngIf="currentUser && ( currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
              routerLink="/settings/users">
             <div class="d-flex flex-row flex-nowrap btn-block">

@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "Fahamu Tech",
-  "version": "20.6.6",
+  "version": "20.6.7",
   "main": "./index.js",
   "build": {
     "appId": "com.fahamutech.smartstock",
@@ -29,6 +29,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "build:snap": "electron-builder --linux snap",
+    "build:mac": "electron-builder --mac",
     "build:snap32": "electron-builder --linux --ia32 snap",
     "build:win": "electron-builder --win"
   },
