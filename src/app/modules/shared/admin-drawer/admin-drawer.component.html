@@ -106,14 +106,14 @@
               <mat-icon color="primary">settings</mat-icon>
             </div>
           </a>
-          <!--          <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item-->
-          <!--             routerLink="/settings/bill">-->
-          <!--            <div class="d-flex flex-row flex-nowrap btn-block">-->
-          <!--              <span>Billing</span>-->
-          <!--              <span class="flex-grow-1"></span>-->
-          <!--              <mat-icon color="primary">payment</mat-icon>-->
-          <!--            </div>-->
-          <!--          </a>-->
+          <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item
+             routerLink="/settings/bill">
+            <div class="d-flex flex-row flex-nowrap btn-block">
+              <span>Billing</span>
+              <span class="flex-grow-1"></span>
+              <mat-icon color="primary">payment</mat-icon>
+            </div>
+          </a>
           <a *ngIf="currentUser && ( currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
              routerLink="/settings/users">
             <div class="d-flex flex-row flex-nowrap btn-block">
