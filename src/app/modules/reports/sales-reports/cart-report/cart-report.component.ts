@@ -22,6 +22,9 @@ export class CartReportComponent implements OnInit {
   constructor(private readonly report: AdminDashboardService, private readonly snack: MatSnackBar) {
   }
 
+  startDate;
+  endDate;
+  channel = 'retail';
   isLoading = false;
   noDataRetrieved = true;
   stocks = [];
@@ -36,12 +39,17 @@ export class CartReportComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
-    this.getSoldCarts();
+    this.channelFormControl.setValue('retail');
+    this.startDate = toSqlDate(new Date());
+    this.endDate = toSqlDate(new Date());
+
+    this.getSoldCarts(this.startDate, this.endDate, this.channel);
+    this._dateRangeListener();
   }
 
-  getSoldCarts() {
+  getSoldCarts(channel: string, from: string, to: string) {
     this.isLoading = true;
-    this.report.getSoldCarts(toSqlDate(new Date()), toSqlDate(new Date()), 'retail').then(data => {
+    this.report.getSoldCarts(from, to, channel).then(data => {
       this.isLoading = false;
       if (data && Array.isArray(data) && data.length > 0) {
         this.carts = new MatTableDataSource(data);
@@ -64,4 +72,20 @@ export class CartReportComponent implements OnInit {
     // console.log(this.stocks);
     json2Csv(this.cartColumns, this.carts.data).then(console.log);
   }
+
+  private _dateRangeListener() {
+    this.startDateFormControl.valueChanges.subscribe(value => {
+      this.startDate = toSqlDate(value);
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+    this.endDateFormControl.valueChanges.subscribe(value => {
+      this.endDate = toSqlDate(value);
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+    this.channelFormControl.valueChanges.subscribe(value => {
+      this.channel = value;
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+  }
+
 }
