@@ -41,9 +41,12 @@ export class LandingComponent implements OnInit {
 
   monthlyCost() {
     const actual = this.calculateBill(30, this.totalSales, this.totalPurchases, this.totalProducts, this.currencyFormControl.value);
-    const maxmun = this.currencyFormControl.value === 'TZS' ? 23000 : 10;
-    if (actual > maxmun) {
-      return maxmun;
+    const maxmunMonthlyCost = this.currencyFormControl.value === 'TZS' ? 150000 : 65;
+    const minimumMonthlyCost = this.currencyFormControl.value === 'TZS' ? 17000 : 7;
+    if (actual > maxmunMonthlyCost) {
+      return maxmunMonthlyCost;
+    } else if (actual < minimumMonthlyCost) {
+      return minimumMonthlyCost;
     } else {
       return actual;
     }

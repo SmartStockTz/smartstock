@@ -29,6 +29,7 @@ import {RouterModule} from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {ResetPasswordDialogComponent} from './login/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ChooseShopComponent,
     DialogSupplierNewComponent,
     RegisterDialogComponent,
-    VerifyEMailDialogComponent
+    VerifyEMailDialogComponent,
+    ResetPasswordDialogComponent
   ],
   imports: [
     CommonModule,
