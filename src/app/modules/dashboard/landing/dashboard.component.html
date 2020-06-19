@@ -22,6 +22,7 @@
           <div class="row">
             <div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
               <app-dash-card [title]="'Total Sales'"
+                             [reportLink]="'/report/sales'"
                              [content]="totalSaleComponent"
                              description="Total sale over specified period">
                 <ng-template #totalSaleComponent>
@@ -31,6 +32,7 @@
             </div>
             <div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
               <app-dash-card [title]="'Gross Profit'"
+                             [reportLink]="'/report/sales'"
                              [content]="totalGrossProfit"
                              description="Total gross profit over specified period">
                 <ng-template #totalGrossProfit>

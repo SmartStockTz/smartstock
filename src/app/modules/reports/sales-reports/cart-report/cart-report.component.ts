@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {CartModel} from '../../../../model/cart';
 import {toSqlDate} from '../../../../utils/date';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-cart-report',
@@ -21,18 +22,39 @@ export class CartReportComponent implements OnInit {
   constructor(private readonly report: AdminDashboardService, private readonly snack: MatSnackBar) {
   }
 
+  startDate;
+  endDate;
+  channel = 'retail';
   isLoading = false;
   noDataRetrieved = true;
   stocks = [];
   carts: MatTableDataSource<CartModel>;
   cartColumns = ['receipt', 'total_amount', 'total_items', 'seller', 'date'];
 
+  startDateFormControl = new FormControl('', [Validators.nullValidator]);
+  endDateFormControl = new FormControl('', [Validators.nullValidator]);
+  channelFormControl = new FormControl('', [Validators.nullValidator]);
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
+    this.channelFormControl.setValue('retail');
+    this.startDate = toSqlDate(new Date());
+    this.endDate = toSqlDate(new Date());
+
+    this.getSoldCarts(this.startDate, this.endDate, this.channel);
+    this._dateRangeListener();
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.carts.filter = filterValue.trim().toLowerCase();
+    });
+  }
+
+  getSoldCarts(channel: string, from: string, to: string) {
     this.isLoading = true;
-    this.report.getSoldCarts(toSqlDate(new Date()), toSqlDate(new Date()), 'retail').then(data => {
+    this.report.getSoldCarts(from, to, channel).then(data => {
       this.isLoading = false;
       if (data && Array.isArray(data) && data.length > 0) {
         this.carts = new MatTableDataSource(data);
@@ -53,6 +75,22 @@ export class CartReportComponent implements OnInit {
 
   exportReport() {
     // console.log(this.stocks);
-    json2Csv(this.cartColumns, this.carts.data).then(console.log);
+    json2Csv(this.cartColumns, this.carts.filteredData).then(console.log);
   }
+
+  private _dateRangeListener() {
+    this.startDateFormControl.valueChanges.subscribe(value => {
+      this.startDate = toSqlDate(value);
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+    this.endDateFormControl.valueChanges.subscribe(value => {
+      this.endDate = toSqlDate(value);
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+    this.channelFormControl.valueChanges.subscribe(value => {
+      this.channel = value;
+      this.getSoldCarts(this.channel, this.startDate, this.endDate);
+    });
+  }
+
 }
