@@ -1,4 +1,4 @@
-<mat-sidenav-container  class="match-parent">
+<mat-sidenav-container class="match-parent">
   <mat-sidenav class="match-parent-side"
                [fixedInViewport]="true"
                #sidenav
@@ -11,56 +11,48 @@
     <app-toolbar [heading]=""
                  [sidenav]="sidenav"
                  [showProgress]="false"
-                  [backLink]="'/settings'"
+                 [backLink]="'/settings'"
                  [hasBackRoute]="isMobile">
     </app-toolbar>
 
     <div class="container my-billing-wrapper">
 
-      <h4 class="my-billing-title">
-        Billing
-      </h4>
+      <div class="col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0">
 
-      <div class="">
+        <div>
+          <p style="padding: 10px 0">
+            Your Billing
+          </p>
+        </div>
+
         <div class="row" style="margin-bottom: 16px">
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Payment Number
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">0235 2344 5406</span>
-            </mat-card-content>
-          </mat-card>
+          <div class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="refNumber" [title]="'Reference Number'"
+                           [height]="250"
+                           [description]="'Your payment reference number'">
+              <ng-template #refNumber>
+                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
+                  <span style="font-size: 30px; text-space: 2px">
+                    {{referenceNumber}}
+                  </span>
+                </div>
+              </ng-template>
+            </app-dash-card>
+          </div>
 
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Amount Due
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">{{0 | currency: 'TZS '}}</span>
-            </mat-card-content>
-          </mat-card>
-
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Uninvoiced balance
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">{{5000 | currency: 'TZS '}}</span>
-            </mat-card-content>
-          </mat-card>
+          <div class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="dueBalance" [title]="'Due Balance'"
+                           [height]="250"
+                           [description]="'Your overdue bill if its value its negative means you have an excess credit'">
+              <ng-template #dueBalance>
+                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
+                  <span style="font-size: 30px; text-space: 2px">
+                    {{dueBill | currency:'TZS '}}
+                  </span>
+                </div>
+              </ng-template>
+            </app-dash-card>
+          </div>
         </div>
 
         <div style="margin-bottom: 16px" class="row">
@@ -92,22 +84,22 @@
           <!--            PAYPAL PAYMENT-->
           <!--          </button>-->
         </div>
-      </div>
 
-      <mat-tab-group>
-        <mat-tab label="Invoices">
-          <app-billing-invoices></app-billing-invoices>
-        </mat-tab>
-        <mat-tab label="Receipts">
-          <app-billing-receipts></app-billing-receipts>
-        </mat-tab>
-      </mat-tab-group>
+        <div class="row">
+          <mat-tab-group>
+            <mat-tab label="Invoices">
+              <app-billing-invoices></app-billing-invoices>
+            </mat-tab>
+            <mat-tab label="Receipts">
+              <app-billing-receipts></app-billing-receipts>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
 
     </div>
 
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-<!--<app-billing-mobile *ngIf="isMobile"></app-billing-mobile>-->
 

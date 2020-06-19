@@ -26,11 +26,10 @@ import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {DateRangeHeaderComponent} from './date-range-header/date-range-header.component';
 import {DateRangeComponent} from './date-range/date-range.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {DashCardComponent} from './dash-card/dash-card.component';
 import {TotalGrossSaleComponent} from './total-gross-sale/total-gross-sale.component';
 import {StockStatusComponent} from './stock-status/stock-status.component';
-import { StockByCategoryComponent } from './stock-by-category/stock-by-category.component';
-import { StockExpiredComponent } from './stock-expired/stock-expired.component';
+import {StockByCategoryComponent} from './stock-by-category/stock-by-category.component';
+import {StockExpiredComponent} from './stock-expired/stock-expired.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { StockExpiredComponent } from './stock-expired/stock-expired.component';
     TotalSalesComponent,
     DateRangeHeaderComponent,
     DateRangeComponent,
-    DashCardComponent,
     TotalGrossSaleComponent,
     StockStatusComponent,
     StockByCategoryComponent,

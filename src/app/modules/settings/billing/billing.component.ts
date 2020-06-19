@@ -14,6 +14,9 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   isMobilePay = true;
   amountFormControl = new FormControl(0);
   isMobile = environment.android;
+  referenceNumber: string;
+  getReferenceNumberFlag = false;
+  dueBill: number;
 
   constructor(private readonly billingApi: BillingApiService) {
     super();
@@ -26,18 +29,21 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   }
 
   getPaymentReference() {
+    this.getReferenceNumberFlag = true;
     this.billingApi.getPaymentReference().then(value => {
-      console.log('payment reference', value);
-    }).catch(reason => {
-      console.log(reason);
+      this.getReferenceNumberFlag = false;
+      this.referenceNumber = value;
+    }).catch(_ => {
+      this.getReferenceNumberFlag = false;
     });
   }
 
   getDueBalance() {
     this.billingApi.getDueBalance('TZS').then(value => {
-      console.log('due balance', value);
-    }).catch(reason => {
-      console.log(reason);
+      const CR = value.CR;
+      const DR = value.DR.map(due => due.total).reduce((a, b) => a + b, 0);
+      this.dueBill = DR - CR;
+    }).catch(_ => {
     });
   }
 
