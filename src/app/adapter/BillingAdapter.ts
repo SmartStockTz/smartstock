@@ -1,7 +1,7 @@
 export interface BillingAdapter {
-  getDueBalance(currency: 'TZS' | 'USD'): Promise<number>;
+  getDueBalance(currency: 'TZS' | 'USD'): Promise<any>;
 
-  getUnInvoicesBalance(currency: 'TZS' | 'USD'): Promise<number>;
+  getUnInvoicesBalance(currency: 'TZS' | 'USD'): Promise<any>;
 }
 
 export interface ShopModel {
