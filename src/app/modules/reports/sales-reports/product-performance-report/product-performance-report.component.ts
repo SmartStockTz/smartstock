@@ -49,6 +49,7 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private readonly router: Router,
               private readonly indexDb: StorageService,
               private readonly snack: MatSnackBar,
@@ -82,11 +83,10 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   private _getProductReport(channel: string, from: string, to: string) {
     this.isLoading = true; // begin fetching data
     this.productPerformanceFetchProgress = true;
-    console.log('from: ' + from + ' to: ' + to)
+    // console.log('from: ' + from + ' to: ' + to);
     this._report.getProductPerformanceReport(channel, from, to).then(data => {
       this.isLoading = false;
       this.noDataRetrieved = false; // loading is done and some data is received
-
       this.productPerformanceReport = data.length > 0 ? data[0].total : 0;
       this.productPerformanceDatasource = new MatTableDataSource(data);
       this.productPerformanceDatasource.paginator = this.paginator;
@@ -95,7 +95,6 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
     }).catch(reason => {
       this.isLoading = false;
       this.noDataRetrieved = true;
-
       this.productPerformanceReport = 0;
       this.snack.open('Fails to get product performance report', 'Ok', {
         duration: 3000
