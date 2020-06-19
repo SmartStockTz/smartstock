@@ -5,7 +5,7 @@ export interface AdminReportAdapter {
 
   getTotalCostOfGoodSold(beginDate: Date, endDate: Date): Promise<{ total: number }[]>;
 
-  getSalesTrend(beginDate: Date, endDate: Date): Promise<any>;
+  getSalesTrend(beginDate: string, endDate: string): Promise<any>;
 
   getFrequentlySoldProducts(beginDate: Date, endDate: Date): Promise<any>;
 
