@@ -11,6 +11,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AdminDashboardService} from 'src/app/services/admin-dashboard.service';
 import {toSqlDate} from 'src/app/utils/date';
 import {DeviceInfo} from '../../../shared/DeviceInfo';
+import {MatSort} from '@angular/material/sort';
 
 
 export interface ProductPerformanceI {
@@ -37,10 +38,17 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   startDateFormControl = new FormControl('', [Validators.nullValidator]);
   endDateFormControl = new FormControl('', [Validators.nullValidator]);
   channelFormControl = new FormControl('', [Validators.nullValidator]);
+  filterFormControl = new FormControl('', [Validators.nullValidator]);
+
   startDate;
   endDate;
   channel = 'retail';
   productPerformanceReport: any;
+  isLoading = false;
+  noDataRetrieved = true;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private readonly router: Router,
               private readonly indexDb: StorageService,
@@ -56,27 +64,38 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   units: Observable<UnitsI[]>;
   productPerformanceDatasource: MatTableDataSource<ProductPerformanceI>;
   stockColumns = ['product', 'quantitySold', 'firstSold', 'lastSold', 'costOfGoodSold', 'grossProfit'];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
   ngOnInit() {
     this.channelFormControl.setValue('retail');
+    this.startDate = toSqlDate(new Date());
+    this.endDate = toSqlDate(new Date());
+
     this._getProductReport(this.channel, this.startDate, this.endDate);
     this._dateRangeListener();
+
+    this.filterFormControl.valueChanges.subscribe(filterValue => {
+      this.productPerformanceDatasource.filter = filterValue.trim().toLowerCase();
+    });
   }
 
 
   private _getProductReport(channel: string, from: string, to: string) {
+    this.isLoading = true; // begin fetching data
     this.productPerformanceFetchProgress = true;
+    // console.log('from: ' + from + ' to: ' + to);
     this._report.getProductPerformanceReport(channel, from, to).then(data => {
+      this.isLoading = false;
+      this.noDataRetrieved = false; // loading is done and some data is received
       this.productPerformanceReport = data.length > 0 ? data[0].total : 0;
-      // console.log(data);
       this.productPerformanceDatasource = new MatTableDataSource(data);
       this.productPerformanceDatasource.paginator = this.paginator;
+      this.productPerformanceDatasource.sort = this.sort;
       this.productPerformanceFetchProgress = false;
     }).catch(reason => {
+      this.isLoading = false;
+      this.noDataRetrieved = true;
       this.productPerformanceReport = 0;
-      // console.log(reason);
       this.snack.open('Fails to get product performance report', 'Ok', {
         duration: 3000
       });

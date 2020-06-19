@@ -1,10 +1,13 @@
 <div>
   <mat-card class="mat-elevation-z3">
-    <div style="display: flex; flex-flow: row; align-items: center">
+    <div style="display: flex; flex-flow: row; align-items: center; margin-right: 100px;">
       <h6 class="col-8">Expired</h6>
 
       <span style="flex-grow: 1"></span>
-
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput [formControl]="filterFormControl" placeholder="Eg. Piriton">
+      </mat-form-field>
       <button [mat-menu-trigger-for]="exportMenu" mat-icon-button>
         <mat-icon>more_vert</mat-icon>
       </button>

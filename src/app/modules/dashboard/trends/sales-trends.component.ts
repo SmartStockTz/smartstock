@@ -18,6 +18,8 @@ export class SalesTrendsComponent implements OnInit {
   salesByDayTrendProgress = false;
   trendChart: Highcharts.Chart = undefined;
 
+  isLoading = false;
+  noDataRetrieved = true;
   constructor(private readonly _report: AdminDashboardService) {
   }
 
@@ -40,14 +42,19 @@ export class SalesTrendsComponent implements OnInit {
   }
 
   private _getSalesTrend(from: string, to: string) {
-    // this.salesByDayTrendProgress = true;
-    // this._report.getSalesTrend(from, to).then(value => {
-    //   this.initiateGraph(value);
-    //   this.salesByDayTrendProgress = false;
-    // }).catch(reason => {
-    //   console.log(reason);
-    //   this.salesByDayTrendProgress = false;
-    // });
+    this.isLoading = true;
+    this.salesByDayTrendProgress = true;
+    this._report.getSalesTrend(from, to).then(value => {
+      this.isLoading = false;
+      this.noDataRetrieved = false;
+      this.initiateGraph(value);
+      this.salesByDayTrendProgress = false;
+    }).catch(reason => {
+      this.isLoading = false;
+      this.noDataRetrieved = true;
+      // console.log(reason);
+      this.salesByDayTrendProgress = false;
+    });
   }
 
   private initiateGraph(data: any) {
