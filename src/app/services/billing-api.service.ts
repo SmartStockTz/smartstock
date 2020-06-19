@@ -20,4 +20,10 @@ export class BillingApiService implements BillingAdapter {
     const owner = await this.storage.getActiveUser();
     return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/unInvoicedBalance`).get();
   }
+
+  async getPaymentReference(): Promise<any> {
+    const owner = await this.storage.getActiveUser();
+    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/referenceNumber`).get();
+  }
+
 }

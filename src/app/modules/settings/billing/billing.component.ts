@@ -22,11 +22,20 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   ngOnInit() {
     this.getDueBalance();
     this.getUnInvoicedBalance();
+    this.getPaymentReference();
+  }
+
+  getPaymentReference() {
+    this.billingApi.getPaymentReference().then(value => {
+      console.log('payment reference', value);
+    }).catch(reason => {
+      console.log(reason);
+    });
   }
 
   getDueBalance() {
     this.billingApi.getDueBalance('TZS').then(value => {
-      console.log(value);
+      console.log('due balance', value);
     }).catch(reason => {
       console.log(reason);
     });
@@ -34,7 +43,7 @@ export class BillingComponent extends DeviceInfo implements OnInit {
 
   getUnInvoicedBalance() {
     this.billingApi.getUnInvoicesBalance('TZS').then(value => {
-      console.log(value);
+      console.log('unInvoiced balance', value);
     }).catch(reason => {
       console.log(reason);
     });
