@@ -4,6 +4,8 @@ import {FormControl} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {BillingApiService} from '../../../services/billing-api.service';
 import {LogService} from '../../../services/log.service';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MobilePayDetailsComponent} from '../mobile-pay-details/mobile-pay-details.component';
 
 @Component({
   selector: 'app-billing',
@@ -22,6 +24,7 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   unInvoicedBalance: number;
 
   constructor(private readonly billingApi: BillingApiService,
+              private readonly bottomSheet: MatBottomSheet,
               private readonly logger: LogService) {
     super();
   }
@@ -68,6 +71,13 @@ export class BillingComponent extends DeviceInfo implements OnInit {
   }
 
   mobilePay() {
-
+    this.bottomSheet.open(MobilePayDetailsComponent, {
+      autoFocus: true,
+      closeOnNavigation: false,
+      data: {
+        ref: this.referenceNumber,
+        amount: this.dueBill
+      }
+    });
   }
 }

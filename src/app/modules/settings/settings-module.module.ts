@@ -34,6 +34,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
 import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
+import { MobilePayDetailsComponent } from './mobile-pay-details/mobile-pay-details.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -45,34 +47,36 @@ import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.m
     DialogUserNewComponent,
     UpdateUserPasswordDialogComponent,
     BillingComponent,
+    MobilePayDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    SettingsModuleRoutingModule,
-    MatSidenavModule,
-    CommonComponentsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatRippleModule,
-    MatDividerModule,
-    MatRadioModule,
-    FormsModule,
-    MobileUiModule,
-    SharedWithMobileModule
-  ],
+    imports: [
+        CommonModule,
+        SettingsModuleRoutingModule,
+        MatSidenavModule,
+        CommonComponentsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTabsModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTableModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatRippleModule,
+        MatDividerModule,
+        MatRadioModule,
+        FormsModule,
+        MobileUiModule,
+        SharedWithMobileModule,
+        MatListModule
+    ],
   entryComponents: [
     DialogUserNewComponent,
     DialogUserDeleteComponent,

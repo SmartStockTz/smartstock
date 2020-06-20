@@ -4,6 +4,10 @@ export interface BillingAdapter {
   getUnInvoicesBalance(currency: 'TZS' | 'USD'): Promise<any>;
 
   getPaymentReference(): Promise<any>;
+
+  getReceipt(): Promise<any>;
+
+  getInvoices(): Promise<any>;
 }
 
 export interface ShopModel {

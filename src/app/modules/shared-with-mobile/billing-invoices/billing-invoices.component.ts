@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-billing-invoices',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./billing-invoices.component.css']
 })
 export class BillingInvoicesComponent implements OnInit {
+  invoices: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

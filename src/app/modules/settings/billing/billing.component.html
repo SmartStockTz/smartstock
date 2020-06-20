@@ -61,20 +61,22 @@
           </div>
         </div>
 
-        <div>
-          <p style="padding: 10px 0">
-            Payments
-          </p>
-        </div>
+        <div *ngIf="dueBill && dueBill<0">
+          <div>
+            <p style="padding: 10px 0">
+              Payments
+            </p>
+          </div>
 
-        <div style="margin-bottom: 16px" class="row">
-          <button (click)="mobilePay()" mat-flat-button class="ft-button" color="primary">
-            Mobile Pay
-          </button>
+          <div style="margin-bottom: 16px" class="row">
+            <button (click)="mobilePay()" mat-flat-button class="ft-button" color="primary">
+              Mobile Pay
+            </button>
+          </div>
         </div>
 
         <div class="row" style="margin-bottom: 16px">
-          <mat-tab-group>
+          <mat-tab-group style="width: 100%">
             <mat-tab label="Invoices">
               <app-billing-invoices></app-billing-invoices>
             </mat-tab>

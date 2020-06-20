@@ -1,3 +1,9 @@
-<mat-card class="mat-elevation-z0">
-
+<mat-card>
+  <mat-list>
+    <mat-list-item *ngFor="let invoice of invoices">
+      <h1 matLine>{{invoice.receipt}}</h1>
+      <p matLine>{{invoice.amount}}</p>
+      <p matSuffix>{{invoice.date | date}}</p>
+    </mat-list-item>
+  </mat-list>
 </mat-card>
