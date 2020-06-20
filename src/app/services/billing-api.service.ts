@@ -26,7 +26,7 @@ export class BillingApiService implements BillingAdapter {
     return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/referenceNumber`).get();
   }
 
-  async getInvoices(): Promise<any> {
+  async getInvoices(): Promise<{ businessName: string, invoice: {}[] }> {
     const owner = await this.storage.getActiveUser();
     return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/invoices`).get();
   }

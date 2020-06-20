@@ -4,3 +4,9 @@ export interface PaymentModel {
   amount: number;
   objectId: string;
 }
+
+export interface InvoiceModel {
+  amount: number;
+  date: string;
+  name: string;
+}
