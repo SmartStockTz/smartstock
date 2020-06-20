@@ -15,77 +15,65 @@
                  [hasBackRoute]="isMobile">
     </app-toolbar>
 
-    <div class="container my-billing-wrapper">
+    <div [ngClass]="isMobile?'container-fluid':'container my-billing-wrapper'">
 
-      <div class="col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0">
+      <div [ngClass]="isMobile?'col-12':'col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0'">
 
         <div>
           <p style="padding: 10px 0">
-            Your Billing
+            Billing
           </p>
         </div>
 
         <div class="row" style="margin-bottom: 16px">
-          <div class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
-            <app-dash-card [content]="refNumber" [title]="'Reference Number'"
+          <div style="margin-bottom: 8px" class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="dueBalance" [title]="'Balance'"
                            [height]="250"
-                           [description]="'Your payment reference number'">
-              <ng-template #refNumber>
-                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
-                  <span style="font-size: 30px; text-space: 2px">
-                    {{referenceNumber}}
-                  </span>
-                </div>
-              </ng-template>
-            </app-dash-card>
-          </div>
-
-          <div class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
-            <app-dash-card [content]="dueBalance" [title]="'Due Balance'"
-                           [height]="250"
-                           [description]="'Your overdue bill if its value its negative means you have an excess credit'">
+                           [description]="'If bill is negative means you have un paid invoices'">
               <ng-template #dueBalance>
                 <div style="display: flex; height: 100%; justify-content: center; align-items: center">
-                  <span style="font-size: 30px; text-space: 2px">
+                  <span *ngIf="!getDueBalanceFlag" style="font-size: 30px; text-space: 2px">
                     {{dueBill | currency:'TZS '}}
                   </span>
+                  <app-data-not-ready *ngIf="getDueBalanceFlag" [isLoading]="getDueBalanceFlag"
+                                      [height]="100"
+                                      [width]="100"></app-data-not-ready>
                 </div>
               </ng-template>
             </app-dash-card>
           </div>
+          <div style="margin-bottom: 8px" class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="unInvoiced" [title]="'Un Invoiced'"
+                           [height]="250"
+                           [description]="'Your usage cost before billed, ' +
+                            'this is approximation actual cost will be billed end of the month'">
+              <ng-template #unInvoiced>
+                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
+                  <span *ngIf="!getUnInvoicedBalanceFlag" style="font-size: 30px; text-space: 2px">
+                    {{unInvoicedBalance | currency:'TZS '}}
+                  </span>
+                  <app-data-not-ready *ngIf="getUnInvoicedBalanceFlag" [isLoading]="getUnInvoicedBalanceFlag"
+                                      [height]="100"
+                                      [width]="100"></app-data-not-ready>
+                </div>
+              </ng-template>
+            </app-dash-card>
+          </div>
+        </div>
+
+        <div>
+          <p style="padding: 10px 0">
+            Payments
+          </p>
         </div>
 
         <div style="margin-bottom: 16px" class="row">
-          <div class="btn-block">
-            <!--            <mat-radio-group>-->
-            <mat-radio-button (change)="togglePay($event)"
-                              style="margin-right: 10px; margin-bottom: 10px" color="primary"
-                              labelPosition="after"
-                              name="mobile"
-                              [checked]="isMobilePay">
-              Mobile Payment
-            </mat-radio-button>
-            <!--            <mat-radio-button (change)="togglePay($event)" color="primary" labelPosition="after"-->
-            <!--                              name="paypal" [checked]="!isMobilePay">-->
-            <!--              PayPal-->
-            <!--            </mat-radio-button>-->
-            <!--            &lt;!&ndash;            </mat-radio-group>&ndash;&gt;-->
-          </div>
-          <!--          <div *ngIf="!isMobilePay" class="btn-block">-->
-          <!--            <mat-form-field appearance="outline">-->
-          <!--              <mat-label>Enter Amount</mat-label>-->
-          <!--              <input matInput type="number" [formControl]="amountFormControl" min="0" placeholder="Enter Amount">-->
-          <!--            </mat-form-field>-->
-          <!--          </div>-->
-          <button *ngIf="isMobilePay" mat-flat-button class="ft-button" color="primary">
-            MAKE PAYMENT
+          <button (click)="mobilePay()" mat-flat-button class="ft-button" color="primary">
+            Mobile Pay
           </button>
-          <!--          <button *ngIf="!isMobilePay" mat-flat-button class="ft-button" color="primary">-->
-          <!--            PAYPAL PAYMENT-->
-          <!--          </button>-->
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 16px">
           <mat-tab-group>
             <mat-tab label="Invoices">
               <app-billing-invoices></app-billing-invoices>

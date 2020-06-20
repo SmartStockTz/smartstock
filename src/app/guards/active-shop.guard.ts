@@ -26,7 +26,6 @@ export class ActiveShopGuard implements CanActivate {
           reject(false);
         }
       } catch (e) {
-        console.log(e);
         window.dispatchEvent(new Event(SsmEvents.ACTIVE_SHOP_REMOVE));
         this._router.navigateByUrl('/shop').catch(reason => console.log(reason));
         reject(false);
