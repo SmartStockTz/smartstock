@@ -1,8 +1,8 @@
 {
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
-  "author": "Fahamu Tech",
-  "version": "20.6.7",
+  "author": "FahamuTech",
+  "version": "20.6.8",
   "main": "./index.js",
   "build": {
     "appId": "com.fahamutech.smartstock",
