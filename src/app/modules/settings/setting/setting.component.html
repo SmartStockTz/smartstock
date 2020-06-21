@@ -1,4 +1,4 @@
-<mat-sidenav-container  class="match-parent">
+<mat-sidenav-container class="match-parent">
   <mat-sidenav class="match-parent-side"
                [fixedInViewport]="true"
                #sidenav
@@ -8,7 +8,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [heading]=""
+    <app-toolbar [heading]="'General'"
                  [sidenav]="sidenav"
                  [hasBackRoute]="isMobile"
                  [backLink]="'/settings'"

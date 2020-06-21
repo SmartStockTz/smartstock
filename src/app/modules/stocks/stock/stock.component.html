@@ -7,21 +7,20 @@
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
 
-    <div>
-      <app-toolbar [heading]="'Stock'"
-                   [showSearch]="true"
-                   [searchPlaceholder]="'Type to search'"
-                   (searchCallback)="handleSearch($event)"
-                   [sidenav]="sidenav"
-                   [showProgress]="showProgress">
-      </app-toolbar>
+    <app-toolbar [heading]="'Stock'"
+                 [showSearch]="!isMobile"
+                 [searchPlaceholder]="'Type to search'"
+                 (searchCallback)="handleSearch($event)"
+                 [sidenav]="sidenav"
+                 [showProgress]="showProgress">
+    </app-toolbar>
+
+    <div *ngIf="!isMobile">
 
       <div class="container">
-
         <div class="row" style="margin: 16px">
-
           <div class="full-width col-12">
             <mat-tab-group [selectedIndex]="selectedTab" color="primary">
               <mat-tab label="Products">
@@ -168,18 +167,16 @@
               </mat-tab>
             </mat-tab-group>
           </div>
-
         </div>
-
       </div>
+
     </div>
+
+    <app-stock-mobile *ngIf="isMobile"></app-stock-mobile>
+
+    <app-bottom-bar *ngIf="isMobile && !enoughWidth()"></app-bottom-bar>
 
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-<!--<div *ngIf="isMobile">-->
-<!--  <app-stock-mobile *ngIf="isMobile"></app-stock-mobile>-->
-<!--</div>-->
-
 

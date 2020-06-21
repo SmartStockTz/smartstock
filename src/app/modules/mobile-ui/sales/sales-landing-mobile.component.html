@@ -4,37 +4,32 @@
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
     <app-toolbar [heading]="'Sale'" [sidenav]="sidenav"></app-toolbar>
     <div style="margin-top: 16px">
       <mat-card-subtitle>Manage</mat-card-subtitle>
       <mat-list>
-        <mat-list-item matRipple routerLink="/sale/retail">
-          <mat-icon color="primary" matListIcon>shopping_cart</mat-icon>
-          <h4 matLine>Retail</h4>
-          <p matLine> manage retail sales</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item matRipple routerLink="/sale/whole">
-          <mat-icon color="primary" matListIcon>local_shipping</mat-icon>
-          <h4 matLine>WholeSale</h4>
-          <p matLine>manage whole sales</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-<!--        <mat-list-item matRipple routerLink="/sale">-->
-<!--          <mat-icon color="primary" matListIcon>equalizer</mat-icon>-->
-<!--          <h4 matLine>Report</h4>-->
-<!--          <p matLine>{{currentUser ? currentUser.username : ''}}'s landing report</p>-->
-<!--        </mat-list-item>-->
-<!--        <mat-divider></mat-divider>-->
+
+        <div *ngIf="shop && (shop.settings.allowRetail===undefined?true:shop.settings.allowRetail)">
+          <mat-list-item matRipple routerLink="/sale/retail">
+            <mat-icon color="primary" matListIcon>shopping_cart</mat-icon>
+            <h4 matLine>Retail</h4>
+            <p matLine> manage retail sales</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+
+        <div *ngIf="shop && (shop.settings.allowWholesale===undefined?true:shop.settings.allowWholesale)">
+          <mat-list-item matRipple routerLink="/sale/whole">
+            <mat-icon color="primary" matListIcon>local_shipping</mat-icon>
+            <h4 matLine>WholeSale</h4>
+            <p matLine>manage whole sales</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+
       </mat-list>
     </div>
-
-    <!--    <div style="margin-top: 16px">-->
-    <!--      <mat-card-subtitle>{{currentUser ? currentUser.username + '\'s' : ''}} quick landing reports</mat-card-subtitle>-->
-    <!--      <app-sale-report></app-sale-report>-->
-    <!--    </div>-->
-
     <app-bottom-bar></app-bottom-bar>
   </mat-sidenav-content>
 

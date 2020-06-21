@@ -7,11 +7,9 @@ import {StockProductsMobileUiComponent} from '../mobile-ui/stock-products-mobile
 import {CategoriesMobileUiComponent} from '../mobile-ui/categories-mobile-ui/categories-mobile-ui.component';
 import {SuppliersMobileUiComponent} from '../mobile-ui/suppliers-mobile-ui/suppliers-mobile-ui.component';
 import {UnitsMobileUiComponent} from '../mobile-ui/units-mobile-ui/units-mobile-ui.component';
-import {environment} from '../../../environments/environment';
-import {StockMobileComponent} from '../mobile-ui/stocks/stock-mobile.component';
 
 const routes: Routes = [
-  {path: '', component: environment.android ? StockMobileComponent : StockComponent},
+  {path: '', component: StockComponent},
   {path: 'products', component: StockProductsMobileUiComponent},
   {path: 'categories', component: CategoriesMobileUiComponent},
   {path: 'suppliers', component: SuppliersMobileUiComponent},

@@ -9,10 +9,12 @@
       <app-admin-drawer></app-admin-drawer>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <app-toolbar [heading]="'Dashboard'" [sidenav]="sidenav" [showProgress]="false"></app-toolbar>
+    <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
 
-      <div [ngStyle]="{padding: (isMobile || !enoughWidth())?'24px 0':'24px 16px'}"
+      <app-toolbar [heading]="'Dashboard'" [sidenav]="sidenav"
+                   [showProgress]="false"></app-toolbar>
+
+      <div [ngStyle]="{padding: (isMobile || !enoughWidth())?'24px 0':'24px 16px', marginBottom: '24px'}"
            [ngClass]="(isMobile || !enoughWidth())?'container-fluid':'container'">
         <div class="col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0">
           <app-current-shop (dateSelected)="dateSelected($event)"></app-current-shop>
@@ -22,7 +24,6 @@
           <div class="row">
             <div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
               <app-dash-card [title]="'Total Sales'"
-                             [reportLink]="'/report/sales'"
                              [content]="totalSaleComponent"
                              description="Total sale over specified period">
                 <ng-template #totalSaleComponent>
@@ -32,7 +33,6 @@
             </div>
             <div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
               <app-dash-card [title]="'Gross Profit'"
-                             [reportLink]="'/report/sales'"
                              [content]="totalGrossProfit"
                              description="Total gross profit over specified period">
                 <ng-template #totalGrossProfit>
@@ -84,7 +84,8 @@
 
         </div>
       </div>
+
+      <app-bottom-bar *ngIf="isMobile && !enoughWidth()"></app-bottom-bar>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <app-bottom-bar *ngIf="isMobile"></app-bottom-bar>
 </div>

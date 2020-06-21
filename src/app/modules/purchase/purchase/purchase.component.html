@@ -1,10 +1,10 @@
-<mat-sidenav-container *ngIf="!isMobile" class="match-parent">
+<mat-sidenav-container>
 
   <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
     <app-admin-drawer></app-admin-drawer>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
     <app-toolbar [heading]="'Purchases'"
                  (searchCallback)="handleSearch($event)"
                  [showSearch]="true"
@@ -12,10 +12,9 @@
                  [sidenav]="sidenav" [showProgress]="false">
     </app-toolbar>
 
-    <div style="margin-top: 16px" class="container">
+    <div *ngIf="!isMobile" style="margin-top: 16px" class="container">
       <mat-tab-group color="primary">
         <mat-tab label="All">
-
           <mat-card class="mat-elevation-z0">
             <mat-card-title class="d-flex flex-row flex-nowrap">
               <button routerLink="/purchase/create" mat-flat-button color="primary" class="ft-button">Add Purchase
@@ -95,256 +94,13 @@
           </mat-card>
 
         </mat-tab>
-        <!--        <mat-tab label="Invoices">-->
-        <!--          <app-purchases-invoice></app-purchases-invoice>-->
-        <!--        </mat-tab>-->
-        <!--        <mat-tab label="Receipts">-->
-        <!--          <app-purchases-receipts></app-purchases-receipts>-->
-        <!--        </mat-tab>-->
       </mat-tab-group>
-      <!--      <div class="row" style="margin: 16px">-->
-
-      <!--        <div class="col-12">-->
-      <!--          <mat-form-field class="my-input">-->
-      <!--            <input type="text" placeholder="Product Name" matInput [formControl]="productNameControlInput"-->
-      <!--                   [matAutocomplete]="auto">-->
-      <!--            <mat-autocomplete #auto="matAutocomplete">-->
-      <!--              <mat-option *ngFor="let purchaseP of purchaseProducts | async" [value]="purchaseP.product"-->
-      <!--                          (onSelectionChange)="updateSelectedPurchase(purchaseP)">-->
-      <!--                {{purchaseP.product}}-->
-      <!--              </mat-option>-->
-      <!--            </mat-autocomplete>-->
-      <!--          </mat-form-field>-->
-      <!--        </div>-->
-
-      <!--        <mat-card class="full-width col-lg-4 col-sm-12 col-md-6 col-xl-4 col-12" style="margin-bottom: 16px">-->
-      <!--          <mat-form-field class="my-input">-->
-      <!--            <input matInput [matDatepicker]="pickerPurchase" placeholder="Purchase Date"-->
-      <!--                   [formControl]="purchaseDateControlInput">-->
-      <!--            <mat-datepicker-toggle matSuffix [for]="pickerPurchase"></mat-datepicker-toggle>-->
-      <!--            <mat-datepicker #pickerPurchase></mat-datepicker>-->
-      <!--          </mat-form-field>-->
-      <!--          <mat-form-field class="my-input">-->
-      <!--            <input matInput [matDatepicker]="pickerDue" placeholder="Due Date" [formControl]="dueDateControlInput">-->
-      <!--            <mat-datepicker-toggle matSuffix [for]="pickerDue"></mat-datepicker-toggle>-->
-      <!--            <mat-datepicker #pickerDue></mat-datepicker>-->
-      <!--          </mat-form-field>-->
-      <!--          <mat-card-content>-->
-
-      <!--            <mat-form-field class="my-input" *ngIf="!showCreditPurchase">-->
-      <!--              <input type="text" placeholder="Receipt#" matInput [formControl]="receipNumberControlInput"-->
-      <!--                     [matAutocomplete]="autoReceipts">-->
-      <!--              <mat-autocomplete #autoReceipts="matAutocomplete">-->
-      <!--                <mat-option *ngFor="let receipt of receipts | async" [value]="receipt.reference">-->
-      <!--                  {{receipt.reference}}-->
-      <!--                </mat-option>-->
-      <!--              </mat-autocomplete>-->
-      <!--            </mat-form-field>-->
-
-      <!--            <mat-form-field class="my-input" *ngIf="showCreditPurchase">-->
-      <!--              <input type="text" placeholder="Invoice#" matInput [formControl]="invoiceNumberControlInput"-->
-      <!--                     [matAutocomplete]="autoReceipts">-->
-      <!--              <mat-autocomplete #autoReceipts="matAutocomplete">-->
-      <!--                <mat-option *ngFor="let receipt of receipts | async" [value]="receipt.reference">-->
-      <!--                  {{receipt.reference}}-->
-      <!--                </mat-option>-->
-      <!--              </mat-autocomplete>-->
-      <!--            </mat-form-field>-->
-
-      <!--            <mat-form-field class="my-input">-->
-      <!--              <input type="text" placeholder="Supplier" matInput [formControl]="supplierControlInput"-->
-      <!--                     [matAutocomplete]="autoSupplier">-->
-      <!--              <mat-autocomplete #autoSupplier="matAutocomplete">-->
-      <!--                <mat-option *ngFor="let supplier of suppliers-mobile-ui | async" [value]="supplier.name">-->
-      <!--                  {{supplier.name}}-->
-      <!--                </mat-option>-->
-      <!--              </mat-autocomplete>-->
-      <!--            </mat-form-field>-->
-
-      <!--            <mat-slide-toggle style="margin-top: 16px; bottom: 16px" [formControl]="creditPurchaseButton">Credit-->
-      <!--              Purchase?-->
-      <!--            </mat-slide-toggle>-->
-
-      <!--            <mat-form-field class="my-input">-->
-      <!--              <input matInput type="number" placeholder="Quantity" [formControl]="quantityControlInput" required>-->
-      <!--            </mat-form-field>-->
-      <!--            <mat-form-field class="my-input">-->
-      <!--              <input matInput type="number" placeholder="Purchase Price ( TZS )"-->
-      <!--                     [formControl]="purchasePriceControlInput">-->
-      <!--            </mat-form-field>-->
-
-      <!--            <mat-form-field class="my-input">-->
-      <!--              <input matInput [matDatepicker]="picker" placeholder="Expire Date" [formControl]="expireDateControlInput">-->
-      <!--              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-      <!--              <mat-datepicker #picker></mat-datepicker>-->
-      <!--            </mat-form-field>-->
-
-      <!--            <button *ngIf="!showProgress" mat-raised-button color="primary" class="space my-input rounded"-->
-      <!--                    (click)="addPurchaseToCart()">-->
-      <!--              <mat-icon>-->
-      <!--                add_shopping_cart-->
-      <!--              </mat-icon>-->
-      <!--              Add To Cart-->
-      <!--            </button>-->
-
-      <!--            <mat-card-subtitle>Retail Profit ( TZS )</mat-card-subtitle>-->
-      <!--            <mat-card-title>{{showRetailProfit}}</mat-card-title>-->
-
-      <!--            <mat-card-subtitle>Wholesale Profit ( TZS )</mat-card-subtitle>-->
-      <!--            <mat-card-title>{{wholesaleProfit}}</mat-card-title>-->
-
-      <!--          </mat-card-content>-->
-      <!--        </mat-card>-->
-
-      <!--        <div class="full-width col-lg-8 col-sm-12 col-md-6 col-xl-8 col-12">-->
-      <!--          <mat-tab-group color="warn" backgroundColor="primary">-->
-
-      <!--            <mat-tab label="Cart">-->
-      <!--              <div>-->
-      <!--                <table mat-table [dataSource]="purchaseDatasource" class=" mat-elevation-z8">-->
-      <!--                  <ng-container matColumnDef="product">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Product</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.product}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="date">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Date</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.date}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="due">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Due</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.due}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="reference">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Reference</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.reference}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="quantity">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Quantity</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.quantity}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="amount">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Amount</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef><b>{{totalPurchase| currency:'TZS':'code'}}</b></td>-->
-      <!--                  </ng-container>-->
-
-      <!--                  <ng-container matColumnDef="action">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Action</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">-->
-      <!--                      <div class="row">-->
-      <!--                        &lt;!&ndash;<div class="col-6">&ndash;&gt;-->
-      <!--                        &lt;!&ndash;<button mat-icon-button (click)="editStock(element)">&ndash;&gt;-->
-      <!--                        &lt;!&ndash;<mat-icon color="primary">edit</mat-icon>&ndash;&gt;-->
-      <!--                        &lt;!&ndash;</button>&ndash;&gt;-->
-      <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-      <!--                        <div class="col-12">-->
-      <!--                          <button mat-icon-button (click)="removePurchaseFromCart(element)">-->
-      <!--                            <mat-icon color="primary">delete</mat-icon>-->
-      <!--                          </button>-->
-      <!--                        </div>-->
-      <!--                      </div>-->
-      <!--                    </td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef>-->
-      <!--                      <div *ngIf="!showProgress">-->
-      <!--                        <button mat-button color="primary" *ngIf="purchaseDatasourceArray.length>0"-->
-      <!--                                (click)="submitPurchase()">Purchase-->
-      <!--                        </button>-->
-      <!--                      </div>-->
-      <!--                    </td>-->
-      <!--                  </ng-container>-->
-
-      <!--                  <tr mat-header-row *matHeaderRowDef="purchaseColums"></tr>-->
-      <!--                  <tr mat-row *matRowDef="let row; columns: purchaseColums;"></tr>-->
-      <!--                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="purchaseColums"></tr>-->
-
-      <!--                </table>-->
-      <!--              </div>-->
-      <!--            </mat-tab>-->
-
-      <!--            <mat-tab label="All Purchases">-->
-      <!--              <mat-form-field class="my-input" style="margin-top: 8px">-->
-      <!--                <input matInput placeholder="Search" type="text" [formControl]="searchPurchaseControl"/>-->
-      <!--              </mat-form-field>-->
-      <!--              <div>-->
-      <!--                <table mat-table [dataSource]="allPurchaseDatasource" class=" mat-elevation-z8">-->
-      <!--                  <ng-container matColumnDef="product">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Product</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.product}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="date">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Date</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.date}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="due">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Due</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.due}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="reference">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Reference</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.reference}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="quantity">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Quantity</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.quantity}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  <ng-container matColumnDef="amount">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Amount</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-      <!--                  &lt;!&ndash;<ng-container matColumnDef="expire">&ndash;&gt;-->
-      <!--                  &lt;!&ndash;<th mat-header-cell *matHeaderCellDef>Expire</th>&ndash;&gt;-->
-      <!--                  &lt;!&ndash;<td mat-cell *matCellDef="let element">{{element.expire}}</td>&ndash;&gt;-->
-      <!--                  &lt;!&ndash;<td mat-footer-cell *matFooterCellDef></td>&ndash;&gt;-->
-      <!--                  &lt;!&ndash;</ng-container>&ndash;&gt;-->
-
-      <!--                  <ng-container matColumnDef="action">-->
-      <!--                    <th mat-header-cell *matHeaderCellDef>Action</th>-->
-      <!--                    <td mat-cell *matCellDef="let element">-->
-      <!--                      <div class="row">-->
-      <!--                        &lt;!&ndash;<div class="col-6">&ndash;&gt;-->
-      <!--                        &lt;!&ndash;<button mat-icon-button (click)="editStock(element)">&ndash;&gt;-->
-      <!--                        &lt;!&ndash;<mat-icon color="primary">edit</mat-icon>&ndash;&gt;-->
-      <!--                        &lt;!&ndash;</button>&ndash;&gt;-->
-      <!--                        &lt;!&ndash;</div>&ndash;&gt;-->
-      <!--                        <div class="col-12">-->
-      <!--                          <button mat-icon-button (click)="removePurchaseFromCart(element)">-->
-      <!--                            <mat-icon color="primary">delete</mat-icon>-->
-      <!--                          </button>-->
-      <!--                        </div>-->
-      <!--                      </div>-->
-      <!--                    </td>-->
-      <!--                    <td mat-footer-cell *matFooterCellDef></td>-->
-      <!--                  </ng-container>-->
-
-      <!--                  <tr mat-header-row *matHeaderRowDef="purchaseColums"></tr>-->
-      <!--                  <tr mat-row *matRowDef="let row; columns: purchaseColums;"></tr>-->
-      <!--                  <tr mat-footer-row style="font-size: 20px" *matFooterRowDef="purchaseColums"></tr>-->
-      <!--                </table>-->
-      <!--                <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>-->
-      <!--              </div>-->
-      <!--            </mat-tab>-->
-
-      <!--          </mat-tab-group>-->
-      <!--        </div>-->
-
-      <!--      </div>-->
     </div>
 
+    <app-purchase-mobile *ngIf="isMobile"></app-purchase-mobile>
+
+    <app-bottom-bar *ngIf="isMobile && !enoughWidth()"></app-bottom-bar>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-
-<app-purchase-mobile *ngIf="isMobile"></app-purchase-mobile>
 

@@ -37,3 +37,9 @@ table {
 mat-card-subtitle {
   padding: 0 16px;
 }
+
+mat-divider{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}

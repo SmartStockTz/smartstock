@@ -34,25 +34,17 @@
       </app-product-card>
     </cdk-virtual-scroll-viewport>
 
-    <button mat-button color="primary"
-            *ngIf="!fetchDataProgress && products && !isMobile"
-            (click)="getProductsFromServer()"
-            matTooltip="Refresh products from server"
-            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 3000; left: 16px; bottom: 20px;"
-            class="mat-fab">
-      <mat-icon>refresh</mat-icon>
-    </button>
-
-    <!--    <button class="mat-fab"-->
-    <!--            color="primary"-->
-    <!--            *ngIf="!fetchDataProgress"-->
-    <!--            style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 1000; left: 88px; bottom: 20px;"-->
-    <!--            mat-button (click)="cartdrawer.toggle()"-->
-    <!--            [matBadge]="noOfProductsInCart.toString()">-->
-    <!--      <mat-icon>shopping_cart</mat-icon>-->
-    <!--    </button>-->
-
-    <app-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></app-cart-preview>
+    <div style="display: flex; flex-direction: row">
+      <button mat-button color="primary"
+              *ngIf="!fetchDataProgress && products &&showRefreshCart"
+              (click)="getProductsFromServer()"
+              matTooltip="Refresh products from server"
+              style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 3000; left: 16px; bottom: 20px;"
+              class="mat-fab">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <app-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></app-cart-preview>
+    </div>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

@@ -14,6 +14,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
+import {HammerModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatSliderModule,
     MatSnackBarModule,
     RouterModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HammerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -39,13 +41,8 @@ export class AppModule {
   constructor() {
     BFast.init({
       applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-        enable: true
+        enable: false
       }
     });
-
-    // const evtSource = new EventSource('http://localhost:3000/tryEventFromBrowser');
-    // evtSource.onmessage = function (event1: MessageEvent) {
-    //   console.log(event1);
-    // };
   }
 }

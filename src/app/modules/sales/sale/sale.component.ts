@@ -33,6 +33,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   isMobile = environment.android;
   noOfProductsInCart = 1;
   searchInputControl = new FormControl('');
+  showRefreshCart = false;
 
   constructor(private readonly router: Router,
               private readonly userDatabase: UserDatabaseService,
@@ -48,6 +49,9 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   ngOnInit() {
     this.getProducts();
     this._addToCartEventListener();
+    this.eventApi.listen(SsmEvents.NO_OF_CART, data => {
+      this.showRefreshCart = data.detail === 0;
+    });
   }
 
   getProductsFromServer() {
@@ -86,24 +90,6 @@ export class SaleComponent extends DeviceInfo implements OnInit {
     this.storage.getStocks().then(allStocks => {
       this.searchProgressFlag = false;
       if (allStocks) {
-        // const keywords = product.toLowerCase().split(' ').filter(value => {
-        //   return value !== '';
-        // });
-        // // console.log(keywords);
-        // const result = allStocks.filter(stock => {
-        //   const targetSentence =
-        //     `${stock.product}_${stock.supplier}_${stock.retailPrice}_${stock.category}_${stock.wholesalePrice}_${stock.unit}`
-        //       .toLowerCase();
-        //   let flag = false;
-        //   for (const keyword of keywords) {
-        //     const searchResult = targetSentence.includes(keyword);
-        //     if (searchResult === true) {
-        //       flag = true;
-        //     }
-        //   }
-        //   return flag;
-        // });
-        // console.log(result);
         this.products = allStocks.filter(stock => stock.product.toLowerCase().trim().includes(product.trim().toLowerCase()));
       } else {
         this.snack.open('No products found, try again or refresh products', 'Ok', {
