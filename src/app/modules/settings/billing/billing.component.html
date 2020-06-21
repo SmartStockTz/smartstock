@@ -35,7 +35,7 @@
                   <span *ngIf="!getDueBalanceFlag" style="font-size: 30px; text-space: 2px">
                     {{dueBill | currency:'TZS '}}
                   </span>
-                  <app-data-not-ready *ngIf="getDueBalanceFlag" [isLoading]="getDueBalanceFlag"
+                  <app-data-not-ready *ngIf="getDueBalanceFlag || !dueBill" [isLoading]="getDueBalanceFlag"
                                       [height]="100"
                                       [width]="100"></app-data-not-ready>
                 </div>
@@ -52,7 +52,8 @@
                   <span *ngIf="!getUnInvoicedBalanceFlag" style="font-size: 30px; text-space: 2px">
                     {{unInvoicedBalance | currency:'TZS '}}
                   </span>
-                  <app-data-not-ready *ngIf="getUnInvoicedBalanceFlag" [isLoading]="getUnInvoicedBalanceFlag"
+                  <app-data-not-ready *ngIf="getUnInvoicedBalanceFlag || !unInvoicedBalance"
+                                      [isLoading]="getUnInvoicedBalanceFlag"
                                       [height]="100"
                                       [width]="100"></app-data-not-ready>
                 </div>
