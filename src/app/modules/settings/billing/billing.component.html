@@ -1,4 +1,4 @@
-<mat-sidenav-container  class="match-parent">
+<mat-sidenav-container class="match-parent">
   <mat-sidenav class="match-parent-side"
                [fixedInViewport]="true"
                #sidenav
@@ -11,104 +11,86 @@
     <app-toolbar [heading]=""
                  [sidenav]="sidenav"
                  [showProgress]="false"
-                  [backLink]="'/settings'"
-                 [hasBackRoute]="isMobile"
-    >
+                 [backLink]="'/settings'"
+                 [hasBackRoute]="isMobile">
     </app-toolbar>
 
-    <div class="container my-billing-wrapper">
+    <div [ngClass]="isMobile?'container-fluid':'container my-billing-wrapper'">
 
-      <h4 class="my-billing-title">
-        Billing
-      </h4>
+      <div [ngClass]="isMobile?'col-12':'col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0'">
 
-      <div class="">
-        <div class="row" style="margin-bottom: 16px">
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Payment Number
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">0235 2344 5406</span>
-            </mat-card-content>
-          </mat-card>
-
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Amount Due
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">{{0 | currency: 'TZS '}}</span>
-            </mat-card-content>
-          </mat-card>
-
-          <mat-card
-            class="col-12 col-sm-12 col-md-4 col-xl-3 col-lg-3 bill-card-top mat-elevation-z0 d-flex flex-column">
-            <mat-card-header>
-              <h5 class="bill-card-top-title text-center">
-                Uninvoiced balance
-              </h5>
-            </mat-card-header>
-            <hr style="width: 100%; height: 1px">
-            <mat-card-content class="d-flex justify-content-center align-items-center">
-              <span class="bill-card-top-number">{{5000 | currency: 'TZS '}}</span>
-            </mat-card-content>
-          </mat-card>
+        <div>
+          <p style="padding: 10px 0">
+            Billing
+          </p>
         </div>
 
-        <div style="margin-bottom: 16px" class="row">
-          <div class="btn-block">
-            <!--            <mat-radio-group>-->
-            <mat-radio-button (change)="togglePay($event)"
-                              style="margin-right: 10px; margin-bottom: 10px" color="primary"
-                              labelPosition="after"
-                              name="mobile"
-                              [checked]="isMobilePay">
-              Mobile Payment
-            </mat-radio-button>
-            <!--            <mat-radio-button (change)="togglePay($event)" color="primary" labelPosition="after"-->
-            <!--                              name="paypal" [checked]="!isMobilePay">-->
-            <!--              PayPal-->
-            <!--            </mat-radio-button>-->
-            <!--            &lt;!&ndash;            </mat-radio-group>&ndash;&gt;-->
+        <div class="row" style="margin-bottom: 16px">
+          <div style="margin-bottom: 8px" class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="dueBalance" [title]="'Balance'"
+                           [height]="250"
+                           [description]="'If bill is negative means you have un paid invoices'">
+              <ng-template #dueBalance>
+                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
+                  <span *ngIf="!getDueBalanceFlag" style="font-size: 30px; text-space: 2px">
+                    {{dueBill | currency:'TZS '}}
+                  </span>
+                  <app-data-not-ready *ngIf="getDueBalanceFlag || !dueBill" [isLoading]="getDueBalanceFlag"
+                                      [height]="100"
+                                      [width]="100"></app-data-not-ready>
+                </div>
+              </ng-template>
+            </app-dash-card>
           </div>
-          <!--          <div *ngIf="!isMobilePay" class="btn-block">-->
-          <!--            <mat-form-field appearance="outline">-->
-          <!--              <mat-label>Enter Amount</mat-label>-->
-          <!--              <input matInput type="number" [formControl]="amountFormControl" min="0" placeholder="Enter Amount">-->
-          <!--            </mat-form-field>-->
-          <!--          </div>-->
-          <button *ngIf="isMobilePay" mat-flat-button class="ft-button" color="primary">
-            MAKE PAYMENT
-          </button>
-          <!--          <button *ngIf="!isMobilePay" mat-flat-button class="ft-button" color="primary">-->
-          <!--            PAYPAL PAYMENT-->
-          <!--          </button>-->
+          <div style="margin-bottom: 8px" class="col-12 col-md-6 col-xl-6 col-sm-12 col-lg-6">
+            <app-dash-card [content]="unInvoiced" [title]="'Un Invoiced'"
+                           [height]="250"
+                           [description]="'Your usage cost before billed, ' +
+                            'this is approximation actual cost will be billed end of the month'">
+              <ng-template #unInvoiced>
+                <div style="display: flex; height: 100%; justify-content: center; align-items: center">
+                  <span *ngIf="!getUnInvoicedBalanceFlag" style="font-size: 30px; text-space: 2px">
+                    {{unInvoicedBalance | currency:'TZS '}}
+                  </span>
+                  <app-data-not-ready *ngIf="getUnInvoicedBalanceFlag || !unInvoicedBalance"
+                                      [isLoading]="getUnInvoicedBalanceFlag"
+                                      [height]="100"
+                                      [width]="100"></app-data-not-ready>
+                </div>
+              </ng-template>
+            </app-dash-card>
+          </div>
+        </div>
+
+        <div *ngIf="dueBill!==undefined">
+          <div>
+            <p style="padding: 10px 0">
+              Payments
+            </p>
+          </div>
+
+          <div style="margin-bottom: 16px" class="row">
+            <button (click)="mobilePay()" mat-flat-button class="ft-button" color="primary">
+              Mobile Pay
+            </button>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 16px">
+          <mat-tab-group style="width: 100%">
+            <mat-tab label="Invoices">
+              <app-billing-invoices></app-billing-invoices>
+            </mat-tab>
+            <mat-tab label="Receipts">
+              <app-billing-receipts></app-billing-receipts>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
-
-      <mat-tab-group>
-        <mat-tab label="Invoices">
-          <app-billing-invoices></app-billing-invoices>
-        </mat-tab>
-        <mat-tab label="Receipts">
-          <app-billing-receipts></app-billing-receipts>
-        </mat-tab>
-      </mat-tab-group>
 
     </div>
 
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-<!--<app-billing-mobile *ngIf="isMobile"></app-billing-mobile>-->
 

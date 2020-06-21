@@ -21,14 +21,15 @@ import {NoStockDialogComponent} from './no-stock-dialog/no-stock-dialog.componen
 import {DialogImageCropComponent} from './dialog-image-crop/dialog-image-crop.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ShopsPipe} from './pipes/shops.pipe';
-import { MatBadgeModule } from '@angular/material/badge';
-import { OnFetchComponent } from './on-fetch/on-fetch.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {OnFetchComponent} from './on-fetch/on-fetch.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { SearchInputComponent } from './toolbar/search-input/search-input.component';
-import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import {SearchInputComponent} from './toolbar/search-input/search-input.component';
+import {BottomBarComponent} from './bottom-bar/bottom-bar.component';
 import {DataNotReadyComponent} from './data-not-ready/data-not-ready.component';
-import { UploadFilesComponent } from './upload-files/upload-files.component';
+import {UploadFilesComponent} from './upload-files/upload-files.component';
 import {MatRippleModule} from '@angular/material/core';
+import {DashCardComponent} from './dash-card/dash-card.component';
 
 
 @NgModule({
@@ -54,15 +55,16 @@ import {MatRippleModule} from '@angular/material/core';
     MatTooltipModule,
     MatRippleModule
   ],
-    exports: [
-        AdminDrawerComponent,
-        ToolbarComponent,
-        ShopsPipe,
-        OnFetchComponent,
-        BottomBarComponent,
-        DataNotReadyComponent,
-        UploadFilesComponent
-    ],
+  exports: [
+    AdminDrawerComponent,
+    ToolbarComponent,
+    ShopsPipe,
+    OnFetchComponent,
+    BottomBarComponent,
+    DataNotReadyComponent,
+    UploadFilesComponent,
+    DashCardComponent
+  ],
   declarations: [
     AdminDrawerComponent,
     ToolbarComponent,
@@ -73,8 +75,9 @@ import {MatRippleModule} from '@angular/material/core';
     SearchInputComponent,
     BottomBarComponent,
     DataNotReadyComponent,
-    UploadFilesComponent
-      ],
+    UploadFilesComponent,
+    DashCardComponent
+  ],
   entryComponents: [
     DialogImageCropComponent
   ]

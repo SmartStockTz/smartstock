@@ -25,6 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {ProfilePersonalComponent} from './profile-personal/profile-personal.component';
 import {BillingInvoicesComponent} from './billing-invoices/billing-invoices.component';
 import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [ProfileAuthenticationComponent,
@@ -33,30 +34,31 @@ import {BillingReceiptsComponent} from './billing-receipts/billing-receipts.comp
     BillingInvoicesComponent,
     BillingReceiptsComponent
   ],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    CommonComponentsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatRippleModule,
-    MatDividerModule,
-    MatRadioModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        CommonComponentsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTabsModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTableModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatRippleModule,
+        MatDividerModule,
+        MatRadioModule,
+        FormsModule,
+        MatListModule,
+    ],
   exports: [
     ProfileAuthenticationComponent,
     ProfileBusinessComponent,

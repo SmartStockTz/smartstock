@@ -1,3 +1,11 @@
 <mat-card class="mat-elevation-z0">
-
+  <mat-list *ngIf="!receiptProgressFlag">
+    <mat-list-item *ngFor="let receipt of receipts">
+      <h1 matLine>{{receipt.receipt}}</h1>
+      <p matLine>{{receipt.amount | currency:'TZS '}}</p>
+      <p matSuffix>{{receipt.date | date}}</p>
+    </mat-list-item>
+  </mat-list>
+  <app-data-not-ready style="padding: 16px" *ngIf="receiptProgressFlag"
+                      [isLoading]="receiptProgressFlag"></app-data-not-ready>
 </mat-card>
