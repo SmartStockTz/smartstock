@@ -33,6 +33,7 @@ export class BillingComponent extends DeviceInfo implements OnInit {
     this.getDueBalance();
     this.getUnInvoicedBalance();
     this.getPaymentReference();
+    // document.getElementsByClassName('mat-tab-body-wrapper').item(0).classList.add('mat-elevation-z2');
   }
 
   getPaymentReference() {
@@ -77,6 +78,11 @@ export class BillingComponent extends DeviceInfo implements OnInit {
       data: {
         ref: this.referenceNumber,
         amount: this.dueBill
+      }
+    }).afterDismissed().subscribe(value => {
+      if (value === true) {
+        this.getDueBalance();
+        this.getUnInvoicedBalance();
       }
     });
   }

@@ -13,27 +13,27 @@ export class BillingApiService implements BillingAdapter {
 
   async getDueBalance(currency: 'TZS' | 'USD'): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/dueBilling`).get();
+    return BFast.functions().request(`/billing/${owner.objectId}/dueBilling`).get();
   }
 
   async getUnInvoicesBalance(currency: 'TZS' | 'USD'): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/unInvoicedBalance`).get();
+    return BFast.functions().request(`/billing/${owner.objectId}/unInvoicedBalance`).get();
   }
 
   async getPaymentReference(): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/referenceNumber`).get();
+    return BFast.functions().request(`/billing/${owner.objectId}/referenceNumber`).get();
   }
 
-  async getInvoices(): Promise<{ businessName: string, invoice: {}[] }> {
+  async getInvoices(): Promise<{ businessName: string, invoice: { _id: string, amount: number, accountId: string }[] }[]> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/invoices`).get();
+    return BFast.functions().request(`/billing/${owner.objectId}/invoices`).get();
   }
 
-  async getReceipt(): Promise<{payments: any[]}> {
+  async getReceipt(): Promise<{ payments: any[] }> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`http://localhost:3000/billing/${owner.objectId}/receipts`).get();
+    return BFast.functions().request(`/billing/${owner.objectId}/receipts`).get();
   }
 
 }

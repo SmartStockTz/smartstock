@@ -28,7 +28,7 @@ export class MobilePayDetailsComponent implements OnInit {
       this.getPaymentReference();
     }
     this.amountToPay = Math.round(Math.abs(this.payData.amount));
-    this.amountControl.setValue(this.amountToPay);
+    this.amountControl.setValue(this.amountToPay === 0 ? 10000 : this.amountToPay);
     this.getPaymentReference();
   }
 
