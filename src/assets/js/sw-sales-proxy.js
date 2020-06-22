@@ -142,13 +142,13 @@ async function prepareSalesCollection(shop) {
 let shouldRun = true;
 
 addEventListener('message', async ({data}) => {
-  console.log('sales worker started');
+  // console.log('sales worker started');
   setInterval(_ => {
     if (shouldRun) {
       shouldRun = false;
       run()
         .then()
-        .catch(console.log)
+        .catch()
         .finally(_ => {
           shouldRun = true;
         });
