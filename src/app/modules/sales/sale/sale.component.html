@@ -34,15 +34,16 @@
       </app-product-card>
     </cdk-virtual-scroll-viewport>
 
-    <div style="display: flex; flex-direction: row">
+    <div
+      style="position: fixed; width: 100%;display: flex; flex-direction: row; justify-content: center; align-items: center; z-index: 3000; left: 16px; bottom: 20px;">
       <button mat-button color="primary"
               *ngIf="!fetchDataProgress && products &&showRefreshCart"
               (click)="getProductsFromServer()"
               matTooltip="Refresh products from server"
-              style="position: fixed; display: flex; justify-content: center; align-items: center; z-index: 3000; left: 16px; bottom: 20px;"
               class="mat-fab">
         <mat-icon>refresh</mat-icon>
       </button>
+      <span [ngStyle]="showRefreshCart?{flex: '1 1 auto'}:{}"></span>
       <app-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></app-cart-preview>
     </div>
   </mat-sidenav-content>

@@ -1,4 +1,4 @@
-importScripts('bfast.js');
+importScripts('bfast_js.js');
 
 function run() {
   init();
