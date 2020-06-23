@@ -74,24 +74,24 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
       this.croppedImage = stock.image;
     }
     this.productForm = this.formBuilder.group({
-      product: [stock ? stock.product : '', [Validators.nullValidator, Validators.required]],
-      saleable: [stock ? stock.saleable : true, [Validators.nullValidator, Validators.required]],
-      downloadable: [stock ? stock.downloadable : false, [Validators.nullValidator, Validators.required]],
-      downloads: [stock ? stock.downloads : [], [Validators.nullValidator, Validators.required]],
-      stockable: [stock ? stock.stockable : true, [Validators.nullValidator, Validators.required]],
-      purchasable: [stock ? stock.purchasable : true, [Validators.nullValidator, Validators.required]],
-      description: [stock ? stock.description : ''],
-      purchase: [stock ? stock.purchase : 0, [Validators.nullValidator, Validators.required]],
-      retailPrice: [stock ? stock.retailPrice : 0, [Validators.nullValidator, Validators.required]],
-      wholesalePrice: [stock ? stock.wholesalePrice : 0, [Validators.nullValidator, Validators.required]],
-      wholesaleQuantity: [stock ? stock.wholesaleQuantity : 0, [Validators.nullValidator, Validators.required]],
-      quantity: [stock ? stock.quantity : 0, [Validators.nullValidator, Validators.required]],
-      reorder: [stock ? stock.reorder : 0, [Validators.nullValidator, Validators.required]],
-      unit: [stock ? stock.unit : null, [Validators.nullValidator, Validators.required]],
-      canExpire: [stock ? stock.canExpire : true],
-      expire: [stock ? stock.expire : null, []],
-      category: [stock ? stock.category : null, [Validators.required, Validators.nullValidator]],
-      supplier: [stock ? stock.supplier : 'general', [Validators.required, Validators.nullValidator]],
+      product: [stock && stock.product ? stock.product : '', [Validators.nullValidator, Validators.required]],
+      saleable: [stock && stock.saleable !== undefined ? stock.saleable : true],
+      downloadable: [stock && stock.downloadable !== undefined ? stock.downloadable : false],
+      downloads: [stock && stock.downloads ? stock.downloads : []],
+      stockable: [stock && stock.stockable !== undefined ? stock.stockable : true],
+      purchasable: [stock && stock.purchasable !== undefined ? stock.purchasable : true],
+      description: [stock && stock.description ? stock.description : ''],
+      purchase: [stock && stock.purchase ? stock.purchase : 0, [Validators.nullValidator, Validators.required]],
+      retailPrice: [stock && stock.retailPrice ? stock.retailPrice : 0, [Validators.nullValidator, Validators.required]],
+      wholesalePrice: [stock && stock.wholesalePrice ? stock.wholesalePrice : 0, [Validators.nullValidator, Validators.required]],
+      wholesaleQuantity: [stock && stock.wholesaleQuantity ? stock.wholesaleQuantity : 0, [Validators.nullValidator, Validators.required]],
+      quantity: [stock && stock.quantity ? stock.quantity : 0, [Validators.nullValidator, Validators.required]],
+      reorder: [stock && stock.reorder ? stock.reorder : 0, [Validators.nullValidator, Validators.required]],
+      unit: [stock && stock.unit ? stock.unit : null, [Validators.nullValidator, Validators.required]],
+      canExpire: [stock && stock.canExpire !== undefined ? stock.canExpire : true],
+      expire: [stock && stock.expire ? stock.expire : null],
+      category: [stock && stock.category ? stock.category : null, [Validators.required, Validators.nullValidator]],
+      supplier: [stock && stock.supplier ? stock.supplier : 'general', [Validators.required, Validators.nullValidator]],
     });
   }
 
@@ -202,7 +202,7 @@ export class StockNewComponent extends DeviceInfo implements OnInit {
   }
 
   updateProduct(formElement: FormGroupDirective) {
-    if (!this.productForm.valid) {
+    if (this.productForm.invalid) {
       this.snack.open('Fill all required fields', 'Ok', {
         duration: 3000
       });
