@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g firebase-tools
       - run: npm ci
-      - run: npm run build:webapp
+#      - run: npm run build:webapp
       - run: npm run deploy:webapp
         env:
           CI: true

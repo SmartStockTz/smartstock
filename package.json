@@ -36,8 +36,10 @@
     "push:snap:stable": "snapcraft push \"electron/dist/smartstock_${PACKAGE_VERSION}_amd64.snap\" --release stable",
     "build:web": "npx gulp copyBFastJs && ng build --prod",
     "build:webapp": "npx gulp copyBFastJs && ng build --prod -c=androidProd",
-    "deploy:web": "firebase deploy --only hosting:web --token \"$FIREBASE_TOKEN\"",
-    "deploy:webapp": "firebase deploy --only hosting:mobile --token \"$FIREBASE_TOKEN\"",
+    "build:webdesktop": "npx gulp copyBFastJs && ng build --prod -c=electronProd",
+    "deploy:web": "npm run build:web && firebase deploy --only hosting:web --token \"$FIREBASE_TOKEN\"",
+    "deploy:webapp": "npm run build:webapp && firebase deploy --only hosting:mobile --token \"$FIREBASE_TOKEN\"",
+    "deploy:webdesktop": "npm run build:webdesktop && firebase deploy --only hosting:desktop --token \"$FIREBASE_TOKEN\"",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

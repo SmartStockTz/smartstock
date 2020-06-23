@@ -10,6 +10,9 @@
         ],
         "mobile": [
           "m-smartstock"
+        ],
+        "desktop": [
+          "desktop-smartstock"
         ]
       }
     }

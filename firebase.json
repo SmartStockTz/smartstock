@@ -16,6 +16,21 @@
       ]
     },
     {
+      "target": "desktop",
+      "public": "dist/smartstock",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
       "target": "web",
       "public": "dist/smartstock",
       "ignore": [
