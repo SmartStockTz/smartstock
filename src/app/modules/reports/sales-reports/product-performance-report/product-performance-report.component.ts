@@ -47,8 +47,8 @@ export class ProductPerformanceReportComponent extends DeviceInfo implements OnI
   isLoading = false;
   noDataRetrieved = true;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private readonly router: Router,
               private readonly indexDb: StorageService,

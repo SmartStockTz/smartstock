@@ -20,7 +20,7 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
   productsObservable: Observable<Stock[]>;
   fetchDataProgress = false;
   showProgress = false;
-  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
   searchProgressFlag = false;
   @Input() isViewedInWholesale = false;
 

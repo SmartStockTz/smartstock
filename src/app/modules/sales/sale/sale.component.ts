@@ -27,7 +27,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
   products: Stock[] = undefined;
   fetchDataProgress = false;
   showProgress = false;
-  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
   searchProgressFlag = false;
   @Input() isViewedInWholesale = true;
   isMobile = environment.android;

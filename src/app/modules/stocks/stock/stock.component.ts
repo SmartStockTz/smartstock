@@ -48,8 +48,8 @@ export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   units: Observable<UnitsI[]>;
   stockDatasource: MatTableDataSource<Stock>;
   stockColumns = ['product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'expire', 'action'];
-  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(value => {
@@ -79,7 +79,6 @@ export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
     this.stockFetchProgress = true;
     this.indexDb.getStocks().then(stocks => {
       if (!stocks && !Array.isArray(stocks)) {
-        // stocks = [];
         this.hotReloadStocks();
         throw new Error('Stock not available in localstorage');
       }

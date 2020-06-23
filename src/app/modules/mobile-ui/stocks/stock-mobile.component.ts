@@ -21,7 +21,7 @@ export class StockMobileComponent extends DeviceInfo implements OnInit {
 
   showProgress = false;
   units: Observable<UnitsI[]>;
-  @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   ngOnInit() {
   }

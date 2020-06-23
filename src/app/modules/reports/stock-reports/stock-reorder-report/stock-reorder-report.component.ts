@@ -50,8 +50,8 @@ export class StockReorderReportComponent implements OnInit {
   units: Observable<UnitsI[]>;
   stockReorderDatasource: MatTableDataSource<Stock>;
   stockColumns = ['product', 'quantity', 'reorder', 'supplier'];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
      this._getStockReport();

@@ -30,8 +30,8 @@ export class ProductsAboutToExpireComponent implements OnInit {
 
   filterFormControl = new FormControl('', [Validators.nullValidator]);
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
     this.isLoading = true;

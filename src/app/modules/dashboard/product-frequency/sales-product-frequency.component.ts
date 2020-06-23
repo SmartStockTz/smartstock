@@ -22,7 +22,7 @@ export class SalesProductFrequencyComponent implements OnInit {
   columns = ['product', 'date', 'quantity', 'amount'];
   soldProductsDatasource: MatTableDataSource<SalesModel>;
   soldProductsArray: SalesModel[] = [];
-  @ViewChild('soldProductPaginator', {static: true}) soldProductPaginator: MatPaginator;
+  @ViewChild('soldProductPaginator') soldProductPaginator: MatPaginator;
   productFilterControl = new FormControl('');
 
   constructor(private readonly _report: AdminDashboardService,

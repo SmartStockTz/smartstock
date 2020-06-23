@@ -36,8 +36,8 @@ export class CartReportComponent implements OnInit {
   channelFormControl = new FormControl('', [Validators.nullValidator]);
   filterFormControl = new FormControl('', [Validators.nullValidator]);
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
     this.channelFormControl.setValue('retail');
