@@ -100,14 +100,14 @@ export class UserDatabaseService implements UserDataSource {
         allowWholesale: true
       };
       user.shops = [];
-      await BFast.functions().request('/functions/users/create').post(user, {
+      return await BFast.functions().request('/functions/users/create').post(user, {
         headers: this._settings.ssmFunctionsHeader
       });
     } catch (e) {
       if (e && e.response && e.response.data) {
-        return e.response.data;
+        throw e.response.data;
       } else {
-        return e;
+        throw e.toString();
       }
     }
   }
