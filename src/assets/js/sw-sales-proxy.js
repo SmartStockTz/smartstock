@@ -44,7 +44,6 @@ async function getShops() {
     }
     return [];
   } catch (e) {
-    // console.warn(e);
     return [];
   }
 }
@@ -58,10 +57,7 @@ async function saveSalesAndRemove() {
     for (const key of salesKeys) {
       const sales = await salesCache.get(key);
       const transactionResult = await saveSaleAndUpdateStock(sales, shop, salesCache, key);
-      // console.log(key);
       await salesCache.remove(key, true);
-      // console.log(remove);
-      // console.log(transactionResult);
       return transactionResult;
     }
   }

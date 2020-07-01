@@ -39,7 +39,11 @@ export class AppComponent implements OnInit {
       }
     });
     this._storage.getActiveShop().then(_ => {
-      this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
+      if (_) {
+        this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_SET);
+      } else {
+        throw new Error('Shop is undefined');
+      }
     }).catch(_ => {
       this.eventApi.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
     });

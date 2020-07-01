@@ -6,8 +6,8 @@ android {
     applicationId "com.fahamutech.smartstock"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 3
-    versionName "20.6.8"
+    versionCode 4
+    versionName "20.6.13"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
