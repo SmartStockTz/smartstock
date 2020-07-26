@@ -17,10 +17,10 @@ function init() {
 async function startStockSocket() {
   const smartStockCache = BFast.cache({database: 'smartstock', collection: 'config'});
   const shop = await smartStockCache.get('activeShop');
-  const event = BFast.functions().event('stocks', () => {
+  const event = BFast.functions().event('/stocks', () => {
     console.log('stocks socket connect');
     getMissedStocks(shop, smartStockCache);
-    event.emit({auth: null, payload: {applicationId: shop?shop.applicationId: null, projectId: shop?shop.projectId:null}});
+    event.emit({auth: null, body: {applicationId: shop?shop.applicationId: null, projectId: shop?shop.projectId:null}});
   }, () => {
     console.log('stocks socket disconnect');
   });
@@ -28,7 +28,7 @@ async function startStockSocket() {
   event.listener(async data => {
     const smartStockCache = BFast.cache({database: 'smartstock', collection: 'config'});
     const shop = await smartStockCache.get('activeShop');
-    updateLocalStock(data.payload ? data.payload : data, shop)
+    updateLocalStock(data.body ? data.body : data, shop)
       .catch(console.log);
   });
 }
