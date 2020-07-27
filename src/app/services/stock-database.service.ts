@@ -38,7 +38,9 @@ export class StockDatabaseService implements StockDataSource {
     const shop = await this._storage.getActiveShop();
     return BFast.functions(shop.projectId)
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + shop.projectId)
-      .post(stocks, this._settings.ssmFunctionsHeader);
+      .post(stocks, {
+        headers: this._settings.ssmFunctionsHeader
+      });
   }
 
   addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void) {
@@ -252,7 +254,9 @@ export class StockDatabaseService implements StockDataSource {
     const shop = await this._storage.getActiveShop();
     return BFast.functions(shop.projectId).request(
       this._settings.ssmFunctionsURL + '/functions/purchases/' + shop.projectId)
-      .post(purchaseI, this._settings.ssmFunctionsHeader);
+      .post(purchaseI, {
+        headers: this._settings.ssmFunctionsHeader
+      });
   }
 }
 

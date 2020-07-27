@@ -29,12 +29,12 @@ export class SwLocalDataService {
   async startStockSocket() {
     const smartStockCache = BFast.cache({database: 'smartstock', collection: 'config'});
     const shop: ShopI = await smartStockCache.get('activeShop');
-    this.stockSocket = BFast.functions().event('stocks', () => {
+    this.stockSocket = BFast.functions().event('/stocks', () => {
       console.log('stocks socket connect');
       this.getMissedStocks(shop, smartStockCache);
       this.stockSocket.emit({
         auth: null,
-        payload: {applicationId: shop ? shop.applicationId : null, projectId: shop ? shop.projectId : null}
+        body: {applicationId: shop ? shop.applicationId : null, projectId: shop ? shop.projectId : null}
       });
     }, () => {
       console.log('stocks socket disconnect');
@@ -43,7 +43,7 @@ export class SwLocalDataService {
     this.stockSocket.listener(async data => {
       const smartStockCache1 = BFast.cache({database: 'smartstock', collection: 'config'});
       const shop1: ShopI = await smartStockCache1.get('activeShop');
-      this.updateLocalStock(data.payload ? data.payload : data, shop1)
+      this.updateLocalStock(data.body ? data.body : data, shop1)
         .catch();
     });
   }

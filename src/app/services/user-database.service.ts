@@ -43,7 +43,9 @@ export class UserDatabaseService implements UserDataSource {
   async deleteUser(user: UserI): Promise<any> {
     return BFast.functions()
       .request('/functions/users/' + user.objectId)
-      .delete({context: {admin: await BFast.auth().currentUser()}});
+      .delete({
+        data: {context: {admin: await BFast.auth().currentUser()}}
+      });
   }
 
   async getAllUser(pagination: { size: number, skip: number }): Promise<UserI[]> {
