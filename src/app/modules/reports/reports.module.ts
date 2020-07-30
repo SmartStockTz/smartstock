@@ -30,6 +30,7 @@ import {TabularReportComponent} from './tabular-report/tabular-report.component'
 import {ProductsAboutToExpireComponent} from './stock-reports/products-about-to-expire/products-about-to-expire.component';
 import {CartReportComponent} from './sales-reports/cart-report/cart-report.component';
 import {ExpiredProductsReportComponent} from './stock-reports/expired-products-report/expired-products-report.component';
+import { ProfitByCategoryComponent } from './sales-reports/profit-by-category/profit-by-category.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {ExpiredProductsReportComponent} from './stock-reports/expired-products-r
     StockReportsComponent, StockReorderReportComponent,
     TabularReportComponent, ProductsAboutToExpireComponent,
     CartReportComponent,
-    SalesReportsComponent
+    SalesReportsComponent,
+    ProfitByCategoryComponent
   ],
   exports: [
     ExpiredProductsReportComponent,

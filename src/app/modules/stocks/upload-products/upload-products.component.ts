@@ -85,9 +85,8 @@ export class UploadProductsComponent implements OnInit {
           return value1;
         }).join('');
         value = UploadProductsComponent._sanitizeField(value);
-        obj[headers[j].toString().split('"').join('')] = value;
+        obj[headers[j].toString().trim().split('"').join('')] = value;
       }
-      console.log(obj);
       result.push(obj);
     }
     if (callback && (typeof callback === 'function')) {

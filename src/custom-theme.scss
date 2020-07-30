@@ -34,6 +34,10 @@ $smartstock-theme: mat-light-theme($smartstock-primary, $smartstock-accent, $sma
 // that you are using.
 @include angular-material-theme($smartstock-theme);
 
-div.mat-list-text{
+div.mat-list-text {
   align-items: start;
+}
+
+table {
+  width: 100%;
 }

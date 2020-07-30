@@ -9,6 +9,7 @@ import {toSqlDate} from '../utils/date';
 import {CartModel} from '../model/cart';
 import {SalesModel} from '../model/CashSale';
 import * as moment from 'moment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -127,6 +128,24 @@ export class AdminDashboardService implements AdminReportAdapter {
         }).subscribe(value => {
           resolve(value);
         }, error => {
+          reject(error);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  getSalesByCategory(channel: string, from: string, to: string) {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const activeShop = await this.storage.getActiveShop();
+        BFast.functions()
+          .request(`/dashboard/sales-reports/profitByCategory/${activeShop.projectId}/${from}/${to}`).get({
+          headers: this.settings.ssmFunctionsHeader
+        }).then(value => {
+          resolve(value);
+        }).catch(error => {
           reject(error);
         });
       } catch (e) {
