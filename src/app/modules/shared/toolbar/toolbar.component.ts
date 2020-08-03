@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {EventApiService} from 'src/app/services/event-api.service';
 import {StorageService} from '../../../services/storage.service';
@@ -60,9 +60,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
-    this.userDatabase.logout(null).then(_ => {
+    this.userDatabase.logout(null).finally(() => {
       return this.router.navigateByUrl('');
-    }).catch(reason => console.log(reason));
+    }).catch(err => console.log(''));
   }
 
   private _clearSearchInputListener() {
