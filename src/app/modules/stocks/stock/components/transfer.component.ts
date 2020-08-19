@@ -1,10 +1,11 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShopI } from './../../../../model/ShopI';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { Stock } from './../../../../model/stock';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { UserDatabaseService } from 'src/app/services/user-database.service';
+import { StorageService } from './../../../../services/storage.service';
 
 
 @Component({
@@ -12,21 +13,22 @@ import { UserDatabaseService } from 'src/app/services/user-database.service';
     template: `
         <div style="width: 95%">
             <h1 mat-dialog-title>Transfer Stocks</h1>
+
+            <ng-container *ngIf=" this.shops.length > 1; else elseTemplate">
             <div mat-dialog-content>
                 <div>
                     <mat-card-subtitle>Tranfer to which shop ( s )</mat-card-subtitle>
-                    <mat-list>
-                        <mat-list-item *ngFor="let shop of shops">
-                            <mat-checkbox> {{ shop.businessName }} </mat-checkbox>
-                        </mat-list-item>
-                    </mat-list>
+         <mat-form-field appearance="fill" style="width: 100%"s>
+            <mat-label> Select Shop </mat-label>
+            <mat-select [formControl]="shop" multiple>
+                 <mat-option *ngFor="let shop of shops" [value]="shop">{{ shop.businessName }}</mat-option>
+            </mat-select>
+        </mat-form-field>
                 </div>
                 <div>
                     <form [formGroup]="transferStockGroup" (ngSubmit)="transaferStocks()">
                         <div *ngFor="let item of data.items">
                             <div style="display: flex;">
-                                <!-- <p>{{item.product}}</p>
-                                <div style="flex-grow: 1"></div> -->
                                 <mat-form-field style="width: 100%">
                                     <mat-label>Quantity of {{item.product}}</mat-label>
                                     <input matInput type="number" required formGroupName="{{item.product}}">
@@ -39,21 +41,25 @@ import { UserDatabaseService } from 'src/app/services/user-database.service';
                     </form>
                 </div>
             </div>
-            <div mat-dialog-actions>
-
-            </div>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <p> You have no extra shop to transfer stock to</p>
+                </ng-template>
         </div>
     `,
 })
 export class TransferDialogComponent {
 
+    shop = new FormControl();
+    activeshop: ShopI;
     shops: ShopI[] = [];
     transferStockGroup: FormGroup;
 
     constructor(private readonly shopsApi: UserDatabaseService,
+        private activeshopapi: StorageService,
         private readonly dialogRef: MatDialogRef<TransferDialogComponent>,
         private readonly snack: MatSnackBar,
-        private readonly formBuilder:FormBuilder,
+        private readonly formBuilder: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public data: {items: Stock[]}) {
 
     }
@@ -67,6 +73,12 @@ export class TransferDialogComponent {
     }
 
     ngOnInit() {
+        this.activeshopapi.getActiveShop().then( activeshop => {
+            this.activeshop = activeshop;
+            this.shopsApi.getShops().then( shops => {
+                this.shops = shops.filter(shop => shop.projectId !== this.activeshop.projectId);
+             });
+        });
         const group = {};
         if (this.data.items && Array.isArray(this.data.items)) {
             this.data.items.forEach(item => {
@@ -74,10 +86,6 @@ export class TransferDialogComponent {
             });
         }
         this.transferStockGroup = this.formBuilder.group(group);
-
-        this.shopsApi.getShops().then( shops => {
-            this.shops = shops;
-         });
     }
 
 }
