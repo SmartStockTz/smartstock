@@ -36,6 +36,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import {UploadProductsComponent} from './upload-products/upload-products.component';
 import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 import {MatListModule} from '@angular/material/list';
+import { TransferDialogComponent } from './stock/components/transfer.component';
 
 @NgModule({
     imports: [
@@ -82,7 +83,8 @@ import {MatListModule} from '@angular/material/list';
     DialogUnitDeleteComponent,
     DialogUnitNewComponent,
     DialogSupplierDeleteComponent,
-    UploadProductsComponent
+    UploadProductsComponent,
+    TransferDialogComponent
   ],
   entryComponents: [
     StockDetailsComponent,

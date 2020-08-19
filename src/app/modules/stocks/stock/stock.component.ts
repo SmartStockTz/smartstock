@@ -17,6 +17,9 @@ import {SsmEvents} from '../../../utils/eventsNames';
 import {LogService} from '../../../services/log.service';
 import {Stock} from '../../../model/stock';
 import {environment} from '../../../../environments/environment';
+import {SelectionModel} from '@angular/cdk/collections';
+import { TransferDialogComponent } from './components/transfer.component';
+
 
 @Component({
   selector: 'app-stock',
@@ -26,6 +29,11 @@ import {environment} from '../../../../environments/environment';
 export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
+  // displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource();
+  selection = new SelectionModel(true, []);
+  shopname: string[];
+
 
   isMobile = environment.android;
 
@@ -47,7 +55,7 @@ export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
   totalPurchase: Observable<number> = of(0);
   units: Observable<UnitsI[]>;
   stockDatasource: MatTableDataSource<Stock>;
-  stockColumns = ['product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'expire', 'action'];
+  stockColumns = ['select', 'product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'expire', 'action'];
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -62,6 +70,52 @@ export class StockComponent extends DeviceInfo implements OnInit, OnDestroy {
     });
     this.initializeView();
   }
+
+
+
+
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    // const numRows = this.stockDatasource.data.length;
+    // return numSelected === numRows;
+    // console.log( numRows);
+    return numSelected;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.stockDatasource.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  transferStock() {
+    if (this.selection.selected.length === 0 ) {
+      this.snack.open('select atleast one product', 'Ok', {duration: 2000});
+    } else {
+      this.dialog.open(TransferDialogComponent, {
+        width: '95%',
+        data: {
+          items: this.selection.selected,
+        }
+      });
+    }
+  }
+
+
+
+
+
+
 
   private showProgressBar() {
     this.showProgress = true;
@@ -269,3 +323,5 @@ export class StockDetailsComponent {
     return Object.keys(this.data);
   }
 }
+
+
