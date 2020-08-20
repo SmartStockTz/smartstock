@@ -4,16 +4,16 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Observable, of} from 'rxjs';
 
 import {PurchaseModel} from '../../../purchase/models/purchase.model';
-import {PurchaseDatabaseService} from '../../../../services/purchase-database.service';
 import {InfoMessageService} from '../../../../services/info-message.service';
 import {PurchaseDetailsComponent} from '../../../purchase/components/details.component';
+import {PurchaseState} from '../../../purchase/states/purchase.state';
 
 @Component({
   selector: 'app-purchase-mobile',
   templateUrl: './purchase-mobile.component.html',
   styleUrls: ['./purchase-mobile.component.css'],
   providers: [
-    PurchaseDatabaseService
+    PurchaseState
   ]
 })
 export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
@@ -24,7 +24,7 @@ export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
   purchasesArray: PurchaseModel[];
   purchases: Observable<PurchaseModel[]>;
 
-  constructor(private readonly purchaseDatabase: PurchaseDatabaseService,
+  constructor(private readonly purchaseDatabase: PurchaseState,
               private readonly bottomSheet: MatBottomSheet,
               private readonly snack: InfoMessageService) {
     super();

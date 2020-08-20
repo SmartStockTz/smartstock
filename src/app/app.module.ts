@@ -93,7 +93,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forRoot(routes),
     CommonComponentsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
