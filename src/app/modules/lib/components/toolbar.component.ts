@@ -8,7 +8,7 @@ import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
 import {environment} from '../../../../environments/environment';
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
+import {SsmEvents} from '../utils/eventsNames.util';
 
 @Component({
   selector: 'app-toolbar',

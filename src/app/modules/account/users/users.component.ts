@@ -10,15 +10,15 @@ import {Observable, of} from 'rxjs';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
 import {LogService} from '../../lib/services/log.service';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {environment} from '../../../../environments/environment';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent extends DeviceInfo implements OnInit {
+export class UsersComponent extends DeviceInfoUtil implements OnInit {
 
   usersDatasource: MatTableDataSource<UserI>;
   usersTableColums = ['name', 'role', 'shops', 'actions'];

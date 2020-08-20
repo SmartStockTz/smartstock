@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormControl, Validators} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -10,9 +9,10 @@ import {LogService} from '../../lib/services/log.service';
 import {Observable, of} from 'rxjs';
 import {UnitsModel} from '../../stocks/models/units.model';
 import {MatTableDataSource} from '@angular/material/table';
-import {toSqlDate} from '../../common-lib/utils/date';
 import {ProductPerformanceI} from './product-performance.component';
 import {ReportService} from '../services/report.service';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {toSqlDate} from '../../lib/utils/date.util';
 
 @Component({
   selector: 'app-profit-by-category',
@@ -122,7 +122,7 @@ import {ReportService} from '../services/report.service';
   `,
   styleUrls: ['../styles/profit-by-category.style.css']
 })
-export class ProfitByCategoryComponent extends DeviceInfo implements OnInit {
+export class ProfitByCategoryComponent extends DeviceInfoUtil implements OnInit {
   private productPerformanceFetchProgress = false;
   startDateFormControl = new FormControl(Date.now().toString(), [Validators.nullValidator]);
   endDateFormControl = new FormControl(Date.now().toString(), [Validators.nullValidator]);

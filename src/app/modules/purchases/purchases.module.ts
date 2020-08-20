@@ -20,14 +20,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 /** must be removed to common module **/
-import {CommonComponentsModule} from '../shared/common-components.module';
 /** must be removed to common module **/
 import {ReactiveFormsModule} from '@angular/forms';
-import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 import {RouterModule, Routes} from '@angular/router';
 import {PurchasePageComponent} from './pages/purchase.page';
 import {PurchaseDetailsComponent} from './components/details.component';
 import {CreatePageComponent} from './pages/create.page';
+import {LibModule} from '../lib/lib.module';
 
 
 const routes: Routes = [
@@ -46,7 +45,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatSidenavModule,
-    CommonComponentsModule,
+    LibModule,
     MatFormFieldModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
@@ -66,7 +65,6 @@ const routes: Routes = [
     MatBottomSheetModule,
     MatExpansionModule,
     MatSelectModule,
-    MobileUiModule
   ],
 })
 export class PurchasesModule {

@@ -1,10 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DialogImageCropComponent} from '../../shared/dialog-image-crop/dialog-image-crop.component';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {StockModel} from '../models/stock.model';
@@ -12,6 +10,8 @@ import {StockState} from '../states/stock.state';
 import {DialogCategoryNewComponent} from '../components/categories.component';
 import {DialogSupplierNewComponent} from '../components/suppliers.component';
 import {DialogUnitNewComponent} from '../components/units.component';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {ImageCropComponent} from '../../lib/components/image-crop.component';
 
 @Component({
   selector: 'app-stock-new',
@@ -282,7 +282,7 @@ import {DialogUnitNewComponent} from '../components/units.component';
   `,
   styleUrls: ['../styles/create.style.css']
 })
-export class CreatePageComponent extends DeviceInfo implements OnInit {
+export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
 
   @Input() isUpdateMode = false;
   @Input() initialStock: StockModel;
@@ -321,7 +321,7 @@ export class CreatePageComponent extends DeviceInfo implements OnInit {
 
   fileChangeEvent(event: any): void {
     if (event) {
-      this.dialog.open(DialogImageCropComponent, {
+      this.dialog.open(ImageCropComponent, {
         data: {
           event: event
         }

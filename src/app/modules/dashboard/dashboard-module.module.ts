@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -30,6 +29,7 @@ import {StockStatusComponent} from './components/stock-status.component';
 import {StockByCategoryComponent} from './components/stock-by-category.component';
 import {StockExpiredComponent} from './components/stock-expired.component';
 import {RouterModule, Routes} from '@angular/router';
+import {LibModule} from '../lib/lib.module';
 
 
 const routes: Routes = [
@@ -57,7 +57,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    CommonComponentsModule,
+    LibModule,
     MatSidenavModule,
     MatCardModule,
     MatFormFieldModule,

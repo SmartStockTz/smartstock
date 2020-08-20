@@ -8,11 +8,11 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
 /***** move to common ********/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {LogService} from '../../lib/services/log.service';
 /***** move to common ********/
 import {StockModel} from '../models/stock.model';
 import {SalesState} from '../states/sales.state';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-retail-sale',
@@ -21,7 +21,7 @@ import {SalesState} from '../states/sales.state';
   `,
   styleUrls: ['../styles/retail.style.css']
 })
-export class RetailPageComponent extends DeviceInfo implements OnInit {
+export class RetailPageComponent extends DeviceInfoUtil implements OnInit {
 
   productsObservable: Observable<StockModel[]>;
   fetchDataProgress = false;

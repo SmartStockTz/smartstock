@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {environment} from '../../../../environments/environment';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-stock-reports',
@@ -45,7 +45,7 @@ import {environment} from '../../../../environments/environment';
   `,
   styleUrls: ['../styles/stock.style.css']
 })
-export class StockPageComponent extends DeviceInfo implements OnInit {
+export class StockPageComponent extends DeviceInfoUtil implements OnInit {
   isMobile = environment.android;
 
   constructor() {

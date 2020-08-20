@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {AdminDrawerComponent} from './components/admin-drawer.component';
+import {DrawerComponent} from './components/drawer.component';
 import {ToolbarComponent} from './components/toolbar.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -56,7 +56,7 @@ import {CommonModule} from '@angular/common';
     MatRippleModule
   ],
   exports: [
-    AdminDrawerComponent,
+    DrawerComponent,
     ToolbarComponent,
     ShopsPipe,
     OnFetchComponent,
@@ -66,7 +66,7 @@ import {CommonModule} from '@angular/common';
     DashCardComponent
   ],
   declarations: [
-    AdminDrawerComponent,
+    DrawerComponent,
     ToolbarComponent,
     NoStockDialogComponent,
     ImageCropComponent,

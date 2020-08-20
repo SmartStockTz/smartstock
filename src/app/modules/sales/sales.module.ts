@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -30,6 +29,7 @@ import {SaleComponent} from './components/sale.component';
 import {CartPreviewComponent} from './components/cart-preview.component';
 import {RouterModule, Routes} from '@angular/router';
 import {WholePageComponent} from './pages/whole.page';
+import {LibModule} from '../lib/lib.module';
 
 
 const routes: Routes = [
@@ -41,7 +41,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    CommonComponentsModule,
+    LibModule,
     MatSidenavModule,
     MatFormFieldModule,
     MatAutocompleteModule,

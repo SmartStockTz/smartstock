@@ -1,10 +1,10 @@
 import {Injectable, OnInit} from '@angular/core';
 import {StorageService} from './storage.service';
 import {EventApiService} from '../modules/lib/services/event-api.service';
-import {SsmEvents} from '../modules/common-lib/utils/eventsNames';
 import {Capacitor} from '@capacitor/core';
 import {SyncStocksService} from '../modules/stocks/services/syncStocks.service';
 import {SyncSalesService} from '../modules/sales/services/syncSales.service';
+import {SsmEvents} from '../modules/lib/utils/eventsNames.util';
 
 /*
 This should use web sockets when web workers not available

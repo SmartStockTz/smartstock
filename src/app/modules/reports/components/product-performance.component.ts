@@ -8,10 +8,10 @@ import {LogService} from 'src/app/modules/lib/services/log.service';
 import {Observable, of} from 'rxjs';
 import {UnitsModel} from 'src/app/modules/stocks/models/units.model';
 import {FormControl, Validators} from '@angular/forms';
-import {toSqlDate} from 'src/app/modules/common-lib/utils/date';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {MatSort} from '@angular/material/sort';
 import {ReportService} from '../services/report.service';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import { toSqlDate } from '../../lib/utils/date.util';
 
 
 export interface ProductPerformanceI {
@@ -130,7 +130,7 @@ export interface ProductPerformanceI {
     ReportService
   ]
 })
-export class ProductPerformanceComponent extends DeviceInfo implements OnInit {
+export class ProductPerformanceComponent extends DeviceInfoUtil implements OnInit {
   private productPerformanceFetchProgress = false;
   startDateFormControl = new FormControl('', [Validators.nullValidator]);
   endDateFormControl = new FormControl('', [Validators.nullValidator]);

@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatButtonModule} from '@angular/material/button';
@@ -24,13 +23,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ImageCropperModule} from 'ngx-image-cropper';
-import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule, Routes} from '@angular/router';
-import {StockProductsMobileUiComponent} from '../mobile-ui/stock-products-mobile-ui/stock-products-mobile-ui.component';
-import {CategoriesMobileUiComponent} from '../mobile-ui/categories-mobile-ui/categories-mobile-ui.component';
-import {SuppliersMobileUiComponent} from '../mobile-ui/suppliers-mobile-ui/suppliers-mobile-ui.component';
-import {UnitsMobileUiComponent} from '../mobile-ui/units-mobile-ui/units-mobile-ui.component';
 import {ViewPageComponent} from './pages/view.page';
 import {StockDetailsComponent} from './components/stock.component';
 import {TransferDialogComponent} from './components/transfer.component';
@@ -41,13 +35,10 @@ import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from 
 import {DialogSupplierDeleteComponent, SuppliersComponent} from './components/suppliers.component';
 import {ImportsDialogComponent} from './components/imports.component';
 import {CommonModule} from '@angular/common';
+import {LibModule} from '../lib/lib.module';
 
 const routes: Routes = [
   {path: '', component: ViewPageComponent},
-  {path: 'products', component: StockProductsMobileUiComponent},
-  {path: 'categories', component: CategoriesMobileUiComponent},
-  {path: 'suppliers', component: SuppliersMobileUiComponent},
-  {path: 'units', component: UnitsMobileUiComponent},
   {path: 'create', component: CreatePageComponent},
   {path: 'edit/:objectId', component: EditPageComponent}
 ];
@@ -56,7 +47,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    CommonComponentsModule,
+    LibModule,
     MatSidenavModule,
     MatCardModule,
     MatFormFieldModule,
@@ -81,7 +72,6 @@ const routes: Routes = [
     MatExpansionModule,
     MatDialogModule,
     ImageCropperModule,
-    MobileUiModule,
     MatListModule
   ],
   declarations: [

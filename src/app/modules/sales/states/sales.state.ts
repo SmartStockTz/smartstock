@@ -5,10 +5,10 @@ import {BatchModel} from '../models/batch.model';
 /***** move to common ********/
 import {StorageService} from '../../../services/storage.service';
 /***** move to common ********/
-import {Security} from '../../common-lib/utils/security';
 /***** move to common ********/
 import {StockModel} from '../models/stock.model';
 import {BFast} from 'bfastjs';
+import {SecurityUtil} from '../../lib/utils/security.util';
 
 @Injectable()
 export class SalesState {
@@ -48,7 +48,7 @@ export class SalesState {
     const batchs: BatchModel[] = [];
     sales.forEach(sale => {
       sale.cartId = cartId;
-      sale.batch = Security.generateUUID();
+      sale.batch = SecurityUtil.generateUUID();
       batchs.push({
         method: 'POST',
         body: sale,

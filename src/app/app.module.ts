@@ -5,7 +5,6 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {CommonComponentsModule} from './modules/shared/common-components.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
@@ -25,6 +24,7 @@ import {ChooseShopComponent} from './landing/choose-shop/choose-shop.component';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {KeeperGuard} from './modules/stocks/guards/keeper.guard';
+import {LibModule} from './modules/lib/lib.module';
 
 const routes: Routes = [
   {path: '', canActivate: [BrowserPlatformGuard], component: LandingComponent},
@@ -76,7 +76,7 @@ const routes: Routes = [
   {
     path: 'settings',
     canActivate: [AuthenticationGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/settings/settings-module.module').then(mod => mod.SettingsModuleModule)
+    loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
   },
   {
     path: 'home',
@@ -94,7 +94,7 @@ const routes: Routes = [
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    CommonComponentsModule,
+    LibModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     HttpClientModule,

@@ -7,11 +7,9 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {EventApiService} from '../../lib/services/event-api.service';
 import {UnitsModel} from '../models/units.model';
 import {StorageService} from '../../../services/storage.service';
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 import {LogService} from '../../lib/services/log.service';
 import {environment} from '../../../../environments/environment';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -20,6 +18,8 @@ import {TransferDialogComponent} from '../components/transfer.component';
 import {StockState} from '../states/stock.state';
 import {StockModel} from '../models/stock.model';
 import {ImportsDialogComponent} from '../components/imports.component';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 
 @Component({
@@ -210,7 +210,7 @@ import {ImportsDialogComponent} from '../components/imports.component';
   `,
   styleUrls: ['../styles/stock.style.css']
 })
-export class ViewPageComponent extends DeviceInfo implements OnInit, OnDestroy {
+export class ViewPageComponent extends DeviceInfoUtil implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
   // displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];

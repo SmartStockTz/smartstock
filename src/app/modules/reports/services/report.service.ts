@@ -4,11 +4,11 @@ import {AdminReportAdapter} from '../../../adapter/AdminReportAdapter';
 import {SettingsService} from '../../../services/settings.service';
 import {BFast} from 'bfastjs';
 import {SalesModel} from '../../sales/models/sale.model';
-import {toSqlDate} from '../../common-lib/utils/date';
 import {StorageService} from '../../../services/storage.service';
 import {StockModel} from '../models/stock.model';
 import {CartModel} from '../models/cart.model';
 import * as moment from 'moment';
+import {toSqlDate} from '../../lib/utils/date.util';
 
 @Injectable({
   providedIn: 'root'

@@ -91,7 +91,7 @@ import {ShopModel} from '../models/shop.model';
                                [expanded]="shouldExpand('stock')" class="mat-elevation-z0">
             <mat-expansion-panel-header>
               <mat-icon matPrefix color="primary">store</mat-icon>
-              <span style="margin-left: 8px">StockModel</span>
+              <span style="margin-left: 8px">Stock</span>
             </mat-expansion-panel-header>
             <mat-nav-list>
               <a mat-list-item routerLink="/stock" [queryParams]="{t:'0'}">Products</a>
@@ -154,7 +154,7 @@ import {ShopModel} from '../models/shop.model';
   `,
   styleUrls: ['../styles/admin-drawer.style.css']
 })
-export class AdminDrawerComponent implements OnInit {
+export class DrawerComponent implements OnInit {
 
   constructor(private readonly _userApi: UserDatabaseService,
               private readonly logger: LogService,

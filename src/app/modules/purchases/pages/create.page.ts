@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 /** must be removed to common module **/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 /** must be removed to common module **/
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -14,6 +13,7 @@ import {DialogSupplierNewComponent} from '../../stocks/components/suppliers.comp
 /** must be removed to common module **/
 import {StockModel} from '../models/stock.model';
 import {PurchaseState} from '../states/purchase.state';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-purchase-create',
@@ -259,7 +259,7 @@ import {PurchaseState} from '../states/purchase.state';
   `,
   styleUrls: ['../styles/create.style.css']
 })
-export class CreatePageComponent extends DeviceInfo implements OnInit {
+export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
   invoiceForm: FormGroup;
   supplierFetching = true;
   suppliers: Observable<any[]>;

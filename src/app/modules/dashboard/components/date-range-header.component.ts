@@ -3,7 +3,7 @@ import {DateAdapter, SatCalendar, SatCalendarFooter, SatDatepicker} from 'saturn
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import * as moment from 'moment';
-import {DeviceInfo} from '../../shared/DeviceInfo';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-date-range-selector',
@@ -20,7 +20,7 @@ import {DeviceInfo} from '../../shared/DeviceInfo';
   `,
   styleUrls: ['../styles/date-range-header.style.css']
 })
-export class DateRangeHeaderComponent<Date> extends DeviceInfo implements SatCalendarFooter<Date>, OnInit {
+export class DateRangeHeaderComponent<Date> extends DeviceInfoUtil implements SatCalendarFooter<Date>, OnInit {
   public ranges: Array<{ key: string, label: string }> = [
     {key: 'today', label: 'Today'},
     {key: 'thisWeek', label: 'This Week'},

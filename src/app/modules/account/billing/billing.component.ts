@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormControl} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {BillingApiService} from '../../../services/billing-api.service';
 import {LogService} from '../../lib/services/log.service';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MobilePayDetailsComponent} from '../mobile-pay-details/mobile-pay-details.component';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-billing',
   templateUrl: './billing.component.html',
   styleUrls: ['./billing.component.css']
 })
-export class BillingComponent extends DeviceInfo implements OnInit {
+export class BillingComponent extends DeviceInfoUtil implements OnInit {
   isMobilePay = true;
   amountFormControl = new FormControl(0);
   isMobile = environment.android;

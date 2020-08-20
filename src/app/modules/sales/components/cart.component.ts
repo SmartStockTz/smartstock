@@ -11,16 +11,16 @@ import {UserDatabaseService} from '../../../services/user-database.service';
 import {SettingsService} from '../../../services/settings.service';
 /*********** moe to common ***********/
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 import {SalesModel} from '../models/sale.model';
 import {CartModel} from '../models/cart.model';
-import {toSqlDate} from '../../common-lib/utils/date';
 import {environment} from '../../../../environments/environment';
 import {CustomerState} from '../states/customer.state';
-import {Security} from '../../common-lib/utils/security';
 import {PrintService} from '../services/print.service';
 import {StockModel} from '../models/stock.model';
 import {UserModel} from 'bfastjs/dist/src/model/UserModel';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
+import {SecurityUtil} from '../../lib/utils/security.util';
+import { toSqlDate } from '../../lib/utils/date.util';
 
 @Component({
   selector: 'app-cart',
@@ -311,7 +311,7 @@ export class CartComponent implements OnInit {
 
   printCart() {
     this.checkoutProgress = true;
-    const cartId = Security.generateUUID();
+    const cartId = SecurityUtil.generateUUID();
     const cartItems = this._getCartItems();
     this.printer.print({
       data: this.cartItemsToPrinterData(cartItems, this.isViewedInWholesale ? this.customerFormControl.value : null),

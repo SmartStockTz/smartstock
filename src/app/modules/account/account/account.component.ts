@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent extends DeviceInfo implements OnInit {
+export class AccountComponent extends DeviceInfoUtil implements OnInit {
 
   constructor() {
     super();

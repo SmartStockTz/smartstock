@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 /*********** moe to common ***********/
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 import {EventApiService} from '../../lib/services/event-api.service';
 /*********** moe to common ***********/
 import {UtilsService} from '../services/utils.service';
@@ -8,9 +7,10 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Observable, of} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 /*********** moe to common ***********/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 /*********** moe to common ***********/
 import {StockModel} from '../models/stock.model';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
   selector: 'app-cart-preview',
@@ -27,7 +27,7 @@ import {StockModel} from '../models/stock.model';
     UtilsService
   ]
 })
-export class CartPreviewComponent extends DeviceInfo implements OnInit {
+export class CartPreviewComponent extends DeviceInfoUtil implements OnInit {
   totalCost = 0;
   totalItems: Observable<number> = of(0);
   @Input() isWholeSale = false;

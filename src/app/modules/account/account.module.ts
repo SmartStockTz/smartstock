@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {SettingsModuleRoutingModule} from './settings-module-routing.module';
 import {SettingComponent} from './setting/setting.component';
 import {AccountComponent} from './account/account.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,7 +20,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {CommonComponentsModule} from '../shared/common-components.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   DialogUserDeleteComponent,
@@ -32,10 +29,20 @@ import {
 } from './users/users.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BillingComponent} from './billing/billing.component';
-import {MobileUiModule} from '../mobile-ui/mobile-ui.module';
-import {SharedWithMobileModule} from '../shared-with-mobile/shared-with-mobile.module';
-import { MobilePayDetailsComponent } from './mobile-pay-details/mobile-pay-details.component';
+import {MobilePayDetailsComponent} from './mobile-pay-details/mobile-pay-details.component';
 import {MatListModule} from '@angular/material/list';
+import {RouterModule, Routes} from '@angular/router';
+import {KeeperGuard} from '../stocks/guards/keeper.guard';
+import {LibModule} from '../lib/lib.module';
+
+
+const routes: Routes = [
+  {path: '', component: AccountComponent},
+  {path: 'general', canActivate: [KeeperGuard], component: SettingComponent},
+  {path: 'bill', canActivate: [KeeperGuard], component: BillingComponent},
+  {path: 'users', canActivate: [KeeperGuard], component: UsersComponent},
+  {path: 'profile', component: ProfileComponent},
+];
 
 @NgModule({
   declarations: [
@@ -49,39 +56,37 @@ import {MatListModule} from '@angular/material/list';
     BillingComponent,
     MobilePayDetailsComponent,
   ],
-    imports: [
-        CommonModule,
-        SettingsModuleRoutingModule,
-        MatSidenavModule,
-        CommonComponentsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatSlideToggleModule,
-        MatTooltipModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        MatTabsModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTableModule,
-        MatExpansionModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatRippleModule,
-        MatDividerModule,
-        MatRadioModule,
-        FormsModule,
-        MobileUiModule,
-        SharedWithMobileModule,
-        MatListModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatSidenavModule,
+    LibModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatRippleModule,
+    MatDividerModule,
+    MatRadioModule,
+    FormsModule,
+    MatListModule
+  ],
   entryComponents: [
     DialogUserNewComponent,
     DialogUserDeleteComponent,
     UpdateUserPasswordDialogComponent
   ]
 })
-export class SettingsModuleModule {
+export class AccountModule {
 }

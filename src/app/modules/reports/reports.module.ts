@@ -4,8 +4,6 @@ import {CommonModule} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {StockPageComponent} from './pages/stock.page';
 import {ReorderComponent} from './components/reorder.component';
-import {DashboardModuleRoutingModule} from '../dashboard/dashboard-module-routing.module';
-import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -30,6 +28,7 @@ import {CartComponent} from './components/cart.component';
 import {ExpiredComponent} from './components/expired.component';
 import {ProfitByCategoryComponent} from './components/profit-by-category.component';
 import {RouterModule, Routes} from '@angular/router';
+import {LibModule} from '../lib/lib.module';
 
 
 const routes: Routes = [
@@ -58,8 +57,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
-    DashboardModuleRoutingModule,
-    CommonComponentsModule,
+    LibModule,
     MatSidenavModule,
     MatCardModule,
     MatFormFieldModule,

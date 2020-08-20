@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {DateRangeHeaderComponent} from './date-range-header.component';
 /*********** move to common ***********/
 import {StorageService} from '../../../services/storage.service';
 /*********** move to common ***********/
 import {FormControl} from '@angular/forms';
 import {ShopModel} from '../models/shop.model';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-current-shop',
@@ -50,7 +50,7 @@ import {ShopModel} from '../models/shop.model';
   `,
   styleUrls: ['../styles/date-range.style.css']
 })
-export class DateRangeComponent extends DeviceInfo implements OnInit {
+export class DateRangeComponent extends DeviceInfoUtil implements OnInit {
   rangeHeader = DateRangeHeaderComponent;
   shop: ShopModel;
   today = new Date();

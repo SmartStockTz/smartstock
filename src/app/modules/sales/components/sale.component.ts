@@ -8,16 +8,16 @@ import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 /*********** move to common ***********/
-import {LogService} from '../../lib/services/log.service';
-import {DeviceInfo} from '../../shared/DeviceInfo';
-import {EventApiService} from '../../lib/services/event-api.service';
 /*********** move to common ***********/
 import {environment} from '../../../../environments/environment';
 import {FormControl} from '@angular/forms';
 /*********** move to common ***********/
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 /*********** move to common ***********/
 import {StockModel} from '../models/stock.model';
+import {EventApiService} from '../../lib/services/event-api.service';
+import {LogService} from '../../lib/services/log.service';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
   selector: 'app-sale',
@@ -80,7 +80,7 @@ import {StockModel} from '../models/stock.model';
     UserDatabaseService
   ]
 })
-export class SaleComponent extends DeviceInfo implements OnInit {
+export class SaleComponent extends DeviceInfoUtil implements OnInit {
   products: StockModel[] = undefined;
   fetchDataProgress = false;
   showProgress = false;

@@ -5,13 +5,13 @@ import {EventApiService} from 'src/app/modules/lib/services/event-api.service';
 /*********** moe to common ***********/
 import {MatSidenav} from '@angular/material/sidenav';
 /*********** moe to common ***********/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 /*********** moe to common ***********/
 import {MatSnackBar} from '@angular/material/snack-bar';
 /*********** moe to common ***********/
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 /*********** moe to common ***********/
 import {StockModel} from '../models/stock.model';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
   selector: 'app-product-card',
@@ -76,7 +76,7 @@ import {StockModel} from '../models/stock.model';
   `,
   styleUrls: ['../styles/product.style.css']
 })
-export class ProductComponent extends DeviceInfo implements OnInit {
+export class ProductComponent extends DeviceInfoUtil implements OnInit {
   @Input() product: StockModel;
   @Input() productIndex: number;
   @Input() isViewedInWholesale = false;

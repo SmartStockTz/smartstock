@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
-import {SsmEvents} from './modules/common-lib/utils/eventsNames';
 import {StorageService} from './services/storage.service';
 import {EventApiService} from './modules/lib/services/event-api.service';
 import {BFast} from 'bfastjs';
+import { SsmEvents } from './modules/lib/utils/eventsNames.util';
 
 @Component({
   selector: 'app-root',

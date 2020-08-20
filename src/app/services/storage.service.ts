@@ -3,13 +3,13 @@ import {StorageAdapter} from '../adapter/StorageAdapter';
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {BatchModel} from '../modules/sales/models/batch.model';
-import {SsmEvents} from '../modules/common-lib/utils/eventsNames';
 import {EventApiService} from '../modules/lib/services/event-api.service';
 import {BFast} from 'bfastjs';
 import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
-import {Security} from '../modules/common-lib/utils/security';
 import {CustomerModel} from '../modules/sales/models/customer.model';
 import {StockModel} from '../modules/stocks/models/stock.model';
+import {SecurityUtil} from '../modules/lib/utils/security.util';
+import {SsmEvents} from '../modules/lib/utils/eventsNames.util';
 
 
 @Injectable({
@@ -28,7 +28,7 @@ export class StorageService implements StorageAdapter {
   async saveSales(batchs: BatchModel[]): Promise<any> {
     const activeShop = await this.getActiveShop();
     await BFast.cache({database: 'sales', collection: activeShop.projectId})
-      .set<BatchModel[]>(Security.randomString(12), batchs, {
+      .set<BatchModel[]>(SecurityUtil.randomString(12), batchs, {
         dtl: 720
       });
   }

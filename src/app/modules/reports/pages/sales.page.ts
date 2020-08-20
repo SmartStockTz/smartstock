@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 /******* move to common *****/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 /******* move to common *****/
 import {environment} from '../../../../environments/environment';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-sales-reports',
@@ -58,7 +58,7 @@ import {environment} from '../../../../environments/environment';
   `,
   styleUrls: ['../styles/sales.style.css']
 })
-export class SalesPageComponent extends DeviceInfo implements OnInit {
+export class SalesPageComponent extends DeviceInfoUtil implements OnInit {
   isMobile = environment.android;
 
   @ViewChild('sidenav') sidenav: MatSidenav;

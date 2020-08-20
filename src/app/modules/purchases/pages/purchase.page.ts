@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 /** must be removed to common module **/
-import {DeviceInfo} from '../../shared/DeviceInfo';
 /** must be removed to common module **/
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -9,6 +8,7 @@ import {PurchaseModel} from '../models/purchase.model';
 import {environment} from '../../../../environments/environment';
 import {PurchaseDetailsComponent} from '../components/details.component';
 import {PurchaseState} from '../states/purchase.state';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-purchase',
@@ -126,7 +126,7 @@ import {PurchaseState} from '../states/purchase.state';
     PurchaseState
   ]
 })
-export class PurchasePageComponent extends DeviceInfo implements OnInit {
+export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
   purchasesDatasource: MatTableDataSource<PurchaseModel>;
   purchaseTableColumns = ['refNumber', 'channel', 'amount', 'status', 'actions'];
   getPurchaseProgress = false;

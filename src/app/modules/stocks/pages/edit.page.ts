@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {StockModel} from '../models/stock.model';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-stock-edit',
@@ -12,7 +12,7 @@ import {StockModel} from '../models/stock.model';
   `,
   styleUrls: ['../styles/edit.style.css']
 })
-export class EditPageComponent extends DeviceInfo implements OnInit {
+export class EditPageComponent extends DeviceInfoUtil implements OnInit {
 
   updateForm: FormGroup;
   mainProgress = false;

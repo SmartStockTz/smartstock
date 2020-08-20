@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {environment} from '../../../../environments/environment';
 import {Subject} from 'rxjs';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
   selector: 'app-dashboard-sales',
@@ -103,7 +103,7 @@ import {Subject} from 'rxjs';
   `,
   styleUrls: ['../styles/dashboard.style.css']
 })
-export class DashboardPageComponent extends DeviceInfo implements OnInit {
+export class DashboardPageComponent extends DeviceInfoUtil implements OnInit {
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 

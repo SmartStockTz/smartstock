@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {EventApiService} from '../../lib/services/event-api.service';
 import {SettingsService} from '../../../services/settings.service';
-import {SsmEvents} from '../../common-lib/utils/eventsNames';
 import {environment} from '../../../../environments/environment';
+import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.css']
 })
-export class SettingComponent extends DeviceInfo implements OnInit {
+export class SettingComponent extends DeviceInfoUtil implements OnInit {
   settingsForm: FormGroup;
   getSettingsProgress = false;
   saveSettingProgress = false;
