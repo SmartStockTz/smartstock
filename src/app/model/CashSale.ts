@@ -1,4 +1,4 @@
-import {Stock} from './stock';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 export interface SalesModel {
   objectId?: string;
@@ -14,7 +14,7 @@ export interface SalesModel {
   discount: number;
   user: string;
   channel: string;
-  stock: Stock;
+  stock: StockModel;
   batch?: string; // for offline sync
   stockId: string;
 }

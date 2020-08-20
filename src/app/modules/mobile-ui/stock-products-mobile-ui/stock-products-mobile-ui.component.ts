@@ -5,10 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import {Observable, of} from 'rxjs';
 import {StorageService} from '../../../services/storage.service';
 import {InfoMessageService} from '../../../services/info-message.service';
-import {StockDatabaseService} from '../../../services/stock-database.service';
+import {StockState} from '../../stocks/states/stock.state';
+import {StockModel} from '../../stocks/models/stock.model';
 import {UnitsI} from '../../../model/UnitsI';
-import {Stock} from '../../../model/stock';
-import {DialogDeleteComponent} from '../../stocks/stock/stock.component';
+import {DialogDeleteComponent} from '../../stocks/components/stock.component';
 
 @Component({
   selector: 'app-stock-products-mobile-ui',
@@ -23,12 +23,12 @@ export class StockProductsMobileUiComponent implements OnInit {
               public readonly _bottomSheet: MatBottomSheet,
               private readonly _infoMessage: InfoMessageService,
               private readonly _dialog: MatDialog,
-              private readonly _stockDatabase: StockDatabaseService) {
+              private readonly _stockDatabase: StockState) {
   }
 
   showProgress = false;
   units: Observable<UnitsI[]>;
-  products: Observable<Stock[]>;
+  products: Observable<StockModel[]>;
 
   ngOnInit() {
     window.addEventListener('ssm_stocks_updated', (e) => {
@@ -83,12 +83,12 @@ export class StockProductsMobileUiComponent implements OnInit {
     });
   }
 
-  editStock(element: Stock) {
+  editStock(element: StockModel) {
     this._router.navigateByUrl('/stock/edit/' + element.objectId + '?stock=' + encodeURI(JSON.stringify(element)))
       .catch(reason => console.log(reason));
   }
 
-  deleteStock(element: Stock) {
+  deleteStock(element: StockModel) {
     const matDialogRef = this._dialog.open(DialogDeleteComponent, {data: element});
     matDialogRef.afterClosed().subscribe(value => {
       if (value === 'no') {
@@ -106,7 +106,7 @@ export class StockProductsMobileUiComponent implements OnInit {
     });
   }
 
-  // viewProduct(stock: Stock) {
+  // viewProduct(stock: StockModel) {
   //   this._bottomSheet.open(StockDetailsComponent, {
   //     data: stock,
   //     closeOnNavigation: true,
@@ -117,7 +117,7 @@ export class StockProductsMobileUiComponent implements OnInit {
     this._storage.getStocks().then(value => {
       if (value) {
         if (query) {
-          const stocksFiltered: Stock[] = value.filter(value1 => (value1.product.toLowerCase().includes(query.toLowerCase())));
+          const stocksFiltered: StockModel[] = value.filter(value1 => (value1.product.toLowerCase().includes(query.toLowerCase())));
           this.products = of(stocksFiltered);
         } else {
           this.products = of(value);
@@ -131,7 +131,7 @@ export class StockProductsMobileUiComponent implements OnInit {
     });
   }
 
-  private _removeProductFromTable(element: Stock) {
+  private _removeProductFromTable(element: StockModel) {
     this._storage.getStocks().then(stocks => {
       const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
       this.products = of(updatedStock);
@@ -141,7 +141,7 @@ export class StockProductsMobileUiComponent implements OnInit {
     });
   }
 
-  // private _getTotalPurchaseOfStock(stocks: Stock[]) {
+  // private _getTotalPurchaseOfStock(stocks: StockModel[]) {
   //   // @ts-ignore
   //   const sum = stocks.reduce(function (a, b) {
   //     return {purchase: a.purchase + b.purchase}; // returns object with property x

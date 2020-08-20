@@ -38,7 +38,7 @@
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item routerLink="/report/sales">Sales Reports</a>
-          <a mat-list-item routerLink="/report/stocks">Stock Reports</a>
+          <a mat-list-item routerLink="/report/stocks">StockModel Reports</a>
         </mat-nav-list>
       </mat-expansion-panel>
 
@@ -79,7 +79,7 @@
                            [expanded]="shouldExpand('stock')" class="mat-elevation-z0">
         <mat-expansion-panel-header>
           <mat-icon matPrefix color="primary">store</mat-icon>
-          <span style="margin-left: 8px">Stock</span>
+          <span style="margin-left: 8px">StockModel</span>
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item routerLink="/stock" [queryParams]="{t:'0'}">Products</a>

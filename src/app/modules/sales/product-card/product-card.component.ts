@@ -5,7 +5,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SsmEvents} from '../../../utils/eventsNames';
-import {Stock} from '../../../model/stock';
+import {StockModel} from '../../stocks/models/stock.model';
 
 @Component({
   selector: 'app-product-card',
@@ -13,7 +13,7 @@ import {Stock} from '../../../model/stock';
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent extends DeviceInfo implements OnInit {
-  @Input() product: Stock;
+  @Input() product: StockModel;
   @Input() productIndex: number;
   @Input() isViewedInWholesale = false;
   @Input() cartdrawer: MatSidenav;

@@ -1,8 +1,8 @@
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {BatchModel} from '../model/batchModel';
-import {Stock} from '../model/stock';
 import {CustomerModel} from '../model/CustomerModel';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 export interface StorageAdapter {
   getActiveUser(): Promise<UserI>;
@@ -27,11 +27,11 @@ export interface StorageAdapter {
 
   removeStocks(): Promise<any>;
 
-  getStocks(): Promise<Stock[]>;
+  getStocks(): Promise<StockModel[]>;
 
-  saveStocks(stocks: Stock[]): Promise<any>;
+  saveStocks(stocks: StockModel[]): Promise<any>;
 
-  saveStock(stock: Stock): Promise<Stock>;
+  saveStock(stock: StockModel): Promise<StockModel>;
 
   saveCustomer(customer: CustomerModel): Promise<CustomerModel>;
 

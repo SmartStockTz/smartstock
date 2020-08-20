@@ -2,13 +2,13 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from 'src/app/services/user-database.service';
 import {StorageService} from 'src/app/services/storage.service';
-import {StockDatabaseService} from 'src/app/services/stock-database.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
 import {DeviceInfo} from '../../shared/DeviceInfo';
-import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
+import {StockModel} from '../../stocks/models/stock.model';
+import {StockState} from '../../stocks/states/stock.state';
 
 @Component({
   selector: 'app-retail-sale',
@@ -17,7 +17,7 @@ import {LogService} from '../../../services/log.service';
 })
 export class RetailSaleComponent extends DeviceInfo implements OnInit {
 
-  productsObservable: Observable<Stock[]>;
+  productsObservable: Observable<StockModel[]>;
   fetchDataProgress = false;
   showProgress = false;
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -29,7 +29,7 @@ export class RetailSaleComponent extends DeviceInfo implements OnInit {
               private readonly _storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
-              private readonly _stockApi: StockDatabaseService,
+              private readonly _stockApi: StockState,
   ) {
     super();
   }

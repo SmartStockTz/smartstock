@@ -4,9 +4,9 @@ import {FormBuilder, FormControl} from '@angular/forms';
 
 import {Observable, of} from 'rxjs';
 import {UnitsI} from '../../../model/UnitsI';
-import {StockDatabaseService} from '../../../services/stock-database.service';
 import {InfoMessageService} from '../../../services/info-message.service';
-import {DialogUnitDeleteComponent, DialogUnitNewComponent} from '../../stocks/units/units.component';
+import {StockState} from '../../stocks/states/stock.state';
+import {DialogUnitDeleteComponent, DialogUnitNewComponent} from '../../stocks/components/units.component';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class UnitsMobileUiComponent implements OnInit {
 
   // @ViewChild(CdkVirtualScrollViewport, {static: false}) virtualScroll: CdkVirtualScrollViewport;
 
-  constructor(private readonly stockDatabase: StockDatabaseService,
+  constructor(private readonly stockDatabase: StockState,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
               private readonly snack: InfoMessageService) {

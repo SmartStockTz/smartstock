@@ -3,13 +3,13 @@ import {StorageAdapter} from '../adapter/StorageAdapter';
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
 import {BatchModel} from '../model/batchModel';
-import {Stock} from '../model/stock';
 import {SsmEvents} from '../utils/eventsNames';
 import {EventApiService} from './event-api.service';
 import {BFast} from 'bfastjs';
 import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
 import {Security} from '../utils/security';
 import {CustomerModel} from '../model/CustomerModel';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 
 @Injectable({
@@ -88,13 +88,13 @@ export class StorageService implements StorageAdapter {
     return await BFast.cache({database: 'stocks', collection: shop.projectId}).clearAll();
   }
 
-  async getStocks(): Promise<Stock[]> {
+  async getStocks(): Promise<StockModel[]> {
     const shop = await this.getActiveShop();
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
-    return await stocksCache.get<Stock[]>('all');
+    return await stocksCache.get<StockModel[]>('all');
   }
 
-  async saveStocks(stocks: Stock[]): Promise<any> {
+  async saveStocks(stocks: StockModel[]): Promise<any> {
     const shop = await this.getActiveShop();
     const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
     return await stocksCache.set('all', stocks, {
@@ -102,7 +102,7 @@ export class StorageService implements StorageAdapter {
     });
   }
 
-  async saveStock(stock: Stock): Promise<Stock> {
+  async saveStock(stock: StockModel): Promise<StockModel> {
     // const shop = await this.getActiveShop();
     // const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
     // return stocksCache.set(stock.objectId, stock);

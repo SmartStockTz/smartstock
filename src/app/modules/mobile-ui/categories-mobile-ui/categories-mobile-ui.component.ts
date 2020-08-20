@@ -3,9 +3,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {CategoryI} from '../../../model/CategoryI';
-import {StockDatabaseService} from '../../../services/stock-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DialogCategoryDeleteComponent, DialogCategoryNewComponent} from '../../stocks/categories/categories.component';
+import {DialogCategoryDeleteComponent, DialogCategoryNewComponent} from '../../stocks/components/categories.component';
+import {StockState} from '../../stocks/states/stock.state';
 
 @Component({
   selector: 'app-categories-mobile-ui',
@@ -19,7 +19,7 @@ export class CategoriesMobileUiComponent implements OnInit {
   descriptionFormControl = new FormControl();
   categories: Observable<CategoryI[]>;
 
-  constructor(private readonly stockDatabase: StockDatabaseService,
+  constructor(private readonly stockDatabase: StockState,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
               private readonly snack: MatSnackBar) {

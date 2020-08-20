@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../../shared/DeviceInfo';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Observable, of} from 'rxjs';
 
-import {PurchaseI} from '../../../../model/PurchaseI';
+import {PurchaseModel} from '../../../purchase/models/purchase.model';
 import {PurchaseDatabaseService} from '../../../../services/purchase-database.service';
-import {StockDetailsComponent} from '../../../stocks/stock/stock.component';
 import {InfoMessageService} from '../../../../services/info-message.service';
-import {PurchaseDetailsComponent} from '../../../purchase/purchase/purchase.component';
+import {PurchaseDetailsComponent} from '../../../purchase/components/details.component';
 
 @Component({
   selector: 'app-purchase-mobile',
@@ -22,8 +21,8 @@ export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
   loadMoreProgress = false;
   size: 100;
   skip: 0;
-  purchasesArray: PurchaseI[];
-  purchases: Observable<PurchaseI[]>;
+  purchasesArray: PurchaseModel[];
+  purchases: Observable<PurchaseModel[]>;
 
   constructor(private readonly purchaseDatabase: PurchaseDatabaseService,
               private readonly bottomSheet: MatBottomSheet,
@@ -80,20 +79,20 @@ export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  showPurchaseDetails(purchase: PurchaseI) {
+  showPurchaseDetails(purchase: PurchaseModel) {
     this.bottomSheet.open(PurchaseDetailsComponent, {
       data: purchase,
       closeOnNavigation: true,
     });
   }
 
-  recordPayment(purchase: PurchaseI) {
+  recordPayment(purchase: PurchaseModel) {
     this.snack.showMobileInfoMessage('Start update payment records...');
     this.purchaseDatabase.recordPayment(purchase.objectId).then(value => {
       this.snack.showMobileInfoMessage('Payments recorded');
       const oldIndex = this.purchasesArray.indexOf(purchase);
       if (oldIndex !== -1) {
-        const oldPurchase: PurchaseI = this.purchasesArray[oldIndex];
+        const oldPurchase: PurchaseModel = this.purchasesArray[oldIndex];
         oldPurchase.paid = true;
         this.purchasesArray[oldIndex] = oldPurchase;
       }
@@ -103,7 +102,7 @@ export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  deletePurchase(purchase: PurchaseI) {
+  deletePurchase(purchase: PurchaseModel) {
     this.snack.showMobileInfoMessage('Start delete process...', 5000);
     this.purchaseDatabase.deletePurchase(purchase).then(_ => {
       // console.log(value);
@@ -115,6 +114,4 @@ export class PurchaseMobileComponent extends DeviceInfo implements OnInit {
       this.snack.showMobileInfoMessage('Purchase not deleted, try again', 5000);
     });
   }
-
-
 }

@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
-import {Stock} from '../../../../model/stock';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {json2Csv} from '../../../../utils/json2csv';
 import {FormControl, Validators} from '@angular/forms';
+import {StockModel} from '../../../stocks/models/stock.model';
 
 @Component({
   selector: 'app-products-about-to-expire',
@@ -24,8 +24,8 @@ export class ProductsAboutToExpireComponent implements OnInit {
 
   isLoading = false;
   noDataRetrieved = true;
-  stocks = []
-  expiredProducts: MatTableDataSource<Stock>;
+  stocks = [];
+  expiredProducts: MatTableDataSource<StockModel>;
   stockColumns = ['product', 'expire', 'quantity'];
 
   filterFormControl = new FormControl('', [Validators.nullValidator]);

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import {Stock} from '../../../model/stock';
-import {StockDetailsComponent} from '../../stocks/stock/stock.component';
+import {StockModel} from '../../stocks/models/stock.model';
+import {StockDetailsComponent} from '../../stocks/components/stock.component';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {StockDetailsComponent} from '../../stocks/stock/stock.component';
 })
 export class StockProductItemMobileUiComponent implements OnInit {
 
-  @Input() product: Stock;
+  @Input() product: StockModel;
   @Input() bottomSheet: MatBottomSheet;
   @Output() deleteCallback = new EventEmitter();
   @Output() editCallback = new EventEmitter();
@@ -22,7 +22,7 @@ export class StockProductItemMobileUiComponent implements OnInit {
   ngOnInit() {
   }
 
-  showDetails(product: Stock) {
+  showDetails(product: StockModel) {
     this.bottomSheet.open(StockDetailsComponent, {
       data: product,
       closeOnNavigation: true,

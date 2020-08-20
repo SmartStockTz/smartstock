@@ -5,9 +5,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {SupplierI} from '../../../model/SupplierI';
-import {StockDatabaseService} from '../../../services/stock-database.service';
 import {ShowSupplierMobileUiComponent} from './show-supplier-mobile-ui/show-supplier-mobile-ui.component';
-import {DialogSupplierDeleteComponent, DialogSupplierNewComponent} from '../../stocks/suppliers/suppliers.component';
+import {DialogSupplierDeleteComponent, DialogSupplierNewComponent} from '../../stocks/components/suppliers.component';
+import {StockState} from '../../stocks/states/stock.state';
 
 @Component({
   selector: 'app-suppliers-mobile-ui',
@@ -25,7 +25,7 @@ export class SuppliersMobileUiComponent implements OnInit {
   mobileFormControl = new FormControl();
   suppliers: Observable<SupplierI[]>;
 
-  constructor(private readonly stockDatabase: StockDatabaseService,
+  constructor(private readonly stockDatabase: StockState,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
               private readonly bottomSheet: MatBottomSheet,

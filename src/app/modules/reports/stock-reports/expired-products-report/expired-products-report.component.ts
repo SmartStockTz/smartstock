@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AdminDashboardService} from '../../../../services/admin-dashboard.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {Stock} from '../../../../model/stock';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {json2Csv} from '../../../../utils/json2csv';
 import {FormControl, Validators} from '@angular/forms';
+import {StockModel} from '../../../stocks/models/stock.model';
 
 @Component({
   selector: 'app-expired-products-report',
@@ -23,7 +23,7 @@ export class ExpiredProductsReportComponent implements OnInit {
 
   isLoading = false;
   noDataRetrieved = true;
-  expiredProducts: MatTableDataSource<Stock>;
+  expiredProducts: MatTableDataSource<StockModel>;
   stockColumns = ['product', 'expire'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

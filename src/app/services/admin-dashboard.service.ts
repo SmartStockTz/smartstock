@@ -3,13 +3,13 @@ import {AdminReportAdapter} from '../adapter/AdminReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 import {StorageService} from './storage.service';
-import {Stock} from '../model/stock';
 import {BFast} from 'bfastjs';
 import {toSqlDate} from '../utils/date';
 import {CartModel} from '../model/cart';
 import {SalesModel} from '../model/CashSale';
 import * as moment from 'moment';
 import {environment} from '../../environments/environment';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 @Injectable({
   providedIn: 'root'
@@ -183,10 +183,10 @@ export class AdminDashboardService implements AdminReportAdapter {
     return stocks.filter(stock => stock.reorder >= stock.quantity);
   }
 
-  async getExpiredProducts(date: Date, skip = 0, size = 1000): Promise<Stock[]> {
+  async getExpiredProducts(date: Date, skip = 0, size = 1000): Promise<StockModel[]> {
     const activeShop = await this.storage.getActiveShop();
 
-    return BFast.database(activeShop.projectId).collection('stocks').query().find<Stock>({
+    return BFast.database(activeShop.projectId).collection('stocks').query().find<StockModel>({
       filter: {
         // @ts-ignore
         expire: {
@@ -201,7 +201,7 @@ export class AdminDashboardService implements AdminReportAdapter {
     });
   }
 
-  async getProductsAboutToExpire(): Promise<Stock[]> {
+  async getProductsAboutToExpire(): Promise<StockModel[]> {
     const activeShop = await this.storage.getActiveShop();
     let stocks = await this.storage.getStocks();
     const today = new Date();

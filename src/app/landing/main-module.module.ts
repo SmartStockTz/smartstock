@@ -2,13 +2,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {LandingComponent} from './landing/landing.component';
-import {DialogDeleteComponent} from '../modules/stocks/stock/stock.component';
 import {RegisterComponent} from './register/register.component';
 import {FooterComponent} from './landing/footer/footer.component';
 import {CreateShopComponent} from './choose-shop/create-shop/create-shop.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {ChooseShopComponent} from './choose-shop/choose-shop.component';
-import {DialogSupplierNewComponent} from '../modules/stocks/suppliers/suppliers.component';
 import {RegisterDialogComponent} from './register/rdialog.component';
 import {VerifyEMailDialogComponent} from './login/verify-dialog.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -30,6 +28,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ResetPasswordDialogComponent} from './login/reset-password.component';
+import {DialogSupplierNewComponent} from '../modules/stocks/components/suppliers.component';
+import {DialogDeleteComponent} from '../modules/stocks/components/stock.component';
 
 @NgModule({
   declarations: [

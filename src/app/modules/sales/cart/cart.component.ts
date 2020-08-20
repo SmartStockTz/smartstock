@@ -12,11 +12,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {SsmEvents} from '../../../utils/eventsNames';
 import {SalesModel} from '../../../model/CashSale';
 import {CartModel} from '../../../model/cart';
-import {Stock} from '../../../model/stock';
 import {toSqlDate} from '../../../utils/date';
 import {environment} from '../../../../environments/environment';
 import {CustomerApiService} from '../../../services/customer-api.service';
 import {Security} from '../../../utils/security';
+import {StockModel} from '../../stocks/models/stock.model';
 
 @Component({
   selector: 'app-cart',
@@ -46,8 +46,8 @@ export class CartComponent implements OnInit {
   customerFormControl = new FormControl('', [Validators.nullValidator, Validators.required, Validators.minLength(3)]);
   customers: Observable<string[]>;
   customersArray: string[];
-  cartProductsArray: { quantity: number, product: Stock }[] = [];
-  cartProducts: Observable<{ quantity: number, product: Stock }[]> = of(this.cartProductsArray);
+  cartProductsArray: { quantity: number, product: StockModel }[] = [];
+  cartProducts: Observable<{ quantity: number, product: StockModel }[]> = of(this.cartProductsArray);
   checkoutProgress = false;
   private currentUser: UserModel;
   isMobile = environment.android;
@@ -206,7 +206,7 @@ export class CartComponent implements OnInit {
     this.printCart();
   }
 
-  private _getCartItemSubAmount(cart: { quantity: number, product: Stock, totalDiscount: number, totalItems: number }): number {
+  private _getCartItemSubAmount(cart: { quantity: number, product: StockModel, totalDiscount: number, totalItems: number }): number {
     const amount = this.isViewedInWholesale
       ? (cart.quantity * cart.product.wholesalePrice)
       : (cart.quantity * cart.product.retailPrice);

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Stock} from '../model/stock';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 @Injectable()
 export class SaleUtilsService {
-  findTotalCartCost(cartItems: { quantity: number, product: Stock }[], isWholeSale: boolean) {
+  findTotalCartCost(cartItems: { quantity: number, product: StockModel }[], isWholeSale: boolean) {
     let totalCost: number;
     if (isWholeSale) {
       const mapped = cartItems.map(
@@ -17,7 +17,7 @@ export class SaleUtilsService {
     return totalCost;
   }
 
-  findCartItemUnitPrice(cart: { quantity: number, product: Stock }, isWholeSale: boolean) {
+  findCartItemUnitPrice(cart: { quantity: number, product: StockModel }, isWholeSale: boolean) {
     if (isWholeSale) {
       return cart.product.wholesalePrice / cart.product.wholesaleQuantity;
     } else {
@@ -25,12 +25,12 @@ export class SaleUtilsService {
     }
   }
 
-  findTotalCartItem(cartItems: { quantity: number, product: Stock }[]) {
+  findTotalCartItem(cartItems: { quantity: number, product: StockModel }[]) {
     const mapped = cartItems.map(value => value.quantity);
     return mapped.reduce((a, b) => a + b, 0);
   }
 
-  findCartItemAmount(cart: { quantity: number, product: Stock }, isWholeSale: boolean) {
+  findCartItemAmount(cart: { quantity: number, product: StockModel }, isWholeSale: boolean) {
     if (isWholeSale) {
       return this.findCartItemUnitPrice(cart, isWholeSale) * cart.quantity * cart.product.wholesaleQuantity;
     } else {
@@ -38,7 +38,7 @@ export class SaleUtilsService {
     }
   }
 
-  findCartItemQuantity(cart: { quantity: number, product: Stock }, isWholeSale: boolean) {
+  findCartItemQuantity(cart: { quantity: number, product: StockModel }, isWholeSale: boolean) {
     if (isWholeSale) {
       return cart.quantity * cart.product.wholesaleQuantity;
     } else {

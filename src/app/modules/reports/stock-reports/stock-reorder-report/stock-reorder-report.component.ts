@@ -5,14 +5,14 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LogService } from 'src/app/services/log.service';
-import { StockDatabaseService } from 'src/app/services/stock-database.service';
 import { Observable, of } from 'rxjs';
 import { UnitsI } from 'src/app/model/UnitsI';
-import { Stock } from 'src/app/model/stock';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AdminDashboardService } from 'src/app/services/admin-dashboard.service';
 import {json2Csv} from '../../../../utils/json2csv';
+import {StockState} from '../../../stocks/states/stock.state';
+import {StockModel} from '../../../stocks/models/stock.model';
 
 
 @Component({
@@ -42,13 +42,13 @@ export class StockReorderReportComponent implements OnInit {
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly _report: AdminDashboardService,
-              private readonly stockDatabase: StockDatabaseService) {
+              private readonly stockDatabase: StockState) {
   }
 
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
   units: Observable<UnitsI[]>;
-  stockReorderDatasource: MatTableDataSource<Stock>;
+  stockReorderDatasource: MatTableDataSource<StockModel>;
   stockColumns = ['product', 'quantity', 'reorder', 'supplier'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

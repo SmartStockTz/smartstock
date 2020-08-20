@@ -1,28 +1,29 @@
-import {Stock} from '../model/stock';
+
 import {CategoryI} from '../model/CategoryI';
 import {SupplierI} from '../model/SupplierI';
 import {UnitsI} from '../model/UnitsI';
-import {PurchaseI} from '../model/PurchaseI';
+import {PurchaseModel} from '../modules/purchase/models/purchase.model';
+import {StockModel} from '../modules/stocks/models/stock.model';
 
 export interface StockDataSource {
 
   // importStocks(): Promise<any>;
 
-  getStock(id: string, callback: (stock: Stock) => void);
+  getStock(id: string, callback: (stock: StockModel) => void);
 
-  getAllStock(callback: (stocks: Stock[]) => void);
+  getAllStock(callback: (stocks: StockModel[]) => void);
 
-  deleteStock(stock: Stock, callback?: (value: any) => void);
+  deleteStock(stock: StockModel, callback?: (value: any) => void);
 
-  deleteAllStock(stocks: Stock[], callback?: (value: any) => void);
+  deleteAllStock(stocks: StockModel[], callback?: (value: any) => void);
 
-  addStock(stock: Stock): Promise<Stock>;
+  addStock(stock: StockModel): Promise<StockModel>;
 
-  importStocks(stocks: Stock[]): Promise<any>;
+  importStocks(stocks: StockModel[]): Promise<any>;
 
-  updateStock(stock: Stock): Promise<Stock>;
+  updateStock(stock: StockModel): Promise<StockModel>;
 
-  updateAllStock(stocks: Stock[], callback?: (value: any) => void);
+  updateAllStock(stocks: StockModel[], callback?: (value: any) => void);
 
   getCategory(id: string, callback: (category: CategoryI) => void);
 
@@ -52,7 +53,7 @@ export interface StockDataSource {
 
   updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any>;
 
-  addPurchase(purchaseI: PurchaseI): Promise<any>;
+  addPurchase(purchaseI: PurchaseModel): Promise<any>;
 
   updateAllSupplier(callback?: (value: any) => void);
 

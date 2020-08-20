@@ -2,17 +2,17 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {SalesDatabaseService} from '../../../services/sales-database.service';
-import {StockDatabaseService} from '../../../services/stock-database.service';
 import {StorageService} from '../../../services/storage.service';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Stock} from '../../../model/stock';
 import {LogService} from '../../../services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {EventApiService} from '../../../services/event-api.service';
 import {environment} from '../../../../environments/environment';
 import {FormControl} from '@angular/forms';
 import {SsmEvents} from '../../../utils/eventsNames';
+import {StockModel} from '../../stocks/models/stock.model';
+import {StockState} from '../../stocks/states/stock.state';
 
 @Component({
   selector: 'app-sale',
@@ -24,7 +24,7 @@ import {SsmEvents} from '../../../utils/eventsNames';
   ]
 })
 export class SaleComponent extends DeviceInfo implements OnInit {
-  products: Stock[] = undefined;
+  products: StockModel[] = undefined;
   fetchDataProgress = false;
   showProgress = false;
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -41,7 +41,7 @@ export class SaleComponent extends DeviceInfo implements OnInit {
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly eventApi: EventApiService,
-              private readonly stockApi: StockDatabaseService,
+              private readonly stockApi: StockState,
   ) {
     super();
   }

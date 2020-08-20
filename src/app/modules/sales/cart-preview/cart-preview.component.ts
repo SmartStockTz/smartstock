@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {SsmEvents} from '../../../utils/eventsNames';
-import {Stock} from '../../../model/stock';
 import {EventApiService} from '../../../services/event-api.service';
 import {SaleUtilsService} from '../../../services/sale-utils.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Observable, of} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {DeviceInfo} from '../../shared/DeviceInfo';
+import {StockModel} from '../../stocks/models/stock.model';
 
 @Component({
   selector: 'app-cart-preview',
@@ -45,7 +45,7 @@ export class CartPreviewComponent extends DeviceInfo implements OnInit {
     });
   }
 
-  private _findTotalCost(cartItems: { quantity: number, product: Stock }[]) {
+  private _findTotalCost(cartItems: { quantity: number, product: StockModel }[]) {
     this.totalCost = this._saleUtils.findTotalCartCost(cartItems, this.isWholeSale);
   }
 
