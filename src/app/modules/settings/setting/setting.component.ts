@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {EventApiService} from '../../../services/event-api.service';
+import {EventApiService} from '../../lib/services/event-api.service';
 import {SettingsService} from '../../../services/settings.service';
-import {SsmEvents} from '../../../utils/eventsNames';
+import {SsmEvents} from '../../common-lib/utils/eventsNames';
 import {environment} from '../../../../environments/environment';
 
 @Component({

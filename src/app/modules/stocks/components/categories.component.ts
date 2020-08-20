@@ -4,7 +4,7 @@ import {MatMenuTrigger} from '@angular/material/menu';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryI} from '../../../model/CategoryI';
+import {CategoryModel} from '../models/category.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
@@ -109,9 +109,9 @@ import {StockState} from '../states/stock.state';
 })
 export class CategoriesComponent implements OnInit {
 
-  categoriesDatasource: MatTableDataSource<CategoryI>;
+  categoriesDatasource: MatTableDataSource<CategoryModel>;
   categoriesTableColums = ['name', 'description', 'actions'];
-  categoriesArray: CategoryI[];
+  categoriesArray: CategoryModel[];
   fetchCategoriesFlag = false;
   nameFormControl = new FormControl();
   descriptionFormControl = new FormControl();
@@ -150,7 +150,7 @@ export class CategoriesComponent implements OnInit {
     this.fetchCategoriesFlag = true;
     this.stockDatabase.getAllCategory({size: 100}).then(data => {
       this.categoriesArray = JSON.parse(JSON.stringify(data));
-      this.categoriesDatasource = new MatTableDataSource<CategoryI>(this.categoriesArray);
+      this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
       this.fetchCategoriesFlag = false;
     }).catch(reason => {
       console.log(reason);
@@ -165,7 +165,7 @@ export class CategoriesComponent implements OnInit {
     }).afterClosed().subscribe(_ => {
       if (_) {
         this.categoriesArray = this.categoriesArray.filter(value => value.objectId !== element.objectId);
-        this.categoriesDatasource = new MatTableDataSource<CategoryI>(this.categoriesArray);
+        this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
         this.snack.open('Category deleted', 'Ok', {
           duration: 2000
         });

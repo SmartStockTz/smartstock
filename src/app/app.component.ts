@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ThreadsService} from './services/threads.service';
-import {SsmEvents} from './utils/eventsNames';
+import {SsmEvents} from './modules/common-lib/utils/eventsNames';
 import {StorageService} from './services/storage.service';
-import {EventApiService} from './services/event-api.service';
+import {EventApiService} from './modules/lib/services/event-api.service';
 import {BFast} from 'bfastjs';
 
 @Component({

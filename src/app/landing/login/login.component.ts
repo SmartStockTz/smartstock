@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {UserDatabaseService} from '../../services/user-database.service';
-import {LogService} from '../../services/log.service';
+import {LogService} from '../../modules/lib/services/log.service';
 import {environment} from '../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
 import {ResetPasswordDialogComponent} from './reset-password.component';

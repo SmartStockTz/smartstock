@@ -1,10 +1,10 @@
 import {Injectable, OnInit} from '@angular/core';
 import {StorageService} from './storage.service';
-import {EventApiService} from './event-api.service';
-import {SsmEvents} from '../utils/eventsNames';
+import {EventApiService} from '../modules/lib/services/event-api.service';
+import {SsmEvents} from '../modules/common-lib/utils/eventsNames';
 import {Capacitor} from '@capacitor/core';
-import {SwLocalDataService} from './sw-local-data.service';
-import {SwSalesProxyService} from './sw-sales-proxy.service';
+import {SyncStocksService} from '../modules/stocks/services/syncStocks.service';
+import {SyncSalesService} from '../modules/sales/services/syncSales.service';
 
 /*
 This should use web sockets when web workers not available
@@ -16,8 +16,8 @@ in a browser
 export class ThreadsService implements OnInit {
 
   constructor(private readonly eventApi: EventApiService,
-              private readonly swLocalDataService: SwLocalDataService,
-              private readonly swSalesProxyService: SwSalesProxyService,
+              private readonly swLocalDataService: SyncStocksService,
+              private readonly swSalesProxyService: SyncSalesService,
               private readonly _storage: StorageService) {
   }
 

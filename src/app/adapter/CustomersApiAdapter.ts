@@ -1,4 +1,4 @@
-import {CustomerModel} from '../model/CustomerModel';
+import {CustomerModel} from '../modules/sales/models/customer.model';
 
 export interface CustomersApiAdapter {
   saveCustomer(customer: CustomerModel): Promise<CustomerModel>;

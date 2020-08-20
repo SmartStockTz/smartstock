@@ -1,7 +1,7 @@
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
-import {BatchModel} from '../model/batchModel';
-import {CustomerModel} from '../model/CustomerModel';
+import {BatchModel} from '../modules/sales/models/batch.model';
+import {CustomerModel} from '../modules/sales/models/customer.model';
 import {StockModel} from '../modules/stocks/models/stock.model';
 
 export interface StorageAdapter {

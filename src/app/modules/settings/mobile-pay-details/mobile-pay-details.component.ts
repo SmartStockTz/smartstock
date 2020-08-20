@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormControl, Validators} from '@angular/forms';
 import {BillingApiService} from '../../../services/billing-api.service';
-import {LogService} from '../../../services/log.service';
+import {LogService} from '../../lib/services/log.service';
 
 @Component({
   selector: 'app-mobile-pay-details',

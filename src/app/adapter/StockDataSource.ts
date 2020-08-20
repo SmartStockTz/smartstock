@@ -1,7 +1,7 @@
 
-import {CategoryI} from '../model/CategoryI';
-import {SupplierI} from '../model/SupplierI';
-import {UnitsI} from '../model/UnitsI';
+import {CategoryModel} from '../modules/stocks/models/category.model';
+import {SupplierModel} from '../modules/stocks/models/supplier.model';
+import {UnitsModel} from '../modules/stocks/models/units.model';
 import {PurchaseModel} from '../modules/purchase/models/purchase.model';
 import {StockModel} from '../modules/stocks/models/stock.model';
 
@@ -25,29 +25,29 @@ export interface StockDataSource {
 
   updateAllStock(stocks: StockModel[], callback?: (value: any) => void);
 
-  getCategory(id: string, callback: (category: CategoryI) => void);
+  getCategory(id: string, callback: (category: CategoryModel) => void);
 
-  getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryI[]>;
+  getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryModel[]>;
 
-  addCategory(category: CategoryI): Promise<any>;
+  addCategory(category: CategoryModel): Promise<any>;
 
-  addAllCategory(categories: CategoryI[], callback?: (value: any) => void);
+  addAllCategory(categories: CategoryModel[], callback?: (value: any) => void);
 
   updateCategory(category: any): Promise<any>;
 
-  updateAllCategory(categories: CategoryI[], callback?: (value: any) => void);
+  updateAllCategory(categories: CategoryModel[], callback?: (value: any) => void);
 
-  deleteCategory(category: CategoryI): Promise<any>;
+  deleteCategory(category: CategoryModel): Promise<any>;
 
-  deleteAllCategory(categories: CategoryI[], callback: (value: any) => void);
+  deleteAllCategory(categories: CategoryModel[], callback: (value: any) => void);
 
-  addSupplier(supplier: SupplierI, callback: (value: any) => void);
+  addSupplier(supplier: SupplierModel, callback: (value: any) => void);
 
-  addAllSupplier(suppliers: SupplierI[], callback: (value: any) => void);
+  addAllSupplier(suppliers: SupplierModel[], callback: (value: any) => void);
 
-  getSupplier(id: string, callback: (supplier: SupplierI) => void);
+  getSupplier(id: string, callback: (supplier: SupplierModel) => void);
 
-  getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierI[]>;
+  getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierModel[]>;
 
   updateSupplier(data: { objectId: string, field: string, value: string }): Promise<any>;
 
@@ -59,10 +59,10 @@ export interface StockDataSource {
 
   deleteSupplier(objectId: string): Promise<any>;
 
-  deleteAllSupplier(suppliers: SupplierI[], callback?: (value: any) => void);
+  deleteAllSupplier(suppliers: SupplierModel[], callback?: (value: any) => void);
 
-  addUnit(unit: UnitsI): Promise<any>;
+  addUnit(unit: UnitsModel): Promise<any>;
 
-  getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsI[]>;
+  getAllUnit(pagination: { size?: number, skip?: number }): Promise<UnitsModel[]>;
 
 }

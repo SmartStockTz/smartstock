@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegisterDialogComponent} from './rdialog.component';
 import {UserDatabaseService} from '../../services/user-database.service';
 import {UserI} from '../../model/UserI';
-import {LogService} from '../../services/log.service';
+import {LogService} from '../../modules/lib/services/log.service';
 
 @Component({
   selector: 'app-register',

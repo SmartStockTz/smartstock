@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {StorageAdapter} from '../adapter/StorageAdapter';
 import {UserI} from '../model/UserI';
 import {ShopI} from '../model/ShopI';
-import {BatchModel} from '../model/batchModel';
-import {SsmEvents} from '../utils/eventsNames';
-import {EventApiService} from './event-api.service';
+import {BatchModel} from '../modules/sales/models/batch.model';
+import {SsmEvents} from '../modules/common-lib/utils/eventsNames';
+import {EventApiService} from '../modules/lib/services/event-api.service';
 import {BFast} from 'bfastjs';
 import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
-import {Security} from '../utils/security';
-import {CustomerModel} from '../model/CustomerModel';
+import {Security} from '../modules/common-lib/utils/security';
+import {CustomerModel} from '../modules/sales/models/customer.model';
 import {StockModel} from '../modules/stocks/models/stock.model';
 
 

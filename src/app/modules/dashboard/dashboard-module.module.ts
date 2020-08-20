@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DashboardModuleRoutingModule} from './dashboard-module-routing.module';
 import {CommonComponentsModule} from '../shared/common-components.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -13,30 +12,36 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {ReactiveFormsModule} from '@angular/forms';
-import {SalesTrendsComponent} from './trends/sales-trends.component';
-import {SalesProductFrequencyComponent} from './product-frequency/sales-product-frequency.component';
-import {DashboardComponent} from './landing/dashboard.component';
+import {SalesTrendsComponent} from './components/sales-trends.component';
+import {SalesProductFrequencyComponent} from './components/sales-product-frequency.component';
+import {DashboardPageComponent} from './pages/dashboard.page';
 import {MatNativeDateModule} from '@angular/material/core';
-import {ProductPerformanceReportComponent} from '../reports/sales-reports/product-performance-report/product-performance-report.component';
+import {ProductPerformanceComponent} from '../reports/components/product-performance.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
-import {TotalSalesComponent} from './total-sales/total-sales.component';
+import {TotalSalesComponent} from './components/total-sales.component';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
-import {DateRangeHeaderComponent} from './date-range-header/date-range-header.component';
-import {DateRangeComponent} from './date-range/date-range.component';
+import {DateRangeHeaderComponent} from './components/date-range-header.component';
+import {DateRangeComponent} from './components/date-range.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {TotalGrossSaleComponent} from './total-gross-sale/total-gross-sale.component';
-import {StockStatusComponent} from './stock-status/stock-status.component';
-import {StockByCategoryComponent} from './stock-by-category/stock-by-category.component';
-import {StockExpiredComponent} from './stock-expired/stock-expired.component';
+import {TotalGrossSaleComponent} from './components/total-gross-sale.component';
+import {StockStatusComponent} from './components/stock-status.component';
+import {StockByCategoryComponent} from './components/stock-by-category.component';
+import {StockExpiredComponent} from './components/stock-expired.component';
+import {RouterModule, Routes} from '@angular/router';
+
+
+const routes: Routes = [
+  {path: '', component: DashboardPageComponent},
+];
 
 @NgModule({
   declarations: [
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
-    DashboardComponent,
-    ProductPerformanceReportComponent,
+    DashboardPageComponent,
+    ProductPerformanceComponent,
     TotalSalesComponent,
     DateRangeHeaderComponent,
     DateRangeComponent,
@@ -46,12 +51,12 @@ import {StockExpiredComponent} from './stock-expired/stock-expired.component';
     StockExpiredComponent
   ],
   exports: [
-    ProductPerformanceReportComponent,
+    ProductPerformanceComponent,
     SalesTrendsComponent
   ],
   imports: [
     CommonModule,
-    DashboardModuleRoutingModule,
+    RouterModule.forChild(routes),
     CommonComponentsModule,
     MatSidenavModule,
     MatCardModule,

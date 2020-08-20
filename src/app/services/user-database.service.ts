@@ -7,7 +7,7 @@ import {ShopI} from '../model/ShopI';
 import {StorageService} from './storage.service';
 import {BFast} from 'bfastjs';
 import {MatDialog} from '@angular/material/dialog';
-import {LogService} from './log.service';
+import {LogService} from '../modules/lib/services/log.service';
 import {VerifyEMailDialogComponent} from '../landing/login/verify-dialog.component';
 
 @Injectable({

@@ -1,5 +1,5 @@
-import {SalesModel} from '../model/CashSale';
-import {OrderModel} from '../model/OderI';
+import {SalesModel} from '../modules/sales/models/sale.model';
+import {OrderModel} from '../modules/sales/models/order.model';
 
 export interface SalesDatasource {
   saveSales(sale: SalesModel[], cartId: string): Promise<any>;

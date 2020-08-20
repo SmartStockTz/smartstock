@@ -9,7 +9,7 @@ import {StorageService} from '../../../services/storage.service';
 import {Observable, of} from 'rxjs';
 import {UserDatabaseService} from '../../../services/user-database.service';
 import {UserI} from '../../../model/UserI';
-import {LogService} from '../../../services/log.service';
+import {LogService} from '../../lib/services/log.service';
 import {DeviceInfo} from '../../shared/DeviceInfo';
 import {environment} from '../../../../environments/environment';
 

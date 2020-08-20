@@ -4,7 +4,7 @@ import {MatMenuTrigger} from '@angular/material/menu';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {SupplierI} from '../../../model/SupplierI';
+import {SupplierModel} from '../models/supplier.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
@@ -163,9 +163,9 @@ import {StockState} from '../states/stock.state';
 })
 export class SuppliersComponent implements OnInit {
 
-  suppliersDatasource: MatTableDataSource<SupplierI>;
+  suppliersDatasource: MatTableDataSource<SupplierModel>;
   suppliersTableColums = ['name', 'email', 'mobile', 'address', 'actions'];
-  suppliersArray: SupplierI[];
+  suppliersArray: SupplierModel[];
   fetchSuppliersFlag = false;
   nameFormControl = new FormControl();
   descriptionFormControl = new FormControl();
@@ -207,7 +207,7 @@ export class SuppliersComponent implements OnInit {
     this.fetchSuppliersFlag = true;
     this.stockState.getAllSupplier({size: 100}).then(data => {
       this.suppliersArray = JSON.parse(JSON.stringify(data));
-      this.suppliersDatasource = new MatTableDataSource<SupplierI>(this.suppliersArray);
+      this.suppliersDatasource = new MatTableDataSource<SupplierModel>(this.suppliersArray);
       this.fetchSuppliersFlag = false;
     }).catch(reason => {
       console.log(reason);
@@ -222,7 +222,7 @@ export class SuppliersComponent implements OnInit {
     }).afterClosed().subscribe(_ => {
       if (_) {
         this.suppliersArray = this.suppliersArray.filter(value => value.objectId !== element.objectId);
-        this.suppliersDatasource = new MatTableDataSource<SupplierI>(this.suppliersArray);
+        this.suppliersDatasource = new MatTableDataSource<SupplierModel>(this.suppliersArray);
         this.snack.open('Supplier deleted', 'Ok', {
           duration: 2000
         });
@@ -340,7 +340,7 @@ export class DialogSupplierDeleteComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  deleteSupplier(supplier: SupplierI) {
+  deleteSupplier(supplier: SupplierModel) {
     this.errorSupplierMessage = undefined;
     this.deleteProgress = true;
     this.stockDatabase.deleteSupplier(supplier.objectId).then(value => {

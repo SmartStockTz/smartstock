@@ -4,7 +4,7 @@ import {MatMenuTrigger} from '@angular/material/menu';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UnitsI} from '../../../model/UnitsI';
+import {UnitsModel} from '../models/units.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
@@ -130,9 +130,9 @@ import {StockState} from '../states/stock.state';
 })
 export class UnitsComponent implements OnInit {
 
-  unitsDatasource: MatTableDataSource<UnitsI>;
+  unitsDatasource: MatTableDataSource<UnitsModel>;
   unitsTableColums = ['name', 'abbreviation', 'description', 'actions'];
-  unitsArray: UnitsI[];
+  unitsArray: UnitsModel[];
   fetchUnitsFlag = false;
   nameFormControl = new FormControl();
   abbreviationFormControl = new FormControl();
@@ -152,7 +152,7 @@ export class UnitsComponent implements OnInit {
     this.fetchUnitsFlag = true;
     this.stockDatabase.getAllUnit({size: 100}).then(data => {
       this.unitsArray = JSON.parse(JSON.stringify(data));
-      this.unitsDatasource = new MatTableDataSource<UnitsI>(this.unitsArray);
+      this.unitsDatasource = new MatTableDataSource<UnitsModel>(this.unitsArray);
       this.fetchUnitsFlag = false;
     }).catch(reason => {
       console.log(reason);

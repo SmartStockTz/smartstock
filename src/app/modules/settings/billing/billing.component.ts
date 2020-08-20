@@ -3,7 +3,7 @@ import {DeviceInfo} from '../../shared/DeviceInfo';
 import {FormControl} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {BillingApiService} from '../../../services/billing-api.service';
-import {LogService} from '../../../services/log.service';
+import {LogService} from '../../lib/services/log.service';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MobilePayDetailsComponent} from '../mobile-pay-details/mobile-pay-details.component';
 
