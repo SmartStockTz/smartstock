@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {SellerReportAdapter} from '../../../adapter/SellerReportAdapter';
 import {HttpClient} from '@angular/common/http';
-import {SettingsService} from '../../../services/settings.service';
-import {StorageService} from '../../../services/storage.service';
+import {SettingsService} from '../../account/services/settings.service';
+import {StorageService} from '../../lib/services/storage.service';
 
 @Injectable()
 export class SellerDashboardService implements SellerReportAdapter {

@@ -3,15 +3,15 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {EventApiService} from 'src/app/modules/lib/services/event-api.service';
-import {StorageService} from '../../../services/storage.service';
-import {UserDatabaseService} from '../../../services/user-database.service';
-import {UserI} from '../../../model/UserI';
+import {EventService} from 'src/app/modules/lib/services/event.service';
+import {StorageService} from '../services/storage.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserModel} from '../../account/models/user.model';
 import {environment} from '../../../../environments/environment';
 import {SsmEvents} from '../utils/eventsNames.util';
 
 @Component({
-  selector: 'app-toolbar',
+  selector: 'smartstock-toolbar',
   template: `
     <mat-toolbar color="primary" class="sticky-top mat-elevation-z4">
       <mat-toolbar-row>
@@ -25,12 +25,12 @@ import {SsmEvents} from '../utils/eventsNames.util';
         <span *ngIf="isMobile" style="flex: 1 1 auto"></span>
         <span *ngIf="!isMobile && showSearch" style="width: 16px"></span>
         <span *ngIf="!isMobile && !showSearch" style="flex: 1 1 auto"></span>
-        <app-search-input [searchProgressFlag]="searchProgressFlag"
+        <smartstock-search-input [searchProgressFlag]="searchProgressFlag"
                           *ngIf="!isMobile && showSearch" style="flex: 1 1 auto"
                           [showSearch]="showSearch"
                           [searchInputControl]="searchInputControl"
                           [searchPlaceholder]="searchPlaceholder">
-        </app-search-input>
+        </smartstock-search-input>
         <span *ngIf="!isMobile && showSearch" style="width: 16px"></span>
         <button *ngIf="noOfProductsInCart> 0 && !isMobile" mat-icon-button (click)="cartdrawer.toggle()"
                 [matBadge]="noOfProductsInCart">
@@ -49,7 +49,7 @@ import {SsmEvents} from '../utils/eventsNames.util';
             <mat-icon>exit_to_app</mat-icon>
             Logout
           </button>
-          <button mat-menu-item routerLink="/settings/profile">
+          <button mat-menu-item routerLink="/account/profile">
             <mat-icon>person</mat-icon>
             My Profile
           </button>
@@ -58,12 +58,12 @@ import {SsmEvents} from '../utils/eventsNames.util';
 
       <mat-toolbar-row *ngIf="isMobile && showSearch">
         <!--    <span style="flex-grow: 1"></span>-->
-        <app-search-input [searchProgressFlag]="searchProgressFlag"
+        <smartstock-search-input [searchProgressFlag]="searchProgressFlag"
                           style="flex: 1 1 auto"
                           [showSearch]="showSearch"
                           [searchInputControl]="searchInputControl"
                           [searchPlaceholder]="searchPlaceholder">
-        </app-search-input>
+        </smartstock-search-input>
         <!--    <span style="flex-grow: 1"></span>-->
       </mat-toolbar-row>
     </mat-toolbar>
@@ -81,7 +81,7 @@ export class ToolbarComponent implements OnInit {
   @Output() searchCallback = new EventEmitter<string>();
   @Input() searchInputControl = new FormControl('');
   @Input() searchPlaceholder: string | 'Type to search';
-  currentUser: UserI;
+  currentUser: UserModel;
 
   noOfProductsInCart;
   @Input() searchProgressFlag = false;
@@ -90,7 +90,7 @@ export class ToolbarComponent implements OnInit {
   constructor(private readonly router: Router,
               private readonly storage: StorageService,
               private readonly userDatabase: UserDatabaseService,
-              private readonly eventService: EventApiService) {
+              private readonly eventService: EventService) {
   }
 
   ngOnInit() {

@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {ThreadsService} from './services/threads.service';
-import {StorageService} from './services/storage.service';
-import {EventApiService} from './modules/lib/services/event-api.service';
+import {ThreadService} from './modules/lib/services/thread.service';
+import {StorageService} from './modules/lib/services/storage.service';
+import {EventService} from './modules/lib/services/event.service';
 import {BFast} from 'bfastjs';
-import { SsmEvents } from './modules/lib/utils/eventsNames.util';
+import {SsmEvents} from './modules/lib/utils/eventsNames.util';
 
 @Component({
-  selector: 'app-root',
+  selector: 'smartstock-root',
   template: `
     <router-outlet></router-outlet>
   `,
   providers: [
-    ThreadsService,
+    ThreadService,
   ]
 })
 export class AppComponent implements OnInit {
 
-  constructor(private readonly threadProxy: ThreadsService,
-              private readonly eventApi: EventApiService,
+  constructor(private readonly threadProxy: ThreadService,
+              private readonly eventApi: EventService,
               private readonly _storage: StorageService) {
   }
 

@@ -3,9 +3,9 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {SalesState} from '../states/sales.state';
 /*********** move to common ***********/
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 /*********** move to common ***********/
-import {UserDatabaseService} from '../../../services/user-database.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 /*********** move to common ***********/
 /*********** move to common ***********/
@@ -14,28 +14,28 @@ import {FormControl} from '@angular/forms';
 /*********** move to common ***********/
 /*********** move to common ***********/
 import {StockModel} from '../models/stock.model';
-import {EventApiService} from '../../lib/services/event-api.service';
+import {EventService} from '../../lib/services/event.service';
 import {LogService} from '../../lib/services/log.service';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
-  selector: 'app-sale',
+  selector: 'smartstock-sale',
   template: `
     <mat-sidenav-container class="match-parent">
 
       <mat-sidenav class="match-parent-side" #sidenav [mode]="'over'" [opened]="false">
-        <app-admin-drawer></app-admin-drawer>
+        <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
       <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
                    [opened]="false">
-        <app-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></app-cart>
+        <smartstock-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></smartstock-cart>
       </mat-sidenav>
 
       <mat-sidenav-content style="display:flex; flex-direction: column">
 
-        <app-toolbar (searchCallback)="filterProduct($event)"
+        <smartstock-toolbar (searchCallback)="filterProduct($event)"
                      [showSearch]="true"
                      [hasBackRoute]="true" [backLink]="'/sale/'"
                      searchPlaceholder="Filter product"
@@ -43,19 +43,19 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
                      [searchProgressFlag]="searchProgressFlag"
                      [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
                      [cartdrawer]="cartdrawer"
-                     [showProgress]="showProgress"></app-toolbar>
+                     [showProgress]="showProgress"></smartstock-toolbar>
 
-        <app-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
-                      (refreshCallback)="getProductsFromServer()"></app-on-fetch>
+        <smartstock-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
+                      (refreshCallback)="getProductsFromServer()"></smartstock-on-fetch>
 
         <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="25" *ngIf="products && !fetchDataProgress">
-          <app-product-card style="margin: 0 5px; display: inline-block"
+          <smartstock-product-card style="margin: 0 5px; display: inline-block"
                             [cartdrawer]="cartdrawer"
                             [product]="product"
                             [productIndex]="idx"
                             [isViewedInWholesale]="isViewedInWholesale"
                             *cdkVirtualFor="let product of products; let idx = index">
-          </app-product-card>
+          </smartstock-product-card>
         </cdk-virtual-scroll-viewport>
 
         <div style="position: fixed; width: 100%;display: flex; flex-direction: row; justify-content: center;
@@ -68,7 +68,7 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
             <mat-icon>refresh</mat-icon>
           </button>
           <span [ngStyle]="showRefreshCart?{flex: '1 1 auto'}:{}"></span>
-          <app-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></app-cart-preview>
+          <smartstock-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></smartstock-cart-preview>
         </div>
       </mat-sidenav-content>
 
@@ -97,7 +97,7 @@ export class SaleComponent extends DeviceInfoUtil implements OnInit {
               private readonly storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
-              private readonly eventApi: EventApiService,
+              private readonly eventApi: EventService,
               private readonly salesState: SalesState,
   ) {
     super();

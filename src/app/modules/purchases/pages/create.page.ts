@@ -7,7 +7,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 /** must be removed to common module **/
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 /** must be removed to common module **/
 import {DialogSupplierNewComponent} from '../../stocks/components/suppliers.component';
 /** must be removed to common module **/
@@ -16,22 +16,22 @@ import {PurchaseState} from '../states/purchase.state';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-purchase-create',
+  selector: 'smartstock-purchase-create',
   template: `
     <mat-sidenav-container class="match-parent">
 
       <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
-        <app-admin-drawer></app-admin-drawer>
+        <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
       <mat-sidenav-content>
-        <app-toolbar [heading]="'Add Purchase'"
+        <smartstock-toolbar [heading]="'Add Purchase'"
                      [showSearch]="false"
                      [sidenav]="sidenav"
                      [showProgress]="false"
                      [hasBackRoute]="true"
                      [backLink]="'/purchase'">
-        </app-toolbar>
+        </smartstock-toolbar>
 
         <div style="margin-top: 16px" class="container">
           <form [formGroup]="invoiceForm" (ngSubmit)="saveInvoice()">

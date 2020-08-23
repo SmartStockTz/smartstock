@@ -6,7 +6,7 @@ import {StockDetailsComponent} from '../../stocks/components/stock.component';
 import {PurchaseModel} from '../models/purchase.model';
 
 @Component({
-  selector: 'app-purchase-details',
+  selector: 'smartstock-purchase-details',
   template: `
     <!--<div *ngFor="let stockKey of getPurchases()">-->
     <!--  <h5>{{stockKey}}</h5>-->
@@ -17,7 +17,7 @@ import {PurchaseModel} from '../models/purchase.model';
 
     <div class="container" style="min-width: 300px">
       <div mat-card-title>{{'Invoice #' + data.refNumber + ' Details'}}</div>
-      <!--  <app-no-data *ngIf="!invoice" [isLoading]="fetchInvoiceProgress" (refreshCallback)="getInvoice()"></app-no-data>-->
+      <!--  <smartstock-no-data *ngIf="!invoice" [isLoading]="fetchInvoiceProgress" (refreshCallback)="getInvoice()"></smartstock-no-data>-->
       <!--  -->
       <div class="row d-flex flex-column">
         <mat-card-subtitle>Purchase date</mat-card-subtitle>

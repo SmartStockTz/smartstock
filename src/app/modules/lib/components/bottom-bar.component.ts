@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-bottom-bar',
+  selector: 'smartstock-bottom-bar',
   template: `
-    <mat-toolbar class="fixed-bottom bottom-app-bar">
+    <mat-toolbar class="fixed-bottom bottom-smartstock-bar">
 
       <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
         <button mat-icon-button *ngIf="activeNav('dashboard')" mat-flat-button routerLink="/dashboard">
@@ -46,10 +46,10 @@ import {Component, OnInit} from '@angular/core';
       </div>
 
       <div class="flex-grow-1 d-flex justify-content-center align-items-center flex-column">
-        <button mat-icon-button *ngIf="activeNav('settings')" mat-flat-button routerLink="/settings">
+        <button mat-icon-button *ngIf="activeNav('settings')" mat-flat-button routerLink="/account">
           <mat-icon color="{{activeNav('settings')?'primary':''}}">settings</mat-icon>
         </button>
-        <button *ngIf="!activeNav('settings')" mat-icon-button routerLink="/settings">
+        <button *ngIf="!activeNav('settings')" mat-icon-button routerLink="/account">
           <mat-icon>settings</mat-icon>
         </button>
         <!--    <span *ngIf="activeNav('settings')">Settings</span>-->

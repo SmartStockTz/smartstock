@@ -5,7 +5,7 @@ import {LogService} from '../../lib/services/log.service';
 import {StockState} from '../states/stock.state';
 
 @Component({
-  selector: 'app-upload-products',
+  selector: 'smartstock-upload-products',
   template: `
     <div>
       <div class="d-flex flex-row align-items-center" mat-dialog-title>

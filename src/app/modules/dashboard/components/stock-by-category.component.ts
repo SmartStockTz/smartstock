@@ -4,12 +4,12 @@ import {AdminDashboardService} from '../services/admin-dashboard.service';
 import {LogService} from '../../lib/services/log.service';
 
 @Component({
-  selector: 'app-stock-by-category',
+  selector: 'smartstock-stock-by-category',
   template: `
     <div style="height: 100%" class="d-flex justify-content-center align-items-center">
       <div style="width: 100%; height: 100%" id="stockByCategory"></div>
-      <app-data-not-ready style="position: absolute" [width]="100" height="100" [isLoading]="stockStatusProgress"
-                          *ngIf="stockStatusProgress  || (!stockByCategoryStatus)"></app-data-not-ready>
+      <smartstock-data-not-ready style="position: absolute" [width]="100" height="100" [isLoading]="stockStatusProgress"
+                          *ngIf="stockStatusProgress  || (!stockByCategoryStatus)"></smartstock-data-not-ready>
     </div>
   `,
   styleUrls: ['../styles/stock-by-category.style.css']

@@ -7,9 +7,9 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
-import {EventApiService} from '../../lib/services/event-api.service';
+import {EventService} from '../../lib/services/event.service';
 import {UnitsModel} from '../models/units.model';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 import {LogService} from '../../lib/services/log.service';
 import {environment} from '../../../../environments/environment';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -23,19 +23,19 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 
 @Component({
-  selector: 'app-stock',
+  selector: 'smartstock-stock',
   template: `
     <mat-sidenav-container class="match-parent">
       <mat-sidenav class="match-parent-side" [fixedInViewport]="true" #sidenav [mode]="enoughWidth()?'side':'over'"
                    [opened]="enoughWidth()">
-        <app-admin-drawer></app-admin-drawer>
+        <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
       <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
 
-        <app-toolbar [heading]="'Stock'" [showSearch]="!isMobile" [searchPlaceholder]="'Type to search'"
+        <smartstock-toolbar [heading]="'Stock'" [showSearch]="!isMobile" [searchPlaceholder]="'Type to search'"
                      (searchCallback)="handleSearch($event)" [sidenav]="sidenav" [showProgress]="showProgress">
-        </app-toolbar>
+        </smartstock-toolbar>
 
         <div *ngIf="!isMobile">
 
@@ -183,15 +183,15 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
                   </mat-tab>
 
                   <mat-tab label="Categories">
-                    <app-categories></app-categories>
+                    <smartstock-categories></smartstock-categories>
                   </mat-tab>
 
                   <mat-tab label="Units">
-                    <app-units></app-units>
+                    <smartstock-units></smartstock-units>
                   </mat-tab>
 
                   <mat-tab label="Suppliers">
-                    <app-suppliers></app-suppliers>
+                    <smartstock-suppliers></smartstock-suppliers>
                   </mat-tab>
                 </mat-tab-group>
               </div>
@@ -200,9 +200,9 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
         </div>
 
-        <app-stock-mobile *ngIf="isMobile"></app-stock-mobile>
+        <smartstock-stock-mobile *ngIf="isMobile"></smartstock-stock-mobile>
 
-        <app-bottom-bar *ngIf="isMobile && !enoughWidth()"></app-bottom-bar>
+        <smartstock-bottom-bar *ngIf="isMobile && !enoughWidth()"></smartstock-bottom-bar>
 
       </mat-sidenav-content>
 
@@ -227,7 +227,7 @@ export class ViewPageComponent extends DeviceInfoUtil implements OnInit, OnDestr
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,
               private readonly dialog: MatDialog,
-              private readonly eventApi: EventApiService,
+              private readonly eventApi: EventService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly stockDatabase: StockState) {
     super();

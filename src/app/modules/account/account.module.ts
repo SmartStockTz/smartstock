@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SettingComponent} from './setting/setting.component';
-import {AccountComponent} from './account/account.component';
+import {SettingsPage} from './pages/settings.page';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatRippleModule} from '@angular/material/core';
@@ -21,40 +20,55 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {
-  DialogUserDeleteComponent,
-  DialogUserNewComponent,
-  UpdateUserPasswordDialogComponent,
-  UsersComponent
-} from './users/users.component';
-import {ProfileComponent} from './profile/profile.component';
-import {BillingComponent} from './billing/billing.component';
-import {MobilePayDetailsComponent} from './mobile-pay-details/mobile-pay-details.component';
+import {ProfilePage} from './pages/profile.page';
+import {BillingPage} from './pages/billing.page';
+import {MobilePayDetailsComponent} from './components/mobile-pay-details.component';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule, Routes} from '@angular/router';
 import {KeeperGuard} from '../stocks/guards/keeper.guard';
 import {LibModule} from '../lib/lib.module';
+import {LoginPage} from './pages/login.page';
+import {RegisterPage} from './pages/register.page';
+import {AuthenticationGuard} from './guards/authentication.guard';
+import {ShopPage} from './pages/shop.page';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {PersonalComponent} from './components/personal.component';
+import {AddressComponent} from './components/address.component';
+import {AuthenticationComponent} from './components/credentials.component';
+import {ReceiptsComponent} from './components/receipt.component';
+import {InvoicesComponent} from './components/invoice.component';
+import {UserDeleteDialogComponent} from './components/user-delete-dialog.component';
+import {UserCreateDialogComponent} from './components/user-create-dialog.component';
+import {UserUpdateDialogComponent} from './components/user-update-dialog.component';
+import {UsersPage} from './pages/users.page';
 
 
 const routes: Routes = [
-  {path: '', component: AccountComponent},
-  {path: 'general', canActivate: [KeeperGuard], component: SettingComponent},
-  {path: 'bill', canActivate: [KeeperGuard], component: BillingComponent},
-  {path: 'users', canActivate: [KeeperGuard], component: UsersComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: '', redirectTo: 'profile', pathMatch: 'full'},
+  {path: 'settings', canActivate: [KeeperGuard], component: SettingsPage},
+  {path: 'shop', canActivate: [AuthenticationGuard], component: ShopPage},
+  {path: 'login', component: LoginPage},
+  {path: 'register', component: RegisterPage},
+  {path: 'bill', canActivate: [KeeperGuard], component: BillingPage},
+  {path: 'users', canActivate: [KeeperGuard], component: UsersPage},
+  {path: 'profile', component: ProfilePage},
 ];
 
 @NgModule({
   declarations: [
-    SettingComponent,
-    AccountComponent,
-    UsersComponent,
-    ProfileComponent,
-    DialogUserDeleteComponent,
-    DialogUserNewComponent,
-    UpdateUserPasswordDialogComponent,
-    BillingComponent,
+    SettingsPage,
+    UsersPage,
+    ProfilePage,
+    BillingPage,
+    PersonalComponent,
+    AddressComponent,
+    AuthenticationComponent,
     MobilePayDetailsComponent,
+    ReceiptsComponent,
+    InvoicesComponent,
+    UserDeleteDialogComponent,
+    UserCreateDialogComponent,
+    UserUpdateDialogComponent
   ],
   imports: [
     CommonModule,
@@ -80,12 +94,8 @@ const routes: Routes = [
     MatDividerModule,
     MatRadioModule,
     FormsModule,
-    MatListModule
-  ],
-  entryComponents: [
-    DialogUserNewComponent,
-    DialogUserDeleteComponent,
-    UpdateUserPasswordDialogComponent
+    MatListModule,
+    MatBottomSheetModule,
   ]
 })
 export class AccountModule {

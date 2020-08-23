@@ -20,7 +20,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDividerModule} from '@angular/material/divider';
-import {DashboardModuleModule} from '../dashboard/dashboard-module.module';
+import {DashboardModule} from '../dashboard/dashboard.module';
 import {MatMenuModule} from '@angular/material/menu';
 import {SalesPageComponent} from './pages/sales.page';
 import {ExpireNearComponent} from './components/expireNear.component';
@@ -78,7 +78,7 @@ const routes: Routes = [
     MatDividerModule,
     MatInputModule,
     MatMenuModule,
-    DashboardModuleModule,
+    DashboardModule,
     MatRippleModule
   ]
 })

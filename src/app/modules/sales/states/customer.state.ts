@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CustomerModel} from '../models/customer.model';
 /***** move to common ********/
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 
 /***** move to common ********/
 

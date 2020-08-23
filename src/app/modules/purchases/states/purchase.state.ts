@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import {PurchaseModel} from '../models/purchase.model';
 import {HttpClient} from '@angular/common/http';
 import {ReceiptModel} from '../models/receipt.model';
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../account/services/settings.service';
 import {BFast} from 'bfastjs';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 import {SupplierModel} from '../models/supplier.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PurchaseState {
 
   constructor(private readonly _httpClient: HttpClient,

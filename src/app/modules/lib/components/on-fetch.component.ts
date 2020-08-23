@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-on-fetch',
+  selector: 'smartstock-on-fetch',
   template: `
     <div *ngIf="!isLoading" class="no-data-wrapper">
       <img src="/src/assets/img/empty.svg" width="200px" alt="">

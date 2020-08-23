@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-search-input',
+  selector: 'smartstock-search-input',
   template: `
     <div style="width: 100%">
       <input [formControl]="searchInputControl"

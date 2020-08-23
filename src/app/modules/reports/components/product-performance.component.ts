@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {StorageService} from 'src/app/services/storage.service';
+import {StorageService} from 'src/app/modules/lib/services/storage.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -26,7 +26,7 @@ export interface ProductPerformanceI {
 }
 
 @Component({
-  selector: 'app-product-performance-report',
+  selector: 'smartstock-product-performance-report',
   template: `
     <div class="col-12">
       <div>
@@ -62,7 +62,7 @@ export interface ProductPerformanceI {
             <!--</mat-form-field>-->
           </mat-card-header>
 
-          <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></app-data-not-ready>
+          <smartstock-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></smartstock-data-not-ready>
 
           <div *ngIf="!noDataRetrieved  && !isLoading">
             <table mat-table [dataSource]="productPerformanceDatasource" matSort>

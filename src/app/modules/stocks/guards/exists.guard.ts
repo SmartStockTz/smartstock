@@ -3,8 +3,8 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from 
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NoStockDialogComponent} from '../shared/no-stock-dialog/no-stock-dialog.component';
-import {UserDatabaseService} from '../../../services/user-database.service';
-import {StorageService} from '../../../services/storage.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
+import {StorageService} from '../../lib/services/storage.service';
 
 @Injectable({
   providedIn: 'root'

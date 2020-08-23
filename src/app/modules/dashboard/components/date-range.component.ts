@@ -1,14 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DateRangeHeaderComponent} from './date-range-header.component';
 /*********** move to common ***********/
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 /*********** move to common ***********/
 import {FormControl} from '@angular/forms';
 import {ShopModel} from '../models/shop.model';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-current-shop',
+  selector: 'smartstock-current-shop',
   template: `
     <mat-card>
       <mat-card-content class="d-flex flex-lg-row flex-lg-row flex-md-row flex-sm-column flex-column align-items-center">

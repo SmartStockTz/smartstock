@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {UnitsModel} from '../models/units.model';
 import {HttpClient} from '@angular/common/http';
 import {SupplierModel} from '../models/supplier.model';
-import {UserDatabaseService} from '../../../services/user-database.service';
-import {SettingsService} from '../../../services/settings.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
+import {SettingsService} from '../../account/services/settings.service';
 import {CategoryModel} from '../models/category.model';
 import {BFast} from 'bfastjs';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
 
 @Injectable({

@@ -4,12 +4,12 @@ import {LogService} from '../../lib/services/log.service';
 import * as Highcharts from 'highcharts';
 
 @Component({
-  selector: 'app-stock-status',
+  selector: 'smartstock-stock-status',
   template: `
     <div style="height: 100%" class="d-flex justify-content-center align-items-center">
       <div style="width: 100%; height: 100%" id="stockStatusDiv"></div>
-      <app-data-not-ready style="position: absolute" [width]="100" height="100" [isLoading]="stockStatusProgress"
-                          *ngIf="stockStatusProgress  || (!stockStatus)"></app-data-not-ready>
+      <smartstock-data-not-ready style="position: absolute" [width]="100" height="100" [isLoading]="stockStatusProgress"
+                          *ngIf="stockStatusProgress  || (!stockStatus)"></smartstock-data-not-ready>
     </div>
   `,
   styleUrls: ['../styles/stock-status.style.css']

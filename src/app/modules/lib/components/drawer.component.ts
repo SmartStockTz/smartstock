@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {EventApiService} from '../services/event-api.service';
-import {UserDatabaseService} from '../../../services/user-database.service';
-import {UserI} from '../../../model/UserI';
+import {EventService} from '../services/event.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserModel} from '../../account/models/user.model';
 import {LogService} from '../services/log.service';
 import {SsmEvents} from '../utils/eventsNames.util';
 import {ShopModel} from '../models/shop.model';
 
 @Component({
-  selector: 'app-admin-drawer',
+  selector: 'smartstock-admin-drawer',
   template: `
     <div class="my-side-nav">
       <div>
@@ -22,7 +22,7 @@ import {ShopModel} from '../models/shop.model';
           <button style="width: 80%"
                   color="primary"
                   class="btn-block"
-                  routerLink="/shop" mat-button>
+                  routerLink="/account/shop" mat-button>
             Change Shop
           </button>
         </div>
@@ -111,7 +111,7 @@ import {ShopModel} from '../models/shop.model';
             </mat-expansion-panel-header>
             <mat-nav-list>
               <a *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
-                 routerLink="/settings/general">
+                 routerLink="/account/settings">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Settings</span>
                   <span class="flex-grow-1"></span>
@@ -119,7 +119,7 @@ import {ShopModel} from '../models/shop.model';
                 </div>
               </a>
               <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item
-                 routerLink="/settings/bill">
+                 routerLink="/account/bill">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Billing</span>
                   <span class="flex-grow-1"></span>
@@ -127,14 +127,14 @@ import {ShopModel} from '../models/shop.model';
                 </div>
               </a>
               <a *ngIf="currentUser && ( currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
-                 routerLink="/settings/users">
+                 routerLink="/account/users">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Users</span>
                   <span class="flex-grow-1"></span>
                   <mat-icon color="primary">person_add</mat-icon>
                 </div>
               </a>
-              <a mat-list-item routerLink="/settings/profile">
+              <a mat-list-item routerLink="/account/profile">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Profile</span>
                   <span class="flex-grow-1"></span>
@@ -158,11 +158,11 @@ export class DrawerComponent implements OnInit {
 
   constructor(private readonly _userApi: UserDatabaseService,
               private readonly logger: LogService,
-              private readonly eventApi: EventApiService) {
+              private readonly eventApi: EventService) {
   }
 
   shop: ShopModel;
-  currentUser: UserI;
+  currentUser: UserModel;
 
   // async shouldShow(menuName: string): Promise<boolean> {
   //   try {

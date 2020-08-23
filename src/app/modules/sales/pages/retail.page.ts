@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 /***** move to common ********/
-import {UserDatabaseService} from 'src/app/services/user-database.service';
+import {UserDatabaseService} from 'src/app/modules/account/services/user-database.service';
 /***** move to common ********/
-import {StorageService} from 'src/app/services/storage.service';
+import {StorageService} from 'src/app/modules/lib/services/storage.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
@@ -15,9 +15,9 @@ import {SalesState} from '../states/sales.state';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-retail-sale',
+  selector: 'smartstock-retail-sale',
   template: `
-    <app-sale [isViewedInWholesale]="false"></app-sale>
+    <smartstock-sale [isViewedInWholesale]="false"></smartstock-sale>
   `,
   styleUrls: ['../styles/retail.style.css']
 })

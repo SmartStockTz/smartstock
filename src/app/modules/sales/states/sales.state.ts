@@ -2,15 +2,14 @@ import {Injectable} from '@angular/core';
 import {SalesModel} from '../models/sale.model';
 import {OrderModel} from '../models/order.model';
 import {BatchModel} from '../models/batch.model';
-/***** move to common ********/
-import {StorageService} from '../../../services/storage.service';
-/***** move to common ********/
-/***** move to common ********/
+import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
 import {BFast} from 'bfastjs';
 import {SecurityUtil} from '../../lib/utils/security.util';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any'
+})
 export class SalesState {
 
   constructor(private readonly _storage: StorageService) {

@@ -14,7 +14,7 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {ImageCropComponent} from '../../lib/components/image-crop.component';
 
 @Component({
-  selector: 'app-stock-new',
+  selector: 'smartstock-stock-new',
   template: `
     <mat-sidenav-container class="match-parent">
       <mat-sidenav class="match-parent-side"
@@ -22,17 +22,17 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                    #sidenav
                    [mode]="enoughWidth()?'side':'over'"
                    [opened]="enoughWidth()">
-        <app-admin-drawer></app-admin-drawer>
+        <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
       <mat-sidenav-content>
 
-        <app-toolbar [heading]="isUpdateMode?'Update StockModel':'Create StockModel'"
+        <smartstock-toolbar [heading]="isUpdateMode?'Update StockModel':'Create StockModel'"
                      [sidenav]="sidenav"
                      [hasBackRoute]="isMobile"
                      backLink="/stock/products"
                      [showProgress]="false">
-        </app-toolbar>
+        </smartstock-toolbar>
 
         <div class="container stock-new-wrapper">
 
@@ -92,8 +92,8 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                   Files
                 </h5>
                 <div *ngIf="getDownloadAbleFormControl().value === true" class="card-wrapper">
-                  <app-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
-                                    [uploadFileFormControl]="getDownloadsFormControl()"></app-upload-files>
+                  <smartstock-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
+                                    [uploadFileFormControl]="getDownloadsFormControl()"></smartstock-upload-files>
                 </div>
 
                 <h5>

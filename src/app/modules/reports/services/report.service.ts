@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AdminReportAdapter} from '../../../adapter/AdminReportAdapter';
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../account/services/settings.service';
 import {BFast} from 'bfastjs';
 import {SalesModel} from '../../sales/models/sale.model';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
 import {CartModel} from '../models/cart.model';
 import * as moment from 'moment';
@@ -13,7 +12,7 @@ import {toSqlDate} from '../../lib/utils/date.util';
 @Injectable({
   providedIn: 'root'
 })
-export class ReportService implements AdminReportAdapter {
+export class ReportService  {
 
   constructor(private readonly httpClient: HttpClient,
               private readonly storage: StorageService,

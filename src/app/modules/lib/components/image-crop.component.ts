@@ -3,7 +3,7 @@ import {ImageCroppedEvent} from 'ngx-image-cropper';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dialog-image-crop',
+  selector: 'smartstock-dialog-image-crop',
   template: `
     <div>
       <mat-progress-spinner mode="indeterminate" color="primary"

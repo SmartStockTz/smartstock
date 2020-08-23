@@ -6,9 +6,9 @@ import {StockModel} from '../models/stock.model';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-stock-edit',
+  selector: 'smartstock-stock-edit',
   template: `
-    <app-stock-new *ngIf="!loadStock" [isUpdateMode]="true" [initialStock]="stock"></app-stock-new>
+    <smartstock-stock-new *ngIf="!loadStock" [isUpdateMode]="true" [initialStock]="stock"></smartstock-stock-new>
   `,
   styleUrls: ['../styles/edit.style.css']
 })

@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {StorageService} from 'src/app/services/storage.service';
+import {StorageService} from 'src/app/modules/lib/services/storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from 'src/app/modules/lib/services/log.service';
 import {Observable, of} from 'rxjs';
@@ -16,7 +16,7 @@ import {ReportService} from '../services/report.service';
 
 
 @Component({
-  selector: 'app-stock-reorder-report',
+  selector: 'smartstock-stock-reorder-report',
   template: `
     <div>
       <mat-card class="mat-elevation-z3">
@@ -37,7 +37,7 @@ import {ReportService} from '../services/report.service';
         <!--        <mat-spinner *ngIf="isLoading"></mat-spinner>-->
         <!--      </div>-->
 
-        <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></app-data-not-ready>
+        <smartstock-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></smartstock-data-not-ready>
 
         <div *ngIf="!noDataRetrieved  && !isLoading">
           <table mat-table [dataSource]="stockReorderDatasource" matSort>

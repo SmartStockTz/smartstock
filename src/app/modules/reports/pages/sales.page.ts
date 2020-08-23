@@ -6,7 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-sales-reports',
+  selector: 'smartstock-sales-reports',
   template: `
     <div>
       <mat-sidenav-container class="my-drawer-container">
@@ -16,11 +16,11 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
           class="match-parent-side"
           #sidenav [mode]="enoughWidth()?'side':'over'"
           [opened]="enoughWidth()">
-          <app-admin-drawer></app-admin-drawer>
+          <smartstock-admin-drawer></smartstock-admin-drawer>
         </mat-sidenav>
 
         <mat-sidenav-content>
-          <app-toolbar [heading]="'REPORT'" [sidenav]="sidenav" [showProgress]="false"></app-toolbar>
+          <smartstock-toolbar [heading]="'REPORT'" [sidenav]="sidenav" [showProgress]="false"></smartstock-toolbar>
 
 
           <div [ngStyle]="{padding: (isMobile || !enoughWidth())?'24px 0':'40px 16px'}"
@@ -28,25 +28,25 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
             <div class="col-12 col-lg-10 col-xl-10 offset-xl-1 offset-lg-1 offset-md-0 offset-sm-0">
               <div class="row">
                 <div style="margin-bottom: 10px" class="col-12">
-                  <app-profit-by-category style="margin-bottom: 1em"></app-profit-by-category>
+                  <smartstock-profit-by-category style="margin-bottom: 1em"></smartstock-profit-by-category>
                 </div>
                 <div style="margin-bottom: 10px" class="col-12">
-                  <app-product-performance-report style="margin-bottom: 1em"></app-product-performance-report>
+                  <smartstock-product-performance-report style="margin-bottom: 1em"></smartstock-product-performance-report>
                 </div>
 
                 <div style="margin-bottom: 10px" class="col-12">
-                  <app-dashboard-sale-trends></app-dashboard-sale-trends>
+                  <smartstock-dashboard-sale-trends></smartstock-dashboard-sale-trends>
                 </div>
                 <div style="margin-bottom: 10px" class="col-12">
-                  <app-cart-report></app-cart-report>
+                  <smartstock-cart-report></smartstock-cart-report>
                 </div>
               </div>
               <!--<div class="row">-->
               <!--<div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">-->
-              <!--<app-expired-products-report></app-expired-products-report>-->
+              <!--<smartstock-expired-products-report></smartstock-expired-products-report>-->
               <!--</div>-->
               <!--<div style="margin-bottom: 10px" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">-->
-              <!--<app-products-about-to-expire></app-products-about-to-expire>-->
+              <!--<smartstock-products-about-to-expire></smartstock-products-about-to-expire>-->
               <!--</div>-->
               <!--</div>-->
             </div>

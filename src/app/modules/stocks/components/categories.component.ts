@@ -8,7 +8,7 @@ import {CategoryModel} from '../models/category.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'smartstock-categories',
   template: `
     <mat-card class="mat-elevation-z0">
       <mat-card-title class="d-flex flex-row">
@@ -229,7 +229,7 @@ export class CategoriesComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-dialog-delete',
+  selector: 'smartstock-dialog-delete',
   template: `
     <div class="container">
       <div class="row">
@@ -286,7 +286,7 @@ export class DialogCategoryDeleteComponent {
 
 
 @Component({
-  selector: 'app-new-category',
+  selector: 'smartstock-new-category',
   template: `
     <div style="min-width: 300px">
       <div mat-dialog-title>Create Category</div>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 /*********** moe to common ***********/
-import {EventApiService} from 'src/app/modules/lib/services/event-api.service';
+import {EventService} from 'src/app/modules/lib/services/event.service';
 /*********** moe to common ***********/
 import {MatSidenav} from '@angular/material/sidenav';
 /*********** moe to common ***********/
@@ -14,7 +14,7 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
-  selector: 'app-product-card',
+  selector: 'smartstock-product-card',
   template: `
     <div>
       <div class='card-container' [ngClass]="{'flipped':productIndex == flipped}">
@@ -87,7 +87,7 @@ export class ProductComponent extends DeviceInfoUtil implements OnInit {
 
   flipped: number;
 
-  constructor(private readonly eventService: EventApiService,
+  constructor(private readonly eventService: EventService,
               private readonly snack: MatSnackBar) {
     super();
   }

@@ -11,21 +11,21 @@ import {PurchaseState} from '../states/purchase.state';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-purchase',
+  selector: 'smartstock-purchase',
   template: `
     <mat-sidenav-container class="match-parent">
 
       <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
-        <app-admin-drawer></app-admin-drawer>
+        <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
       <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
-        <app-toolbar [heading]="'Purchases'"
+        <smartstock-toolbar [heading]="'Purchases'"
                      (searchCallback)="handleSearch($event)"
                      [showSearch]="true"
                      searchPlaceholder="Search purchase"
                      [sidenav]="sidenav" [showProgress]="false">
-        </app-toolbar>
+        </smartstock-toolbar>
 
         <div *ngIf="!isMobile" style="margin-top: 16px" class="container">
           <mat-tab-group color="primary">
@@ -112,9 +112,9 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
           </mat-tab-group>
         </div>
 
-        <app-purchase-mobile *ngIf="isMobile"></app-purchase-mobile>
+        <smartstock-purchase-mobile *ngIf="isMobile"></smartstock-purchase-mobile>
 
-        <app-bottom-bar *ngIf="isMobile && !enoughWidth()"></app-bottom-bar>
+        <smartstock-bottom-bar *ngIf="isMobile && !enoughWidth()"></smartstock-bottom-bar>
       </mat-sidenav-content>
 
     </mat-sidenav-container>

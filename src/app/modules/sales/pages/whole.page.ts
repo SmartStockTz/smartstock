@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-whole-sale',
+  selector: 'smartstock-whole-sale',
   template: `
-    <app-sale [isViewedInWholesale]="true"></app-sale>
+    <smartstock-sale [isViewedInWholesale]="true"></smartstock-sale>
   `,
   styleUrls: ['../styles/whole.style.css'],
 })

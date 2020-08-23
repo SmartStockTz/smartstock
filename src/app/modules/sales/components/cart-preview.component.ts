@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 /*********** moe to common ***********/
-import {EventApiService} from '../../lib/services/event-api.service';
+import {EventService} from '../../lib/services/event.service';
 /*********** moe to common ***********/
 import {UtilsService} from '../services/utils.service';
 import {MatSidenav} from '@angular/material/sidenav';
@@ -13,7 +13,7 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
 @Component({
-  selector: 'app-cart-preview',
+  selector: 'smartstock-cart-preview',
   template: `
     <div style="padding: 16px" [ngClass]="isMobile?'fixed-bottom':!enoughWidth()?'fixed-bottom-web-enough-width':'fixed-bottom-web'"
          *ngIf="(totalItems | async)  > 0">
@@ -34,7 +34,7 @@ export class CartPreviewComponent extends DeviceInfoUtil implements OnInit {
   @Input() cartSidenav: MatSidenav;
   isMobile = environment.android;
 
-  constructor(private readonly eventApi: EventApiService,
+  constructor(private readonly eventApi: EventService,
               private readonly changeDetectorRef: ChangeDetectorRef,
               private readonly _saleUtils: UtilsService) {
     super();

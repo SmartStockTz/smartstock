@@ -8,7 +8,7 @@ import {SupplierModel} from '../models/supplier.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
-  selector: 'app-suppliers',
+  selector: 'smartstock-suppliers',
   template: `
     <mat-card class="mat-elevation-z0">
       <mat-card-title class="d-flex flex-row">
@@ -302,7 +302,7 @@ export class SuppliersComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-dialog-delete',
+  selector: 'smartstock-dialog-delete',
   template: `
     <div class="container">
       <div class="row">
@@ -359,7 +359,7 @@ export class DialogSupplierDeleteComponent {
 
 
 @Component({
-  selector: 'app-new-supplier',
+  selector: 'smartstock-new-supplier',
   template: `
     <div style="min-width: 300px">
       <div mat-dialog-title>Create Supplier</div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 /***** move to common ********/
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../account/services/settings.service';
 /***** move to common ********/
 import {environment} from '../../../../environments/environment';
 import {PrinterModel} from '../models/printer.model';

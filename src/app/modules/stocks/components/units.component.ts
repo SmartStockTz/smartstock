@@ -8,7 +8,7 @@ import {UnitsModel} from '../models/units.model';
 import {StockState} from '../states/stock.state';
 
 @Component({
-  selector: 'app-units',
+  selector: 'smartstock-units',
   template: `
     <mat-card class="mat-elevation-z0">
       <mat-card-title class="d-flex flex-row">
@@ -241,7 +241,7 @@ export class UnitsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-dialog-delete',
+  selector: 'smartstock-dialog-delete',
   template: `
     <div class="container">
       <div class="row">
@@ -300,7 +300,7 @@ export class DialogUnitDeleteComponent {
 
 
 @Component({
-  selector: 'app-new-unit',
+  selector: 'smartstock-new-unit',
   template: `
     <div style="min-width: 300px">
       <div mat-dialog-title>Create Unit</div>

@@ -1,0 +1,22 @@
+.my-profile-wrapper {
+  margin-top: 16px;
+}
+
+.profile-auth-wrapper {
+  padding: 16px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+
+.profile-business-wrapper {
+  padding: 16px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.profile-personal-wrapper {
+  padding: 16px;
+  border-radius: 4px;
+  background-color: white;
+}

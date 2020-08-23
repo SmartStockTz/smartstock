@@ -12,7 +12,7 @@ import {ReportService} from '../services/report.service';
 import {toSqlDate} from '../../lib/utils/date.util';
 
 @Component({
-  selector: 'app-cart-report',
+  selector: 'smartstock-cart-report',
   template: `
     <div class="col-12" style="margin-top: 1em">
       <div>
@@ -59,7 +59,7 @@ import {toSqlDate} from '../../lib/utils/date.util';
             <mat-spinner *ngIf="isLoading"></mat-spinner>
           </div>
 
-          <app-data-not-ready *ngIf="noDataRetrieved  && !isLoading"></app-data-not-ready>
+          <smartstock-data-not-ready *ngIf="noDataRetrieved  && !isLoading"></smartstock-data-not-ready>
           <table mat-table *ngIf="!noDataRetrieved  && !isLoading" [dataSource]="carts" matSort>
 
             <ng-container matColumnDef="receipt">

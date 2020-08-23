@@ -3,12 +3,12 @@ import {FormControl, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
 /*********** moe to common ***********/
-import {EventApiService} from 'src/app/modules/lib/services/event-api.service';
+import {EventService} from 'src/app/modules/lib/services/event.service';
 /*********** moe to common ***********/
 import {SalesState} from '../states/sales.state';
 /*********** moe to common ***********/
-import {UserDatabaseService} from '../../../services/user-database.service';
-import {SettingsService} from '../../../services/settings.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
+import {SettingsService} from '../../account/services/settings.service';
 /*********** moe to common ***********/
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SalesModel} from '../models/sale.model';
@@ -23,7 +23,7 @@ import {SecurityUtil} from '../../lib/utils/security.util';
 import { toSqlDate } from '../../lib/utils/date.util';
 
 @Component({
-  selector: 'app-cart',
+  selector: 'smartstock-cart',
   template: `
     <div id="cart_view" [ngClass]="isMobile?'cart-mobile':'cart'">
 
@@ -115,7 +115,7 @@ import { toSqlDate } from '../../lib/utils/date.util';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private readonly eventService: EventApiService,
+  constructor(private readonly eventService: EventService,
               private readonly saleDatabase: SalesState,
               private readonly settings: SettingsService,
               private readonly printer: PrintService,

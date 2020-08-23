@@ -3,7 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import {StorageService} from '../../../services/storage.service';
+import {StorageService} from '../../lib/services/storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from '../../lib/services/log.service';
 import {Observable, of} from 'rxjs';
@@ -15,7 +15,7 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {toSqlDate} from '../../lib/utils/date.util';
 
 @Component({
-  selector: 'app-profit-by-category',
+  selector: 'smartstock-profit-by-category',
   template: `
     <div class="col-12">
       <div>
@@ -51,7 +51,7 @@ import {toSqlDate} from '../../lib/utils/date.util';
             <!--</mat-form-field>-->
           </mat-card-header>
 
-          <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></app-data-not-ready>
+          <smartstock-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved || isLoading"></smartstock-data-not-ready>
 
           <div *ngIf="!noDataRetrieved  && !isLoading">
             <table mat-table [dataSource]="productPerformanceDatasource" matSort>

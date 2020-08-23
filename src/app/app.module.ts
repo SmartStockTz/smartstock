@@ -13,45 +13,21 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HammerModule} from '@angular/platform-browser';
-import {BrowserPlatformGuard} from './guards/browser-platform.guard';
-import {LandingComponent} from './landing/landing/landing.component';
-import {PrivacyComponent} from './landing/privacy/privacy.component';
-import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
-import {LoginComponent} from './landing/login/login.component';
-import {RegisterComponent} from './landing/register/register.component';
-import {AuthenticationGuard} from './guards/authentication.guard';
-import {ChooseShopComponent} from './landing/choose-shop/choose-shop.component';
-import {AdminRoleGuard} from './guards/admin-role.guard';
-import {ActiveShopGuard} from './guards/active-shop.guard';
+import {AuthenticationGuard} from './modules/account/guards/authentication.guard';
+import {AdminRoleGuard} from './modules/account/guards/admin-role.guard';
+import {ActiveShopGuard} from './modules/account/guards/active-shop.guard';
 import {KeeperGuard} from './modules/stocks/guards/keeper.guard';
 import {LibModule} from './modules/lib/lib.module';
 
 const routes: Routes = [
-  {path: '', canActivate: [BrowserPlatformGuard], component: LandingComponent},
   {
-    path: 'privacy',
-    canActivate: [BrowserPlatformGuard],
-    component: PrivacyComponent
-  },
-  {
-    path: 'login',
-    canActivate: [AuthenticatedUserGuard],
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    canActivate: [AuthenticatedUserGuard],
-    component: RegisterComponent
-  },
-  {
-    path: 'shop',
-    canActivate: [AuthenticationGuard],
-    component: ChooseShopComponent
+    path: '',
+    loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule),
   },
   {
     path: 'dashboard',
     canActivate: [AdminRoleGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/dashboard/dashboard-module.module').then(mod => mod.DashboardModuleModule)
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
@@ -74,17 +50,17 @@ const routes: Routes = [
     loadChildren: () => import('./modules/purchases/purchases.module').then(mod => mod.PurchasesModule)
   },
   {
-    path: 'settings',
-    canActivate: [AuthenticationGuard, ActiveShopGuard],
+    path: 'account',
+    canActivate: [AuthenticationGuard],
     loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
   },
   {
     path: 'home',
     redirectTo: 'dashboard'
   },
-  {
-    path: '**', loadChildren: () => import('./landing/main-module.module').then(mod => mod.MainModuleModule)
-  }
+  // {
+  //   path: '**', loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule)
+  // }
 ];
 
 @NgModule({

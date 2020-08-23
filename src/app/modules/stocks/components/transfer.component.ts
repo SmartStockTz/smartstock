@@ -2,14 +2,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import {UserDatabaseService} from 'src/app/services/user-database.service';
-import {ShopI} from '../../../model/ShopI';
-import {StorageService} from '../../../services/storage.service';
+import {UserDatabaseService} from 'src/app/modules/account/services/user-database.service';
+import {ShopModel} from '../../account/models/shop.model';
+import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
 
 
 @Component({
-  selector: 'app-transfer-dialog',
+  selector: 'smartstock-transfer-dialog',
   template: `
     <div style="width: 95%">
       <h1 mat-dialog-title>Transfer Stocks</h1>
@@ -51,8 +51,8 @@ import {StockModel} from '../models/stock.model';
 export class TransferDialogComponent {
 
   shop = new FormControl();
-  activeShop: ShopI;
-  shops: ShopI[] = [];
+  activeShop: ShopModel;
+  shops: ShopModel[] = [];
   transferStockGroup: FormGroup;
 
   constructor(private readonly shopsApi: UserDatabaseService,

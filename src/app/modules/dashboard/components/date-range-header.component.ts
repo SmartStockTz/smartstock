@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
 @Component({
-  selector: 'app-date-range-selector',
+  selector: 'smartstock-date-range-selector',
   template: `
     <div style="background: white">
       <div style="background: white">

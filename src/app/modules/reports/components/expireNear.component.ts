@@ -9,7 +9,7 @@ import {StockModel} from '../../stocks/models/stock.model';
 import {ReportService} from '../services/report.service';
 
 @Component({
-  selector: 'app-products-about-to-expire',
+  selector: 'smartstock-products-about-to-expire',
   template: `
     <div>
       <mat-card class="mat-elevation-z3">
@@ -24,7 +24,7 @@ import {ReportService} from '../services/report.service';
           </button>
         </div>
 
-        <app-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved  || isLoading"></app-data-not-ready>
+        <smartstock-data-not-ready [isLoading]="isLoading" *ngIf="noDataRetrieved  || isLoading"></smartstock-data-not-ready>
 
         <table mat-table *ngIf="!noDataRetrieved  && !isLoading" [dataSource]="expiredProducts" matSort>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-stock-expired',
+  selector: 'smartstock-stock-expired',
   template: `
     <p>stock-expired works!</p>
   `,

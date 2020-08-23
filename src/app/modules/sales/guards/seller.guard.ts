@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserDatabaseService} from '../../../services/user-database.service';
+import {UserDatabaseService} from '../../account/services/user-database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,11 @@ export class SellerGuard implements CanActivate {
         if (user && user.applicationId && user.projectUrlId && user.projectId && (user.role === 'user' || user.role === 'admin')) {
           resolve(true);
         } else {
-          this.router.navigateByUrl('/login').catch(reason => console.log(reason));
+          this.router.navigateByUrl('/account/login').catch(reason => console.log(reason));
           reject(false);
         }
       }).catch(_ => {
-        this.router.navigateByUrl('/login').catch(reason => console.log(reason));
+        this.router.navigateByUrl('/account/login').catch(reason => console.log(reason));
         reject(false);
       });
     });

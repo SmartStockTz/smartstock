@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {ShopI} from '../../../model/ShopI';
-import {UserDatabaseService} from '../../../services/user-database.service';
+import {ShopModel} from '../../account/models/shop.model';
+import {UserDatabaseService} from '../../account/services/user-database.service';
 
 @Pipe({
   name: 'shopsPipe'
@@ -10,7 +10,7 @@ export class ShopsPipe implements PipeTransform {
   constructor(private readonly userApi: UserDatabaseService) {
   }
 
-  async transform(shops: ShopI[], ...args: unknown[]): Promise<string[]> {
+  async transform(shops: ShopModel[], ...args: unknown[]): Promise<string[]> {
     try {
       const shop = await this.userApi.getCurrentShop();
       shops.push(shop);
