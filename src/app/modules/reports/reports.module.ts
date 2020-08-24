@@ -1,12 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {ReportsRoutingModule} from './reports-routing.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {StockReportsComponent} from './stock-reports/stock-reports.component';
-import {StockReorderReportComponent} from './stock-reports/stock-reorder-report/stock-reorder-report.component';
-import {DashboardModuleRoutingModule} from '../dashboard/dashboard-module-routing.module';
-import {CommonComponentsModule} from '../shared/common-components.module';
+import {StockPageComponent} from './pages/stock.page';
+import {ReorderComponent} from './components/reorder.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -23,60 +20,67 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDividerModule} from '@angular/material/divider';
-import {DashboardModuleModule} from '../dashboard/dashboard-module.module';
+import {DashboardModule} from '../dashboard/dashboard.module';
 import {MatMenuModule} from '@angular/material/menu';
-import {SalesReportsComponent} from './sales-reports/sales-reports.component';
-import {TabularReportComponent} from './tabular-report/tabular-report.component';
-import {ProductsAboutToExpireComponent} from './stock-reports/products-about-to-expire/products-about-to-expire.component';
-import {CartReportComponent} from './sales-reports/cart-report/cart-report.component';
-import {ExpiredProductsReportComponent} from './stock-reports/expired-products-report/expired-products-report.component';
-import { ProfitByCategoryComponent } from './sales-reports/profit-by-category/profit-by-category.component';
+import {SalesPageComponent} from './pages/sales.page';
+import {ExpireNearComponent} from './components/expireNear.component';
+import {CartComponent} from './components/cart.component';
+import {ExpiredComponent} from './components/expired.component';
+import {ProfitByCategoryComponent} from './components/profit-by-category.component';
+import {RouterModule, Routes} from '@angular/router';
+import {LibModule} from '../lib/lib.module';
 
+
+const routes: Routes = [
+  {path: '', redirectTo: 'sales', pathMatch: 'full'},
+  {path: 'sales', component: SalesPageComponent},
+  {path: 'stocks', component: StockPageComponent},
+];
 
 @NgModule({
   declarations: [
-    ExpiredProductsReportComponent,
-    StockReportsComponent, StockReorderReportComponent,
-    TabularReportComponent, ProductsAboutToExpireComponent,
-    CartReportComponent,
-    SalesReportsComponent,
+    ExpiredComponent,
+    StockPageComponent,
+    ReorderComponent,
+    ExpireNearComponent,
+    CartComponent,
+    SalesPageComponent,
     ProfitByCategoryComponent
   ],
   exports: [
-    ExpiredProductsReportComponent,
-    StockReportsComponent,
-    StockReorderReportComponent,
-    ProductsAboutToExpireComponent
+    ExpiredComponent,
+    StockPageComponent,
+    ReorderComponent,
+    ExpireNearComponent
   ],
-    imports: [
-        CommonModule,
-        ReportsRoutingModule,
-        MatDatepickerModule,
-        DashboardModuleRoutingModule,
-        CommonComponentsModule,
-        MatSidenavModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        MatNativeDateModule,
-        MatTooltipModule,
-        MatSelectModule,
-        SatDatepickerModule,
-        SatNativeDateModule,
-        MatDividerModule,
-        MatInputModule,
-        MatMenuModule,
-        DashboardModuleModule,
-        MatRippleModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatDatepickerModule,
+    LibModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatSelectModule,
+    SatDatepickerModule,
+    SatNativeDateModule,
+    MatDividerModule,
+    MatInputModule,
+    MatMenuModule,
+    DashboardModule,
+    MatRippleModule
+  ]
 })
 export class ReportsModule {
 }
