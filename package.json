@@ -46,19 +46,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.0.6",
+    "@angular/animations": "~10.0.11",
     "@angular/cdk": "~9.1.2",
-    "@angular/common": "~9.0.6",
-    "@angular/compiler": "~9.0.6",
-    "@angular/core": "~9.0.6",
-    "@angular/forms": "~9.0.6",
+    "@angular/common": "~10.0.11",
+    "@angular/compiler": "~10.0.11",
+    "@angular/core": "~10.0.11",
+    "@angular/forms": "~10.0.11",
     "@angular/material": "^9.1.2",
-    "@angular/platform-browser": "~9.0.6",
-    "@angular/platform-browser-dynamic": "~9.0.6",
-    "@angular/router": "~9.0.6",
-    "@angular/service-worker": "^9.0.6",
-    "@capacitor/android": "^2.1.2",
-    "@capacitor/angular": "^1.0.2",
+    "@angular/platform-browser": "~10.0.11",
+    "@angular/platform-browser-dynamic": "~10.0.11",
+    "@angular/router": "~10.0.11",
+    "@angular/service-worker": "^10.0.11",
     "@capacitor/core": "latest",
     "@capacitor/electron": "^2.1.2",
     "bfastjs": "^3.1.5-beta.1",
@@ -73,13 +71,13 @@
     "tslib": "^1.11.1",
     "typeface-roboto": "0.0.75",
     "uuid": "^8.1.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.6",
     "@angular/cli": "^9.0.6",
-    "@angular/compiler-cli": "~9.0.6",
-    "@angular/language-service": "~9.0.6",
+    "@angular/compiler-cli": "~10.0.11",
+    "@angular/language-service": "~10.0.11",
     "@capacitor/cli": "latest",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "^2.0.8",
@@ -97,6 +95,6 @@
     "protractor": "^5.4.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.7.5"
+    "typescript": "~3.9.7"
   }
 }
