@@ -68,6 +68,7 @@ export class StockByCategoryComponent implements OnInit {
           },
           labels: {
             enabled: false,
+            // @ts-ignore
             formatter: function () {
               return this.value;
             }
@@ -81,6 +82,7 @@ export class StockByCategoryComponent implements OnInit {
           // lineColor: '#1b5e20',
           labels: {
             enabled: false,
+            // @ts-ignore
             formatter: function () {
               return this.value;
             }

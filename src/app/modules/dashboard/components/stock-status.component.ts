@@ -9,7 +9,7 @@ import * as Highcharts from 'highcharts';
     <div style="height: 100%" class="d-flex justify-content-center align-items-center">
       <div style="width: 100%; height: 100%" id="stockStatusDiv"></div>
       <smartstock-data-not-ready style="position: absolute" [width]="100" height="100" [isLoading]="stockStatusProgress"
-                          *ngIf="stockStatusProgress  || (!stockStatus)"></smartstock-data-not-ready>
+                                 *ngIf="stockStatusProgress  || (!stockStatus)"></smartstock-data-not-ready>
     </div>
   `,
   styleUrls: ['../styles/stock-status.style.css']
@@ -47,6 +47,7 @@ export class StockStatusComponent implements OnInit {
     //   x.push(data[key].x);
     //   y.push(data[key].total);
     // });
+
     this.stockStatusChart = Highcharts.chart(
       'stockStatusDiv',
       {
@@ -67,6 +68,7 @@ export class StockStatusComponent implements OnInit {
           },
           labels: {
             enabled: false,
+            // @ts-ignore
             formatter: function () {
               return this.value;
             }
@@ -80,6 +82,7 @@ export class StockStatusComponent implements OnInit {
           // lineColor: '#1b5e20',
           labels: {
             enabled: false,
+            // @ts-ignore
             formatter: function () {
               return this.value;
             }
