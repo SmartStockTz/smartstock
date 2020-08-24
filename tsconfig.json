@@ -1,5 +1,8 @@
 {
   "compileOnSave": false,
+  "exclude": [
+    "./src/**/*.worker.service.ts"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
