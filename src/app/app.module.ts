@@ -51,7 +51,6 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    canActivate: [AuthenticationGuard],
     loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
   },
   {

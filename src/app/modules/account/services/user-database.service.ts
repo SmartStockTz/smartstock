@@ -23,12 +23,12 @@ export class UserDatabaseService {
   }
 
   async currentUser(): Promise<UserModel> {
-    this.refreshToken().catch(reason => {
-      if (reason && reason.response && reason.response.data && reason.response.data.code === 209) {
-        return BFast.auth().logOut();
-      }
-      return {};
-    }).catch(this.logger.w);
+    // this.refreshToken().catch(reason => {
+    //   if (reason && reason.response && reason.response.data && reason.response.data.code === 209) {
+    //     return BFast.auth().logOut();
+    //   }
+    //   return {};
+    // }).catch(this.logger.w);
     const user = await BFast.auth().currentUser<UserModel>();
     if (user && user.role !== 'admin') {
       return user;
@@ -68,6 +68,7 @@ export class UserDatabaseService {
 
   async login(user: { username: string, password: string }): Promise<UserModel> {
     const authUser = await BFast.auth().logIn<UserModel>(user.username, user.password);
+    await this._storage.removeActiveShop();
     if (authUser && authUser.role !== 'admin') {
       await this._storage.saveActiveUser(authUser);
       return authUser;
@@ -101,6 +102,7 @@ export class UserDatabaseService {
         allowWholesale: true
       };
       user.shops = [];
+      await this._storage.removeActiveShop();
       return await BFast.functions().request('/functions/users/create').post(user, {
         headers: this._settings.ssmFunctionsHeader
       });

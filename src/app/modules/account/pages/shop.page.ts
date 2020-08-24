@@ -95,9 +95,6 @@ export class ShopPage implements OnInit {
   }
 
   setCurrentProject(shop: ShopModel) {
-    this._snack.open('We prepare your shop...', 'Ok', {
-      duration: 1000
-    });
     this.userDatabase.saveCurrentShop(shop).then(_ => {
       this._router.navigateByUrl('/dashboard').catch(reason => console.log(reason));
     }).catch(reason => {

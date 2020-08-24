@@ -50,7 +50,7 @@ import {ShopModel} from '../models/shop.model';
             </mat-expansion-panel-header>
             <mat-nav-list>
               <a mat-list-item routerLink="/report/sales">Sales Reports</a>
-              <a mat-list-item routerLink="/report/stocks">StockModel Reports</a>
+              <a mat-list-item routerLink="/report/stocks">Stock Reports</a>
             </mat-nav-list>
           </mat-expansion-panel>
 

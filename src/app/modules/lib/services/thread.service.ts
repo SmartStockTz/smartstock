@@ -60,18 +60,15 @@ export class ThreadService implements OnInit {
 
   private async startSalesProxy() {
     try {
-      if (Capacitor.isNative) {
-        this.swSalesProxyService.start();
+      if (typeof Worker !== 'undefined') {
+        this.salesWorkerProxy = new Worker('./sales.worker.service', {type: 'module'});
+        // wrap<SalesWorkerService>(this.salesWorkerProxy);
+        // this.salesWorkerProxy.onmessage = ({data}) => {
+        // };
+        this.salesWorkerProxy.postMessage({});
+        return 'Ok';
       } else {
-        if (typeof Worker !== 'undefined') {
-          this.salesWorkerProxy = new Worker('assets/js/sw-sales-proxy.js');
-          this.salesWorkerProxy.onmessage = ({data}) => {
-          };
-          this.salesWorkerProxy.postMessage({});
-          return 'Ok';
-        } else {
-          this._noWorkerSalesProxy();
-        }
+        this._noWorkerSalesProxy();
       }
     } catch (e) {
       this._noWorkerSalesProxy();
@@ -85,7 +82,7 @@ export class ThreadService implements OnInit {
         this.swLocalDataService.start();
       } else {
         if (typeof Worker !== 'undefined') {
-          this.stocksWorkerProxy = new Worker('assets/js/sw-local-data.js');
+          this.stocksWorkerProxy = new Worker('./stocks.worker.service', {type: 'module'});
           this.stocksWorkerProxy.onmessage = ({data}) => {
             this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
           };

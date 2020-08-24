@@ -41,17 +41,19 @@ import {UserDeleteDialogComponent} from './components/user-delete-dialog.compone
 import {UserCreateDialogComponent} from './components/user-create-dialog.component';
 import {UserUpdateDialogComponent} from './components/user-update-dialog.component';
 import {UsersPage} from './pages/users.page';
+import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
+import {ActiveShopGuard} from './guards/active-shop.guard';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'profile', pathMatch: 'full'},
-  {path: 'settings', canActivate: [KeeperGuard], component: SettingsPage},
+  {path: 'settings', canActivate: [KeeperGuard, ActiveShopGuard], component: SettingsPage},
   {path: 'shop', canActivate: [AuthenticationGuard], component: ShopPage},
-  {path: 'login', component: LoginPage},
-  {path: 'register', component: RegisterPage},
-  {path: 'bill', canActivate: [KeeperGuard], component: BillingPage},
-  {path: 'users', canActivate: [KeeperGuard], component: UsersPage},
-  {path: 'profile', component: ProfilePage},
+  {path: 'login', canActivate: [AuthenticatedUserGuard], component: LoginPage},
+  {path: 'register', canActivate: [AuthenticatedUserGuard], component: RegisterPage},
+  {path: 'bill', canActivate: [KeeperGuard, ActiveShopGuard], component: BillingPage},
+  {path: 'users', canActivate: [KeeperGuard, ActiveShopGuard], component: UsersPage},
+  {path: 'profile', canActivate: [AuthenticationGuard, ActiveShopGuard], component: ProfilePage},
 ];
 
 @NgModule({
