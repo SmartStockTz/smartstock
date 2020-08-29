@@ -12,27 +12,27 @@ export class BillingApiService {
 
   async getDueBalance(currency: 'TZS' | 'USD'): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`/billing/${owner.objectId}/dueBilling`).get();
+    return BFast.functions().request(`/billing/${owner.id}/dueBilling`).get();
   }
 
   async getUnInvoicesBalance(currency: 'TZS' | 'USD'): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`/billing/${owner.objectId}/unInvoicedBalance`).get();
+    return BFast.functions().request(`/billing/${owner.id}/unInvoicedBalance`).get();
   }
 
   async getPaymentReference(): Promise<any> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`/billing/${owner.objectId}/referenceNumber`).get();
+    return BFast.functions().request(`/billing/${owner.id}/referenceNumber`).get();
   }
 
   async getInvoices(): Promise<{ businessName: string, invoice: { _id: string, amount: number, accountId: string }[] }[]> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`/billing/${owner.objectId}/invoices`).get();
+    return BFast.functions().request(`/billing/${owner.id}/invoices`).get();
   }
 
   async getReceipt(): Promise<{ payments: any[] }> {
     const owner = await this.storage.getActiveUser();
-    return BFast.functions().request(`/billing/${owner.objectId}/receipts`).get();
+    return BFast.functions().request(`/billing/${owner.id}/receipts`).get();
   }
 
 }

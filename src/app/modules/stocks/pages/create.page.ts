@@ -28,10 +28,10 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
       <mat-sidenav-content>
 
         <smartstock-toolbar [heading]="isUpdateMode?'Update StockModel':'Create StockModel'"
-                     [sidenav]="sidenav"
-                     [hasBackRoute]="isMobile"
-                     backLink="/stock/products"
-                     [showProgress]="false">
+                            [sidenav]="sidenav"
+                            [hasBackRoute]="isMobile"
+                            backLink="/stock/products"
+                            [showProgress]="false">
         </smartstock-toolbar>
 
         <div class="container stock-new-wrapper">
@@ -93,7 +93,7 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                 </h5>
                 <div *ngIf="getDownloadAbleFormControl().value === true" class="card-wrapper">
                   <smartstock-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
-                                    [uploadFileFormControl]="getDownloadsFormControl()"></smartstock-upload-files>
+                                           [uploadFileFormControl]="getDownloadsFormControl()"></smartstock-upload-files>
                 </div>
 
                 <h5>
@@ -447,7 +447,9 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
     if (this.croppedImage) {
       this.productForm.value.image = this.croppedImage;
     }
-    this.stockDatabase.addStock(this.productForm.value).then(_ => {
+    this.stockDatabase.addStock(this.productForm.value, d => {
+      console.log(d);
+    }).then(_ => {
       this.mainProgress = false;
       this.snack.open('Product added', 'Ok', {
         duration: 3000
@@ -482,9 +484,11 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
 
     this.mainProgress = true;
     const newStock = this.productForm.value;
-    newStock.objectId = this.initialStock.objectId;
+    newStock.id = this.initialStock.id;
     newStock.image = this.croppedImage;
-    this.stockDatabase.updateStock(newStock).then(_ => {
+    this.stockDatabase.updateStock(newStock, d => {
+      console.log(d);
+    }).then(_ => {
       this.mainProgress = false;
       this.snack.open('Product updated', 'Ok', {
         duration: 3000

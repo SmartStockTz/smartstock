@@ -359,7 +359,7 @@ export class ViewPageComponent extends DeviceInfoUtil implements OnInit, OnDestr
   }
 
   editStock(element: StockModel) {
-    this.router.navigateByUrl('/stock/edit/' + element.objectId + '?stock=' + encodeURI(JSON.stringify(element)))
+    this.router.navigateByUrl('/stock/edit/' + element.id + '?stock=' + encodeURI(JSON.stringify(element)))
       .catch(reason => this.logger.e(reason));
   }
 
@@ -404,11 +404,11 @@ export class ViewPageComponent extends DeviceInfoUtil implements OnInit, OnDestr
   }
 
   private _removeProductFromTable(element: StockModel) {
-    this.stockDatasource.data = this.stockDatasource.data.filter(value => value.objectId !== element.objectId);
+    this.stockDatasource.data = this.stockDatasource.data.filter(value => value.id !== element.id);
     this._getTotalPurchaseOfStock(this.stockDatasource.data);
     // update stocks
     this.indexDb.getStocks().then(stocks => {
-      const updatedStock = stocks.filter(value => value.objectId !== element.objectId);
+      const updatedStock = stocks.filter(value => value.id !== element.id);
       this.indexDb.saveStocks(updatedStock).catch(reason => this.logger.w('Fails to update stock due to deleted item'));
     }).catch(reason => {
       this.logger.w('fails to update stocks to to deleted item');

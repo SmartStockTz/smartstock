@@ -14,7 +14,7 @@ export interface UserModel {
   country: string;
   region: string;
   street: string;
-  objectId?: string;
+  id?: string;
   verified?: boolean;
   createdAt?: string;
   updatedAt?: string;

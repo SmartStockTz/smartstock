@@ -2,7 +2,7 @@ export interface StockModel {
   createdAt?: any;
   updatedAt?: any;
   image?: any;
-  objectId?: string;
+  id?: string;
   _id?: string;
   product: string;
   saleable: boolean | true;
@@ -12,7 +12,7 @@ export interface StockModel {
   category: string;
   type?: 'simple' | 'grouped';
   downloadable: boolean | false;
-  downloads: { name: string, type: string, url: string }[];
+  downloads: { name: string, type: string, url: any }[];
   stockable: boolean | true;
   purchasable: boolean | true;
   quantity: number;

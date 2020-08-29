@@ -33,17 +33,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td class="editable" [matMenuTriggerFor]="nameMenu"
                 #nameMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.name}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.name}" matRipple mat-cell
                 *matCellDef="let element">{{element.name}}
               <mat-menu #nameMenu>
-                <ng-template matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Name</mat-label>
                       <input [value]="data" [formControl]="nameFormControl" matInput>
                     </mat-form-field>
                     <button
-                      (click)="updateSupplierName({objectId: objectId, value: nameFormControl.value}, nameMenuTrigger)"
+                      (click)="updateSupplierName({id: id, value: nameFormControl.value}, nameMenuTrigger)"
                       mat-button>Update
                     </button>
                   </div>
@@ -56,17 +56,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Mobile</th>
             <td class="editable" [matMenuTriggerFor]="mobileMenu"
                 #mobileMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.number}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.number}" matRipple mat-cell
                 *matCellDef="let element">{{element.number}}
               <mat-menu #mobileMenu>
-                <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template style="padding: 16px" matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Mobile</mat-label>
                       <textarea [value]="data" [formControl]="mobileFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateSupplierMobile({objectId: objectId, value: mobileFormControl.value},
+                      (click)="updateSupplierMobile({id: id, value: mobileFormControl.value},
                      mobileMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -80,17 +80,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Email</th>
             <td class="editable" [matMenuTriggerFor]="emailMenu"
                 #emailMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.email}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.email}" matRipple mat-cell
                 *matCellDef="let element">{{element.email}}
               <mat-menu #emailMenu>
-                <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template style="padding: 16px" matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Email</mat-label>
                       <textarea [value]="data" [formControl]="emailFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateSupplierEmail({objectId: objectId, value: emailFormControl.value},
+                      (click)="updateSupplierEmail({id: id, value: emailFormControl.value},
                      emailMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -104,17 +104,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Address</th>
             <td class="editable" [matMenuTriggerFor]="addressMenu"
                 #addressMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.address}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.address}" matRipple mat-cell
                 *matCellDef="let element">{{element.address}}
               <mat-menu #addressMenu>
-                <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template style="padding: 16px" matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Address</mat-label>
                       <textarea [value]="data" [formControl]="addressFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateSupplierAddress({objectId: objectId, value: addressFormControl.value},
+                      (click)="updateSupplierAddress({id: id, value: addressFormControl.value},
                      addressMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -221,7 +221,7 @@ export class SuppliersComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe(_ => {
       if (_) {
-        this.suppliersArray = this.suppliersArray.filter(value => value.objectId !== element.objectId);
+        this.suppliersArray = this.suppliersArray.filter(value => value.id !== element.id);
         this.suppliersDatasource = new MatTableDataSource<SupplierModel>(this.suppliersArray);
         this.snack.open('Supplier deleted', 'Ok', {
           duration: 2000
@@ -242,11 +242,11 @@ export class SuppliersComponent implements OnInit {
     }
   }
 
-  updateSupplier(supplier: { objectId: string, value: string, field: string }) {
+  updateSupplier(supplier: { id: string, value: string, field: string }) {
     this.snack.open('Update in progress..', 'Ok');
     this.stockState.updateSupplier(supplier).then(data => {
-      const editedObjectIndex = this.suppliersArray.findIndex(value => value.objectId === data.objectId);
-      this.suppliersArray = this.suppliersArray.filter(value => value.objectId !== supplier.objectId);
+      const editedObjectIndex = this.suppliersArray.findIndex(value => value.id === data.id);
+      this.suppliersArray = this.suppliersArray.filter(value => value.id !== supplier.id);
       if (editedObjectIndex !== -1) {
         const updatedObject = this.suppliersArray[editedObjectIndex];
         updatedObject[supplier.field] = supplier.value;
@@ -343,7 +343,7 @@ export class DialogSupplierDeleteComponent {
   deleteSupplier(supplier: SupplierModel) {
     this.errorSupplierMessage = undefined;
     this.deleteProgress = true;
-    this.stockDatabase.deleteSupplier(supplier.objectId).then(value => {
+    this.stockDatabase.deleteSupplier(supplier.id).then(value => {
       this.dialogRef.close(supplier);
       this.deleteProgress = false;
     }).catch(reason => {

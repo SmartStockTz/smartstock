@@ -2,7 +2,7 @@ export interface ReceiptModel {
   date: string;
   reference: string;
   idOld: string;
-  objectId?: string;
+  id?: string;
   type: string;
   paid: boolean;
   due: string;

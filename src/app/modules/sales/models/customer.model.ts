@@ -5,5 +5,5 @@ export interface CustomerModel {
   street?: string;
   createdAt?: any;
   updatedAt?: any;
-  objectId?: any;
+  id?: any;
 }

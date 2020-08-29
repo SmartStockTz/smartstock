@@ -16,7 +16,7 @@ export class ShopDatabaseService {
     return new Promise<ShopModel>(async (resolve, reject) => {
       try {
         const user = await this._storage.getActiveUser();
-        this._httpClient.post<ShopModel>(this._settings.ssmFunctionsURL + '/shops/' + user.objectId, shop, {
+        this._httpClient.post<ShopModel>(this._settings.ssmFunctionsURL + '/shops/' + user.id, shop, {
           headers: this._settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);

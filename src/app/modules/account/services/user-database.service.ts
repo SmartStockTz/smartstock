@@ -41,7 +41,7 @@ export class UserDatabaseService {
 
   async deleteUser(user: UserModel): Promise<any> {
     return BFast.functions()
-      .request('/functions/users/' + user.objectId)
+      .request('/functions/users/' + user.id)
       .delete({
         data: {context: {admin: await BFast.auth().currentUser()}}
       });
@@ -49,17 +49,15 @@ export class UserDatabaseService {
 
   async getAllUser(pagination: { size: number, skip: number }): Promise<UserModel[]> {
     const projectId = await this._settings.getCustomerProjectId();
-    return BFast.database().collection('_User').query().find<UserModel>({
-      size: pagination.size,
-      skip: pagination.skip,
-      filter: {
-        projectId: projectId,
-        // @ts-ignore
-        role: {
-          '$in': ['user', 'manager']
-        }
-      }
-    });
+    return BFast.database().collection('_User')
+      .query()
+      .equalTo('projectId', projectId)
+      .includesIn('role', ['user', 'manager'])
+      .size(pagination.size)
+      .skip(pagination.skip)
+      .find<UserModel[]>({
+        useMasterKey: true
+      });
   }
 
   getUser(user: UserModel, callback?: (user: UserModel) => void) {
@@ -68,6 +66,7 @@ export class UserDatabaseService {
 
   async login(user: { username: string, password: string }): Promise<UserModel> {
     const authUser = await BFast.auth().logIn<UserModel>(user.username, user.password);
+    console.log(authUser);
     await this._storage.removeActiveShop();
     if (authUser && authUser.role !== 'admin') {
       await this._storage.saveActiveUser(authUser);
@@ -120,7 +119,7 @@ export class UserDatabaseService {
   }
 
   async refreshToken(): Promise<any> {
-    return BFast.auth().authenticated();
+    return BFast.auth().currentUser();
   }
 
   addUser(user: UserModel): Promise<UserModel> {
@@ -212,7 +211,7 @@ export class UserDatabaseService {
 
   updatePassword(user: UserModel, password: string): Promise<any> {
     return new Promise<UserModel>((resolve, reject) => {
-      this._httpClient.put<any>(this._settings.ssmFunctionsURL + '/functions/users/password/' + user.objectId, {
+      this._httpClient.put<any>(this._settings.ssmFunctionsURL + '/functions/users/password/' + user.id, {
         password: password
       }, {
         headers: this._settings.ssmFunctionsHeader
@@ -226,7 +225,7 @@ export class UserDatabaseService {
 
   updateUser(user: UserModel, data: { [p: string]: any }): Promise<UserModel> {
     return new Promise(async (resolve, reject) => {
-      this._httpClient.put<UserModel>(this._settings.ssmFunctionsURL + '/functions/users/' + user.objectId, data, {
+      this._httpClient.put<UserModel>(this._settings.ssmFunctionsURL + '/functions/users/' + user.id, data, {
         headers: this._settings.ssmFunctionsHeader
       }).subscribe(value => resolve(value), error1 => {
         reject(error1);
@@ -244,7 +243,7 @@ export class UserDatabaseService {
 
   changePasswordFromOld(data: { lastPassword: string; password: string; user: UserModel }): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this._httpClient.put<UserModel>(this._settings.ssmFunctionsURL + '/functions/users/password/change/' + data.user.objectId, {
+      this._httpClient.put<UserModel>(this._settings.ssmFunctionsURL + '/functions/users/password/change/' + data.user.id, {
         lastPassword: data.lastPassword,
         username: data.user.username,
         password: data.password

@@ -30,17 +30,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td class="editable" [matMenuTriggerFor]="nameMenu"
                 #nameMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.name}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.name}" matRipple mat-cell
                 *matCellDef="let element">{{element.name}}
               <mat-menu #nameMenu>
-                <ng-template matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Name</mat-label>
                       <input [value]="data" [formControl]="nameFormControl" matInput>
                     </mat-form-field>
                     <button
-                      (click)="updateUnitName({objectId: objectId, value: nameFormControl.value}, nameMenuTrigger)"
+                      (click)="updateUnitName({id: id, value: nameFormControl.value}, nameMenuTrigger)"
                       mat-button>Update
                     </button>
                   </div>
@@ -53,17 +53,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Abbreviation</th>
             <td class="editable" [matMenuTriggerFor]="abbreviationMenu"
                 #nameMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.abbreviation}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.abbreviation}" matRipple mat-cell
                 *matCellDef="let element">{{element.abbreviation}}
               <mat-menu #abbreviationMenu>
-                <ng-template matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Abbreviation</mat-label>
                       <input [value]="data" [formControl]="abbreviationFormControl" matInput>
                     </mat-form-field>
                     <button
-                      (click)="updateUnitAbbreviation({objectId: objectId, value: abbreviationFormControl.value}, nameMenuTrigger)"
+                      (click)="updateUnitAbbreviation({id: id, value: abbreviationFormControl.value}, nameMenuTrigger)"
                       mat-button>Update
                     </button>
                   </div>
@@ -76,17 +76,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Description</th>
             <td class="editable" [matMenuTriggerFor]="descriptionMenu"
                 #descriptionMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.description}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.description}" matRipple mat-cell
                 *matCellDef="let element">{{element.description}}
               <mat-menu #descriptionMenu>
-                <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template style="padding: 16px" matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Description</mat-label>
                       <textarea [value]="data" [formControl]="descriptionFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateUnitDescription({objectId: objectId, value: descriptionFormControl.value},
+                      (click)="updateUnitDescription({id: id, value: descriptionFormControl.value},
                      descriptionMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -166,7 +166,7 @@ export class UnitsComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe(_ => {
       if (_) {
-        this.unitsArray = this.unitsArray.filter(value => value.objectId !== element.objectId);
+        this.unitsArray = this.unitsArray.filter(value => value.id !== element.id);
         this.unitsDatasource.data = this.unitsArray;
         this.snack.open('Unit deleted', 'Ok', {
           duration: 2000
@@ -195,11 +195,11 @@ export class UnitsComponent implements OnInit {
     }
   }
 
-  updateUnit(unit: { objectId: string, value: string, field: string }) {
+  updateUnit(unit: { id: string, value: string, field: string }) {
     this.snack.open('Update units-mobile-ui in progress..', 'Ok');
     this.stockDatabase.updateUnit(unit).then(data => {
-      const editedObjectIndex = this.unitsArray.findIndex(value => value.objectId === data.objectId);
-      this.unitsArray = this.unitsArray.filter(value => value.objectId !== unit.objectId);
+      const editedObjectIndex = this.unitsArray.findIndex(value => value.id === data.id);
+      this.unitsArray = this.unitsArray.filter(value => value.id !== unit.id);
       if (editedObjectIndex !== -1) {
         const updatedObject = this.unitsArray[editedObjectIndex];
         updatedObject[unit.field] = unit.value;

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {NoStockDialogComponent} from '../shared/no-stock-dialog/no-stock-dialog.component';
 import {UserDatabaseService} from '../../account/services/user-database.service';
 import {StorageService} from '../../lib/services/storage.service';
+import {NoStockDialogComponent} from '../../lib/components/no-stock-dialog.component';
 
 @Injectable({
   providedIn: 'root'

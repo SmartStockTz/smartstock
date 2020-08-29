@@ -205,7 +205,7 @@ export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
 
   recordPayment(purchase: PurchaseModel) {
     this.snack.open('Start update payment record..');
-    this.purchaseDatabase.recordPayment(purchase.objectId).then(value => {
+    this.purchaseDatabase.recordPayment(purchase.id).then(value => {
       this.snack.open('Payments recorded', 'Ok', {
         duration: 3000
       });

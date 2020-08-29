@@ -1,7 +1,5 @@
-import {BFast} from 'bfastjs';
-import {ShopModel} from '../models/shop.model';
-//
-// importScripts('bfast_js.js');
+// import {BFast} from 'bfastjs';
+// import {ShopModel} from '../models/shop.model';
 //
 // function run() {
 //   init();
@@ -11,7 +9,7 @@ import {ShopModel} from '../models/shop.model';
 //
 // function init() {
 //   BFast.init({
-//     applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
+//     applicationId: 'smartstock', projectId: 'smartstock', cache: {
 //       enable: true
 //     }
 //   });
@@ -72,12 +70,12 @@ import {ShopModel} from '../models/shop.model';
 //     const localStockMap = {};
 //     if (localStocks) {
 //       localStocks.forEach(value => {
-//         localStockMap[value.objectId] = value;
+//         localStockMap[value.id] = value;
 //       });
 //     }
 //     if (remoteStocks && remoteStocks.results) {
 //       remoteStocks.results.forEach(value => {
-//         localStockMap[value.objectId] = value;
+//         localStockMap[value.id] = value;
 //       });
 //     }
 //     const newStocks = [];
@@ -109,7 +107,7 @@ import {ShopModel} from '../models/shop.model';
 //     const {operationType, fullDocument, documentKey, updateDescription} = data.data;
 //     switch (operationType) {
 //       case 'insert':
-//         fullDocument.objectId = fullDocument['_id'];
+//         fullDocument.id = fullDocument['_id'];
 //         delete fullDocument._id;
 //         fullDocument.createdAt = fullDocument['_created_at'];
 //         delete fullDocument._created_at;
@@ -119,11 +117,11 @@ import {ShopModel} from '../models/shop.model';
 //         await stocksCache.set('all', stocks);
 //         return;
 //       case 'delete':
-//         await stocksCache.set('all', stocks.filter(stock => stock.objectId !== documentKey['_id']));
+//         await stocksCache.set('all', stocks.filter(stock => stock.id !== documentKey['_id']));
 //         return;
 //       case 'update':
 //         await stocksCache.set('all', stocks.map(stock => {
-//           if (stock.objectId === documentKey['_id']) {
+//           if (stock.id === documentKey['_id']) {
 //             // updatedFields
 //             // removedFields
 //             const updatedFields = updateDescription['updatedFields'];
@@ -151,7 +149,7 @@ import {ShopModel} from '../models/shop.model';
 //         return;
 //       case 'replace':
 //         await stocksCache.set('all', stocks.map(stock => {
-//           if (stock.objectId === documentKey['_id']) {
+//           if (stock.id === documentKey['_id']) {
 //             return fullDocument;
 //           } else {
 //             return stock;
@@ -163,8 +161,8 @@ import {ShopModel} from '../models/shop.model';
 //     }
 //   }
 // }
-
-addEventListener('message', async ({data}) => {
-  console.log('start stocks worker');
- // run();
-});
+//
+// addEventListener('message', async ({data}) => {
+//   console.log('start stocks worker');
+//   run();
+// });

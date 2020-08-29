@@ -12,7 +12,7 @@ import {toSqlDate} from '../../lib/utils/date.util';
 @Injectable({
   providedIn: 'root'
 })
-export class ReportService  {
+export class ReportService {
 
   constructor(private readonly httpClient: HttpClient,
               private readonly storage: StorageService,
@@ -75,33 +75,19 @@ export class ReportService  {
 
   async getTotalSale(beginDate: Date, endDate: Date): Promise<number> {
     const activeShop = await this.storage.getActiveShop();
-    const total = await BFast.database(activeShop.projectId).collection('sales')
+    const total: number = await BFast.database(activeShop.projectId).collection('sales')
       .query()
-      .count({
-        date: {
-          $lte: toSqlDate(endDate),
-          $gte: toSqlDate(beginDate)
-        }
-      }, {
-        cacheEnable: false,
-        dtl: 0
-      });
-    let sales = await BFast.database(activeShop.projectId).collection('sales')
+      .lessThanOrEqual('date', toSqlDate(endDate))
+      .greaterThanOrEqual('date', toSqlDate(beginDate))
+      .count(true).find();
+    let sales: SalesModel[] = await BFast.database(activeShop.projectId).collection('sales')
       .query()
-      .find<SalesModel>({
-        filter: {
-          // @ts-ignore
-          date: {
-            $lte: toSqlDate(endDate),
-            $gte: toSqlDate(beginDate)
-          }
-        },
-        skip: 0,
-        size: total,
-        keys: ['amount', 'batch'],
-      }, {
-        cacheEnable: false,
-        dtl: 0
+      .lessThanOrEqual('date', toSqlDate(endDate))
+      .greaterThanOrEqual('date', toSqlDate(beginDate))
+      .skip(0)
+      .size(total)
+      .find<SalesModel[]>({
+        returnFields: ['amount', 'batch']
       });
 
     const duplication: { batch: string, value: any } = {batch: 'a', value: 'a'};
@@ -183,20 +169,12 @@ export class ReportService  {
 
   async getExpiredProducts(date: Date, skip = 0, size = 1000): Promise<StockModel[]> {
     const activeShop = await this.storage.getActiveShop();
-
-    return BFast.database(activeShop.projectId).collection('stocks').query().find<StockModel>({
-      filter: {
-        // @ts-ignore
-        expire: {
-          $lte: toSqlDate(date)
-        }
-      },
-      skip,
-      size
-    }, {
-      cacheEnable: true,
-      dtl: 0,
-    });
+    return BFast.database(activeShop.projectId).collection('stocks')
+      .query()
+      .lessThanOrEqual('expire', toSqlDate(date))
+      .skip(skip)
+      .size(size)
+      .find<StockModel[]>();
   }
 
   async getProductsAboutToExpire(): Promise<StockModel[]> {
@@ -234,33 +212,20 @@ export class ReportService  {
 
   async getTotalGrossSale(beginDate: Date, endDate: Date) {
     const activeShop = await this.storage.getActiveShop();
-    const total = await BFast.database(activeShop.projectId).collection('sales')
+    const total: number = await BFast.database(activeShop.projectId).collection('sales')
       .query()
-      .count({
-        date: {
-          $lte: toSqlDate(endDate),
-          $gte: toSqlDate(beginDate)
-        }
-      }, {
-        cacheEnable: false,
-        dtl: 0
-      });
+      .lessThanOrEqual('date', toSqlDate(endDate))
+      .greaterThanOrEqual('date', toSqlDate(beginDate))
+      .count(true)
+      .find();
     let sales = await BFast.database(activeShop.projectId).collection('sales')
       .query()
-      .find<SalesModel>({
-        filter: {
-          // @ts-ignore
-          date: {
-            $lte: toSqlDate(endDate),
-            $gte: toSqlDate(beginDate)
-          }
-        },
-        skip: 0,
-        size: total,
-        keys: ['amount', 'batch', 'quantity', 'stock'],
-      }, {
-        cacheEnable: false,
-        dtl: 0
+      .lessThanOrEqual('date', toSqlDate(endDate))
+      .greaterThanOrEqual('date', toSqlDate(beginDate))
+      .skip(0)
+      .size(total)
+      .find<SalesModel[]>({
+        returnFields: ['amount', 'batch', 'quantity', 'stock'],
       });
 
     const duplication: { batch: string, value: any } = {batch: 'a', value: 'a'};

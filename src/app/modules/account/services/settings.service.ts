@@ -11,10 +11,10 @@ export class SettingsService {
   ssmServerURL = environment.databaseURL;
   ssmFunctionsURL = environment.functionsURL;
   ssmHeader = {
-    'X-Parse-Application-Id': 'smartstock_lb'
+    'X-Parse-Application-Id': 'smartstock'
   };
   ssmFunctionsHeader = {
-    'bfast-application-id': 'smartstock_lb',
+    'bfast-application-id': 'smartstock',
     'content-type': 'application/json'
   };
 
@@ -33,7 +33,7 @@ export class SettingsService {
       }
       if (user && user.sessionToken && activeShop && activeShop.applicationId) {
         return {
-          'X-Parse-Application-Id': 'smartstock_lb',
+          'X-Parse-Application-Id': 'smartstock',
           'X-Parse-Session-Token': user.sessionToken,
           'Content-Type': 'application/json'
         };

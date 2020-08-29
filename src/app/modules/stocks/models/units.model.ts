@@ -1,6 +1,6 @@
 export interface UnitsModel {
   name: string;
-  objectId?: string;
+  id?: string;
   createdAt?: string;
   updatedAt?: string;
   description?: string;

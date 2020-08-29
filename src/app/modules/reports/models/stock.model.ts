@@ -2,7 +2,7 @@ export interface StockModel {
   createdAt?: any;
   updatedAt?: any;
   image?: any;
-  objectId?: string;
+  id?: string;
   _id?: string;
   product: string;
   saleable: boolean | true;

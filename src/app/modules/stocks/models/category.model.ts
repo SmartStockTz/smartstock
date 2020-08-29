@@ -1,5 +1,5 @@
 export interface CategoryModel {
-  objectId?: string;
+  id?: string;
   name: string;
   description?: string;
   createdAt?: any;

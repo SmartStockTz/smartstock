@@ -40,7 +40,7 @@ import {LibModule} from '../lib/lib.module';
 const routes: Routes = [
   {path: '', component: ViewPageComponent},
   {path: 'create', component: CreatePageComponent},
-  {path: 'edit/:objectId', component: EditPageComponent}
+  {path: 'edit/:id', component: EditPageComponent}
 ];
 
 @NgModule({

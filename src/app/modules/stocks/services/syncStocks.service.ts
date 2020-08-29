@@ -1,13 +1,13 @@
 import {BFast} from 'bfastjs';
-import {RealTimeAdapter} from 'bfastjs/dist/src/adapters/RealTimeAdapter';
 import {Injectable} from '@angular/core';
 import {ShopModel} from '../models/shop.model';
+import {SocketController} from 'bfastjs/dist/controllers/SocketController';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SyncStocksService {
-  stockSocket: RealTimeAdapter;
+  private stockSocket: SocketController;
 
   constructor() {
   }
@@ -20,9 +20,7 @@ export class SyncStocksService {
 
   init() {
     BFast.init({
-      applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-        enable: true
-      }
+      applicationId: 'smartstock', projectId: 'smartstock'
     });
   }
 
@@ -83,12 +81,12 @@ export class SyncStocksService {
       const localStockMap = {};
       if (localStocks) {
         localStocks.forEach(value => {
-          localStockMap[value.objectId] = value;
+          localStockMap[value.id] = value;
         });
       }
       if (remoteStocks && remoteStocks.results) {
         remoteStocks.results.forEach(value => {
-          localStockMap[value.objectId] = value;
+          localStockMap[value.id] = value;
         });
       }
       const newStocks = [];
@@ -114,7 +112,7 @@ export class SyncStocksService {
       const {operationType, fullDocument, documentKey, updateDescription} = data.data;
       switch (operationType) {
         case 'insert':
-          fullDocument.objectId = fullDocument['_id'];
+          fullDocument.id = fullDocument['_id'];
           delete fullDocument._id;
           fullDocument.createdAt = fullDocument['_created_at'];
           delete fullDocument._created_at;
@@ -124,11 +122,11 @@ export class SyncStocksService {
           await stocksCache.set('all', stocks);
           return;
         case 'delete':
-          await stocksCache.set('all', stocks.filter(stock => stock.objectId !== documentKey['_id']));
+          await stocksCache.set('all', stocks.filter(stock => stock.id !== documentKey['_id']));
           return;
         case 'update':
           await stocksCache.set('all', stocks.map(stock => {
-            if (stock.objectId === documentKey['_id']) {
+            if (stock.id === documentKey['_id']) {
               // updatedFields
               // removedFields
               const updatedFields = updateDescription['updatedFields'];
@@ -156,7 +154,7 @@ export class SyncStocksService {
           return;
         case 'replace':
           await stocksCache.set('all', stocks.map(stock => {
-            if (stock.objectId === documentKey['_id']) {
+            if (stock.id === documentKey['_id']) {
               return fullDocument;
             } else {
               return stock;

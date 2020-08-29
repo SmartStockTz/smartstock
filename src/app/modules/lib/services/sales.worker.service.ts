@@ -10,7 +10,7 @@ import {ShopModel} from '../models/shop.model';
 //   },
 //
 //   initiateSmartStock() {
-//     BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
+//     BFast.init({applicationId: 'smartstock', projectId: 'smartstock'});
 //   },
 //
 //   async getShops(): Promise<ShopModel[]> {
@@ -65,7 +65,7 @@ import {ShopModel} from '../models/shop.model';
 //       .updateMany('stocks',
 //         dataToSave.map(sale => {
 //           return {
-//             objectId: sale.stock.objectId,
+//             id: sale.stock.id,
 //             data: {'quantity': {'__op': 'Increment', 'amount': -sale.quantity}}
 //           };
 //         })
@@ -112,7 +112,7 @@ import {ShopModel} from '../models/shop.model';
 //       .save({'n1m': 'prepare'});
 //     await BFast.database(shop.projectId)
 //       .collection('sales')
-//       .delete(t.objectId);
+//       .delete(t.id);
 //   },
 // };
 

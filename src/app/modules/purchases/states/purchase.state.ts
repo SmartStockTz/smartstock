@@ -17,9 +17,9 @@ export class PurchaseState {
               private readonly _settings: SettingsService) {
   }
 
-  recordPayment(objectId: string): Promise<any> {
+  recordPayment(id: string): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.put(await this._settings.getCustomerServerURL() + '/classes/purchases/' + objectId, {
+      this._httpClient.put(await this._settings.getCustomerServerURL() + '/classes/purchases/' + id, {
         paid: true
       }, {
         headers: await this._settings.getCustomerPostHeader()
@@ -101,7 +101,7 @@ export class PurchaseState {
   // @ts-ignore
   deletePurchase(purchase: PurchaseModel): Promise<PurchaseModel> {
     return new Promise<PurchaseModel>(async (resolve, reject) => {
-      this._httpClient.delete<PurchaseModel>(await this._settings.getCustomerServerURL() + '/classes/purchases/' + purchase.objectId, {
+      this._httpClient.delete<PurchaseModel>(await this._settings.getCustomerServerURL() + '/classes/purchases/' + purchase.id, {
         headers: await this._settings.getCustomerHeader()
       }).subscribe(value => {
         resolve(value);

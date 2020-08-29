@@ -4,18 +4,18 @@ import {ShopModel} from '../../account/models/shop.model';
 import {BatchModel} from '../../sales/models/batch.model';
 import {EventService} from './event.service';
 import {BFast} from 'bfastjs';
-import {CacheAdapter} from 'bfastjs/dist/src/adapters/CacheAdapter';
 import {CustomerModel} from '../../sales/models/customer.model';
 import {StockModel} from '../../stocks/models/stock.model';
 import {SecurityUtil} from '../utils/security.util';
 import {SsmEvents} from '../utils/eventsNames.util';
+import {CacheController} from 'bfastjs/dist/controllers/CacheController';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  smartStockCache: CacheAdapter = BFast.cache({database: 'smartstock', collection: 'config'});
+  smartStockCache: CacheController = BFast.cache({database: 'smartstock', collection: 'config'});
 
   constructor(private readonly eventApi: EventService) {
   }
@@ -104,7 +104,7 @@ export class StorageService {
   async saveStock(stock: StockModel): Promise<StockModel> {
     // const shop = await this.getActiveShop();
     // const stocksCache = BFast.cache({database: 'stocks', collection: shop.projectId});
-    // return stocksCache.set(stock.objectId, stock);
+    // return stocksCache.set(stock.id, stock);
     return undefined;
   }
 

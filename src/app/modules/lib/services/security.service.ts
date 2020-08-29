@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {SecurityAdapter} from '../../../adapter/SecurityAdapter';
 
 @Injectable()
-export class SecurityService<T> implements SecurityAdapter {
+export class SecurityService<T> {
 
   constructor() {
   }

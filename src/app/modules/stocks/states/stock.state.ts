@@ -63,20 +63,16 @@ export class StockState {
     return units;
   }
 
-  async addStock(stock: StockModel): Promise<StockModel> {
+  async addStock(stock: StockModel, progress: (d: any) => void): Promise<StockModel> {
     const shop = await this._storage.getActiveShop();
-    if (stock.image) {
-      const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
-      stock.image = imageRequest.url;
+    if (stock.image && stock.image instanceof File) {
+      stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
     }
     if (stock.downloads && stock.downloads.length > 0) {
       for (const value of stock.downloads) {
-        const fileUpload = await BFast.storage(shop.projectId).save({
-          fileName: `downloadableFile.${value.name.split('.').pop()}`,
-          data: {base64: value.url},
-          fileType: value.type
-        });
-        value.url = fileUpload.url;
+        if (value && value.url instanceof File) {
+          value.url = await BFast.storage(shop.projectId).save(value.url as any, progress);
+        }
       }
     }
     return BFast.database(shop.projectId).collection('stocks').save(stock);
@@ -98,17 +94,17 @@ export class StockState {
 
   async deleteCategory(category: CategoryModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('categories').delete(category.objectId);
+    return BFast.database(shop.projectId).collection('categories').query().byId(category.id).delete();
   }
 
   async deleteStock(stock: StockModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('stocks').delete(stock._id ? stock._id : stock.objectId);
+    return BFast.database(shop.projectId).collection('stocks').query().byId(stock._id ? stock._id : stock.id).delete();
   }
 
-  async deleteSupplier(objectId: string): Promise<any> {
+  async deleteSupplier(id: string): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('suppliers').delete(objectId);
+    return BFast.database(shop.projectId).collection('suppliers').query().byId(id).delete();
   }
 
   async getAllCategory(pagination: { size?: number, skip?: number }): Promise<CategoryModel[]> {
@@ -155,10 +151,7 @@ export class StockState {
 
   async getStock(id: string, callback: (stock: StockModel) => void) {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('stocks').get(id, {
-      cacheEnable: false,
-      dtl: 0
-    });
+    return BFast.database(shop.projectId).collection('stocks').get(id);
   }
 
   getSupplier(id: string, callback: (supplier: SupplierModel) => void) {
@@ -173,21 +166,26 @@ export class StockState {
   updateAllSupplier(callback?: (value: any) => void) {
   }
 
-  // @ts-ignore
-  async updateCategory(category: { objectId: string, value: string, field: string }): Promise<any> {
+
+  async updateCategory(category: { id: string, value: string, field: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    const categoryId = category.objectId;
+    const categoryId = category.id;
     const data = {};
     data[category.field] = category.value;
-    delete category.objectId;
-    const response = await BFast.database(shop.projectId).collection('categories').update<any>(categoryId, data);
-    response.objectId = categoryId;
+    delete category.id;
+    const response = await BFast.database(shop.projectId).collection('categories')
+      .query()
+      .byId(categoryId)
+      .updateBuilder()
+      .update(data);
+    response.id = categoryId;
     return response;
   }
 
   updateCategoryMobile(category: CategoryModel, categoryId): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.put<CategoryModel>(await this._settings.getCustomerServerURL() + '/classes/categories-mobile-ui/' + categoryId, category,
+      this._httpClient.put<CategoryModel>(await this._settings.getCustomerServerURL() +
+        '/classes/categories-mobile-ui/' + categoryId, category,
         {
           headers: await this._settings.getCustomerPostHeader()
         }).subscribe(value => {
@@ -198,54 +196,58 @@ export class StockState {
     });
   }
 
-  async updateStock(stock: StockModel): Promise<StockModel> {
+  async updateStock(stock: StockModel, progress: (d) => void): Promise<StockModel> {
     const shop = await this._storage.getActiveShop();
-    const stockId = stock._id ? stock._id : stock.objectId;
-    delete stock.objectId;
+    const stockId = stock._id ? stock._id : stock.id;
+    delete stock.id;
     if (stock.image && !stock.image.toString().startsWith('http')) {
-      const imageRequest = await BFast.storage(shop.projectId).save({fileName: 'product.png', data: {base64: stock.image}, fileType: null});
-      stock.image = imageRequest.url;
+      stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
     }
     if (stock.downloads && stock.downloads.length > 0) {
       for (const value of stock.downloads) {
-        if (value && !value.url.startsWith('http')) {
-          const fileUpload = await BFast.storage(shop.projectId).save({
-            fileName: `downloadableFile.${value.name.split('.').pop()}`,
-            data: {base64: value.url},
-            fileType: value.type
-          });
-          value.url = fileUpload.url;
+        if (value && value.url instanceof File) {
+          value.url = await BFast.storage(shop.projectId).save(value.url as any, progress);
         }
       }
     }
-    return BFast.database(shop.projectId).collection('stocks').update<StockModel>(stockId, stock);
+    return BFast.database(shop.projectId).collection('stocks').query().byId(stockId).updateBuilder().doc(stock).update();
   }
 
-  async updateSupplier(value: { objectId: string, field: string, value: string }): Promise<any> {
+  async updateSupplier(value: { id: string, field: string, value: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    const supplierId = value.objectId;
+    const supplierId = value.id;
     const data = {};
     data[value.field] = value.value;
-    delete value.objectId;
-    const response = await BFast.database(shop.projectId).collection('suppliers').update<any>(supplierId, data);
-    response.objectId = supplierId;
+    delete value.id;
+    const response = await BFast.database(shop.projectId).collection('suppliers')
+      .query()
+      .byId(supplierId)
+      .updateBuilder()
+      .set(value.field, value.value)
+      .update();
+    response.id = supplierId;
     return response;
   }
 
-  async updateUnit(unit: { objectId: string; value: string; field: string }): Promise<any> {
+  async updateUnit(unit: { id: string; value: string; field: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    const unitId = unit.objectId;
+    const unitId = unit.id;
     const data = {};
     data[unit.field] = unit.value;
-    delete unit.objectId;
-    const response = await BFast.database(shop.projectId).collection('units').update<any>(unitId, data);
-    response.objectId = unitId;
+
+    delete unit.id;
+    const response = await BFast.database(shop.projectId).collection('units')
+      .query()
+      .byId(unitId)
+      .updateBuilder()
+      .set(unit.field, unit.value)
+      .update();
+    response.id = unitId;
     return response;
   }
 
   async deleteUnit(unit: UnitsModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.database(shop.projectId).collection('units').delete(unit.objectId);
+    return BFast.database(shop.projectId).collection('units').query().byId(unit.id).delete();
   }
 }
-

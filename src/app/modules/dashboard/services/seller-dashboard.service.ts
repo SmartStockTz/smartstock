@@ -18,7 +18,7 @@ export class SellerDashboardService implements SellerReportAdapter {
         const user = await this._storage.getActiveUser();
         const activeShop = await this._storage.getActiveShop();
         this._httpClient.get<{ total: number }[]>(
-          this._settings.ssmFunctionsURL + `/dashboard/seller/sales/${user.objectId}/${activeShop.projectId}/${date}`, {
+          this._settings.ssmFunctionsURL + `/dashboard/seller/sales/${user.id}/${activeShop.projectId}/${date}`, {
             headers: this._settings.ssmFunctionsHeader
           }).subscribe(value => {
           resolve(value);
@@ -37,7 +37,7 @@ export class SellerDashboardService implements SellerReportAdapter {
         const user = await this._storage.getActiveUser();
         const activeShop = await this._storage.getActiveShop();
         this._httpClient.get<{ total: number }[]>(
-          this._settings.ssmFunctionsURL + `/dashboard/seller/stock/${user.objectId}/${activeShop.projectId}/${date}`, {
+          this._settings.ssmFunctionsURL + `/dashboard/seller/stock/${user.id}/${activeShop.projectId}/${date}`, {
             headers: this._settings.ssmFunctionsHeader
           }).subscribe(value => {
           resolve(value);
@@ -56,7 +56,7 @@ export class SellerDashboardService implements SellerReportAdapter {
         const user = await this._storage.getActiveUser();
         const activeShop = await this._storage.getActiveShop();
         this._httpClient.get(this._settings.ssmFunctionsURL +
-          `/dashboard/seller/salesGraphData/day/${user.objectId}/${activeShop.projectId}/${fromDate}/${toDate}`, {
+          `/dashboard/seller/salesGraphData/day/${user.id}/${activeShop.projectId}/${fromDate}/${toDate}`, {
           headers: this._settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);
@@ -75,7 +75,7 @@ export class SellerDashboardService implements SellerReportAdapter {
         const user = await this._storage.getActiveUser();
         const activeShop = await this._storage.getActiveShop();
         this._httpClient.get(this._settings.ssmFunctionsURL +
-          `/dashboard/seller/dailySales/${user.objectId}/${activeShop.projectId}/${date}`, {
+          `/dashboard/seller/dailySales/${user.id}/${activeShop.projectId}/${date}`, {
           headers: this._settings.ssmFunctionsHeader
         }).subscribe(value => {
           resolve(value);

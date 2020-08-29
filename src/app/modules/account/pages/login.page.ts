@@ -139,9 +139,9 @@ export class LoginPage implements OnInit {
       }).catch(reason => {
         this.log.i(reason);
         this.showProgress = false;
-        this.snack.open((reason && reason.error && reason.error.error)
-          ? reason.error.error : 'Your request was not successful try again', 'Ok', {
-          duration: 7000
+        this.snack.open((reason && reason.message)
+          ? reason.message : reason, 'Ok', {
+          duration: 5000
         });
       });
     }

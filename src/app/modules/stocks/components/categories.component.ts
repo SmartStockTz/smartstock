@@ -32,17 +32,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td class="editable" [matMenuTriggerFor]="nameMenu"
                 #nameMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.name}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.name}" matRipple mat-cell
                 *matCellDef="let element">{{element.name}}
               <mat-menu #nameMenu>
-                <ng-template matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Name</mat-label>
                       <input [value]="data" [formControl]="nameFormControl" matInput>
                     </mat-form-field>
                     <button
-                      (click)="updateCategoryName({objectId: objectId, value: nameFormControl.value}, nameMenuTrigger)"
+                      (click)="updateCategoryName({id: id, value: nameFormControl.value}, nameMenuTrigger)"
                       mat-button>Update
                     </button>
                   </div>
@@ -55,17 +55,17 @@ import {StockState} from '../states/stock.state';
             <th mat-header-cell *matHeaderCellDef>Description</th>
             <td class="editable" [matMenuTriggerFor]="descriptionMenu"
                 #descriptionMenuTrigger="matMenuTrigger"
-                [matMenuTriggerData]="{objectId: element.objectId, data: element.description}" matRipple mat-cell
+                [matMenuTriggerData]="{id: element.id, data: element.description}" matRipple mat-cell
                 *matCellDef="let element">{{element.description}}
               <mat-menu #descriptionMenu>
-                <ng-template style="padding: 16px" matMenuContent let-objectId="objectId" let-data="data">
+                <ng-template style="padding: 16px" matMenuContent let-id="id" let-data="data">
                   <div (click)="$event.stopPropagation()" style="padding: 16px">
                     <mat-form-field class="my-input" appearance="outline">
                       <mat-label>Description</mat-label>
                       <textarea [value]="data" [formControl]="descriptionFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateCategoryDescription({objectId: objectId, value: descriptionFormControl.value},
+                      (click)="updateCategoryDescription({id: id, value: descriptionFormControl.value},
                      descriptionMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -164,7 +164,7 @@ export class CategoriesComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe(_ => {
       if (_) {
-        this.categoriesArray = this.categoriesArray.filter(value => value.objectId !== element.objectId);
+        this.categoriesArray = this.categoriesArray.filter(value => value.id !== element.id);
         this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
         this.snack.open('Category deleted', 'Ok', {
           duration: 2000
@@ -185,11 +185,11 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  updateCategory(category: { objectId: string, value: string, field: string }) {
+  updateCategory(category: { id: string, value: string, field: string }) {
     this.snack.open('Update in progress..', 'Ok');
     this.stockDatabase.updateCategory(category).then(data => {
-      const editedObjectIndex = this.categoriesArray.findIndex(value => value.objectId === data.objectId);
-      this.categoriesArray = this.categoriesArray.filter(value => value.objectId !== category.objectId);
+      const editedObjectIndex = this.categoriesArray.findIndex(value => value.id === data.id);
+      this.categoriesArray = this.categoriesArray.filter(value => value.id !== category.id);
       if (editedObjectIndex !== -1) {
         const updatedObject = this.categoriesArray[editedObjectIndex];
         updatedObject[category.field] = category.value;

@@ -80,15 +80,12 @@ const routes: Routes = [
     MatNativeDateModule,
     HammerModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
     BFast.init({
-      applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-        enable: false
-      }
+      applicationId: 'smartstock', projectId: 'smartstock', appPassword: 'ZMUGVn72o3yd8kSbMGhfWpI80N9nA2IHjxWKlAhG'
     });
   }
 }

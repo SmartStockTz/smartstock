@@ -48,7 +48,7 @@ export class InvoicesComponent implements OnInit {
       //   return {
       //     amount: receipt.amount,
       //     date: receipt.date.iso ? receipt.date.iso : receipt.date,
-      //     objectId: receipt.objectId,
+      //     id: receipt.id,
       //     receipt: receipt.receipt
       //   };
       // });

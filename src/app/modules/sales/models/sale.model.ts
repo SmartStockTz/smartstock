@@ -1,7 +1,7 @@
 import {StockModel} from './stock.model';
 
 export interface SalesModel {
-  objectId?: string;
+  id?: string;
   idTra?: string;
   date: string;
   product: string;

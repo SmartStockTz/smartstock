@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {PlatformApiAdapter} from '../../../adapter/PlatformApiAdapter';
 import {Capacitor} from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlatformService implements PlatformApiAdapter {
+export class PlatformService {
 
   constructor() {
   }

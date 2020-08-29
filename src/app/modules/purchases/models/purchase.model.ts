@@ -2,7 +2,7 @@ import {StockModel} from './stock.model';
 import {SupplierModel} from './supplier.model';
 
 export interface PurchaseModel {
-  objectId?: string;
+  id?: string;
   createdAt?: any;
   updatedAt?: any;
   date: any;

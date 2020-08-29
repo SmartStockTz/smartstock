@@ -185,7 +185,7 @@ export class UsersPage extends DeviceInfoUtil implements OnInit {
       disableClose: true
     }).afterClosed().subscribe(_ => {
       if (_) {
-        this.usersArray = this.usersArray.filter(value => value.objectId !== element.objectId);
+        this.usersArray = this.usersArray.filter(value => value.id !== element.id);
         this.usersDatasource = new MatTableDataSource<UserModel>(this.usersArray);
         this.snack.open('User deleted', 'Ok', {
           duration: 2000
@@ -206,11 +206,11 @@ export class UsersPage extends DeviceInfoUtil implements OnInit {
     // }
   }
 
-  updateUser(user: { objectId: string, value: string, field: string }) {
+  updateUser(user: { id: string, value: string, field: string }) {
     // this.snack.open('Update in progress..', 'Ok');
     // this.userDatabase.updateUser(user).then(data => {
-    //   const editedObjectIndex = this.usersArray.findIndex(value => value.objectId === data.objectId);
-    //   this.usersArray = this.usersArray.filter(value => value.objectId !== user.objectId);
+    //   const editedObjectIndex = this.usersArray.findIndex(value => value.id === data.id);
+    //   this.usersArray = this.usersArray.filter(value => value.id !== user.id);
     //   if (editedObjectIndex !== -1) {
     //     const updatedObject = this.usersArray[editedObjectIndex];
     //     updatedObject[user.field] = user.value;

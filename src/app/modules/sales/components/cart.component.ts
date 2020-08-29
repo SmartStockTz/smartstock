@@ -2,14 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
-/*********** moe to common ***********/
 import {EventService} from 'src/app/modules/lib/services/event.service';
-/*********** moe to common ***********/
 import {SalesState} from '../states/sales.state';
-/*********** moe to common ***********/
 import {UserDatabaseService} from '../../account/services/user-database.service';
 import {SettingsService} from '../../account/services/settings.service';
-/*********** moe to common ***********/
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SalesModel} from '../models/sale.model';
 import {CartModel} from '../models/cart.model';
@@ -17,10 +13,9 @@ import {environment} from '../../../../environments/environment';
 import {CustomerState} from '../states/customer.state';
 import {PrintService} from '../services/print.service';
 import {StockModel} from '../models/stock.model';
-import {UserModel} from 'bfastjs/dist/src/model/UserModel';
 import {SsmEvents} from '../../lib/utils/eventsNames.util';
 import {SecurityUtil} from '../../lib/utils/security.util';
-import { toSqlDate } from '../../lib/utils/date.util';
+import {toSqlDate} from '../../lib/utils/date.util';
 
 @Component({
   selector: 'smartstock-cart',
@@ -135,7 +130,7 @@ export class CartComponent implements OnInit {
   cartProductsArray: { quantity: number, product: StockModel }[] = [];
   cartProducts: Observable<{ quantity: number, product: StockModel }[]> = of(this.cartProductsArray);
   checkoutProgress = false;
-  private currentUser: UserModel;
+  private currentUser: any;
   isMobile = environment.android;
 
   private static _getCartItemDiscount(data: { totalDiscount: number, totalItems: number }): number {
@@ -192,7 +187,7 @@ export class CartComponent implements OnInit {
   private _cartListener() {
     this.eventService.listen(SsmEvents.ADD_CART, (event) => {
       const cart = event.detail;
-      const updateItem = this.cartProductsArray.find(x => x.product.objectId === cart.product.objectId);
+      const updateItem = this.cartProductsArray.find(x => x.product.id === cart.product.id);
       if (updateItem != null) {
         const index = this.cartProductsArray.indexOf(updateItem);
         this.cartProductsArray[index].quantity = this.cartProductsArray[index].quantity + cart.quantity;
@@ -408,9 +403,9 @@ export class CartComponent implements OnInit {
         customer: this.isViewedInWholesale
           ? this.customerFormControl.value
           : null,
-        user: this.currentUser?.objectId,
+        user: this.currentUser?.id,
         stock: value.product,
-        stockId: value.product.objectId
+        stockId: value.product.id
       });
     });
     return sales;

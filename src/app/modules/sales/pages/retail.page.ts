@@ -1,15 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-/***** move to common ********/
 import {UserDatabaseService} from 'src/app/modules/account/services/user-database.service';
-/***** move to common ********/
 import {StorageService} from 'src/app/modules/lib/services/storage.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
-/***** move to common ********/
 import {LogService} from '../../lib/services/log.service';
-/***** move to common ********/
 import {StockModel} from '../models/stock.model';
 import {SalesState} from '../states/sales.state';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';

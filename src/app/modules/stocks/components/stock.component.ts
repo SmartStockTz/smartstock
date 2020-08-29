@@ -11,15 +11,15 @@ import {StockModel} from '../models/stock.model';
     </div>
     <div *ngFor="let stockKey of getStocks()">
       <h5
-        *ngIf="stockKey!=='image' && stockKey !=='objectId' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld' ">
+        *ngIf="stockKey!=='image' && stockKey !=='id' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld' ">
         {{stockKey}}
       </h5>
       <span
-        *ngIf="stockKey!=='image' && stockKey !=='objectId' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld'">
+        *ngIf="stockKey!=='image' && stockKey !=='id' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld'">
     {{data[stockKey]}}
   </span>
       <mat-divider
-        *ngIf="stockKey!=='image' && stockKey !=='objectId' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld'"
+        *ngIf="stockKey!=='image' && stockKey !=='id' && stockKey!=='createdAt' && stockKey!=='updatedAt' && stockKey!=='idOld'"
         style="margin-bottom: 8px">
       </mat-divider>
     </div>
