@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {LogService} from '../../lib/services/log.service';
 import {environment} from '../../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
@@ -107,7 +107,7 @@ export class LoginPage implements OnInit {
               private readonly dialog: MatDialog,
               private readonly log: LogService,
               private readonly formBuilder: FormBuilder,
-              private readonly userDatabase: UserDatabaseService) {
+              private readonly userDatabase: UserService) {
   }
 
   ngOnInit() {
@@ -139,8 +139,7 @@ export class LoginPage implements OnInit {
       }).catch(reason => {
         this.log.i(reason);
         this.showProgress = false;
-        this.snack.open((reason && reason.message)
-          ? reason.message : reason, 'Ok', {
+        this.snack.open('Invalid username/password try again', 'Ok', {
           duration: 5000
         });
       });

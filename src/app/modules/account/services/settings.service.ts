@@ -8,8 +8,8 @@ import {environment} from '../../../../environments/environment';
 })
 export class SettingsService {
 
-  ssmServerURL = environment.databaseURL;
-  ssmFunctionsURL = environment.functionsURL;
+  ssmServerURL = environment.smartstock.databaseURL;
+  ssmFunctionsURL = environment.smartstock.functionsURL;
   ssmHeader = {
     'X-Parse-Application-Id': 'smartstock'
   };

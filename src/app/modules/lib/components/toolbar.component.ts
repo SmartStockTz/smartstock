@@ -5,7 +5,7 @@ import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {EventService} from 'src/app/modules/lib/services/event.service';
 import {StorageService} from '../services/storage.service';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {UserModel} from '../../account/models/user.model';
 import {environment} from '../../../../environments/environment';
 import {SsmEvents} from '../utils/eventsNames.util';
@@ -89,7 +89,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly storage: StorageService,
-              private readonly userDatabase: UserDatabaseService,
+              private readonly userDatabase: UserService,
               private readonly eventService: EventService) {
   }
 

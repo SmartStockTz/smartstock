@@ -9,7 +9,7 @@
 //
 // function init() {
 //   BFast.init({
-//     applicationId: 'smartstock', projectId: 'smartstock', cache: {
+//     applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
 //       enable: true
 //     }
 //   });
@@ -162,7 +162,7 @@
 //   }
 // }
 //
-// addEventListener('message', async ({data}) => {
-//   console.log('start stocks worker');
-//   run();
-// });
+addEventListener('message', async ({data}) => {
+  console.log('start stocks worker');
+  // run();
+});

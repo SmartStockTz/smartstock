@@ -85,7 +85,9 @@ const routes: Routes = [
 export class AppModule {
   constructor() {
     BFast.init({
-      applicationId: 'smartstock', projectId: 'smartstock', appPassword: 'ZMUGVn72o3yd8kSbMGhfWpI80N9nA2IHjxWKlAhG'
+      applicationId: environment.smartstock.applicationId,
+      projectId: environment.smartstock.projectId,
+      appPassword: environment.smartstock.pass
     });
   }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import {UserDatabaseService} from '../services/user-database.service';
 export class AdminRoleGuard implements CanActivate {
 
   constructor(private readonly router: Router,
-              private readonly userDatabase: UserDatabaseService) {
+              private readonly userDatabase: UserService) {
   }
 
   canActivate(

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from '../models/user.model';
 import {ShopModel} from '../models/shop.model';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StorageService} from '../../lib/services/storage.service';
 
@@ -85,7 +85,7 @@ export class AddressComponent implements OnInit {
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
               private readonly _storage: StorageService,
-              private readonly _userApi: UserDatabaseService) {
+              private readonly _userApi: UserService) {
   }
 
   ngOnInit() {

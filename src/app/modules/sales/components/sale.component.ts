@@ -5,7 +5,7 @@ import {SalesState} from '../states/sales.state';
 /*********** move to common ***********/
 import {StorageService} from '../../lib/services/storage.service';
 /*********** move to common ***********/
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 /*********** move to common ***********/
 /*********** move to common ***********/
@@ -77,7 +77,7 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
   styleUrls: ['../styles/sale.style.css'],
   providers: [
     SalesState,
-    UserDatabaseService
+    UserService
   ]
 })
 export class SaleComponent extends DeviceInfoUtil implements OnInit {
@@ -93,7 +93,7 @@ export class SaleComponent extends DeviceInfoUtil implements OnInit {
   showRefreshCart = false;
 
   constructor(private readonly router: Router,
-              private readonly userDatabase: UserDatabaseService,
+              private readonly userDatabase: UserService,
               private readonly storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,

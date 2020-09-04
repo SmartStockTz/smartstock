@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {ShopModel} from '../models/shop.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StorageService} from '../../lib/services/storage.service';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {LogService} from '../../lib/services/log.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -69,7 +69,7 @@ export class UserCreateDialogComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly snack: MatSnackBar,
     private readonly storage: StorageService,
-    private readonly userDatabase: UserDatabaseService,
+    private readonly userDatabase: UserService,
     private readonly logger: LogService,
     public dialogRef: MatDialogRef<UserCreateDialogComponent>) {
   }

@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KeeperGuard implements CanActivate {
 
-  constructor(private readonly userDatabase: UserDatabaseService,
+  constructor(private readonly userDatabase: UserService,
               private readonly router: Router) {
   }
 

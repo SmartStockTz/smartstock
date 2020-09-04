@@ -89,9 +89,6 @@ export class PurchaseState {
   deleteInvoice(id: string, callback: (value: any) => void) {
   }
 
-  // deletePurchase(id: string, callback: (value: any) => void) {
-  // }
-
   deleteReceipts(id: string, callback: (value: any) => void) {
   }
 
@@ -111,7 +108,6 @@ export class PurchaseState {
     });
   }
 
-
   getAllPurchase(page: { size?: number, skip?: number }): Promise<PurchaseModel[]> {
     return new Promise<PurchaseModel[]>(async (resolve, reject) => {
       this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/purchases', {
@@ -127,10 +123,6 @@ export class PurchaseState {
         reject(error1);
       });
     });
-  }
-
-  private updateCachePurchase() {
-
   }
 
   // must be updated and its socket method
@@ -151,21 +143,6 @@ export class PurchaseState {
     //   this.updateCachedPurchaseRefs();
     // });
     callback(null);
-  }
-
-  private updateCachedPurchaseRefs() {
-    // this.httpClient.get<any>(this._settings.getCustomerServerURL() + '/classes/purchaseRefs', {
-    //   headers: this._settings.getCustomerHeader(),
-    //   params: {
-    //     'limit': '1000'
-    //   }
-    // }).subscribe(value => {
-    //   this.indexDb.setItem<ReceiptModel[]>('purchaseRefs', value.results).then(value1 => {
-    //     console.log('updated purchaseRefs is ---> ' + value1.length);
-    //   }).catch(reason => console.log(reason));
-    // }, error1 => {
-    //   console.log(error1);
-    // });
   }
 
   getInvoice(id: string, callback: (invoice: ReceiptModel) => void) {

@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 
 describe('UserDatabaseService', () => {
@@ -10,18 +10,18 @@ describe('UserDatabaseService', () => {
         HttpClientModule
       ],
       providers: [
-        UserDatabaseService
+        UserService
       ]
     });
   });
 
   it('should be created', () => {
-    const service: UserDatabaseService = TestBed.inject(UserDatabaseService);
+    const service: UserService = TestBed.inject(UserService);
     expect(service).toBeTruthy();
   });
 
   it('should register a new user', async function () {
-    const databaseService: UserDatabaseService = TestBed.inject(UserDatabaseService);
+    const databaseService: UserService = TestBed.inject(UserService);
     try {
       const result = await databaseService.register({
         username: 'joshuamshana',

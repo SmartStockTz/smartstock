@@ -84,24 +84,24 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
                           </mat-menu>
 
                         </mat-card-title>
-                        <mat-card-subtitle>
-                          <button mat-stroked-button mat-button color="primary" class="stockbtn" (click)="transferStock()">
-                            <mat-icon>cached</mat-icon>
-                            Transfer Stock
-                          </button>
-                          <button mat-stroked-button mat-button color="primary" class="stockbtn">
-                            <mat-icon>add</mat-icon>
-                            Stock In
-                          </button>
-                          <button mat-stroked-button mat-button color="primary" class="stockbtn">
-                            <mat-icon>remove</mat-icon>
-                            Stock Out
-                          </button>
-                          <button mat-stroked-button mat-button color="primary" class="stockbtn">
-                            <mat-icon>delete_forever</mat-icon>
-                            Dispose Stock
-                          </button>
-                        </mat-card-subtitle>
+<!--                        <mat-card-subtitle>-->
+<!--                          <button mat-stroked-button mat-button color="primary" class="stockbtn" (click)="transferStock()">-->
+<!--                            <mat-icon>cached</mat-icon>-->
+<!--                            Transfer Stock-->
+<!--                          </button>-->
+<!--                          <button mat-stroked-button mat-button color="primary" class="stockbtn">-->
+<!--                            <mat-icon>add</mat-icon>-->
+<!--                            Stock In-->
+<!--                          </button>-->
+<!--                          <button mat-stroked-button mat-button color="primary" class="stockbtn">-->
+<!--                            <mat-icon>remove</mat-icon>-->
+<!--                            Stock Out-->
+<!--                          </button>-->
+<!--                          <button mat-stroked-button mat-button color="primary" class="stockbtn">-->
+<!--                            <mat-icon>delete_forever</mat-icon>-->
+<!--                            Dispose Stock-->
+<!--                          </button>-->
+<!--                        </mat-card-subtitle>-->
                         <table mat-table [dataSource]="stockDatasource">
 
 

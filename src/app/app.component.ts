@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     });
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
       try {
-        BFast.init({applicationId: 'smartstock', projectId: 'smartstock'});
+        BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
         await this.threadProxy.stop();
       } catch (e) {
         console.log(e);

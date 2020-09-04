@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
 import {EventService} from 'src/app/modules/lib/services/event.service';
 import {SalesState} from '../states/sales.state';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {SettingsService} from '../../account/services/settings.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SalesModel} from '../models/sale.model';
@@ -114,7 +114,7 @@ export class CartComponent implements OnInit {
               private readonly saleDatabase: SalesState,
               private readonly settings: SettingsService,
               private readonly printer: PrintService,
-              private readonly userApi: UserDatabaseService,
+              private readonly userApi: UserService,
               private readonly customerApi: CustomerState,
               private readonly snack: MatSnackBar) {
   }

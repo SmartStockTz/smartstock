@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShopModel} from '../models/shop.model';
 import {StorageService} from '../../lib/services/storage.service';
 import {Observable, of} from 'rxjs';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {UserModel} from '../models/user.model';
 import {LogService} from '../../lib/services/log.service';
 import {environment} from '../../../../environments/environment';
@@ -135,7 +135,7 @@ export class UsersPage extends DeviceInfoUtil implements OnInit {
 
   isMobile = environment.android;
 
-  constructor(private readonly userDatabase: UserDatabaseService,
+  constructor(private readonly userDatabase: UserService,
               private readonly formBuilder: FormBuilder,
               private readonly dialog: MatDialog,
               private readonly logger: LogService,

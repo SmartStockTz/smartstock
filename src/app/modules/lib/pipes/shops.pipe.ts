@@ -1,13 +1,13 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {ShopModel} from '../../account/models/shop.model';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 
 @Pipe({
   name: 'shopsPipe'
 })
 export class ShopsPipe implements PipeTransform {
 
-  constructor(private readonly userApi: UserDatabaseService) {
+  constructor(private readonly userApi: UserService) {
   }
 
   async transform(shops: ShopModel[], ...args: unknown[]): Promise<string[]> {

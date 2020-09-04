@@ -17,7 +17,7 @@ export class SyncSalesService {
   }
 
   initiateSmartStock() {
-    BFast.init({applicationId: 'smartstock', projectId: 'smartstock'});
+    BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
   }
 
   async getShops() {

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserDatabaseService} from 'src/app/modules/account/services/user-database.service';
+import {UserService} from 'src/app/modules/account/services/user.service';
 import {StorageService} from 'src/app/modules/lib/services/storage.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -27,7 +27,7 @@ export class RetailPageComponent extends DeviceInfoUtil implements OnInit {
   @Input() isViewedInWholesale = false;
 
   constructor(private readonly router: Router,
-              private readonly userDatabase: UserDatabaseService,
+              private readonly userDatabase: UserService,
               private readonly _storage: StorageService,
               private readonly snack: MatSnackBar,
               private readonly logger: LogService,

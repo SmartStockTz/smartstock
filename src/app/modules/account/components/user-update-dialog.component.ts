@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from '../../lib/services/log.service';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {UserModel} from '../models/user.model';
 
 @Component({
@@ -38,7 +38,7 @@ export class UserUpdateDialogComponent implements OnInit {
               private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
               private readonly logger: LogService,
-              private readonly _userApi: UserDatabaseService,
+              private readonly _userApi: UserService,
               @Inject(MAT_DIALOG_DATA) public data: UserModel) {
   }
 

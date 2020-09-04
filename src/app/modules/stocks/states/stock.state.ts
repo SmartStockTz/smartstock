@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {UnitsModel} from '../models/units.model';
 import {HttpClient} from '@angular/common/http';
 import {SupplierModel} from '../models/supplier.model';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {SettingsService} from '../../account/services/settings.service';
 import {CategoryModel} from '../models/category.model';
 import {BFast} from 'bfastjs';
@@ -15,7 +15,7 @@ import {StockModel} from '../models/stock.model';
 export class StockState {
 
   constructor(private readonly _httpClient: HttpClient,
-              private readonly _user: UserDatabaseService,
+              private readonly _user: UserService,
               private readonly _storage: StorageService,
               private readonly _settings: SettingsService) {
   }

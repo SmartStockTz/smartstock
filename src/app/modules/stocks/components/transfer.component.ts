@@ -2,7 +2,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import {UserDatabaseService} from 'src/app/modules/account/services/user-database.service';
+import {UserService} from 'src/app/modules/account/services/user.service';
 import {ShopModel} from '../../account/models/shop.model';
 import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
@@ -55,7 +55,7 @@ export class TransferDialogComponent {
   shops: ShopModel[] = [];
   transferStockGroup: FormGroup;
 
-  constructor(private readonly shopsApi: UserDatabaseService,
+  constructor(private readonly shopsApi: UserService,
               private activeShopApi: StorageService,
               private readonly dialogRef: MatDialogRef<TransferDialogComponent>,
               private readonly snack: MatSnackBar,

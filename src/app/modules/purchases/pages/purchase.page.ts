@@ -21,10 +21,10 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 
       <mat-sidenav-content (swiperight)="openDrawer(sidenav)">
         <smartstock-toolbar [heading]="'Purchases'"
-                     (searchCallback)="handleSearch($event)"
-                     [showSearch]="true"
-                     searchPlaceholder="Search purchase"
-                     [sidenav]="sidenav" [showProgress]="false">
+                            (searchCallback)="handleSearch($event)"
+                            [showSearch]="true"
+                            searchPlaceholder="Search purchase"
+                            [sidenav]="sidenav" [showProgress]="false">
         </smartstock-toolbar>
 
         <div *ngIf="!isMobile" style="margin-top: 16px" class="container">
@@ -205,7 +205,7 @@ export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
 
   recordPayment(purchase: PurchaseModel) {
     this.snack.open('Start update payment record..');
-    this.purchaseDatabase.recordPayment(purchase.id).then(value => {
+    this.purchaseDatabase.recordPayment(purchase.id ? purchase.id : purchase.objectId).then(value => {
       this.snack.open('Payments recorded', 'Ok', {
         duration: 3000
       });
@@ -216,7 +216,6 @@ export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
         this.purchasesDatasource.data[oldIndex] = oldPurchase;
       }
     }).catch(reason => {
-      console.log(reason);
       this.snack.open('Fails to record payments', 'Ok', {
         duration: 3000
       });

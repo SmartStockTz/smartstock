@@ -30,6 +30,7 @@ import {UploadFilesComponent} from './components/upload-files.component';
 import {MatRippleModule} from '@angular/material/core';
 import {DashCardComponent} from './components/dash-card.component';
 import {CommonModule} from '@angular/common';
+import {DialogDeleteComponent} from '../stocks/components/stock.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {CommonModule} from '@angular/common';
     BottomBarComponent,
     DataNotReadyComponent,
     UploadFilesComponent,
-    DashCardComponent
+    DashCardComponent,
+    DialogDeleteComponent,
   ],
   entryComponents: [
     ImageCropComponent

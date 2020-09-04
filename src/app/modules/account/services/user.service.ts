@@ -12,7 +12,7 @@ import {VerifyEMailDialogComponent} from '../components/verify-dialog.component'
 @Injectable({
   providedIn: 'root'
 })
-export class UserDatabaseService {
+export class UserService {
 
 
   constructor(private readonly _httpClient: HttpClient,
@@ -22,14 +22,8 @@ export class UserDatabaseService {
               private readonly _storage: StorageService) {
   }
 
-  async currentUser(): Promise<UserModel> {
-    // this.refreshToken().catch(reason => {
-    //   if (reason && reason.response && reason.response.data && reason.response.data.code === 209) {
-    //     return BFast.auth().logOut();
-    //   }
-    //   return {};
-    // }).catch(this.logger.w);
-    const user = await BFast.auth().currentUser<UserModel>();
+  async currentUser(): Promise<any> {
+    const user = await BFast.auth().currentUser();
     if (user && user.role !== 'admin') {
       return user;
     } else if (user && user.verified === true) {
@@ -39,7 +33,7 @@ export class UserDatabaseService {
     }
   }
 
-  async deleteUser(user: UserModel): Promise<any> {
+  async deleteUser(user: any): Promise<any> {
     return BFast.functions()
       .request('/functions/users/' + user.id)
       .delete({
@@ -66,7 +60,6 @@ export class UserDatabaseService {
 
   async login(user: { username: string, password: string }): Promise<UserModel> {
     const authUser = await BFast.auth().logIn<UserModel>(user.username, user.password);
-    console.log(authUser);
     await this._storage.removeActiveShop();
     if (authUser && authUser.role !== 'admin') {
       await this._storage.saveActiveUser(authUser);

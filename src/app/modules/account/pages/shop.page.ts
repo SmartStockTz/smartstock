@@ -6,7 +6,7 @@ import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {ShopModel} from '../models/shop.model';
 import {StorageService} from '../../lib/services/storage.service';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'smartstock-choose-shop',
@@ -34,14 +34,14 @@ import {UserDatabaseService} from '../services/user-database.service';
             </div>
           </div>
 
-          <div class="ct_shop_profile">
-            <div matRipple class="ct_add_shop d-flex justify-content-center" (click)="openCreateShopDialog()">
-              <div class="add_shop_btn d-flex justify-content-center">
-                <img alt="shop image" src="../../../../assets/img/plus_sign.svg">
-              </div>
-            </div>
-            <div class="shop_name d-flex justify-content-center">Add Shop</div>
-          </div>
+<!--          <div class="ct_shop_profile">-->
+          <!--            <div matRipple class="ct_add_shop d-flex justify-content-center" (click)="openCreateShopDialog()">-->
+          <!--              <div class="add_shop_btn d-flex justify-content-center">-->
+          <!--                <img alt="shop image" src="../../../../assets/img/plus_sign.svg">-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="shop_name d-flex justify-content-center">Add Shop</div>-->
+          <!--          </div>-->
 
         </div>
 
@@ -59,7 +59,7 @@ export class ShopPage implements OnInit {
               private readonly _snack: MatSnackBar,
               private readonly _router: Router,
               private readonly _storage: StorageService,
-              private readonly userDatabase: UserDatabaseService) {
+              private readonly userDatabase: UserService) {
   }
 
   openCreateShopDialog() {

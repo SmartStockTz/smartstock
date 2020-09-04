@@ -64,12 +64,7 @@ export class StorageService {
   }
 
   async saveActiveUser(user: UserModel): Promise<any> {
-    try {
-      return await BFast.auth().setCurrentUser<UserModel>(user);
-    } catch (e) {
-      console.log('Fail to set user');
-      throw e;
-    }
+    return BFast.auth().setCurrentUser(user, 6);
   }
 
   async removeActiveShop(): Promise<any> {
@@ -79,7 +74,7 @@ export class StorageService {
   }
 
   async removeActiveUser(): Promise<any> {
-    return await BFast.auth().setCurrentUser(undefined);
+    return await BFast.auth().setCurrentUser(undefined, 0);
   }
 
   async removeStocks(): Promise<any> {

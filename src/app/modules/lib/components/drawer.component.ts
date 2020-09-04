@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {EventService} from '../services/event.service';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {UserModel} from '../../account/models/user.model';
 import {LogService} from '../services/log.service';
 import {SsmEvents} from '../utils/eventsNames.util';
@@ -118,14 +118,14 @@ import {ShopModel} from '../models/shop.model';
                   <mat-icon color="primary">settings</mat-icon>
                 </div>
               </a>
-              <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item
-                 routerLink="/account/bill">
-                <div class="d-flex flex-row flex-nowrap btn-block">
-                  <span>Billing</span>
-                  <span class="flex-grow-1"></span>
-                  <mat-icon color="primary">payment</mat-icon>
-                </div>
-              </a>
+              <!--              <a *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')" mat-list-item-->
+              <!--                 routerLink="/account/bill">-->
+              <!--                <div class="d-flex flex-row flex-nowrap btn-block">-->
+              <!--                  <span>Billing</span>-->
+              <!--                  <span class="flex-grow-1"></span>-->
+              <!--                  <mat-icon color="primary">payment</mat-icon>-->
+              <!--                </div>-->
+              <!--              </a>-->
               <a *ngIf="currentUser && ( currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
                  routerLink="/account/users">
                 <div class="d-flex flex-row flex-nowrap btn-block">
@@ -156,7 +156,7 @@ import {ShopModel} from '../models/shop.model';
 })
 export class DrawerComponent implements OnInit {
 
-  constructor(private readonly _userApi: UserDatabaseService,
+  constructor(private readonly _userApi: UserService,
               private readonly logger: LogService,
               private readonly eventApi: EventService) {
   }

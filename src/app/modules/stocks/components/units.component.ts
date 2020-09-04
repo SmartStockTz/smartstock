@@ -212,7 +212,6 @@ export class UnitsComponent implements OnInit {
         duration: 3000
       });
     }).catch(reason => {
-      console.log(reason);
       this.snack.open('Fail to update unit', 'Ok', {
         duration: 3000
       });
@@ -314,12 +313,6 @@ export class DialogUnitDeleteComponent {
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Abbreviation</mat-label>
-            <input placeholder="e.g Kg" matInput type="text" formControlName="abbreviation" required>
-            <mat-error>Abbreviation required</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description" [rows]="2"></textarea>
           </mat-form-field>
@@ -356,7 +349,6 @@ export class DialogUnitNewComponent implements OnInit {
   initiateForm() {
     this.newUnitForm = this.formBuilder.group({
       name: ['', [Validators.nullValidator, Validators.required]],
-      abbreviation: ['', [Validators.nullValidator, Validators.required]],
       description: ['']
     });
   }
@@ -379,7 +371,6 @@ export class DialogUnitNewComponent implements OnInit {
         duration: 3000
       });
     }).catch(reason => {
-      console.log(reason);
       this.createUnitProgress = false;
       this.snack.open('Unit not created, try again', 'Ok', {
         duration: 3000

@@ -32,7 +32,7 @@ import {CreatePageComponent} from './pages/create.page';
 import {EditPageComponent} from './pages/edit.page';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './components/categories.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './components/units.component';
-import {DialogSupplierDeleteComponent, SuppliersComponent} from './components/suppliers.component';
+import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './components/suppliers.component';
 import {ImportsDialogComponent} from './components/imports.component';
 import {CommonModule} from '@angular/common';
 import {LibModule} from '../lib/lib.module';
@@ -88,16 +88,9 @@ const routes: Routes = [
     DialogUnitNewComponent,
     DialogSupplierDeleteComponent,
     ImportsDialogComponent,
-    TransferDialogComponent
+    TransferDialogComponent,
+    DialogSupplierNewComponent,
   ],
-  entryComponents: [
-    StockDetailsComponent,
-    DialogCategoryDeleteComponent,
-    DialogCategoryNewComponent,
-    DialogUnitDeleteComponent,
-    DialogUnitNewComponent,
-    DialogSupplierDeleteComponent
-  ]
 })
 export class StockModule {
 }

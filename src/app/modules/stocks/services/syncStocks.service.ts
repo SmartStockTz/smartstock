@@ -20,7 +20,7 @@ export class SyncStocksService {
 
   init() {
     BFast.init({
-      applicationId: 'smartstock', projectId: 'smartstock'
+      applicationId: 'smartstock_lb', projectId: 'smartstock'
     });
   }
 

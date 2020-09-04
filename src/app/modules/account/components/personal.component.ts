@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserDatabaseService} from '../services/user-database.service';
+import {UserService} from '../services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UserModel} from '../models/user.model';
 
@@ -87,7 +87,7 @@ export class PersonalComponent {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly _snack: MatSnackBar,
-              private readonly _userApi: UserDatabaseService) {
+              private readonly _userApi: UserService) {
   }
 
   ngOnInit() {

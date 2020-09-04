@@ -43,6 +43,16 @@ import {UserUpdateDialogComponent} from './components/user-update-dialog.compone
 import {UsersPage} from './pages/users.page';
 import {AuthenticatedUserGuard} from './guards/authenticated-user.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
+import {PersonalDetailsFormComponent} from './components/personal-details-form.component';
+import {BusinessDetailsFormComponent} from './components/business-details-form.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {CreateShopDialogComponent} from './components/create-shop-dialog.component';
+import {VerifyEMailDialogComponent} from './components/verify-dialog.component';
+import {ResetPasswordDialogComponent} from './components/reset-password.component';
+import {RegisterDialogComponent} from './components/register-dialog.component';
+import {LoginDetailsFormComponent} from './components/login-details-form.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const routes: Routes = [
@@ -70,8 +80,19 @@ const routes: Routes = [
     InvoicesComponent,
     UserDeleteDialogComponent,
     UserCreateDialogComponent,
-    UserUpdateDialogComponent
+    UserUpdateDialogComponent,
+    PersonalDetailsFormComponent,
+    BusinessDetailsFormComponent,
+    RegisterPage,
+    LoginPage,
+    CreateShopDialogComponent,
+    ShopPage,
+    VerifyEMailDialogComponent,
+    ResetPasswordDialogComponent,
+    RegisterDialogComponent,
+    LoginDetailsFormComponent
   ],
+  exports: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -98,6 +119,9 @@ const routes: Routes = [
     FormsModule,
     MatListModule,
     MatBottomSheetModule,
+    MatStepperModule,
+    MatToolbarModule,
+    MatProgressBarModule,
   ]
 })
 export class AccountModule {

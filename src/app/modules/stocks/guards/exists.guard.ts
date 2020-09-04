@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {UserDatabaseService} from '../../account/services/user-database.service';
+import {UserService} from '../../account/services/user.service';
 import {StorageService} from '../../lib/services/storage.service';
 import {NoStockDialogComponent} from '../../lib/components/no-stock-dialog.component';
 
@@ -11,7 +11,7 @@ import {NoStockDialogComponent} from '../../lib/components/no-stock-dialog.compo
 })
 export class ExistsGuard implements CanActivate {
   constructor(private readonly indexDb: StorageService,
-              private readonly _userApi: UserDatabaseService,
+              private readonly _userApi: UserService,
               private readonly dialog: MatDialog) {
   }
 

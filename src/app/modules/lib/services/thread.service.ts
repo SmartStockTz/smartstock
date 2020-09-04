@@ -21,7 +21,8 @@ export class ThreadService implements OnInit {
               private readonly _storage: StorageService) {
   }
 
-  private salesWorkerProxy: Worker;
+  private settingsWorker: Worker;
+  private salesWorker: Worker;
   private stocksWorkerProxy: Worker;
 
   ngOnInit(): void {
@@ -29,10 +30,9 @@ export class ThreadService implements OnInit {
 
   async start() {
     try {
-      // const activeShop = await this._storage.getActiveShop();
-      // this._setUpParseServer(activeShop);
       await this.startSalesProxy();
       await this.startStockUpdateProxy();
+      await this.startSettingsWatch();
       return 'Done start proxy';
     } catch (e) {
       console.warn(e);
@@ -46,29 +46,46 @@ export class ThreadService implements OnInit {
   private _stopWorkers() {
     this.swSalesProxyService.stop();
     this.swLocalDataService.stop();
-    if (this.salesWorkerProxy) {
-      this.salesWorkerProxy.terminate();
+    if (this.salesWorker) {
+      this.salesWorker.terminate();
     } else {
-      this.salesWorkerProxy = undefined;
+      this.salesWorker = undefined;
     }
     if (this.stocksWorkerProxy) {
       this.stocksWorkerProxy.terminate();
     } else {
       this.stocksWorkerProxy = undefined;
     }
+    if (this.settingsWorker) {
+      this.settingsWorker.terminate();
+    } else {
+      this.settingsWorker = undefined;
+    }
   }
 
   private async startSalesProxy() {
     try {
       if (typeof Worker !== 'undefined') {
-        this.salesWorkerProxy = new Worker('./sales.worker.service', {type: 'module'});
-        // wrap<SalesWorkerService>(this.salesWorkerProxy);
-        // this.salesWorkerProxy.onmessage = ({data}) => {
-        // };
-        this.salesWorkerProxy.postMessage({});
+        this.salesWorker = new Worker('./sales.worker.service', {type: 'module'});
+        this.salesWorker.postMessage({});
         return 'Ok';
       } else {
         this._noWorkerSalesProxy();
+      }
+    } catch (e) {
+      this._noWorkerSalesProxy();
+      throw {message: 'Fails to start sales proxy'};
+    }
+  }
+
+  private startSettingsWatch() {
+    try {
+      if (typeof Worker !== 'undefined') {
+        this.settingsWorker = new Worker('./settings.worker.service', {type: 'module'});
+        this.settingsWorker.postMessage({});
+        return 'Ok';
+      } else {
+        this._noWorkerSettings();
       }
     } catch (e) {
       this._noWorkerSalesProxy();
@@ -106,4 +123,7 @@ export class ThreadService implements OnInit {
     this.swLocalDataService.start();
   }
 
+  private _noWorkerSettings() {
+
+  }
 }

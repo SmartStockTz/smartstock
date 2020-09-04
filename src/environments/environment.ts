@@ -16,8 +16,15 @@ export const environment = {
   electron: false,
   android: false,
   printerUrl: 'https://localhost:8080',
-  functionsURL:  'https://smartstock-faas.bfast.fahamutech.com', // 'http://localhost:3000',
-  databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'
+  functionsURL: 'http://localhost:3000',
+  databaseURL: 'https://smartstock-daas.bfast.fahamutech.com',
+  smartstock: {
+    applicationId: 'smartstock_lb',
+    projectId: 'smartstock',
+    pass: 'ZMUGVn72o3yd8kSbMGhfWpI80N9nA2IHjxWKlAhG',
+    functionsURL: 'http://localhost:3000',
+    databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'
+  }
 };
 
 /*
