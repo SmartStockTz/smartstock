@@ -11,7 +11,7 @@ const SalesWorkerService = {
   },
 
   initiateSmartStock() {
-    BFast.init({applicationId: 'smartstock_lb', functionsURL: 'http://localhost:3000', projectId: 'smartstock'});
+    BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
   },
 
   async getShops(): Promise<ShopModel[]> {
