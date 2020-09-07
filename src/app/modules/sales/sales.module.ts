@@ -30,9 +30,11 @@ import {CartPreviewComponent} from './components/cart-preview.component';
 import {RouterModule, Routes} from '@angular/router';
 import {WholePageComponent} from './pages/whole.page';
 import {LibModule} from '../lib/lib.module';
+import {IndexPage} from './pages/index.page';
 
 
 const routes: Routes = [
+  {path: '', component: IndexPage},
   {path: 'whole', component: WholePageComponent},
   {path: 'retail', component: RetailPageComponent}
 ];
@@ -67,6 +69,7 @@ const routes: Routes = [
     FormsModule,
   ],
   declarations: [
+    IndexPage,
     WholePageComponent,
     CartComponent,
     ProductComponent,

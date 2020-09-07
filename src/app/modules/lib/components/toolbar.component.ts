@@ -15,11 +15,11 @@ import {SsmEvents} from '../utils/eventsNames.util';
   template: `
     <mat-toolbar color="primary" class="sticky-top mat-elevation-z4">
       <mat-toolbar-row>
-        <button *ngIf="(!hasBackRoute && !backLink) || !isMobile" mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <button routerLink="{{backLink}}" *ngIf="hasBackRoute && backLink && isMobile" mat-icon-button>
+        <button routerLink="{{backLink}}" *ngIf="hasBackRoute && backLink" mat-icon-button>
           <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
         </button>
         <span>{{heading}}</span>
         <span *ngIf="isMobile" style="flex: 1 1 auto"></span>

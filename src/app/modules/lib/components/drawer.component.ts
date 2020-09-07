@@ -56,19 +56,21 @@ import {ShopModel} from '../models/shop.model';
 
           <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
 
-          <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">
-            <mat-expansion-panel-header>
-              <mat-icon matPrefix color="primary">shop_front</mat-icon>
-              <span style="margin-left: 8px">Sale</span>
-            </mat-expansion-panel-header>
-            <mat-nav-list>
-              <a *ngIf="shop && (shop.settings.allowRetail===undefined?true:shop.settings.allowRetail)" mat-list-item
-                 routerLink="/sale/retail">Retails</a>
-              <a *ngIf="shop && (shop.settings.allowWholesale===undefined?true:shop.settings.allowWholesale)" mat-list-item
-                 routerLink="/sale/whole">WholeSale</a>
-              <!--          <a mat-list-item routerLink="/sale">Quick Reports</a>-->
-            </mat-nav-list>
-          </mat-expansion-panel>
+          <!--          <mat-expansion-panel [expanded]="shouldExpand('sale')" class="mat-elevation-z0">-->
+          <!--            <mat-expansion-panel-header>-->
+          <!--              <mat-icon matPrefix color="primary">shop_front</mat-icon>-->
+          <!--              <span style="margin-left: 8px">Sale</span>-->
+          <!--            </mat-expansion-panel-header>-->
+          <mat-nav-list>
+            <mat-list-item routerLink="/sale">
+              <mat-icon matListIcon matPrefix color="primary">shop_front</mat-icon>
+              <span matLine style="margin-left: 8px">Sale</span>
+            </mat-list-item>
+            <!--            <a mat-list-item routerLink="/sale">Sale</a>-->
+            <!--              <a *ngIf="shop && (shop.settings.allowWholesale===undefined?true:shop.settings.allowWholesale)" mat-list-item-->
+            <!--                 routerLink="/sale/whole">WholeSale</a>-->
+          </mat-nav-list>
+          <!--          </mat-expansion-panel>-->
 
           <mat-divider></mat-divider>
 
