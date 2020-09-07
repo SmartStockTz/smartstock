@@ -22,7 +22,7 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
               </mat-card>
               <p>Retail</p>
             </div>
-            <div routerLink="/sale/retail" style="margin: 5px; cursor: pointer">
+            <div routerLink="/sale/whole" style="margin: 5px; cursor: pointer">
               <mat-card matRipple
                         style="width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; flex-direction: column">
                 <mat-icon color="primary" style="font-size: 60px; height: 60px; width: 60px">
