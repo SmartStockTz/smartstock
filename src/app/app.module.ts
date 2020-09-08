@@ -89,5 +89,10 @@ export class AppModule {
       projectId: environment.smartstock.projectId,
       appPassword: environment.smartstock.pass
     });
+    BFast.init({
+      applicationId: environment.fahamupay.applicationId,
+      projectId: environment.fahamupay.projectId,
+      appPassword: environment.fahamupay.pass
+    }, environment.fahamupay.projectId);
   }
 }

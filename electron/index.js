@@ -1,6 +1,6 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const isDevMode = require('electron-is-dev');
-const {CapacitorSplashScreen, configCapacitor} = require('@capacitor/electron');
+// const {CapacitorSplashScreen, configCapacitor} = require('@capacitor/electron');
 
 const path = require('path');
 
@@ -16,7 +16,8 @@ if (!gotTheLock) {
 
   let splashScreen = null;
 
-  let useSplashScreen = true;
+  let useSplashScreen = true
+  ;
 
   const menuTemplateDev = [
     {
@@ -39,26 +40,29 @@ if (!gotTheLock) {
       show: false,
       webPreferences: {
         nodeIntegration: true,
-        preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
+       // preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
       }
     });
 
-    configCapacitor(mainWindow).catch(console.log);
+    // configCapacitor(mainWindow).catch(console.log);
 
     if (isDevMode) {
       Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
       mainWindow.webContents.openDevTools();
     }
 
-    if (useSplashScreen) {
-      splashScreen = new CapacitorSplashScreen(mainWindow);
-      splashScreen.init();
-    } else {
-      await mainWindow.loadURL(`file://${__dirname}/app/index.html`);
-      mainWindow.webContents.on('dom-ready', () => {
+    // if (useSplashScreen) {
+    //   splashScreen = new CapacitorSplashScreen(mainWindow);
+    //   splashScreen.init();
+    // } else {
+      await mainWindow.loadURL(`file://${__dirname}/app/smartstock/index.html`);
+      mainWindow.on('ready-to-show', ()=>{
         mainWindow.show();
-      });
-    }
+      })
+      // mainWindow.webContents.on('dom-ready', () => {
+      //   mainWindow.show();
+      // });
+    // }
 
   }
 

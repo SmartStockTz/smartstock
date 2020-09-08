@@ -1,11 +1,11 @@
-import {CartModel} from './cart.model';
-
 export interface OrderModel {
+  displayName?: string;
   id?: string;
-  amount: number;
-  customer: any;
+  total: number;
+  mobile: number;
   date: string;
-  cart: CartModel[];
+  cart: any[];
+  user?: any;
   status: 'pending' | 'processed' | 'delivered';
   complete: boolean;
 }

@@ -31,10 +31,18 @@ import {RouterModule, Routes} from '@angular/router';
 import {WholePageComponent} from './pages/whole.page';
 import {LibModule} from '../lib/lib.module';
 import {IndexPage} from './pages/index.page';
+import {OrderPage} from './pages/order.page';
+import {OrdersTableComponent} from './components/orders-table.component';
+import {CdkTableModule} from '@angular/cdk/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatChipsModule} from '@angular/material/chips';
+import {OrdersTableActionsComponent} from './components/orders-table-actions.component';
+import {OrderPaymentStatusComponent} from './components/order-payment-status.component';
 
 
 const routes: Routes = [
   {path: '', component: IndexPage},
+  {path: 'order', component: OrderPage},
   {path: 'whole', component: WholePageComponent},
   {path: 'retail', component: RetailPageComponent}
 ];
@@ -67,9 +75,16 @@ const routes: Routes = [
     MatListModule,
     ScrollingModule,
     FormsModule,
+    CdkTableModule,
+    MatProgressBarModule,
+    MatChipsModule,
   ],
   declarations: [
+    OrderPaymentStatusComponent,
+    OrdersTableActionsComponent,
     IndexPage,
+    OrderPage,
+    OrdersTableComponent,
     WholePageComponent,
     CartComponent,
     ProductComponent,

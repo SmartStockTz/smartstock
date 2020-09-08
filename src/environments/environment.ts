@@ -24,6 +24,11 @@ export const environment = {
     pass: 'ZMUGVn72o3yd8kSbMGhfWpI80N9nA2IHjxWKlAhG',
     functionsURL: 'https://smartstock-faas.bfast.fahamutech.com',
     databaseURL: 'https://smartstock-daas.bfast.fahamutech.com'
+  },
+  fahamupay: {
+    applicationId: 'fahamupay',
+    projectId: 'fahamupay',
+    pass: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'
   }
 };
 

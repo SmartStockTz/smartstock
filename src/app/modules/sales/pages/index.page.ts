@@ -13,23 +13,14 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
         <div class="container col-xl-10 col-lg-10 col-sm-9 col-md-9 col-sm-12 col-10" style="padding: 16px 0">
           <h1>Go To</h1>
           <div class="row">
-            <div routerLink="/sale/retail" style="margin: 5px; cursor: pointer">
+            <div *ngFor="let page of pages" routerLink="{{page.path}}" style="margin: 5px; cursor: pointer">
               <mat-card matRipple
                         style="width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; flex-direction: column">
                 <mat-icon color="primary" style="font-size: 60px; height: 60px; width: 60px">
-                  receipt
+                  {{page.icon}}
                 </mat-icon>
               </mat-card>
-              <p>Retail</p>
-            </div>
-            <div routerLink="/sale/whole" style="margin: 5px; cursor: pointer">
-              <mat-card matRipple
-                        style="width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; flex-direction: column">
-                <mat-icon color="primary" style="font-size: 60px; height: 60px; width: 60px">
-                  widgets
-                </mat-icon>
-              </mat-card>
-              <p>Wholesale</p>
+              <p>{{page.name}}</p>
             </div>
           </div>
         </div>
@@ -39,6 +30,24 @@ import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 })
 
 export class IndexPage extends DeviceInfoUtil implements OnInit {
+  pages = [
+    {
+      name: 'Retail',
+      path: '/sale/retail',
+      icon: 'receipt'
+    },
+    {
+      name: 'Wholesale',
+      path: '/sale/whole',
+      icon: 'widgets'
+    },
+    {
+      name: 'Orders',
+      path: '/sale/order',
+      icon: 'local_shipping'
+    }
+  ];
+
   constructor() {
     super();
   }
