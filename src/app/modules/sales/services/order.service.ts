@@ -17,11 +17,22 @@ export class OrderService {
       .query()
       .skip(skip)
       .size(size)
+      .orderBy('_created_at', -1)
       .find<OrderModel[]>();
     return orders.map<OrderModel>(x => {
       x.displayName = x.user.displayName;
       return x;
     });
+  }
+
+  async markOrderIsPaid(orderId: string) {
+    // console.log(orderId);
+    return BFast.database().collection('orders')
+      .query()
+      .byId(orderId)
+      .updateBuilder()
+      .set('paid', true)
+      .update();
   }
 
   async checkOrderIsPaid(order: string): Promise<any> {

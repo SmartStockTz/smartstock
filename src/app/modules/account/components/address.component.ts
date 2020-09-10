@@ -108,7 +108,7 @@ export class AddressComponent implements OnInit {
       this._initializeForm(this.currentUser);
       this.getBusinessProgress = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.getBusinessProgress = false;
       this._snack.open('Error when trying to get shop details', 'Ok', {
         duration: 3000

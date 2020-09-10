@@ -66,7 +66,7 @@ export class TransferDialogComponent {
 
   transferStocks() {
     if (this.transferStockGroup.valid) {
-      console.log(this.transferStockGroup.value);
+      // console.log(this.transferStockGroup.value);
     } else {
       this.snack.open('Please fix all errors', 'Ok', {duration: 2000});
     }

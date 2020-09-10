@@ -38,6 +38,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {OrdersTableActionsComponent} from './components/orders-table-actions.component';
 import {OrderPaymentStatusComponent} from './components/order-payment-status.component';
+import {OrdersTableOptionsComponent} from './components/orders-table-options.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {OrdersTableShowItemsComponent} from './components/orders-table-show-items.component';
 
 
 const routes: Routes = [
@@ -78,8 +81,11 @@ const routes: Routes = [
     CdkTableModule,
     MatProgressBarModule,
     MatChipsModule,
+    MatBottomSheetModule
   ],
   declarations: [
+    OrdersTableShowItemsComponent,
+    OrdersTableOptionsComponent,
     OrderPaymentStatusComponent,
     OrdersTableActionsComponent,
     IndexPage,

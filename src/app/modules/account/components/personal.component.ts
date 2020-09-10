@@ -111,7 +111,7 @@ export class PersonalComponent {
       this._initializeForm(this.currentUser);
       this.getUserProgress = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.getUserProgress = false;
       this._snack.open('Error when trying get your details', 'Ok', {
         duration: 3000

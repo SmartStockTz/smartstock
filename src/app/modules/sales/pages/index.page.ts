@@ -41,11 +41,11 @@ export class IndexPage extends DeviceInfoUtil implements OnInit {
       path: '/sale/whole',
       icon: 'widgets'
     },
-    {
-      name: 'Orders',
-      path: '/sale/order',
-      icon: 'local_shipping'
-    }
+    // {
+    //   name: 'Orders',
+    //   path: '/sale/order',
+    //   icon: 'local_shipping'
+    // }
   ];
 
   constructor() {

@@ -389,7 +389,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       this.suppliersFetching = false;
       this.suppliers = of(JSON.parse(JSON.stringify(value)));
     }).catch(_ => {
-      console.log(_);
+      // console.log(_);
       this.suppliersFetching = false;
       this.suppliers = of([{name: 'Default'}]);
     });
@@ -448,7 +448,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       this.productForm.value.image = this.croppedImage;
     }
     this.stockDatabase.addStock(this.productForm.value, d => {
-      console.log(d);
+      // console.log(d);
     }).then(_ => {
       this.mainProgress = false;
       this.snack.open('Product added', 'Ok', {

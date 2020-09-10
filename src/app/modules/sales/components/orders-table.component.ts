@@ -3,13 +3,15 @@ import {MatTableDataSource} from '@angular/material/table';
 import {OrderModel} from '../models/order.model';
 import {OrderState} from '../states/order.state';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {OrdersTableOptionsComponent} from './orders-table-options.component';
 
 @Component({
   selector: 'smartstock-orders-table',
   template: `
     <mat-progress-bar mode="indeterminate" color="primary" *ngIf="(orderState.getOrderFlag | async)===true"></mat-progress-bar>
     <mat-card>
-      <mat-card-header *ngIf="orderState.orders.value.length > 0">
+      <mat-card-header>
         <smartstock-orders-table-actions></smartstock-orders-table-actions>
       </mat-card-header>
       <table *ngIf="orderState.orders.value.length > 0" mat-table [dataSource]="ordersDataTable">
@@ -37,12 +39,18 @@ import {MatPaginator} from '@angular/material/paginator';
         </ng-container>
         <ng-container matColumnDef="status">
           <th mat-header-cell *cdkHeaderCellDef>Status</th>
-          <td mat-cell *cdkCellDef="let order">{{order.status}}</td>
+          <td mat-cell *cdkCellDef="let order">
+            <span *ngIf="order.status === 'DELIVERED'">COMPLETED</span>
+            <span *ngIf="order.status === 'PROCESSED'">NEW</span>
+          </td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th mat-header-cell *cdkHeaderCellDef>Action</th>
+          <th mat-header-cell *cdkHeaderCellDef>Options</th>
           <td mat-cell *cdkCellDef="let order">
-            <button color="primary" (click)="viewItems(order)" mat-button>Items</button>
+            <button (click)="showOptions(order)" color="primary" mat-button>
+              OPTIONS
+              <mat-icon>more_vert</mat-icon>
+            </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="ordersColumns"></tr>
@@ -60,7 +68,8 @@ export class OrdersTableComponent implements OnInit {
   ordersDataTable: MatTableDataSource<OrderModel> = new MatTableDataSource<OrderModel>([]);
   ordersColumns = ['date', 'customer', 'amount', 'paid', 'mobile', 'status', 'action'];
 
-  constructor(public readonly orderState: OrderState) {
+  constructor(public readonly orderState: OrderState,
+              private readonly bottomSheet: MatBottomSheet) {
     this.ordersDataTable.paginator = this.paginator;
   }
 
@@ -83,7 +92,12 @@ export class OrdersTableComponent implements OnInit {
     });
   }
 
-  viewItems(order: OrderModel) {
-
+  showOptions(order: OrderModel) {
+    this.bottomSheet.open(OrdersTableOptionsComponent, {
+      data: {
+        order: order
+      },
+      closeOnNavigation: true
+    });
   }
 }

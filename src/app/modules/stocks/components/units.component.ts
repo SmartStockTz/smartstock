@@ -155,7 +155,7 @@ export class UnitsComponent implements OnInit {
       this.unitsDatasource = new MatTableDataSource<UnitsModel>(this.unitsArray);
       this.fetchUnitsFlag = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.fetchUnitsFlag = false;
     });
   }
@@ -286,7 +286,7 @@ export class DialogUnitDeleteComponent {
       this.dialogRef.close(unit);
       this.deleteProgress = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.errorUnitMessage = 'Fails to delete, try again';
       this.deleteProgress = false;
     });

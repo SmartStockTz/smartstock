@@ -17,46 +17,20 @@ export class PurchaseState {
               private readonly _settings: SettingsService) {
   }
 
-  recordPayment(id: string): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.put(await this._settings.getCustomerServerURL() + '/classes/purchases/' + id, {
-        paid: true
-      }, {
-        headers: await this._settings.getCustomerPostHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error => {
-        reject(error);
-      });
-    });
+  async recordPayment(id: string): Promise<any> {
+    const activeShop = await this._storage.getActiveShop();
+    return BFast.database(activeShop.projectId).collection('purchases')
+      .query()
+      .byId(id)
+      .updateBuilder()
+      .set('paid', true)
+      .update();
   }
 
   addAllInvoices(invoices: ReceiptModel[], callback: (value: any) => void) {
   }
 
   addAllPurchase(purchases: PurchaseModel[], callback: (value: any) => void) {
-    // const bat: BatchI[] = [];
-    // purchases.forEach(value => {
-    //   bat.push({
-    //     method: 'POST',
-    //     path: '/classes/purchases',
-    //     body: value
-    //   });
-    // });
-    // if (purchases.length <= 50) {
-    //   this.httpClient.post(this._settings.getCustomerServerURL() + '/batch', {
-    //     'requests': bat
-    //   }, {
-    //     headers: this._settings.getCustomerPostHeader()
-    //   }).subscribe(value => {
-    //     callback(value);
-    //   }, error1 => {
-    //     console.log(error1);
-    //     callback(null);
-    //   });
-    // } else {
-    //   callback('BE');
-    // }
   }
 
   addAllReceipts(invoices: ReceiptModel[], callback: (value: any) => void) {
@@ -76,14 +50,6 @@ export class PurchaseState {
   }
 
   addReceipt(invoice: ReceiptModel, callback: (value: any) => void) {
-    // this.httpClient.post<ReceiptModel>(this._settings.getCustomerServerURL() + '/classes/purchaseRefs', invoice, {
-    //   headers: this._settings.getCustomerPostHeader(),
-    // }).subscribe(value => {
-    //   callback(value);
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
   }
 
   deleteInvoice(id: string, callback: (value: any) => void) {
@@ -95,34 +61,22 @@ export class PurchaseState {
   getAllInvoice(callback: (invoices: ReceiptModel[]) => void) {
   }
 
-  // @ts-ignore
-  deletePurchase(purchase: PurchaseModel): Promise<PurchaseModel> {
-    return new Promise<PurchaseModel>(async (resolve, reject) => {
-      this._httpClient.delete<PurchaseModel>(await this._settings.getCustomerServerURL() + '/classes/purchases/' + purchase.id, {
-        headers: await this._settings.getCustomerHeader()
-      }).subscribe(value => {
-        resolve(value);
-      }, error => {
-        reject(error);
-      });
-    });
+  async deletePurchase(purchase: PurchaseModel): Promise<PurchaseModel> {
+    const activeShop = await this._storage.getActiveShop();
+    return BFast.database(activeShop.projectId).collection('purchase')
+      .query()
+      .byId(purchase.id)
+      .delete();
   }
 
-  getAllPurchase(page: { size?: number, skip?: number }): Promise<PurchaseModel[]> {
-    return new Promise<PurchaseModel[]>(async (resolve, reject) => {
-      this._httpClient.get<any>(await this._settings.getCustomerServerURL() + '/classes/purchases', {
-        headers: await this._settings.getCustomerHeader(),
-        params: {
-          'order': '-updatedAt',
-          'limit': page.size ? page.size.toString() : '100',
-          'skip': page.skip ? page.skip.toString() : '0',
-        }
-      }).subscribe(value => {
-        resolve(value.results);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async getAllPurchase(page: { size?: number, skip?: number }): Promise<PurchaseModel[]> {
+    const activeShop = await this._storage.getActiveShop();
+    return BFast.database(activeShop.projectId).collection('purchases')
+      .query()
+      .orderBy('_created_at', -1)
+      .size(page.size)
+      .skip(page.skip)
+      .find();
   }
 
   // must be updated and its socket method
@@ -149,14 +103,6 @@ export class PurchaseState {
   }
 
   getPurchase(id: string, callback: (purchase: PurchaseModel) => void) {
-    // this.httpClient.get<any>(this._settings.getCustomerServerURL() + '/classes/purchases/' + id, {
-    //   headers: this._settings.getCustomerHeader()
-    // }).subscribe(value => {
-    //   callback(value);
-    // }, error1 => {
-    //   console.log(error1);
-    //   callback(null);
-    // });
   }
 
   async getAllSupplier(pagination: { size?: number, skip?: number }): Promise<SupplierModel[]> {

@@ -210,7 +210,7 @@ export class SuppliersComponent implements OnInit {
       this.suppliersDatasource = new MatTableDataSource<SupplierModel>(this.suppliersArray);
       this.fetchSuppliersFlag = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.fetchSuppliersFlag = false;
     });
   }
@@ -452,7 +452,7 @@ export class DialogSupplierNewComponent implements OnInit {
         duration: 3000
       });
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.createSupplierProgress = false;
       //  this.dialogRef.close(null);
       this.snack.open('Supplier not created, try again', 'Ok', {

@@ -150,7 +150,7 @@ import {ShopModel} from '../models/shop.model';
       </div>
       <span style="flex-grow: 1"></span>
       <div style="display: flex; justify-content: center; align-items: center">
-        <span>Ver: {{versionNumber | async}}</span>
+        <span>Version: {{versionNumber | async}}</span>
       </div>
     </div>
   `,

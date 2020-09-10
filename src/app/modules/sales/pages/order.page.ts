@@ -13,7 +13,7 @@ import {OrderState} from '../states/order.state';
         <smartstock-toolbar searchPlaceholder="Filter orders" [showSearch]="true"
                             (searchCallback)="onSearch($event)" [heading]="'Orders'"
                             [sidenav]="sidenav"></smartstock-toolbar>
-        <div class="container col-xl-9 col-lg-9 col-sm-10 col-md-10 col-10" style="padding: 16px 0">
+        <div class="container col-xl-8 col-lg-9 col-sm-10 col-md-10 col-11" style="padding: 16px 0">
           <div style="height: 24px"></div>
           <smartstock-orders-table></smartstock-orders-table>
         </div>

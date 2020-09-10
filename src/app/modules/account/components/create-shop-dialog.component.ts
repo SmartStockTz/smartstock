@@ -108,7 +108,7 @@ export class CreateShopDialogComponent implements OnInit {
 
         }
       }).catch(reason => {
-        console.log(reason);
+        // console.log(reason);
         this.snack.open(reason.message, 'Ok', {duration: 3000});
         this.createShopProgress = false;
       });

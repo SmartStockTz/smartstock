@@ -182,25 +182,21 @@ export class StockState {
     return response;
   }
 
-  updateCategoryMobile(category: CategoryModel, categoryId): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      this._httpClient.put<CategoryModel>(await this._settings.getCustomerServerURL() +
-        '/classes/categories-mobile-ui/' + categoryId, category,
-        {
-          headers: await this._settings.getCustomerPostHeader()
-        }).subscribe(value => {
-        resolve(value);
-      }, error1 => {
-        reject(error1);
-      });
-    });
+  async updateCategoryMobile(category: CategoryModel, categoryId): Promise<any> {
+    const activeShop = await this._storage.getActiveShop();
+    return BFast.database(activeShop.projectId).collection('categories')
+      .query()
+      .byId(categoryId)
+      .updateBuilder()
+      .doc(category)
+      .update();
   }
 
   async updateStock(stock: StockModel, progress: (d) => void): Promise<StockModel> {
     const shop = await this._storage.getActiveShop();
     const stockId = stock._id ? stock._id : stock.id;
     delete stock.id;
-    if (stock.image && !stock.image.toString().startsWith('http')) {
+    if (stock.image && !stock.image.toString().startsWith('http') && stock.image instanceof File) {
       stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
     }
     if (stock.downloads && stock.downloads.length > 0) {
@@ -210,7 +206,12 @@ export class StockState {
         }
       }
     }
-    return BFast.database(shop.projectId).collection('stocks').query().byId(stockId).updateBuilder().doc(stock).update();
+    return BFast.database(shop.projectId).collection('stocks')
+      .query()
+      .byId(stockId.trim())
+      .updateBuilder()
+      .doc(stock)
+      .update();
   }
 
   async updateSupplier(value: { id: string, field: string, value: string }): Promise<any> {

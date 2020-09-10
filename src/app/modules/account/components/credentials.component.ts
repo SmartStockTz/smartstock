@@ -100,7 +100,7 @@ export class AuthenticationComponent implements OnInit {
       this._initializeForm(this.currentUser);
       this.getUserProgress = false;
     }).catch(reason => {
-      console.log(reason);
+     // console.log(reason);
       this.getUserProgress = false;
       this._snack.open('Error when trying to get user details', 'Ok', {
         duration: 3000
@@ -123,7 +123,7 @@ export class AuthenticationComponent implements OnInit {
         await this._userApi.updateCurrentUser(user);
         this._resetForm(true);
       }).catch(reason => {
-        console.log(reason);
+        // console.log(reason);
         this.updateUserProgress = false;
         this._snack.open('Fails to change password, try again or contact support', 'Ok', {
           duration: 3000

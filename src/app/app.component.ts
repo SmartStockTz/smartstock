@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
         BFast.init({applicationId: activeShop.applicationId, projectId: activeShop.projectId}, activeShop.projectId);
         await this.threadProxy.start();
       } catch (e) {
-        console.log(e);
+       // console.log(e);
       }
     });
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
         BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
         await this.threadProxy.stop();
       } catch (e) {
-        console.log(e);
+       // console.log(e);
       }
     });
     this._storage.getActiveShop().then(_ => {

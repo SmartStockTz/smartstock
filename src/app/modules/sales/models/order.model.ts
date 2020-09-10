@@ -1,11 +1,12 @@
 export interface OrderModel {
+  paid?: boolean;
   displayName?: string;
   id?: string;
-  total: number;
-  mobile: number;
-  date: string;
-  cart: any[];
+  total?: number;
+  mobile?: number;
+  date?: string;
+  carts?: any[];
   user?: any;
-  status: 'pending' | 'processed' | 'delivered';
-  complete: boolean;
+  status?: 'PROCESSED' | 'DELIVERED';
+  complete?: boolean;
 }

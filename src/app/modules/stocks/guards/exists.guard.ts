@@ -31,7 +31,7 @@ export class ExistsGuard implements CanActivate {
           resolve(false);
         }
       } catch (e) {
-        console.log(e);
+       // console.log(e);
         resolve(false);
       }
     });

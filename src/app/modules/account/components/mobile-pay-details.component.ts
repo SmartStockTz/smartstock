@@ -13,7 +13,6 @@ import {LogService} from '../../lib/services/log.service';
       </div>
       <mat-divider></mat-divider>
       <div>
-
         <div style="padding: 16px;">
           <div>
             <mat-form-field style="width: 100%" appearance="outline">
@@ -23,7 +22,8 @@ import {LogService} from '../../lib/services/log.service';
             <span>Your reference number</span>
             <p *ngIf="reference" style="font-size: 26px; word-spacing: 4px; padding: 8px 0">{{reference}}</p>
             <mat-progress-spinner *ngIf="!reference" mode="indeterminate" [diameter]="30"
-                                  color="primary"></mat-progress-spinner>
+                                  color="primary">
+            </mat-progress-spinner>
             <button [disabled]="confirmPaymentFlag" style="width: 100%"
                     class="ft-button" (click)="bottomSheet.dismiss(true)" mat-flat-button color="primary">
               Confirm Payment
@@ -131,23 +131,23 @@ export class MobilePayDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reference = this.payData.ref;
-    if (!this.reference) {
-      this.getPaymentReference();
-    }
+    // if (!this.reference) {
+    //   this.getPaymentReference();
+    // }
     this.amountToPay = Math.round(Math.abs(this.payData.amount));
     this.amountControl.setValue(this.amountToPay === 0 ? 10000 : this.amountToPay);
-    this.getPaymentReference();
+    // this.getPaymentReference();
   }
 
   getPaymentReference() {
-    this.billApi.getPaymentReference().then(value => {
-      this.reference = value;
-      this.changeDetectorRef.detectChanges();
-    }).catch(_ => {
-      this.reference = '';
-      this.logger.i(_);
-      this.changeDetectorRef.detectChanges();
-    });
+    // this.billApi.getPaymentReference().then(value => {
+    //   this.reference = value;
+    //   this.changeDetectorRef.detectChanges();
+    // }).catch(_ => {
+    //   this.reference = '';
+    //   this.logger.i(_);
+    //   this.changeDetectorRef.detectChanges();
+    // });
   }
 
   getAmountToPay() {
