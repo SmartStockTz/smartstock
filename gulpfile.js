@@ -10,9 +10,13 @@ function defaultTask(cb) {
 async function copyBFastJs() {
   electronPackage.version = webPackage.version;
   fs.writeFileSync('./electron/package.json', JSON.stringify(electronPackage));
-  // return gulp.src('./node_modules/bfastjs/dist/bfast_js.js')
-  //   .pipe(gulp.dest('./src/assets/js'));
+}
+
+async function syncDesktop() {
+  return gulp.src('./dist/smartstock/**/*')
+    .pipe(gulp.dest('./electron/public'));
 }
 
 exports.default = defaultTask;
 exports.copyBFastJs = copyBFastJs;
+exports.syncDesktop = syncDesktop;

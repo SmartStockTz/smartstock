@@ -1,8 +1,5 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const isDevMode = require('electron-is-dev');
-// const {CapacitorSplashScreen, configCapacitor} = require('@capacitor/electron');
-
-const path = require('path');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -13,11 +10,7 @@ if (!gotTheLock) {
   app.quit();
 } else {
   let mainWindow = null;
-
   let splashScreen = null;
-
-  let useSplashScreen = true
-  ;
 
   const menuTemplateDev = [
     {
@@ -34,36 +27,44 @@ if (!gotTheLock) {
   ];
 
   async function createWindow() {
+    splashScreen = new BrowserWindow({
+      show: false,
+      width: 400,
+      maxWidth: 400,
+      height: 400,
+      maxHeight: 400,
+      center: true,
+      modal: true,
+      frame: false
+    });
     mainWindow = new BrowserWindow({
       height: 700,
       width: 1200,
       show: false,
       webPreferences: {
         nodeIntegration: true,
-       // preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
+        // preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
       }
     });
 
-    // configCapacitor(mainWindow).catch(console.log);
-
     if (isDevMode) {
-      Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
       mainWindow.webContents.openDevTools();
     }
 
-    // if (useSplashScreen) {
-    //   splashScreen = new CapacitorSplashScreen(mainWindow);
-    //   splashScreen.init();
-    // } else {
-      await mainWindow.loadURL(`file://${__dirname}/app/smartstock/index.html`);
-      mainWindow.on('ready-to-show', ()=>{
-        mainWindow.show();
-      })
-      // mainWindow.webContents.on('dom-ready', () => {
-      //   mainWindow.show();
-      // });
-    // }
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
 
+    if (splashScreen) {
+      await splashScreen.loadFile(__dirname + `/splash_assets/ssm.png`);
+      splashScreen.show();
+    }
+    await mainWindow.loadURL(`file://${__dirname}/public/index.html`);
+    // mainWindow.show();
+    mainWindow.webContents.on('dom-ready', () => {
+      mainWindow.show();
+      if (splashScreen) {
+        splashScreen.close();
+      }
+    });
   }
 
   app.on('ready', createWindow);
@@ -75,12 +76,13 @@ if (!gotTheLock) {
   });
 
   app.on("second-instance", (event, commandLine, workingDirectory) => {
-    // Someone tried to run a second instance, we should focus our window.
     if (mainWindow) {
-      if (mainWindow.isMinimized())  mainWindow.restore()
-      mainWindow.focus()
+      if (mainWindow.isMinimized()) {
+        mainWindow.restore();
+      }
+      mainWindow.focus();
     }
-  })
+  });
 
   app.on('activate', function () {
     if (mainWindow === null) {

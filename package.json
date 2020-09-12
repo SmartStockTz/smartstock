@@ -28,7 +28,7 @@
     "start": "npx gulp copyBFastJs && ng serve",
     "start:desktop": "npx gulp copyBFastJs && ng serve -c=electron",
     "start:android": "npx gulp copyBFastJs && ng serve --host 0.0.0.0 -c=android",
-    "build:desktop": "npx gulp copyBFastJs && ng build --prod -c=electronProd --base-href ./ && npx cap sync",
+    "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx gulp syncDesktop",
     "build:android": "npx gulp copyBFastJs && ng build --prod -c=androidProd --base-href ./ && npx cap sync",
     "prepare:snap": "cd electron && npm install && npm run build:snap",
     "prepare:mac": "cd electron && npm install && npm run build:mac",
