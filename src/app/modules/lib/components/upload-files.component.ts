@@ -18,6 +18,7 @@ import {FormControl, Validators} from '@angular/forms';
         </mat-card>
       </div>
       <mat-card (click)="uploadFile.click()" matRipple style="width: 120px; height: 50px; margin: 5px">
+        <mat-icon>attachment</mat-icon>
         <span>Add File</span>
       </mat-card>
     </div>

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryModel} from '../models/category.model';
 import {StockState} from '../states/stock.state';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'smartstock-categories',
@@ -98,6 +99,7 @@ import {StockState} from '../states/stock.state';
           <tr mat-header-row *matHeaderRowDef="categoriesTableColums"></tr>
           <tr mat-row class="table-data-row" *matRowDef="let row; columns: categoriesTableColums;"></tr>
         </table>
+        <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
         <div *ngIf="fetchCategoriesFlag">
           <mat-progress-spinner matTooltip="fetch categories" [diameter]="30" mode="indeterminate"
                                 color="primary"></mat-progress-spinner>
@@ -108,7 +110,7 @@ import {StockState} from '../states/stock.state';
   styleUrls: ['../styles/categories.style.css']
 })
 export class CategoriesComponent implements OnInit {
-
+  @ViewChild('matPaginator') matPaginator: MatPaginator;
   categoriesDatasource: MatTableDataSource<CategoryModel>;
   categoriesTableColums = ['name', 'description', 'actions'];
   categoriesArray: CategoryModel[];
@@ -151,6 +153,7 @@ export class CategoriesComponent implements OnInit {
     this.stockDatabase.getAllCategory({size: 100}).then(data => {
       this.categoriesArray = JSON.parse(JSON.stringify(data));
       this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
+      this.categoriesDatasource.paginator = this.matPaginator;
       this.fetchCategoriesFlag = false;
     }).catch(reason => {
       console.log(reason);

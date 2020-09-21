@@ -7,9 +7,6 @@ import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {StockModel} from '../models/stock.model';
 import {StockState} from '../states/stock.state';
-import {DialogCategoryNewComponent} from '../components/categories.component';
-import {DialogSupplierNewComponent} from '../components/suppliers.component';
-import {DialogUnitNewComponent} from '../components/units.component';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {ImageCropComponent} from '../../lib/components/image-crop.component';
 
@@ -64,194 +61,105 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
 
               <div style="margin-bottom: 16px" class="col-12 col-xl-9 col-lg-9">
 
-                <h5>
-                  Status
-                </h5>
-                <mat-card class="card-wrapper">
-                  <mat-list>
-                    <mat-list-item>
-                      <p matLine>Can be sold</p>
-                      <mat-checkbox formControlName="saleable" matSuffix></mat-checkbox>
-                    </mat-list-item>
-                    <mat-list-item>
-                      <p matLine>Can be stocked</p>
-                      <mat-checkbox formControlName="stockable" matSuffix></mat-checkbox>
-                    </mat-list-item>
-                    <mat-list-item>
-                      <p matLine>Can be downloaded</p>
-                      <mat-checkbox formControlName="downloadable" matSuffix></mat-checkbox>
-                    </mat-list-item>
-                    <mat-list-item>
-                      <p matLine>Can be purchased</p>
-                      <mat-checkbox formControlName="purchasable" matSuffix></mat-checkbox>
-                    </mat-list-item>
-                  </mat-list>
-                </mat-card>
+                <smartstock-product-short-detail-form
+                  [isUpdateMode]="isUpdateMode"
+                  [initialStock]="initialStock"
+                  [downloadAble]="getDownloadAbleFormControl().value===true"
+                  [saleable]="getSaleableFormControl().value === true"
+                  [downloadsFormControl]="getDownloadAbleFormControl()"
+                  [formGroup]="productForm">
+                </smartstock-product-short-detail-form>
 
-                <h5 *ngIf="getDownloadAbleFormControl().value === true">
-                  Files
-                </h5>
-                <div *ngIf="getDownloadAbleFormControl().value === true" class="card-wrapper">
-                  <smartstock-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
-                                           [uploadFileFormControl]="getDownloadsFormControl()"></smartstock-upload-files>
-                </div>
+                <mat-expansion-panel style="margin-top: 8px">
+                  <mat-expansion-panel-header>
+                    Advance Details
+                  </mat-expansion-panel-header>
+                  <h5>
+                    Status
+                  </h5>
+                  <mat-card class="card-wrapper mat-elevation-z0">
+                    <mat-list>
+                      <mat-list-item>
+                        <p matLine>Can be sold</p>
+                        <mat-checkbox formControlName="saleable" matSuffix></mat-checkbox>
+                      </mat-list-item>
+                      <mat-list-item>
+                        <p matLine>Can be stocked</p>
+                        <mat-checkbox formControlName="stockable" matSuffix></mat-checkbox>
+                      </mat-list-item>
+                      <mat-list-item>
+                        <p matLine>Can be purchased</p>
+                        <mat-checkbox formControlName="purchasable" matSuffix></mat-checkbox>
+                      </mat-list-item>
+                    </mat-list>
+                  </mat-card>
 
-                <h5>
-                  Product
-                </h5>
-                <mat-card class="card-wrapper">
-                  <mat-card-content class="card-content">
-                    <mat-form-field appearance="fill" class="my-input">
-                      <mat-label>Product Name</mat-label>
-                      <input matInput type="text" required formControlName="product">
-                      <mat-error>Product name required</mat-error>
-                    </mat-form-field>
+                  <h5>
+                    Inventory
+                  </h5>
+                  <mat-card class="card-wrapper mat-elevation-z0">
+                    <mat-card-content class="card-content">
+                      <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="fill" class="my-input">
+                        <mat-label>Purchase Price / Unit</mat-label>
+                        <span matSuffix>TZS</span>
+                        <input min="0" matInput type="number" required formControlName="purchase">
+                        <mat-error>Purchase price required</mat-error>
+                      </mat-form-field>
 
-                    <mat-form-field appearance="fill" class="my-input">
-                      <mat-label>Description</mat-label>
-                      <textarea matInput type="text" formControlName="description"></textarea>
-                    </mat-form-field>
+                      <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
+                        <mat-label>Wholesale Price / Unit</mat-label>
+                        <span matSuffix>TZS</span>
+                        <input min="0" matInput type="number" required formControlName="wholesalePrice">
+                        <mat-error>Wholesale price required</mat-error>
+                      </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="my-input">
-                      <mat-label>Category</mat-label>
-                      <mat-select [multiple]="false" formControlName="category">
-                        <mat-option *ngFor="let category of categories | async" [value]="category.name">
-                          {{category.name}}
-                        </mat-option>
-                      </mat-select>
-                      <mat-progress-spinner matTooltip="Fetching units"
-                                            *ngIf="categoriesFetching" matSuffix color="accent"
-                                            mode="indeterminate"
-                                            [diameter]="20"></mat-progress-spinner>
-                      <mat-error>Category required</mat-error>
-                      <div matSuffix class="d-flex flex-row">
-                        <button (click)="refreshCategories($event)" mat-icon-button matTooltip="refresh categories"
-                                *ngIf="!categoriesFetching">
-                          <mat-icon>refresh</mat-icon>
-                        </button>
-                        <button (click)="addNewCategory($event)" mat-icon-button matTooltip="add new category"
-                                *ngIf="!categoriesFetching">
-                          <mat-icon>add</mat-icon>
-                        </button>
-                      </div>
-                    </mat-form-field>
+                      <!--                    <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input"-->
+                      <!--                                    matTooltip="Quantity for this product to be sold as a whole or in bulk">-->
+                      <!--                      <mat-label>Wholesale Quantity</mat-label>-->
+                      <!--                      <input min="0" matInput-->
+                      <!--                             type="number"-->
+                      <!--                             required formControlName="wholesaleQuantity">-->
+                      <!--                      <mat-error>Wholesale Quantity required</mat-error>-->
+                      <!--                    </mat-form-field>-->
 
-                    <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="outline"
-                                    class="my-input">
-                      <mat-label>Supplier</mat-label>
-                      <mat-select [multiple]="false" formControlName="supplier">
-                        <mat-option *ngFor="let supplier of suppliers | async" [value]="supplier.name">
-                          {{supplier.name}}
-                        </mat-option>
-                      </mat-select>
-                      <mat-progress-spinner matTooltip="Fetching suppliers"
-                                            *ngIf="suppliersFetching" matSuffix color="accent"
-                                            mode="indeterminate"
-                                            [diameter]="20"></mat-progress-spinner>
-                      <mat-error>Supplier required</mat-error>
-                      <div matSuffix class="d-flex flex-row">
-                        <button (click)="refreshSuppliers($event)" mat-icon-button matTooltip="refresh suppliers"
-                                *ngIf="!suppliersFetching">
-                          <mat-icon>refresh</mat-icon>
-                        </button>
-                        <button (click)="addNewSupplier($event)" mat-icon-button matTooltip="add new supplier"
-                                *ngIf="!suppliersFetching">
-                          <mat-icon>add</mat-icon>
-                        </button>
-                      </div>
-                    </mat-form-field>
+                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input"
+                                      matTooltip="Total initial unit quantity available">
+                        <mat-label>Initial Stock Quantity</mat-label>
+                        <input min="0" matInput type="number" required
+                               formControlName="quantity">
+                        <mat-error>Initial Stock Quantity required</mat-error>
+                      </mat-form-field>
 
-                  </mat-card-content>
-                </mat-card>
+                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input">
+                        <mat-label>Reorder Level</mat-label>
+                        <input min="0" matInput type="number" required formControlName="reorder">
+                        <mat-error>Reorder field required</mat-error>
+                      </mat-form-field>
 
-                <h5>
-                  Inventory
-                </h5>
-                <mat-card class="card-wrapper">
-                  <mat-card-content class="card-content">
-                    <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="fill" class="my-input">
-                      <mat-label>Purchase Price / Unit</mat-label>
-                      <span matSuffix>TZS</span>
-                      <input min="0" matInput type="number" required formControlName="purchase">
-                      <mat-error>Purchase price required</mat-error>
-                    </mat-form-field>
+                      <smartstock-category-form-field [formGroup]="productForm"></smartstock-category-form-field>
+                      <smartstock-suppliers-form-field [formGroup]="productForm"
+                                                       [purchasable]="getPurchasableFormControl().value===true">
+                      </smartstock-suppliers-form-field>
+                      <smartstock-units-form-field [stockable]="getStockableFormControl().value === true"
+                                                   [formGroup]="productForm">
+                      </smartstock-units-form-field>
 
-                    <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
-                      <mat-label>Retail Price / Unit</mat-label>
-                      <span matSuffix>TZS</span>
-                      <input min="0" matInput type="number" required formControlName="retailPrice">
-                      <mat-error>Retail price required</mat-error>
-                    </mat-form-field>
+                      <mat-checkbox matTooltip="Select if a product can expire" labelPosition="after"
+                                    class="my-input"
+                                    formControlName="canExpire">
+                        Can Expire?
+                      </mat-checkbox>
 
-                    <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
-                      <mat-label>Wholesale Price / Unit</mat-label>
-                      <span matSuffix>TZS</span>
-                      <input min="0" matInput type="number" required formControlName="wholesalePrice">
-                      <mat-error>Wholesale price required</mat-error>
-                    </mat-form-field>
+                      <mat-form-field *ngIf="getCanExpireFormControl().value === true" appearance="outline" class="my-input">
+                        <mat-label>Expire Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="expire">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker [touchUi]="true" #picker></mat-datepicker>
+                      </mat-form-field>
 
-                    <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input"
-                                    matTooltip="Quantity for this product to be sold as a whole or in bulk">
-                      <mat-label>Wholesale Quantity</mat-label>
-                      <input min="0" matInput
-                             type="number"
-                             required formControlName="wholesaleQuantity">
-                      <mat-error>Wholesale Quantity required</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input"
-                                    matTooltip="Total initial unit quantity available">
-                      <mat-label>Quantity</mat-label>
-                      <input min="0" matInput type="number" required
-                             formControlName="quantity">
-                      <mat-error>Quantity required</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input">
-                      <mat-label>Reorder Level</mat-label>
-                      <input min="0" matInput type="number" required formControlName="reorder">
-                      <mat-error>Reorder field required</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="my-input">
-                      <mat-label>Unit</mat-label>
-                      <mat-select formControlName="unit">
-                        <mat-option *ngFor="let unit of units | async" [value]="unit.name">
-                          {{unit.name}}
-                        </mat-option>
-                      </mat-select>
-                      <mat-progress-spinner matTooltip="Fetching units"
-                                            *ngIf="unitsFetching" matSuffix color="accent"
-                                            mode="indeterminate"
-                                            [diameter]="20"></mat-progress-spinner>
-                      <mat-error>Unit required</mat-error>
-                      <div matSuffix class="d-flex flex-row">
-                        <button (click)="refreshUnits($event)" mat-icon-button matTooltip="refresh units"
-                                *ngIf="!unitsFetching">
-                          <mat-icon>refresh</mat-icon>
-                        </button>
-                        <button (click)="addNewUnit($event)" mat-icon-button matTooltip="add new unit"
-                                *ngIf="!unitsFetching">
-                          <mat-icon>add</mat-icon>
-                        </button>
-                      </div>
-                    </mat-form-field>
-
-                    <mat-checkbox matTooltip="Select if a product can expire" labelPosition="after"
-                                  class="my-input"
-                                  formControlName="canExpire">
-                      Can Expire?
-                    </mat-checkbox>
-
-                    <mat-form-field *ngIf="getCanExpireFormControl().value === true" appearance="outline" class="my-input">
-                      <mat-label>Expire Date</mat-label>
-                      <input matInput [matDatepicker]="picker" formControlName="expire">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker [touchUi]="true" #picker></mat-datepicker>
-                    </mat-form-field>
-
-                  </mat-card-content>
-                </mat-card>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-expansion-panel>
 
               </div>
 
@@ -289,18 +197,12 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
 
   croppedImage: any = '';
   productForm: FormGroup;
-  units: Observable<[any]>;
-  categories: Observable<any[]>;
-  suppliers: Observable<any[]>;
   metas: Observable<{
     type: string;
     label: string;
     controlName: string;
   }[]>;
   mainProgress = false;
-  unitsFetching = true;
-  categoriesFetching = true;
-  suppliersFetching = true;
   isMobile = environment.android;
 
   constructor(private readonly formBuilder: FormBuilder,
@@ -313,9 +215,6 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
 
   ngOnInit() {
     this.initializeForm(this.initialStock);
-    this.getCategories();
-    this.getUnits();
-    this.getSuppliers();
     this.metas = of([]);
   }
 
@@ -342,8 +241,8 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       saleable: [stock && stock.saleable !== undefined ? stock.saleable : true],
       downloadable: [stock && stock.downloadable !== undefined ? stock.downloadable : false],
       downloads: [stock && stock.downloads ? stock.downloads : []],
-      stockable: [stock && stock.stockable !== undefined ? stock.stockable : true],
-      purchasable: [stock && stock.purchasable !== undefined ? stock.purchasable : true],
+      stockable: [stock && stock.stockable !== undefined ? stock.stockable : false],
+      purchasable: [stock && stock.purchasable !== undefined ? stock.purchasable : false],
       description: [stock && stock.description ? stock.description : ''],
       purchase: [stock && stock.purchase ? stock.purchase : 0, [Validators.nullValidator, Validators.required]],
       retailPrice: [stock && stock.retailPrice ? stock.retailPrice : 0, [Validators.nullValidator, Validators.required]],
@@ -352,7 +251,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       quantity: [stock && stock.quantity ? stock.quantity : 0, [Validators.nullValidator, Validators.required]],
       reorder: [stock && stock.reorder ? stock.reorder : 0, [Validators.nullValidator, Validators.required]],
       unit: [stock && stock.unit ? stock.unit : null, [Validators.nullValidator, Validators.required]],
-      canExpire: [stock && stock.canExpire !== undefined ? stock.canExpire : true],
+      canExpire: [stock && stock.canExpire !== undefined ? stock.canExpire : false],
       expire: [stock && stock.expire ? stock.expire : null],
       category: [stock && stock.category ? stock.category : null, [Validators.required, Validators.nullValidator]],
       supplier: [stock && stock.supplier ? stock.supplier : 'general', [Validators.required, Validators.nullValidator]],
@@ -383,44 +282,8 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
     return this.productForm.get('canExpire') as FormControl;
   }
 
-  getSuppliers() {
-    this.suppliersFetching = true;
-    this.stockDatabase.getAllSupplier({}).then(value => {
-      this.suppliersFetching = false;
-      this.suppliers = of(JSON.parse(JSON.stringify(value)));
-    }).catch(_ => {
-      // console.log(_);
-      this.suppliersFetching = false;
-      this.suppliers = of([{name: 'Default'}]);
-    });
-  }
-
-  getCategories() {
-    this.categoriesFetching = true;
-    this.stockDatabase.getAllCategory({size: 10000}).then(categoryObject => {
-      const cat = JSON.parse(JSON.stringify(categoryObject));
-      this.categories = of(cat);
-      this.categoriesFetching = false;
-    }).catch(reason => {
-      this.categories = of([{name: 'No category'}]);
-      console.warn(reason);
-      this.categoriesFetching = false;
-    });
-  }
-
-  getUnits() {
-    this.unitsFetching = true;
-    this.stockDatabase.getAllUnit({}).then(unitsObjects => {
-      this.units = of(JSON.parse(JSON.stringify(unitsObjects)));
-      this.unitsFetching = false;
-    }).catch(reason => {
-      this.units = of([{name: 'No unit'}]);
-      console.warn(reason);
-      this.unitsFetching = false;
-    });
-  }
-
   addProduct(formElement: FormGroupDirective) {
+    this.productForm.markAsTouched();
     if (!this.productForm.valid) {
       this.snack.open('Fill all required fields', 'Ok', {
         duration: 3000
@@ -503,60 +366,6 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
         duration: 3000
       });
     });
-  }
-
-  addNewUnit($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.dialog.open(DialogUnitNewComponent, {
-      closeOnNavigation: true
-    }).afterClosed().subscribe(value => {
-      if (value) {
-        this.getUnits();
-      }
-    });
-  }
-
-  refreshUnits($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.getUnits();
-  }
-
-  addNewCategory($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.dialog.open(DialogCategoryNewComponent, {
-      closeOnNavigation: true
-    }).afterClosed().subscribe(value => {
-      if (value) {
-        this.getCategories();
-      }
-    });
-  }
-
-  refreshCategories($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.getCategories();
-  }
-
-  addNewSupplier($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.dialog.open(DialogSupplierNewComponent, {
-      closeOnNavigation: true
-    }).afterClosed().subscribe(value => {
-      if (value) {
-        this.getSuppliers();
-      }
-    });
-  }
-
-  refreshSuppliers($event: MouseEvent) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.getSuppliers();
   }
 
   removeImage(imageInput: HTMLInputElement) {
