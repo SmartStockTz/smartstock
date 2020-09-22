@@ -44,7 +44,7 @@ jobs:
         snapcraft_token: ${{ secrets.SNAP_STORE_EDGE }}
         # skip_install: true # optional, if already installed in an earlier step
     - run: npm install
-    - run: npm run build:desktop
+    # - run: npm run build:desktop
     - run: npm run prepare:snap
     - run: npm run push:snap:edge
       env:

@@ -7,16 +7,16 @@ function defaultTask(cb) {
   cb();
 }
 
-async function copyBFastJs() {
+async function updateElectronVersion() {
   electronPackage.version = webPackage.version;
   fs.writeFileSync('./electron/package.json', JSON.stringify(electronPackage));
 }
 
 async function syncDesktop() {
-  return gulp.src('./dist/smartstock/**/*')
-    .pipe(gulp.dest('./electron/public'));
+  // return gulp.src('./dist/smartstock/**/*')
+  //   .pipe(gulp.dest('./electron/public'));
 }
 
 exports.default = defaultTask;
-exports.copyBFastJs = copyBFastJs;
+exports.copyBFastJs = updateElectronVersion;
 exports.syncDesktop = syncDesktop;

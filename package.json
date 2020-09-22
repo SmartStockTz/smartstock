@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "FahamuTech",
-  "version": "20.9.0-rc.1",
+  "version": "20.9.0-rc.2",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -57,9 +57,7 @@
     "@angular/platform-browser-dynamic": "~10.0.11",
     "@angular/router": "~10.0.11",
     "@angular/service-worker": "^10.0.11",
-    "@capacitor/core": "latest",
-    "@capacitor/electron": "^2.1.2",
-    "bfastjs": "^4.0.0-beta.21",
+    "bfastjs": "^4.0.0-beta.23",
     "comlink": "^4.3.0",
     "highcharts": "^8.1.2",
     "material-design-icons": "^3.0.1",
@@ -77,7 +75,6 @@
     "@angular/cli": "^10.0.7",
     "@angular/compiler-cli": "~10.0.11",
     "@angular/language-service": "~10.0.11",
-    "@capacitor/cli": "latest",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.11.1",

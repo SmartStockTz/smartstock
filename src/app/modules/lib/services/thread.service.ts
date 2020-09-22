@@ -1,6 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
 import {StorageService} from './storage.service';
-import {Capacitor} from '@capacitor/core';
 import {SyncSalesService} from '../../sales/services/syncSales.service';
 import {SyncStocksService} from '../../stocks/services/syncStocks.service';
 import {SsmEvents} from '../utils/eventsNames.util';
@@ -95,20 +94,20 @@ export class ThreadService implements OnInit {
 
   private async startStockUpdateProxy() {
     try {
-      if (Capacitor.isNative) {
-        this.swLocalDataService.start();
+      // if (Capacitor.isNative) {
+      //   this.swLocalDataService.start();
+      // } else {
+      if (typeof Worker !== 'undefined') {
+        this.stocksWorkerProxy = new Worker('./stocks.worker.service', {type: 'module'});
+        this.stocksWorkerProxy.onmessage = ({data}) => {
+          this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
+        };
+        this.stocksWorkerProxy.postMessage({});
+        return 'Ok';
       } else {
-        if (typeof Worker !== 'undefined') {
-          this.stocksWorkerProxy = new Worker('./stocks.worker.service', {type: 'module'});
-          this.stocksWorkerProxy.onmessage = ({data}) => {
-            this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
-          };
-          this.stocksWorkerProxy.postMessage({});
-          return 'Ok';
-        } else {
-          this._noWorkerStockSync();
-        }
+        this._noWorkerStockSync();
       }
+      // }
     } catch (e) {
       this._noWorkerStockSync();
       throw {message: 'Fails to start stocks proxy'};

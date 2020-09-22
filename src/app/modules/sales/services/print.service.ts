@@ -5,9 +5,6 @@ import {SettingsService} from '../../account/services/settings.service';
 /***** move to common ********/
 import {environment} from '../../../../environments/environment';
 import {PrinterModel} from '../models/printer.model';
-import {Capacitor} from '@capacitor/core';
-
-const {Printer} = Capacitor.Plugins;
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +17,7 @@ export class PrintService {
   }
 
   private async printInMobile(printerModel: PrinterModel) {
-    return Printer.print(printerModel);
+    return 'done printing';
   }
 
   private async printInDesktop(printModel: PrinterModel) {
@@ -51,8 +48,8 @@ export class PrintService {
     }
 
     // console.log(cSettings.saleWithoutPrinter);
-    if (environment.android && Capacitor.isNative && !cSettings.saleWithoutPrinter) {
-      return await this.printInMobile(printModel);
+    if (environment.android && !cSettings.saleWithoutPrinter) {
+      return 'done printing';
     }
 
     if (environment.electron && !cSettings.saleWithoutPrinter) {

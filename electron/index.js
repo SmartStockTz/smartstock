@@ -57,14 +57,13 @@ if (!gotTheLock) {
       await splashScreen.loadFile(__dirname + `/splash_assets/ssm.png`);
       splashScreen.show();
     }
-    await mainWindow.loadURL(`file://${__dirname}/public/index.html`);
-    // mainWindow.show();
     mainWindow.webContents.on('dom-ready', () => {
       mainWindow.show();
       if (splashScreen) {
         splashScreen.close();
       }
     });
+    await mainWindow.loadURL(`https://desktop-smartstock.web.app`);
   }
 
   app.on('ready', createWindow);
