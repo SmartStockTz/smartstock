@@ -89,6 +89,6 @@ addEventListener('message', async ({data}) => {
     } else {
       // console.log('another save sales routine runs');
     }
-  }, 10000);
+  }, 60000);
 });
 

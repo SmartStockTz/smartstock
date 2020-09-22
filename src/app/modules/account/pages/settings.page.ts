@@ -145,7 +145,7 @@ export class SettingsPage extends DeviceInfoUtil implements OnInit {
       this._initiateSettingsForm(value);
       this.getSettingsProgress = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this._initiateSettingsForm({
         saleWithoutPrinter: true,
         printerHeader: '',

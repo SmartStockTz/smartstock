@@ -24,7 +24,7 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
   template: `
     <mat-sidenav-container class="match-parent">
 
-      <mat-sidenav class="match-parent-side" #sidenav [mode]="'over'" [opened]="false">
+      <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
         <smartstock-admin-drawer></smartstock-admin-drawer>
       </mat-sidenav>
 
@@ -36,25 +36,25 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
       <mat-sidenav-content style="display:flex; flex-direction: column">
 
         <smartstock-toolbar (searchCallback)="filterProduct($event)"
-                     [showSearch]="true"
-                     [hasBackRoute]="true" [backLink]="'/sale/'"
-                     searchPlaceholder="Filter product"
-                     [searchInputControl]="searchInputControl"
-                     [searchProgressFlag]="searchProgressFlag"
-                     [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
-                     [cartdrawer]="cartdrawer"
-                     [showProgress]="showProgress"></smartstock-toolbar>
+                            [showSearch]="true"
+                            [hasBackRoute]="true" [backLink]="'/sale/'"
+                            searchPlaceholder="Filter product"
+                            [searchInputControl]="searchInputControl"
+                            [searchProgressFlag]="searchProgressFlag"
+                            [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
+                            [cartdrawer]="cartdrawer"
+                            [showProgress]="showProgress"></smartstock-toolbar>
 
         <smartstock-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
-                      (refreshCallback)="getProductsFromServer()"></smartstock-on-fetch>
+                             (refreshCallback)="getProductsFromServer()"></smartstock-on-fetch>
 
         <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="25" *ngIf="products && !fetchDataProgress">
           <smartstock-product-card style="margin: 0 5px; display: inline-block"
-                            [cartdrawer]="cartdrawer"
-                            [product]="product"
-                            [productIndex]="idx"
-                            [isViewedInWholesale]="isViewedInWholesale"
-                            *cdkVirtualFor="let product of products; let idx = index">
+                                   [cartdrawer]="cartdrawer"
+                                   [product]="product"
+                                   [productIndex]="idx"
+                                   [isViewedInWholesale]="isViewedInWholesale"
+                                   *cdkVirtualFor="let product of products; let idx = index">
           </smartstock-product-card>
         </cdk-virtual-scroll-viewport>
 

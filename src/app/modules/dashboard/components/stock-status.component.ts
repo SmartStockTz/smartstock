@@ -35,7 +35,7 @@ export class StockStatusComponent implements OnInit {
       this.initiateGraph(this.stockStatus);
     }).catch(reason => {
       this.stockStatusProgress = false;
-      console.log(reason);
+      this.logger.i(reason);
       // this.logger.i(reason, 'StockStatusComponent:26');
     });
   }

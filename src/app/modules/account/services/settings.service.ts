@@ -28,7 +28,7 @@ export class SettingsService {
       const user = await this._storage.getActiveUser();
       const activeShop = await this._storage.getActiveShop();
       if (!user) {
-        console.log('no user records found');
+        // console.log('no user records found');
         throw new Error('no user records found');
       }
       if (user && user.sessionToken && activeShop && activeShop.applicationId) {

@@ -38,7 +38,7 @@ export class OrderPaymentStatusComponent implements OnInit {
       this.orderService.checkOrderIsPaid(this.order.id.split('-')[1]).then(value => {
         this.getPaidProgress = false;
         this.isPaid = value >= this.order.total;
-        this.orderService.markOrderIsPaid(this.order.id).then(console.log).catch(_ => {
+        this.orderService.markOrderIsPaid(this.order.id).catch(_ => {
          // console.log(_);
         });
       }).catch(reason => {
