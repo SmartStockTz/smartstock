@@ -19,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       #- run: npm install
       #- run: npm run build:desktop
-      #- run: cd electron && npm install && npm run build:win
+      #- run: cd desktop && npm install && npm run build:win
         env:
           CI: true
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

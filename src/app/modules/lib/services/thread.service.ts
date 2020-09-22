@@ -1,6 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
 import {StorageService} from './storage.service';
-import {SyncSalesService} from '../../sales/services/syncSales.service';
 import {SyncStocksService} from '../../stocks/services/syncStocks.service';
 import {SsmEvents} from '../utils/eventsNames.util';
 import {EventService} from './event.service';
@@ -16,7 +15,6 @@ export class ThreadService implements OnInit {
 
   constructor(private readonly eventApi: EventService,
               private readonly swLocalDataService: SyncStocksService,
-              private readonly swSalesProxyService: SyncSalesService,
               private readonly _storage: StorageService) {
   }
 
@@ -43,7 +41,7 @@ export class ThreadService implements OnInit {
   }
 
   private _stopWorkers() {
-    this.swSalesProxyService.stop();
+    // this.swSalesProxyService.stop();
     this.swLocalDataService.stop();
     if (this.salesWorker) {
       this.salesWorker.terminate();
@@ -115,7 +113,7 @@ export class ThreadService implements OnInit {
   }
 
   private _noWorkerSalesProxy() {
-    this.swSalesProxyService.start();
+    // this.swSalesProxyService.start();
   }
 
   private _noWorkerStockSync() {

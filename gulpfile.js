@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const electronPackage = require('./electron/package.json');
+const electronPackage = require('./desktop/package.json');
 const webPackage = require('./package.json');
 const fs = require('fs');
 
@@ -9,12 +9,12 @@ function defaultTask(cb) {
 
 async function updateElectronVersion() {
   electronPackage.version = webPackage.version;
-  fs.writeFileSync('./electron/package.json', JSON.stringify(electronPackage));
+  fs.writeFileSync('./desktop/package.json', JSON.stringify(electronPackage));
 }
 
 async function syncDesktop() {
   // return gulp.src('./dist/smartstock/**/*')
-  //   .pipe(gulp.dest('./electron/public'));
+  //   .pipe(gulp.dest('./desktop/public'));
 }
 
 exports.default = defaultTask;

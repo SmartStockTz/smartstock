@@ -2,12 +2,11 @@
 
 import {BFast} from 'bfastjs';
 import {ShopModel} from '../models/shop.model';
+import {SalesModel} from '../../sales/models/sale.model';
 
 const SalesWorkerService = {
   async run() {
-    this.initiateSmartStock();
-    this.saveSalesAndRemove().catch(_ => {
-    });
+    return this.saveSalesAndRemove();
   },
 
   initiateSmartStock() {
@@ -59,12 +58,47 @@ const SalesWorkerService = {
     }
   },
 
-  async saveSaleAndUpdateStock(sales: any[], shop: ShopModel, salesCache, key: string) {
+  async saveSaleAndUpdateStock(sales: { method: string, path: string, body: SalesModel }[], shop: ShopModel, salesCache, key: string) {
     if (sales && Array.isArray(sales) && sales.length > 0) {
-      await BFast
-        .functions()
-        .request(`/functions/sales/${shop.projectId}/${shop.applicationId}`)
-        .post({requests: sales});
+      const activeUser = await BFast.auth().currentUser();
+      await BFast.database(shop.projectId)
+        .transaction()
+        .create('sales', sales.filter(x => x.body.stock.saleable === true).map(x => {
+          x.body.soldBy = {
+            username: activeUser.username
+          };
+          return x.body;
+        }))
+        .update('stocks', sales.filter(x => x.body.stock.stockable === true).map(value => {
+          return {
+            update: {
+              $inc: {
+                'quantity': -Number(value.body.quantity)
+              }
+            },
+            query: {
+              id: value.body.stock.id
+            }
+          };
+        })).commit(
+          //   {
+          //   before: async transactionRequests => {
+          //     for (const value of transactionRequests) {
+          //       if (value.action === 'create') {
+          //         console.log(value.data);
+          //         const results = await BFast.database(shop.projectId).collection('sales')
+          //           .query()
+          //           .equalTo('batch', value.data['batch'])
+          //           .find();
+          //         if (results && Array.isArray(results) && results.length > 0) {
+          //           salesToSave = transactionRequests.filter(x => x.data.batch !== value.batch);
+          //         }
+          //       }
+          //     }
+          //     return transactionRequests;
+          //   }
+          // }
+        );
     } else {
       return 'Done';
     }
@@ -76,19 +110,21 @@ let shouldRun = true;
 
 addEventListener('message', async ({data}) => {
   console.log('sales worker started');
+  SalesWorkerService.initiateSmartStock();
   setInterval(_ => {
     if (shouldRun === true) {
       shouldRun = false;
       SalesWorkerService.run()
-        .then()
-        .catch(__ => {
+        .then(_1 => {
+        })
+        .catch(_2 => {
         })
         .finally(() => {
           shouldRun = true;
         });
     } else {
-      // console.log('another save sales routine runs');
+      console.log('another save sales routine runs');
     }
-  }, 60000);
+  }, 5000);
 });
 

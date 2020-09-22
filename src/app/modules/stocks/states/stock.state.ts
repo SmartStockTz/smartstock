@@ -24,7 +24,7 @@ export class StockState {
     const user = await this._user.currentUser();
     const projectId = await this._settings.getCustomerProjectId();
     const email = encodeURIComponent(user.email);
-    return BFast.functions(projectId)
+    return BFast.functions()
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/export/' + projectId + '/' + email)
       .get({});
   }
@@ -34,7 +34,7 @@ export class StockState {
 
   async importStocks(stocks: StockModel[]): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.functions(shop.projectId)
+    return BFast.functions()
       .request(this._settings.ssmFunctionsURL + '/functions/stocks/import/' + shop.projectId)
       .post(stocks, {
         headers: this._settings.ssmFunctionsHeader

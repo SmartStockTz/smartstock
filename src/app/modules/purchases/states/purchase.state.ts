@@ -42,7 +42,7 @@ export class PurchaseState {
 
   async addPurchase(purchaseI: PurchaseModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
-    return BFast.functions(shop.projectId).request(
+    return BFast.functions().request(
       this._settings.ssmFunctionsURL + '/functions/purchases/' + shop.projectId)
       .post(purchaseI, {
         headers: this._settings.ssmFunctionsHeader

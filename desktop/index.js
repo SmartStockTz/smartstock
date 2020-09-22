@@ -43,7 +43,7 @@ if (!gotTheLock) {
       show: false,
       webPreferences: {
         nodeIntegration: true,
-        // preload: path.join(__dirname, 'node_modules', '@capacitor', 'electron', 'dist', 'electron-bridge.js')
+        // preload: path.join(__dirname, 'node_modules', '@capacitor', 'desktop', 'dist', 'desktop-bridge.js')
       }
     });
 
