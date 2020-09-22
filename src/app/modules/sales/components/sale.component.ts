@@ -22,57 +22,57 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 @Component({
   selector: 'smartstock-sale',
   template: `
-    <mat-sidenav-container class="match-parent">
+      <mat-sidenav-container class="match-parent">
 
-      <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
-        <smartstock-admin-drawer></smartstock-admin-drawer>
-      </mat-sidenav>
+          <mat-sidenav class="match-parent-side" #sidenav [mode]="enoughWidth()?'side':'over'" [opened]="enoughWidth()">
+              <smartstock-drawer></smartstock-drawer>
+          </mat-sidenav>
 
-      <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
-                   [opened]="false">
-        <smartstock-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></smartstock-cart>
-      </mat-sidenav>
+          <mat-sidenav #cartdrawer [fixedInViewport]="false" position="end" [mode]="enoughWidth()?'side':'over'"
+                       [opened]="false">
+              <smartstock-cart [isViewedInWholesale]="isViewedInWholesale" [cartdrawer]="cartdrawer"></smartstock-cart>
+          </mat-sidenav>
 
-      <mat-sidenav-content style="display:flex; flex-direction: column">
+          <mat-sidenav-content style="display:flex; flex-direction: column">
 
-        <smartstock-toolbar (searchCallback)="filterProduct($event)"
-                            [showSearch]="true"
-                            [hasBackRoute]="true" [backLink]="'/sale/'"
-                            searchPlaceholder="Filter product"
-                            [searchInputControl]="searchInputControl"
-                            [searchProgressFlag]="searchProgressFlag"
-                            [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
-                            [cartdrawer]="cartdrawer"
-                            [showProgress]="showProgress"></smartstock-toolbar>
+              <smartstock-toolbar (searchCallback)="filterProduct($event)"
+                                  [showSearch]="true"
+                                  [hasBackRoute]="true" [backLink]="'/sale/'"
+                                  searchPlaceholder="Filter product"
+                                  [searchInputControl]="searchInputControl"
+                                  [searchProgressFlag]="searchProgressFlag"
+                                  [heading]="isViewedInWholesale?'WholeSale':'Retail'" [sidenav]="sidenav"
+                                  [cartdrawer]="cartdrawer"
+                                  [showProgress]="showProgress"></smartstock-toolbar>
 
-        <smartstock-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
-                             (refreshCallback)="getProductsFromServer()"></smartstock-on-fetch>
+              <smartstock-on-fetch *ngIf="!products || fetchDataProgress" [isLoading]="fetchDataProgress"
+                                   (refreshCallback)="getProductsFromServer()"></smartstock-on-fetch>
 
-        <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="25" *ngIf="products && !fetchDataProgress">
-          <smartstock-product-card style="margin: 0 5px; display: inline-block"
-                                   [cartdrawer]="cartdrawer"
-                                   [product]="product"
-                                   [productIndex]="idx"
-                                   [isViewedInWholesale]="isViewedInWholesale"
-                                   *cdkVirtualFor="let product of products; let idx = index">
-          </smartstock-product-card>
-        </cdk-virtual-scroll-viewport>
+              <cdk-virtual-scroll-viewport style="flex-grow: 1" itemSize="25" *ngIf="products && !fetchDataProgress">
+                  <smartstock-product-card style="margin: 0 5px; display: inline-block"
+                                           [cartdrawer]="cartdrawer"
+                                           [product]="product"
+                                           [productIndex]="idx"
+                                           [isViewedInWholesale]="isViewedInWholesale"
+                                           *cdkVirtualFor="let product of products; let idx = index">
+                  </smartstock-product-card>
+              </cdk-virtual-scroll-viewport>
 
-        <div style="position: fixed; width: 100%;display: flex; flex-direction: row; justify-content: center;
+              <div style="position: fixed; width: 100%;display: flex; flex-direction: row; justify-content: center;
            align-items: center; z-index: 3000; left: 16px; bottom: 20px;">
-          <button mat-button color="primary"
-                  *ngIf="!fetchDataProgress && products &&showRefreshCart"
-                  (click)="getProductsFromServer()"
-                  matTooltip="Refresh products from server"
-                  class="mat-fab">
-            <mat-icon>refresh</mat-icon>
-          </button>
-          <span [ngStyle]="showRefreshCart?{flex: '1 1 auto'}:{}"></span>
-          <smartstock-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></smartstock-cart-preview>
-        </div>
-      </mat-sidenav-content>
+                  <button mat-button color="primary"
+                          *ngIf="!fetchDataProgress && products &&showRefreshCart"
+                          (click)="getProductsFromServer()"
+                          matTooltip="Refresh products from server"
+                          class="mat-fab">
+                      <mat-icon>refresh</mat-icon>
+                  </button>
+                  <span [ngStyle]="showRefreshCart?{flex: '1 1 auto'}:{}"></span>
+                  <smartstock-cart-preview [cartSidenav]="cartdrawer" [isWholeSale]="isViewedInWholesale"></smartstock-cart-preview>
+              </div>
+          </mat-sidenav-content>
 
-    </mat-sidenav-container>
+      </mat-sidenav-container>
   `,
   styleUrls: ['../styles/sale.style.css'],
   providers: [

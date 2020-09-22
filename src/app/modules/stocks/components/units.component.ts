@@ -11,7 +11,7 @@ import {MatPaginator} from '@angular/material/paginator';
 @Component({
   selector: 'smartstock-units',
   template: `
-    <mat-card class="mat-elevation-z0">
+    <mat-card class="mat-elevation-z3">
       <mat-card-title class="d-flex flex-row">
         <button (click)="openAddUnitDialog()" color="primary" class="ft-button" mat-flat-button>Add Unit</button>
         <span class="toolbar-spacer"></span>
@@ -120,12 +120,12 @@ import {MatPaginator} from '@angular/material/paginator';
           <tr mat-header-row *matHeaderRowDef="unitsTableColums"></tr>
           <tr mat-row class="table-data-row" *matRowDef="let row; columns: unitsTableColums;"></tr>
         </table>
-        <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
         <div *ngIf="fetchUnitsFlag">
           <mat-progress-spinner matTooltip="fetch units" [diameter]="30" mode="indeterminate"
                                 color="primary">
           </mat-progress-spinner>
         </div>
+        <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
       </mat-card-content>
     </mat-card>
   `,

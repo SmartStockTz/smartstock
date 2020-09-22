@@ -19,110 +19,110 @@ import {UserDeleteDialogComponent} from '../components/user-delete-dialog.compon
 @Component({
   selector: 'smartstock-users',
   template: `
-    <mat-sidenav-container *ngIf="!isMobile" class="match-parent">
-      <mat-sidenav class="match-parent-side"
-                   [fixedInViewport]="true"
-                   #sidenav
-                   [mode]="enoughWidth()?'side':'over'"
-                   [opened]="true">
-        <smartstock-admin-drawer></smartstock-admin-drawer>
-      </mat-sidenav>
+      <mat-sidenav-container *ngIf="!isMobile" class="match-parent">
+          <mat-sidenav class="match-parent-side"
+                       [fixedInViewport]="true"
+                       #sidenav
+                       [mode]="enoughWidth()?'side':'over'"
+                       [opened]="true">
+              <smartstock-drawer></smartstock-drawer>
+          </mat-sidenav>
 
-      <mat-sidenav-content>
-        <smartstock-toolbar [heading]=""
-                     [sidenav]="sidenav"
-                     [showProgress]="false">
-        </smartstock-toolbar>
+          <mat-sidenav-content>
+              <smartstock-toolbar [heading]=""
+                                  [sidenav]="sidenav"
+                                  [showProgress]="false">
+              </smartstock-toolbar>
 
-        <div class="container my-users-wrapper">
-          <mat-tab-group class="container">
-            <mat-tab label="All Users">
-              <div class="">
-                <mat-card class="mat-elevation-z0">
-                  <mat-card-title class="d-flex flex-row">
-                    <button (click)="openAddUserDialog()" color="primary" class="ft-button" mat-flat-button>
-                      Add User
-                    </button>
-                    <span class="toolbar-spacer"></span>
-                    <button [matMenuTriggerFor]="menuUsers" mat-icon-button>
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menuUsers>
-                      <button (click)="getUsers()" mat-menu-item>Reload Users</button>
-                    </mat-menu>
-                  </mat-card-title>
-                  <mat-card-content>
+              <div class="container my-users-wrapper">
+                  <mat-tab-group class="container">
+                      <mat-tab label="All Users">
+                          <div class="">
+                              <mat-card class="mat-elevation-z0">
+                                  <mat-card-title class="d-flex flex-row">
+                                      <button (click)="openAddUserDialog()" color="primary" class="ft-button" mat-flat-button>
+                                          Add User
+                                      </button>
+                                      <span class="toolbar-spacer"></span>
+                                      <button [matMenuTriggerFor]="menuUsers" mat-icon-button>
+                                          <mat-icon>more_vert</mat-icon>
+                                      </button>
+                                      <mat-menu #menuUsers>
+                                          <button (click)="getUsers()" mat-menu-item>Reload Users</button>
+                                      </mat-menu>
+                                  </mat-card-title>
+                                  <mat-card-content>
 
-                    <table style="margin-top: 16px" class="my-input"
-                           *ngIf="!fetchUsersFlag && usersArray && usersArray.length > 0"
-                           mat-table
-                           [dataSource]="usersDatasource">
+                                      <table style="margin-top: 16px" class="my-input"
+                                             *ngIf="!fetchUsersFlag && usersArray && usersArray.length > 0"
+                                             mat-table
+                                             [dataSource]="usersDatasource">
 
-                      <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>Username</th>
-                        <td class="" matRipple mat-cell
-                            *matCellDef="let element">
-                          {{element.username}}
-                        </td>
-                      </ng-container>
+                                          <ng-container matColumnDef="name">
+                                              <th mat-header-cell *matHeaderCellDef>Username</th>
+                                              <td class="" matRipple mat-cell
+                                                  *matCellDef="let element">
+                                                  {{element.username}}
+                                              </td>
+                                          </ng-container>
 
-                      <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef>Role</th>
-                        <td class=""
-                            matRipple mat-cell
-                            *matCellDef="let element">{{element.role === 'user' ? 'SELLER' : 'MANAGER'}}
-                        </td>
-                      </ng-container>
+                                          <ng-container matColumnDef="role">
+                                              <th mat-header-cell *matHeaderCellDef>Role</th>
+                                              <td class=""
+                                                  matRipple mat-cell
+                                                  *matCellDef="let element">{{element.role === 'user' ? 'SELLER' : 'MANAGER'}}
+                                              </td>
+                                          </ng-container>
 
-                      <ng-container matColumnDef="shops">
-                        <th mat-header-cell *matHeaderCellDef>Shops</th>
-                        <td class=""
-                            matRipple mat-cell
-                            *matCellDef="let element">{{element.shops | shopsPipe | async }}
-                        </td>
-                      </ng-container>
+                                          <ng-container matColumnDef="shops">
+                                              <th mat-header-cell *matHeaderCellDef>Shops</th>
+                                              <td class=""
+                                                  matRipple mat-cell
+                                                  *matCellDef="let element">{{element.shops | shopsPipe | async }}
+                                              </td>
+                                          </ng-container>
 
-                      <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef>
-                          <div class="d-flex justify-content-end align-items-end">
-                            Actions
+                                          <ng-container matColumnDef="actions">
+                                              <th mat-header-cell *matHeaderCellDef>
+                                                  <div class="d-flex justify-content-end align-items-end">
+                                                      Actions
+                                                  </div>
+                                              </th>
+                                              <td mat-cell *matCellDef="let element">
+                                                  <div class="d-flex justify-content-end align-items-end">
+                                                      <button [matMenuTriggerFor]="opts" color="primary" mat-icon-button>
+                                                          <mat-icon>more_vert</mat-icon>
+                                                      </button>
+                                                      <mat-menu #opts>
+                                                          <button (click)="deleteUser(element)" mat-menu-item>
+                                                              Delete
+                                                          </button>
+                                                          <button mat-menu-item (click)="updatePassword(element)">
+                                                              Update password
+                                                          </button>
+                                                      </mat-menu>
+                                                  </div>
+                                              </td>
+                                          </ng-container>
+
+                                          <tr mat-header-row *matHeaderRowDef="usersTableColums"></tr>
+                                          <tr mat-row class="table-data-row" *matRowDef="let row; columns: usersTableColums;"></tr>
+
+                                      </table>
+                                      <div *ngIf="fetchUsersFlag">
+                                          <mat-progress-spinner matTooltip="fetch users" [diameter]="30" mode="indeterminate"
+                                                                color="primary"></mat-progress-spinner>
+                                      </div>
+                                  </mat-card-content>
+                              </mat-card>
                           </div>
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                          <div class="d-flex justify-content-end align-items-end">
-                            <button [matMenuTriggerFor]="opts" color="primary" mat-icon-button>
-                              <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #opts>
-                              <button (click)="deleteUser(element)" mat-menu-item>
-                                Delete
-                              </button>
-                              <button mat-menu-item (click)="updatePassword(element)">
-                                Update password
-                              </button>
-                            </mat-menu>
-                          </div>
-                        </td>
-                      </ng-container>
-
-                      <tr mat-header-row *matHeaderRowDef="usersTableColums"></tr>
-                      <tr mat-row class="table-data-row" *matRowDef="let row; columns: usersTableColums;"></tr>
-
-                    </table>
-                    <div *ngIf="fetchUsersFlag">
-                      <mat-progress-spinner matTooltip="fetch users" [diameter]="30" mode="indeterminate"
-                                            color="primary"></mat-progress-spinner>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
+                      </mat-tab>
+                  </mat-tab-group>
               </div>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
 
-      </mat-sidenav-content>
+          </mat-sidenav-content>
 
-    </mat-sidenav-container>
+      </mat-sidenav-container>
   `,
   styleUrls: ['../style/users.style.css']
 })

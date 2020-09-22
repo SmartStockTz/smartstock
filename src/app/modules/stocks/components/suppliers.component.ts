@@ -11,7 +11,7 @@ import {MatPaginator} from '@angular/material/paginator';
 @Component({
   selector: 'smartstock-suppliers',
   template: `
-    <mat-card class="mat-elevation-z0">
+    <mat-card class="mat-elevation-z3">
       <mat-card-title class="d-flex flex-row">
         <button (click)="openAddSupplierDialog()" color="primary" class="ft-button" mat-flat-button>
           Add Supplier
@@ -149,15 +149,13 @@ import {MatPaginator} from '@angular/material/paginator';
           <tr mat-row class="table-data-row" *matRowDef="let row; columns: suppliersTableColums;"></tr>
 
         </table>
-        <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
-
         <div *ngIf="fetchSuppliersFlag">
           <mat-progress-spinner matTooltip="fetch suppliers"
                                 [diameter]="30" mode="indeterminate"
                                 color="primary">
           </mat-progress-spinner>
         </div>
-
+        <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
       </mat-card-content>
     </mat-card>
   `,

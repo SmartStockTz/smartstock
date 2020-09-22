@@ -25,10 +25,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule, Routes} from '@angular/router';
-import {ViewPageComponent} from './pages/view.page';
+import {ProductsPage} from './pages/products.page';
 import {StockDetailsComponent} from './components/stock.component';
 import {TransferDialogComponent} from './components/transfer.component';
-import {CreatePageComponent} from './pages/create.page';
+import {CreatePageComponent} from './pages/product-create.page';
 import {EditPageComponent} from './pages/edit.page';
 import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './components/categories.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './components/units.component';
@@ -40,10 +40,17 @@ import {CategoryFormFieldComponent} from './components/category-form-field.compo
 import {SuppliersFormFieldComponent} from './components/suppliers-form-field.component';
 import {UnitsFormFieldComponent} from './components/units-form-field.component';
 import {ProductShortDetailFormComponent} from './components/product-short-detail-form.component';
+import {IndexPage} from './pages/index.page';
+import {UnitsPage} from './pages/units.page';
+import {SuppliersPage} from './pages/suppliers.page';
+import {CategoriesPage} from './pages/categories.page';
 
 const routes: Routes = [
-  {path: '', component: ViewPageComponent},
-  {path: 'products', component: ViewPageComponent},
+  {path: '', component: IndexPage},
+  {path: 'products', component: ProductsPage},
+  {path: 'categories', component: CategoriesPage},
+  {path: 'units', component: UnitsPage},
+  {path: 'suppliers', component: SuppliersPage},
   {path: 'create', component: CreatePageComponent},
   {path: 'edit/:id', component: EditPageComponent}
 ];
@@ -80,7 +87,7 @@ const routes: Routes = [
     MatListModule
   ],
   declarations: [
-    ViewPageComponent,
+    IndexPage,
     CreatePageComponent,
     EditPageComponent,
     CategoriesComponent,
@@ -99,7 +106,11 @@ const routes: Routes = [
     SuppliersFormFieldComponent,
     UnitsFormFieldComponent,
     ProductShortDetailFormComponent,
-    ProductShortDetailFormComponent
+    ProductShortDetailFormComponent,
+    UnitsPage,
+    SuppliersPage,
+    CategoriesPage,
+    ProductsPage
   ],
 })
 export class StockModule {

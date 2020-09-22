@@ -40,7 +40,10 @@ async function getMissedStocks(shop) {
       .query()
       .count(true)
       .find();
-    const localStocks: StockModel[] = await BFast.cache({database: 'stocks', collection: shop.projectId}).get('all');
+    let localStocks: StockModel[] = await BFast.cache({database: 'stocks', collection: shop.projectId}).get('all');
+    if (!localStocks) {
+      localStocks = [];
+    }
     const stocks: StockModel[] = await BFast.database(shop.projectId).collection('stocks')
       .query()
       .size(stocksCount)

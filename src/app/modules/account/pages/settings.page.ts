@@ -10,115 +10,115 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 @Component({
   selector: 'smartstock-setting',
   template: `
-    <mat-sidenav-container class="match-parent">
-      <mat-sidenav class="match-parent-side"
-                   [fixedInViewport]="true"
-                   #sidenav
-                   [mode]="enoughWidth()?'side':'over'"
-                   [opened]="!isMobile">
-        <smartstock-admin-drawer></smartstock-admin-drawer>
-      </mat-sidenav>
+      <mat-sidenav-container class="match-parent">
+          <mat-sidenav class="match-parent-side"
+                       [fixedInViewport]="true"
+                       #sidenav
+                       [mode]="enoughWidth()?'side':'over'"
+                       [opened]="!isMobile">
+              <smartstock-drawer></smartstock-drawer>
+          </mat-sidenav>
 
-      <mat-sidenav-content>
-        <smartstock-toolbar [heading]="'General'"
-                     [sidenav]="sidenav"
-                     [hasBackRoute]="isMobile"
-                     [backLink]="'/account'"
-                     [showProgress]="false">
-        </smartstock-toolbar>
+          <mat-sidenav-content>
+              <smartstock-toolbar [heading]="'General'"
+                                  [sidenav]="sidenav"
+                                  [hasBackRoute]="isMobile"
+                                  [backLink]="'/account'"
+                                  [showProgress]="false">
+              </smartstock-toolbar>
 
-        <div class="container d-flex flex-column justify-content-center align-items-center stock-new-wrapper">
-          <mat-progress-spinner *ngIf="getSettingsProgress" [diameter]="20" mode="indeterminate"
-                                [matTooltip]="'Fetch settings'"
-                                color="primary"></mat-progress-spinner>
-          <form *ngIf="!getSettingsProgress && settingsForm" [formGroup]="settingsForm"
-                style="margin-top: 16px"
-                class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+              <div class="container d-flex flex-column justify-content-center align-items-center stock-new-wrapper">
+                  <mat-progress-spinner *ngIf="getSettingsProgress" [diameter]="20" mode="indeterminate"
+                                        [matTooltip]="'Fetch settings'"
+                                        color="primary"></mat-progress-spinner>
+                  <form *ngIf="!getSettingsProgress && settingsForm" [formGroup]="settingsForm"
+                        style="margin-top: 16px"
+                        class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
 
-            <h4>Sales</h4>
-            <mat-card class="mat-elevation-z0">
-              <mat-card-content>
+                      <h4>Sales</h4>
+                      <mat-card class="mat-elevation-z0">
+                          <mat-card-content>
 
-                <div class="d-flex flex-row align-items-center">
-                  <mat-card-subtitle>Allow Retail</mat-card-subtitle>
-                  <span class="toolbar-spacer"></span>
-                  <mat-slide-toggle
-                    formControlName="allowRetail"
-                    matTooltip="If you disable you wont sale without printer" color="primary"
-                    labelPosition="after">
-                  </mat-slide-toggle>
-                </div>
-                <div style="height: 20px"></div>
-                <div class="d-flex flex-row align-items-center">
-                  <mat-card-subtitle>Allow Wholesale</mat-card-subtitle>
-                  <span class="toolbar-spacer"></span>
-                  <mat-slide-toggle
-                    formControlName="allowWholesale"
-                    matTooltip="If you disable you wont sale without printer" color="primary"
-                    labelPosition="after">
-                  </mat-slide-toggle>
-                </div>
-              </mat-card-content>
-            </mat-card>
-            <div style="height: 20px"></div>
-            <h4>Printer</h4>
-            <mat-card class="mat-elevation-z0">
-              <mat-card-content>
-                <div class="d-flex flex-row align-items-center">
-                  <mat-card-subtitle>Allow to sale without printer</mat-card-subtitle>
-                  <span class="toolbar-spacer"></span>
-                  <mat-slide-toggle
-                    formControlName="saleWithoutPrinter"
-                    matTooltip="If you disable you wont sale without printer" color="primary"
-                    labelPosition="after">
-                  </mat-slide-toggle>
-                </div>
+                              <div class="d-flex flex-row align-items-center">
+                                  <mat-card-subtitle>Allow Retail</mat-card-subtitle>
+                                  <span class="toolbar-spacer"></span>
+                                  <mat-slide-toggle
+                                          formControlName="allowRetail"
+                                          matTooltip="If you disable you wont sale without printer" color="primary"
+                                          labelPosition="after">
+                                  </mat-slide-toggle>
+                              </div>
+                              <div style="height: 20px"></div>
+                              <div class="d-flex flex-row align-items-center">
+                                  <mat-card-subtitle>Allow Wholesale</mat-card-subtitle>
+                                  <span class="toolbar-spacer"></span>
+                                  <mat-slide-toggle
+                                          formControlName="allowWholesale"
+                                          matTooltip="If you disable you wont sale without printer" color="primary"
+                                          labelPosition="after">
+                                  </mat-slide-toggle>
+                              </div>
+                          </mat-card-content>
+                      </mat-card>
+                      <div style="height: 20px"></div>
+                      <h4>Printer</h4>
+                      <mat-card class="mat-elevation-z0">
+                          <mat-card-content>
+                              <div class="d-flex flex-row align-items-center">
+                                  <mat-card-subtitle>Allow to sale without printer</mat-card-subtitle>
+                                  <span class="toolbar-spacer"></span>
+                                  <mat-slide-toggle
+                                          formControlName="saleWithoutPrinter"
+                                          matTooltip="If you disable you wont sale without printer" color="primary"
+                                          labelPosition="after">
+                                  </mat-slide-toggle>
+                              </div>
 
-                <div style="margin-top: 16px">
-                  <!--              <mat-card-subtitle>Header message</mat-card-subtitle>-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Header</mat-label>
-                    <textarea matTooltip="This content will be shown on top of a receipt when printed"
-                              formControlName="printerHeader"
-                              placeholder="Type here..." matInput type="text" [rows]="6">
+                              <div style="margin-top: 16px">
+                                  <!--              <mat-card-subtitle>Header message</mat-card-subtitle>-->
+                                  <mat-form-field appearance="fill">
+                                      <mat-label>Header</mat-label>
+                                      <textarea matTooltip="This content will be shown on top of a receipt when printed"
+                                                formControlName="printerHeader"
+                                                placeholder="Type here..." matInput type="text" [rows]="6">
                 </textarea>
-                  </mat-form-field>
-                </div>
+                                  </mat-form-field>
+                              </div>
 
-                <div style="margin-top: 16px">
-                  <!--              <mat-card-subtitle>Header message</mat-card-subtitle>-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Footer</mat-label>
-                    <textarea matTooltip="This content will be shown on bottom of a receipt when printed"
-                              formControlName="printerFooter"
-                              placeholder="Type here..." matInput type="text" [rows]="6">
+                              <div style="margin-top: 16px">
+                                  <!--              <mat-card-subtitle>Header message</mat-card-subtitle>-->
+                                  <mat-form-field appearance="fill">
+                                      <mat-label>Footer</mat-label>
+                                      <textarea matTooltip="This content will be shown on bottom of a receipt when printed"
+                                                formControlName="printerFooter"
+                                                placeholder="Type here..." matInput type="text" [rows]="6">
                 </textarea>
-                  </mat-form-field>
-                </div>
+                                  </mat-form-field>
+                              </div>
 
-              </mat-card-content>
-            </mat-card>
+                          </mat-card-content>
+                      </mat-card>
 
-            <button [disabled]="saveSettingProgress || !settingsForm.dirty"
-                    style="margin-top: 16px; margin-bottom: 16px"
-                    color="primary"
-                    mat-flat-button
-                    (click)="saveSettings()"
-                    class="btn-block ft-button">Update
-              <mat-progress-spinner style="display: inline-block" *ngIf="saveSettingProgress" [diameter]="20"
-                                    color="primary"
-                                    mode="indeterminate">
-              </mat-progress-spinner>
-            </button>
+                      <button [disabled]="saveSettingProgress || !settingsForm.dirty"
+                              style="margin-top: 16px; margin-bottom: 16px"
+                              color="primary"
+                              mat-flat-button
+                              (click)="saveSettings()"
+                              class="btn-block ft-button">Update
+                          <mat-progress-spinner style="display: inline-block" *ngIf="saveSettingProgress" [diameter]="20"
+                                                color="primary"
+                                                mode="indeterminate">
+                          </mat-progress-spinner>
+                      </button>
 
-          </form>
+                  </form>
 
-        </div>
-      </mat-sidenav-content>
+              </div>
+          </mat-sidenav-content>
 
-    </mat-sidenav-container>
+      </mat-sidenav-container>
 
-    <!--<smartstock-settings-general *ngIf="isMobile"></smartstock-settings-general>-->
+      <!--<smartstock-settings-general *ngIf="isMobile"></smartstock-settings-general>-->
   `,
   styleUrls: ['../style/setting.style.css']
 })

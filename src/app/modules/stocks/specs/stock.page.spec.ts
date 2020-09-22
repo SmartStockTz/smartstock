@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ViewPageComponent} from '../pages/view.page';
+import {ViewPageComponent} from '../pages/products.page';
 
 describe('StockPage', () => {
   let component: ViewPageComponent;

@@ -20,12 +20,12 @@ import {StorageService} from '../../lib/services/storage.service';
                    #sidenav
                    [mode]="enoughWidth()?'side':'over'"
                    [opened]="enoughWidth()">
-        <smartstock-admin-drawer></smartstock-admin-drawer>
+        <smartstock-drawer></smartstock-drawer>
       </mat-sidenav>
 
       <mat-sidenav-content>
 
-        <smartstock-toolbar [heading]="isUpdateMode?'Update StockModel':'Create StockModel'"
+        <smartstock-toolbar [heading]="isUpdateMode?'Update Product':'Create Product'"
                             [sidenav]="sidenav"
                             [hasBackRoute]="isMobile"
                             backLink="/stock/products"
@@ -99,30 +99,33 @@ import {StorageService} from '../../lib/services/storage.service';
                   </h5>
                   <mat-card class="card-wrapper mat-elevation-z0">
                     <mat-card-content class="card-content">
-                      <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="fill" class="my-input">
+                      <mat-form-field *ngIf="getPurchasableFormControl().value === true" appearance="fill"
+                                      class="my-input">
                         <mat-label>Purchase Price / Unit</mat-label>
                         <span matSuffix>TZS</span>
                         <input min="0" matInput type="number" required formControlName="purchase">
                         <mat-error>Purchase price required</mat-error>
                       </mat-form-field>
 
-                      <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input">
+                      <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill"
+                                      class="my-input">
                         <mat-label>Wholesale Price / Unit</mat-label>
                         <span matSuffix>TZS</span>
                         <input min="0" matInput type="number" required formControlName="wholesalePrice">
                         <mat-error>Wholesale price required</mat-error>
                       </mat-form-field>
 
-                      <!--                    <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input"-->
-                      <!--                                    matTooltip="Quantity for this product to be sold as a whole or in bulk">-->
-                      <!--                      <mat-label>Wholesale Quantity</mat-label>-->
-                      <!--                      <input min="0" matInput-->
-                      <!--                             type="number"-->
-                      <!--                             required formControlName="wholesaleQuantity">-->
-                      <!--                      <mat-error>Wholesale Quantity required</mat-error>-->
-                      <!--                    </mat-form-field>-->
+                      <mat-form-field *ngIf="getSaleableFormControl().value === true" appearance="fill" class="my-input"
+                                      matTooltip="Quantity for this product to be sold as a whole or in bulk">
+                        <mat-label>Wholesale Quantity</mat-label>
+                        <input min="0" matInput
+                               type="number"
+                               required formControlName="wholesaleQuantity">
+                        <mat-error>Wholesale Quantity required</mat-error>
+                      </mat-form-field>
 
-                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input"
+                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill"
+                                      class="my-input"
                                       matTooltip="Total initial unit quantity available">
                         <mat-label>Initial Stock Quantity</mat-label>
                         <input min="0" matInput type="number" required
@@ -130,7 +133,8 @@ import {StorageService} from '../../lib/services/storage.service';
                         <mat-error>Initial Stock Quantity required</mat-error>
                       </mat-form-field>
 
-                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill" class="my-input">
+                      <mat-form-field *ngIf="getStockableFormControl().value === true" appearance="fill"
+                                      class="my-input">
                         <mat-label>Reorder Level</mat-label>
                         <input min="0" matInput type="number" required formControlName="reorder">
                         <mat-error>Reorder field required</mat-error>
@@ -150,7 +154,8 @@ import {StorageService} from '../../lib/services/storage.service';
                         Can Expire?
                       </mat-checkbox>
 
-                      <mat-form-field *ngIf="getCanExpireFormControl().value === true" appearance="outline" class="my-input">
+                      <mat-form-field *ngIf="getCanExpireFormControl().value === true" appearance="outline"
+                                      class="my-input">
                         <mat-label>Expire Date</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="expire">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -256,7 +261,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       purchase: [stock && stock.purchase ? stock.purchase : 0, [Validators.nullValidator, Validators.required]],
       retailPrice: [stock && stock.retailPrice ? stock.retailPrice : 0, [Validators.nullValidator, Validators.required]],
       wholesalePrice: [stock && stock.wholesalePrice ? stock.wholesalePrice : 0, [Validators.nullValidator, Validators.required]],
-      wholesaleQuantity: [stock && stock.wholesaleQuantity ? stock.wholesaleQuantity : 0, [Validators.nullValidator, Validators.required]],
+      wholesaleQuantity: [stock && stock.wholesaleQuantity ? stock.wholesaleQuantity : 1, [Validators.nullValidator, Validators.required]],
       quantity: [stock && stock.quantity ? stock.quantity : 0, [Validators.nullValidator, Validators.required]],
       reorder: [stock && stock.reorder ? stock.reorder : 0, [Validators.nullValidator, Validators.required]],
       unit: [stock && stock.unit ? stock.unit : 'general', [Validators.nullValidator, Validators.required]],
