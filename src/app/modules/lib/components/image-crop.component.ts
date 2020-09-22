@@ -49,6 +49,7 @@ export class ImageCropComponent implements OnInit, OnDestroy {
   }
 
   imageCropped(event: ImageCroppedEvent) {
+    console.log(event);
     this.croppedImage = event.base64;
   }
 

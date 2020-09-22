@@ -8,7 +8,8 @@ import {environment} from '../../../../environments/environment';
 import {StockModel} from '../models/stock.model';
 import {StockState} from '../states/stock.state';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
-import {ImageCropComponent} from '../../lib/components/image-crop.component';
+import {FileLibraryService} from '../../lib/services/file-library.service';
+import {StorageService} from '../../lib/services/storage.service';
 
 @Component({
   selector: 'smartstock-stock-new',
@@ -50,7 +51,7 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                  class="col-12 col-xl-9 col-lg-9 d-flex justify-content-center align-items-center">
               <button color="warn" (click)="removeImage(imageInput)" mat-button>Remove Image</button>
             </div>
-            <input (change)="fileChangeEvent($event)" #imageInput style="display: none" type="file">
+            <input (change)="fileChangeEvent($event)" #imageInput style="display: none" accept="image/*" type="file">
 
           </div>
 
@@ -66,7 +67,6 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                   [initialStock]="initialStock"
                   [downloadAble]="getDownloadAbleFormControl().value===true"
                   [saleable]="getSaleableFormControl().value === true"
-                  [downloadsFormControl]="getDownloadAbleFormControl()"
                   [formGroup]="productForm">
                 </smartstock-product-short-detail-form>
 
@@ -163,7 +163,7 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
 
               </div>
 
-              <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 16px">
+              <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 100px">
 
                 <div>
                   <button class="btn-block ft-button" color="primary" mat-raised-button
@@ -178,6 +178,10 @@ import {ImageCropComponent} from '../../lib/components/image-crop.component';
                     </button>
                   </div>
                 </div>
+                <smartstock-upload-file-progress [uploadPercentage]="uploadPercentage"
+                                                 [onUploadFlag]="isUploadingFile"
+                                                 [name]="uploadTag">
+                </smartstock-upload-file-progress>
 
               </div>
 
@@ -204,12 +208,18 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
   }[]>;
   mainProgress = false;
   isMobile = environment.android;
+  private thumbnail: File;
+  uploadPercentage = 0;
+  isUploadingFile = false;
+  uploadTag = '';
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly snack: MatSnackBar,
               private readonly dialog: MatDialog,
               private readonly router: Router,
-              private readonly stockDatabase: StockState) {
+              private readonly storageService: StorageService,
+              private readonly fileLibraryService: FileLibraryService,
+              private readonly stockState: StockState) {
     super();
   }
 
@@ -218,17 +228,16 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
     this.metas = of([]);
   }
 
-  fileChangeEvent(event: any): void {
+  fileChangeEvent(event: Event): void {
     if (event) {
-      this.dialog.open(ImageCropComponent, {
-        data: {
-          event: event
-        }
-      }).afterClosed().subscribe(value => {
-        if (value) {
-          this.croppedImage = value;
-        }
-      });
+      // @ts-ignore
+      this.thumbnail = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = ev => {
+        this.croppedImage = ev.target.result;
+      };
+      // @ts-ignore
+      reader.readAsDataURL(event.target.files[0]);
     }
   }
 
@@ -250,10 +259,10 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       wholesaleQuantity: [stock && stock.wholesaleQuantity ? stock.wholesaleQuantity : 0, [Validators.nullValidator, Validators.required]],
       quantity: [stock && stock.quantity ? stock.quantity : 0, [Validators.nullValidator, Validators.required]],
       reorder: [stock && stock.reorder ? stock.reorder : 0, [Validators.nullValidator, Validators.required]],
-      unit: [stock && stock.unit ? stock.unit : null, [Validators.nullValidator, Validators.required]],
+      unit: [stock && stock.unit ? stock.unit : 'general', [Validators.nullValidator, Validators.required]],
       canExpire: [stock && stock.canExpire !== undefined ? stock.canExpire : false],
       expire: [stock && stock.expire ? stock.expire : null],
-      category: [stock && stock.category ? stock.category : null, [Validators.required, Validators.nullValidator]],
+      category: [stock && stock.category ? stock.category : 'general', [Validators.required, Validators.nullValidator]],
       supplier: [stock && stock.supplier ? stock.supplier : 'general', [Validators.required, Validators.nullValidator]],
     });
   }
@@ -282,7 +291,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
     return this.productForm.get('canExpire') as FormControl;
   }
 
-  addProduct(formElement: FormGroupDirective) {
+  addProduct(formElement: FormGroupDirective, inUpdateMode = false) {
     this.productForm.markAsTouched();
     if (!this.productForm.valid) {
       this.snack.open('Fill all required fields', 'Ok', {
@@ -291,8 +300,9 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       return;
     }
 
-    if ((this.productForm.value.purchase >= this.productForm.value.retailPrice)
-      || (this.productForm.value.purchase >= this.productForm.value.wholesalePrice)) {
+    if (this.getPurchasableFormControl().value === true
+      && ((this.productForm.value.purchase >= this.productForm.value.retailPrice)
+        || (this.productForm.value.purchase >= this.productForm.value.wholesalePrice))) {
       this.snack.open('Purchase price must not be greater than retailPrice/wholesalePrice', 'Ok', {
         duration: 3000
       });
@@ -307,65 +317,60 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
     }
 
     this.mainProgress = true;
-    if (this.croppedImage) {
-      this.productForm.value.image = this.croppedImage;
-    }
-    this.stockDatabase.addStock(this.productForm.value, d => {
-      // console.log(d);
+    this.fileLibraryService.saveFile(this.thumbnail, percentage => {
+      this.isUploadingFile = true;
+      this.uploadTag = 'Upload product image...';
+      this.uploadPercentage = percentage;
+    }).then(async imageUrl => {
+      if (imageUrl) {
+        this.productForm.value.image = imageUrl;
+      }
+      if (inUpdateMode) {
+        this.productForm.value.id = this.initialStock.id;
+      }
+      return this.stockState.addStock(this.productForm.value, (percentage, name) => {
+        this.isUploadingFile = true;
+        this.uploadTag = `Upload ${name}...`;
+        this.uploadPercentage = percentage;
+      }, inUpdateMode);
     }).then(_ => {
-      this.mainProgress = false;
-      this.snack.open('Product added', 'Ok', {
-        duration: 3000
+      this.storageService.getStocks().then(value => {
+        if (inUpdateMode) {
+          value.map(value1 => {
+            if (value1.id === _.id) {
+              return Object.assign(value1, _);
+            } else {
+              return value1;
+            }
+          });
+        } else {
+          value.unshift(_);
+        }
+        return this.storageService.saveStocks(value);
+      }).finally(() => {
+        this.mainProgress = false;
+        this.snack.open('Product added', 'Ok', {
+          duration: 3000
+        });
+        this.croppedImage = null;
+        this.productForm.reset();
+        formElement.resetForm();
+        this.router.navigateByUrl('/stock/products').catch(console.log);
       });
-      this.croppedImage = null;
-      this.productForm.reset();
-      formElement.resetForm();
-      this.router.navigateByUrl('/stock').catch(console.log);
     }).catch(reason => {
-      // console.warn(reason);
+      console.log(reason);
       this.mainProgress = false;
       this.snack.open(reason.message ? reason.message : 'Unknown', 'Ok', {
         duration: 3000
       });
+    }).finally(() => {
+      this.isUploadingFile = false;
+      this.uploadPercentage = 0;
     });
   }
 
   updateProduct(formElement: FormGroupDirective) {
-    if (this.productForm.invalid) {
-      this.snack.open('Fill all required fields', 'Ok', {
-        duration: 3000
-      });
-      return;
-    }
-
-    if (this.productForm.get('canExpire').value && !this.productForm.get('expire').value) {
-      this.snack.open('Please enter expire date', 'Ok', {
-        duration: 3000
-      });
-      return;
-    }
-
-    this.mainProgress = true;
-    const newStock = this.productForm.value;
-    newStock.id = this.initialStock.id;
-    newStock.image = this.croppedImage;
-    this.stockDatabase.updateStock(newStock, d => {
-      console.log(d);
-    }).then(_ => {
-      this.mainProgress = false;
-      this.snack.open('Product updated', 'Ok', {
-        duration: 3000
-      });
-      this.productForm.reset();
-      formElement.resetForm();
-      this.router.navigateByUrl('/stock').catch(reason => console.log(reason));
-    }).catch(reason => {
-      console.warn(reason);
-      this.mainProgress = false;
-      this.snack.open(reason.message ? reason.message : 'Unknown', 'Ok', {
-        duration: 3000
-      });
-    });
+    this.addProduct(formElement, true);
   }
 
   removeImage(imageInput: HTMLInputElement) {

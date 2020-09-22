@@ -31,6 +31,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {DashCardComponent} from './components/dash-card.component';
 import {CommonModule} from '@angular/common';
 import {DialogDeleteComponent} from '../stocks/components/stock.component';
+import {UploadFileProgressComponent} from './components/upload-file-progress.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import {DialogDeleteComponent} from '../stocks/components/stock.component';
     BottomBarComponent,
     DataNotReadyComponent,
     UploadFilesComponent,
-    DashCardComponent
+    DashCardComponent,
+    UploadFileProgressComponent
   ],
   declarations: [
     DrawerComponent,
@@ -79,6 +81,7 @@ import {DialogDeleteComponent} from '../stocks/components/stock.component';
     UploadFilesComponent,
     DashCardComponent,
     DialogDeleteComponent,
+    UploadFileProgressComponent
   ],
   entryComponents: [
     ImageCropComponent

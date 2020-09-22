@@ -26,9 +26,9 @@ import {StockModel} from '../models/stock.model';
             <mat-checkbox style="margin-right: 5px" formControlName="downloadable"></mat-checkbox>
             <p style="margin: 0">Can be downloaded</p>
           </div>
-          <div *ngIf="downloadAble === true" class="card-wrapper">
+          <div *ngIf="downloadAble" class="card-wrapper">
             <smartstock-upload-files [files]="isUpdateMode?initialStock.downloads:[]"
-                                     [uploadFileFormControl]="downloadsFormControl"></smartstock-upload-files>
+                                     [uploadFileFormControl]="downloadsFormControl()"></smartstock-upload-files>
           </div>
 
           <!--                    <mat-form-field appearance="fill" class="my-input">-->
@@ -46,7 +46,6 @@ export class ProductShortDetailFormComponent implements OnInit {
   @Input() downloadAble = false;
   @Input() isUpdateMode = false;
   @Input() initialStock: StockModel;
-  @Input() downloadsFormControl: FormControl;
 
   constructor() {
   }
@@ -54,4 +53,7 @@ export class ProductShortDetailFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  downloadsFormControl() {
+    return this.formGroup.get('downloads') as FormControl;
+  }
 }

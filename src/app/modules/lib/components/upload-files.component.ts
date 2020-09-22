@@ -8,9 +8,9 @@ import {FormControl, Validators} from '@angular/forms';
       <div *ngFor="let file of files; let i =index"
            style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center">
         <mat-card style="height: 50px; margin: 5px; display: flex; flex-direction: row; align-items: center">
-      <span style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
-        {{file.name}}
-      </span>
+          <span style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+            {{file.name}}
+          </span>
           <span style="width: 10px"></span>
           <button mat-icon-button style="display: inline-block" (click)="removeFile($event, i)">
             <mat-icon color="warn">delete</mat-icon>
@@ -28,7 +28,7 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['../styles/upload-files.style.css']
 })
 export class UploadFilesComponent implements OnInit {
-  @Input() files: { name: string, type: string, url: string }[] = [];
+  @Input() files: { name: string, type: string, url: File }[] = [];
   @Input() uploadFileFormControl: FormControl = new FormControl([], [Validators.nullValidator, Validators.required]);
 
   constructor() {
@@ -50,14 +50,14 @@ export class UploadFilesComponent implements OnInit {
         this.files.push({
           name: file.name,
           type: file.type,
-          url: await this.readFileContent(file),
+          url: file,
         });
       } else {
         this.files = this.files.filter(value => file.name !== value.name);
         this.files.push({
           name: file.name,
           type: file.type,
-          url: await this.readFileContent(file)
+          url: file
         });
       }
       this.uploadFileFormControl.setValue(this.files);
@@ -65,17 +65,17 @@ export class UploadFilesComponent implements OnInit {
     }
   }
 
-  private async readFileContent(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.onload = ev => {
-        resolve(ev.target.result.toString());
-      };
-      fileReader.onerror = _ => {
-        reject('Fails to read file');
-      };
-      fileReader.readAsDataURL(file);
-    });
-  }
+  // private async readFileContent(file: File): Promise<string> {
+  //   return new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = ev => {
+  //       resolve(ev.target.result.toString());
+  //     };
+  //     fileReader.onerror = _ => {
+  //       reject('Fails to read file');
+  //     };
+  //     fileReader.readAsDataURL(file);
+  //   });
+  // }
 
 }

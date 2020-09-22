@@ -43,6 +43,7 @@ import {ProductShortDetailFormComponent} from './components/product-short-detail
 
 const routes: Routes = [
   {path: '', component: ViewPageComponent},
+  {path: 'products', component: ViewPageComponent},
   {path: 'create', component: CreatePageComponent},
   {path: 'edit/:id', component: EditPageComponent}
 ];

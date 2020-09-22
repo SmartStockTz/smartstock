@@ -63,19 +63,32 @@ export class StockState {
     return units;
   }
 
-  async addStock(stock: StockModel, progress: (d: any) => void): Promise<StockModel> {
+  async addStock(stock: StockModel, progress: (d: any, name: string) => void, inUpdateMode = false): Promise<StockModel> {
     const shop = await this._storage.getActiveShop();
-    if (stock.image && stock.image instanceof File) {
-      stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
-    }
     if (stock.downloads && stock.downloads.length > 0) {
       for (const value of stock.downloads) {
         if (value && value.url instanceof File) {
-          value.url = await BFast.storage(shop.projectId).save(value.url as any, progress);
+          value.url = await BFast.storage(shop?.projectId).save(value.url as any, progress1 => {
+            progress((Number(progress1.loaded) / Number(progress1.total) * 100), value.name);
+          });
         }
       }
     }
-    return BFast.database(shop.projectId).collection('stocks').save(stock);
+    if (inUpdateMode) {
+      const stockId = stock._id ? stock._id : stock.id;
+      delete stock.id;
+      delete stock._id;
+      delete stock.updatedAt;
+      delete stock.createdAt;
+      return BFast.database(shop.projectId).collection('stocks')
+        .query()
+        .byId(stockId)
+        .updateBuilder()
+        .doc(stock)
+        .update();
+    } else {
+      return BFast.database(shop.projectId).collection('stocks').save(stock);
+    }
   }
 
   async addSupplier(supplier: SupplierModel): Promise<any> {
@@ -192,27 +205,27 @@ export class StockState {
       .update();
   }
 
-  async updateStock(stock: StockModel, progress: (d) => void): Promise<StockModel> {
-    const shop = await this._storage.getActiveShop();
-    const stockId = stock._id ? stock._id : stock.id;
-    delete stock.id;
-    if (stock.image && !stock.image.toString().startsWith('http') && stock.image instanceof File) {
-      stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
-    }
-    if (stock.downloads && stock.downloads.length > 0) {
-      for (const value of stock.downloads) {
-        if (value && value.url instanceof File) {
-          value.url = await BFast.storage(shop.projectId).save(value.url as any, progress);
-        }
-      }
-    }
-    return BFast.database(shop.projectId).collection('stocks')
-      .query()
-      .byId(stockId.trim())
-      .updateBuilder()
-      .doc(stock)
-      .update();
-  }
+  // async updateStock(stock: StockModel, progress: (d) => void): Promise<StockModel> {
+  //   const shop = await this._storage.getActiveShop();
+  //   const stockId = stock._id ? stock._id : stock.id;
+  //   delete stock.id;
+  //   if (stock.image && !stock.image.toString().startsWith('http') && stock.image instanceof File) {
+  //     stock.image = await BFast.storage(shop.projectId).save(stock.image, progress);
+  //   }
+  //   if (stock.downloads && stock.downloads.length > 0) {
+  //     for (const value of stock.downloads) {
+  //       if (value && value.url instanceof File) {
+  //         value.url = await BFast.storage(shop.projectId).save(value.url as any, progress);
+  //       }
+  //     }
+  //   }
+  //   return BFast.database(shop.projectId).collection('stocks')
+  //     .query()
+  //     .byId(stockId.trim())
+  //     .updateBuilder()
+  //     .doc(stock)
+  //     .update();
+  // }
 
   async updateSupplier(value: { id: string, field: string, value: string }): Promise<any> {
     const shop = await this._storage.getActiveShop();
