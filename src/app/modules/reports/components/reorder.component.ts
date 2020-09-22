@@ -149,7 +149,7 @@ export class ReorderComponent implements OnInit {
 
   exportReport() {
     // console.log(this.stocks);
-    json2csv(this.stockColumns, this.stockReorderDatasource.filteredData).then(console.log);
+    json2csv(this.stockColumns, this.stockReorderDatasource.filteredData).catch();
   }
 
   // dateRange() {

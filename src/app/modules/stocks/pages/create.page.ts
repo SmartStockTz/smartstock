@@ -358,7 +358,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
         this.router.navigateByUrl('/stock/products').catch(console.log);
       });
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.mainProgress = false;
       this.snack.open(reason.message ? reason.message : 'Unknown', 'Ok', {
         duration: 3000

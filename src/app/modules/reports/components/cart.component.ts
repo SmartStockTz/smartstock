@@ -170,7 +170,7 @@ export class CartComponent implements OnInit {
 
   exportReport() {
     // console.log(this.stocks);
-    json2csv(this.cartColumns, this.carts.filteredData).then(console.log);
+    json2csv(this.cartColumns, this.carts.filteredData).catch();
   }
 
   private _dateRangeListener() {

@@ -283,7 +283,6 @@ export class CartComponent implements OnInit {
         displayName: this.customerFormControl.value,
       }).catch();
     }
-
     this.printCart();
   }
 
@@ -325,6 +324,8 @@ export class CartComponent implements OnInit {
         'Ok',
         {duration: 3000}
       );
+    }).finally(() => {
+      this.discountFormControl.setValue(0);
     });
   }
 

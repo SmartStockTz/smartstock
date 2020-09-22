@@ -198,7 +198,7 @@ export class DrawerComponent implements OnInit {
     this._userApi.getCurrentShop().then(shop => {
       this.shop = shop;
     }).catch(reason => {
-      console.log(reason);
+      this.logger.i(reason);
       this.shop = undefined;
     });
     this._userApi.currentUser().then(user => {

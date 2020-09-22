@@ -164,7 +164,7 @@ export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
       this.snack.open('Fails to get purchases, try again', 'Ok', {
         duration: 3000
       });
-      console.log(reason);
+      // console.log(reason);
     });
   }
 
@@ -192,7 +192,7 @@ export class PurchasePageComponent extends DeviceInfoUtil implements OnInit {
       this.snack.open('Fails to load more purchases', 'Ok', {
         duration: 3000
       });
-      console.log(reason);
+      // console.log(reason);
     });
   }
 

@@ -315,7 +315,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
         this.products = of(dataArray);
         this.searchProductProgress = false;
       }).catch(reason => {
-        console.log(reason);
+        // console.log(reason);
         // this.snack.open('Failed to get stocks', 'Ok', {duration: 3000});
         this.snack.open(reason && reason.message ? reason.message : reason.toString());
         this.products = of([]);
@@ -361,7 +361,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       this.router.navigateByUrl('/purchase').catch(reason => console.log(reason));
     }).catch(reason => {
       this.saveInvoiceProgress = false;
-      console.log(reason);
+      // console.log(reason);
       this.snack.open(reason && reason.message ? reason.message : reason.toString(), 'Ok', {
         duration: 3000
       });
@@ -394,7 +394,7 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       this.suppliers = of(dataArray);
       this.supplierFetching = false;
     }).catch(reason => {
-      console.log(reason);
+      // console.log(reason);
       this.suppliers = of([{name: 'Default Supplier'}]);
       this.supplierFetching = false;
     });

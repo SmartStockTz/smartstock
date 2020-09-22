@@ -95,7 +95,7 @@ export class ExpireNearComponent implements OnInit {
       }
     }).catch(reason => {
       this.isLoading = false;
-      console.log(reason);
+      // console.log(reason);
       this.snack.open('Fails to get total expired products', 'Ok', {
         duration: 3000
       });
