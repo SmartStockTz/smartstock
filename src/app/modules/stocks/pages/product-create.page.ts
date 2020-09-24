@@ -168,7 +168,7 @@ import {StorageService} from '../../lib/services/storage.service';
 
               </div>
 
-              <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 100px">
+              <div class="col-12 col-xl-9 col-lg-9" style="padding-bottom: 100px">
 
                 <div>
                   <button class="btn-block ft-button" color="primary" mat-raised-button
