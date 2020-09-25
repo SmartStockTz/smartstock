@@ -7,7 +7,7 @@ async function run() {
   //   projectId: environment.smartstock.projectId,
   //   appPassword: environment.smartstock.pass
   // });
-  // BFast.database().collection('categories')
+  // BFast.database().collection('catalogs')
   //   .query()
   //   .changes()
   //   .addListener(response => {

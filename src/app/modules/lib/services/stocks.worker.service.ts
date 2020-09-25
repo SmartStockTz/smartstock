@@ -68,7 +68,7 @@ async function updateLocalStock(body: {
     const stocksCache = await BFast.cache({database: 'stocks', collection: shop.projectId});
     if (body.change.name === 'create' && body.change.snapshot) {
       const localStocks: StockModel[] = await stocksCache.get('all');
-      localStocks.unshift(body.change.snapshot);
+      localStocks.filter(x => x.id !== body.change.snapshot.id).unshift(body.change.snapshot);
       stocksCache.set('all', localStocks);
     } else if (body.change.name === 'delete' && body.change.snapshot) {
       const localStocks: StockModel[] = await stocksCache.get('all');

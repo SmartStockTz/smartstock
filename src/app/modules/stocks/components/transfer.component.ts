@@ -52,6 +52,7 @@ import {StockModel} from '../models/stock.model';
       </ng-container>
       <ng-template #elseTemplate>
         <p> You have no extra shop ( s ) to transfer stock to</p>
+        <button mat-button color="warn" (click)="closeDialog($event)">Close</button>
       </ng-template>
     </div>
   `,

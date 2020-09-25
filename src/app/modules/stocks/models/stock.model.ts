@@ -1,5 +1,6 @@
 export interface StockModel {
   createdAt?: any;
+  catalog?: any[];
   updatedAt?: any;
   image?: any;
   id?: string;

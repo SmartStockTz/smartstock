@@ -3,31 +3,31 @@ import {FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {StockState} from '../states/stock.state';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogCategoryCreateComponent} from './dialog-category-create.component';
+import {DialogCatalogCreateComponent} from './dialog-catalog-create.component';
 
 @Component({
-  selector: 'smartstock-category-form-field',
+  selector: 'smartstock-catalog-form-field',
   template: `
     <div [formGroup]="formGroup">
       <mat-form-field appearance="outline" class="my-input">
-        <mat-label>Category</mat-label>
-        <mat-select [multiple]="false" formControlName="category">
-          <mat-option *ngFor="let category of categories | async" [value]="category.name">
+        <mat-label>Catalogs</mat-label>
+        <mat-select [multiple]="true" formControlName="catalog">
+          <mat-option *ngFor="let category of catalogs | async" [value]="category.name">
             {{category.name}}
           </mat-option>
         </mat-select>
         <mat-progress-spinner matTooltip="Fetching units"
-                              *ngIf="categoriesFetching" matSuffix color="accent"
+                              *ngIf="catalogsFetching" matSuffix color="accent"
                               mode="indeterminate"
                               [diameter]="20"></mat-progress-spinner>
         <mat-error>Category required</mat-error>
         <div matSuffix class="d-flex flex-row">
           <button (click)="refreshCategories($event)" mat-icon-button matTooltip="refresh categories"
-                  *ngIf="!categoriesFetching">
+                  *ngIf="!catalogsFetching">
             <mat-icon>refresh</mat-icon>
           </button>
-          <button (click)="addNewCategory($event)" mat-icon-button matTooltip="add new category"
-                  *ngIf="!categoriesFetching">
+          <button (click)="addNewCatalog($event)" mat-icon-button matTooltip="add new category"
+                  *ngIf="!catalogsFetching">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -35,40 +35,39 @@ import {DialogCategoryCreateComponent} from './dialog-category-create.component'
     </div>
   `
 })
-export class CategoryFormFieldComponent implements OnInit {
+export class CatalogFormFieldComponent implements OnInit {
   @Input() formGroup: FormGroup;
-  categoriesFetching = true;
-  categories: Observable<any[]>;
+  catalogsFetching = true;
+  catalogs: Observable<any[]>;
 
   constructor(private readonly stockState: StockState,
               private readonly dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getCatalogs();
   }
 
-  getCategories() {
-    this.categoriesFetching = true;
-    this.stockState.getAllCategory({size: 10000}).then(categoryObject => {
+  getCatalogs() {
+    this.catalogsFetching = true;
+    this.stockState.getAllCatalogs({size: 10000}).then(categoryObject => {
       categoryObject.push({name: 'general'});
-      this.categories = of(categoryObject);
-      this.categoriesFetching = false;
-    }).catch(reason => {
-      this.categories = of([{name: 'No category'}]);
-      console.warn(reason);
-      this.categoriesFetching = false;
+      this.catalogs = of(categoryObject);
+      this.catalogsFetching = false;
+    }).catch(_ => {
+      this.catalogs = of([{name: 'general'}]);
+      this.catalogsFetching = false;
     });
   }
 
-  addNewCategory($event: MouseEvent) {
+  addNewCatalog($event: MouseEvent) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.dialog.open(DialogCategoryCreateComponent, {
+    this.dialog.open(DialogCatalogCreateComponent, {
       closeOnNavigation: true
     }).afterClosed().subscribe(value => {
       if (value) {
-        this.getCategories();
+        this.getCatalogs();
       }
     });
   }
@@ -76,7 +75,7 @@ export class CategoryFormFieldComponent implements OnInit {
   refreshCategories($event: MouseEvent) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.getCategories();
+    this.getCatalogs();
   }
 
 }
