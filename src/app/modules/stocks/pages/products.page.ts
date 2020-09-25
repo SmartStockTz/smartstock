@@ -20,6 +20,7 @@ import {StockModel} from '../models/stock.model';
 import {ImportsDialogComponent} from '../components/imports.component';
 import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
 import {SsmEvents} from '../../lib/utils/eventsNames.util';
+import {CreateGroupProductsComponent} from '../components/create-group-products.component';
 
 
 @Component({
@@ -83,10 +84,14 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 
                     </mat-card-title>
                     <mat-card-subtitle>
-<!--                      <button mat-stroked-button mat-button color="primary" class="stockbtn" (click)="transferStock()">-->
-<!--                        <mat-icon>cached</mat-icon>-->
-<!--                        Stock Transfer-->
-<!--                      </button>-->
+                      <!--                      <button mat-stroked-button mat-button color="primary" class="stockbtn" (click)="createGroupProduct()">-->
+                      <!--                        <mat-icon>cached</mat-icon>-->
+                      <!--                        Create Group Product-->
+                      <!--                      </button>-->
+                      <!--                      <button mat-stroked-button mat-button color="primary" class="stockbtn" (click)="transferStock()">-->
+                      <!--                        <mat-icon>cached</mat-icon>-->
+                      <!--                        Stock Transfer-->
+                      <!--                      </button>-->
                       <!--                      <button mat-stroked-button mat-button color="primary" class="stockbtn">-->
                       <!--                        <mat-icon>add</mat-icon>-->
                       <!--                        Stock In-->
@@ -114,39 +119,65 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
                                         [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
                           </mat-checkbox>
                         </td>
+                        <td mat-footer-cell *matFooterCellDef>
+                          TOTAL
+                        </td>
                       </ng-container>
 
 
                       <ng-container matColumnDef="product">
                         <th mat-header-cell *matHeaderCellDef>Product</th>
                         <td mat-cell *matCellDef="let element">{{element.product}}</td>
+                        <td mat-footer-cell *matFooterCellDef>
+
+                        </td>
                       </ng-container>
 
 
                       <ng-container matColumnDef="quantity">
                         <th mat-header-cell *matHeaderCellDef>Quantity</th>
-                        <td mat-cell *matCellDef="let element">{{element.quantity | number}}</td>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.stockable ? (element.quantity | number) : 'N/A'}}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>
+
+                        </td>
                       </ng-container>
 
                       <ng-container matColumnDef="purchase">
-                        <th mat-header-cell *matHeaderCellDef>Purchase (TZS)</th>
-                        <td mat-cell *matCellDef="let element">{{element.purchase | number}}</td>
+                        <th mat-header-cell *matHeaderCellDef>Purchase Price</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.purchasable ? (element.purchase | number) : 'N/A'}}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef="let element">
+                          {{productValue() | number}}
+                        </td>
                       </ng-container>
 
                       <ng-container matColumnDef="retailPrice">
-                        <th mat-header-cell *matHeaderCellDef>R.Price (TZS)</th>
-                        <td matRipple mat-cell *matCellDef="let element">{{element.retailPrice | number}}</td>
+                        <th mat-header-cell *matHeaderCellDef>Sale Pice</th>
+                        <td matRipple mat-cell *matCellDef="let element">
+                          {{element.saleable ? (element.retailPrice | number) : 'N/A'}}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>
+
+                        </td>
                       </ng-container>
 
                       <ng-container matColumnDef="wholesalePrice">
-                        <th mat-header-cell *matHeaderCellDef>W.Price (TZS)</th>
-                        <td mat-cell *matCellDef="let element">{{element.wholesalePrice | number}}</td>
+                        <th mat-header-cell *matHeaderCellDef>WholeSale Price</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.saleable ? (element.wholesalePrice | number) : 'N/A'}}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>
+
+                        </td>
                       </ng-container>
 
-                      <ng-container matColumnDef="expire">
-                        <th mat-header-cell *matHeaderCellDef>Expire</th>
-                        <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>
-                      </ng-container>
+                      <!--                      <ng-container matColumnDef="expire">-->
+                      <!--                        <th mat-header-cell *matHeaderCellDef>Expire</th>-->
+                      <!--                        <td mat-cell *matCellDef="let element">{{element.expire | date}}</td>-->
+                      <!--                      </ng-container>-->
 
                       <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef>
@@ -169,11 +200,14 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
                             </mat-menu>
                           </div>
                         </td>
+                        <td mat-footer-cell *matFooterCellDef>
+
+                        </td>
                       </ng-container>
 
                       <tr mat-header-row *matHeaderRowDef="stockColumns"></tr>
                       <tr matTooltip="{{row.product}}" class="table-data-row" mat-row *matRowDef="let row; columns: stockColumns;"></tr>
-                      <!--                      <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>-->
+                      <tr mat-footer-row style="font-size: 36px" *matFooterRowDef="stockColumns"></tr>
                     </table>
                     <mat-paginator #paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
                   </mat-card>
@@ -195,10 +229,8 @@ import {SsmEvents} from '../../lib/utils/eventsNames.util';
 export class ProductsPage extends DeviceInfoUtil implements OnInit, OnDestroy {
   selectedTab = 0;
   private stockFetchProgress = false;
-  // displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel(true, []);
-  shopname: string[];
 
 
   isMobile = environment.android;
@@ -221,7 +253,7 @@ export class ProductsPage extends DeviceInfoUtil implements OnInit, OnDestroy {
   totalPurchase: Observable<number> = of(0);
   units: Observable<UnitsModel[]>;
   stockDatasource: MatTableDataSource<StockModel> = new MatTableDataSource<StockModel>([]);
-  stockColumns = ['select', 'product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'expire', 'action'];
+  stockColumns = ['select', 'product', 'quantity', 'purchase', 'retailPrice', 'wholesalePrice', 'action'];
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -444,6 +476,26 @@ export class ProductsPage extends DeviceInfoUtil implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventApi.unListen(SsmEvents.STOCK_UPDATED);
+  }
+
+  createGroupProduct() {
+    if (this.selection.selected.length < 2) {
+      this.snack.open('select atleast two product', 'Ok', {duration: 2000});
+    } else {
+      this.dialog.open(CreateGroupProductsComponent, {
+        width: '95%',
+        maxWidth: '600px',
+        disableClose: true,
+        closeOnNavigation: true,
+        data: {
+          items: this.selection.selected,
+        }
+      });
+    }
+  }
+
+  productValue() {
+    return this.stockDatasource.data.filter(x => x.stockable === true).map(x => x.purchase).reduce((a, b) => a + b, 0);
   }
 }
 

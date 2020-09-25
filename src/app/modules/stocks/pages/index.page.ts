@@ -42,6 +42,11 @@ export class IndexPage extends DeviceInfoUtil implements OnInit {
       icon: 'list'
     },
     {
+      name: 'Catalogs',
+      path: '/stock/catalogs',
+      icon: 'loyalty'
+    },
+    {
       name: 'Units',
       path: '/stock/units',
       icon: 'straighten'

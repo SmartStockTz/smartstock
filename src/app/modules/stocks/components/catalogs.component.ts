@@ -4,33 +4,33 @@ import {MatMenuTrigger} from '@angular/material/menu';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl} from '@angular/forms';
-import {CategoryModel} from '../models/category.model';
 import {StockState} from '../states/stock.state';
 import {MatPaginator} from '@angular/material/paginator';
-import {DialogCategoryDeleteComponent} from './dialog-category-delete.component';
-import {DialogCategoryCreateComponent} from './dialog-category-create.component';
+import {DialogCatalogDeleteComponent} from './dialog-catalog-delete.component';
+import {CatalogModel} from '../models/catalog.model';
+import {DialogCatalogCreateComponent} from './dialog-catalog-create.component';
 
 @Component({
-  selector: 'smartstock-categories',
+  selector: 'smartstock-catalogs',
   template: `
     <mat-card class="mat-elevation-z3">
       <mat-card-title class="d-flex flex-row">
-        <button (click)="openAddCategoryDialog()" color="primary" class="ft-button" mat-flat-button>
-          Add Category
+        <button (click)="openAddCatalogDialog()" color="primary" class="ft-button" mat-flat-button>
+          Add Catalog
         </button>
         <span class="toolbar-spacer"></span>
         <button [matMenuTriggerFor]="menuCategories" mat-icon-button>
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menuCategories>
-          <button (click)="getCategories()" mat-menu-item>Reload Categories</button>
+          <button (click)="getCatalogs()" mat-menu-item>Reload Catalogs</button>
         </mat-menu>
       </mat-card-title>
       <mat-card-content>
         <table style="margin-top: 16px" class="my-input"
-               *ngIf="!fetchCategoriesFlag && categoriesArray && categoriesArray.length > 0"
+               *ngIf="!fetchCategoriesFlag && catalogsArray && catalogsArray.length > 0"
                mat-table
-               [dataSource]="categoriesDatasource">
+               [dataSource]="catalogsDatasource">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td class="editable" [matMenuTriggerFor]="nameMenu"
@@ -45,7 +45,7 @@ import {DialogCategoryCreateComponent} from './dialog-category-create.component'
                       <input [value]="data" [formControl]="nameFormControl" matInput>
                     </mat-form-field>
                     <button
-                      (click)="updateCategoryName({id: id, value: nameFormControl.value}, nameMenuTrigger)"
+                      (click)="updateCatalogName({id: id, value: nameFormControl.value}, nameMenuTrigger)"
                       mat-button>Update
                     </button>
                   </div>
@@ -68,7 +68,7 @@ import {DialogCategoryCreateComponent} from './dialog-category-create.component'
                       <textarea [value]="data" [formControl]="descriptionFormControl" matInput></textarea>
                     </mat-form-field>
                     <button
-                      (click)="updateCategoryDescription({id: id, value: descriptionFormControl.value},
+                      (click)="updateCatalogDescription({id: id, value: descriptionFormControl.value},
                      descriptionMenuTrigger)"
                       mat-button>Update
                     </button>
@@ -90,7 +90,7 @@ import {DialogCategoryCreateComponent} from './dialog-category-create.component'
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #opts>
-                  <button (click)="deleteCategory(element)" mat-menu-item>
+                  <button (click)="deleteCatalog(element)" mat-menu-item>
                     Delete
                   </button>
                 </mat-menu>
@@ -98,24 +98,24 @@ import {DialogCategoryCreateComponent} from './dialog-category-create.component'
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="categoriesTableColums"></tr>
-          <tr mat-row class="table-data-row" *matRowDef="let row; columns: categoriesTableColums;"></tr>
+          <tr mat-header-row *matHeaderRowDef="catalogsTableColums"></tr>
+          <tr mat-row class="table-data-row" *matRowDef="let row; columns: catalogsTableColums;"></tr>
         </table>
         <div *ngIf="fetchCategoriesFlag">
-          <mat-progress-spinner matTooltip="fetch categories" [diameter]="30" mode="indeterminate"
+          <mat-progress-spinner matTooltip="fetch catalogs" [diameter]="30" mode="indeterminate"
                                 color="primary"></mat-progress-spinner>
         </div>
         <mat-paginator #matPaginator [pageSize]="10" [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
       </mat-card-content>
     </mat-card>
   `,
-  styleUrls: ['../styles/categories.style.css']
+  styleUrls: ['../styles/catalogs.style.css']
 })
-export class CategoriesComponent implements OnInit {
+export class CatalogsComponent implements OnInit {
   @ViewChild('matPaginator') matPaginator: MatPaginator;
-  categoriesDatasource: MatTableDataSource<CategoryModel>;
-  categoriesTableColums = ['name', 'description', 'actions'];
-  categoriesArray: CategoryModel[];
+  catalogsDatasource: MatTableDataSource<CatalogModel>;
+  catalogsTableColums = ['name', 'description', 'actions'];
+  catalogsArray: CatalogModel[];
   fetchCategoriesFlag = false;
   nameFormControl = new FormControl();
   descriptionFormControl = new FormControl();
@@ -127,16 +127,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCategories();
+    this.getCatalogs();
   }
 
-  searchCategory(query: string) {
+  searchCatalog(query: string) {
     // if ($event && $event.query) {
     //   this.fetchCategoriesFlag = true;
-    //   this.stockDatabase.searchCategory($event.query, {size: 20}).then(data => {
+    //   this.stockDatabase.searchCatalog($event.query, {size: 20}).then(data => {
     //     this.catalogsArray = JSON.parse(JSON.stringify(data));
     //     // this.skip +=this.productsArray.length;
-    //     this.categoriesDatasource = new MatTableDataSource(this.catalogsArray);
+    //     this.catalogsDatasource = new MatTableDataSource(this.catalogsArray);
     //     this.fetchCategoriesFlag = false;
     //     // this.size = 0;
     //   }).catch(reason => {
@@ -150,84 +150,86 @@ export class CategoriesComponent implements OnInit {
     // }
   }
 
-  getCategories() {
+  getCatalogs() {
     this.fetchCategoriesFlag = true;
-    this.stockDatabase.getAllCategory({size: 100}).then(data => {
-      this.categoriesArray = JSON.parse(JSON.stringify(data));
-      this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
-      this.categoriesDatasource.paginator = this.matPaginator;
+    this.stockDatabase.getAllCatalogs({size: 100}).then(data => {
+      this.catalogsArray = data;
+      this.catalogsDatasource = new MatTableDataSource<CatalogModel>(this.catalogsArray);
+      this.catalogsDatasource.paginator = this.matPaginator;
       this.fetchCategoriesFlag = false;
-    }).catch(reason => {
-      console.log(reason);
+    }).catch(_ => {
       this.fetchCategoriesFlag = false;
     });
   }
 
-  deleteCategory(element: any) {
-    this.dialog.open(DialogCategoryDeleteComponent, {
+  deleteCatalog(element: any) {
+    this.dialog.open(DialogCatalogDeleteComponent, {
       data: element,
       disableClose: true
     }).afterClosed().subscribe(_ => {
       if (_) {
-        this.categoriesArray = this.categoriesArray.filter(value => value.id !== element.id);
-        this.categoriesDatasource = new MatTableDataSource<CategoryModel>(this.categoriesArray);
-        this.snack.open('Category deleted', 'Ok', {
+        this.catalogsArray = this.catalogsArray.filter(value => value.id !== element.id);
+        this.catalogsDatasource = new MatTableDataSource<CatalogModel>(this.catalogsArray);
+        this.snack.open('Catalog deleted', 'Ok', {
           duration: 2000
         });
       } else {
-        this.snack.open('Category not deleted', 'Ok', {
+        this.snack.open('Catalog not deleted', 'Ok', {
           duration: 2000
         });
       }
     });
   }
 
-  updateCategoryName(category, matMenu: MatMenuTrigger) {
+  updateCatalogName(catalog, matMenu: MatMenuTrigger) {
     matMenu.toggleMenu();
-    if (category && category.value) {
-      category.field = 'name';
-      this.updateCategory(category);
+    if (catalog && catalog.value) {
+      catalog.field = 'name';
+      this.updateCatalog(catalog);
     }
   }
 
-  updateCategory(category: { id: string, value: string, field: string }) {
+  updateCatalog(catalog: { id: string, value: string, field: string }) {
     this.snack.open('Update in progress..', 'Ok');
-    this.stockDatabase.updateCategory(category).then(data => {
-      const editedObjectIndex = this.categoriesArray.findIndex(value => value.id === data.id);
-      this.categoriesArray = this.categoriesArray.filter(value => value.id !== category.id);
+    this.stockDatabase.updateCatalog(catalog).then(data => {
+      const editedObjectIndex = this.catalogsArray.findIndex(value => value.id === data.id);
+      this.catalogsArray = this.catalogsArray.filter(value => value.id !== catalog.id);
       if (editedObjectIndex !== -1) {
-        const updatedObject = this.categoriesArray[editedObjectIndex];
-        updatedObject[category.field] = category.value;
-        this.categoriesDatasource.data[editedObjectIndex] = updatedObject;
+        const updatedObject = this.catalogsArray[editedObjectIndex];
+        updatedObject[catalog.field] = catalog.value;
+        this.catalogsDatasource.data[editedObjectIndex] = updatedObject;
       } else {
-        console.warn('fails to update category table');
+        console.warn('fails to update catalog table');
       }
-      this.snack.open('Category updated', 'Ok', {
+      this.snack.open('Catalog updated', 'Ok', {
         duration: 3000
       });
     }).catch(reason => {
-      this.snack.open(reason && reason.message ? reason.message : 'Fail to update category', 'Ok', {
+      this.snack.open(reason && reason.message ? reason.message : 'Fail to update catalog', 'Ok', {
         duration: 3000
       });
+    }).finally(() => {
+      this.descriptionFormControl.setValue(null);
+      this.nameFormControl.setValue(null);
     });
   }
 
-  updateCategoryDescription(category, matMenu: MatMenuTrigger) {
+  updateCatalogDescription(catalog, matMenu: MatMenuTrigger) {
     matMenu.toggleMenu();
-    if (category && category.value) {
-      category.field = 'description';
-      this.updateCategory(category);
+    if (catalog && catalog.value) {
+      catalog.field = 'description';
+      this.updateCatalog(catalog);
     }
   }
 
-  openAddCategoryDialog() {
-    this.dialog.open(DialogCategoryCreateComponent, {
+  openAddCatalogDialog() {
+    this.dialog.open(DialogCatalogCreateComponent, {
       closeOnNavigation: true,
       hasBackdrop: true
     }).afterClosed().subscribe(value => {
       if (value) {
-        this.categoriesArray.push(value);
-        this.categoriesDatasource.data = this.categoriesArray;
+        this.catalogsArray.push(value);
+        this.catalogsDatasource.data = this.catalogsArray;
       }
     });
   }

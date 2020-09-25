@@ -30,7 +30,7 @@ import {StockDetailsComponent} from './components/stock.component';
 import {TransferDialogComponent} from './components/transfer.component';
 import {CreatePageComponent} from './pages/product-create.page';
 import {EditPageComponent} from './pages/edit.page';
-import {CategoriesComponent, DialogCategoryDeleteComponent, DialogCategoryNewComponent} from './components/categories.component';
+import {CategoriesComponent} from './components/categories.component';
 import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from './components/units.component';
 import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './components/suppliers.component';
 import {ImportsDialogComponent} from './components/imports.component';
@@ -44,11 +44,20 @@ import {IndexPage} from './pages/index.page';
 import {UnitsPage} from './pages/units.page';
 import {SuppliersPage} from './pages/suppliers.page';
 import {CategoriesPage} from './pages/categories.page';
+import {CreateGroupProductsComponent} from './components/create-group-products.component';
+import {CatalogFormFieldComponent} from './components/catalog-form-field.component';
+import {DialogCategoryDeleteComponent} from './components/dialog-category-delete.component';
+import {DialogCategoryCreateComponent} from './components/dialog-category-create.component';
+import {DialogCatalogCreateComponent} from './components/dialog-catalog-create.component';
+import {CatalogsComponent} from './components/catalogs.component';
+import {DialogCatalogDeleteComponent} from './components/dialog-catalog-delete.component';
+import {CatalogsPage} from './pages/catalogs.page';
 
 const routes: Routes = [
   {path: '', component: IndexPage},
   {path: 'products', component: ProductsPage},
   {path: 'categories', component: CategoriesPage},
+  {path: 'catalogs', component: CatalogsPage},
   {path: 'units', component: UnitsPage},
   {path: 'suppliers', component: SuppliersPage},
   {path: 'create', component: CreatePageComponent},
@@ -87,6 +96,8 @@ const routes: Routes = [
     MatListModule
   ],
   declarations: [
+    CreateGroupProductsComponent,
+    CatalogFormFieldComponent,
     IndexPage,
     CreatePageComponent,
     EditPageComponent,
@@ -95,7 +106,8 @@ const routes: Routes = [
     UnitsComponent,
     StockDetailsComponent,
     DialogCategoryDeleteComponent,
-    DialogCategoryNewComponent,
+    DialogCategoryCreateComponent,
+    DialogCatalogCreateComponent,
     DialogUnitDeleteComponent,
     DialogUnitNewComponent,
     DialogSupplierDeleteComponent,
@@ -110,7 +122,10 @@ const routes: Routes = [
     UnitsPage,
     SuppliersPage,
     CategoriesPage,
-    ProductsPage
+    ProductsPage,
+    CatalogsComponent,
+    DialogCatalogDeleteComponent,
+    CatalogsPage
   ],
 })
 export class StockModule {
