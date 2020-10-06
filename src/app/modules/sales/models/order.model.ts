@@ -5,8 +5,8 @@ export interface OrderModel {
   total?: number;
   mobile?: number;
   date?: string;
-  carts?: any[];
+  carts?: {quantity: number, product: any}[];
   user?: any;
-  status?: 'PROCESSED' | 'DELIVERED';
+  status?: 'PROCESSED' | 'DELIVERED' | "COMPLETED";
   complete?: boolean;
 }

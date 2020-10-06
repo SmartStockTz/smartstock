@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {OrderModel} from '../models/order.model';
+import { OrderService } from '../services/order.service';
+import { OrderState } from '../states/order.state';
 import {OrdersTableShowItemsComponent} from './orders-table-show-items.component';
 
 @Component({
@@ -8,11 +10,14 @@ import {OrdersTableShowItemsComponent} from './orders-table-show-items.component
   template: `
     <div style="padding: 16px 0 24px 0;">
       <mat-nav-list>
-        <mat-list-item (click)="markAsComplete()">
+        <div *ngIf="data.order.status!=='COMPLETED'">
+        <mat-list-item *ngIf="(orderState.markAsCompleteFlag | async) === false" (click)="markAsComplete()" >
           <mat-icon matListIcon>done_all</mat-icon>
           <p matLine>Mark As Complete</p>
           <mat-card-subtitle matLine>Mark order as complete</mat-card-subtitle>
         </mat-list-item>
+        <mat-progress-spinner *ngIf="(orderState.markAsCompleteFlag | async) === true" diameter="30" mode="indeterminate"></mat-progress-spinner>
+        </div>
         <mat-list-item (click)="showItems()">
           <mat-icon matListIcon>receipt</mat-icon>
           <p matLine>Show Items</p>
@@ -30,7 +35,8 @@ import {OrdersTableShowItemsComponent} from './orders-table-show-items.component
 export class OrdersTableOptionsComponent implements OnInit {
   constructor(private readonly bottomSheetRef: MatBottomSheetRef<OrdersTableOptionsComponent>,
               private readonly bottomSheet: MatBottomSheet,
-              @Inject(MAT_BOTTOM_SHEET_DATA) private readonly data: { order: OrderModel }) {
+              public readonly orderState: OrderState,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public readonly data: { order: OrderModel }) {
   }
 
   ngOnInit(): void {
@@ -47,6 +53,6 @@ export class OrdersTableOptionsComponent implements OnInit {
   }
 
   markAsComplete() {
-
+    this.orderState.markAsComplete(this.data.order);
   }
 }

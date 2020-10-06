@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "FahamuTech",
-  "version": "20.9.0-rc.5",
+  "version": "20.10.0-rc.0",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {

@@ -27,20 +27,24 @@ import {OrdersTableOptionsComponent} from './orders-table-options.component';
           <th mat-header-cell *cdkHeaderCellDef>Amount</th>
           <td mat-cell *cdkCellDef="let order">{{order.total | currency:'TZS '}}</td>
         </ng-container>
-        <ng-container matColumnDef="paid">
+        <!-- <ng-container matColumnDef="paid">
           <th mat-header-cell *cdkHeaderCellDef>Payment</th>
           <td mat-cell *cdkCellDef="let order">
             <smartstock-oder-paid-status [order]="order"></smartstock-oder-paid-status>
           </td>
-        </ng-container>
+        </ng-container> -->
         <ng-container matColumnDef="mobile">
           <th mat-header-cell *cdkHeaderCellDef>Mobile</th>
           <td mat-cell *cdkCellDef="let order">{{order.mobile}}</td>
         </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *cdkHeaderCellDef>Email</th>
+          <td mat-cell *cdkCellDef="let order"><div style="padding:8px">{{order.user.email}}</div></td>
+        </ng-container>
         <ng-container matColumnDef="status">
           <th mat-header-cell *cdkHeaderCellDef>Status</th>
           <td mat-cell *cdkCellDef="let order">
-            <span *ngIf="order.status === 'DELIVERED'">COMPLETED</span>
+            <span *ngIf="order.status === 'COMPLETED'">COMPLETED</span>
             <span *ngIf="order.status === 'PROCESSED'">NEW</span>
           </td>
         </ng-container>
@@ -66,7 +70,7 @@ import {OrdersTableOptionsComponent} from './orders-table-options.component';
 export class OrdersTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ordersDataTable: MatTableDataSource<OrderModel> = new MatTableDataSource<OrderModel>([]);
-  ordersColumns = ['date', 'customer', 'amount', 'paid', 'mobile', 'status', 'action'];
+  ordersColumns = ['date', 'customer', 'amount', 'mobile', 'email', 'status', 'action'];
 
   constructor(public readonly orderState: OrderState,
               private readonly bottomSheet: MatBottomSheet) {
