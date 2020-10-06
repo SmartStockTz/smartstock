@@ -1,4 +1,5 @@
 export interface StockModel {
+  catalog?: any[];
   createdAt?: any;
   updatedAt?: any;
   image?: any;

@@ -32,18 +32,16 @@ import {ShopModel} from '../models/shop.model';
         </div>
 
         <mat-accordion [multi]="true" class="mat-elevation-z0">
-          <mat-nav-list *ngIf="currentUser && (currentUser.role==='admin')" class="mat-elevation-z0">
+          <mat-nav-list *ngIf="isAdmin()" class="mat-elevation-z0">
             <mat-list-item [ngStyle]="shouldExpand('dashboard')?selectedMenu:{}" routerLink="/dashboard">
               <mat-icon matListIcon matPrefix>dashboard</mat-icon>
               <span matLine style="margin-left: 8px">Dashboard</span>
             </mat-list-item>
           </mat-nav-list>
 
-          <mat-divider *ngIf="currentUser && currentUser.role==='admin'"></mat-divider>
+          <mat-divider *ngIf="isAdmin()"></mat-divider>
 
-          <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin')"
-                               [expanded]="shouldExpand('report')"
-                               class="mat-elevation-z0">
+          <mat-expansion-panel *ngIf="isAdmin()" [expanded]="shouldExpand('report')" class="mat-elevation-z0">
             <mat-expansion-panel-header>
               <mat-icon matPrefix>table_chart</mat-icon>
               <span style="margin-left: 8px">Reports</span>
@@ -65,8 +63,7 @@ import {ShopModel} from '../models/shop.model';
 
           <mat-divider></mat-divider>
 
-          <mat-expansion-panel *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"
-                               [expanded]="shouldExpand('purchase')" class="mat-elevation-z0">
+          <mat-expansion-panel *ngIf="isManager()" [expanded]="shouldExpand('purchase')" class="mat-elevation-z0">
             <mat-expansion-panel-header>
               <mat-icon matPrefix>receipts</mat-icon>
               <span style="margin-left: 8px">Purchase</span>
@@ -80,23 +77,22 @@ import {ShopModel} from '../models/shop.model';
 
           <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
 
-          <mat-nav-list>
+          <mat-nav-list *ngIf="isManager()">
             <mat-list-item [ngStyle]="shouldExpand('stock')?selectedMenu:{}" routerLink="/stock">
               <mat-icon matListIcon matPrefix>store</mat-icon>
               <span matLine style="margin-left: 8px">Stock</span>
             </mat-list-item>
           </mat-nav-list>
 
-          <mat-divider *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role === 'manager')"></mat-divider>
+          <mat-divider *ngIf="isManager()"></mat-divider>
 
-          <mat-expansion-panel [expanded]="shouldExpand('settings')"
-                               class="mat-elevation-z0">
+          <mat-expansion-panel [expanded]="shouldExpand('settings')" class="mat-elevation-z0">
             <mat-expansion-panel-header>
               <mat-icon matPrefix>supervisor_account</mat-icon>
               <span style="margin-left: 8px">Account</span>
             </mat-expansion-panel-header>
             <mat-nav-list>
-              <a *ngIf="currentUser && (currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
+              <a *ngIf="isManager()" mat-list-item
                  routerLink="/account/settings">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Settings</span>
@@ -104,7 +100,7 @@ import {ShopModel} from '../models/shop.model';
                   <mat-icon>settings</mat-icon>
                 </div>
               </a>
-              <a *ngIf="currentUser && ( currentUser.role==='admin' || currentUser.role==='manager')" mat-list-item
+              <a *ngIf="isManager()" mat-list-item
                  routerLink="/account/users">
                 <div class="d-flex flex-row flex-nowrap btn-block">
                   <span>Users</span>
@@ -141,28 +137,6 @@ export class DrawerComponent implements OnInit {
 
   shop: ShopModel;
   currentUser: UserModel;
-
-  // async shouldShow(menuName: string): Promise<boolean> {
-  //   try {
-  //     // const user = await this._userApi.currentUser();
-  //     // switch (menuName) {
-  //     //   case 'dashboard':
-  //     //     return user.role === 'admin';
-  //     //   case 'sale':
-  //     //     return (user.role === 'admin' || user.role === 'manager' || user.role === 'user');
-  //     //   case 'purchase':
-  //     //     return (user.role === 'admin' || user.role === 'manager');
-  //     //   case 'stock':
-  //     //     return (user.role === 'admin' || user.role === 'manager');
-  //     //   case 'settings':
-  //     //     return user.role === 'admin';
-  //     // }
-  //     return true;
-  //   } catch (e) {
-  //     console.log(e);
-  //     return false;
-  //   }
-  // }
   versionNumber: Observable<string> = of();
   selectedMenu = {
     background: '#1b5e20',
@@ -199,5 +173,13 @@ export class DrawerComponent implements OnInit {
   shouldExpand(route: string) {
     const url = new URL(location.href);
     return url.pathname.startsWith('/' + route);
+  }
+
+  isManager() {
+    return this.currentUser && (this.currentUser.role === 'admin' || this.currentUser.role === 'manager');
+  }
+
+  isAdmin() {
+    return this.currentUser && (this.currentUser.role === 'admin');
   }
 }

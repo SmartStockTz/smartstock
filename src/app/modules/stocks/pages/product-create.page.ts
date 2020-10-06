@@ -93,7 +93,10 @@ import {StorageService} from '../../lib/services/storage.service';
                       </mat-list-item>
                     </mat-list>
                   </mat-card>
-
+                  <mat-form-field appearance="fill" class="my-input">
+                    <mat-label>Description</mat-label>
+                    <textarea placeholder="optional" matInput type="text" formControlName="description"></textarea>
+                  </mat-form-field>
                   <h5>
                     Inventory
                   </h5>
@@ -140,7 +143,6 @@ import {StorageService} from '../../lib/services/storage.service';
                         <mat-error>Reorder field required</mat-error>
                       </mat-form-field>
 
-                      <smartstock-category-form-field [formGroup]="productForm"></smartstock-category-form-field>
                       <smartstock-suppliers-form-field [formGroup]="productForm"
                                                        [purchasable]="getPurchasableFormControl().value===true">
                       </smartstock-suppliers-form-field>
@@ -168,7 +170,7 @@ import {StorageService} from '../../lib/services/storage.service';
 
               </div>
 
-              <div class="col-12 col-xl-9 col-lg-9" style="margin-bottom: 100px">
+              <div class="col-12 col-xl-9 col-lg-9" style="padding-bottom: 100px">
 
                 <div>
                   <button class="btn-block ft-button" color="primary" mat-raised-button
@@ -268,6 +270,9 @@ export class CreatePageComponent extends DeviceInfoUtil implements OnInit {
       canExpire: [stock && stock.canExpire !== undefined ? stock.canExpire : false],
       expire: [stock && stock.expire ? stock.expire : null],
       category: [stock && stock.category ? stock.category : 'general', [Validators.required, Validators.nullValidator]],
+      catalog: [stock && stock.catalog && Array.isArray(stock.catalog)
+        ? stock.catalog
+        : ['general'], [Validators.required, Validators.nullValidator]],
       supplier: [stock && stock.supplier ? stock.supplier : 'general', [Validators.required, Validators.nullValidator]],
     });
   }

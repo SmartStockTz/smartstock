@@ -8,6 +8,7 @@ import {CategoryModel} from '../models/category.model';
 import {BFast} from 'bfastjs';
 import {StorageService} from '../../lib/services/storage.service';
 import {StockModel} from '../models/stock.model';
+import {CatalogModel} from '../models/catalog.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,11 @@ export class StockState {
   async addCategory(category: CategoryModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
     return BFast.database(shop.projectId).collection<CategoryModel>('categories').save(category);
+  }
+
+  async addCatalog(catalogModel: CatalogModel): Promise<any> {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection<CategoryModel>('catalogs').save(catalogModel);
   }
 
   async addUnit(unit: UnitsModel): Promise<any> {
@@ -110,6 +116,11 @@ export class StockState {
     return BFast.database(shop.projectId).collection('categories').query().byId(category.id).delete();
   }
 
+  async deleteCatalog(catalog: CatalogModel): Promise<any> {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('catalogs').query().byId(catalog.id).delete();
+  }
+
   async deleteStock(stock: StockModel): Promise<any> {
     const shop = await this._storage.getActiveShop();
     return BFast.database(shop.projectId).collection('stocks').query().byId(stock._id ? stock._id : stock.id).delete();
@@ -129,6 +140,11 @@ export class StockState {
         // console.log(value);
       }
     });
+  }
+
+  async getAllCatalogs(pagination: { size?: number, skip?: number }): Promise<CategoryModel[]> {
+    const shop = await this._storage.getActiveShop();
+    return BFast.database(shop.projectId).collection('catalogs').getAll(null);
   }
 
   async getAllStock(): Promise<StockModel[]> {
@@ -190,8 +206,25 @@ export class StockState {
       .query()
       .byId(categoryId)
       .updateBuilder()
-      .update(data);
+      .set(category.field, category.value)
+      .update();
     response.id = categoryId;
+    return response;
+  }
+
+  async updateCatalog(category: { id: string, value: string, field: string }): Promise<any> {
+    const shop = await this._storage.getActiveShop();
+    const catalogId = category.id;
+    const data = {};
+    data[category.field] = category.value;
+    delete category.id;
+    const response = await BFast.database(shop.projectId).collection('catalogs')
+      .query()
+      .byId(catalogId)
+      .updateBuilder()
+      .set(category.field, category.value)
+      .update();
+    response.id = catalogId;
     return response;
   }
 
