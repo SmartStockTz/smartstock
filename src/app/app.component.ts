@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ThreadService} from './modules/lib/services/thread.service';
-import {StorageService} from './modules/lib/services/storage.service';
-import {EventService} from './modules/lib/services/event.service';
+import {ThreadService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstock/core-libs';
+import {EventService} from '@smartstock/core-libs';
 import {BFast} from 'bfastjs';
-import {SsmEvents} from './modules/lib/utils/eventsNames.util';
+import {SsmEvents} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-root',

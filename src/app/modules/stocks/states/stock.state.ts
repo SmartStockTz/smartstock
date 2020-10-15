@@ -6,7 +6,7 @@ import {UserService} from '../../account/services/user.service';
 import {SettingsService} from '../../account/services/settings.service';
 import {CategoryModel} from '../models/category.model';
 import {BFast} from 'bfastjs';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 import {StockModel} from '../models/stock.model';
 import {CatalogModel} from '../models/catalog.model';
 

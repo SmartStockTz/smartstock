@@ -26,7 +26,7 @@ import {MobilePayDetailsComponent} from './components/mobile-pay-details.compone
 import {MatListModule} from '@angular/material/list';
 import {RouterModule, Routes} from '@angular/router';
 import {KeeperGuard} from '../stocks/guards/keeper.guard';
-import {LibModule} from '../lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 import {LoginPage} from './pages/login.page';
 import {RegisterPage} from './pages/register.page';
 import {AuthenticationGuard} from './guards/authentication.guard';

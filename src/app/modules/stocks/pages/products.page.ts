@@ -7,10 +7,10 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
-import {EventService} from '../../lib/services/event.service';
+import {EventService} from '@smartstock/core-libs';
 import {UnitsModel} from '../models/units.model';
-import {StorageService} from '../../lib/services/storage.service';
-import {LogService} from '../../lib/services/log.service';
+import {StorageService} from '@smartstock/core-libs';
+import {LogService} from '@smartstock/core-libs';
 import {environment} from '../../../../environments/environment';
 import {SelectionModel} from '@angular/cdk/collections';
 import {DialogDeleteComponent, StockDetailsComponent} from '../components/stock.component';
@@ -18,8 +18,8 @@ import {TransferDialogComponent} from '../components/transfer.component';
 import {StockState} from '../states/stock.state';
 import {StockModel} from '../models/stock.model';
 import {ImportsDialogComponent} from '../components/imports.component';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
-import {SsmEvents} from '../../lib/utils/eventsNames.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
+import {SsmEvents} from '@smartstock/core-libs';
 import {CreateGroupProductsComponent} from '../components/create-group-products.component';
 
 

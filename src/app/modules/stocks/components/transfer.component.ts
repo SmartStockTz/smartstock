@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ChangeDetectorRef, Component, Inject} from '@angular/core';
 import {UserService} from 'src/app/modules/account/services/user.service';
 import {ShopModel} from '../../account/models/shop.model';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 import {StockModel} from '../models/stock.model';
 
 

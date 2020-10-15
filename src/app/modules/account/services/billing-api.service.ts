@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BFast} from 'bfastjs';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 
 @Injectable({
   providedIn: 'root'

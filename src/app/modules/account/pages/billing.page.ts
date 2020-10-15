@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {BillingApiService} from '../services/billing-api.service';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MobilePayDetailsComponent} from '../components/mobile-pay-details.component';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-billing',

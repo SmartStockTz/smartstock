@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import {AdminDashboardService} from '../services/admin-dashboard.service';
-import { toSqlDate } from '../../lib/utils/date.util';
+import { toSqlDate } from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-dashboard-sale-trends',

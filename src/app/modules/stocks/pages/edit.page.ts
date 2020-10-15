@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockModel} from '../models/stock.model';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-stock-edit',

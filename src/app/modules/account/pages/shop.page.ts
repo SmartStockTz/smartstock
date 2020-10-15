@@ -5,7 +5,7 @@ import {CreateShopDialogComponent} from '../components/create-shop-dialog.compon
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {ShopModel} from '../models/shop.model';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 import {UserService} from '../services/user.service';
 
 @Component({

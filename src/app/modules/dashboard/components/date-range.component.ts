@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DateRangeHeaderComponent} from './date-range-header.component';
 /*********** move to common ***********/
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 /*********** move to common ***********/
 import {FormControl} from '@angular/forms';
 import {ShopModel} from '../models/shop.model';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-current-shop',

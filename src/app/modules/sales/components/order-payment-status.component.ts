@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderService} from '../services/order.service';
 import {OrderModel} from '../models/order.model';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MobilePayDetailsComponent} from '../../account/components/mobile-pay-details.component';
 

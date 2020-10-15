@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {ReceiptModel} from '../models/receipt.model';
 import {SettingsService} from '../../account/services/settings.service';
 import {BFast} from 'bfastjs';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 import {SupplierModel} from '../models/supplier.model';
 
 @Injectable({

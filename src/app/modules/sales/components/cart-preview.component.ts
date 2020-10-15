@@ -1,16 +1,12 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-/*********** moe to common ***********/
-import {EventService} from '../../lib/services/event.service';
-/*********** moe to common ***********/
+import {EventService} from '@smartstock/core-libs';
 import {UtilsService} from '../services/utils.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Observable, of} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-/*********** moe to common ***********/
-/*********** moe to common ***********/
 import {StockModel} from '../models/stock.model';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
-import {SsmEvents} from '../../lib/utils/eventsNames.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
+import {SsmEvents} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-cart-preview',

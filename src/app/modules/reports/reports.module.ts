@@ -28,7 +28,7 @@ import {CartComponent} from './components/cart.component';
 import {ExpiredComponent} from './components/expired.component';
 import {ProfitByCategoryComponent} from './components/profit-by-category.component';
 import {RouterModule, Routes} from '@angular/router';
-import {LibModule} from '../lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 
 
 const routes: Routes = [
@@ -53,34 +53,35 @@ const routes: Routes = [
     ReorderComponent,
     ExpireNearComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatDatepickerModule,
-    LibModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatNativeDateModule,
-    MatTooltipModule,
-    MatSelectModule,
-    SatDatepickerModule,
-    SatNativeDateModule,
-    MatDividerModule,
-    MatInputModule,
-    MatMenuModule,
-    DashboardModule,
-    MatRippleModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatDatepickerModule,
+        LibModule,
+        MatSidenavModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatNativeDateModule,
+        MatTooltipModule,
+        MatSelectModule,
+        SatDatepickerModule,
+        SatNativeDateModule,
+        MatDividerModule,
+        MatInputModule,
+        MatMenuModule,
+        DashboardModule,
+        MatRippleModule,
+        LibModule
+    ]
 })
 export class ReportsModule {
 }

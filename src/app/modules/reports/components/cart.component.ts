@@ -9,7 +9,7 @@ import {CartModel} from '../models/cart.model';
 /****** move to common **********/
 import {FormControl, Validators} from '@angular/forms';
 import {ReportService} from '../services/report.service';
-import {toSqlDate} from '../../lib/utils/date.util';
+import {toSqlDate} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-cart-report',

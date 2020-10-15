@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 import {StockState} from '../states/stock.state';
 
 @Component({

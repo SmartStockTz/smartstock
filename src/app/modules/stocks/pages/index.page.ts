@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-stocks-index',

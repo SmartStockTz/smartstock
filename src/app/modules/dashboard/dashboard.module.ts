@@ -29,7 +29,7 @@ import {StockStatusComponent} from './components/stock-status.component';
 import {StockByCategoryComponent} from './components/stock-by-category.component';
 import {StockExpiredComponent} from './components/stock-expired.component';
 import {RouterModule, Routes} from '@angular/router';
-import {LibModule} from '../lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 
 
 const routes: Routes = [

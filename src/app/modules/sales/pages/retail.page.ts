@@ -1,14 +1,14 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from 'src/app/modules/account/services/user.service';
-import {StorageService} from 'src/app/modules/lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 import {StockModel} from '../models/stock.model';
 import {SalesState} from '../states/sales.state';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-retail-sale',

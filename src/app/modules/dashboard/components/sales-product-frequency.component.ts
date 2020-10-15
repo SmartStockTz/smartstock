@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {AdminDashboardService} from '../services/admin-dashboard.service';
 import {SalesModel} from '../../sales/models/sale.model';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-dashboard-sales-product-frequency',

@@ -7,9 +7,9 @@ import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {StockModel} from '../models/stock.model';
 import {StockState} from '../states/stock.state';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
-import {FileLibraryService} from '../../lib/services/file-library.service';
-import {StorageService} from '../../lib/services/storage.service';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
+import {FileLibraryService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-stock-new',

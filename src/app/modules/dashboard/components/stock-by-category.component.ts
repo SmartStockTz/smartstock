@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import {AdminDashboardService} from '../services/admin-dashboard.service';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-stock-by-category',

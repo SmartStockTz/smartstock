@@ -17,7 +17,7 @@ import {AuthenticationGuard} from './modules/account/guards/authentication.guard
 import {AdminRoleGuard} from './modules/account/guards/admin-role.guard';
 import {ActiveShopGuard} from './modules/account/guards/active-shop.guard';
 import {KeeperGuard} from './modules/stocks/guards/keeper.guard';
-import {LibModule} from './modules/lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 
 const routes: Routes = [
   {

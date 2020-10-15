@@ -4,7 +4,7 @@ import {UserModel} from '../models/user.model';
 import {ShopModel} from '../models/shop.model';
 import {UserService} from '../services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-profile-address',

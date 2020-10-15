@@ -7,13 +7,13 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 /** must be removed to common module **/
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 /** must be removed to common module **/
 import {DialogSupplierNewComponent} from '../../stocks/components/suppliers.component';
 /** must be removed to common module **/
 import {StockModel} from '../models/stock.model';
 import {PurchaseState} from '../states/purchase.state';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-purchase-create',

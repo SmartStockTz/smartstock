@@ -35,7 +35,7 @@ import {DialogUnitDeleteComponent, DialogUnitNewComponent, UnitsComponent} from 
 import {DialogSupplierDeleteComponent, DialogSupplierNewComponent, SuppliersComponent} from './components/suppliers.component';
 import {ImportsDialogComponent} from './components/imports.component';
 import {CommonModule} from '@angular/common';
-import {LibModule} from '../lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 import {CategoryFormFieldComponent} from './components/category-form-field.component';
 import {SuppliersFormFieldComponent} from './components/suppliers-form-field.component';
 import {UnitsFormFieldComponent} from './components/units-form-field.component';

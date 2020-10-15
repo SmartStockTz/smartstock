@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {environment} from '../../../../environments/environment';
 import {Subject} from 'rxjs';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 import {DashboardState} from '../states/dashboard.state';
 
 @Component({

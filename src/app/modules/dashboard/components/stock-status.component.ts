@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminDashboardService} from '../services/admin-dashboard.service';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 import * as Highcharts from 'highcharts';
 
 @Component({

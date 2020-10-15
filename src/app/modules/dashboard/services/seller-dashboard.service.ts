@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {SellerReportAdapter} from '../../../adapter/SellerReportAdapter';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from '../../account/services/settings.service';
-import {StorageService} from '../../lib/services/storage.service';
+import {StorageService} from '@smartstock/core-libs';
 
 @Injectable()
-export class SellerDashboardService implements SellerReportAdapter {
+export class SellerDashboardService {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _storage: StorageService,

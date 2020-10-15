@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BillingApiService} from '../services/billing-api.service';
 import {InvoiceModel} from '../models/payment.model';
-import {LogService} from '../../lib/services/log.service';
+import {LogService} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-billing-invoices',

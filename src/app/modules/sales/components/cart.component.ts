@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
-import {EventService} from 'src/app/modules/lib/services/event.service';
+import {EventService} from '@smartstock/core-libs';
 import {SalesState} from '../states/sales.state';
 import {UserService} from '../../account/services/user.service';
 import {SettingsService} from '../../account/services/settings.service';
@@ -13,9 +13,9 @@ import {environment} from '../../../../environments/environment';
 import {CustomerState} from '../states/customer.state';
 import {PrintService} from '../services/print.service';
 import {StockModel} from '../models/stock.model';
-import {SsmEvents} from '../../lib/utils/eventsNames.util';
-import {SecurityUtil} from '../../lib/utils/security.util';
-import {toSqlDate} from '../../lib/utils/date.util';
+import {SsmEvents} from '@smartstock/core-libs';
+import {SecurityUtil} from '@smartstock/core-libs';
+import {toSqlDate} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-cart',

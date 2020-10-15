@@ -26,7 +26,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PurchasePageComponent} from './pages/purchase.page';
 import {PurchaseDetailsComponent} from './components/details.component';
 import {CreatePageComponent} from './pages/create.page';
-import {LibModule} from '../lib/lib.module';
+import {LibModule} from '@smartstock/core-libs';
 
 
 const routes: Routes = [

@@ -3,7 +3,7 @@ import {DateAdapter, SatCalendar, SatCalendarFooter, SatDatepicker} from 'saturn
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import * as moment from 'moment';
-import {DeviceInfoUtil} from '../../lib/utils/device-info.util';
+import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-date-range-selector',
