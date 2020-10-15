@@ -25,7 +25,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "npx gulp copyBFastJs && ng serve",
+    "start": "ng serve",
     "start:desktop": "npx gulp copyBFastJs && ng serve -c=electron",
     "start:android": "npx gulp copyBFastJs && ng serve --host 0.0.0.0 -c=android",
     "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx gulp syncDesktop",
@@ -57,7 +57,7 @@
     "@angular/platform-browser-dynamic": "~10.0.11",
     "@angular/router": "~10.0.11",
     "@angular/service-worker": "^10.0.11",
-    "@smartstock/core-libs": "0.0.2",
+    "@smartstock/core-libs": "0.0.3",
     "bfastjs": "^4.0.0-beta.25",
     "comlink": "^4.3.0",
     "highcharts": "^8.1.2",

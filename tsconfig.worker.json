@@ -9,6 +9,6 @@
     "types": []
   },
   "include": [
-    "src/**/*.worker.service.ts"
+    "src/**/*.worker.ts"
   ]
 }

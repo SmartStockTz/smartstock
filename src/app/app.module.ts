@@ -84,6 +84,12 @@ const routes: Routes = [
 })
 export class AppModule {
   constructor() {
+    // @ts-ignore
+    import('../../package.json').then(pkg => {
+      LibModule.start({
+        version: pkg.version
+      });
+    });
     BFast.init({
       applicationId: environment.smartstock.applicationId,
       projectId: environment.smartstock.projectId,

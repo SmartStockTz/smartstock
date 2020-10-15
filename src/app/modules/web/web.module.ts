@@ -4,13 +4,13 @@ import {LandingPage} from './pages/landing.page';
 import {FooterComponent} from './componets/footer.component';
 import {PrivacyPageComponent} from './pages/privacy.page';
 import {RouterModule, Routes} from '@angular/router';
-import {BrowserPlatformGuard} from '@smartstock/core-libs';
 import {MatDividerModule} from '@angular/material/divider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {BrowserPlatformGuard} from './guards/browser-platform.guard';
 
 const routes: Routes = [
   {
