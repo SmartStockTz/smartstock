@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {ShopModel} from '../models/shop.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {UserService} from '../services/user.service';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BFast } from 'bfastjs';
-import { StorageService } from '@smartstock/core-libs';
-import { toSqlDate } from '@smartstock/core-libs';
-import { SecurityUtil } from '@smartstock/core-libs';
+import { StorageService } from '@smartstocktz/core-libs';
+import { toSqlDate } from '@smartstocktz/core-libs';
+import { SecurityUtil } from '@smartstocktz/core-libs';
 import { OrderModel } from '../models/order.model';
 
 @Injectable({

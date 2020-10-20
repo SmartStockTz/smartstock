@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 /*********** moe to common ***********/
-import {EventService} from '@smartstock/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 /*********** moe to common ***********/
 import {MatSidenav} from '@angular/material/sidenav';
 /*********** moe to common ***********/
@@ -10,8 +10,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 /*********** moe to common ***********/
 /*********** moe to common ***********/
 import {StockModel} from '../models/stock.model';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
-import {SsmEvents} from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
+import {SsmEvents} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-product-card',

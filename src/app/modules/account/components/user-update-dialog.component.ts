@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {UserService} from '../services/user.service';
 import {UserModel} from '../models/user.model';
 

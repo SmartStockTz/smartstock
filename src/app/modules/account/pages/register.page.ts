@@ -5,8 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegisterDialogComponent} from '../components/register-dialog.component';
 import {UserService} from '../services/user.service';
 import {UserModel} from '../models/user.model';
-import {LogService} from '@smartstock/core-libs';
-import {MessageService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
+import {MessageService} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-register',

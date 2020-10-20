@@ -16,8 +16,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './modules/account/guards/authentication.guard';
 import {AdminRoleGuard} from './modules/account/guards/admin-role.guard';
 import {ActiveShopGuard} from './modules/account/guards/active-shop.guard';
-import {KeeperGuard} from './modules/stocks/guards/keeper.guard';
-import {LibModule} from '@smartstock/core-libs';
+import {LibModule} from '@smartstocktz/core-libs';
 
 const routes: Routes = [
   {
@@ -41,13 +40,13 @@ const routes: Routes = [
   },
   {
     path: 'stock',
-    canActivate: [KeeperGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/stocks/stock.module').then(mod => mod.StockModule)
+    canActivate: [/*KeeperGuard*/ ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/stocks').then(mod => mod.StockModule)
   },
   {
     path: 'purchase',
-    canActivate: [KeeperGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/purchases/purchases.module').then(mod => mod.PurchasesModule)
+    canActivate: [/*KeeperGuard*/ ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/purchases').then(mod => mod.PurchasesModule)
   },
   {
     path: 'account',

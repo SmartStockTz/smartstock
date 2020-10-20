@@ -2,16 +2,16 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {SalesState} from '../states/sales.state';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {UserService} from '../../account/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../../../../environments/environment';
 import {FormControl} from '@angular/forms';
 import {StockModel} from '../models/stock.model';
-import {EventService} from '@smartstock/core-libs';
-import {LogService} from '@smartstock/core-libs';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
-import {SsmEvents} from '@smartstock/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
+import {SsmEvents} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-sale',

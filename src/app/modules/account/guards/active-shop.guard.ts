@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {StorageService} from '@smartstock/core-libs';
-import {SsmEvents} from '@smartstock/core-libs';
-import {EventService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
+import {SsmEvents} from '@smartstocktz/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 
 @Injectable({
   providedIn: 'root'

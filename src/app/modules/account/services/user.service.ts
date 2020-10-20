@@ -3,10 +3,10 @@ import {UserModel} from '../models/user.model';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 import {ShopModel} from '../models/shop.model';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {BFast} from 'bfastjs';
 import {MatDialog} from '@angular/material/dialog';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {VerifyEMailDialogComponent} from '../components/verify-dialog.component';
 
 @Injectable({

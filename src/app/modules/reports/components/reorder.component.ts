@@ -2,17 +2,16 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {Observable, of} from 'rxjs';
-import {UnitsModel} from 'src/app/modules/stocks/models/units.model';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {AdminDashboardService} from 'src/app/modules/dashboard/services/admin-dashboard.service';
 import {json2csv} from '../services/json2csv.service';
-import {StockModel} from '../../stocks/models/stock.model';
 import {ReportService} from '../services/report.service';
+import {StockModel} from '../models/stock.model';
 
 
 @Component({
@@ -22,7 +21,7 @@ import {ReportService} from '../services/report.service';
       <mat-card class="mat-elevation-z3">
 
         <div style="display: flex; flex-flow: row; align-items: center">
-          <h6>StockModel Reorder</h6>
+          <h6>any Reorder</h6>
           <span style="flex-grow: 1"></span>
           <mat-form-field>
             <mat-label>Filter</mat-label>
@@ -106,8 +105,8 @@ export class ReorderComponent implements OnInit {
 
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
-  units: Observable<UnitsModel[]>;
-  stockReorderDatasource: MatTableDataSource<StockModel>;
+  units: Observable<any[]>;
+  stockReorderDatasource: MatTableDataSource<any>;
   stockColumns = ['product', 'quantity', 'reorder', 'supplier'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

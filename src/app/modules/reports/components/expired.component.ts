@@ -5,8 +5,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {json2csv} from '../services/json2csv.service';
 import {FormControl, Validators} from '@angular/forms';
-import {StockModel} from '../../stocks/models/stock.model';
 import {ReportService} from '../services/report.service';
+import {StockModel} from '../models/stock.model';
 
 @Component({
   selector: 'smartstock-expired-products-report',
@@ -65,7 +65,7 @@ export class ExpiredComponent implements OnInit {
 
   isLoading = false;
   noDataRetrieved = true;
-  expiredProducts: MatTableDataSource<StockModel>;
+  expiredProducts: MatTableDataSource<any>;
   stockColumns = ['product', 'expire'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

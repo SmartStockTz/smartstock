@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../services/user.service';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-dialog-user-delete',

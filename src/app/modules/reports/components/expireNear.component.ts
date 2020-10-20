@@ -5,7 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {json2csv} from '../services/json2csv.service';
 import {FormControl, Validators} from '@angular/forms';
-import {StockModel} from '../../stocks/models/stock.model';
+import {StockModel} from '../models/stock.model';
 import {ReportService} from '../services/report.service';
 
 @Component({
@@ -72,7 +72,7 @@ export class ExpireNearComponent implements OnInit {
   isLoading = false;
   noDataRetrieved = true;
   stocks = [];
-  expiredProducts: MatTableDataSource<StockModel>;
+  expiredProducts: MatTableDataSource<any>;
   stockColumns = ['product', 'expire', 'quantity'];
 
   filterFormControl = new FormControl('', [Validators.nullValidator]);

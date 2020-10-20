@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ShopModel} from '../models/shop.model';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 
 @Injectable()
 export class ShopDatabaseService {

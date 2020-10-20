@@ -25,8 +25,7 @@ import {BillingPage} from './pages/billing.page';
 import {MobilePayDetailsComponent} from './components/mobile-pay-details.component';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule, Routes} from '@angular/router';
-import {KeeperGuard} from '../stocks/guards/keeper.guard';
-import {LibModule} from '@smartstock/core-libs';
+import {LibModule} from '@smartstocktz/core-libs';
 import {LoginPage} from './pages/login.page';
 import {RegisterPage} from './pages/register.page';
 import {AuthenticationGuard} from './guards/authentication.guard';
@@ -57,12 +56,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const routes: Routes = [
   {path: '', redirectTo: 'profile', pathMatch: 'full'},
-  {path: 'settings', canActivate: [KeeperGuard, ActiveShopGuard], component: SettingsPage},
+  {path: 'settings', canActivate: [/*KeeperGuard,*/ ActiveShopGuard], component: SettingsPage},
   {path: 'shop', canActivate: [AuthenticationGuard], component: ShopPage},
   {path: 'login', canActivate: [AuthenticatedUserGuard], component: LoginPage},
   {path: 'register', canActivate: [AuthenticatedUserGuard], component: RegisterPage},
-  {path: 'bill', canActivate: [KeeperGuard, ActiveShopGuard], component: BillingPage},
-  {path: 'users', canActivate: [KeeperGuard, ActiveShopGuard], component: UsersPage},
+  {path: 'bill', canActivate: [/*KeeperGuard,*/ ActiveShopGuard], component: BillingPage},
+  {path: 'users', canActivate: [/*KeeperGuard,*/ ActiveShopGuard], component: UsersPage},
   {path: 'profile', canActivate: [AuthenticationGuard, ActiveShopGuard], component: ProfilePage},
 ];
 

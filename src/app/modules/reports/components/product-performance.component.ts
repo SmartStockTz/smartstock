@@ -1,17 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {Observable, of} from 'rxjs';
-import {UnitsModel} from 'src/app/modules/stocks/models/units.model';
 import {FormControl, Validators} from '@angular/forms';
 import {MatSort} from '@angular/material/sort';
 import {ReportService} from '../services/report.service';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
-import { toSqlDate } from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
+import { toSqlDate } from '@smartstocktz/core-libs';
 
 
 export interface ProductPerformanceI {
@@ -158,7 +157,7 @@ export class ProductPerformanceComponent extends DeviceInfoUtil implements OnIni
 
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
-  units: Observable<UnitsModel[]>;
+  units: Observable<any[]>;
   productPerformanceDatasource: MatTableDataSource<ProductPerformanceI>;
   stockColumns = ['product', 'category', 'quantitySold', 'firstSold', 'lastSold', 'costOfGoodSold', 'grossProfit'];
 

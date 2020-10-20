@@ -18,7 +18,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
-import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDividerModule} from '@angular/material/divider';
 import {DashboardModule} from '../dashboard/dashboard.module';
 import {MatMenuModule} from '@angular/material/menu';
@@ -28,7 +27,7 @@ import {CartComponent} from './components/cart.component';
 import {ExpiredComponent} from './components/expired.component';
 import {ProfitByCategoryComponent} from './components/profit-by-category.component';
 import {RouterModule, Routes} from '@angular/router';
-import {LibModule} from '@smartstock/core-libs';
+import {LibModule} from '@smartstocktz/core-libs';
 
 
 const routes: Routes = [
@@ -73,8 +72,6 @@ const routes: Routes = [
         MatNativeDateModule,
         MatTooltipModule,
         MatSelectModule,
-        SatDatepickerModule,
-        SatNativeDateModule,
         MatDividerModule,
         MatInputModule,
         MatMenuModule,

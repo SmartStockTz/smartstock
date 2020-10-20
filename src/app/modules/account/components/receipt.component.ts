@@ -1,7 +1,7 @@
 import {PaymentModel} from '../models/payment.model';
 import {Component, OnInit} from '@angular/core';
 import {BillingApiService} from '../services/billing-api.service';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-billing-receipts',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { BehaviorSubject } from 'rxjs';
 import { OrderModel } from '../models/order.model';
-import { MessageService } from '@smartstock/core-libs';
-import { LogService } from '@smartstock/core-libs';
+import { MessageService } from '@smartstocktz/core-libs';
+import { LogService } from '@smartstocktz/core-libs';
 
 @Injectable({
   providedIn: 'any'

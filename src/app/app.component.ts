@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {StorageService} from '@smartstock/core-libs';
-import {EventService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 import {BFast} from 'bfastjs';
-import {SsmEvents} from '@smartstock/core-libs';
+import {SsmEvents} from '@smartstocktz/core-libs';
 import {BackgroundService} from './workers/background.service';
 
 @Component({

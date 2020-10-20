@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {EventService} from '@smartstock/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 import {SettingsService} from '../services/settings.service';
 import {environment} from '../../../../environments/environment';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
-import {SsmEvents} from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
+import {SsmEvents} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-setting',

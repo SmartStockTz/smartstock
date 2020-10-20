@@ -29,7 +29,7 @@ import {SaleComponent} from './components/sale.component';
 import {CartPreviewComponent} from './components/cart-preview.component';
 import {RouterModule, Routes} from '@angular/router';
 import {WholePageComponent} from './pages/whole.page';
-import {LibModule} from '@smartstock/core-libs';
+import {LibModule} from '@smartstocktz/core-libs';
 import {IndexPage} from './pages/index.page';
 import {OrderPage} from './pages/order.page';
 import {OrdersTableComponent} from './components/orders-table.component';

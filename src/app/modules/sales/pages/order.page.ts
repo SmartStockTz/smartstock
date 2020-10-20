@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
 import {OrderState} from '../states/order.state';
 
 @Component({

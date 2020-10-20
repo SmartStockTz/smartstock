@@ -3,16 +3,16 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import {StorageService} from '@smartstock/core-libs';
+import {StorageService} from '@smartstocktz/core-libs';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {LogService} from '@smartstock/core-libs';
+import {LogService} from '@smartstocktz/core-libs';
 import {Observable, of} from 'rxjs';
-import {UnitsModel} from '../../stocks/models/units.model';
 import {MatTableDataSource} from '@angular/material/table';
 import {ProductPerformanceI} from './product-performance.component';
 import {ReportService} from '../services/report.service';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
-import {toSqlDate} from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
+import {toSqlDate} from '@smartstocktz/core-libs';
+import {UnitsModel} from '@smartstocktz/stocks/models/units.model';
 
 @Component({
   selector: 'smartstock-profit-by-category',

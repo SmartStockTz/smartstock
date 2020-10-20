@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
+import {DeviceInfoUtil} from '@smartstocktz/core-libs';
 
 @Component({
   selector: 'smartstock-profile',

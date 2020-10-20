@@ -20,8 +20,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {TotalSalesComponent} from './components/total-sales.component';
-import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
-import {DateRangeHeaderComponent} from './components/date-range-header.component';
 import {DateRangeComponent} from './components/date-range.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {TotalGrossSaleComponent} from './components/total-gross-sale.component';
@@ -29,7 +27,7 @@ import {StockStatusComponent} from './components/stock-status.component';
 import {StockByCategoryComponent} from './components/stock-by-category.component';
 import {StockExpiredComponent} from './components/stock-expired.component';
 import {RouterModule, Routes} from '@angular/router';
-import {LibModule} from '@smartstock/core-libs';
+import {LibModule} from '@smartstocktz/core-libs';
 
 
 const routes: Routes = [
@@ -43,7 +41,6 @@ const routes: Routes = [
     DashboardPageComponent,
     ProductPerformanceComponent,
     TotalSalesComponent,
-    DateRangeHeaderComponent,
     DateRangeComponent,
     TotalGrossSaleComponent,
     StockStatusComponent,
@@ -73,8 +70,6 @@ const routes: Routes = [
     MatNativeDateModule,
     MatTooltipModule,
     MatSelectModule,
-    SatDatepickerModule,
-    SatNativeDateModule,
     MatDividerModule,
   ]
 })

@@ -1,6 +1,6 @@
 
 import {Injectable, OnInit} from '@angular/core';
-import {EventService, SsmEvents, StorageService} from '@smartstock/core-libs';
+import {EventService, SsmEvents, StorageService} from '@smartstocktz/core-libs';
 
 @Injectable({
   providedIn: 'root'

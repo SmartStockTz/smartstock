@@ -1,11 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DateRangeHeaderComponent} from './date-range-header.component';
-/*********** move to common ***********/
-import {StorageService} from '@smartstock/core-libs';
-/*********** move to common ***********/
-import {FormControl} from '@angular/forms';
+import {DeviceInfoUtil, StorageService} from '@smartstocktz/core-libs';
+import {FormControl, FormGroup} from '@angular/forms';
 import {ShopModel} from '../models/shop.model';
-import {DeviceInfoUtil} from '@smartstock/core-libs';
 
 @Component({
   selector: 'smartstock-current-shop',
@@ -30,19 +26,32 @@ import {DeviceInfoUtil} from '@smartstock/core-libs';
         </div>
 
         <div class="d-flex justify-content-center align-items-center">
-          <mat-form-field>
-            <input matInput
-                   (click)="picker6.open()"
-                   [formControl]="dashboardDateInput"
-                   placeholder="Choose a date"
-                   [satDatepicker]="picker6">
-            <sat-datepicker #picker6 [rangeMode]="true"
-                            [touchUi]="!enoughWidth()"
-                            panelClass="range-datepicker"
-                            [selectFirstDateOnClose]="true">
-            </sat-datepicker>
-            <sat-datepicker-toggle matSuffix [for]="picker6"></sat-datepicker-toggle>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="rangeFormGroup" [rangePicker]="picker">
+              <input matStartDate formControlName="begin" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <mat-error *ngIf="rangeFormGroup.controls.begin.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="rangeFormGroup.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
           </mat-form-field>
+          <!--          <mat-form-field>-->
+          <!--            <input matInput-->
+          <!--                   (click)="picker6.open()"-->
+          <!--                   [formControl]="dashboardDateInput"-->
+          <!--                   placeholder="Choose a date"-->
+          <!--                   [satDatepicker]="picker6">-->
+          <!--            <sat-datepicker #picker6 [rangeMode]="true"-->
+          <!--                            [touchUi]="!enoughWidth()"-->
+          <!--                            panelClass="range-datepicker"-->
+          <!--                            [selectFirstDateOnClose]="true">-->
+          <!--            </sat-datepicker>-->
+          <!--            <sat-datepicker-toggle matSuffix [for]="picker6"></sat-datepicker-toggle>-->
+          <!--          </mat-form-field>-->
         </div>
 
       </mat-card-content>
@@ -51,11 +60,14 @@ import {DeviceInfoUtil} from '@smartstock/core-libs';
   styleUrls: ['../styles/date-range.style.css']
 })
 export class DateRangeComponent extends DeviceInfoUtil implements OnInit {
-  rangeHeader = DateRangeHeaderComponent;
+ // rangeHeader = DateRangeHeaderComponent;
   shop: ShopModel;
   today = new Date();
-  dashboardDateInput = new FormControl({begin: new Date(), end: new Date()});
   @Output() dateSelected = new EventEmitter<{ begin: Date, end: Date }>();
+  rangeFormGroup: FormGroup = new FormGroup({
+    begin: new FormControl(new Date()),
+    end: new FormControl(new Date())
+  });
 
   constructor(private readonly storage: StorageService) {
     super();
@@ -66,7 +78,7 @@ export class DateRangeComponent extends DeviceInfoUtil implements OnInit {
       this.shop = value;
     });
     this.dateSelected.emit({begin: new Date(), end: new Date()});
-    this.dashboardDateInput.valueChanges.subscribe(value => {
+    this.rangeFormGroup.valueChanges.subscribe(value => {
       if (value && value.begin && value.end) {
         this.dateSelected.emit(value);
       }
