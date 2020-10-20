@@ -58,7 +58,7 @@
     "@angular/router": "~10.0.11",
     "@angular/service-worker": "^10.0.11",
     "@smartstocktz/core-libs": "^0.0.2",
-    "@smartstocktz/stocks": "^0.0.2",
+    "@smartstocktz/stocks": "^0.0.3",
     "@smartstocktz/purchases": "^0.0.3",
     "bfastjs": "^4.0.0-beta.25",
     "highcharts": "^8.1.2",
