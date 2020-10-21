@@ -12,7 +12,6 @@ import {ProductPerformanceI} from './product-performance.component';
 import {ReportService} from '../services/report.service';
 import {DeviceInfoUtil} from '@smartstocktz/core-libs';
 import {toSqlDate} from '@smartstocktz/core-libs';
-import {UnitsModel} from '@smartstocktz/stocks/models/units.model';
 
 @Component({
   selector: 'smartstock-profit-by-category',
@@ -150,7 +149,7 @@ export class ProfitByCategoryComponent extends DeviceInfoUtil implements OnInit 
 
   hotReloadProgress = false;
   totalPurchase: Observable<number> = of(0);
-  units: Observable<UnitsModel[]>;
+  units: Observable<any[]>;
   productPerformanceDatasource: MatTableDataSource<ProductPerformanceI> = new MatTableDataSource<ProductPerformanceI>([]);
   stockColumns = ['category', 'sales', 'quantitySold', 'firstSold', 'lastSold'];
 

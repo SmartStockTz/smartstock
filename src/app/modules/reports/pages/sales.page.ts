@@ -1,7 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
-/******* move to common *****/
-/******* move to common *****/
 import {environment} from '../../../../environments/environment';
 import {DeviceInfoUtil} from '@smartstocktz/core-libs';
 

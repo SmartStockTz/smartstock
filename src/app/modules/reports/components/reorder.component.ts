@@ -11,7 +11,6 @@ import {MatSort} from '@angular/material/sort';
 import {AdminDashboardService} from 'src/app/modules/dashboard/services/admin-dashboard.service';
 import {json2csv} from '../services/json2csv.service';
 import {ReportService} from '../services/report.service';
-import {StockModel} from '../models/stock.model';
 
 
 @Component({

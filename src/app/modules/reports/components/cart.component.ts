@@ -5,8 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {CartModel} from '../models/cart.model';
-/****** move to common **********/
-/****** move to common **********/
 import {FormControl, Validators} from '@angular/forms';
 import {ReportService} from '../services/report.service';
 import {toSqlDate} from '@smartstocktz/core-libs';

@@ -5,7 +5,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {json2csv} from '../services/json2csv.service';
 import {FormControl, Validators} from '@angular/forms';
-import {StockModel} from '../models/stock.model';
 import {ReportService} from '../services/report.service';
 
 @Component({

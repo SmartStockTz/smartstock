@@ -6,7 +6,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {json2csv} from '../services/json2csv.service';
 import {FormControl, Validators} from '@angular/forms';
 import {ReportService} from '../services/report.service';
-import {StockModel} from '../models/stock.model';
 
 @Component({
   selector: 'smartstock-expired-products-report',

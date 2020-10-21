@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {SettingsService} from '../../account/services/settings.service';
+import {SettingsService} from '@smartstocktz/core-libs';
 import {StorageService} from '@smartstocktz/core-libs';
 import {BFast} from 'bfastjs';
 import * as moment from 'moment';
