@@ -13,10 +13,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HammerModule} from '@angular/platform-browser';
-import {AuthenticationGuard} from './modules/account/guards/authentication.guard';
-import {AdminRoleGuard} from './modules/account/guards/admin-role.guard';
-import {ActiveShopGuard} from './modules/account/guards/active-shop.guard';
+import {AuthenticationGuard} from './guards/authentication.guard';
+import {AdminGuard} from './guards/admin.guard';
+import {ActiveShopGuard} from './guards/active-shop.guard';
 import {LibModule} from '@smartstocktz/core-libs';
+import {ManagerGuard} from './guards/manager.guard';
 
 const routes: Routes = [
   {
@@ -25,12 +26,12 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [AdminGuard, ActiveShopGuard],
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
+    canActivate: [AdminGuard, ActiveShopGuard],
     loadChildren: () => import('./modules/reports/reports.module').then(mod => mod.ReportsModule)
   },
   {
@@ -40,17 +41,17 @@ const routes: Routes = [
   },
   {
     path: 'stock',
-    canActivate: [/*KeeperGuard*/ ActiveShopGuard],
+    canActivate: [ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/stocks').then(mod => mod.StockModule)
   },
   {
     path: 'purchase',
-    canActivate: [/*KeeperGuard*/ ActiveShopGuard],
+    canActivate: [ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/purchases').then(mod => mod.PurchasesModule)
   },
   {
     path: 'account',
-    loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
+    loadChildren: () => import('@smartstocktz/accounts').then(mod => mod.AccountModule)
   },
   {
     path: 'home',
