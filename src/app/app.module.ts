@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'sale',
     canActivate: [AuthenticationGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/sales/sales.module').then(mod => mod.SalesModule)
+    loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
   },
   {
     path: 'stock',

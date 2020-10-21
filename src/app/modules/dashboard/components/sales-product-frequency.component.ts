@@ -4,8 +4,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {AdminDashboardService} from '../services/admin-dashboard.service';
-import {SalesModel} from '../../sales/models/sale.model';
 import {LogService} from '@smartstocktz/core-libs';
+import {SalesModel} from '../models/sale.model';
 
 @Component({
   selector: 'smartstock-dashboard-sales-product-frequency',

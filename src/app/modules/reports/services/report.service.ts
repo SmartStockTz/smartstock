@@ -2,12 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from '../../account/services/settings.service';
 import {BFast} from 'bfastjs';
-import {SalesModel} from '../../sales/models/sale.model';
 import {StorageService} from '@smartstocktz/core-libs';
-import {StockModel} from '../models/stock.model';
 import {CartModel} from '../models/cart.model';
 import * as moment from 'moment';
 import {toSqlDate} from '@smartstocktz/core-libs';
+import {SalesModel} from '../models/sale.model';
 
 @Injectable({
   providedIn: 'root'
