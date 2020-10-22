@@ -81,7 +81,6 @@ export class SalesProductFrequencyComponent implements OnInit {
   getProductsProgress = false;
   columns = ['product', 'date', 'quantity', 'amount'];
   soldProductsDatasource: MatTableDataSource<SalesModel>;
-  soldProductsArray: SalesModel[] = [];
   @ViewChild('soldProductPaginator') soldProductPaginator: MatPaginator;
   productFilterControl = new FormControl('');
 
@@ -100,35 +99,8 @@ export class SalesProductFrequencyComponent implements OnInit {
   }
 
   reloadProducts() {
-    // this.getProductsProgress = true;
-    // const initDate = toSqlDate(new Date(this.dateFormControl.value));
-    // this._report.getFrequentlySoldProducts(initDate,null).then(value => {
-    //   this._logger.i(value, 'SalesProductFrequencyComponent:42');
-    //   this.soldProductsArray = value;
-    //   this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
-    //   this.soldProductsDatasource.paginator = this.soldProductPaginator;
-    //   this.getProductsProgress = false;
-    // }).catch(reason => {
-    //   this._logger.e(reason, 'SalesProductFrequencyComponent:47');
-    //   this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
-    //   this.getProductsProgress = false;
-    // });
   }
 
   _getSoldProduct() {
-    // const initDate = toSqlDate(new Date());
-    // this.dateFormControl.setValue(initDate);
-    // this.getProductsProgress = true;
-    // this._report.getFrequentlySoldProducts(initDate,null).then(value => {
-    //   this._logger.i(value, 'SalesProductFrequencyComponent:42');
-    //   this.soldProductsArray = value;
-    //   this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
-    //   this.soldProductsDatasource.paginator = this.soldProductPaginator;
-    //   this.getProductsProgress = false;
-    // }).catch(reason => {
-    //   this._logger.e(reason, 'SalesProductFrequencyComponent:47');
-    //   this.soldProductsDatasource = new MatTableDataSource<SalesModel>(this.soldProductsArray);
-    //   this.getProductsProgress = false;
-    // });
   }
 }

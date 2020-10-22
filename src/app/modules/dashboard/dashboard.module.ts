@@ -15,7 +15,6 @@ import {SalesTrendsComponent} from './components/sales-trends.component';
 import {SalesProductFrequencyComponent} from './components/sales-product-frequency.component';
 import {DashboardPageComponent} from './pages/dashboard.page';
 import {MatNativeDateModule} from '@angular/material/core';
-import {ProductPerformanceComponent} from '../reports/components/product-performance.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
@@ -39,17 +38,12 @@ const routes: Routes = [
     SalesTrendsComponent,
     SalesProductFrequencyComponent,
     DashboardPageComponent,
-    ProductPerformanceComponent,
     TotalSalesComponent,
     DateRangeComponent,
     TotalGrossSaleComponent,
     StockStatusComponent,
     StockByCategoryComponent,
     StockExpiredComponent
-  ],
-  exports: [
-    ProductPerformanceComponent,
-    SalesTrendsComponent
   ],
   imports: [
     CommonModule,

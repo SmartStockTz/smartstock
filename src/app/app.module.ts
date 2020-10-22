@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'report',
     canActivate: [AdminGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/reports/reports.module').then(mod => mod.ReportsModule)
+    loadChildren: () => import('@smartstocktz/reports').then(mod => mod.ReportsModule)
   },
   {
     path: 'sale',

@@ -39,19 +39,6 @@ import {ShopModel} from '../models/shop.model';
             <mat-error *ngIf="rangeFormGroup.controls.begin.hasError('matStartDateInvalid')">Invalid start date</mat-error>
             <mat-error *ngIf="rangeFormGroup.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
           </mat-form-field>
-          <!--          <mat-form-field>-->
-          <!--            <input matInput-->
-          <!--                   (click)="picker6.open()"-->
-          <!--                   [formControl]="dashboardDateInput"-->
-          <!--                   placeholder="Choose a date"-->
-          <!--                   [satDatepicker]="picker6">-->
-          <!--            <sat-datepicker #picker6 [rangeMode]="true"-->
-          <!--                            [touchUi]="!enoughWidth()"-->
-          <!--                            panelClass="range-datepicker"-->
-          <!--                            [selectFirstDateOnClose]="true">-->
-          <!--            </sat-datepicker>-->
-          <!--            <sat-datepicker-toggle matSuffix [for]="picker6"></sat-datepicker-toggle>-->
-          <!--          </mat-form-field>-->
         </div>
 
       </mat-card-content>
@@ -60,7 +47,6 @@ import {ShopModel} from '../models/shop.model';
   styleUrls: ['../styles/date-range.style.css']
 })
 export class DateRangeComponent extends DeviceInfoUtil implements OnInit {
- // rangeHeader = DateRangeHeaderComponent;
   shop: ShopModel;
   today = new Date();
   @Output() dateSelected = new EventEmitter<{ begin: Date, end: Date }>();
