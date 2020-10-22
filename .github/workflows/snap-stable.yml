@@ -51,3 +51,4 @@ jobs:
         CI: true
         PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GT:  ${{ secrets.GH_TOKEN }}
