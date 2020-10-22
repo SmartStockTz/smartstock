@@ -18,11 +18,13 @@ import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {LibModule} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
+import {WebGuard} from './guards/web.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule),
+    canActivate: [WebGuard],
+    loadChildren: () => import('@smartstocktz/web').then(mod => mod.WebModule),
   },
   {
     path: 'dashboard',
@@ -57,9 +59,11 @@ const routes: Routes = [
     path: 'home',
     redirectTo: 'dashboard'
   },
-  // {
-  //   path: '**', loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule)
-  // }
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
