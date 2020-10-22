@@ -63,6 +63,7 @@
     "@smartstocktz/sales": "^0.0.6",
     "@smartstocktz/accounts": "^0.0.1",
     "@smartstocktz/reports": "^0.0.1",
+    "@smartstocktz/dashboard": "^0.0.1",
     "bfastjs": "^4.0.0-beta.25",
     "highcharts": "^8.2.0",
     "material-design-icons": "^3.0.1",

@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AdminGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then(mod => mod.DashboardModule)
+    loadChildren: () => import('@smartstocktz/dashboard').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
