@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ThreadService} from './modules/lib/services/thread.service';
-import {StorageService} from './modules/lib/services/storage.service';
-import {EventService} from './modules/lib/services/event.service';
+import {StorageService} from '@smartstocktz/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 import {BFast} from 'bfastjs';
-import {SsmEvents} from './modules/lib/utils/eventsNames.util';
+import {SsmEvents} from '@smartstocktz/core-libs';
+import {BackgroundService} from './workers/background.service';
 
 @Component({
   selector: 'smartstock-root',
@@ -11,12 +11,12 @@ import {SsmEvents} from './modules/lib/utils/eventsNames.util';
     <router-outlet></router-outlet>
   `,
   providers: [
-    ThreadService,
+    BackgroundService,
   ]
 })
 export class AppComponent implements OnInit {
 
-  constructor(private readonly threadProxy: ThreadService,
+  constructor(private readonly backgroundService: BackgroundService,
               private readonly eventApi: EventService,
               private readonly _storage: StorageService) {
   }
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       try {
         const activeShop = await this._storage.getActiveShop();
         BFast.init({applicationId: activeShop.applicationId, projectId: activeShop.projectId}, activeShop.projectId);
-        await this.threadProxy.start();
+        await this.backgroundService.start();
       } catch (e) {
        // console.log(e);
       }
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
       try {
         BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
-        await this.threadProxy.stop();
+        await this.backgroundService.stop();
       } catch (e) {
        // console.log(e);
       }
