@@ -25,7 +25,7 @@
     }
   },
   "scripts": {
-    "start": "electron ./",
+    "start": "electron .",
     "test": "ng test",
     "lint": "ng lint",
     "build:snap": "electron-builder --linux snap",

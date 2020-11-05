@@ -1,4 +1,6 @@
 const {app, BrowserWindow, Menu} = require('electron');
+const url = require('url');
+const path = require('path');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -62,7 +64,11 @@ if (!gotTheLock) {
         splashScreen.close();
       }
     });
-    await mainWindow.loadFile('./public/index.html');
+    await mainWindow.loadFile(url.format({
+      pathname: path.join(__dirname, 'public', 'index.html'),
+      protocol: 'file:',
+      slashes: true
+    }));
   }
 
   app.on('ready', createWindow);

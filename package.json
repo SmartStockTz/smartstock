@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "FahamuTech",
-  "version": "20.10.2",
+  "version": "20.11.1",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -27,7 +27,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:desktop": "ng serve -c=electron",
-    "build:desktop": "ng build --prod -c=electronProd --base-href ./ && npx gulp syncDesktop",
+    "build:desktop": "ng build --prod -c=electronProd --base-href=./ -o=desktop/public",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
     "push:snap:edge": "snapcraft upload desktop/dist/smartstock_${PACKAGE_VERSION}_amd64.snap --release edge",
@@ -38,7 +38,8 @@
     "deploy:webdesktop": "npm run build:webdesktop && firebase deploy --only hosting:desktop --token \"$FIREBASE_TOKEN\"",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron:start": "ng build --watch -op=desktop/public --base-href=./"
   },
   "private": true,
   "dependencies": {
@@ -53,7 +54,7 @@
     "@angular/platform-browser-dynamic": "~10.0.11",
     "@angular/router": "~10.0.11",
     "@angular/service-worker": "^10.0.11",
-    "@smartstocktz/core-libs": "^0.0.8",
+    "@smartstocktz/core-libs": "^0.0.10",
     "@smartstocktz/stocks": "^0.0.4",
     "@smartstocktz/purchases": "^0.0.3",
     "@smartstocktz/sales": "^0.0.6",
