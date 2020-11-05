@@ -91,7 +91,10 @@ export class AppModule {
     // @ts-ignore
     import('../../package.json').then(pkg => {
       LibModule.start({
-        version: pkg.version
+        version: pkg.version,
+        production: true,
+        electron: true,
+        browser: true
       });
     });
     BFast.init({

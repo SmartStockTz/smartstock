@@ -1,8 +1,8 @@
 {
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
-  "author": "FahamuTech",
-  "version": "20.11.1",
+  "author": "SmartStock Company",
+  "version": "20.11.2",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -57,7 +57,7 @@
     "@smartstocktz/core-libs": "^0.0.11",
     "@smartstocktz/stocks": "^0.0.4",
     "@smartstocktz/purchases": "^0.0.3",
-    "@smartstocktz/sales": "^0.0.7",
+    "@smartstocktz/sales": "^0.0.8",
     "@smartstocktz/accounts": "^0.0.1",
     "@smartstocktz/reports": "^0.0.3",
     "@smartstocktz/dashboard": "^0.0.2",
