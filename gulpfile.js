@@ -13,8 +13,8 @@ async function updateElectronVersion() {
 }
 
 async function syncDesktop() {
-  // return gulp.src('./dist/smartstock/**/*')
-  //   .pipe(gulp.dest('./desktop/public'));
+  return gulp.src('./dist/smartstock/**/*')
+    .pipe(gulp.dest('./desktop/public'));
 }
 
 exports.default = defaultTask;
