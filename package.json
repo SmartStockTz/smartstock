@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "20.11.3",
+  "version": "20.11.4",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -54,11 +54,11 @@
     "@angular/platform-browser-dynamic": "~10.2.2",
     "@angular/router": "~10.2.2",
     "@angular/service-worker": "^10.2.2",
-    "@smartstocktz/core-libs": "^0.0.13",
+    "@smartstocktz/core-libs": "^0.0.16",
     "@smartstocktz/stocks": "^0.0.4",
     "@smartstocktz/purchases": "^0.0.3",
     "@smartstocktz/sales": "^0.0.8",
-    "@smartstocktz/accounts": "^0.0.3",
+    "@smartstocktz/accounts": "^0.0.4",
     "@smartstocktz/reports": "^0.0.3",
     "@smartstocktz/dashboard": "^0.0.2",
     "@smartstocktz/web": "^0.0.1",
