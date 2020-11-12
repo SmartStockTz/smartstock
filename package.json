@@ -58,7 +58,7 @@
     "@smartstocktz/stocks": "^0.0.4",
     "@smartstocktz/purchases": "^0.0.3",
     "@smartstocktz/sales": "^0.0.8",
-    "@smartstocktz/accounts": "^0.0.2",
+    "@smartstocktz/accounts": "^0.0.3",
     "@smartstocktz/reports": "^0.0.3",
     "@smartstocktz/dashboard": "^0.0.2",
     "@smartstocktz/web": "^0.0.1",
