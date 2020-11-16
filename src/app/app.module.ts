@@ -72,7 +72,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     LibModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
     MatStepperModule,
