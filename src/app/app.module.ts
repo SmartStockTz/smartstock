@@ -13,53 +13,57 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HammerModule} from '@angular/platform-browser';
-import {AuthenticationGuard} from './modules/account/guards/authentication.guard';
-import {AdminRoleGuard} from './modules/account/guards/admin-role.guard';
-import {ActiveShopGuard} from './modules/account/guards/active-shop.guard';
-import {KeeperGuard} from './modules/stocks/guards/keeper.guard';
-import {LibModule} from './modules/lib/lib.module';
+import {AuthenticationGuard} from './guards/authentication.guard';
+import {AdminGuard} from './guards/admin.guard';
+import {ActiveShopGuard} from './guards/active-shop.guard';
+import {LibModule} from '@smartstocktz/core-libs';
+import {ManagerGuard} from './guards/manager.guard';
+import {WebGuard} from './guards/web.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule),
+    canActivate: [WebGuard],
+    loadChildren: () => import('@smartstocktz/web').then(mod => mod.WebModule),
   },
   {
     path: 'dashboard',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then(mod => mod.DashboardModule)
+    canActivate: [AdminGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/dashboard').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
-    canActivate: [AdminRoleGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/reports/reports.module').then(mod => mod.ReportsModule)
+    canActivate: [AdminGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/reports').then(mod => mod.ReportsModule)
   },
   {
     path: 'sale',
     canActivate: [AuthenticationGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/sales/sales.module').then(mod => mod.SalesModule)
+    loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
   },
   {
     path: 'stock',
-    canActivate: [KeeperGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/stocks/stock.module').then(mod => mod.StockModule)
+    canActivate: [ManagerGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/stocks').then(mod => mod.StockModule)
   },
   {
     path: 'purchase',
-    canActivate: [KeeperGuard, ActiveShopGuard],
-    loadChildren: () => import('./modules/purchases/purchases.module').then(mod => mod.PurchasesModule)
+    canActivate: [ManagerGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/purchases').then(mod => mod.PurchasesModule)
   },
   {
     path: 'account',
-    loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
+    loadChildren: () => import('@smartstocktz/accounts').then(mod => mod.AccountModule)
   },
   {
     path: 'home',
     redirectTo: 'dashboard'
   },
-  // {
-  //   path: '**', loadChildren: () => import('./modules/web/web.module').then(mod => mod.WebModule)
-  // }
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -70,7 +74,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,
@@ -84,6 +88,15 @@ const routes: Routes = [
 })
 export class AppModule {
   constructor() {
+    // @ts-ignore
+    import('../../package.json').then(pkg => {
+      LibModule.start({
+        version: pkg.version,
+        production: true,
+        electron: true,
+        browser: true
+      });
+    });
     BFast.init({
       applicationId: environment.smartstock.applicationId,
       projectId: environment.smartstock.projectId,
