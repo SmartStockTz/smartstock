@@ -28,27 +28,27 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AdminGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, AdminGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/dashboard').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
-    canActivate: [AdminGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, AdminGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/reports').then(mod => mod.ReportsModule)
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, AuthenticationGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
   },
   {
     path: 'stock',
-    canActivate: [ManagerGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/stocks').then(mod => mod.StockModule)
   },
   {
     path: 'purchase',
-    canActivate: [ManagerGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/purchases').then(mod => mod.PurchasesModule)
   },
   {
@@ -72,9 +72,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'}),
+    RouterModule.forRoot(routes),
     LibModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,
@@ -86,7 +86,7 @@ const routes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class SmartstockModule {
   constructor() {
     // @ts-ignore
     import('../../package.json').then(pkg => {
@@ -107,5 +107,7 @@ export class AppModule {
       projectId: environment.fahamupay.projectId,
       appPassword: environment.fahamupay.pass
     }, environment.fahamupay.projectId);
+
+    BFast.cache().set('_current_user_', 'ab').then(console.log).catch(console.log);
   }
 }

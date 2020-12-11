@@ -33,9 +33,5 @@
     "build:snap32": "electron-builder --linux --ia32 snap",
     "build:win": "electron-builder --win"
   },
-  "private": true,
-  "devDependencies": {
-    "electron": "^9.3.0",
-    "electron-builder": "^22.8.0"
-  }
+  "private": true
 }
