@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,10 +21,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-#      - run: npm install -g firebase-tools
-#      - run: npm ci
-##      - run: npm run build:web
-#      - run: npm run deploy:web
+      - run: npm install -g firebase-tools
+      - run: npm install
+      - run: npm run deploy:web
         env:
           CI: true
           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}

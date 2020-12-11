@@ -19,10 +19,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-#      - run: npm install -g firebase-tools
-#      - run: npm ci
-#      #      - run: npm run build:webapp
-#      - run: npm run deploy:webdesktop
+      - run: npm install -g firebase-tools
+      - run: npm install
+      - run: npm run deploy:webdesktop
         env:
           CI: true
           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
