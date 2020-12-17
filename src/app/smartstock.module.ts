@@ -107,7 +107,5 @@ export class SmartstockModule {
       projectId: environment.fahamupay.projectId,
       appPassword: environment.fahamupay.pass
     }, environment.fahamupay.projectId);
-
-    BFast.cache().set('_current_user_', 'ab').then(console.log).catch(console.log);
   }
 }
