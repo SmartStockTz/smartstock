@@ -62,7 +62,7 @@
     "@smartstocktz/purchases": "^0.0.3",
     "@smartstocktz/reports": "^0.0.4",
     "@smartstocktz/sales": "^0.0.11",
-    "@smartstocktz/stocks": "^0.0.6",
+    "@smartstocktz/stocks": "^0.0.7",
     "@smartstocktz/web": "^0.0.1",
     "bfastjs": "~4.0.5",
     "highcharts": "^8.2.0",
