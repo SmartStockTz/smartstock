@@ -1,6 +1,5 @@
 const {app, BrowserWindow, Menu} = require('electron');
-const url = require('url');
-const path = require('path');
+// const isDevMode = require('electron-is-dev')
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -48,27 +47,24 @@ if (!gotTheLock) {
       }
     });
 
-    // if (isDevMode) {
-    //   mainWindow.webContents.openDevTools();
-    // }
-
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateDev));
 
     if (splashScreen) {
       await splashScreen.loadFile(__dirname + `/splash_assets/ssm.png`);
       splashScreen.show();
     }
+
     mainWindow.webContents.on('dom-ready', () => {
       mainWindow.show();
-      if (splashScreen) {
+      if (splashScreen && !splashScreen.closed) {
         splashScreen.close();
       }
     });
-    await mainWindow.loadFile(url.format({
-      pathname: path.join(__dirname, 'public', 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    if (process.env.EA &&  process.env.EA.toString() === '1') {
+      await mainWindow.loadURL('http://localhost:4200');
+    } else {
+      await mainWindow.loadFile(__dirname + '/smartstock/index.html');
+    }
   }
 
   app.on('ready', createWindow);

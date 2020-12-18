@@ -53,5 +53,6 @@ server/logs
 .idea
 .vscode
 desktop/node_modules
+desktop/smartstock
 node_modules
 dist

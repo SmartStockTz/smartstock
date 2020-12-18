@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: '23694341104',
   },
   browser: true,
-  electron: true,
+  electron: false,
   android: false,
   printerUrl: 'https://localhost:8080',
   functionsURL: 'https://smartstock-faas.bfast.fahamutech.com',

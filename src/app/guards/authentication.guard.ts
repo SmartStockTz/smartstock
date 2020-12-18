@@ -19,6 +19,8 @@ export class AuthenticationGuard implements CanActivate {
         if (user && user.applicationId && user.projectUrlId && user.projectId && user.role) {
           resolve(true);
         } else {
+          this.userDatabase.updateCurrentUser(null).catch(_ => {
+          });
           this.router.navigateByUrl('/account/login').catch(reason => console.log(reason));
           reject(false);
         }
