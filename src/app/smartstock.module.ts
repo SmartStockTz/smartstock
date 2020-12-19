@@ -19,6 +19,7 @@ import {ActiveShopGuard} from './guards/active-shop.guard';
 import {LibModule} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
+import firebase from 'firebase';
 
 const routes: Routes = [
   {
@@ -88,6 +89,8 @@ const routes: Routes = [
 })
 export class SmartstockModule {
   constructor() {
+    firebase.initializeApp(environment.firebase);
+    firebase.analytics();
     // @ts-ignore
     import('../../package.json').then(pkg => {
       LibModule.start({
