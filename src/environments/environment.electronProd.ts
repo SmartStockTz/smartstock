@@ -7,6 +7,8 @@ export const environment = {
     projectId: 'smart-stock-manager',
     storageBucket: 'smart-stock-manager.appspot.com',
     messagingSenderId: '23694341104',
+    appId: '1:23694341104:web:2905c54949c39987eca335',
+    measurementId: 'G-GBR0FY21QZ'
   },
   browser: false,
   electron: true,
