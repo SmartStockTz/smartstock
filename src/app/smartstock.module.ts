@@ -5,7 +5,6 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ServiceWorkerModule} from '@angular/service-worker';
 import {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -25,7 +24,9 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [WebGuard],
-    loadChildren: () => import('@smartstocktz/web').then(mod => mod.WebModule),
+    loadChildren: () => {
+      return import('@smartstocktz/web').then(mod => mod.WebModule);
+    },
   },
   {
     path: 'dashboard',
@@ -45,7 +46,9 @@ const routes: Routes = [
   {
     path: 'stock',
     canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
-    loadChildren: () => import('@smartstocktz/stocks').then(mod => mod.StockModule)
+    loadChildren: () => {
+      return import('@smartstocktz/stocks').then(mod => mod.StockModule);
+    }
   },
   {
     path: 'purchase',
@@ -75,7 +78,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
+    // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,

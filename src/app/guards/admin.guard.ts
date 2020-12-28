@@ -16,10 +16,10 @@ export class AdminGuard implements CanActivate {
     : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser().then(user => {
-        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role === 'admin') {
+        if (user && user.applicationId && user.projectId && user.role === 'admin') {
           resolve(true);
         } else {
-          this.router.navigateByUrl('/account/login').catch(reason => console.log(reason));
+          this.router.navigateByUrl('/sale').catch(reason => console.log(reason));
           reject(false);
         }
       }).catch(_ => {

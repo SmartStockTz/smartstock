@@ -16,7 +16,7 @@ export class AuthenticationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       this.userDatabase.currentUser().then(user => {
-        if (user && user.applicationId && user.projectUrlId && user.projectId && user.role) {
+        if (user && user.applicationId && user.projectId && user.role) {
           resolve(true);
         } else {
           this.userDatabase.updateCurrentUser(null).catch(_ => {

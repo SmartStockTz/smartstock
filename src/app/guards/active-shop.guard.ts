@@ -18,7 +18,7 @@ export class ActiveShopGuard implements CanActivate {
     return new Promise(async (resolve, reject) => {
       try {
         const activeShop = await this._storage.getActiveShop();
-        if (activeShop && activeShop.projectId && activeShop.applicationId && activeShop.projectUrlId) {
+        if (activeShop && activeShop.projectId && activeShop.applicationId) {
           resolve(true);
         } else {
           this.eventService.broadcast(SsmEvents.ACTIVE_SHOP_REMOVE);
