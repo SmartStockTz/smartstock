@@ -14,10 +14,24 @@ if (!gotTheLock) {
 
   const menuTemplateDev = [
     {
+      label: 'Help',
+      click() {
+        require('electron').shell.openExternal('https://smartstock.co.tz').catch(_ => {
+        });
+      },
+    },
+    {
+      label: 'Privacy',
+      click() {
+        require('electron').shell.openExternal('https://smartstock.co.tz/privacy').catch(_ => {
+        });
+      },
+    },
+    {
       label: 'Options',
       submenu: [
         {
-          label: 'Open Dev Tools',
+          label: 'Dev Tools',
           click() {
             mainWindow.openDevTools();
           },
@@ -60,7 +74,7 @@ if (!gotTheLock) {
         splashScreen.close();
       }
     });
-    if (process.env.EA &&  process.env.EA.toString() === '1') {
+    if (process.env.EA && process.env.EA.toString() === '1') {
       await mainWindow.loadURL('http://localhost:4200');
     } else {
       await mainWindow.loadFile(__dirname + '/smartstock/index.html');
