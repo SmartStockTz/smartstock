@@ -19,6 +19,10 @@ import {LibModule} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import firebase from 'firebase';
+import {PaymentGuard} from './guards/payment.guard';
+import {PaymentDialogComponent} from './components/payment-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -30,29 +34,29 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthenticationGuard, AdminGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, AdminGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/dashboard').then(mod => mod.DashboardModule)
   },
   {
     path: 'report',
-    canActivate: [AuthenticationGuard, AdminGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, AdminGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/reports').then(mod => mod.ReportsModule)
   },
   {
     path: 'sale',
-    canActivate: [AuthenticationGuard, AuthenticationGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, AuthenticationGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
   },
   {
     path: 'stock',
-    canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => {
       return import('@smartstocktz/stocks').then(mod => mod.StockModule);
     }
   },
   {
     path: 'purchase',
-    canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/purchases').then(mod => mod.PurchasesModule)
   },
   {
@@ -72,7 +76,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PaymentDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -87,6 +92,8 @@ const routes: Routes = [
     RouterModule,
     MatNativeDateModule,
     HammerModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -29,10 +29,12 @@
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": [
-              "./node_modules/localforage/dist/localforage.js"
+              "./node_modules/localforage/dist/localforage.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
             ],
             "webWorkerTsConfig": "tsconfig.worker.json"
           },
@@ -127,10 +129,12 @@
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css",
-              "node_modules/material-design-icons/iconfont/material-icons.css"
+              "node_modules/material-design-icons/iconfont/material-icons.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
-              "./node_modules/localforage/dist/localforage.js"
+              "node_modules/localforage/dist/localforage.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
             ],
             "assets": [
               "src/favicon.ico",

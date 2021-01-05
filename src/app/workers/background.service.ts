@@ -1,6 +1,8 @@
-
 import {Injectable, OnInit} from '@angular/core';
 import {EventService, SsmEvents, StorageService} from '@smartstocktz/core-libs';
+import {BillingService} from '@smartstocktz/accounts';
+import {Router} from '@angular/router';
+import {bfast} from 'bfastjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,9 @@ import {EventService, SsmEvents, StorageService} from '@smartstocktz/core-libs';
 export class BackgroundService implements OnInit {
 
   constructor(private readonly eventApi: EventService,
-              private readonly _storage: StorageService) {
+              private readonly billing: BillingService,
+              private readonly router: Router,
+              private readonly storageService: StorageService) {
   }
 
   private settingsWorker: Worker;
@@ -20,6 +24,7 @@ export class BackgroundService implements OnInit {
 
   async start() {
     try {
+      this._startPaymentWatch();
       await this.startSalesProxy();
       await this.startStockUpdateProxy();
       await this.startSettingsWatch();
@@ -113,5 +118,21 @@ export class BackgroundService implements OnInit {
 
   private _noWorkerSettings() {
 
+  }
+
+  private _startPaymentWatch() {
+    setInterval(() => {
+      this.billing.subscription().then(value => {
+        return bfast.cache({database: 'payment', collection: 'subscription'}).set('status', value, {secure: true});
+      }).then(value => {
+        if (value && value.subscription === false) {
+          this.router.navigateByUrl('/account/bill').catch(_ => {
+            // console.log(reason);
+          });
+        }
+      }).catch(_ => {
+        // console.log(reason, 'payment');
+      });
+    }, 60000);
   }
 }
