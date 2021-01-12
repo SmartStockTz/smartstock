@@ -23,6 +23,7 @@ import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const routes: Routes = [
   {
@@ -51,7 +52,7 @@ const routes: Routes = [
     path: 'stock',
     canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => {
-      return import('@smartstocktz/stocks').then(mod => mod.StockModule);
+      return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
     }
   },
   {
@@ -83,7 +84,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,

@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {EventService, SsmEvents, StorageService} from '@smartstocktz/core-libs';
+import {EventService, SsmEvents} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
 import {bfast} from 'bfastjs';
@@ -11,8 +11,7 @@ export class BackgroundService implements OnInit {
 
   constructor(private readonly eventApi: EventService,
               private readonly billing: BillingService,
-              private readonly router: Router,
-              private readonly storageService: StorageService) {
+              private readonly router: Router) {
   }
 
   private settingsWorker: Worker;
