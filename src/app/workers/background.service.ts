@@ -3,6 +3,8 @@ import {EventService, SsmEvents} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
 import {bfast} from 'bfastjs';
+import {MatDialog} from '@angular/material/dialog';
+import {PaymentDialogComponent} from '../components/payment-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class BackgroundService implements OnInit {
 
   constructor(private readonly eventApi: EventService,
               private readonly billing: BillingService,
+              private readonly dialog: MatDialog,
               private readonly router: Router) {
   }
 
@@ -127,6 +130,10 @@ export class BackgroundService implements OnInit {
         if (value && value.subscription === false) {
           this.router.navigateByUrl('/account/bill').catch(_ => {
             // console.log(reason);
+          });
+          this.dialog.open(PaymentDialogComponent).afterClosed().subscribe(_1 => {
+            this.router.navigateByUrl('/account/bill').catch(_2 => {
+            });
           });
         }
       }).catch(_ => {

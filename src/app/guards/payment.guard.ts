@@ -23,14 +23,12 @@ export class PaymentGuard implements CanActivate {
         const status = await cache.get<any>('status', {secure: true});
         if (status && status.subscription === true) {
           resolve(true);
-        } else {
+        } else if (status && status.subscription === false) {
           reject(false);
-          this.router.navigateByUrl('/account/bill').catch(reason => {
+          this.router.navigateByUrl('/account/bill').catch(_ => {
           });
-          this.dialog.open(PaymentDialogComponent).afterClosed().subscribe(value => {
-            this.router.navigateByUrl('/account/bill').catch(reason => {
-            });
-          });
+        } else {
+          resolve(true);
         }
       } catch (reason) {
         resolve(true);
