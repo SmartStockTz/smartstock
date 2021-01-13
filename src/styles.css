@@ -3,15 +3,25 @@
 
 html, body {
   /*height: 100%;*/
-  background: white;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #f3f2ef;
 }
+
+/*h1 {*/
+/*  font-weight: bold!important;*/
+/*  font-size: 28px!important;*/
+/*}*/
+
+/*h2 {*/
+/*  font-weight: bold!important;*/
+/*  font-size: 20px!important;*/
+/*}*/
 
 body {
   margin: 0;
   padding: 0;
-  background: white;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #f3f2ef;
 }
 
 .highcharts-credits {
@@ -143,8 +153,7 @@ div.mat-tab-body-wrapper {
 }
 
 mat-sidenav-content {
-  touch-action: pan-y !important;
-  background: white;
+  /*touch-action: pan-y !important;*/
 }
 
 
@@ -154,4 +163,8 @@ button {
 
 div {
   outline: none !important;
+}
+
+mat-sidenav-content {
+  background: transparent !important;
 }
