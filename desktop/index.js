@@ -3,6 +3,7 @@ const {app, BrowserWindow, Menu} = require('electron');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
+process.env.IS_DESKTOP_SSM = '1';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -73,6 +74,11 @@ if (!gotTheLock) {
       if (splashScreen && !splashScreen.closed) {
         splashScreen.close();
       }
+    });
+    mainWindow.webContents.on('new-window', (event, url) => {
+      event.preventDefault();
+      require('electron').shell.openExternal(url).catch(_ => {
+      });
     });
     if (process.env.EA && process.env.EA.toString() === '1') {
       await mainWindow.loadURL('http://localhost:4200');
