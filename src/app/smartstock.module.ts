@@ -15,7 +15,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {LibModule} from '@smartstocktz/core-libs';
+import {ConfigsService, LibModule} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import firebase from 'firebase';
@@ -23,7 +23,6 @@ import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 const routes: Routes = [
   {
@@ -99,17 +98,19 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class SmartstockModule {
-  constructor() {
+  constructor(private readonly config: ConfigsService) {
     firebase.initializeApp(environment.firebase);
     firebase.analytics();
     // @ts-ignore
     import('../../package.json').then(pkg => {
-      LibModule.start({
-        version: pkg.version,
-        production: true,
-        electron: true,
-        browser: true
-      });
+      // LibModule.start({
+      //   version: pkg.version,
+      //   production: true,
+      //   electron: true,
+      //   browser: true
+      // });
+      this.config.versionName = pkg.version;
+      config.production = true;
     });
     BFast.init({
       applicationId: environment.smartstock.applicationId,
@@ -121,5 +122,66 @@ export class SmartstockModule {
       projectId: environment.fahamupay.projectId,
       appPassword: environment.fahamupay.pass
     }, environment.fahamupay.projectId);
+
+    this.config.menu = [
+      {
+        name: 'Dashboard',
+        link: '/dashboard',
+        roles: ['admin'],
+        icon: 'dashboard',
+      },
+      {
+        name: 'Report',
+        link: '/report',
+        roles: ['admin'],
+        icon: 'table_chart',
+        pages: [
+          {
+            link: '/report/sales/overview',
+            name: 'sales overviews',
+            roles: ['*']
+          },
+          {
+            link: '/report/sales/order',
+            name: 'sales orders',
+            roles: ['*']
+          },
+          {
+            link: '/report/sales/performance',
+            name: 'sales performance',
+            roles: ['*']
+          },
+          {
+            link: '/report/stock/overview',
+            name: 'stocks overviews',
+            roles: ['*']
+          }
+        ]
+      },
+      {
+        name: 'Sale',
+        link: '/sale',
+        roles: ['*'],
+        icon: 'shop_front',
+      },
+      {
+        name: 'Purchase',
+        link: '/purchase',
+        roles: ['manager', 'admin'],
+        icon: 'receipt',
+      },
+      {
+        name: 'Stock',
+        link: '/stock',
+        roles: ['manager', 'admin'],
+        icon: 'store',
+      },
+      {
+        name: 'Profile',
+        link: '/account',
+        roles: ['*'],
+        icon: 'supervisor_account',
+      },
+    ];
   }
 }
