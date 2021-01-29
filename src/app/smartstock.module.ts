@@ -133,28 +133,28 @@ export class SmartstockModule {
       {
         name: 'Report',
         link: '/report',
-        roles: ['admin'],
+        roles: ['*'],
         icon: 'table_chart',
         pages: [
           {
             link: '/report/sales/overview',
-            name: 'sales overviews',
-            roles: ['*']
-          },
-          {
-            link: '/report/sales/order',
-            name: 'sales orders',
-            roles: ['*']
+            name: 'Sales Overviews',
+            roles: ['admin']
           },
           {
             link: '/report/sales/performance',
-            name: 'sales performance',
+            name: 'Sales Performance',
+            roles: ['admin']
+          },
+          {
+            link: '/report/sales/order',
+            name: 'Receipts Track',
             roles: ['*']
           },
           {
             link: '/report/stock/overview',
-            name: 'stocks overviews',
-            roles: ['*']
+            name: 'Stocks Overviews',
+            roles: ['admin', 'manager']
           }
         ]
       },
@@ -163,6 +163,28 @@ export class SmartstockModule {
         link: '/sale',
         roles: ['*'],
         icon: 'shop_front',
+        pages: [
+          {
+            name: 'Retail',
+            link: '/sale/retail',
+            roles: ['*']
+          },
+          {
+            name: 'Wholesale',
+            link: '/sale/whole',
+            roles: ['*']
+          },
+          {
+            name: 'Orders',
+            link: '/sale/order',
+            roles: ['*']
+          },
+          {
+            name: 'Credit Sale',
+            link: '/sale/pay_by_credit',
+            roles: ['*']
+          }
+        ]
       },
       {
         name: 'Purchase',
@@ -175,12 +197,66 @@ export class SmartstockModule {
         link: '/stock',
         roles: ['manager', 'admin'],
         icon: 'store',
+        pages: [
+          {
+            name: 'Products',
+            link: '/stock/products',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Categories',
+            link: '/stock/categories',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Catalogs',
+            link: '/stock/catalogs',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Suppliers',
+            link: '/stock/suppliers',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Units',
+            link: '/stock/units',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Transfers',
+            link: '/stock/transfers',
+            roles: ['admin', 'manager']
+          }
+        ]
       },
       {
-        name: 'Profile',
+        name: 'Account',
         link: '/account',
         roles: ['*'],
         icon: 'supervisor_account',
+        pages: [
+          {
+            name: 'Profile',
+            link: '/account/profile',
+            roles: ['*']
+          },
+          {
+            name: 'Users',
+            link: '/account/users',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Shops',
+            link: '/account/shops',
+            roles: ['admin', 'manager']
+          },
+          {
+            name: 'Payments',
+            link: '/account/bill',
+            roles: ['*']
+          }
+        ]
       },
     ];
   }
