@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService, SsmEvents, StorageService} from '@smartstocktz/core-libs';
-import {BFast} from 'bfastjs';
+import bfast from 'bfastjs';
 import {BackgroundService} from './workers/background.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_SET, async ($event) => {
       try {
         const activeShop = await this._storage.getActiveShop();
-        BFast.init({applicationId: activeShop.applicationId, projectId: activeShop.projectId}, activeShop.projectId);
+        bfast.init({applicationId: activeShop.applicationId, projectId: activeShop.projectId}, activeShop.projectId);
         await this.backgroundService.start();
       } catch (e) {
         // console.log(e);
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     });
     this.eventApi.listen(SsmEvents.ACTIVE_SHOP_REMOVE, async ($event) => {
       try {
-        BFast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
+        bfast.init({applicationId: 'smartstock_lb', projectId: 'smartstock'});
         await this.backgroundService.stop();
       } catch (e) {
         // console.log(e);

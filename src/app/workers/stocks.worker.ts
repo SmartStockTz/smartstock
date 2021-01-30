@@ -1,49 +1,6 @@
-import {BFast} from 'bfastjs';
-
-export interface ShopModel {
-  businessName: string;
-  applicationId: string;
-  projectId: string;
-  projectUrlId: string;
-  category: string;
-  settings: {
-    saleWithoutPrinter: boolean,
-    printerFooter: string,
-    printerHeader: string,
-    allowRetail: boolean,
-    allowWholesale: boolean,
-  };
-  country?: string;
-  region?: string;
-  street?: string;
-}
-
-export interface StockModel {
-  createdAt?: any;
-  updatedAt?: any;
-  image?: any;
-  id?: string;
-  _id?: string;
-  product: string;
-  saleable: boolean | true;
-  canExpire?: boolean | true;
-  description?: string;
-  unit: string;
-  category: string;
-  type?: 'simple' | 'grouped';
-  downloadable: boolean | false;
-  downloads: { name: string, type: string, url: string }[];
-  stockable: boolean | true;
-  purchasable: boolean | true;
-  quantity: number;
-  wholesaleQuantity: number;
-  reorder: number;
-  purchase: number;
-  retailPrice: number;
-  wholesalePrice: any;
-  supplier: string;
-  expire: string;
-}
+import bfast from 'bfastjs';
+import {ShopModel} from '../models/shop.model';
+import {StockModel} from '../models/stock.model';
 
 function run() {
   init();
@@ -51,18 +8,17 @@ function run() {
 }
 
 function init() {
-  BFast.init({
-    applicationId: 'smartstock_lb', projectId: 'smartstock', cache: {
-      enable: true
-    }
+  bfast.init({
+    applicationId: 'smartstock_lb',
+    projectId: 'smartstock'
   });
 }
 
 async function startStockSocket() {
-  const smartStockCache = BFast.cache({database: 'smartstock', collection: 'config'});
+  const smartStockCache = bfast.cache({database: 'smartstock', collection: 'config'});
   const shop: ShopModel = await smartStockCache.get('activeShop');
-  BFast.init({applicationId: shop.applicationId, projectId: shop.projectId}, shop.projectId);
-  BFast.database(shop.projectId).collection('stocks')
+  bfast.init({applicationId: shop.applicationId, projectId: shop.projectId}, shop.projectId);
+  bfast.database(shop.projectId).collection('stocks')
     .query()
     .changes(() => {
       console.log('stocks socket connect');
@@ -78,16 +34,16 @@ async function startStockSocket() {
 
 async function getMissedStocks(shop) {
   if (shop && shop.applicationId && shop.projectId) {
-    BFast.init({applicationId: shop.applicationId, projectId: shop.projectId}, shop.projectId);
-    const stocksCount: number = await BFast.database(shop.projectId).collection('stocks')
+    bfast.init({applicationId: shop.applicationId, projectId: shop.projectId}, shop.projectId);
+    const stocksCount: number = await bfast.database(shop.projectId).collection('stocks')
       .query()
       .count(true)
       .find();
-    let localStocks: StockModel[] = await BFast.cache({database: 'stocks', collection: shop.projectId}).get('all');
+    let localStocks: StockModel[] = await bfast.cache({database: 'stocks', collection: shop.projectId}).get('all');
     if (!localStocks) {
       localStocks = [];
     }
-    const stocks: StockModel[] = await BFast.database(shop.projectId).collection('stocks')
+    const stocks: StockModel[] = await bfast.database(shop.projectId).collection('stocks')
       .query()
       .size(stocksCount)
       .skip(0)
@@ -95,7 +51,7 @@ async function getMissedStocks(shop) {
       .notIncludesIn('_updated_at', localStocks.map(value => value.updatedAt))
       .find();
     localStocks.push(...stocks);
-    await BFast.cache({database: 'stocks', collection: shop.projectId})
+    await bfast.cache({database: 'stocks', collection: shop.projectId})
       .set('all', localStocks);
   }
 }
@@ -108,7 +64,7 @@ async function updateLocalStock(body: {
   }
 }, shop: ShopModel) {
   if (body && body.change) {
-    const stocksCache = await BFast.cache({database: 'stocks', collection: shop.projectId});
+    const stocksCache = await bfast.cache({database: 'stocks', collection: shop.projectId});
     if (body.change.name === 'create' && body.change.snapshot) {
       const localStocks: StockModel[] = await stocksCache.get('all');
       localStocks.filter(x => x.id !== body.change.snapshot.id).unshift(body.change.snapshot);

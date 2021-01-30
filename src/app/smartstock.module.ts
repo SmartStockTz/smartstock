@@ -23,6 +23,7 @@ import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 const routes: Routes = [
   {
@@ -83,7 +84,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production && environment.electron === false}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,
@@ -103,12 +104,6 @@ export class SmartstockModule {
     firebase.analytics();
     // @ts-ignore
     import('../../package.json').then(pkg => {
-      // LibModule.start({
-      //   version: pkg.version,
-      //   production: true,
-      //   electron: true,
-      //   browser: true
-      // });
       this.config.versionName = pkg.version;
       config.production = true;
     });
@@ -133,7 +128,7 @@ export class SmartstockModule {
       {
         name: 'Report',
         link: '/report',
-        roles: ['*'],
+        roles: ['admin'],
         icon: 'table_chart',
         pages: [
           {
