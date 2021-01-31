@@ -54,9 +54,9 @@ const SalesWorkerService = {
             await salesCache.remove(key, true);
           }
         }
-        return 'Done';
       }
     }
+    return 'Done';
   },
 
   async saveSaleAndUpdateStock(
