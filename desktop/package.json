@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.1.31-build.1",
+  "version": "21.2.26-build.0",
   "main": "./index.js",
   "build": {
     "appId": "com.fahamutech.smartstock",

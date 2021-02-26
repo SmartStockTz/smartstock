@@ -20,6 +20,7 @@ export class BackgroundService implements OnInit {
   private settingsWorker: Worker;
   private salesWorker: Worker;
   private stocksWorkerProxy: Worker;
+  private paymentDialogOpen = false;
 
   ngOnInit(): void {
   }
@@ -131,10 +132,14 @@ export class BackgroundService implements OnInit {
           this.router.navigateByUrl('/account/bill').catch(_ => {
             // console.log(reason);
           });
-          this.dialog.open(PaymentDialogComponent).afterClosed().subscribe(_1 => {
-            this.router.navigateByUrl('/account/bill').catch(_2 => {
+          if (this.paymentDialogOpen === false) {
+            this.paymentDialogOpen = true;
+            this.dialog.open(PaymentDialogComponent).afterClosed().subscribe(_1 => {
+              this.paymentDialogOpen = false;
+              this.router.navigateByUrl('/account/bill').catch(_2 => {
+              });
             });
-          });
+          }
         }
       }).catch(_ => {
         // console.log(reason, 'payment');
