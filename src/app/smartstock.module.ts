@@ -143,7 +143,7 @@ export class SmartstockModule {
           },
           {
             link: '/report/sales/order',
-            name: 'Receipts Track',
+            name: 'Sales Tracking',
             roles: ['*']
           },
           {
