@@ -142,8 +142,13 @@ export class SmartstockModule {
             roles: ['admin']
           },
           {
-            link: '/report/sales/order',
+            link: '/report/sales/tracking',
             name: 'Sales Tracking',
+            roles: ['*']
+          },
+          {
+            link: '/report/sales/growth',
+            name: 'Sales Growth',
             roles: ['*']
           },
           {

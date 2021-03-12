@@ -17,7 +17,7 @@ if (!gotTheLock) {
     {
       label: 'Help',
       click() {
-        require('electron').shell.openExternal('https://smartstock.co.tz').catch(_ => {
+        require('electron').shell.openExternal('https://tawk.to/chat/5fe973abdf060f156a90dd77/1eqjunn83').catch(_ => {
         });
       },
     },
