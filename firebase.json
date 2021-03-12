@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "mobile",
+      "target": "business",
       "public": "dist/smartstock",
       "ignore": [
         "firebase.json",

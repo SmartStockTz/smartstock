@@ -36,6 +36,7 @@
     "push:snap:stable": "snapcraft upload desktop/dist/smartstock_${PACKAGE_VERSION}_amd64.snap --release stable",
     "build:web": "ng build --prod",
     "build:webdesktop": "ng build --prod -c=electronProd",
+    "deploy:business": "npm run build:web && firebase deploy --only hosting:business",
     "deploy:web": "npm run build:web && firebase deploy --only hosting:web --token \"$FIREBASE_TOKEN\"",
     "deploy:webdesktop": "npm run build:webdesktop && firebase deploy --only hosting:desktop --token \"$FIREBASE_TOKEN\"",
     "test": "ng test",

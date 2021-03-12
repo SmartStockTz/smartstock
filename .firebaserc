@@ -8,6 +8,9 @@
         "web": [
           "smart-stock-manager"
         ],
+        "business": [
+          "business-smartstock"
+        ],
         "mobile": [
           "m-smartstock"
         ],
