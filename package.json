@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.3.12-build.0",
+  "version": "21.3.22-build.0",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -29,7 +29,7 @@
     "start:electron": "export EA=1 && npm-run-all -p start:desktop electron:serve",
     "electron:serve": "wait-on tcp:4200 && cd desktop && npm start",
     "start:desktop": "ng serve --host 0.0.0.0 -c=electron",
-    "build:desktop": "ng build --prod -c=electronProd --base-href=./ && rm -r desktop/smartstock && cp -r dist/smartstock desktop",
+    "build:desktop": "ng build --prod -c=desktopProd --base-href=./ && rm -r desktop/smartstock && cp -r dist/smartstock desktop",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
     "push:snap:edge": "snapcraft upload desktop/dist/smartstock_${PACKAGE_VERSION}_amd64.snap --release edge",
@@ -64,7 +64,7 @@
     "@smartstocktz/purchases": "^0.0.13",
     "@smartstocktz/reports": "^0.0.12",
     "@smartstocktz/sales": "^0.0.17",
-    "@smartstocktz/stocks": "^0.0.11",
+    "@smartstocktz/stocks": "^0.0.12",
     "@smartstocktz/web": "^0.0.4",
     "bfastjs": "^4.2.2",
     "bootstrap": "^4.5.3",

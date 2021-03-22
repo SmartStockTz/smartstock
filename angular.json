@@ -61,6 +61,22 @@
               "buildOptimizer": true,
               "serviceWorker": true
             },
+            "desktopProd": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.desktopProd.ts"
+                }
+              ]
+            },
+            "desktop": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.desktop.ts"
+                }
+              ]
+            },
             "electronProd": {
               "fileReplacements": [
                 {
@@ -106,6 +122,9 @@
             },
             "electron": {
               "browserTarget": "smartstock:build:electron"
+            },
+            "desktop": {
+              "browserTarget": "smartstock:build:desktop"
             },
             "android": {
               "browserTarget": "smartstock:build:android"

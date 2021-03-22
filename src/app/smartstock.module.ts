@@ -84,7 +84,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    environment.desktop ? LibModule : ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,

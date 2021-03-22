@@ -11,8 +11,9 @@ export const environment = {
     measurementId: 'G-GBR0FY21QZ'
   },
   browser: false,
-  electron: false,
-  android: true,
+  electron: true,
+  desktop: true,
+  android: false,
   printerUrl: 'https://localhost:8080',
   functionsURL: 'https://smartstock-faas.bfast.fahamutech.com',
   databaseURL: 'https://smartstock-daas.bfast.fahamutech.com',
