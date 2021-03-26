@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.3.22-build.0",
+  "version": "21.3.26-build.0",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -12,9 +12,10 @@
       "category": "Office"
     },
     "win": {
+      "icon": "desktop/build/icon.png",
       "target": [
         {
-          "target": "nsis",
+          "target": "appx",
           "arch": [
             "x64",
             "ia32"
@@ -29,7 +30,8 @@
     "start:electron": "export EA=1 && npm-run-all -p start:desktop electron:serve",
     "electron:serve": "wait-on tcp:4200 && cd desktop && npm start",
     "start:desktop": "ng serve --host 0.0.0.0 -c=electron",
-    "build:desktop": "ng build --prod -c=desktopProd --base-href=./ && rm -r desktop/smartstock && cp -r dist/smartstock desktop",
+    "build:desktop": "ng build --prod -c=desktopProd --base-href=./ && cp -r dist/smartstock desktop",
+    "build:desktop:win": "ng build --prod -c=desktopProd --base-href=./ && copy -r dist/smartstock desktop",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
     "push:snap:edge": "snapcraft upload desktop/dist/smartstock_${PACKAGE_VERSION}_amd64.snap --release edge",
@@ -52,8 +54,8 @@
     "@angular/compiler": "~11.0.5",
     "@angular/core": "~11.0.5",
     "@angular/forms": "~11.0.5",
-    "@angular/material": "^11.0.3",
-    "@angular/material-moment-adapter": "^11.0.3",
+    "@angular/material": "~11.0.3",
+    "@angular/material-moment-adapter": "~11.0.3",
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
