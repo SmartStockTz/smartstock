@@ -5,7 +5,7 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {BFast} from 'bfastjs';
+import bfast, {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
