@@ -144,6 +144,6 @@ export class BackgroundService implements OnInit {
       }).catch(_ => {
         // console.log(reason, 'payment');
       });
-    }, 60000);
+    }, 1000 * 60 * 60);
   }
 }
