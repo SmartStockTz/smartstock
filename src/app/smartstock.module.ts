@@ -5,7 +5,7 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import bfast, {BFast} from 'bfastjs';
+import {BFast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {ConfigsService, LibModule} from '@smartstocktz/core-libs';
+import {ConfigsService, EventService, LibModule, StorageService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import firebase from 'firebase';
@@ -51,8 +51,20 @@ const routes: Routes = [
   {
     path: 'stock',
     canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
-    loadChildren: () => {
-      return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+    loadChildren: async () => {
+      const shop: any = await new StorageService(new EventService()).getActiveShop();
+      if (shop && shop.settings && shop.settings.module && shop.settings.module.stock) {
+        switch (shop.settings.module.stock.toString().trim()) {
+          case '@smartstocktz/stocks':
+            return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+          case '@smartstocktz/stocks-real-estate':
+            return import('@smartstocktz/stocks-real-estate').then(mod => mod.StocksModule);
+          default:
+            return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+        }
+      } else {
+        return import('@smartstocktz/stocks');
+      }
     }
   },
   {
@@ -117,5 +129,46 @@ export class SmartstockModule {
       projectId: environment.fahamupay.projectId,
       appPassword: environment.fahamupay.pass
     }, environment.fahamupay.projectId);
+
+    [
+      {
+        name: 'Dashboard',
+        link: '/dashboard',
+        roles: ['admin'],
+        icon: 'dashboard',
+      },
+      {
+        name: 'Report',
+        link: '/report',
+        roles: ['admin'],
+        icon: 'table_chart'
+      },
+      {
+        name: 'Sale',
+        link: '/sale',
+        roles: ['*'],
+        icon: 'shop_front',
+      },
+      {
+        name: 'Purchase',
+        link: '/purchase',
+        roles: ['manager', 'admin'],
+        icon: 'receipt',
+      },
+      {
+        name: 'Stock',
+        link: '/stock',
+        roles: ['manager', 'admin'],
+        icon: 'store',
+      },
+      {
+        name: 'Account',
+        link: '/account',
+        roles: ['*'],
+        icon: 'supervisor_account',
+      },
+    ].forEach(menu => {
+      this.config.addMenu(menu);
+    });
   }
 }
