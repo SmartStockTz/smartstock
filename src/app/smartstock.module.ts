@@ -63,7 +63,7 @@ const routes: Routes = [
             return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
         }
       } else {
-        return import('@smartstocktz/stocks');
+        return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
       }
     }
   },
