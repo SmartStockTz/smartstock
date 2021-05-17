@@ -1,5 +1,10 @@
 const {app, BrowserWindow, Menu} = require('electron');
-// const isDevMode = require('electron-is-dev')
+const njre = require('njre');
+const {spawn} = require("child_process");
+const {exec} = require("child_process");
+const {promisify} = require("util");
+const {execSync} = require("child_process");
+// const isDevMode = require('electron-is-dev');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -70,10 +75,22 @@ if (!gotTheLock) {
     }
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow.show();
-      if (splashScreen && !splashScreen.closed) {
-        splashScreen.close();
-      }
+      spawn(`ls -lh ${__dirname}/printer/ssmjavapos-0.2.0.jar`, {
+
+      }).on("message", m=>{
+        console.log(m);
+      });
+
+      //   .then(value => {
+      //   console.log(value.toString());
+      // }).catch(err => {
+      //   console.log(err.toString());
+      // }).finally(() => {
+      //   mainWindow.show();
+      //   if (splashScreen && !splashScreen.closed) {
+      //     splashScreen.close();
+      //   }
+      // });
     });
     mainWindow.webContents.on('new-window', (event, url) => {
       event.preventDefault();
