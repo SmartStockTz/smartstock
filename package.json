@@ -74,6 +74,7 @@
     "highcharts": "^8.2.2",
     "material-design-icons": "^3.0.1",
     "moment": "^2.29.1",
+    "ngx-bottom-nav": "^11.0.0",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
     "typeface-roboto": "0.0.75",
