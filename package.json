@@ -27,7 +27,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:electron": "export EA=1 && npm-run-all -p start:desktop electron:serve",
-    "electron:serve": "wait-on tcp:4200 && cd desktop && npm start",
+    "electron:serve": "export EA=1 && wait-on tcp:4200 && cd desktop && npm start",
     "start:desktop": "ng serve --host 0.0.0.0 -c=electron",
     "build:desktop": "ng build --configuration production -c=desktopProd --base-href=./ && rm -r desktop/smartstock && cp -r dist/smartstock desktop",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
@@ -37,12 +37,12 @@
     "build:web": "ng build --configuration production",
     "build:webdesktop": "ng build --configuration production -c=electronProd",
     "deploy:business": "npm run build:web && firebase deploy --only hosting:business",
-    "deploy:web": "npm run build:web && firebase deploy --only hosting:web --token \"$FIREBASE_TOKEN\"",
-    "deploy:webdesktop": "npm run build:webdesktop && firebase deploy --only hosting:desktop --token \"$FIREBASE_TOKEN\"",
+    "deploy:web": "npm run build:web && firebase deploy --only hosting:web",
+    "deploy:webdesktop": "npm run build:webdesktop && firebase deploy --only hosting:desktop",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron:start": "ng build --watch -op=desktop/public --base-href=./"
+    "electron:start": "ng build --watch --output-path=desktop/public --base-href=./"
   },
   "private": true,
   "dependencies": {

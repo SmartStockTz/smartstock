@@ -75,22 +75,10 @@ if (!gotTheLock) {
     }
 
     mainWindow.webContents.on('dom-ready', () => {
-      spawn(`ls -lh ${__dirname}/printer/ssmjavapos-0.2.0.jar`, {
-
-      }).on("message", m=>{
-        console.log(m);
-      });
-
-      //   .then(value => {
-      //   console.log(value.toString());
-      // }).catch(err => {
-      //   console.log(err.toString());
-      // }).finally(() => {
-      //   mainWindow.show();
-      //   if (splashScreen && !splashScreen.closed) {
-      //     splashScreen.close();
-      //   }
-      // });
+      mainWindow.show();
+      if (splashScreen && !splashScreen.closed) {
+        splashScreen.close();
+      }
     });
     mainWindow.webContents.on('new-window', (event, url) => {
       event.preventDefault();
