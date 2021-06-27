@@ -1662,10 +1662,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@smartstocktz/sales@~0.1.10":
-  version "0.1.10"
-  resolved "https://npm.pkg.github.com/download/@smartstocktz/sales/0.1.10/f909147b0f967ee585968026a15a43f18ddbd9f18078bf28e52651b3b5036484#7270abf1ebc118c47325043dfb6c45baa82ef9b3"
-  integrity sha512-nAVeL1hVUISufjYF1ojEoheusc4cxKmUAwrOkX6SPHNZS1SvtH7VQT6K+O6jS7iUniWEyUZu4buSPYl6T39XiQ==
+"@smartstocktz/sales@~0.1.11":
+  version "0.1.11"
+  resolved "https://npm.pkg.github.com/download/@smartstocktz/sales/0.1.11/9b8b15033d4dd189d8046f68fa21b6a842bbba47ab9928e3f28d0a1f4e505d83#dd9d8917707ed27e5aebce7d1b879354fe0167d7"
+  integrity sha512-TqdnKxYNii3WAzl89aWdD0Mzfal5JtkEz9Zre3B34CQr/6A6U4Sd1WiesKAp4MRlWq66j+Gj5f5Z1V4kvNu8Ew==
   dependencies:
     tslib "^2.0.0"
 
