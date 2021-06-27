@@ -24,6 +24,14 @@ import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {ReportNavigationService} from '@smartstocktz/reports';
+import {SalesNavigationService} from '@smartstocktz/sales';
+import {StockNavigationService} from '@smartstocktz/stocks';
+import {PurchaseNavigationService} from '@smartstocktz/purchases';
+import {ExpenseNavigationService} from '@smartstocktz/expense';
+import {AccountsNavigationService} from '@smartstocktz/accounts';
+import {StoreNavigationService} from '@smartstocktz/store';
 
 const routes: Routes = [
   {
@@ -45,8 +53,18 @@ const routes: Routes = [
   },
   {
     path: 'sale',
-    canActivate: [PaymentGuard, AuthenticationGuard, AuthenticationGuard, ActiveShopGuard],
+    canActivate: [PaymentGuard, AuthenticationGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
+  },
+  {
+    path: 'expense',
+    canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/expense').then(mod => mod.ExpenseModule)
+  },
+  {
+    path: 'store',
+    canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
+    loadChildren: () => import('@smartstocktz/store').then(mod => mod.StoreModule)
   },
   {
     path: 'stock',
@@ -107,11 +125,19 @@ const routes: Routes = [
     HammerModule,
     MatDialogModule,
     MatButtonModule,
+    MatBottomSheetModule
   ],
   bootstrap: [AppComponent]
 })
 export class SmartstockModule {
-  constructor(private readonly config: ConfigsService) {
+  constructor(private readonly config: ConfigsService,
+              private readonly salesNav: SalesNavigationService,
+              private readonly reportNav: ReportNavigationService,
+              private readonly stockNav: StockNavigationService,
+              private readonly purchaseNav: PurchaseNavigationService,
+              private readonly expenseNav: ExpenseNavigationService,
+              private readonly storeNav: StoreNavigationService,
+              private readonly accountNav: AccountsNavigationService) {
     firebase.initializeApp(environment.firebase);
     firebase.analytics();
     // @ts-ignore
@@ -136,39 +162,67 @@ export class SmartstockModule {
         link: '/dashboard',
         roles: ['admin'],
         icon: 'dashboard',
+        pages: []
       },
       {
         name: 'Report',
         link: '/report',
         roles: ['admin'],
-        icon: 'table_chart'
+        icon: 'table_chart',
+        pages: []
       },
       {
         name: 'Sale',
         link: '/sale',
         roles: ['*'],
         icon: 'shop_front',
+        pages: []
       },
       {
         name: 'Purchase',
         link: '/purchase',
         roles: ['manager', 'admin'],
         icon: 'receipt',
+        pages: []
       },
       {
         name: 'Stock',
         link: '/stock',
         roles: ['manager', 'admin'],
         icon: 'store',
+        pages: []
+      },
+      {
+        name: 'Store',
+        link: '/store',
+        roles: ['manager', 'admin'],
+        icon: 'widgets',
+        pages: []
+      },
+      {
+        name: 'Expense',
+        link: '/expense',
+        roles: ['manager', 'admin'],
+        icon: 'receipt',
+        pages: []
       },
       {
         name: 'Account',
         link: '/account',
         roles: ['*'],
         icon: 'supervisor_account',
+        pages: []
       },
     ].forEach(menu => {
       this.config.addMenu(menu);
     });
+    this.reportNav.init();
+    this.salesNav.init();
+    this.stockNav.init();
+    this.purchaseNav.init();
+    this.storeNav.init();
+    this.expenseNav.init();
+    this.accountNav.init();
+    config.selectedModuleName = '';
   }
 }

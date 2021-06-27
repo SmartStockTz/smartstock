@@ -63,7 +63,7 @@ export class BackgroundService implements OnInit {
   private async startSalesProxy() {
     try {
       if (typeof Worker !== 'undefined') {
-        this.salesWorker = new Worker('./sales.worker', {type: 'module'});
+        this.salesWorker = new Worker(new URL('./sales.worker', import.meta.url), {type: 'module'});
         this.salesWorker.postMessage({});
         return 'Ok';
       } else {
@@ -78,7 +78,7 @@ export class BackgroundService implements OnInit {
   private startSettingsWatch() {
     try {
       if (typeof Worker !== 'undefined') {
-        this.settingsWorker = new Worker('./settings.worker', {type: 'module'});
+        this.settingsWorker = new Worker(new URL('./settings.worker', import.meta.url), {type: 'module'});
         this.settingsWorker.postMessage({});
         return 'Ok';
       } else {
@@ -96,7 +96,7 @@ export class BackgroundService implements OnInit {
       //   this.swLocalDataService.start();
       // } else {
       if (typeof Worker !== 'undefined') {
-        this.stocksWorkerProxy = new Worker('./stocks.worker', {type: 'module'});
+        this.stocksWorkerProxy = new Worker(new URL('./stocks.worker', import.meta.url), {type: 'module'});
         this.stocksWorkerProxy.onmessage = ({data}) => {
           this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
         };
