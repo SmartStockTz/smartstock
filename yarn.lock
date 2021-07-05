@@ -1620,10 +1620,10 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@smartstocktz/accounts@^0.2.6":
-  version "0.2.6"
-  resolved "https://npm.pkg.github.com/download/@smartstocktz/accounts/0.2.6/676bf7c423662f99fc68f8fba121eefb4b27f2c8dddfc4250a691b93acfeb7a2#95575dba1783f61704b5ad791a6c03ae847414ac"
-  integrity sha512-FlzQHYU9tqQTsNNmso6t5e3a03nABfZZErM5ZhrDfe8FooWfDCDPXBbElj8qY80xBNk4BWyq652h1rU7S40Few==
+"@smartstocktz/accounts@^0.2.7":
+  version "0.2.7"
+  resolved "https://npm.pkg.github.com/download/@smartstocktz/accounts/0.2.7/4747942df031a10de7ec124af620aa4cc34825921f592f46cef23a0e4a5d3cc9#b4ce9a2cb02e70241934a03459f36ee602c81013"
+  integrity sha512-hNP4E07nAD7z34QRJ9bYRLLL+DbN3s0TyixrOSWYobiKNLSVtY4UwhVotdkCsj7Ijr/0nwX1qjoXV97slFEEjQ==
   dependencies:
     tslib "^2.0.0"
 
@@ -1662,7 +1662,7 @@
   dependencies:
     tslib "^2.0.0"
 
-"@smartstocktz/sales@~0.1.11":
+"@smartstocktz/sales@^0.1.11":
   version "0.1.11"
   resolved "https://npm.pkg.github.com/download/@smartstocktz/sales/0.1.11/9b8b15033d4dd189d8046f68fa21b6a842bbba47ab9928e3f28d0a1f4e505d83#dd9d8917707ed27e5aebce7d1b879354fe0167d7"
   integrity sha512-TqdnKxYNii3WAzl89aWdD0Mzfal5JtkEz9Zre3B34CQr/6A6U4Sd1WiesKAp4MRlWq66j+Gj5f5Z1V4kvNu8Ew==
