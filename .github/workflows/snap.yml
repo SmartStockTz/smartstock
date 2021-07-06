@@ -25,6 +25,7 @@ jobs:
       with:
         snapcraft_token: ${{ secrets.STORE_LOGIN }}
         skip_install: false
+    - run: echo $GT
     - run: npm install -g npm
     - run: npm install -f
     #- run: echo $GT
@@ -33,5 +34,5 @@ jobs:
       env:
         CI: true
         PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
-        GT: ${{ secrets.GT }}
+        GT: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
