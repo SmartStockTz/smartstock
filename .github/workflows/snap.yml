@@ -25,8 +25,9 @@ jobs:
       with:
         snapcraft_token: ${{ secrets.STORE_LOGIN }}
         skip_install: false
-    - run: echo "${PACKAGE_VERSION}"
-    - run: echo "${GT}"
+    - run: echo $PACKAGE_VERSION
+    - run: echo "**********"
+    - run: echo $GT
     - run: npm install -g npm
     - run: npm install -f
     - run: npm run deploy:desktop:snap
