@@ -33,5 +33,5 @@ jobs:
       env:
         CI: true
         PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
-        GT: ${{ secrets.GITHUB_TOKEN }}
+        GT: ${{ secrets.GT }}
         GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
