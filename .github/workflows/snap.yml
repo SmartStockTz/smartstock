@@ -28,8 +28,8 @@ jobs:
     - run: echo ${{ steps.pv.outputs.current-version }}
     - run: echo "**********"
     - run: echo ${{ secrets.GITHUB_TOKEN }}
-    - run: export GT=${{ secrets.GITHUB_TOKEN }} && npm install -g npm
-    - run: export GT=${{ secrets.GITHUB_TOKEN }} && npm install -f
+    - run: export GT=${{ secrets.GT }} && npm install -g npm
+    - run: export GT=${{ secrets.GT }} && npm install -f
     - run: export PACKAGE_VERSION=${{ steps.pv.outputs.current-version }} && npm run deploy:desktop:snap
       env:
 #         PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
