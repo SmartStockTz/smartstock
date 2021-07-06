@@ -24,7 +24,7 @@ jobs:
       uses: samuelmeuli/action-snapcraft@v1
       with:
         snapcraft_token: ${{ secrets.STORE_LOGIN }}
-        skip_install: true # optional, if already installed in an earlier step
+        skip_install: false # optional, if already installed in an earlier step
     - run: npm install -g yarn
     - run: yarn install
     - run: yarn deploy:desktop:snap
