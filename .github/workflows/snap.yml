@@ -26,6 +26,7 @@ jobs:
         snapcraft_token: ${{ secrets.STORE_LOGIN }}
         skip_install: false
     - run: npm install
+    #- run: echo $GT
     # - run: yarn install
     - run: npm run deploy:desktop:snap
       env:
