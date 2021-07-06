@@ -1,0 +1,35 @@
+name: Deploy Desktop
+
+on:
+  push:
+    branches:
+      - stable
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@master
+    - name: Install Snapcraft
+      uses: samuelmeuli/action-snapcraft@v1
+      with:
+        snapcraft_token: ${{ secrets.STORE_LOGIN }}
+        skip_install: true # optional, if already installed in an earlier step
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn deploy:desktop:snap
+      env:
+        CI: true
+        PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GRT:  ${{ secrets.GITHUB_TOKEN }}
