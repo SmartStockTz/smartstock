@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: get-npm-version
-      id: package-version
+      id: pv
       uses: martinbeentjes/npm-get-version-action@master
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
@@ -32,6 +32,6 @@ jobs:
           npm run deploy:desktop:snap
     env:
       CI: true
-      PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
+      PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
       GT: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
