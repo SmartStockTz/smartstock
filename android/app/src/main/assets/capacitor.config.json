@@ -1,0 +1,6 @@
+{
+	"appId": "com.fahamutech.smartstock",
+	"appName": "smartstock",
+	"webDir": "dist/smartstock",
+	"bundledWebRuntime": false
+}

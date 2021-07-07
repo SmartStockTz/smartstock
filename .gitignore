@@ -56,3 +56,5 @@ desktop/node_modules
 desktop/smartstock
 node_modules
 dist
+.vscode
+.idea

@@ -143,7 +143,7 @@ export class SmartstockModule {
     // @ts-ignore
     import('../../package.json').then(pkg => {
       this.config.versionName = pkg.version;
-      config.production = true;
+      this.config.production = true;
     });
     BFast.init({
       applicationId: environment.smartstock.applicationId,
