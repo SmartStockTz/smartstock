@@ -5,7 +5,7 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {BFast} from 'bfastjs';
+import {bfast} from 'bfastjs';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -18,7 +18,6 @@ import {ActiveShopGuard} from './guards/active-shop.guard';
 import {ConfigsService, EventService, LibModule, StorageService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
-import firebase from 'firebase';
 import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -32,6 +31,8 @@ import {PurchaseNavigationService} from '@smartstocktz/purchases';
 import {ExpenseNavigationService} from '@smartstocktz/expense';
 import {AccountsNavigationService} from '@smartstocktz/accounts';
 import {StoreNavigationService} from '@smartstocktz/store';
+import firebase from 'firebase/app';
+import "firebase/analytics";
 
 const routes: Routes = [
   {
@@ -145,12 +146,12 @@ export class SmartstockModule {
       this.config.versionName = pkg.version;
       this.config.production = true;
     });
-    BFast.init({
+    bfast.init({
       applicationId: environment.smartstock.applicationId,
       projectId: environment.smartstock.projectId,
       appPassword: environment.smartstock.pass
     });
-    BFast.init({
+    bfast.init({
       applicationId: environment.fahamupay.applicationId,
       projectId: environment.fahamupay.projectId,
       appPassword: environment.fahamupay.pass
