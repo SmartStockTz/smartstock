@@ -69,7 +69,15 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.desktopProd.ts"
                 }
-              ]
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
             },
             "desktop": {
               "fileReplacements": [
@@ -85,7 +93,15 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.electronProd.ts"
                 }
-              ]
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
             },
             "electron": {
               "fileReplacements": [
@@ -109,7 +125,15 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.androidProd.ts"
                 }
-              ]
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
             }
           },
           "defaultConfiguration": ""
