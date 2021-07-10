@@ -59,7 +59,7 @@ jobs:
         releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}
         track: production
         inAppUpdatePriority: 3
-        userFraction: 1.0
+        userFraction: 0.99
         whatsNewDirectory: android/whats-new/whatsnew-en-US
         # mappingFile: app/build/outputs/mapping/release/mapping.txt
 
