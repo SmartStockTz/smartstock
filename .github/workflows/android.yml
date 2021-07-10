@@ -27,4 +27,6 @@ jobs:
           export GT=${{ secrets.GT }} && npm install -f
           export GT=${{ secrets.GT }} && npm run build:mobile
     - name: Build with Gradle
-      run: ./android/gradlew build
+      run: |
+          cd android
+          bash ./gradlew build
