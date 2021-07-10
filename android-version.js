@@ -10,7 +10,7 @@ const vPath = join(__dirname, 'android', 'variables.gradle');
 let vFile  = readFileSync(vPath);
 vFile = vFile.toString()
 .replace(new RegExp('(versionCode).*', 'ig'), `versionCode = ${versionCode}`)
-.replace(new RegExp('(versionName).*','ig'), `versionName = ${versionName}`);
+.replace(new RegExp('(versionName).*','ig'), `versionName = "${versionName}"`);
 writeFileSync(vPath, vFile);
 console.log(versionCode);
 console.log(versionName);
