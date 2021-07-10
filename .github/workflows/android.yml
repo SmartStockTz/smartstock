@@ -60,6 +60,6 @@ jobs:
         track: production
         inAppUpdatePriority: 3
         userFraction: 0.99
-        whatsNewDirectory: android/whats-new/whatsnew-en-US
+        whatsNewDirectory: android/whats-new
         # mappingFile: app/build/outputs/mapping/release/mapping.txt
 
