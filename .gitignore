@@ -60,3 +60,5 @@ dist
 .idea
 android/app/build
 android/.gradle
+android/.idea
+android/build
