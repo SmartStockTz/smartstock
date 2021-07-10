@@ -3,5 +3,5 @@
     <string name="app_name">SmartStock</string>
     <string name="title_activity_main">SmartStock</string>
     <string name="package_name">com.fahamutech.smartstock</string>
-    <string name="custom_url_scheme">smartstock.co.tz</string>
+    <string name="custom_url_scheme">smartstock</string>
 </resources>
