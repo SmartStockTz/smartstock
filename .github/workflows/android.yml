@@ -32,11 +32,13 @@ jobs:
           cd android
           bash ./gradlew build
           bash ./gradlew bundle
+          cd ..
+          echo $PWD/android
     - uses: r0adkll/sign-android-release@v1
       name: Sign app APK
       id: sign_app
       with:
-        releaseDirectory: ~/android/app/build/outputs/bundle/release
+        releaseDirectory: android/app/build/outputs/bundle/release
         signingKeyBase64: ${{ secrets.ANDROID_SIGN_KEY_BASE64 }}
         alias: ${{ secrets.ANDROID_ALIAS }}
         keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
