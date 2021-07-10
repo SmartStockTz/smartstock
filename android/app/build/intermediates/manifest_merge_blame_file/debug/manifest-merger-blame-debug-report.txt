@@ -1,8 +1,8 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.fahamutech.smartstock"
-4    android:versionCode="5"
-5    android:versionName="21.7.7.13" >
+4    android:versionCode="19"
+5    android:versionName="21.7.9-build.15" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
@@ -30,66 +30,65 @@
 20-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:12:9-54
 21        android:supportsRtl="true"
 21-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:13:9-35
-22        android:testOnly="true"
-23        android:theme="@style/AppTheme" >
-23-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:14:9-40
-24        <activity
-24-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:16:9-35:20
-25            android:name="com.fahamutech.smartstock.MainActivity"
-25-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:18:13-66
-26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-26-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:17:13-129
-27            android:label="@string/title_activity_main"
-27-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:19:13-56
-28            android:launchMode="singleTask"
-28-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:21:13-44
-29            android:theme="@style/AppTheme.NoActionBarLaunch" >
-29-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:20:13-62
-30            <intent-filter>
-30-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:23:13-26:29
-31                <action android:name="android.intent.action.MAIN" />
-31-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:24:17-69
-31-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:24:25-66
-32
-33                <category android:name="android.intent.category.LAUNCHER" />
-33-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:25:17-77
-33-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:25:27-74
-34            </intent-filter>
-35            <intent-filter>
-35-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:28:11-33:27
-36                <action android:name="android.intent.action.VIEW" />
-36-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:29:13-65
-36-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:29:21-62
-37
-38                <category android:name="android.intent.category.DEFAULT" />
-38-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:30:13-72
-38-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:30:23-69
-39                <category android:name="android.intent.category.BROWSABLE" />
-39-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:31:13-74
-39-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:31:23-71
-40
-41                <data android:scheme="@string/custom_url_scheme" />
-41-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:32:13-64
-41-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:32:19-61
-42            </intent-filter>
-43        </activity>
-44
-45        <provider
-46            android:name="androidx.core.content.FileProvider"
-46-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:38:13-62
-47            android:authorities="com.fahamutech.smartstock.fileprovider"
-47-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:39:13-64
-48            android:exported="false"
-48-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:40:13-37
-49            android:grantUriPermissions="true" >
-49-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:41:13-47
-50            <meta-data
-50-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:42:11-44:50
-51                android:name="android.support.FILE_PROVIDER_PATHS"
-51-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:43:13-63
-52                android:resource="@xml/file_paths" />
-52-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:44:13-47
-53        </provider>
-54    </application>
-55
-56</manifest>
+22        android:theme="@style/AppTheme" >
+22-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:14:9-40
+23        <activity
+23-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:16:9-35:20
+24            android:name="com.fahamutech.smartstock.MainActivity"
+24-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:18:13-66
+25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+25-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:17:13-129
+26            android:label="@string/title_activity_main"
+26-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:19:13-56
+27            android:launchMode="singleTask"
+27-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:21:13-44
+28            android:theme="@style/AppTheme.NoActionBarLaunch" >
+28-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:20:13-62
+29            <intent-filter>
+29-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:23:13-26:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:24:17-69
+30-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:24:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:25:17-77
+32-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:25:27-74
+33            </intent-filter>
+34            <intent-filter>
+34-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:28:11-33:27
+35                <action android:name="android.intent.action.VIEW" />
+35-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:29:13-65
+35-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:29:21-62
+36
+37                <category android:name="android.intent.category.DEFAULT" />
+37-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:30:13-72
+37-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:30:23-69
+38                <category android:name="android.intent.category.BROWSABLE" />
+38-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:31:13-74
+38-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:31:23-71
+39
+40                <data android:scheme="@string/custom_url_scheme" />
+40-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:32:13-64
+40-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:32:19-61
+41            </intent-filter>
+42        </activity>
+43
+44        <provider
+45            android:name="androidx.core.content.FileProvider"
+45-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:38:13-62
+46            android:authorities="com.fahamutech.smartstock.fileprovider"
+46-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:39:13-64
+47            android:exported="false"
+47-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:40:13-37
+48            android:grantUriPermissions="true" >
+48-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:41:13-47
+49            <meta-data
+49-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:42:11-44:50
+50                android:name="android.support.FILE_PROVIDER_PATHS"
+50-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:43:13-63
+51                android:resource="@xml/file_paths" />
+51-->/home/mama27j/BFastProjects/smartstock/android/app/src/main/AndroidManifest.xml:44:13-47
+52        </provider>
+53    </application>
+54
+55</manifest>

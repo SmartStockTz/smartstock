@@ -10,8 +10,8 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 5,
-      "versionName": "21.7.7.13",
+      "versionCode": 19,
+      "versionName": "21.7.9-build.15",
       "outputFile": "AndroidManifest.xml"
     }
   ]
