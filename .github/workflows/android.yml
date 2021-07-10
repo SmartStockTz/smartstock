@@ -23,6 +23,7 @@ jobs:
       run: chmod +x android/gradlew
     - name: Build and snyc web assets
       run : |
+          export GT=${{ secrets.GT }} && npm install -g npm
           export GT=${{ secrets.GT }} && npm install -f
           export GT=${{ secrets.GT }} && npm run build:mobile
     - name: Build with Gradle
