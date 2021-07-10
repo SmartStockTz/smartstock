@@ -30,7 +30,7 @@
     "electron:serve": "export EA=1 && wait-on tcp:4200 && cd desktop && npm start",
     "start:desktop": "ng serve --host 0.0.0.0 -c=electron",
     "build:desktop": "ng build --configuration production -c=desktopProd --base-href=./",
-    "build:mobile": "ng build --configuration production -c=desktopProd --base-href=./ && npx cap sync",
+    "build:mobile": "ng build --configuration production -c=desktopProd --base-href=./ && node android-version.js && npx cap sync",
     "deploy:desktop:snap": "ng build --configuration production -c=desktopProd --base-href=./ && bash desktop.sh",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
