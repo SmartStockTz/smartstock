@@ -1,4 +1,0 @@
-com/fahamutech/smartstock/MainActivity.java
- com.fahamutech.smartstock.MainActivity
-com/fahamutech/smartstock/BuildConfig.java
- com.fahamutech.smartstock.BuildConfig

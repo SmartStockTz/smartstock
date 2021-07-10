@@ -58,3 +58,5 @@ node_modules
 dist
 .vscode
 .idea
+android/app/build
+android/.gradle
