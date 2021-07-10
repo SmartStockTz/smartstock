@@ -23,6 +23,7 @@ jobs:
       run: chmod +x android/gradlew
     - name: Build and snyc web assets
       run : |
+          echo $PWD
           export GT=${{ secrets.GT }} && sudo npm install -g npm
           export GT=${{ secrets.GT }} && npm install -f
           export GT=${{ secrets.GT }} && npm run build:mobile
@@ -30,11 +31,12 @@ jobs:
       run: |
           cd android
           bash ./gradlew build
+          bash ./gradlew bundle
     - uses: r0adkll/sign-android-release@v1
       name: Sign app APK
       id: sign_app
       with:
-        releaseDirectory: app/build/outputs/apk/release
+        releaseDirectory: ~/android/app/build/outputs/bundle/release
         signingKeyBase64: ${{ secrets.ANDROID_SIGN_KEY_BASE64 }}
         alias: ${{ secrets.ANDROID_ALIAS }}
         keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
