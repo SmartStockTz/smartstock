@@ -158,7 +158,7 @@ export class SmartstockModule {
     // @ts-ignore
     import('../../package.json').then(pkg => {
       this.config.versionName = pkg.version;
-      this.config.production = true;
+      // this.config.production = true;
     });
     bfast.init({
       applicationId: environment.smartstock.applicationId,
