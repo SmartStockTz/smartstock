@@ -31,9 +31,9 @@ import { PurchaseNavigationService } from '@smartstocktz/purchases';
 import { ExpenseNavigationService } from '@smartstocktz/expense';
 import { AccountsNavigationService } from '@smartstocktz/accounts';
 import { StoreNavigationService } from '@smartstocktz/store';
-import { App } from '@capacitor/app'
+import { App } from '@capacitor/app';
 import firebase from 'firebase/app';
-import "firebase/analytics";
+import 'firebase/analytics';
 
 const routes: Routes = [
   {
@@ -141,15 +141,15 @@ export class SmartstockModule {
     private readonly storeNav: StoreNavigationService,
     private readonly accountNav: AccountsNavigationService) {
     App.addListener('backButton', (e) => {
-      if(e.canGoBack){
+      if (e.canGoBack) {
         const curl = window.location.href;
         window.history.back();
-        setTimeout(()=>{
-          if(curl === window.location.href){
+        setTimeout(() => {
+          if (curl === window.location.href) {
             App.exitApp();
           }
         }, 500);
-      }else{
+      } else {
         App.exitApp();
       }
     });
