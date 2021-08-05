@@ -1,37 +1,37 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from '../environments/environment';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { bfast } from 'bfastjs';
-import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
-import { MatNativeDateModule } from '@angular/material/core';
-import { HammerModule } from '@angular/platform-browser';
-import { AuthenticationGuard } from './guards/authentication.guard';
-import { AdminGuard } from './guards/admin.guard';
-import { ActiveShopGuard } from './guards/active-shop.guard';
-import { ConfigsService, EventService, LibModule, StorageService } from '@smartstocktz/core-libs';
-import { ManagerGuard } from './guards/manager.guard';
-import { WebGuard } from './guards/web.guard';
-import { PaymentGuard } from './guards/payment.guard';
-import { PaymentDialogComponent } from './components/payment-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { ReportNavigationService } from '@smartstocktz/reports';
-import { SalesNavigationService } from '@smartstocktz/sales';
-import { StockNavigationService } from '@smartstocktz/stocks';
-import { PurchaseNavigationService } from '@smartstocktz/purchases';
-import { ExpenseNavigationService } from '@smartstocktz/expense';
-import { AccountsNavigationService } from '@smartstocktz/accounts';
-import { StoreNavigationService } from '@smartstocktz/store';
-import { App } from '@capacitor/app';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {environment} from '../environments/environment';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {bfast} from 'bfastjs';
+import {AppComponent} from './app.component';
+import {RouterModule, Routes} from '@angular/router';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {HttpClientModule} from '@angular/common/http';
+import {MatNativeDateModule} from '@angular/material/core';
+import {HammerModule} from '@angular/platform-browser';
+import {AuthenticationGuard} from './guards/authentication.guard';
+import {AdminGuard} from './guards/admin.guard';
+import {ActiveShopGuard} from './guards/active-shop.guard';
+import {ConfigsService, EventService, LibModule, StorageService} from '@smartstocktz/core-libs';
+import {ManagerGuard} from './guards/manager.guard';
+import {WebGuard} from './guards/web.guard';
+import {PaymentGuard} from './guards/payment.guard';
+import {PaymentDialogComponent} from './components/payment-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {ReportNavigationService} from '@smartstocktz/reports';
+import {SalesNavigationService, SaleService} from '@smartstocktz/sales';
+import {StockNavigationService} from '@smartstocktz/stocks';
+import {PurchaseNavigationService} from '@smartstocktz/purchases';
+import {ExpenseNavigationService} from '@smartstocktz/expense';
+import {AccountsNavigationService} from '@smartstocktz/accounts';
+import {StoreNavigationService} from '@smartstocktz/store';
+import {App} from '@capacitor/app';
 import firebase from 'firebase/app';
 import 'firebase/analytics';
 
@@ -116,7 +116,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LibModule,
-    environment.desktop ? LibModule : ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    environment.desktop ? LibModule : ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,
@@ -133,13 +133,17 @@ const routes: Routes = [
 })
 export class SmartstockModule {
   constructor(private readonly config: ConfigsService,
-    private readonly salesNav: SalesNavigationService,
-    private readonly reportNav: ReportNavigationService,
-    private readonly stockNav: StockNavigationService,
-    private readonly purchaseNav: PurchaseNavigationService,
-    private readonly expenseNav: ExpenseNavigationService,
-    private readonly storeNav: StoreNavigationService,
-    private readonly accountNav: AccountsNavigationService) {
+              private readonly salesNav: SalesNavigationService,
+              private readonly reportNav: ReportNavigationService,
+              private readonly stockNav: StockNavigationService,
+              private readonly purchaseNav: PurchaseNavigationService,
+              private readonly expenseNav: ExpenseNavigationService,
+              private readonly storeNav: StoreNavigationService,
+              private readonly accountNav: AccountsNavigationService) {
+    bfast.init({
+      applicationId: 'smartstock_lb',
+      projectId: 'smartstock'
+    });
     App.addListener('backButton', (e) => {
       if (e.canGoBack) {
         const curl = window.location.href;
@@ -161,14 +165,9 @@ export class SmartstockModule {
       // this.config.production = true;
     });
     bfast.init({
-      applicationId: environment.smartstock.applicationId,
-      projectId: environment.smartstock.projectId,
-      appPassword: environment.smartstock.pass
-    });
-    bfast.init({
-      applicationId: environment.fahamupay.applicationId,
-      projectId: environment.fahamupay.projectId,
-      appPassword: environment.fahamupay.pass
+      applicationId: 'fahamupay',
+      projectId: 'fahamupay',
+      appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'
     }, environment.fahamupay.projectId);
 
     [
