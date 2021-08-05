@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {EventService, SsmEvents} from '@smartstocktz/core-libs';
+import {EventService} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
 import {bfast} from 'bfastjs';
@@ -17,9 +17,6 @@ export class BackgroundService implements OnInit {
               private readonly router: Router) {
   }
 
-  private settingsWorker: Worker;
-  private salesWorker: Worker;
-  private stocksWorkerProxy: Worker;
   private paymentDialogOpen = false;
 
   ngOnInit(): void {
@@ -28,9 +25,6 @@ export class BackgroundService implements OnInit {
   async start() {
     try {
       this._startPaymentWatch();
-      await this.startSalesProxy();
-      await this.startStockUpdateProxy();
-      await this.startSettingsWatch();
       return 'Done start proxy';
     } catch (e) {
       console.warn(e);
@@ -42,85 +36,6 @@ export class BackgroundService implements OnInit {
   }
 
   private _stopWorkers() {
-    // this.swSalesProxyService.stop();
-    if (this.salesWorker) {
-      this.salesWorker.terminate();
-    } else {
-      this.salesWorker = undefined;
-    }
-    if (this.stocksWorkerProxy) {
-      this.stocksWorkerProxy.terminate();
-    } else {
-      this.stocksWorkerProxy = undefined;
-    }
-    if (this.settingsWorker) {
-      this.settingsWorker.terminate();
-    } else {
-      this.settingsWorker = undefined;
-    }
-  }
-
-  private async startSalesProxy() {
-    try {
-      if (typeof Worker !== 'undefined') {
-        this.salesWorker = new Worker(new URL('./sales.worker', import.meta.url), {type: 'module'});
-        this.salesWorker.postMessage({});
-        return 'Ok';
-      } else {
-        this._noWorkerSalesProxy();
-      }
-    } catch (e) {
-      this._noWorkerSalesProxy();
-      throw {message: 'Fails to start sales proxy'};
-    }
-  }
-
-  private startSettingsWatch() {
-    try {
-      if (typeof Worker !== 'undefined') {
-        this.settingsWorker = new Worker(new URL('./settings.worker', import.meta.url), {type: 'module'});
-        this.settingsWorker.postMessage({});
-        return 'Ok';
-      } else {
-        this._noWorkerSettings();
-      }
-    } catch (e) {
-      this._noWorkerSalesProxy();
-      throw {message: 'Fails to start sales proxy'};
-    }
-  }
-
-  private async startStockUpdateProxy() {
-    try {
-      // if (Capacitor.isNative) {
-      //   this.swLocalDataService.start();
-      // } else {
-      if (typeof Worker !== 'undefined') {
-        this.stocksWorkerProxy = new Worker(new URL('./stocks.worker', import.meta.url), {type: 'module'});
-        this.stocksWorkerProxy.onmessage = ({data}) => {
-          this.eventApi.broadcast(SsmEvents.STOCK_UPDATED);
-        };
-        this.stocksWorkerProxy.postMessage({});
-        return 'Ok';
-      } else {
-        this._noWorkerStockSync();
-      }
-      // }
-    } catch (e) {
-      this._noWorkerStockSync();
-      throw {message: 'Fails to start stocks proxy'};
-    }
-  }
-
-  private _noWorkerSalesProxy() {
-    // this.swSalesProxyService.start();
-  }
-
-  private _noWorkerStockSync() {
-  }
-
-  private _noWorkerSettings() {
-
   }
 
   private _startPaymentWatch() {
