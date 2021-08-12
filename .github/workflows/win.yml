@@ -29,11 +29,11 @@ jobs:
 #        with:
 #          snapcraft_token: ${{ secrets.STORE_LOGIN }}
 #          skip_install: false
-      - run: npm install -g npm
-      - run: npm install -f
       - run: |
            $Env:GT=${{ secrets.GITHUB_TOKEN }}
            $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+           npm install -g npm
+           npm install -f
            rm -r desktop/smartstock
            rm -r desktop/dist
            cp -r dist/smartstock desktop
