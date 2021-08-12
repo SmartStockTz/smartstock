@@ -15,6 +15,9 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    env:
+      GT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -29,9 +32,9 @@ jobs:
 #        with:
 #          snapcraft_token: ${{ secrets.STORE_LOGIN }}
 #          skip_install: false
+#      - $Env:GT=${{ secrets.GITHUB_TOKEN }}
+#        $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: |
-           $Env:GT=${{ secrets.GITHUB_TOKEN }}
-           $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
            npm install -g npm
            npm install -f
            rm -r desktop/smartstock
@@ -45,8 +48,3 @@ jobs:
            jsipfs init
            jsipfs daemon
            jsipfs add -r ./dist
-           #          npm run deploy:desktop:win
-        env:
-#          PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
-#          GT: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
