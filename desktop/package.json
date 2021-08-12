@@ -37,18 +37,18 @@
     "start": "electron .",
     "test": "ng test",
     "lint": "ng lint",
-    "build:snap": "electron-builder --linux snap",
-    "build:mac": "electron-builder --mac",
-    "build:snap32": "electron-builder --linux --ia32 snap",
-    "build:win": "electron-builder --win"
+    "build:snap": "electron-builder --linux snap  --publish always",
+    "build:mac": "electron-builder --mac  --publish always",
+    "build:snap32": "electron-builder --linux --ia32 snap  --publish always",
+    "build:win": "electron-builder --win  --publish always"
   },
   "dependencies": {
     "njre": "~0.2.0"
   },
   "devDependencies": {
     "electron": "^9.3.0",
-    "electron-builder": "^22.8.0",
-    "electron-is-dev": "^1.2.0"
+    "electron-builder": "^22.11.7",
+    "electron-is-dev": "^2.0.0"
   },
   "private": true
 }
