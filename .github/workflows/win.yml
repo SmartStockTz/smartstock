@@ -21,14 +21,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: get-npm-version
-        id: pv
-        uses: martinbeentjes/npm-get-version-action@master
-      - name: Install Snapcraft
-        uses: samuelmeuli/action-snapcraft@v1
-        with:
-          snapcraft_token: ${{ secrets.STORE_LOGIN }}
-          skip_install: false
+#      - name: get-npm-version
+#        id: pv
+#        uses: martinbeentjes/npm-get-version-action@master
+#      - name: Install Snapcraft
+#        uses: samuelmeuli/action-snapcraft@v1
+#        with:
+#          snapcraft_token: ${{ secrets.STORE_LOGIN }}
+#          skip_install: false
       - run: npm install -g npm
       - run: npm install -f
       - run: |
@@ -45,6 +45,6 @@ jobs:
            jsipfs daemon
            jsipfs add -r ./dist
         env:
-          PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
+#          PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
           GT: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
