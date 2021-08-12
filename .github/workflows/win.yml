@@ -32,7 +32,6 @@ jobs:
       - run: npm install -g npm
       - run: npm install -f
       - run: |
-#          npm run deploy:desktop:win
            rm -r desktop/smartstock
            rm -r desktop/dist
            cp -r dist/smartstock desktop
@@ -44,6 +43,7 @@ jobs:
            jsipfs init
            jsipfs daemon
            jsipfs add -r ./dist
+           #          npm run deploy:desktop:win
         env:
 #          PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
           GT: ${{ secrets.GITHUB_TOKEN }}
