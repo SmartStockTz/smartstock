@@ -32,6 +32,8 @@ jobs:
       - run: npm install -g npm
       - run: npm install -f
       - run: |
+           $Env:GT=${{ secrets.GITHUB_TOKEN }}
+           $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
            rm -r desktop/smartstock
            rm -r desktop/dist
            cp -r dist/smartstock desktop
@@ -46,5 +48,5 @@ jobs:
            #          npm run deploy:desktop:win
         env:
 #          PACKAGE_VERSION: ${{ steps.pv.outputs.current-version }}
-          GT: ${{ secrets.GITHUB_TOKEN }}
+#          GT: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
