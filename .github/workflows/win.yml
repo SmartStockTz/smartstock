@@ -35,6 +35,7 @@ jobs:
 #      - $Env:GT=${{ secrets.GITHUB_TOKEN }}
 #        $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: |
+           pwd
            npm install -g npm
            npm install -f
            cp -r dist/smartstock desktop
