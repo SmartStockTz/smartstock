@@ -25,8 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-           $env:GT = ${{ secrets.GITHUB_TOKEN }}
-           $env:GITHUB_TOKEN = ${{ secrets.GITHUB_TOKEN }}
+           $env:GT = "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"
            npm install -g npm
            npm install -f
            echo $GT
