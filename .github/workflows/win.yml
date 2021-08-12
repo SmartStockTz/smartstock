@@ -35,9 +35,9 @@ jobs:
 #      - $Env:GT=${{ secrets.GITHUB_TOKEN }}
 #        $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: |
-           echo $pwd
            npm install -g npm
            npm install -f
+           npx ng build --configuration production -c=desktopProd --base-href=./
            cp -r dist/smartstock desktop
            node desktop-version.js
            cd desktop
