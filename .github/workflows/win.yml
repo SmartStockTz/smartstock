@@ -24,19 +24,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-#      - name: get-npm-version
-#        id: pv
-#        uses: martinbeentjes/npm-get-version-action@master
-#      - name: Install Snapcraft
-#        uses: samuelmeuli/action-snapcraft@v1
-#        with:
-#          snapcraft_token: ${{ secrets.STORE_LOGIN }}
-#          skip_install: false
-#      - $Env:GT=${{ secrets.GITHUB_TOKEN }}
-#        $Env:GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: |
+           $env:GT = ${{ secrets.GITHUB_TOKEN }}
+           $env:GITHUB_TOKEN = ${{ secrets.GITHUB_TOKEN }}
            npm install -g npm
            npm install -f
+           echo $GT
            npx ng build --configuration production -c=desktopProd --base-href=./
            cp -r dist/smartstock desktop
            node desktop-version.js
