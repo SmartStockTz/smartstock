@@ -15,7 +15,7 @@
     "win": {
       "target": [
         {
-          "target": "nsis",
+          "target": "appx",
           "arch": [
             "x64",
             "ia32"
@@ -33,6 +33,7 @@
     "build:desktop": "npx ng build --configuration production -c=desktopProd --base-href=./",
     "build:mobile": "npx ng build --configuration production -c=desktopProd --base-href=./ && node android-version.js && npx cap sync",
     "deploy:desktop:snap": "npx ng build --configuration production -c=desktopProd --base-href=./ && bash desktop.sh",
+    "deploy:desktop:win": "npx ng build --configuration production -c=desktopProd --base-href=./ && powershel desktop-win.bat",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
     "push:snap:edge": "snapcraft upload desktop/dist/smartstock_${PACKAGE_VERSION}_amd64.snap --release edge",
