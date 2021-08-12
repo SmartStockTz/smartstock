@@ -27,7 +27,8 @@
           ]
         }
       ]
-    }
+    },
+    "publish": "always"
   },
   "extraFiles": [
     "printer"
