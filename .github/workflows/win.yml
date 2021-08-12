@@ -35,6 +35,6 @@ jobs:
            cd desktop
            npm install
            npm run build:win
-           npm install -g ipfs
-           jsipfs init
-           jsipfs add -r ./dist
+#           npm install -g ipfs
+#           jsipfs init
+#           jsipfs add -r ./dist
