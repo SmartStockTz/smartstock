@@ -4,6 +4,10 @@
   "author": "SmartStock Company",
   "version": "21.7.6-build.12",
   "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SmartStockTz/smartstock.git"
+  },
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
