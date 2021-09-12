@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {EventService} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
-import {bfast} from 'bfastjs';
+import {cache} from 'bfast';
 import {MatDialog} from '@angular/material/dialog';
 import {PaymentDialogComponent} from '../components/payment-dialog.component';
 
@@ -41,7 +41,7 @@ export class BackgroundService implements OnInit {
   private _startPaymentWatch() {
     setInterval(() => {
       this.billing.subscription().then(value => {
-        return bfast.cache({database: 'payment', collection: 'subscription'}).set('status', value, {secure: true});
+        return cache({database: 'payment', collection: 'subscription'}).set('status', value, {secure: true});
       }).then(value => {
         if (value && value.subscription === false) {
           this.router.navigateByUrl('/account/bill').catch(_ => {

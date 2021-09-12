@@ -1,4 +1,4 @@
-import bfast from 'bfastjs';
+import * as bfast from 'bfast';
 import {ShopModel} from '../models/shop.model';
 import {StockModel} from '../models/stock.model';
 import {sha1} from 'crypto-hash';

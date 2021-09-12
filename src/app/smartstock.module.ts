@@ -5,7 +5,7 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {bfast} from 'bfastjs';
+import {init} from 'bfast';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {ConfigsService, EventService, LibModule, StorageService} from '@smartstocktz/core-libs';
+import {ConfigsService, EventService, IpfsService, LibModule, StorageService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import {PaymentGuard} from './guards/payment.guard';
@@ -25,15 +25,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {ReportNavigationService} from '@smartstocktz/reports';
-import {SalesNavigationService, SaleService} from '@smartstocktz/sales';
+import {SalesNavigationService} from '@smartstocktz/sales';
 import {StockNavigationService} from '@smartstocktz/stocks';
 import {PurchaseNavigationService} from '@smartstocktz/purchases';
 import {ExpenseNavigationService} from '@smartstocktz/expense';
 import {AccountsNavigationService} from '@smartstocktz/accounts';
 import {StoreNavigationService} from '@smartstocktz/store';
 import {App} from '@capacitor/app';
-import firebase from 'firebase/app';
-import 'firebase/analytics';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/analytics';
 
 const routes: Routes = [
   {
@@ -72,19 +72,19 @@ const routes: Routes = [
     path: 'stock',
     canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: async () => {
-      const shop: any = await new StorageService(new EventService()).getActiveShop();
-      if (shop && shop.settings && shop.settings.module && shop.settings.module.stock) {
-        switch (shop.settings.module.stock.toString().trim()) {
-          case '@smartstocktz/stocks':
-            return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-          case '@smartstocktz/stocks-real-estate':
-            return import('@smartstocktz/stocks-real-estate').then(mod => mod.StocksModule);
-          default:
-            return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-        }
-      } else {
-        return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-      }
+      // const shop: any = await new StorageService(new EventService()).getActiveShop();
+      // if (shop && shop.settings && shop.settings.module && shop.settings.module.stock) {
+      //   switch (shop.settings.module.stock.toString().trim()) {
+      //     case '@smartstocktz/stocks':
+      //       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+      //     case '@smartstocktz/stocks-real-estate':
+      //       return import('@smartstocktz/stocks-real-estate').then(mod => mod.StocksModule);
+      //     default:
+      //       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+      //   }
+      // } else {
+      return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
+      // }
     }
   },
   {
@@ -140,7 +140,10 @@ export class SmartstockModule {
               private readonly expenseNav: ExpenseNavigationService,
               private readonly storeNav: StoreNavigationService,
               private readonly accountNav: AccountsNavigationService) {
-    bfast.init({
+    IpfsService.getVersion().then(value => {
+      console.log('ipfs version is : ', value.version);
+    }).catch(console.log);
+    init({
       applicationId: 'smartstock_lb',
       projectId: 'smartstock'
     });
@@ -164,12 +167,11 @@ export class SmartstockModule {
       this.config.versionName = pkg.version;
       // this.config.production = true;
     });
-    bfast.init({
+    init({
       applicationId: 'fahamupay',
       projectId: 'fahamupay',
       appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'
     }, environment.fahamupay.projectId);
-
     [
       {
         name: 'Dashboard',
