@@ -5,7 +5,7 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {init} from 'bfast';
+import * as bfast from 'bfast';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -143,7 +143,7 @@ export class SmartstockModule {
     IpfsService.getVersion().then(value => {
       console.log('ipfs version is : ', value.version);
     }).catch(console.log);
-    init({
+    bfast.init({
       applicationId: 'smartstock_lb',
       projectId: 'smartstock'
     });
@@ -167,7 +167,7 @@ export class SmartstockModule {
       this.config.versionName = pkg.version;
       // this.config.production = true;
     });
-    init({
+    bfast.init({
       applicationId: 'fahamupay',
       projectId: 'fahamupay',
       appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'

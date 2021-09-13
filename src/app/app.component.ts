@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {init} from 'bfast';
 import {BackgroundService} from './workers/background.service';
 
 @Component({

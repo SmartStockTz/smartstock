@@ -1,1 +1,48 @@
-{"name":"smartstock","description":"manage your sales, purchase and stock","author":"SmartStock Company","version":"21.7.6-build.12","main":"./index.js","build":{"appId":"com.fahamutech.smartstock","mac":{"category":"Office"},"linux":{"category":"Office"},"win":{"icon":"build/icon.png","target":[{"target":"appx","arch":["x64","ia32"]}]}},"extraFiles":["printer"],"scripts":{"start":"electron .","test":"ng test","lint":"ng lint","build:snap":"electron-builder --linux snap","build:mac":"electron-builder --mac","build:snap32":"electron-builder --linux --ia32 snap","build:win":"electron-builder --win"},"dependencies":{"njre":"~0.2.0"},"devDependencies":{"electron":"^9.3.0","electron-builder":"^22.8.0","electron-is-dev":"^1.2.0"},"private":true}
+{
+  "name": "smartstock",
+  "description": "manage your sales, purchase and stock",
+  "author": "SmartStock Company",
+  "version": "21.9.13-build.26-v2.0",
+  "main": "./index.js",
+  "build": {
+    "appId": "com.fahamutech.smartstock",
+    "mac": {
+      "category": "Office"
+    },
+    "linux": {
+      "category": "Office"
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "appx",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "extraFiles": [
+    "printer"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "test": "ng test",
+    "lint": "ng lint",
+    "build:snap": "electron-builder --linux snap",
+    "build:mac": "electron-builder --mac",
+    "build:snap32": "electron-builder --linux --ia32 snap",
+    "build:win": "electron-builder --win"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": "^9.3.0",
+    "electron-builder": "^22.8.0",
+    "electron-is-dev": "^1.2.0"
+  },
+  "private": true
+}
