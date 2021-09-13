@@ -30,7 +30,8 @@
               "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": [
-              "./node_modules/localforage/dist/localforage.js"
+              "./node_modules/localforage/dist/localforage.js",
+              "src/assets/js/ipfs.min.js"
             ],
             "webWorkerTsConfig": "tsconfig.worker.json",
             "vendorChunk": true,
@@ -178,7 +179,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
-              "node_modules/localforage/dist/localforage.js"
+              "node_modules/localforage/dist/localforage.js",
+              "src/assets/js/ipfs.min.js"
             ],
             "assets": [
               "src/favicon.ico",
