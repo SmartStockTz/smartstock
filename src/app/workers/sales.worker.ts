@@ -1,4 +1,4 @@
-import bfast from 'bfastjs';
+import * as bfast from 'bfast';
 import {ShopModel} from '../models/shop.model';
 import {SalesModel} from '../models/sales.model';
 import {SmartstockUtil} from '../utils/smartstock.util';

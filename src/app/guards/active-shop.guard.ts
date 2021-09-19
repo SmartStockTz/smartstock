@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserService} from '@smartstocktz/core-libs';
-import {bfast} from 'bfastjs';
+import {init} from 'bfast';
 import {SaleService} from '@smartstocktz/sales';
 import {StockService} from '@smartstocktz/stocks';
 
@@ -23,11 +23,11 @@ export class ActiveShopGuard implements CanActivate {
       try {
         const activeShop = await this.userService.getCurrentShop();
         if (activeShop && activeShop.projectId && activeShop.applicationId) {
-          bfast.init({
+          init({
             applicationId: 'smartstock_lb',
             projectId: 'smartstock'
           });
-          bfast.init({
+          init({
             applicationId: activeShop.applicationId,
             projectId: activeShop.projectId,
             appPassword: activeShop.masterKey,

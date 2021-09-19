@@ -1,9 +1,5 @@
 const {app, BrowserWindow, Menu} = require('electron');
-const njre = require('njre');
-const {spawn} = require("child_process");
-const {exec} = require("child_process");
-const {promisify} = require("util");
-const {execSync} = require("child_process");
+const path = require('path');
 // const isDevMode = require('electron-is-dev');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
@@ -47,6 +43,7 @@ if (!gotTheLock) {
   ];
 
   async function createWindow() {
+
     splashScreen = new BrowserWindow({
       show: false,
       width: 400,
@@ -63,7 +60,7 @@ if (!gotTheLock) {
       show: false,
       webPreferences: {
         nodeIntegration: true,
-        // preload: path.join(__dirname, 'node_modules', '@capacitor', 'desktop', 'dist', 'desktop-bridge.js')
+        preload: path.join(__dirname, 'preload.js')
       }
     });
 
