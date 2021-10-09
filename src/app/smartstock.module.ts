@@ -5,7 +5,6 @@ import {environment} from '../environments/environment';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import * as bfast from 'bfast';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -15,7 +14,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {ConfigsService, EventService, IpfsService, LibModule, StorageService} from '@smartstocktz/core-libs';
+import {ConfigsService, IpfsService, LibModule, SyncsService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import {PaymentGuard} from './guards/payment.guard';
@@ -34,6 +33,7 @@ import {StoreNavigationService} from '@smartstocktz/store';
 import {App} from '@capacitor/app';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/analytics';
+import {init} from 'bfast';
 
 const routes: Routes = [
   {
@@ -139,11 +139,12 @@ export class SmartstockModule {
               private readonly purchaseNav: PurchaseNavigationService,
               private readonly expenseNav: ExpenseNavigationService,
               private readonly storeNav: StoreNavigationService,
-              private readonly accountNav: AccountsNavigationService) {
-    IpfsService.getVersion().then(value => {
-      console.log('ipfs version is : ', value.version);
-    }).catch(console.log);
-    bfast.init({
+              private readonly accountNav: AccountsNavigationService,
+              private readonly syncsService: SyncsService) {
+    // IpfsService.getVersion().then(value => {
+    //   console.log('ipfs version is : ', value.version);
+    // }).catch(console.log);
+    init({
       applicationId: 'smartstock_lb',
       projectId: 'smartstock'
     });
@@ -167,11 +168,11 @@ export class SmartstockModule {
       this.config.versionName = pkg.version;
       // this.config.production = true;
     });
-    bfast.init({
+    init({
       applicationId: 'fahamupay',
       projectId: 'fahamupay',
       appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'
-    }, environment.fahamupay.projectId);
+    }, 'fahamupay');
     [
       {
         name: 'Dashboard',
@@ -240,5 +241,6 @@ export class SmartstockModule {
     this.expenseNav.init();
     this.accountNav.init();
     config.selectedModuleName = '';
+    this.syncsService.startWorker().catch(console.log);
   }
 }
