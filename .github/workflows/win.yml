@@ -20,11 +20,12 @@ jobs:
           username: joshuamshana
           password: ${{ secrets.GT }}
       - run: |
-           GT=${{ secrets.GITHUB_TOKEN }} npm install -f
+           echo $GT
+           npm install -f
            npm run build:desktop
            cd desktop
-           GT=${{ secrets.GITHUB_TOKEN }} npm install
-           docker run --rm -v $PWD:/desktop electronuserland/builder:wine bash "GT=${{ secrets.GITHUB_TOKEN }} npm install && npm run build:win"
+           npm install
+           docker run --rm -v -e GT=$GT $PWD:/desktop electronuserland/builder:wine bash "npm install && npm run build:win"
            ls
     env:
       GT: ${{ secrets.GT }}
