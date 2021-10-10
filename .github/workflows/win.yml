@@ -25,16 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-           $env:GT = "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"
            npm install -g npm
            npm install -f
-           echo $GT
-           npx ng build --configuration production -c=desktopProd --base-href=./
-           cp -r dist/smartstock desktop
-           node desktop-version.js
+           npm run build:desktop
            cd desktop
            npm install
            npm run build:win
-#           npm install -g ipfs
-#           jsipfs init
-#           jsipfs add -r ./dist
+           ls dist
