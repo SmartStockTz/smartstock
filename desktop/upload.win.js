@@ -2,7 +2,6 @@ const bfast = require('bfast');
 const pkg = require('./package.json');
 const {createReadStream} = require("fs");
 const {join} = require("path");
-// const {execSync} = require("child_process");
 
 bfast.init({
   applicationId: 'smartstock_lb',
@@ -14,4 +13,7 @@ bfast.storage().save({
   data: createReadStream(join(__dirname, 'dist', `smartstock Setup ${pkg.version}.exe`))
 }, progress => {
   console.log(progress);
-}).then(console.log);
+}).then(console.log).catch(reason => {
+  console.error(reason);
+  process.exit(-1)
+});

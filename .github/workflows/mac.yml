@@ -2,27 +2,27 @@ name: Deploy Mac
 
 on:
   push:
-    branches: [ mac ]
+    branches: [ master ]
 #  pull_request:
 #    branches: [ master ]
-
+env:
+  GRT:  ${{ secrets.GITHUB_TOKEN }}
+  GT:  ${{ secrets.GT }}
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: export GT=${{ secrets.GT }}
-#      - run: export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
-      - run: npm install -g npm
-#      - run: npm install -g firebase-tools
-      - run: export GT=${{ secrets.GT }} && npm install -f
-      - run: export GT=${{ secrets.GT }} && npm run build:desktop
-      - run: export GT=${{ secrets.GT }} && cd desktop && npm install && npm run build:mac && node upload.mac.js
-        env:
-          #           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
-          GRT:  ${{ secrets.GITHUB_TOKEN }}
+      - name: Install and build window package
+        run: |
+          npm install -g npm
+          npm install -f
+          npm run build:desktop
+          cd desktop
+          npm install -f
+          npm run build:mac
+          node upload.mac.js
