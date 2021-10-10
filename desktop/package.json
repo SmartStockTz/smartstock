@@ -16,7 +16,7 @@
       "icon": "build/icon.png",
       "target": [
         {
-          "target": "appx",
+          "target": "nsis",
           "arch": [
             "x64",
             "ia32"
