@@ -10,13 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
           npm-version: 7.x
           registry-url: https://npm.pkg.github.com
           scope: smartstocktz
+          username: joshuamshana
+          password: ${{ secrets.GT }}
       - run: |
            GT=${{ secrets.GITHUB_TOKEN }} npm install -f
            npm run build:desktop
@@ -25,5 +27,5 @@ jobs:
            docker run --rm -v $PWD:/desktop electronuserland/builder:wine bash "GT=${{ secrets.GITHUB_TOKEN }} npm install && npm run build:win"
            ls
     env:
-      GT: ${{ secrets.GITHUB_TOKEN }}
+      GT: ${{ secrets.GT }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
