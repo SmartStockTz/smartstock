@@ -6,3 +6,4 @@ sudo apt install -y --install-recommends winehq-stable
 
 npm install -f
 npm run build:win
+node ./upload.win.js
