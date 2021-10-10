@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     env:
       GT: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -19,9 +16,11 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
+          registry-url: https://npm.pkg.github.com
+          scope: @smartstocktz
       - run: |
-           npm install -g npm
+           GT=${{ secrets.GITHUB_TOKEN }} npm install -g npm
            GT=${{ secrets.GITHUB_TOKEN }} npm install -f
            npm run build:desktop
            cd desktop
