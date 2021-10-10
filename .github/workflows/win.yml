@@ -16,13 +16,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: export GT=${{ secrets.GT }}
-#      - run: export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
-      - run: npm install -g npm
-#      - run: npm install -g firebase-tools
-      - run: export GT=${{ secrets.GT }} && npm install -f
-      - run: export GT=${{ secrets.GT }} && npm run build:desktop
-      - run: export GT=${{ secrets.GT }} && cd desktop && docker run --rm -e GT=${{ secrets.GT }} -v $PWD:/project  electronuserland/builder:wine bash win.sh
+        run: |
+          $GT:${{ secrets.GT }}
+          npm install -g npm
+          $GT:${{ secrets.GT }}
+          npm install -f
+          $GT:${{ secrets.GT }}
+          npm run build:desktop
+          $GT:${{ secrets.GT }}
+          cd desktop
+          npm install -f
+          npm run build:win
+          ls dist
+        shell: powershell
         env:
           #           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
           GRT:  ${{ secrets.GITHUB_TOKEN }}
