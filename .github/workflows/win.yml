@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 14.x
           registry-url: https://npm.pkg.github.com
-          scope: @smartstocktz
+          scope: smartstocktz
       - run: |
            GT=${{ secrets.GITHUB_TOKEN }} npm install -g npm
            GT=${{ secrets.GITHUB_TOKEN }} npm install -f
