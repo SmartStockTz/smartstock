@@ -8,22 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GT: ${{ secrets.GITHUB_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+          npm-version: 7.x
           registry-url: https://npm.pkg.github.com
           scope: smartstocktz
       - run: |
-           GT=${{ secrets.GITHUB_TOKEN }} npm install -g npm
            GT=${{ secrets.GITHUB_TOKEN }} npm install -f
            npm run build:desktop
            cd desktop
            GT=${{ secrets.GITHUB_TOKEN }} npm install
            docker run --rm -v $PWD:/desktop electronuserland/builder:wine bash "GT=${{ secrets.GITHUB_TOKEN }} npm install && npm run build:win"
            ls
+    env:
+      GT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
