@@ -30,7 +30,7 @@
     "start:electron": "export EA=1 && npm-run-all -p start:desktop electron:serve",
     "electron:serve": "export EA=1 && wait-on tcp:4200 && cd desktop && npm start",
     "start:desktop": "npx ng serve --host 0.0.0.0 -c=electron",
-    "build:desktop": "npx ng build --configuration production -c=desktopProd --base-href=./",
+    "build:desktop": "npx ng build -c=desktopProd --base-href=./ && node desktop-version.js && cp -r dist/smartstock desktop",
     "build:mobile": "npx ng build --configuration production -c=desktopProd --base-href=./ && node android-version.js && npx cap sync",
     "deploy:desktop:snap": "npx ng build -c=desktopProd --base-href=./ && bash desktop.sh",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
