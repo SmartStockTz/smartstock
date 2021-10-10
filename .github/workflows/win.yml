@@ -5,7 +5,12 @@ on:
     branches: [ win ]
 #  pull_request:
 #    branches: [ master ]
-
+env:
+  GRT:  ${{ secrets.GITHUB_TOKEN }}
+  GT:  ${{ secrets.GT }}
+default:
+  run:
+    shell: powershell
 jobs:
   build:
     runs-on: windows-latest
@@ -15,7 +20,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: |
+      - name: Install and build window package
+        run: |
           npm install -g npm
           npm install -f
           npm run build:desktop
@@ -23,7 +29,3 @@ jobs:
           npm install -f
           npm run build:win
           ls dist
-        shell: powershell
-        env:
-          GRT:  ${{ secrets.GITHUB_TOKEN }}
-          GT:  ${{ secrets.GT }}
