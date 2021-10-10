@@ -1,33 +1,27 @@
-name: Build win app
+name: Deploy Win
 
 on:
   push:
-    branches:
-      - win
-      - master
+    branches: [ win ]
+#  pull_request:
+#    branches: [ master ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-          npm-version: 7.x
-          registry-url: https://npm.pkg.github.com
-          scope: smartstocktz
-          username: joshuamshana
-          password: ${{ secrets.GT }}
       - run: export GT=${{ secrets.GT }}
+      - run: export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
       - run: npm install -g npm
+#      - run: npm install -g firebase-tools
       - run: export GT=${{ secrets.GT }} && npm install -f
-      - run: npm run build:desktop
-      - run: |
-           cd desktop
-           npm install
-           docker run --rm -v -e GT=${{ secrets.GT }} $PWD:/desktop electronuserland/builder:wine bash "npm install -f && npm run build:win"
-           ls
-    env:
-#      GT: ${{ secrets.GT }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: export GT=${{ secrets.GT }} && npm run build:desktop
+        env:
+          #           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
+          GRT:  ${{ secrets.GITHUB_TOKEN }}
