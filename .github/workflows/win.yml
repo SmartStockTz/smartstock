@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-        run: |
+      - run: |
           $GT:${{ secrets.GT }}
           npm install -g npm
           $GT:${{ secrets.GT }}
