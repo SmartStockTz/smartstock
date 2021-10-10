@@ -19,14 +19,15 @@ jobs:
           scope: smartstocktz
           username: joshuamshana
           password: ${{ secrets.GT }}
+      - run: export GT=${{ secrets.GT }}
+      - run: npm install -g npm
+      - run: export GT=${{ secrets.GT }} && npm install -f
+      - run: npm run build:desktop
       - run: |
-           echo $GT
-           npm install -f
-           npm run build:desktop
            cd desktop
            npm install
-           docker run --rm -v -e GT=$GT $PWD:/desktop electronuserland/builder:wine bash "npm install && npm run build:win"
+           docker run --rm -v -e GT=${{ secrets.GT }} $PWD:/desktop electronuserland/builder:wine bash "npm install -f && npm run build:win"
            ls
     env:
-      GT: ${{ secrets.GT }}
+#      GT: ${{ secrets.GT }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
