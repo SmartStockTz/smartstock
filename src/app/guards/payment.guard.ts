@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {bfast} from 'bfastjs';
+import {cache} from 'bfast';
 import {MatDialog} from '@angular/material/dialog';
-import {PaymentDialogComponent} from '../components/payment-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,8 @@ export class PaymentGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise(async (resolve, reject) => {
       try {
-        const cache = bfast.cache({database: 'payment', collection: 'subscription'});
-        const status = await cache.get<any>('status', {secure: true});
+        const _cache = cache({database: 'payment', collection: 'subscription'});
+        const status = await _cache.get<any>('status', {secure: true});
         if (status && status.subscription === true) {
           resolve(true);
         } else if (status && status.subscription === false) {

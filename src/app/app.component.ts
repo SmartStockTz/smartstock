@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {bfast} from 'bfastjs';
 import {BackgroundService} from './workers/background.service';
 
 @Component({
@@ -14,10 +13,10 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    bfast.init({
-      applicationId: 'smartstock_lb',
-      projectId: 'smartstock'
-    });
+    // init({
+    //   applicationId: 'smartstock_lb',
+    //   projectId: 'smartstock'
+    // });
     return this.backgroundService.start();
   }
 }
