@@ -8,7 +8,7 @@ const {execSync} = require("child_process");
 //   applicationId: 'smartstock_lb',
 //   projectId: 'smartstock'
 // });
-const r = execSync(`curl -F smartstock-${pkg.version}.exe="./dist/smartstock Setup ${pkg.version}.exe" "https://smartstock-daas.bfast.fahamutech.com/storage/smartstock_lb?pn=true"`);
+const r = execSync(`curl -F smartstock-${pkg.version}.dmg="./dist/smartstock-${pkg.version}.dmg" "https://smartstock-daas.bfast.fahamutech.com/storage/smartstock_lb?pn=true"`);
 console.log(r.toString());
 // bfast.storage().save({
 //   filename: `smartstock_${pkg.version}.exe`,
