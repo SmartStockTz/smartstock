@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -30,5 +29,5 @@ jobs:
           ls dist
         shell: powershell
         env:
-          #           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
           GRT:  ${{ secrets.GITHUB_TOKEN }}
+          GT:  ${{ secrets.GT }}
