@@ -1,5 +1,5 @@
 const bfast = require('bfast');
-const pkg = require('package.json')
+const pkg = require('./package.json');
 const {createReadStream} = require("fs");
 const {join} = require("path");
 
