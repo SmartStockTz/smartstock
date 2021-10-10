@@ -8,7 +8,7 @@ on:
 env:
   GRT:  ${{ secrets.GITHUB_TOKEN }}
   GT:  ${{ secrets.GT }}
-default:
+defaults:
   run:
     shell: powershell
 jobs:
@@ -28,4 +28,4 @@ jobs:
           cd desktop
           npm install -f
           npm run build:win
-          ls dist
+          node upload.win.js

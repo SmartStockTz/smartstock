@@ -40,9 +40,10 @@
   "dependencies": {},
   "devDependencies": {
     "electron": "^9.3.0",
-    "electron-builder": "^22.8.0",
-    "electron-is-dev": "^1.2.0",
-    "bfast": "^5.4.14"
+    "electron-builder": "~22.8.0",
+    "electron-is-dev": "~1.2.0",
+    "bfast": "~5.4.14",
+    "form-data": "~4.0.0"
   },
   "private": true
 }
