@@ -16,13 +16,9 @@ jobs:
         with:
           node-version: 14.x
       - run: |
-          $GT:${{ secrets.GT }}
           npm install -g npm
-          $GT:${{ secrets.GT }}
           npm install -f
-          $GT:${{ secrets.GT }}
           npm run build:desktop
-          $GT:${{ secrets.GT }}
           cd desktop
           npm install -f
           npm run build:win
