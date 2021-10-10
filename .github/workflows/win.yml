@@ -5,13 +5,9 @@ on:
     branches:
       - win
       - master
-
 jobs:
   build:
-    defaults:
-      run:
-        shell: powershell
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
@@ -29,5 +25,5 @@ jobs:
            npm run build:desktop
            cd desktop
            npm install
-           npm run build:win
-           ls dist
+           docker run --rm -v $PWD:/desktop electronuserland/builder:wine bash "npm install && npm run build:win"
+           ls
