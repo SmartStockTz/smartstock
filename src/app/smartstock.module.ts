@@ -144,6 +144,7 @@ export class SmartstockModule {
     // IpfsService.getVersion().then(value => {
     //   console.log('ipfs version is : ', value.version);
     // }).catch(console.log);
+    this.syncsService.startWorker().then(console.log).catch(console.log);
     init({
       applicationId: 'smartstock_lb',
       projectId: 'smartstock'
@@ -241,6 +242,5 @@ export class SmartstockModule {
     this.expenseNav.init();
     this.accountNav.init();
     config.selectedModuleName = '';
-    this.syncsService.startWorker().then(console.log).catch(console.log);
   }
 }
