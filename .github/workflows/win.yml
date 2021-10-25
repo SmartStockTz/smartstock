@@ -2,7 +2,7 @@ name: Deploy Win
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, win ]
 #  pull_request:
 #    branches: [ master ]
 env:
