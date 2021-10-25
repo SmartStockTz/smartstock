@@ -14,7 +14,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {ConfigsService, IpfsService, LibModule, SyncsService} from '@smartstocktz/core-libs';
+import {LibModule, NavigationService, SyncsService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {WebGuard} from './guards/web.guard';
 import {PaymentGuard} from './guards/payment.guard';
@@ -132,7 +132,7 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class SmartstockModule {
-  constructor(private readonly config: ConfigsService,
+  constructor(private readonly config: NavigationService,
               private readonly salesNav: SalesNavigationService,
               private readonly reportNav: ReportNavigationService,
               private readonly stockNav: StockNavigationService,
@@ -241,6 +241,6 @@ export class SmartstockModule {
     this.expenseNav.init();
     this.accountNav.init();
     config.selectedModuleName = '';
-    this.syncsService.startWorker().catch(console.log);
+    this.syncsService.startWorker().then(console.log).catch(console.log);
   }
 }
