@@ -141,9 +141,6 @@ export class SmartstockModule {
               private readonly storeNav: StoreNavigationService,
               private readonly accountNav: AccountsNavigationService,
               private readonly syncsService: SyncsService) {
-    // IpfsService.getVersion().then(value => {
-    //   console.log('ipfs version is : ', value.version);
-    // }).catch(console.log);
     this.syncsService.startWorker().then(console.log).catch(console.log);
     init({
       applicationId: 'smartstock_lb',
