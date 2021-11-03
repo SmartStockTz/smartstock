@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.11.3-build.43-v2.9",
+  "version": "21.11.3-build.44-v2.9",
   "android-build": "20",
   "build": {
     "appId": "com.fahamutech.smartstock",
