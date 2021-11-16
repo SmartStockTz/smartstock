@@ -38,8 +38,6 @@ export class ActiveShopGuard implements CanActivate {
             databaseURL: getDaasAddress(activeShop),
             functionsURL: getFaasAddress(activeShop)
           }, activeShop.projectId);
-          this.saleService.startWorker(activeShop).catch(console.log);
-          this.stockService.startWorker(activeShop).catch(console.log);
           resolve(true);
         } else {
           this.router.navigateByUrl('/account/shop').catch(reason => console.log(reason));

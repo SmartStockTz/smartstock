@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.9.10-build.35-v2.5",
+  "version": "21.11.16-build.50-v3.0",
   "main": "./index.js",
   "build": {
     "appId": "com.fahamutech.smartstock",
@@ -16,7 +16,7 @@
       "icon": "build/icon.png",
       "target": [
         {
-          "target": "appx",
+          "target": "nsis",
           "arch": [
             "x64",
             "ia32"
@@ -39,9 +39,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "electron": "^9.3.0",
-    "electron-builder": "^22.8.0",
-    "electron-is-dev": "^1.2.0"
+    "electron": "~11.5.0",
+    "electron-builder": "~22.13.1",
+    "electron-is-dev": "~2.0.0",
+    "bfast": "~6.0.0-alpha.16"
   },
   "private": true
 }

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 //
@@ -40,12 +40,3 @@ button {
 mat-sidenav {
   border: none !important;
 }
-
-
-// td {
-//   padding: 5px !important;
-// }
-
-// th {
-//   padding: 5px !important;
-// }

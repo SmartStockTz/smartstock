@@ -13,10 +13,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // init({
-    //   applicationId: 'smartstock_lb',
-    //   projectId: 'smartstock'
-    // });
+    document.getElementById('splash12').style.display = 'none';
     return this.backgroundService.start();
   }
 }
