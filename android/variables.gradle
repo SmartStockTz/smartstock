@@ -11,6 +11,6 @@ ext {
     androidxJunitVersion = '1.1.2'
     androidxEspressoCoreVersion = '3.3.0'
     cordovaAndroidVersion = '7.0.0'
-    versionCode = 15
-    versionName = "21.7.9-build.15"
+    versionCode = 20
+    versionName = "21.11.16-build.50-v3.0"
 }
