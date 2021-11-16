@@ -16,7 +16,6 @@ import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
 import {LibModule, NavigationService, SyncsService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
-import {WebGuard} from './guards/web.guard';
 import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -38,7 +37,7 @@ import {init} from 'bfast';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [WebGuard],
+    canActivate: [],
     loadChildren: () => {
       return import('@smartstocktz/web').then(mod => mod.WebModule);
     },
@@ -142,7 +141,7 @@ export class SmartstockModule {
               private readonly accountNav: AccountsNavigationService,
               private readonly stockService: StockService,
               private readonly syncsService: SyncsService) {
-    this.syncsService.startWorker().then(console.log).catch(console.log);
+    this.syncsService.startWorker().catch(console.log);
     stockService.compactStockQuantity().catch(console.log);
     init({
       applicationId: 'smartstock_lb',

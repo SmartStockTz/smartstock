@@ -173,6 +173,5 @@ mat-sidenav-content {
 
 .mat-bottom-sheet-container {
   min-width: 100vw !important;
-  min-height: 100vh !important;
-//margin-top: 80px;
+  min-height: 80vh !important;
 }
