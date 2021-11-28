@@ -128,15 +128,15 @@ export class SmartstockModule {
               private readonly stockService: StockService,
               private readonly smartstockHttp: SmartstockHttpAdapter,
               private readonly syncsService: SyncsService) {
-    this.syncsService.startWorker().catch(console.log);
-    stockService.compactStockQuantity().catch(console.log);
     init({
       applicationId: 'smartstock_lb',
       projectId: 'smartstock',
       adapters: {
-        http: _3 => this.smartstockHttp
+        // http: _3 => this.smartstockHttp
       }
     });
+    this.syncsService.startWorker().catch(console.log);
+    stockService.compactStockQuantity().catch(console.log);
     App.addListener('backButton', (e) => {
       if (e.canGoBack) {
         const curl = window.location.href;
