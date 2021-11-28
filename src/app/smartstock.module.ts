@@ -14,7 +14,7 @@ import {HammerModule} from '@angular/platform-browser';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import {AdminGuard} from './guards/admin.guard';
 import {ActiveShopGuard} from './guards/active-shop.guard';
-import {LibModule, NavigationService, SyncsService} from '@smartstocktz/core-libs';
+import {LibModule, NavigationService, SmartstockHttpAdapter, SyncsService} from '@smartstocktz/core-libs';
 import {ManagerGuard} from './guards/manager.guard';
 import {PaymentGuard} from './guards/payment.guard';
 import {PaymentDialogComponent} from './components/payment-dialog.component';
@@ -28,7 +28,6 @@ import {StockNavigationService, StockService} from '@smartstocktz/stocks';
 import {PurchaseNavigationService} from '@smartstocktz/purchases';
 import {ExpenseNavigationService} from '@smartstocktz/expense';
 import {AccountsNavigationService} from '@smartstocktz/accounts';
-import {StoreNavigationService} from '@smartstocktz/store';
 import {App} from '@capacitor/app';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/analytics';
@@ -62,28 +61,16 @@ const routes: Routes = [
     canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/expense').then(mod => mod.ExpenseModule)
   },
-  {
-    path: 'store',
-    canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
-    loadChildren: () => import('@smartstocktz/store').then(mod => mod.StoreModule)
-  },
+  // {
+  //   path: 'store',
+  //   canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
+  //   loadChildren: () => import('@smartstocktz/store').then(mod => mod.StoreModule)
+  // },
   {
     path: 'stock',
     canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: async () => {
-      // const shop: any = await new StorageService(new EventService()).getActiveShop();
-      // if (shop && shop.settings && shop.settings.module && shop.settings.module.stock) {
-      //   switch (shop.settings.module.stock.toString().trim()) {
-      //     case '@smartstocktz/stocks':
-      //       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-      //     case '@smartstocktz/stocks-real-estate':
-      //       return import('@smartstocktz/stocks-real-estate').then(mod => mod.StocksModule);
-      //     default:
-      //       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-      //   }
-      // } else {
       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
-      // }
     }
   },
   {
@@ -137,15 +124,18 @@ export class SmartstockModule {
               private readonly stockNav: StockNavigationService,
               private readonly purchaseNav: PurchaseNavigationService,
               private readonly expenseNav: ExpenseNavigationService,
-              private readonly storeNav: StoreNavigationService,
               private readonly accountNav: AccountsNavigationService,
               private readonly stockService: StockService,
+              private readonly smartstockHttp: SmartstockHttpAdapter,
               private readonly syncsService: SyncsService) {
     this.syncsService.startWorker().catch(console.log);
     stockService.compactStockQuantity().catch(console.log);
     init({
       applicationId: 'smartstock_lb',
-      projectId: 'smartstock'
+      projectId: 'smartstock',
+      adapters: {
+        http: _3 => this.smartstockHttp
+      }
     });
     App.addListener('backButton', (e) => {
       if (e.canGoBack) {
@@ -169,7 +159,12 @@ export class SmartstockModule {
     init({
       applicationId: 'fahamupay',
       projectId: 'fahamupay',
-      appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX'
+      appPassword: 'paMnho3EsBF6MxHelep94gQW3nIODMBq8lG9vapX',
+      adapters: {
+        auth: 'DEFAULT',
+        cache: 'DEFAULT',
+        http: 'DEFAULT'
+      }
     }, 'fahamupay');
     [
       {
@@ -214,13 +209,13 @@ export class SmartstockModule {
         icon: 'store',
         pages: []
       },
-      {
-        name: 'Store',
-        link: '/store',
-        roles: ['manager', 'admin'],
-        icon: 'widgets',
-        pages: []
-      },
+      // {
+      //   name: 'Store',
+      //   link: '/store',
+      //   roles: ['manager', 'admin'],
+      //   icon: 'widgets',
+      //   pages: []
+      // },
       {
         name: 'Expense',
         link: '/expense',
@@ -238,13 +233,12 @@ export class SmartstockModule {
     ].forEach(menu => {
       this.navigationService.addMenu(menu);
     });
-    // this.reportNav.init();
-    // this.salesNav.init();
-    // this.stockNav.init();
-    // this.purchaseNav.init();
-    // this.storeNav.init();
-    // this.expenseNav.init();
-    // this.accountNav.init();
+    this.reportNav.init();
+    this.salesNav.init();
+    this.stockNav.init();
+    this.purchaseNav.init();
+    this.expenseNav.init();
+    this.accountNav.init();
     navigationService.selectedModuleName = '';
   }
 }

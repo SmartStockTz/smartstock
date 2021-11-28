@@ -24,15 +24,12 @@ export class ActiveShopGuard implements CanActivate {
         const activeShop = await this.userService.getCurrentShop();
         if (activeShop && activeShop.projectId && activeShop.applicationId) {
           init({
-            applicationId: 'smartstock_lb',
-            projectId: 'smartstock'
-          });
-          init({
             applicationId: activeShop.applicationId,
             projectId: activeShop.projectId,
             appPassword: activeShop.masterKey,
             adapters: {
               auth: 'DEFAULT',
+              cache: 'DEFAULT',
               http: 'DEFAULT'
             },
             databaseURL: getDaasAddress(activeShop),
