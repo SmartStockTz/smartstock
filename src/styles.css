@@ -175,3 +175,100 @@ mat-sidenav-content {
   min-width: 100vw !important;
   min-height: 80vh !important;
 }
+
+p.about {
+  font-size: 14px !important;
+  letter-spacing: 0.5px !important;
+}
+
+hr.line {
+  border: 0 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  div.land-container {
+    padding-top: 0 !important;
+  }
+
+  div.malls-container {
+    padding: 0 0 !important;
+  }
+
+  div.mall-container {
+    border-radius: 0 !important;
+    margin-bottom: 8px !important;
+    box-shadow: none !important;
+  }
+
+  div.shop-container {
+    padding: 0 0 100px 0 !important;
+  }
+
+  div.checkout-container {
+    padding: 0 0 100px 0 !important;
+  }
+
+  div.payment-container {
+    padding: 8px 0 100px 0 !important;
+  }
+
+  div.order-container {
+    padding: 0 0 100px 0 !important;
+  }
+
+  div.pricing-container {
+    padding: 0 !important;
+  }
+
+  div.free-pricing-container {
+    padding: 0 !important;
+  }
+
+  .features-container {
+    justify-content: center;
+  }
+
+  .link-container {
+    margin: 3px;
+  }
+
+  .logo {
+    margin-right: 2px;
+  }
+
+  .nav-item > span {
+    display: none;
+  }
+
+  div.line {
+    padding: 0 16px;
+  }
+
+  div.card-container {
+    padding: 0 16px;
+  }
+
+  img.mobile-mode-body-logo {
+    display: none !important;
+  }
+
+  div.shop-header-container {
+    padding: 4px 16px !important;
+  }
+
+  div.product-container {
+    border-radius: 0 !important;
+    margin-bottom: 8px !important;
+    box-shadow: none !important;
+  }
+
+  .name {
+    font-size: 16px !important;
+    margin-left: 0 !important;
+  }
+
+  div.product-head {
+    height: auto !important;
+  }
+}

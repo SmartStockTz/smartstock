@@ -29,9 +29,8 @@ import {PurchaseNavigationService} from '@smartstocktz/purchases';
 import {ExpenseNavigationService} from '@smartstocktz/expense';
 import {AccountsNavigationService} from '@smartstocktz/accounts';
 import {App} from '@capacitor/app';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/analytics';
 import {init} from 'bfast';
+import {InfoComponent} from './components/info.component';
 
 const routes: Routes = [
   {
@@ -96,7 +95,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentDialogComponent
+    PaymentDialogComponent,
+    InfoComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -128,15 +128,6 @@ export class SmartstockModule {
               private readonly stockService: StockService,
               private readonly smartstockHttp: SmartstockHttpAdapter,
               private readonly syncsService: SyncsService) {
-    init({
-      applicationId: 'smartstock_lb',
-      projectId: 'smartstock',
-      adapters: {
-        // http: _3 => this.smartstockHttp
-      }
-    });
-    this.syncsService.startWorker().catch(console.log);
-    stockService.compactStockQuantity().catch(console.log);
     App.addListener('backButton', (e) => {
       if (e.canGoBack) {
         const curl = window.location.href;
@@ -150,11 +141,21 @@ export class SmartstockModule {
         App.exitApp();
       }
     });
-    firebase.initializeApp(environment.firebase);
-    firebase.analytics();
     // @ts-ignore
     import('../../package.json').then(pkg => {
       this.navigationService.versionName = pkg.version;
+    });
+    this.smartstockInit();
+    this.menus();
+  }
+
+  private smartstockInit(): void {
+    init({
+      applicationId: 'smartstock_lb',
+      projectId: 'smartstock',
+      adapters: {
+        // http: _3 => this.smartstockHttp
+      }
     });
     init({
       applicationId: 'fahamupay',
@@ -166,19 +167,17 @@ export class SmartstockModule {
         http: 'DEFAULT'
       }
     }, 'fahamupay');
+    this.syncsService.startWorker().catch(console.log);
+    this.stockService.compactStockQuantity().catch(console.log);
+  }
+
+  private menus(): void {
     [
       {
         name: 'Dashboard',
         link: '/dashboard',
         roles: ['admin'],
         icon: 'dashboard',
-        pages: []
-      },
-      {
-        name: 'Mall',
-        link: '/',
-        roles: ['admin'],
-        icon: 'shopping_cart',
         pages: []
       },
       {
@@ -230,6 +229,13 @@ export class SmartstockModule {
         icon: 'supervisor_account',
         pages: []
       },
+      {
+        name: 'Mall',
+        link: '/',
+        roles: ['admin'],
+        icon: 'shopping_cart',
+        pages: []
+      },
     ].forEach(menu => {
       this.navigationService.addMenu(menu);
     });
@@ -239,6 +245,6 @@ export class SmartstockModule {
     this.purchaseNav.init();
     this.expenseNav.init();
     this.accountNav.init();
-    navigationService.selectedModuleName = '';
+    this.navigationService.selectedModuleName = '';
   }
 }

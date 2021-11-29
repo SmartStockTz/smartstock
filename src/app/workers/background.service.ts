@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {EventService} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
@@ -9,7 +9,7 @@ import {PaymentDialogComponent} from '../components/payment-dialog.component';
 @Injectable({
   providedIn: 'root'
 })
-export class BackgroundService implements OnInit {
+export class BackgroundService {
 
   constructor(private readonly eventApi: EventService,
               private readonly billing: BillingService,
@@ -19,40 +19,30 @@ export class BackgroundService implements OnInit {
 
   private paymentDialogOpen = false;
 
-  ngOnInit(): void {
-  }
-
   async start() {
     try {
       this._startPaymentWatch();
-      return 'Done start proxy';
+      return 'Done start payment watch';
     } catch (e) {
       console.warn(e);
     }
   }
 
   async stop() {
-    this._stopWorkers();
-  }
-
-  private _stopWorkers() {
   }
 
   private _startPaymentWatch() {
     setInterval(() => {
       this.billing.subscription().then(value => {
-        return cache({database: 'payment', collection: 'subscription'}).set('status', value, {secure: true});
+        return cache({database: 'payment', collection: 'subscription'}).set('status', value);
       }).then(value => {
         if (value && value.subscription === false) {
-          this.router.navigateByUrl('/account/bill').catch(_ => {
-            // console.log(reason);
-          });
+          this.router.navigateByUrl('/account/bill').catch(console.log);
           if (this.paymentDialogOpen === false) {
             this.paymentDialogOpen = true;
             this.dialog.open(PaymentDialogComponent).afterClosed().subscribe(_1 => {
               this.paymentDialogOpen = false;
-              this.router.navigateByUrl('/account/bill').catch(_2 => {
-              });
+              this.router.navigateByUrl('/account/bill').catch(console.log);
             });
           }
         }

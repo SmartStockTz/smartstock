@@ -2,15 +2,13 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {cache} from 'bfast';
-import {MatDialog} from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentGuard implements CanActivate {
 
-  constructor(private readonly router: Router,
-              private readonly dialog: MatDialog) {
+  constructor(private readonly router: Router) {
   }
 
   canActivate(
@@ -19,7 +17,7 @@ export class PaymentGuard implements CanActivate {
     return new Promise(async (resolve, reject) => {
       try {
         const _cache = cache({database: 'payment', collection: 'subscription'});
-        const status = await _cache.get<any>('status', {secure: true});
+        const status = await _cache.get<any>('status');
         if (status && status.subscription === true) {
           resolve(true);
         } else if (status && status.subscription === false) {
