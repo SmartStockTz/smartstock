@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "21.11.28-build.53-v3.2",
+  "version": "21.12.01-build.54-v3.3",
   "android-build": "26",
   "build": {
     "appId": "com.fahamutech.smartstock",
@@ -64,7 +64,7 @@
     "@capacitor/ios": "^3.3.1",
     "@smartstocktz/accounts": "^0.4.1",
     "@smartstocktz/core-libs": "^0.4.11",
-    "@smartstocktz/dashboard": "^0.2.1",
+    "@smartstocktz/dashboard": "^0.3.2",
     "@smartstocktz/ecommerce": "^0.1.5",
     "@smartstocktz/expense": "^0.2.5",
     "@smartstocktz/purchases": "^0.2.4",
