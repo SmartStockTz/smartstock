@@ -31,6 +31,7 @@ import {AccountsNavigationService} from '@smartstocktz/accounts';
 import {App} from '@capacitor/app';
 import {init} from 'bfast';
 import {InfoComponent} from './components/info.component';
+import {DatePipe} from '@angular/common';
 
 const routes: Routes = [
   {
@@ -115,6 +116,7 @@ const routes: Routes = [
     MatButtonModule,
     MatBottomSheetModule
   ],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class SmartstockModule {

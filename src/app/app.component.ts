@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     getToken(messaging, {
       vapidKey: 'BAjyuI_opZiVghN7ixIu7csRcOXNExhhjdfTU0CbUkKwXmc4v_C0X2KA8x5vFSPp3PHdI1-A6Bco-ReFMl7W9gw'
     }).then(value => {
-      console.log(value);
+      // console.log(value);
     }).catch(console.log);
     onMessage(messaging, c => {
       // console.log(c, 'OM');
