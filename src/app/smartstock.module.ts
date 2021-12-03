@@ -11,13 +11,16 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HammerModule} from '@angular/platform-browser';
-import {AuthenticationGuard} from './guards/authentication.guard';
-import {AdminGuard} from './guards/admin.guard';
-import {ActiveShopGuard} from './guards/active-shop.guard';
-import {LibModule, NavigationService, SmartstockHttpAdapter, SyncsService} from '@smartstocktz/core-libs';
-import {ManagerGuard} from './guards/manager.guard';
-import {PaymentGuard} from './guards/payment.guard';
-import {PaymentDialogComponent} from './components/payment-dialog.component';
+import {
+  ActiveShopGuard,
+  AdminGuard, AuthenticationGuard,
+  LibModule,
+  ManagerGuard,
+  NavigationService,
+  PaymentDialogComponent, PaymentGuard,
+  SmartstockHttpAdapter,
+  SyncsService
+} from '@smartstocktz/core-libs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -96,7 +99,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentDialogComponent,
     InfoComponent
   ],
   imports: [
@@ -109,7 +111,6 @@ const routes: Routes = [
     MatTooltipModule,
     MatSliderModule,
     MatSnackBarModule,
-    RouterModule,
     MatNativeDateModule,
     HammerModule,
     MatDialogModule,

@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
-import {EventService} from '@smartstocktz/core-libs';
 import {BillingService} from '@smartstocktz/accounts';
 import {Router} from '@angular/router';
 import {cache} from 'bfast';
 import {MatDialog} from '@angular/material/dialog';
-import {PaymentDialogComponent} from '../components/payment-dialog.component';
+import {PaymentDialogComponent} from '@smartstocktz/core-libs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackgroundService {
 
-  constructor(private readonly eventApi: EventService,
-              private readonly billing: BillingService,
+  constructor(private readonly billing: BillingService,
               private readonly dialog: MatDialog,
               private readonly router: Router) {
   }
