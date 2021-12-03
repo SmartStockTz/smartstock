@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'sale',
-    canActivate: [PaymentGuard, AuthenticationGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, ActiveShopGuard],
     loadChildren: () => import('@smartstocktz/sales').then(mod => mod.SalesModule)
   },
   {
@@ -71,7 +71,7 @@ const routes: Routes = [
   // },
   {
     path: 'stock',
-    canActivate: [PaymentGuard, AuthenticationGuard, ManagerGuard, ActiveShopGuard],
+    canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: async () => {
       return import('@smartstocktz/stocks').then(mod => mod.StocksModule);
     }
