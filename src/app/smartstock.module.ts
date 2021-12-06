@@ -13,11 +13,12 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {HammerModule} from '@angular/platform-browser';
 import {
   ActiveShopGuard,
-  AdminGuard, AuthenticationGuard,
+  AdminGuard,
+  AuthenticationGuard,
   LibModule,
   ManagerGuard,
   NavigationService,
-  PaymentDialogComponent, PaymentGuard,
+  PaymentGuard,
   SmartstockHttpAdapter,
   SyncsService
 } from '@smartstocktz/core-libs';
