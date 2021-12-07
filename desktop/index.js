@@ -85,6 +85,7 @@ if (!gotTheLock) {
     if (process.env.EA && process.env.EA.toString() === '1') {
       await mainWindow.loadURL('http://localhost:4200');
     } else {
+      // await mainWindow.loadURL('https://smartstock.co.tz');
       await mainWindow.loadFile(__dirname + '/smartstock/index.html');
     }
   }
