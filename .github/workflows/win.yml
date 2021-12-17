@@ -1,13 +1,13 @@
 name: Deploy Win
 
 on:
-  push:
-    branches: [ master, win ]
-#  pull_request:
-#    branches: [ master ]
+  release:
+    types:
+      - published
+
 env:
-  GRT:  ${{ secrets.GITHUB_TOKEN }}
-  GT:  ${{ secrets.GT }}
+  GRT: ${{ secrets.GITHUB_TOKEN }}
+  GT: ${{ secrets.GT }}
 defaults:
   run:
     shell: powershell
@@ -19,7 +19,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Install and build window package
         run: |
           npm install -g npm

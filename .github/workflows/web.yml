@@ -1,19 +1,16 @@
 name: Deploy Website
 
 on:
-  push:
-    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
+  release:
+    types:
+      - published
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 16.x ]
 
     steps:
       - uses: actions/checkout@v2
@@ -28,5 +25,5 @@ jobs:
       - run: export GT=${{ secrets.GT }} && npm install -f
       - run: export GT=${{ secrets.GT }} && export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }} && npm run deploy:web:ci
         env:
-#           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
-          GRT:  ${{ secrets.GITHUB_TOKEN }}
+          #           FIREBASE_TOKEN:  ${{ secrets.FIREBASE_TOKEN }}
+          GRT: ${{ secrets.GITHUB_TOKEN }}
