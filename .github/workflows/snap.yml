@@ -26,7 +26,6 @@ jobs:
         snapcraft_token: ${{ secrets.STORE_LOGIN }}
         skip_install: false
     - run: echo ${{ steps.pv.outputs.current-version }}
-    - run: echo "**********"
     - run: echo ${{ secrets.GITHUB_TOKEN }}
     - run: export GT=${{ secrets.GT }} && npm install -g npm
     - run: export GT=${{ secrets.GT }} && npm install -f

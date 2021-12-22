@@ -6,7 +6,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AppComponent} from './app.component';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -104,9 +104,11 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    }),
     LibModule,
-    environment.desktop ? LibModule : ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatStepperModule,
     HttpClientModule,
     MatTooltipModule,

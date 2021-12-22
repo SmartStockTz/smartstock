@@ -1,6 +1,5 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const path = require('path');
-// const isDevMode = require('electron-is-dev');
 
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -73,8 +72,12 @@ if (!gotTheLock) {
 
     mainWindow.webContents.on('dom-ready', () => {
       mainWindow.show();
-      if (splashScreen && !splashScreen.closed) {
-        splashScreen.close();
+      if (splashScreen) {
+        try{
+          splashScreen.close();
+        }catch (e){
+          console.log(e);
+        }
       }
     });
     mainWindow.webContents.on('new-window', (event, url) => {
@@ -85,8 +88,8 @@ if (!gotTheLock) {
     if (process.env.EA && process.env.EA.toString() === '1') {
       await mainWindow.loadURL('http://localhost:4200');
     } else {
-      // await mainWindow.loadURL('https://smartstock.co.tz');
-      await mainWindow.loadFile(__dirname + '/smartstock/index.html');
+      await mainWindow.loadURL('https://smartstock.co.tz');
+      // await mainWindow.loadFile(__dirname + '/smartstock/index.html');
     }
   }
 
