@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "22.2.6-build.66-v3.12",
+  "version": "22.4.9-build.67-v3.13",
   "android-build": "29",
   "build": {
     "appId": "com.fahamutech.smartstock",
@@ -16,10 +16,7 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
+          "arch": ["x64", "ia32"]
         }
       ]
     }
