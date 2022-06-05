@@ -1964,10 +1964,10 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@smartstocktz/accounts@^0.5.1":
-  version "0.5.1"
-  resolved "https://npm.pkg.github.com/download/@smartstocktz/accounts/0.5.1/b88779c2cff529bd4b26cd85d36d93d9e00d47de85550387619dde2af5685c47#b8d84fe107d50a8d3e5e2a01b184e84e573463cd"
-  integrity sha512-CCDhNo98DWSafY8ICzw6PaYg4v6W3rtFMYwmwUSZgGfq4Ij3JajrbVAxGe3BVTTbARLCiy8iM3utgVXc++CMxA==
+"@smartstocktz/accounts@^0.5.2":
+  version "0.5.2"
+  resolved "https://npm.pkg.github.com/download/@smartstocktz/accounts/0.5.2/ab2092047e65d47beaebfab25c7727255d6e89b6431f4600c88a9daa48a1ed97#1c22c8501ae05f6844300ad822cb19eb00c2a044"
+  integrity sha512-1xrJdRvjnUVOPHUF670eUrS6UnLe7SC9WizNhUVEblznsjaRgIq2/32pblwdOxpjDKmYBL2U1Su6CEAVDKj9TQ==
   dependencies:
     tslib "^2.0.0"
 

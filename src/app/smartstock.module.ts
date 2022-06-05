@@ -40,12 +40,12 @@ import {DatePipe} from '@angular/common';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'account/shop',
-    pathMatch: 'full'
+    // redirectTo: 'account/shop',
+    // pathMatch: 'full'
     // canActivate: [],
-    // loadChildren: () => {
-    //   return import('@smartstocktz/web').then(mod => mod.WebModule);
-    // },
+    loadChildren: () => {
+      return import('@smartstocktz/web').then(mod => mod.WebModule);
+    },
   },
   {
     path: 'dashboard',
@@ -90,7 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: 'account/shop'
+    redirectTo: ''
   },
   {
     path: '**',
