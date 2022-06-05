@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "22.2.6-build.66-v3.12",
+  "version": "22.6.5-build.68-v3.13",
   "main": "./index.js",
   "build": {
     "appId": "com.fahamutech.smartstock",
@@ -31,7 +31,7 @@
     "lint": "ng lint",
     "build:snap": "electron-builder --linux snap",
     "build:mac": "electron-builder --mac",
-    "build:win": "electron-builder --win --x64 --ia32"
+    "build:win": "electron-builder --win"
   },
   "dependencies": {},
   "devDependencies": {
