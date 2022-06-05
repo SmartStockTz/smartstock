@@ -25,16 +25,13 @@
       ]
     }
   },
-  "extraFiles": [
-    "printer"
-  ],
   "scripts": {
     "start": "electron .",
     "test": "ng test",
     "lint": "ng lint",
     "build:snap": "electron-builder --linux snap",
     "build:mac": "electron-builder --mac",
-    "build:win": "electron-builder --win"
+    "build:win": "electron-builder --win --x64 --ia32"
   },
   "dependencies": {},
   "devDependencies": {
