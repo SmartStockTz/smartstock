@@ -3,7 +3,6 @@
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
   "version": "22.6.5-build.68-v3.13",
-  "android-build": "29",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -28,7 +27,6 @@
     "start:desktop": "npx ng serve --host 0.0.0.0",
     "electron:serve": "export EA=1 && wait-on tcp:4200 && cd desktop && npm start",
     "build:desktop": "npx ng build -c=productionEmb --base-href=./ && node desktop-version.js && cp -r dist/smartstock desktop",
-    "build:mobile": "npx ng build -c=productionEmb --base-href=./ && node android-version.js && npx cap sync",
     "deploy:desktop:snap": "bash desktop.sh",
     "prepare:snap": "cd desktop && npm install && npm run build:snap",
     "prepare:mac": "cd desktop && npm install && npm run build:mac",
