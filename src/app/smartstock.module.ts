@@ -114,7 +114,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent, InfoComponent],
   imports: [
-    CommonModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
       preloadingStrategy: PreloadAllModules
