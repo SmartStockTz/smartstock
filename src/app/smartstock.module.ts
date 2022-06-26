@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, Type } from "@angular/core";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "../environments/environment";
@@ -34,17 +34,12 @@ import { ExpenseNavigationService } from "smartstock-expense";
 import { AccountsNavigationService } from "smartstock-accounts";
 import { init } from "bfast";
 import { InfoComponent } from "./components/info.component";
-import { DatePipe } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 
 const routes: Routes = [
   {
     path: "",
-    // redirectTo: 'account/shop',
-    // pathMatch: 'full',
-    // canActivate: [],
-    loadChildren: () => {
-      return import("smartstock-web").then((mod) => mod.WebModule);
-    }
+    loadChildren: () => import("smartstock-web").then((mod) => mod.WebModule)
   },
   {
     path: "dashboard",
@@ -54,8 +49,7 @@ const routes: Routes = [
       AdminGuard,
       ActiveShopGuard
     ],
-    loadChildren: () =>
-      import("smartstock-dashboard").then((mod) => mod.DashboardModule)
+    loadChildren: () => import("smartstock-dashboard").then((mod) => mod.DashboardModule)
   },
   {
     path: "report",
@@ -88,9 +82,7 @@ const routes: Routes = [
   {
     path: "stock",
     canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
-    loadChildren: async () => {
-      return import("smartstock-stocks").then((mod) => mod.StocksModule);
-    }
+    loadChildren: () => import("smartstock-stocks").then((mod) => mod.StocksModule)
   },
   {
     path: "purchase",

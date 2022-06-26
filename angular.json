@@ -169,7 +169,6 @@
       }
     }
   },
-  "defaultProject": "smartstock",
   "cli": {
     "analytics": false
   }
