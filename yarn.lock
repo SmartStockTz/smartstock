@@ -1800,11 +1800,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@scarf/scarf@^1.1.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@scarf/scarf/-/scarf-1.1.1.tgz#d8b9f20037b3a37dbf8dcdc4b3b72f9285bfce35"
-  integrity sha512-VGbKDbk1RFIaSmdVb0cNjjWJoRWRI/Weo23AjRCC2nryO0iAS8pzsToJfPVPtVs74WHw4L1UTADNdIYRLkirZQ==
-
 "@schematics/angular@13.2.2":
   version "13.2.2"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-13.2.2.tgz#3fbf00059ffe54828c22733223641d1dde6cdf0e"
@@ -5558,10 +5553,10 @@ masonry-layout@^4.2.2:
     get-size "^2.0.2"
     outlayer "^2.1.0"
 
-material-design-icons-iconfont@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-6.1.1.tgz#c251c32b31435783105dc73820aa55252c3589c8"
-  integrity sha512-nkoXybeXoofanNagj4tbM6+/LALWpWxYX5ee861to5VQrKgb0/TskTw28Svwn0OGDKajuqK7ShFOsIBxIygGKA==
+material-design-icons-iconfont@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-6.7.0.tgz#55cf0f3d7e4c76e032855b7e810b6e30535eff3c"
+  integrity sha512-lSj71DgVv20kO0kGbs42icDzbRot61gEDBLQACzkUuznRQBUYmbxzEkGU6dNBb5fRWHMaScYlAXX96HQ4/cJWA==
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -5800,18 +5795,17 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-infinite-scroll@10.0.1:
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-10.0.1.tgz#6f51f2f8775a7c50d1dd8bad125d4e748abbe880"
-  integrity sha512-7is0eJZ9kJPsaHohRmMhJ/QFHAW9jp9twO5HcHRvFM/Yl/R8QCiokgjwmH0/CR3MuxUanxfHZMfO3PbYTwlBEg==
+ngx-infinite-scroll@13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-13.0.2.tgz#87f10269aae722ca2743ff8f8a84a318c503a41e"
+  integrity sha512-RSezL0DUxo1B57SyRMOSt3a/5lLXJs6P8lavtxOh10uhX+hn662cMYHUO7LiU2a/vJxef2R020s4jkUqhnXTcg==
   dependencies:
-    "@scarf/scarf" "^1.1.0"
-    opencollective-postinstall "^2.0.2"
+    tslib "^2.3.0"
 
-ngx-masonry@12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/ngx-masonry/-/ngx-masonry-12.0.0.tgz#91641d1f2b5def9431d1081684e551c02ad302e9"
-  integrity sha512-uHCXIWj6liGAhJ/2QCVtuvGyK150meJds1hiuA3FXbN8rWpXQn3qdoCC+eSM33QoNIQTXmo6jm6BSzxNWV1Mpg==
+ngx-masonry@13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-masonry/-/ngx-masonry-13.0.0.tgz#03a74a10fd655d9ce383dc6b81972c920ff76a75"
+  integrity sha512-orNkCPe1KJqHrRkcUB/WACM+ufBqEv2mkGCQ7Nn7ThOs+XaHlcYdyXHBjf6IT0nBzlLl+ypGVYJ8hbGX8VI+Mw==
   dependencies:
     tslib "^2.0.0"
 
@@ -6089,11 +6083,6 @@ open@8.4.0, open@^8.0.9:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
-
-opencollective-postinstall@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
-  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
 
 optjs@~3.2.2:
   version "3.2.2"
@@ -7388,10 +7377,10 @@ smartstock-dashboard@^1.0.0:
   dependencies:
     tslib "^2.0.0"
 
-smartstock-expense@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/smartstock-expense/-/smartstock-expense-1.0.0.tgz#7760571131868321a7ea98bf3ef8700963e5271b"
-  integrity sha512-PsY025xlYkYsbRBehsHp3at7DCf/l+mxvSiu0WoYfoUT3oMWsx8vDai+erGPSewxeBNNJEXDyvDmMB8S0DXaNA==
+smartstock-expense@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/smartstock-expense/-/smartstock-expense-1.0.1.tgz#6002e3940cda0bb022932eadb1dfeb5d6c12cdfe"
+  integrity sha512-8LCPB4/tKX07wD3Gc0WiBAaGyaTp5c1ndW5fbSZFWJ2oYZDCCWU0rIHewwMVAACz5qYrFjY53vKCCHTaeoKChg==
   dependencies:
     tslib "^2.0.0"
 
