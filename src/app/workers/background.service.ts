@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BillingService} from '@smartstocktz/accounts';
+import {BillingService} from 'smartstock-accounts';
 import {Router} from '@angular/router';
 import {cache} from 'bfast';
 import {MatDialog} from '@angular/material/dialog';
-import {PaymentDialogComponent} from '@smartstocktz/core-libs';
+import {PaymentDialogComponent} from 'smartstock-core';
 
 @Injectable({
   providedIn: 'root'

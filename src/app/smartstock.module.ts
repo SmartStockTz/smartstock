@@ -21,18 +21,17 @@ import {
   PaymentGuard,
   SmartstockHttpAdapter,
   SyncsService
-} from "@smartstocktz/core-libs";
+} from "smartstock-core";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
-import { ReportNavigationService } from "@smartstocktz/reports";
-import { SalesNavigationService } from "@smartstocktz/sales";
-import { StockNavigationService, StockService } from "@smartstocktz/stocks";
-import { PurchaseNavigationService } from "@smartstocktz/purchases";
-import { ExpenseNavigationService } from "@smartstocktz/expense";
-import { AccountsNavigationService } from "@smartstocktz/accounts";
-import { App } from "@capacitor/app";
+import { ReportNavigationService } from "smartstock-reports";
+import { SalesNavigationService } from "smartstock-sales";
+import { StockNavigationService, StockService } from "smartstock-stocks";
+import { PurchaseNavigationService } from "smartstock-purchases";
+import { ExpenseNavigationService } from "smartstock-expense";
+import { AccountsNavigationService } from "smartstock-accounts";
 import { init } from "bfast";
 import { InfoComponent } from "./components/info.component";
 import { DatePipe } from "@angular/common";
@@ -44,7 +43,7 @@ const routes: Routes = [
     // pathMatch: 'full',
     // canActivate: [],
     loadChildren: () => {
-      return import("@smartstocktz/web").then((mod) => mod.WebModule);
+      return import("smartstock-web").then((mod) => mod.WebModule);
     }
   },
   {
@@ -56,7 +55,7 @@ const routes: Routes = [
       ActiveShopGuard
     ],
     loadChildren: () =>
-      import("@smartstocktz/dashboard").then((mod) => mod.DashboardModule)
+      import("smartstock-dashboard").then((mod) => mod.DashboardModule)
   },
   {
     path: "report",
@@ -67,19 +66,19 @@ const routes: Routes = [
       ActiveShopGuard
     ],
     loadChildren: () =>
-      import("@smartstocktz/reports").then((mod) => mod.ReportsModule)
+      import("smartstock-reports").then((mod) => mod.ReportsModule)
   },
   {
     path: "sale",
     canActivate: [AuthenticationGuard, ActiveShopGuard],
     loadChildren: () =>
-      import("@smartstocktz/sales").then((mod) => mod.SalesModule)
+      import("smartstock-sales").then((mod) => mod.SalesModule)
   },
   {
     path: "expense",
     canActivate: [PaymentGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: () =>
-      import("@smartstocktz/expense").then((mod) => mod.ExpenseModule)
+      import("smartstock-expense").then((mod) => mod.ExpenseModule)
   },
   // {
   //   path: 'store',
@@ -90,7 +89,7 @@ const routes: Routes = [
     path: "stock",
     canActivate: [AuthenticationGuard, ManagerGuard, ActiveShopGuard],
     loadChildren: async () => {
-      return import("@smartstocktz/stocks").then((mod) => mod.StocksModule);
+      return import("smartstock-stocks").then((mod) => mod.StocksModule);
     }
   },
   {
@@ -102,12 +101,12 @@ const routes: Routes = [
       ActiveShopGuard
     ],
     loadChildren: () =>
-      import("@smartstocktz/purchases").then((mod) => mod.PurchasesModule)
+      import("smartstock-purchases").then((mod) => mod.PurchasesModule)
   },
   {
     path: "account",
     loadChildren: () =>
-      import("@smartstocktz/accounts").then((mod) => mod.AccountModule)
+      import("smartstock-accounts").then((mod) => mod.AccountModule)
   },
   {
     path: "home",
@@ -158,19 +157,19 @@ export class SmartstockModule {
     private readonly smartstockHttp: SmartstockHttpAdapter,
     private readonly syncsService: SyncsService
   ) {
-    App.addListener("backButton", (e) => {
-      if (e.canGoBack) {
-        const curl = window.location.href;
-        window.history.back();
-        setTimeout(() => {
-          if (curl === window.location.href) {
-            App.exitApp();
-          }
-        }, 500);
-      } else {
-        App.exitApp();
-      }
-    });
+    // App.addListener("backButton", (e) => {
+    //   if (e.canGoBack) {
+    //     const curl = window.location.href;
+    //     window.history.back();
+    //     setTimeout(() => {
+    //       if (curl === window.location.href) {
+    //         App.exitApp();
+    //       }
+    //     }, 500);
+    //   } else {
+    //     App.exitApp();
+    //   }
+    // });
     // @ts-ignore
     import("../../package.json").then((pkg) => {
       this.navigationService.versionName = pkg.version;
