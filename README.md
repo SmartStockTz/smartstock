@@ -1,1 +1,1 @@
-# StockApp
+# SmartStock
