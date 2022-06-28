@@ -7830,10 +7830,10 @@ smartstock-accounts@^1.0.1:
   dependencies:
     tslib "^2.0.0"
 
-smartstock-core@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/smartstock-core/-/smartstock-core-1.0.2.tgz#530f2950b4448a1ac006fbc38388fb650b000503"
-  integrity sha512-b4rMY8g7ClMRK55OTBrm4opvzg9SbSc6eihUY56vCFjAEAbDBCTNdRgP1JfazY/aSbweoq8285/KTgxkxDDO1A==
+smartstock-core@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/smartstock-core/-/smartstock-core-1.0.3.tgz#bbcdc7ae1d427016f2f2c88a0f9be95e371efab1"
+  integrity sha512-0bXdqhpswsspZMMeGmibVLl+STrWbXmVw0E6/EjudL+iakiU/efsdMM/DjXoPk45rFCtD76+mLqV2S7A1GY68A==
   dependencies:
     tslib "^2.0.0"
 
