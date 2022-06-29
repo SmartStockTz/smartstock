@@ -7830,10 +7830,10 @@ smartstock-accounts@^1.0.1:
   dependencies:
     tslib "^2.0.0"
 
-smartstock-core@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/smartstock-core/-/smartstock-core-1.0.3.tgz#bbcdc7ae1d427016f2f2c88a0f9be95e371efab1"
-  integrity sha512-0bXdqhpswsspZMMeGmibVLl+STrWbXmVw0E6/EjudL+iakiU/efsdMM/DjXoPk45rFCtD76+mLqV2S7A1GY68A==
+smartstock-core@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/smartstock-core/-/smartstock-core-1.0.4.tgz#763ffc2cdefd400173681b79ae39d64730b47be4"
+  integrity sha512-BWreuDS1xcVVJDv88ODPHWKvlmz/mAweqfH28h2TJOhd3F07qAePB6WOHntD7nYua/L1+CGzLC0wanU0DJgt9Q==
   dependencies:
     tslib "^2.0.0"
 
@@ -7865,10 +7865,10 @@ smartstock-reports@^1.0.1:
   dependencies:
     tslib "^2.0.0"
 
-smartstock-sales@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/smartstock-sales/-/smartstock-sales-1.0.1.tgz#c59564c689c2d284d381d04f09f25782912a9bd2"
-  integrity sha512-h2qoPtDTedpfFXSPgp8zaRPbhKEwBozIdsIpPBBP/E0ai+DFrY4UK7N3sUlrxBTw3O1UNZuI42G5X/HuA/3Yfg==
+smartstock-sales@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/smartstock-sales/-/smartstock-sales-1.0.2.tgz#9c3acee052bbab5a25a93f289ed2843fe2e2aea5"
+  integrity sha512-rhZh0YIQAHLQ4/pJFN2BNpu1mPH6DrmY8AWxJNL2VRMRoRiAZeNjJehDPOnYtyHo+ufuYTtLIrwUKImJyP51qA==
   dependencies:
     tslib "^2.0.0"
 
