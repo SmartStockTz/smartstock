@@ -1,4 +1,4 @@
-import { NgModule, Type } from "@angular/core";
+import { NgModule} from "@angular/core";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "../environments/environment";
@@ -34,7 +34,7 @@ import { ExpenseNavigationService } from "smartstock-expense";
 import { AccountsNavigationService } from "smartstock-accounts";
 import { init } from "bfast";
 import { InfoComponent } from "./components/info.component";
-import { CommonModule, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 
 const routes: Routes = [
   {
@@ -137,6 +137,7 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class SmartstockModule {
+  private isMaybeStockRunning = false;
   constructor(
     private readonly navigationService: NavigationService,
     private readonly salesNav: SalesNavigationService,
@@ -193,6 +194,15 @@ export class SmartstockModule {
     );
     this.syncsService.startWorker().catch(console.log);
     this.stockService.compactStockQuantity().catch(console.log);
+    setInterval(()=>{
+      if(this.isMaybeStockRunning===true){
+        console.log('maybe stocks already running');
+      }
+      this.isMaybeStockRunning = true;
+      this.stockService.maybeRefreshStocks().catch(console.log).finally(()=>{
+        this.isMaybeStockRunning = false;
+      });
+    },10000);
   }
 
   private menus(): void {
