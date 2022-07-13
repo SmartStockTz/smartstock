@@ -202,7 +202,7 @@ export class SmartstockModule {
       this.stockService.maybeRefreshStocks().catch(console.log).finally(()=>{
         this.isMaybeStockRunning = false;
       });
-    },10000);
+    },300000);
   }
 
   private menus(): void {
