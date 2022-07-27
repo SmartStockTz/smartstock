@@ -193,7 +193,7 @@ export class SmartstockModule {
       "fahamupay"
     );
     this.syncsService.startWorker().catch(console.log);
-    this.stockService.compactStockQuantity().catch(console.log);
+    // this.stockService.compactStockQuantity().catch(console.log);
     setInterval(()=>{
       if(this.isMaybeStockRunning===true){
         console.log('maybe stocks already running');
