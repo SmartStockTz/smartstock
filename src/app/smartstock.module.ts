@@ -37,8 +37,18 @@ import { InfoComponent } from "./components/info.component";
 import { DatePipe } from "@angular/common";
 
 const routes: Routes = [
-  {
+ {
     path: "",
+    canActivate: [
+      PaymentGuard,
+      AuthenticationGuard,
+      AdminGuard,
+      ActiveShopGuard
+    ],
+    loadChildren: () => import("smartstock-dashboard").then((mod) => mod.DashboardModule)
+  },
+  {
+    path: "/web",
     loadChildren: () => import("smartstock-web").then((mod) => mod.WebModule)
   },
   {
