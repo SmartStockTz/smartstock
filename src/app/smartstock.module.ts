@@ -48,7 +48,7 @@ const routes: Routes = [
     loadChildren: () => import("smartstock-dashboard").then((mod) => mod.DashboardModule)
   },
   {
-    path: "/web",
+    path: "web",
     loadChildren: () => import("smartstock-web").then((mod) => mod.WebModule)
   },
   {
