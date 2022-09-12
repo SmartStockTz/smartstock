@@ -2,7 +2,7 @@
   "name": "smartstock",
   "description": "manage your sales, purchase and stock",
   "author": "SmartStock Company",
-  "version": "22.9.10-build.88-v3.22",
+  "version": "22.9.12-build.89-v3.22",
   "build": {
     "appId": "com.fahamutech.smartstock",
     "mac": {
@@ -72,7 +72,7 @@
     "smartstock-expense": "^1.0.2",
     "smartstock-purchases": "^1.0.1",
     "smartstock-reports": "^1.0.1",
-    "smartstock-sales": "^1.1.4",
+    "smartstock-sales": "^1.1.5",
     "smartstock-shop": "^1.0.1",
     "smartstock-stocks": "^1.1.7",
     "smartstock-web": "~1.0.1",
