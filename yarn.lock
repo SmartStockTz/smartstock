@@ -7865,10 +7865,10 @@ smartstock-reports@^1.0.1:
   dependencies:
     tslib "^2.0.0"
 
-smartstock-sales@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/smartstock-sales/-/smartstock-sales-1.1.6.tgz#b2b2bbf6650b36cbadc34f20bd23fae48f38278b"
-  integrity sha512-yJHPILyel0Q5mfk6+WXBn8i8H3xrRWO2/+FtAd7+H9oCxERSa0HOHmaCGpXFLqUN+rOackqhNlWGLfWxiISrsA==
+smartstock-sales@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/smartstock-sales/-/smartstock-sales-1.1.7.tgz#23c019e9527a5d70d7d74b8d6458767d8266621c"
+  integrity sha512-fv9yLpusGCPL2rCJnjRnizQAqYYyT3qAbSkGC6ZuEqWM0FYp9iuTKrrcieS0xwAj423M4cnze3FvFA7EdHES8A==
   dependencies:
     tslib "^2.0.0"
 
